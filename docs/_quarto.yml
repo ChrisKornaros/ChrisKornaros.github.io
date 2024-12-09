@@ -5,9 +5,10 @@ website:
   title: "ChrisKornaros"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+      - text: Home
+        href: index.qmd
+      - pages/about/about.qmd
+      - pages/repos/repos.qmd
 
 format:
   html:
