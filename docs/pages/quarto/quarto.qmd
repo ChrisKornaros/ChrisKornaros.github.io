@@ -1,0 +1,22 @@
+---
+title: "Quarto Development Notes"
+---
+
+# Quarto
+## Overview
+Quarto is a ...
+
+## Projects
+### Initializing a Project
+
+### Rendering a Projects
+
+## Websites
+### Rendering Websites
+
+```{bash}
+cd docs
+quarto render . --output-dir . # This ensures sub page .qmd files are rendered in .html as well, otherwise pages aren't viewable
+```
+
+

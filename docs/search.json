@@ -1,7 +1,42 @@
 [
   {
+    "objectID": "pages/quarto/quarto.html",
+    "href": "pages/quarto/quarto.html",
+    "title": "Quarto Development Notes",
+    "section": "",
+    "text": "Quarto is a …\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncd docs\nquarto render . --output-dir . # This ensures sub page .qmd files are rendered in .html as well, otherwise pages aren't viewable"
+  },
+  {
+    "objectID": "pages/quarto/quarto.html#overview",
+    "href": "pages/quarto/quarto.html#overview",
+    "title": "Quarto Development Notes",
+    "section": "",
+    "text": "Quarto is a …"
+  },
+  {
+    "objectID": "pages/quarto/quarto.html#websites",
+    "href": "pages/quarto/quarto.html#websites",
+    "title": "Quarto Development Notes",
+    "section": "",
+    "text": "cd docs\nquarto render . --output-dir . # This ensures sub page .qmd files are rendered in .html as well, otherwise pages aren't viewable"
+  },
+  {
+    "objectID": "pages/repos/repos.html",
+    "href": "pages/repos/repos.html",
+    "title": "Public Repositories",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
+    "title": "ChrisKornaros",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "pages/about/about.html",
+    "href": "pages/about/about.html",
     "title": "About",
     "section": "",
     "text": "About this site"

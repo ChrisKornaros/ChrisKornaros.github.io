@@ -8,6 +8,7 @@ website:
       - text: Home
         href: index.qmd
       - pages/about/about.qmd
+      - pages/quarto/quarto.qmd
       - pages/repos/repos.qmd
 
 format:
