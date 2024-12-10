@@ -2,37 +2,37 @@ project:
   type: website
 
 website:
-  title: "ChrisKornaros"
+  title: "Chris Kornaros"
   navbar:
     left:
-      - text: Home
+      - text: "Home"
         href: index.qmd
-      - text: About
+      - text: "About"
         href: pages/about/about.qmd
-      - text: Guides
+      - text: "Guides"
         href: pages/guides/guides.qmd
         menu: 
-        - text: Quarto
+        - text: "Quarto"
           href: pages/guides/quarto/quarto.qmd
-        - text: uv
+        - text: "uv"
           href: pages/guides/uv/uv.qmd
       - text: Projects
         href: pages/projects/projects.qmd
         menu: 
-          - text: Data Engineering
+          - text: "Data Engineering"
             href: pages/projects/data_engineering/data_engineering/qmd
             menu:        
-            - text: DataCamp
+            - text: "DataCamp"
               href: pages/projects/data_engineering/datacamp/datacamp.qmd
-            - text: Research
+            - text: "Research"
               href: pages/projects/data_engineering/research/research.qmd
-          - text: Data Science
+          - text: "Data Science"
             menu:        
-            - text: DataCamp
+            - text: "DataCamp"
               href: pages/projects/data_science/datacamp/datacamp.qmd
-            - text: Kaggle
+            - text: "Kaggle"
               href: pages/projects/data_science/kaggle/kaggle.qmd
-            - text: Research
+            - text: "Research"
               href: pages/projects/data_science/research/research.qmd
 
 format:
