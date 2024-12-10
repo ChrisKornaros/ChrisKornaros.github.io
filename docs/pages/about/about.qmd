@@ -1,5 +1,11 @@
 ---
 title: "About"
 ---
+# About
+About myself and this site in general. 
 
-About this site
+## About Chris
+I'm a 26 year old Data Scientist, Engineer, Analyst, Architect, etc. that has two degrees from Tulane University in New Orleans-- BSM, Marketing and Asian Studies; MS, Business Analytics. During COVID, I did an extra year of school and received a Masters in Data Science. As a result of my education, I fell in love with data science and machine learning, but due to common data challenges, I developed a professional passion and skillset for database architecture and data engineering.
+
+## About this Website
+This site is the personal portfolio and homepage for Chris Kornaros. I'm a Tulane Graduate and professional Data Engineer. On here, you'll find projects and code samples that I can share publicly, guides for various tools or workflows, journal or blog posts, and any independent research or professional updates (including my resume). 

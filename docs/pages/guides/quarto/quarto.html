@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Projects – ChrisKornaros</title>
+<title>Quarto Development Notes – ChrisKornaros</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +23,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-6bd9cfa162949bde0a231f530c97869d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-6bd9cfa162949bde0a231f530c97869d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,7 +68,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../../../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -78,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">ChrisKornaros</span>
     </a>
   </div>
@@ -89,19 +89,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../pages/about/about.html"> 
+    <a class="nav-link" href="../../../pages/about/about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../pages/guides/guides.html"> 
+    <a class="nav-link" href="../../../pages/guides/guides.html"> 
 <span class="menu-text">Guides</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../pages/projects/projects.html" aria-current="page"> 
+    <a class="nav-link" href="../../../pages/projects/projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
 </ul>
@@ -115,15 +115,33 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#quarto" id="toc-quarto" class="nav-link active" data-scroll-target="#quarto">Quarto</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#projects" id="toc-projects" class="nav-link" data-scroll-target="#projects">Projects</a>
+  <ul class="collapse">
+  <li><a href="#initializing-a-project" id="toc-initializing-a-project" class="nav-link" data-scroll-target="#initializing-a-project">Initializing a Project</a></li>
+  <li><a href="#rendering-a-projects" id="toc-rendering-a-projects" class="nav-link" data-scroll-target="#rendering-a-projects">Rendering a Projects</a></li>
+  </ul></li>
+  <li><a href="#websites" id="toc-websites" class="nav-link" data-scroll-target="#websites">Websites</a>
+  <ul class="collapse">
+  <li><a href="#rendering-websites" id="toc-rendering-websites" class="nav-link" data-scroll-target="#rendering-websites">Rendering Websites</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Projects</h1>
+<h1 class="title">Quarto Development Notes</h1>
 </div>
 
 
@@ -140,9 +158,39 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Landing page for the project portfolio portion of this website. Contains all of my public repositories and projects (for now, may include future consulting or paid side work, but I don’t do that at the moment), including both the code in repositories and write ups (where applicable).</p>
+<section id="quarto" class="level1">
+<h1>Quarto</h1>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Quarto is &gt; An open-source scientific and technical publishing system<br>
+&gt; Author using Jupyter notebooks or with plain text markdown in your favorite editor.<br>
+&gt; Create dynamic content with Python, R, Julia, and Observable.<br>
+&gt; Publish reproducible, production quality articles, presentations, dashboards, websites, blogs, and books in HTML, PDF, MS Word ePub, and more.<br>
+&gt; Share knowledge and insights organization-wide by publishing to Posit Connect, Confluence, or other publishing systems.<br>
+&gt; Write using Pandoc markdown, including equations, citations, crossrefs, figure panels, callouts, advanced layout, and more.</p>
+</section>
+<section id="projects" class="level2">
+<h2 class="anchored" data-anchor-id="projects">Projects</h2>
+<section id="initializing-a-project" class="level3">
+<h3 class="anchored" data-anchor-id="initializing-a-project">Initializing a Project</h3>
+<p>It’s easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process.</p>
+<pre class="{bash}"><code></code></pre>
+</section>
+<section id="rendering-a-projects" class="level3">
+<h3 class="anchored" data-anchor-id="rendering-a-projects">Rendering a Projects</h3>
+</section>
+</section>
+<section id="websites" class="level2">
+<h2 class="anchored" data-anchor-id="websites">Websites</h2>
+<section id="rendering-websites" class="level3">
+<h3 class="anchored" data-anchor-id="rendering-websites">Rendering Websites</h3>
+<p>I run the following code block from my main project directory. My Quarto project directory is a folder called docs. So, I specify to Quarto that I want to render the entire Quarto project <code>docs</code>, but <code>quarto render</code>’s context is specific to the <em>quarto project</em> directory. Therefore, I need to use the <code>.</code> to specify that I want the rendered <code>.html</code> files put in the Quarto project folder, and sub folder.</p>
+<pre class="{bash}"><code>quarto render docs --output-dir .</code></pre>
 
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
