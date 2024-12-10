@@ -7,9 +7,9 @@ website:
     left:
       - text: Home
         href: index.qmd
-      - _site/pages/about/about.qmd
-      - _site/pages/quarto/quarto.qmd
-      - _site/pages/repos/repos.qmd
+      - pages/about/about.qmd
+      - pages/quarto/quarto.qmd
+      - pages/repos/repos.qmd
 
 format:
   html:
