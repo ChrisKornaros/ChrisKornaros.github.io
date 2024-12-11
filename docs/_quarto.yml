@@ -12,7 +12,7 @@ website:
       - text: "About"
         href: pages/about/about.qmd
       - text: "Guides"
-        href: sidebar:guides
+        href: sidebar:section:Guides
       - text: "Projects"
         href: sidebar:projects
       - text: "Blogs"
@@ -21,49 +21,69 @@ website:
   sidebar:
     style: docked
     background: light
+    collapse-level: 2
     contents:
-      - id: guides
+      - section: "Guides"
+        title: "Guides"
         href: pages/guides/guides.qmd
         contents:
-            - id: quarto
+            - section: "Quarto"
+              id: quarto
               href: pages/guides/quarto/quarto.qmd
-              contents:
-            - id: uv
+            - section: "uv"
+              id: uv
               href: pages/guides/uv/uv.qmd
-              contents:
-      - id: projects
+      - section: "Projects"
+        id: projects
         href: pages/projects/projects.qmd
         contents:
-          - id: data_engineering
+          - section: "Data Engineering and Architecture"
+            id: data_engineering
             href: pages/projects/data_engineering/data_engineering.qmd
             contents:
-                - id: de_datacamp
+                - section: "DataCamp Data Engineering Projects"
+                  id: de_datacamp
                   href: pages/projects/data_engineering/datacamp/datacamp.qmd
                   contents:
-                - id: de_research
+                      - section: 
+                - section:
+                  id: de_research
                   href: pages/projects/data_engineering/research/research.qmd
                   contents:
-          - id: data_science
+                      - section:
+          - section: "Data Science and Machine Learning"
+            id: data_science
             href: pages/projects/data_science/data_science.qmd
             contents:
-                - id: ds_datacamp
+                - section: "DataCamp Data Science Projects"
+                  id: ds_datacamp
                   href: pages/projects/data_science/data_science.qmd
                   contents:
-                - id: ds_kaggle
+                      - section:
+                - section: "Kaggle Projects"
+                  id: ds_kaggle
                   href: pages/projects/data_science/data_science.qmd
                   contents:
-                - id: ds_research
+                      - section:
+                - section: "Research Projects"
+                  id: ds_research
                   href: pages/projects/data_science/data_science.qmd
                   contents:
-      - id: blogs
+                      - section: 
+      - section: "Blogs"
+        id: blogs
         href: pages/blogs/blogs.qmd
         contents:
-            - id: tech_blogs
+            - section: "Technology Blogs"
+              id: tech_blogs
               href: pages/blogs/tech/tech.qmd
               contents:
-            - id: research_blogs
+                  - title: 
+            - section: "Research Blogs"
+              id: research_blogs
               href: pages/blogs/research/research.qmd
               contents:
+                  - title:
 
 
 format:

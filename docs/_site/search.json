@@ -8,7 +8,7 @@
     "crumbs": [
       "Home",
       "Guides",
-      "Quarto Development Notes"
+      "Quarto"
     ]
   },
   {
@@ -20,7 +20,7 @@
     "crumbs": [
       "Home",
       "Guides",
-      "Quarto Development Notes"
+      "Quarto"
     ]
   },
   {
@@ -32,7 +32,7 @@
     "crumbs": [
       "Home",
       "Guides",
-      "Quarto Development Notes"
+      "Quarto"
     ]
   },
   {
@@ -44,7 +44,7 @@
     "crumbs": [
       "Home",
       "Guides",
-      "Quarto Development Notes"
+      "Quarto"
     ]
   },
   {
@@ -54,6 +54,7 @@
     "section": "",
     "text": "Landing page for the project portfolio portion of this website. Contains all of my public repositories and projects (for now, may include future consulting or paid side work, but I don’t do that at the moment), including both the code in repositories and write ups (where applicable).",
     "crumbs": [
+      "Home",
       "Projects"
     ]
   },
@@ -85,6 +86,7 @@
     "section": "",
     "text": "A landing page for various blogs, journals, or random thoughts. Some of these will be focused on specific tools or technology, others will be random thoughts or research notes.",
     "crumbs": [
+      "Home",
       "Blogs"
     ]
   },
