@@ -4,49 +4,70 @@
     "href": "pages/guides/quarto/quarto.html",
     "title": "Quarto Development Notes",
     "section": "",
-    "text": "Quarto is:\n\n\nAn open-source scientific and technical publishing system\nAuthor using Jupyter notebooks or with plain text markdown in your favorite editor.\nCreate dynamic content with Python, R, Julia, and Observable.\nPublish reproducible, production quality articles, presentations, dashboards, websites, blogs, and books in HTML, PDF, MS Word ePub, and more.\nShare knowledge and insights organization-wide by publishing to Posit Connect, Confluence, or other publishing systems.\nWrite using Pandoc markdown, including equations, citations, crossrefs, figure panels, callouts, advanced layout, and more.\n\n\n\n\n\n\nIt’s easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process.\n\n\n\n\n\n\n\n\n\n\nI run the following code block from my main project directory. My Quarto project directory is a folder called docs. So, I specify to Quarto that I want to render the entire Quarto project docs, but quarto render’s context is specific to the quarto project directory. Therefore, I need to use the . to specify that I want the rendered .html files put in the Quarto project folder, and sub folder.\nquarto render docs --output-dir ."
+    "text": "Quarto is:\n\n\nAn open-source scientific and technical publishing system\nAuthor using Jupyter notebooks or with plain text markdown in your favorite editor.\nCreate dynamic content with Python, R, Julia, and Observable.\nPublish reproducible, production quality articles, presentations, dashboards, websites, blogs, and books in HTML, PDF, MS Word ePub, and more.\nShare knowledge and insights organization-wide by publishing to Posit Connect, Confluence, or other publishing systems.\nWrite using Pandoc markdown, including equations, citations, crossrefs, figure panels, callouts, advanced layout, and more.\n\n\n\n\n\n\n\n\nIt’s easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process. Furthermore, Quarto provides a simple command for creating (or initializing) a project (or extension), quarto create project\n\n\n\n\n\n\n\n\n\n\n\nI run the following code block from my main project directory. My Quarto project directory is a folder called docs. So, I specify to Quarto that I want to render the entire Quarto project docs, but quarto render’s context is specific to the quarto project directory. Therefore, I need to use the . to specify that I want the rendered .html files put in the Quarto project folder, and sub folder.\nquarto render docs --output-dir .",
+    "crumbs": [
+      "Quarto Development Notes"
+    ]
   },
   {
     "objectID": "pages/guides/quarto/quarto.html#overview",
     "href": "pages/guides/quarto/quarto.html#overview",
     "title": "Quarto Development Notes",
     "section": "",
-    "text": "Quarto is:\n\n\nAn open-source scientific and technical publishing system\nAuthor using Jupyter notebooks or with plain text markdown in your favorite editor.\nCreate dynamic content with Python, R, Julia, and Observable.\nPublish reproducible, production quality articles, presentations, dashboards, websites, blogs, and books in HTML, PDF, MS Word ePub, and more.\nShare knowledge and insights organization-wide by publishing to Posit Connect, Confluence, or other publishing systems.\nWrite using Pandoc markdown, including equations, citations, crossrefs, figure panels, callouts, advanced layout, and more."
+    "text": "Quarto is:\n\n\nAn open-source scientific and technical publishing system\nAuthor using Jupyter notebooks or with plain text markdown in your favorite editor.\nCreate dynamic content with Python, R, Julia, and Observable.\nPublish reproducible, production quality articles, presentations, dashboards, websites, blogs, and books in HTML, PDF, MS Word ePub, and more.\nShare knowledge and insights organization-wide by publishing to Posit Connect, Confluence, or other publishing systems.\nWrite using Pandoc markdown, including equations, citations, crossrefs, figure panels, callouts, advanced layout, and more.",
+    "crumbs": [
+      "Quarto Development Notes"
+    ]
   },
   {
     "objectID": "pages/guides/quarto/quarto.html#projects",
     "href": "pages/guides/quarto/quarto.html#projects",
     "title": "Quarto Development Notes",
     "section": "",
-    "text": "It’s easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process."
+    "text": "It’s easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process. Furthermore, Quarto provides a simple command for creating (or initializing) a project (or extension), quarto create project",
+    "crumbs": [
+      "Quarto Development Notes"
+    ]
   },
   {
     "objectID": "pages/guides/quarto/quarto.html#websites",
     "href": "pages/guides/quarto/quarto.html#websites",
     "title": "Quarto Development Notes",
     "section": "",
-    "text": "I run the following code block from my main project directory. My Quarto project directory is a folder called docs. So, I specify to Quarto that I want to render the entire Quarto project docs, but quarto render’s context is specific to the quarto project directory. Therefore, I need to use the . to specify that I want the rendered .html files put in the Quarto project folder, and sub folder.\nquarto render docs --output-dir ."
+    "text": "I run the following code block from my main project directory. My Quarto project directory is a folder called docs. So, I specify to Quarto that I want to render the entire Quarto project docs, but quarto render’s context is specific to the quarto project directory. Therefore, I need to use the . to specify that I want the rendered .html files put in the Quarto project folder, and sub folder.\nquarto render docs --output-dir .",
+    "crumbs": [
+      "Quarto Development Notes"
+    ]
   },
   {
     "objectID": "pages/projects/projects.html",
     "href": "pages/projects/projects.html",
     "title": "Projects",
     "section": "",
-    "text": "Landing page for the project portfolio portion of this website. Contains all of my public repositories and projects (for now, may include future consulting or paid side work, but I don’t do that at the moment), including both the code in repositories and write ups (where applicable)."
+    "text": "Landing page for the project portfolio portion of this website. Contains all of my public repositories and projects (for now, may include future consulting or paid side work, but I don’t do that at the moment), including both the code in repositories and write ups (where applicable).",
+    "crumbs": [
+      "Projects"
+    ]
   },
   {
     "objectID": "pages/blogs/tech/tech.html",
     "href": "pages/blogs/tech/tech.html",
     "title": "Technology",
     "section": "",
-    "text": "A landing page for my blogs (hosted on WhiteWind) about specific technologies. These may be quick notes, or longer demos."
+    "text": "A landing page for my blogs (hosted on WhiteWind) about specific technologies. These may be quick notes, or longer demos.",
+    "crumbs": [
+      "Technology"
+    ]
   },
   {
     "objectID": "pages/blogs/research/research.html",
     "href": "pages/blogs/research/research.html",
     "title": "Research",
     "section": "",
-    "text": "A landing page for my general thoughts and research into what’s interesting me at the time."
+    "text": "A landing page for my general thoughts and research into what’s interesting me at the time.",
+    "crumbs": [
+      "Research"
+    ]
   },
   {
     "objectID": "index.html",
@@ -60,7 +81,10 @@
     "href": "pages/blogs/blogs.html",
     "title": "Blogs",
     "section": "",
-    "text": "A landing page for various blogs, journals, or random thoughts. Some of these will be focused on specific tools or technology, others will be random thoughts or research notes."
+    "text": "A landing page for various blogs, journals, or random thoughts. Some of these will be focused on specific tools or technology, others will be random thoughts or research notes.",
+    "crumbs": [
+      "Blogs"
+    ]
   },
   {
     "objectID": "pages/about/about.html",
@@ -88,20 +112,29 @@
     "href": "pages/guides/guides.html",
     "title": "Guides",
     "section": "",
-    "text": "Welcome to the Guides section of the website! This is the landing page for step-by-step guides and instructions for various tools and workflows that I’ve used in the past or am currently exploring.\n\n\n\nPersonal Portfolio with Quarto and GitHub Pages\nUsing uv for Project Initialization\n\n\n\n\nHere are some topics I plan to cover in the future: - DuckDB - dbt - PostgreSQL - More to come!\nStay tuned for updates!"
+    "text": "Welcome to the Guides section of the website! This is the landing page for step-by-step guides and instructions for various tools and workflows that I’ve used in the past or am currently exploring.\n\n\n\nPersonal Portfolio with Quarto and GitHub Pages\nUsing uv for Project Initialization\n\n\n\n\nHere are some topics I plan to cover in the future: - DuckDB - dbt - PostgreSQL - More to come!\nStay tuned for updates!",
+    "crumbs": [
+      "Guides"
+    ]
   },
   {
     "objectID": "pages/guides/guides.html#current-guides",
     "href": "pages/guides/guides.html#current-guides",
     "title": "Guides",
     "section": "",
-    "text": "Personal Portfolio with Quarto and GitHub Pages\nUsing uv for Project Initialization"
+    "text": "Personal Portfolio with Quarto and GitHub Pages\nUsing uv for Project Initialization",
+    "crumbs": [
+      "Guides"
+    ]
   },
   {
     "objectID": "pages/guides/guides.html#future-guides-planned",
     "href": "pages/guides/guides.html#future-guides-planned",
     "title": "Guides",
     "section": "",
-    "text": "Here are some topics I plan to cover in the future: - DuckDB - dbt - PostgreSQL - More to come!\nStay tuned for updates!"
+    "text": "Here are some topics I plan to cover in the future: - DuckDB - dbt - PostgreSQL - More to come!\nStay tuned for updates!",
+    "crumbs": [
+      "Guides"
+    ]
   }
 ]
