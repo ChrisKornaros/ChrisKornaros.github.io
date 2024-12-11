@@ -1,49 +1,48 @@
-/* Style the navigation bar */
-.navbar {
-    display: flex;
-    background-color: #333;
-    padding: 10px;
-  }
-  
-  .navbar a {
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-  }
-  
-  .navbar a:hover {
-    background-color: #575757;
-  }
-  
-  /* Dropdown container */
-  .navbar .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  /* Dropdown content */
-  .navbar .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 200px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-  }
-  
-  .navbar .dropdown-content a {
-    color: black;
-    padding: 10px 15px;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .navbar .dropdown-content a:hover {
-    background-color: #ddd;
-  }
-  
-  /* Show dropdown content on hover */
-  .navbar .dropdown:hover .dropdown-content {
-    display: block;
-  }
-  
+/* Navigation bar styles */
+.quarto-navbar {
+  display: flex;
+  background-color: #333;
+  padding: 10px;
+}
+
+.quarto-navbar a {
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+}
+
+.quarto-navbar a:hover {
+  background-color: #575757;
+}
+
+/* Dropdown container */
+.quarto-navbar .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown content */
+.quarto-navbar .dropdown .dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.quarto-navbar .dropdown .dropdown-menu a {
+  color: black;
+  padding: 10px 15px;
+  text-decoration: none;
+  display: block;
+}
+
+.quarto-navbar .dropdown .dropdown-menu a:hover {
+  background-color: #ddd;
+}
+
+/* Show dropdown content on hover */
+.quarto-navbar .dropdown:hover .dropdown-menu {
+  display: block;
+}
