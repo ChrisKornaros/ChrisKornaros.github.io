@@ -12,78 +12,64 @@ website:
       - text: "About"
         href: pages/about/about.qmd
       - text: "Guides"
-        href: sidebar:section:Guides
+        href: pages/guides/guides.qmd
       - text: "Projects"
-        href: sidebar:projects
+        href: pages/projects/projects.qmd
       - text: "Blogs"
-        href: sidebar:blogs
+        href: pages/blogs/blogs.qmd
 
-  sidebar:
-    style: docked
-    background: light
+sidebar:
+    style: floating
     collapse-level: 2
     contents:
-      - section: "Guides"
+      - id: guides
         title: "Guides"
-        href: pages/guides/guides.qmd
         contents:
-            - section: "Quarto"
-              id: quarto
-              href: pages/guides/quarto/quarto.qmd
-            - section: "uv"
-              id: uv
-              href: pages/guides/uv/uv.qmd
-      - section: "Projects"
-        id: projects
-        href: pages/projects/projects.qmd
+          - id: quarto
+            title: "Quarto"
+            href: /pages/guides/quarto/quarto.qmd  # Corrected to direct file
+          - id: uv
+            title: "uv"
+            href: /pages/guides/uv/uv.qmd  # Corrected to direct file
+          - href: /pages/guides/guides.qmd  # Ensure this links directly
+      - id: projects
+        title: "Projects"
+        href: /pages/projects/projects.qmd  # Corrected to direct file
         contents:
-          - section: "Data Engineering and Architecture"
-            id: data_engineering
-            href: pages/projects/data_engineering/data_engineering.qmd
+          - id: data_engineering
+            title: "Data Engineering and Architecture"
+            href: /pages/projects/data_engineering/data_engineering.qmd  # Corrected to direct file
             contents:
-                - section: "DataCamp Data Engineering Projects"
-                  id: de_datacamp
-                  href: pages/projects/data_engineering/datacamp/datacamp.qmd
-                  contents:
-                      - section: 
-                - section:
-                  id: de_research
-                  href: pages/projects/data_engineering/research/research.qmd
-                  contents:
-                      - section:
-          - section: "Data Science and Machine Learning"
-            id: data_science
-            href: pages/projects/data_science/data_science.qmd
+              - id: de_datacamp
+                title: "DataCamp Data Engineering Projects"
+                href: /pages/projects/data_engineering/datacamp/datacamp.qmd  # Corrected to direct file
+              - id: de_research
+                title: "Data Engineering Research Projects"
+                href: /pages/projects/data_engineering/research/research.qmd  # Corrected to direct file
+          - id: data_science
+            title: "Data Science and Machine Learning"
+            href: /pages/projects/data_science/data_science.qmd  # Corrected to direct file
             contents:
-                - section: "DataCamp Data Science Projects"
-                  id: ds_datacamp
-                  href: pages/projects/data_science/data_science.qmd
-                  contents:
-                      - section:
-                - section: "Kaggle Projects"
-                  id: ds_kaggle
-                  href: pages/projects/data_science/data_science.qmd
-                  contents:
-                      - section:
-                - section: "Research Projects"
-                  id: ds_research
-                  href: pages/projects/data_science/data_science.qmd
-                  contents:
-                      - section: 
-      - section: "Blogs"
-        id: blogs
-        href: pages/blogs/blogs.qmd
+              - id: ds_datacamp
+                title: "DataCamp Data Science Projects"
+                href: /pages/projects/data_science/datacamp/datacamp.qmd  # Corrected to direct file
+              - id: ds_kaggle
+                title: "Kaggle Projects"
+                href: /pages/projects/data_science/kaggle/kaggle.qmd  # Corrected to direct file
+              - id: ds_research
+                title: "Research Projects"
+                href: /pages/projects/data_science/research/research.qmd  # Corrected to direct file
+      - id: blogs
+        title: "Blogs"
+        href: /pages/blogs/blogs.qmd  # Corrected to direct file
         contents:
-            - section: "Technology Blogs"
-              id: tech_blogs
-              href: pages/blogs/tech/tech.qmd
-              contents:
-                  - title: 
-            - section: "Research Blogs"
-              id: research_blogs
-              href: pages/blogs/research/research.qmd
-              contents:
-                  - title:
+          - id: tech_blogs
+            title: "Technology Blogs"
+            href: /pages/blogs/tech/tech.qmd  # Corrected to direct file
+          - id: research_blogs
+            title: "Research Blogs"
+            href: /pages/blogs/research/research.qmd  # Corrected to direct file
+
 
 
 format:
