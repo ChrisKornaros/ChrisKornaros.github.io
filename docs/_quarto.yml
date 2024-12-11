@@ -12,34 +12,39 @@ website:
       - text: "Guides"
         href: pages/guides/guides.qmd
         menu: 
-        - text: "Quarto"
-          href: pages/guides/quarto/quarto.qmd
-        - text: "uv"
-          href: pages/guides/uv/uv.qmd
-      - text: Projects
+          - text: "Quarto"
+            href: pages/guides/quarto/quarto.qmd
+          - text: "uv"
+            href: pages/guides/uv/uv.qmd
+      - text: "Projects"
         href: pages/projects/projects.qmd
         menu: 
           - text: "Data Engineering"
-            href: pages/projects/data_engineering/data_engineering/qmd
+            href: pages/projects/data_engineering/data_engineering.qmd
             menu:        
-            - text: "DataCamp"
-              href: pages/projects/data_engineering/datacamp/datacamp.qmd
-            - text: "Research"
-              href: pages/projects/data_engineering/research/research.qmd
+              - text: "DataCamp"
+                href: pages/projects/data_engineering/datacamp/datacamp.qmd
+              - text: "Research"
+                href: pages/projects/data_engineering/research/research.qmd
           - text: "Data Science"
+            href: pages/projects/data_science/data_science.qmd
             menu:        
-            - text: "DataCamp"
-              href: pages/projects/data_science/datacamp/datacamp.qmd
-            - text: "Kaggle"
-              href: pages/projects/data_science/kaggle/kaggle.qmd
-            - text: "Research"
-              href: pages/projects/data_science/research/research.qmd
+              - text: "DataCamp"
+                href: pages/projects/data_science/datacamp/datacamp.qmd
+              - text: "Kaggle"
+                href: pages/projects/data_science/kaggle/kaggle.qmd
+              - text: "Research"
+                href: pages/projects/data_science/research/research.qmd
+      - text: "Blogs"
+        href: pages/blogs/blogs.qmd
+        menu:
+          - text: "Tech"
+            href: pages/blogs/tech/tech.qmd
+          - text: "Personal"
+            href: pages/blogs/personal/personal.qmd
 
 format:
   html:
     theme: cosmo
     css: styles.css
     toc: true
-
-
-

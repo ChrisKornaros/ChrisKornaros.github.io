@@ -35,11 +35,32 @@
     "text": "Landing page for the project portfolio portion of this website. Contains all of my public repositories and projects (for now, may include future consulting or paid side work, but I don’t do that at the moment), including both the code in repositories and write ups (where applicable)."
   },
   {
+    "objectID": "pages/blogs/tech/tech.html",
+    "href": "pages/blogs/tech/tech.html",
+    "title": "Technology",
+    "section": "",
+    "text": "A landing page for my blogs (hosted on WhiteWind) about specific technologies. These may be quick notes, or longer demos."
+  },
+  {
+    "objectID": "pages/blogs/research/research.html",
+    "href": "pages/blogs/research/research.html",
+    "title": "Research",
+    "section": "",
+    "text": "A landing page for my general thoughts and research into what’s interesting me at the time."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "ChrisKornaros",
     "section": "",
     "text": "This is a Quarto website.\nTesting changes/additions.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "pages/blogs/blogs.html",
+    "href": "pages/blogs/blogs.html",
+    "title": "Blogs",
+    "section": "",
+    "text": "A landing page for various blogs, journals, or random thoughts. Some of these will be focused on specific tools or technology, others will be random thoughts or research notes."
   },
   {
     "objectID": "pages/about/about.html",
