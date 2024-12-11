@@ -31,9 +31,28 @@ website:
       
     - id: projects
       title: "Projects"
+      contents:
+        - id: data_engineering
+          title: "Data Engineering and Architecture"
+          href: pages/projects/data_engineering/data_engineering.qmd
+          contents:
+            - id: de_datacamp
+              title: "DataCamp Data Engineering Projects"
+              href: pages/projects/data_engineering/datacamp/datacamp.qmd
+            - id: de_research
+              title: "Data Engineering Research Projects"
+              href: pages/projects/data_engineering/research/research.qmd
         
     - id: blogs
       title: "Blogs"
+      contents:
+        - id: tech_blogs
+          title: "Technology Blogs"
+          href: pages/blogs/tech/tech.qmd
+        - id: research_blogs
+          title: "Research Blogs"
+          href: pages/blogs/research/research.qmd
+        - pages/blogs/blogs.qmd
 
 
 format:
