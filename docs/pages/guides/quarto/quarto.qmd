@@ -4,7 +4,8 @@ title: "Quarto Development Notes"
 
 # Quarto
 ## Overview
-Quarto is
+Quarto is:\
+
 > An open-source scientific and technical publishing system\
 > Author using Jupyter notebooks or with plain text markdown in your favorite editor.\
 > Create dynamic content with Python, R, Julia, and Observable.\

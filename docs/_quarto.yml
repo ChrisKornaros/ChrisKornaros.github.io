@@ -10,25 +10,27 @@ website:
       - text: "About"
         href: pages/about/about.qmd
       - text: "Guides"
-        href: pages/guides/guides.qmd
-        menu: 
+        menu:
+          - text: "Overview"
+            href: pages/guides/guides.qmd
           - text: "Quarto"
             href: pages/guides/quarto/quarto.qmd
           - text: "uv"
             href: pages/guides/uv/uv.qmd
       - text: "Projects"
-        href: pages/projects/projects.qmd
-        menu: 
+        menu:
+          - text: "Overview"
+            href: pages/projects/projects.qmd
           - text: "Data Engineering"
             href: pages/projects/data_engineering/data_engineering.qmd
-            menu:        
+            menu:
               - text: "DataCamp"
                 href: pages/projects/data_engineering/datacamp/datacamp.qmd
               - text: "Research"
                 href: pages/projects/data_engineering/research/research.qmd
           - text: "Data Science"
             href: pages/projects/data_science/data_science.qmd
-            menu:        
+            menu:
               - text: "DataCamp"
                 href: pages/projects/data_science/datacamp/datacamp.qmd
               - text: "Kaggle"
@@ -36,8 +38,9 @@ website:
               - text: "Research"
                 href: pages/projects/data_science/research/research.qmd
       - text: "Blogs"
-        href: pages/blogs/blogs.qmd
         menu:
+          - text: "Overview"
+            href: pages/blogs/blogs.qmd
           - text: "Tech"
             href: pages/blogs/tech/tech.qmd
           - text: "Personal"
