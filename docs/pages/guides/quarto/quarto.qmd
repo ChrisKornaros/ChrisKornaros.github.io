@@ -14,9 +14,11 @@ Quarto is:\
 > Write using Pandoc markdown, including equations, citations, crossrefs, figure panels, callouts, advanced layout, and more.
 
 ## Projects
+This section, and the rest of the guide, assume you're familiar with and using the uv package and project manager for Python, git for version control, and the GitHub CLI for collaboration. I'll be referencing all of these tools throughout the rest of the guide.
+
 ### Initializing a Project
 #### The create command
-It's easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process. Furthermore, Quarto provides a simple command for creating (or initializing) a project (or extension), `quarto create project`
+It's easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process. Furthermore, Quarto provides a simple command for creating (or initializing) a project (or extension), `quarto create project`, and a handy setup guide to help you use it.
 
 ```{bash}
 
