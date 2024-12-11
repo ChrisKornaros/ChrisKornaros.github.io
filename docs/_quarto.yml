@@ -4,44 +4,67 @@ project:
 website:
   title: "Chris Kornaros"
   navbar:
+    background: primary
+    search: true
     left:
       - text: "Home"
         href: index.qmd
       - text: "About"
         href: pages/about/about.qmd
       - text: "Guides"
-        href: pages/guides/guides.qmd
-        menu: 
-          - text: "Quarto"
-            href: pages/guides/quarto/quarto.qmd
-          - text: "uv"
-            href: pages/guides/uv/uv.qmd
+        href: sidebar:guides
       - text: "Projects"
-        href: pages/projects/projects.qmd
-        menu: 
-          - text: "Data Engineering"
-            href: pages/projects/data_engineering/data_engineering.qmd
-            menu:        
-              - text: "DataCamp"
-                href: pages/projects/data_engineering/datacamp/datacamp.qmd
-              - text: "Research"
-                href: pages/projects/data_engineering/research/research.qmd
-          - text: "Data Science"
-            href: pages/projects/data_science/data_science.qmd
-            menu:        
-              - text: "DataCamp"
-                href: pages/projects/data_science/datacamp/datacamp.qmd
-              - text: "Kaggle"
-                href: pages/projects/data_science/kaggle/kaggle.qmd
-              - text: "Research"
-                href: pages/projects/data_science/research/research.qmd
+        href: sidebar:projects
       - text: "Blogs"
+        href: sidebar:blogs
+
+  sidebar:
+    style: docked
+    background: light
+    contents:
+      - id: guides
+        href: pages/guides/guides.qmd
+        contents:
+            - id: quarto
+              href: pages/guides/quarto/quarto.qmd
+              contents:
+            - id: uv
+              href: pages/guides/uv/uv.qmd
+              contents:
+      - id: projects
+        href: pages/projects/projects.qmd
+        contents:
+          - id: data_engineering
+            href: pages/projects/data_engineering/data_engineering.qmd
+            contents:
+                - id: de_datacamp
+                  href: pages/projects/data_engineering/datacamp/datacamp.qmd
+                  contents:
+                - id: de_research
+                  href: pages/projects/data_engineering/research/research.qmd
+                  contents:
+          - id: data_science
+            href: pages/projects/data_science/data_science.qmd
+            contents:
+                - id: ds_datacamp
+                  href: pages/projects/data_science/data_science.qmd
+                  contents:
+                - id: ds_kaggle
+                  href: pages/projects/data_science/data_science.qmd
+                  contents:
+                - id: ds_research
+                  href: pages/projects/data_science/data_science.qmd
+                  contents:
+      - id: blogs
         href: pages/blogs/blogs.qmd
-        menu:
-          - text: "Tech"
-            href: pages/blogs/tech/tech.qmd
-          - text: "Research"
-            href: pages/blogs/research/research.qmd
+        contents:
+            - id: tech_blogs
+              href: pages/blogs/tech/tech.qmd
+              contents:
+            - id: research_blogs
+              href: pages/blogs/research/research.qmd
+              contents:
+
 
 format:
   html:
