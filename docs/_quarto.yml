@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "Chris Kornaors"
+  title: "Chris Kornaros"
   navbar:
     background: primary
     search: true
@@ -10,7 +10,8 @@ website:
       - text: "Home"
         href: index.qmd
       - pages/about/about.qmd
-      - sidebar:guides
+      - text: "Guides"
+        href: sidebar:guides
       - sidebar:projects
       - sidebar:blogs
 
@@ -20,18 +21,24 @@ website:
       style: "floating"
       background: light
       collapse-level: 2
-      contents: 
+      contents:
+        - id: guides_home
+          title: "Guides"
+          href: pages/guides/guides.qmd
         - id: quarto
           title: "Quarto"
           href: pages/guides/quarto/quarto.qmd
         - id: uv
           title: "uv"
           href: pages/guides/uv/uv.qmd
-        - pages/guides/guides.qmd
+
       
     - id: projects
       title: "Projects"
       contents:
+        - id: projects_home
+          title: "Projects"
+          href: pages/projects/projects.qmd
         - id: data_engineering
           title: "Data Engineering and Architecture"
           href: pages/projects/data_engineering/data_engineering.qmd
@@ -42,22 +49,40 @@ website:
             - id: de_research
               title: "Data Engineering Research Projects"
               href: pages/projects/data_engineering/research/research.qmd
+        - id: data_science
+          title: "Data Science and Machine Learning"
+          href: pages/projects/data_science/data_science.qmd
+          contents:
+            - id: ds_datacamp
+              title: "DataCamp Data Science Projects"
+              href: pages/projects/data_science/datacamp/datacamp.qmd
+            - id: ds_kaggle
+              title: "Kaggle Projects"
+              href: pages/projects/data_science/kaggle/kaggle.qmd
+            - id: ds_research
+              title: "Research Projects"
+              href: pages/projects/data_science/research/research.qmd
         
     - id: blogs
       title: "Blogs"
       contents:
+        - id: blogs_home
+          title: "Blogs"
+          href: pages/blogs/blogs.qmd
         - id: tech_blogs
           title: "Technology Blogs"
           href: pages/blogs/tech/tech.qmd
+          contents:
         - id: research_blogs
           title: "Research Blogs"
           href: pages/blogs/research/research.qmd
-        - pages/blogs/blogs.qmd
 
 
 format:
   html:
-    theme: cosmo
+    theme:
+      light: zephyr
+      dark: flatly
     css: styles.css
     toc: true
     

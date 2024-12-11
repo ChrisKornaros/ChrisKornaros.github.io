@@ -15,7 +15,8 @@ Quarto is:\
 
 ## Projects
 ### Initializing a Project
-It's easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process. 
+#### The create command
+It's easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process. Furthermore, Quarto provides a simple command for creating (or initializing) a project (or extension), `quarto create project`
 
 ```{bash}
 

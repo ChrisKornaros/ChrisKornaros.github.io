@@ -102,14 +102,6 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-guides">    
         <li>
-    <a class="dropdown-item" href="../../../pages/guides/quarto/quarto.html">
- <span class="dropdown-text">Quarto Development Notes</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../../pages/guides/uv/uv.html">
- <span class="dropdown-text">uv</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="../../../pages/guides/guides.html">
  <span class="dropdown-text">Guides</span></a>
   </li>  
@@ -120,6 +112,33 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Projects</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
+        <li class="dropdown-header">Data Engineering and Architecture Projects</li>
+        <li>
+    <a class="dropdown-item" href="../../../pages/projects/data_engineering/datacamp/datacamp.html">
+ <span class="dropdown-text">DataCamp Data Engineering Projects</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/projects/data_engineering/research/research.html">
+ <span class="dropdown-text">Data Engineering Reserach Projects</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Data Science and Machine Learning Projects</li>
+        <li>
+    <a class="dropdown-item" href="../../../pages/projects/data_science/datacamp/datacamp.html">
+ <span class="dropdown-text">DataCamp Data Science Projects</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/projects/data_science/kaggle/kaggle.html">
+ <span class="dropdown-text">Kaggle Data Science Projects</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/projects/data_science/research/research.html">
+ <span class="dropdown-text">Data Science Research Projects</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/projects/projects.html">
+ <span class="dropdown-text">Projects</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -127,6 +146,18 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Blogs</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-blogs">    
+        <li>
+    <a class="dropdown-item" href="../../../pages/blogs/tech/tech.html">
+ <span class="dropdown-text">Technology</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/blogs/research/research.html">
+ <span class="dropdown-text">Research</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/blogs/blogs.html">
+ <span class="dropdown-text">Blogs</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -154,6 +185,12 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../../pages/guides/guides.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guides</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../../pages/guides/quarto/quarto.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Quarto Development Notes</span></a>
   </div>
@@ -162,12 +199,6 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../../../pages/guides/uv/uv.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">uv</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/guides/guides.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Guides</span></a>
   </div>
 </li>
     </ul>
@@ -237,8 +268,11 @@ Write using Pandoc markdown, including equations, citations, crossrefs, figure p
 <h2 class="anchored" data-anchor-id="projects">Projects</h2>
 <section id="initializing-a-project" class="level3">
 <h3 class="anchored" data-anchor-id="initializing-a-project">Initializing a Project</h3>
-<p>It’s easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process.</p>
+<section id="the-create-command" class="level4">
+<h4 class="anchored" data-anchor-id="the-create-command">The create command</h4>
+<p>It’s easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process. Furthermore, Quarto provides a simple command for creating (or initializing) a project (or extension), <code>quarto create project</code></p>
 <pre class="{bash}"><code></code></pre>
+</section>
 </section>
 <section id="rendering-a-projects" class="level3">
 <h3 class="anchored" data-anchor-id="rendering-a-projects">Rendering a Projects</h3>
