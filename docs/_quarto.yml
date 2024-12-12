@@ -6,7 +6,7 @@ website:
   title: "Chris Kornaros"
   navbar:
     search: true
-    background: dark
+    background: danger
     foreground: light
     left:
       - text: "Home"
@@ -31,8 +31,8 @@ website:
     - id: guides
       title: "Guides"
       style: "docked"
-      background: danger
-      foreground: success
+      background: dark
+      foreground: light
       collapse-level: 2
       contents:
         - pages/guides/guides.qmd
@@ -82,7 +82,9 @@ website:
         - section: "Technology Blogs"
           href: pages/blogs/tech/tech.qmd
           
-format: 
+format:
+  #theme:
+    #light:
   html:
     toc: true
     toc-title: "On this page"

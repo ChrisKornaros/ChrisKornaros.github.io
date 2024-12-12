@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -38,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-fe3d27ad4957b7b46e339d7dc053a392.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-137f1e0c68c6a28dd42006ab19990aeb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-41a681e4da13496a6b2eed9b688362c5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -266,9 +300,12 @@ Write using Pandoc markdown, including equations, citations, crossrefs, figure p
 <h4 class="anchored" data-anchor-id="color">Color</h4>
 <p>This is obviously an important part of all branding. There are two main components: 1. <code>palette</code> 2. <code>theme colors</code></p>
 <p>Palette lets you specify hexcodes and assign those to various strings. Those string values could be generic terms, like <em>green</em> (if there is a specific shade you would like), or terms specific to brand.yml’s <em>theme colors</em>. When you set your default colors in this way, you can then customize the output in the _quarto.yml file. To modify, for example, your navigation bar, just define the background and foreground properties under the <code>navbar</code> property.</p>
+<p>Another thing to keep in mind with color, just because it’s available in _brand.yml, like <code>tertiary</code>, doesn’t mean it’s defined and functional in the <code>_quarto.yml</code> file. So, you may need to be creative with how you use protected terms, like success, danger, or warning. Doing so allows you to take advantage of the programmatic benefits of the brand file, while specifying several, possibly, similar shades that would be tricky to do just be renaming colors, such as red, blue, or yellow.</p>
+<p>If you aren’t sure on what colors or palettes to choose, using an LLM based chatbot can be helpful. This allows you to describe the colors and themes you’re going for, as well as refine them over time.</p>
 </section>
 <section id="typography" class="level4">
 <h4 class="anchored" data-anchor-id="typography">Typography</h4>
+<p>This section lets you control which font families are included in your Quarto project. Then, you can specify where various fonts are used and for some properties, even change their specific color. As a heads up, the _brand.yml documentation seems to be correct and updated; however, <code>bash</code> code blocks don’t render the monospace-background the same way. So, while in-line monospace backgrounds and monospace backgrounds for Python (at the very least) will be colored as the documentation says. Bash code blocks will have no background, just the code itself in the specified font color.</p>
 </section>
 <section id="defaults" class="level4">
 <h4 class="anchored" data-anchor-id="defaults">Defaults</h4>
@@ -316,6 +353,12 @@ Creating project at /Users/chriskornaros/Documents/test/docs:
 <section id="side-navigation" class="level4">
 <h4 class="anchored" data-anchor-id="side-navigation">Side Navigation</h4>
 <p>It’s crucial, for nested subpages, to have the parent landing page’s .qmd file’s path as a standalone line in the contents of the _quarto.yml file. Failing to do so will remove the sidebar from the landing page’s navigation; however, for subsections, those should be specified within an href paramter, under the section line. Additionally, for the collapsable functionality to work consistently in a sidebar, you’ll need it docked. The behavior is inconsistent with floating sidebars. After you’ve set your default color values in <code>_brand.yml</code>, make sure to specify the design details at the top of your <code>sidebar</code> property.</p>
+<div id="4c2f32ab" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="op">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>4</code></pre>
+</div>
+</div>
 
 
 </section>

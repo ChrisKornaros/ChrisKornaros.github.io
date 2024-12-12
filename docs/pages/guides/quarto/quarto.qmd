@@ -26,7 +26,12 @@ This is obviously an important part of all branding. There are two main componen
 
 Palette lets you specify hexcodes and assign those to various strings. Those string values could be generic terms, like *green* (if there is a specific shade you would like), or terms specific to brand.yml's *theme colors*. When you set your default colors in this way, you can then customize the output in the _quarto.yml file. To modify, for example, your navigation bar, just define the background and foreground properties under the `navbar` property. 
 
+Another thing to keep in mind with color, just because it's available in _brand.yml, like `tertiary`, doesn't mean it's defined and functional in the `_quarto.yml` file. So, you may need to be creative with how you use protected terms, like success, danger, or warning. Doing so allows you to take advantage of the programmatic benefits of the brand file, while specifying several, possibly, similar shades that would be tricky to do just be renaming colors, such as red, blue, or yellow. 
+
+If you aren't sure on what colors or palettes to choose, using an LLM based chatbot can be helpful. This allows you to describe the colors and themes you're going for, as well as refine them over time.
+
 #### Typography
+This section lets you control which font families are included in your Quarto project. Then, you can specify where various fonts are used and for some properties, even change their specific color. As a heads up, the _brand.yml documentation seems to be correct and updated; however, `bash` code blocks don't render the monospace-background the same way. So, while in-line monospace backgrounds and monospace backgrounds for Python (at the very least) will be colored as the documentation says. Bash code blocks will have no background, just the code itself in the specified font color.
 
 #### Defaults
 This section gives you more control over various defaults, for HTML Bootstrap, Quarto, Shiny, etc. When configuring specific design colors, using the bootstrap default section will allow you to keep your Quarto files simple, while providing a high level of control over design.
@@ -67,3 +72,8 @@ After you've set your default color values in `_brand.yml`, make sure to specify
 
 #### Side Navigation
 It's crucial, for nested subpages, to have the parent landing page's .qmd file's path as a standalone line in the contents of the _quarto.yml file. Failing to do so will remove the sidebar from the landing page's navigation; however, for subsections, those should be specified within an href paramter, under the section line. Additionally, for the collapsable functionality to work consistently in a sidebar, you'll need it docked. The behavior is inconsistent with floating sidebars. After you've set your default color values in `_brand.yml`, make sure to specify the design details at the top of your `sidebar` property.
+
+
+```{python}
+2+2
+```
