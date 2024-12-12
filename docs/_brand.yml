@@ -1,23 +1,42 @@
 color:
-  background: "#EBEBD3"
+  background: "#F7F7F7"
   foreground: "#083D77"
+  primary: "#FF9900"
+  secondary: "#1A4D6E"
+  tertiary: "#8B9467"
+  success: "#FFFFFF"
+  danger: "#052F5F"
+  light: "#F7F7F7"
+  dark: "#083D77"
 
 typography:
   fonts:
-    - family: Inter
+    - family: Open Sans
       source: google
-  base: Inter
-  headings: Inter
+  base: 
+    family: Open Sans
+  headings: 
+    family: Open Sans
+    color: secondary
+  monospace: 
+    family: Open Sans
+    color: light
+  monospace-block: 
+    family: Open Sans
+    color: light
+  monospace-inline:
+    family: Open Sans
+    color: light 
 
-defaults:
-  bootstrap:
-    #primary: "#2C2F33"  # Replace with your desired primary color
-    #secondary: "#6c757d"  # Replace with your desired secondary color
-    --quarto-scss-export-navbar-bg: "#EADEDA" # Replace with your desired navbar background color
-    navbar-text: "#2E294E"  # Replace with your desired navbar text color
   
-
-# Beige - Background "#EBEBD3"
-# Yale Blue - Foreground "#083D77" (Light navy/light royal blue)
-# Timberwolf - Navigation Background "#EADEDA" (Light purple/white)
-# Space Cadet - Navigation Foreground "#2E294E" (Dark purple/navy)
+# Light mode
+# Background (#F7F7F7): soft, creamy white base
+# Foreground (#083D77): deep blue for text
+# Primary (#FF9900): rich, golden orange for accents
+# Secondary (#1A4D6E): softer blue for secondary elements
+# Tertiary (#8B9467): muted, green-ish brown for added depth
+# Light (#F7F7F7): soft, creamy white base
+# Dark (#083D77): deep blue for text
+# Success (#34C759): muted, greenish-yellow for success
+# Danger (#DC3545): deep, bold red for danger
+  

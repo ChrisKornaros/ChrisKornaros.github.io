@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quarto Development Notes – Chris Kornaros</title>
+<title>Quarto Development Notes – Chris Kornaro</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -35,10 +35,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-fe3d27ad4957b7b46e339d7dc053a392.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-8ebc83034b995932b93cc2bfdde2785a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-23c5aed45e93794b6305154f55cd8b63.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar floating nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -78,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../../index.html">
-    <span class="navbar-title">Chris Kornaros</span>
+    <span class="navbar-title">Chris Kornaro</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -164,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -239,7 +239,14 @@ Write using Pandoc markdown, including equations, citations, crossrefs, figure p
 <section id="color" class="level4">
 <h4 class="anchored" data-anchor-id="color">Color</h4>
 <p>This is obviously an important part of all branding. There are two main components: 1. <code>palette</code> 2. <code>theme colors</code></p>
-<p>Palette lets you specify hexcodes and assign those to various strings. Those string values could be generic terms, like <em>green</em> (if there is a specific shade you would like), or terms specific to brand.yml’s <em>theme colors</em>.</p>
+<p>Palette lets you specify hexcodes and assign those to various strings. Those string values could be generic terms, like <em>green</em> (if there is a specific shade you would like), or terms specific to brand.yml’s <em>theme colors</em>. When you set your default colors in this way, you can then customize the output in the _quarto.yml file. To modify, for example, your navigation bar, just define the background and foreground properties under the <code>navbar</code> property.</p>
+</section>
+<section id="typography" class="level4">
+<h4 class="anchored" data-anchor-id="typography">Typography</h4>
+</section>
+<section id="defaults" class="level4">
+<h4 class="anchored" data-anchor-id="defaults">Defaults</h4>
+<p>This section gives you more control over various defaults, for HTML Bootstrap, Quarto, Shiny, etc. When configuring specific design colors, using the bootstrap default section will allow you to keep your Quarto files simple, while providing a high level of control over design.</p>
 </section>
 </section>
 </section>
@@ -278,10 +285,11 @@ Creating project at /Users/chriskornaros/Documents/test/docs:
 <h3 class="anchored" data-anchor-id="website-navigation">Website Navigation</h3>
 <section id="top-navigation" class="level4">
 <h4 class="anchored" data-anchor-id="top-navigation">Top Navigation</h4>
+<p>After you’ve set your default color values in <code>_brand.yml</code>, make sure to specify the design details at the top of your <code>navbar</code> property.</p>
 </section>
 <section id="side-navigation" class="level4">
 <h4 class="anchored" data-anchor-id="side-navigation">Side Navigation</h4>
-<p>It’s crucial, for nested subpages, to have the parent landing page’s .qmd file’s path as a standalone line in the contents of the _quarto.yml file. Failing to do so will remove the sidebar from the landing page’s navigation; however, for subsections, those should be specified within an href paramter, under the section line.</p>
+<p>It’s crucial, for nested subpages, to have the parent landing page’s .qmd file’s path as a standalone line in the contents of the _quarto.yml file. Failing to do so will remove the sidebar from the landing page’s navigation; however, for subsections, those should be specified within an href paramter, under the section line. Additionally, for the collapsable functionality to work consistently in a sidebar, you’ll need it docked. The behavior is inconsistent with floating sidebars. After you’ve set your default color values in <code>_brand.yml</code>, make sure to specify the design details at the top of your <code>sidebar</code> property.</p>
 
 
 </section>

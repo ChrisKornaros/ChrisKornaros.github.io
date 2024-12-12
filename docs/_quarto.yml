@@ -1,10 +1,13 @@
 project:
   type: website
+  output-dir: .
 
 website:
   title: "Chris Kornaros"
   navbar:
     search: true
+    background: dark
+    foreground: light
     left:
       - text: "Home"
         href: index.qmd
@@ -27,7 +30,9 @@ website:
   sidebar:
     - id: guides
       title: "Guides"
-      style: "floating"
+      style: "docked"
+      background: danger
+      foreground: success
       collapse-level: 2
       contents:
         - pages/guides/guides.qmd
@@ -77,4 +82,8 @@ website:
         - section: "Technology Blogs"
           href: pages/blogs/tech/tech.qmd
           
- 
+format: 
+  html:
+    toc: true
+    toc-title: "On this page"
+    toc-depth: 3

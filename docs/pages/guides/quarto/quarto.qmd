@@ -24,7 +24,7 @@ This is obviously an important part of all branding. There are two main componen
 1. `palette`
 2. `theme colors`
 
-Palette lets you specify hexcodes and assign those to various strings. Those string values could be generic terms, like *green* (if there is a specific shade you would like), or terms specific to brand.yml's *theme colors*. 
+Palette lets you specify hexcodes and assign those to various strings. Those string values could be generic terms, like *green* (if there is a specific shade you would like), or terms specific to brand.yml's *theme colors*. When you set your default colors in this way, you can then customize the output in the _quarto.yml file. To modify, for example, your navigation bar, just define the background and foreground properties under the `navbar` property. 
 
 #### Typography
 
@@ -63,6 +63,7 @@ quarto render docs --output-dir .
 
 ### Website Navigation
 #### Top Navigation
+After you've set your default color values in `_brand.yml`, make sure to specify the design details at the top of your `navbar` property.
 
 #### Side Navigation
-It's crucial, for nested subpages, to have the parent landing page's .qmd file's path as a standalone line in the contents of the _quarto.yml file. Failing to do so will remove the sidebar from the landing page's navigation; however, for subsections, those should be specified within an href paramter, under the section line.
+It's crucial, for nested subpages, to have the parent landing page's .qmd file's path as a standalone line in the contents of the _quarto.yml file. Failing to do so will remove the sidebar from the landing page's navigation; however, for subsections, those should be specified within an href paramter, under the section line. Additionally, for the collapsable functionality to work consistently in a sidebar, you'll need it docked. The behavior is inconsistent with floating sidebars. After you've set your default color values in `_brand.yml`, make sure to specify the design details at the top of your `sidebar` property.
