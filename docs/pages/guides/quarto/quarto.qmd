@@ -26,6 +26,11 @@ This is obviously an important part of all branding. There are two main componen
 
 Palette lets you specify hexcodes and assign those to various strings. Those string values could be generic terms, like *green* (if there is a specific shade you would like), or terms specific to brand.yml's *theme colors*. 
 
+#### Typography
+
+#### Defaults
+This section gives you more control over various defaults, for HTML Bootstrap, Quarto, Shiny, etc. When configuring specific design colors, using the bootstrap default section will allow you to keep your Quarto files simple, while providing a high level of control over design.
+
 ## Projects
 This section, and the rest of the guide, assume you're familiar with and using the uv package and project manager for Python, git for version control, and the GitHub CLI for collaboration. I'll be referencing all of these tools throughout the rest of the guide.
 

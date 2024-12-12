@@ -1,6 +1,6 @@
 color:
-  background: "#C4F1BE"
-  foreground: "#201E50"
+  background: "#EBEBD3"
+  foreground: "#083D77"
 
 typography:
   fonts:
@@ -8,4 +8,16 @@ typography:
       source: google
   base: Inter
   headings: Inter
+
+defaults:
+  bootstrap:
+    #primary: "#2C2F33"  # Replace with your desired primary color
+    #secondary: "#6c757d"  # Replace with your desired secondary color
+    --quarto-scss-export-navbar-bg: "#EADEDA" # Replace with your desired navbar background color
+    navbar-text: "#2E294E"  # Replace with your desired navbar text color
   
+
+# Beige - Background "#EBEBD3"
+# Yale Blue - Foreground "#083D77" (Light navy/light royal blue)
+# Timberwolf - Navigation Background "#EADEDA" (Light purple/white)
+# Space Cadet - Navigation Foreground "#2E294E" (Dark purple/navy)
