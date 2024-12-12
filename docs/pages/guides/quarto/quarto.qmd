@@ -17,7 +17,7 @@ Quarto is:\
 ### Downloading and Updating
 
 ### The _brand.yml File
-This is a new feature with Quarto 1.6 that allows you to define and save your design specifications in a YAML file. While this file is specific to your Quarto project directories, you can store and share the file across projects or with others to maintain brand consistency. Luckily, there is great documentation if you want more details [brand.yml](https://posit-dev.github.io/brand-yml/brand/). While there is a lot to cover, I'll go over some basics to get started.
+This is a new feature with Quarto 1.6 that allows you to define and save your design specifications in a YAML file. While this file is specific to your Quarto project directories, you can store and share the file across projects or with others to maintain brand consistency. Luckily, there is great documentation if you want more details [brand.yml](https://posit-dev.github.io/brand-yml/brand/). While there is a lot to cover, I'll go over some basics to get started. It's important to remember that if you specify colors for anything within .qmd files, those will overwrite the defaults in the brand file.
 
 #### Color
 This is obviously an important part of all branding. There are two main components:
@@ -56,4 +56,8 @@ I run the following code block from my main project directory. My Quarto project
 quarto render docs --output-dir .
 ```
 
+### Website Navigation
+#### Top Navigation
 
+#### Side Navigation
+It's crucial, for nested subpages, to have the parent landing page's .qmd file's path as a standalone line in the contents of the _quarto.yml file. Failing to do so will remove the sidebar from the landing page's navigation; however, for subsections, those should be specified within an href paramter, under the section line.

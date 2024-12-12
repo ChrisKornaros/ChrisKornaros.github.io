@@ -38,7 +38,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-11a91e5fc066ded83d1585acfc0a5d62.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-840151acc769d4c947b40bfae8639c85.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar floating nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -155,7 +155,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/guides/quarto/quarto.html">Quarto Development Notes</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/guides/quarto/quarto.html">Quarto</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -164,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -176,7 +176,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../pages/guides/quarto/quarto.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Quarto Development Notes</span></a>
+ <span class="menu-text">Quarto</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -235,7 +235,7 @@ Write using Pandoc markdown, including equations, citations, crossrefs, figure p
 </section>
 <section id="the-_brand.yml-file" class="level3">
 <h3 class="anchored" data-anchor-id="the-_brand.yml-file">The _brand.yml File</h3>
-<p>This is a new feature with Quarto 1.6 that allows you to define and save your design specifications in a YAML file. While this file is specific to your Quarto project directories, you can store and share the file across projects or with others to maintain brand consistency. Luckily, there is great documentation if you want more details <a href="https://posit-dev.github.io/brand-yml/brand/">brand.yml</a>. While there is a lot to cover, I’ll go over some basics to get started.</p>
+<p>This is a new feature with Quarto 1.6 that allows you to define and save your design specifications in a YAML file. While this file is specific to your Quarto project directories, you can store and share the file across projects or with others to maintain brand consistency. Luckily, there is great documentation if you want more details <a href="https://posit-dev.github.io/brand-yml/brand/">brand.yml</a>. While there is a lot to cover, I’ll go over some basics to get started. It’s important to remember that if you specify colors for anything within .qmd files, those will overwrite the defaults in the brand file.</p>
 <section id="color" class="level4">
 <h4 class="anchored" data-anchor-id="color">Color</h4>
 <p>This is obviously an important part of all branding. There are two main components: 1. <code>palette</code> 2. <code>theme colors</code></p>
@@ -273,8 +273,18 @@ Creating project at /Users/chriskornaros/Documents/test/docs:
 <h3 class="anchored" data-anchor-id="rendering-websites">Rendering Websites</h3>
 <p>I run the following code block from my main project directory. My Quarto project directory is a folder called docs. So, I specify to Quarto that I want to render the entire Quarto project <code>docs</code>, but <code>quarto render</code>’s context is specific to the <em>quarto project</em> directory. Therefore, I need to use the <code>.</code> to specify that I want the rendered <code>.html</code> files put in the Quarto project folder, and sub folder.</p>
 <pre class="{bash}"><code>quarto render docs --output-dir .</code></pre>
+</section>
+<section id="website-navigation" class="level3">
+<h3 class="anchored" data-anchor-id="website-navigation">Website Navigation</h3>
+<section id="top-navigation" class="level4">
+<h4 class="anchored" data-anchor-id="top-navigation">Top Navigation</h4>
+</section>
+<section id="side-navigation" class="level4">
+<h4 class="anchored" data-anchor-id="side-navigation">Side Navigation</h4>
+<p>It’s crucial, for nested subpages, to have the parent landing page’s .qmd file’s path as a standalone line in the contents of the _quarto.yml file. Failing to do so will remove the sidebar from the landing page’s navigation; however, for subsections, those should be specified within an href paramter, under the section line.</p>
 
 
+</section>
 </section>
 </section>
 </section>
