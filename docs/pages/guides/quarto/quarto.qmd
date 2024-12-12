@@ -13,16 +13,39 @@ Quarto is:\
 > Share knowledge and insights organization-wide by publishing to Posit Connect, Confluence, or other publishing systems.\
 > Write using Pandoc markdown, including equations, citations, crossrefs, figure panels, callouts, advanced layout, and more.
 
+## Configurations
+### Downloading and Updating
+
+### The _brand.yml File
+This is a new feature with Quarto 1.6 that allows you to define and save your design specifications in a YAML file. While this file is specific to your Quarto project directories, you can store and share the file across projects or with others to maintain brand consistency. Luckily, there is great documentation if you want more details [brand.yml](https://posit-dev.github.io/brand-yml/brand/). While there is a lot to cover, I'll go over some basics to get started.
+
+#### Color
+This is obviously an important part of all branding. There are two main components:
+1. `palette`
+2. `theme colors`
+
+Palette lets you specify hexcodes and assign those to various strings. Those string values could be generic terms, like *green* (if there is a specific shade you would like), or terms specific to brand.yml's *theme colors*. 
+
 ## Projects
 This section, and the rest of the guide, assume you're familiar with and using the uv package and project manager for Python, git for version control, and the GitHub CLI for collaboration. I'll be referencing all of these tools throughout the rest of the guide.
 
 ### Initializing a Project
 #### The create command
-It's easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process. Furthermore, Quarto provides a simple command for creating (or initializing) a project (or extension), `quarto create project`, and a handy setup guide to help you use it.
+It's easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process. Furthermore, Quarto provides a simple command for creating (or initializing) a project (or extension), `quarto create project`, and a handy setup guide to help you use it. The following code shows you my terminal input and outputs.
 
 ```{bash}
-
+chriskornaros@chriss-air test % quarto create project
+? Type › default
+? Directory › docs
+? Title (docs) › test_docs
+Creating project at /Users/chriskornaros/Documents/test/docs:
+  - Created _quarto.yml
+  - Created .gitignore
+  - Created test_docs.qmd
+? Open With › (don't open)
 ```
+
+For a quick run through: quarto create project initializes a quarto project directory within your current working directory (the uv parent directory), `type` lets you choose the type of Quarto documentation (book, website, confluence, etc.), title is teh title of your homepage (.qmd) file. Personally, I like to remove the `docs/.gitignore` file because uv creates one when you initialize a project, in the parent directory. So, having just one .gitignore file helps me keep track of things more easily.
 
 ### Rendering a Projects
 
