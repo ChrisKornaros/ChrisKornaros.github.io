@@ -1,11 +1,6 @@
 color:
-  palette:
-    primary: "#EE964B" 
-    secondary: "#F4D35E"
-    tertiary: "#FAF0CA"
-
-  background: "#0D3B66"
-  foreground: tertiary
+  background: "#C4F1BE"
+  foreground: "#201E50"
 
 typography:
   fonts:
@@ -13,23 +8,4 @@ typography:
       source: google
   base: Inter
   headings: Inter
-
-# Light Mode:
-# Primary: Sandy Brown EE964B
-# Secondary: Naples Yellow F4D35E
-# Tertiary: Lemon Chiffon FAF0CA
-# Background: Yale Blue 0D3B66
-# color:
-#  palette:
-#    primary: "#EE964B" 
-#    secondary: "#F4D35E"
-#    tertiary: "#FAF0CA"
-
-#  background: "#0D3B66"
-#  foreground: tertiary
-
-# Dark Mode:
-# Mint Green C2EFEB (Secondary color, trim)
-# Air Superiority Blue 6EA4BF (Main color, background, header, etc.)
-# Honeydew ECFEE8 (Text color)
-
+  

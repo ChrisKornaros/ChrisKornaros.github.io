@@ -4,7 +4,6 @@ project:
 website:
   title: "Chris Kornaros"
   navbar:
-    background: primary
     search: true
     left:
       - text: "Home"
@@ -29,7 +28,6 @@ website:
     - id: guides
       title: "Guides"
       style: "docked"
-      background: light
       collapse-level: 3
       contents:
         - id: guides_home
@@ -46,31 +44,26 @@ website:
     - id: projects
       title: "Projects"
       contents:
-        - id: projects_home
-          title: "Projects"
+        - title: "Projects"
           href: pages/projects/projects.qmd
-        - id: data_engineering
-          title: "Data Engineering and Architecture"
+        - title: "Data Engineering and Architecture"
           href: pages/projects/data_engineering/data_engineering.qmd
           contents:
-            - id: de_datacamp
-              title: "DataCamp Data Engineering Projects"
+            - title: "DataCamp Data Engineering Projects"
               href: pages/projects/data_engineering/datacamp/datacamp.qmd
               contents:
                 - id: bank_etl
                   href: pages/projects/data_engineering/datacamp/bank_etl/bank_etl.qmd
-            - id: de_research
-              title: "Data Engineering Research Projects"
+            - title: "Data Engineering Research Projects"
               href: pages/projects/data_engineering/research/research.qmd
         - id: data_science
           title: "Data Science and Machine Learning"
           href: pages/projects/data_science/data_science.qmd
           contents:
-            - id: ds_datacamp
-              title: "DataCamp Data Science Projects"
+            - title: "DataCamp Data Science Projects"
               href: pages/projects/data_science/datacamp/datacamp.qmd
               contents:
-                - id: gym_market
+                - text: gym_market
                   href: pages/projects/data_science/datacamp/gym_market/gym_market.qmd
                 - id: login_validation
                   href: pages/projects/data_science/datacamp/login_validation/login_validation.qmd
@@ -86,15 +79,11 @@ website:
     - id: blogs
       title: "Blogs"
       contents:
-        - id: blogs_home
-          title: "Blogs"
+        - title: "Blogs"
           href: pages/blogs/blogs.qmd
-        - id: research_blogs
-          title: "Research Blogs"
+        - title: "Research Blogs"
           href: pages/blogs/research/research.qmd
-        - id: tech_blogs
-          title: "Technology Blogs"
+        - title: "Technology Blogs"
           href: pages/blogs/tech/tech.qmd
-          contents:
-
-    
+          
+ 
