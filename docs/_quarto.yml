@@ -3,7 +3,7 @@ project:
   output-dir: .
 
 website:
-  title: "Chris Kornaros"
+  title: "Chris Kornaro"
   navbar:
     search: true
     background: danger
@@ -83,9 +83,10 @@ website:
           href: pages/blogs/tech/tech.qmd
           
 format:
-  #theme:
-    #light:
   html:
     toc: true
     toc-title: "On this page"
     toc-depth: 3
+    theme:
+      light: light.scss
+      dark: dark.scss

@@ -1,15 +1,15 @@
-color:
+#color:     
   # Light Mode
-  background: "#F7F7F7"
-  foreground: "#083D77"
-  primary: "#FF9900"
-  secondary: "#1A4D6E"
-  tertiary: "#8B9467"
-  light: "#F7F7F7"
-  dark: "#083D77"
-  success: "#E5F2FF"
-  danger: "#052F5F"
-  info: "#8B0A1A"
+  #background: "#F7F7F7"
+  #foreground: "#083D77"
+  #primary: "#FF9900"
+  #secondary: "#1A4D6E"
+  #tertiary: "#8B9467"
+  #light: "#F7F7F7"
+  #dark: "#083D77"
+  #success: "#E5F2FF"
+  #danger: "#052F5F"
+  #info: "#8B0A1A"
   # Dark Mode
   #background: "#2E4053"
   #foreground: "#F7F7F7"
@@ -34,6 +34,7 @@ typography:
     color: danger
   monospace: 
     family: Open Sans
+    background-color: success
   monospace-block: 
     family: Open Sans
     color: info # For Dark Mode, use secondary

@@ -21,6 +21,7 @@ This is a new feature with Quarto 1.6 that allows you to define and save your de
 
 #### Color
 This is obviously an important part of all branding. There are two main components:
+
 1. `palette`
 2. `theme colors`
 
@@ -36,6 +37,51 @@ This section lets you control which font families are included in your Quarto pr
 #### Defaults
 This section gives you more control over various defaults, for HTML Bootstrap, Quarto, Shiny, etc. When configuring specific design colors, using the bootstrap default section will allow you to keep your Quarto files simple, while providing a high level of control over design.
 
+#### SASS - Syntactically Awesome Style Sheets
+Remember, whatever you can't configure simply in your _brand.yml file, you can do so in a .scss file. For example, if you want to create custom light and dark mode themes, just create .scss files with the appropriate code and place this in your docs (main Quarto project) directory. Below is an example of a dark mode theme. I set the default values for the scss bootstrap variables at the top. Then, I specified the specific rules for various parts of the page. For defined variables, blockquote, you don't need a `.`, but for features specific to quarto rendered sites, add a . before. For example, to modify the look of code blocks, you must use the `.sourceCode` variable. To find out the name of a variable you don't know, just inspect the specific element on the webpage, and the class name will translate 1:1 with the variable name, spaces included. For a list of all CSS variable properties, visit (CSS Web Docs)[https://developer.mozilla.org/en-US/docs/Web/CSS/Reference]. 
+
+```css
+/*-- scss:defaults --*/
+$background: #2E4053;
+$foreground: #F7F7F7;
+$primary: #FF9900;
+$secondary: #56B3FA;
+$tertiary: #655D4B;
+$light: #F7F7F7;
+$dark: #1C1F24;
+$success: #33373D;
+$danger: #1A1D23;
+$info: #56B3FA;
+
+/*-- scss:rules --*/
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: $background;
+  color: $foreground;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $danger;
+}
+
+blockquote {
+  background-color: $success; /* added background color */
+  border-color: $dark;
+  color: $secondary;
+}
+
+code {
+  background-color: $success;
+  color: $info;
+}
+
+.sourceCode {
+  background-color: $success;
+  color: $info;
+  border-style: none;
+}
+```
+
 ## Projects
 This section, and the rest of the guide, assume you're familiar with and using the uv package and project manager for Python, git for version control, and the GitHub CLI for collaboration. I'll be referencing all of these tools throughout the rest of the guide.
 
@@ -43,7 +89,7 @@ This section, and the rest of the guide, assume you're familiar with and using t
 #### The create command
 It's easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process. Furthermore, Quarto provides a simple command for creating (or initializing) a project (or extension), `quarto create project`, and a handy setup guide to help you use it. The following code shows you my terminal input and outputs.
 
-```{bash}
+```bash
 chriskornaros@chriss-air test % quarto create project
 ? Type › default
 ? Directory › docs
@@ -62,7 +108,8 @@ For a quick run through: quarto create project initializes a quarto project dire
 ## Websites
 ### Rendering Websites 
 I run the following code block from my main project directory. My Quarto project directory is a folder called docs. So, I specify to Quarto that I want to render the entire Quarto project `docs`, but `quarto render`'s context is specific to the *quarto project* directory. Therefore, I need to use the `.` to specify that I want the rendered `.html` files put in the Quarto project folder, and sub folder.
-```{bash}
+
+```bash
 quarto render docs --output-dir .
 ```
 

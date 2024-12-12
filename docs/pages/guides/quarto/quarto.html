@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quarto Development Notes – Chris Kornaros</title>
+<title>Quarto Development Notes – Chris Kornaro</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,10 +69,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-fe3d27ad4957b7b46e339d7dc053a392.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-fe3d27ad4957b7b46e339d7dc053a392.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-c15c7ccb793a8c0145e7ec7341df1540.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-41a681e4da13496a6b2eed9b688362c5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-c0c99b698838cc1dcc46ed9f61f50d17.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-6b55fe39fafbb86b29f7fca7485a5352.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -112,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../../index.html">
-    <span class="navbar-title">Chris Kornaros</span>
+    <span class="navbar-title">Chris Kornaro</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -181,6 +183,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -298,7 +301,11 @@ Write using Pandoc markdown, including equations, citations, crossrefs, figure p
 <p>This is a new feature with Quarto 1.6 that allows you to define and save your design specifications in a YAML file. While this file is specific to your Quarto project directories, you can store and share the file across projects or with others to maintain brand consistency. Luckily, there is great documentation if you want more details <a href="https://posit-dev.github.io/brand-yml/brand/">brand.yml</a>. While there is a lot to cover, I’ll go over some basics to get started. It’s important to remember that if you specify colors for anything within .qmd files, those will overwrite the defaults in the brand file.</p>
 <section id="color" class="level4">
 <h4 class="anchored" data-anchor-id="color">Color</h4>
-<p>This is obviously an important part of all branding. There are two main components: 1. <code>palette</code> 2. <code>theme colors</code></p>
+<p>This is obviously an important part of all branding. There are two main components:</p>
+<ol type="1">
+<li><code>palette</code></li>
+<li><code>theme colors</code></li>
+</ol>
 <p>Palette lets you specify hexcodes and assign those to various strings. Those string values could be generic terms, like <em>green</em> (if there is a specific shade you would like), or terms specific to brand.yml’s <em>theme colors</em>. When you set your default colors in this way, you can then customize the output in the _quarto.yml file. To modify, for example, your navigation bar, just define the background and foreground properties under the <code>navbar</code> property.</p>
 <p>Another thing to keep in mind with color, just because it’s available in _brand.yml, like <code>tertiary</code>, doesn’t mean it’s defined and functional in the <code>_quarto.yml</code> file. So, you may need to be creative with how you use protected terms, like success, danger, or warning. Doing so allows you to take advantage of the programmatic benefits of the brand file, while specifying several, possibly, similar shades that would be tricky to do just be renaming colors, such as red, blue, or yellow.</p>
 <p>If you aren’t sure on what colors or palettes to choose, using an LLM based chatbot can be helpful. This allows you to describe the colors and themes you’re going for, as well as refine them over time.</p>
@@ -311,6 +318,49 @@ Write using Pandoc markdown, including equations, citations, crossrefs, figure p
 <h4 class="anchored" data-anchor-id="defaults">Defaults</h4>
 <p>This section gives you more control over various defaults, for HTML Bootstrap, Quarto, Shiny, etc. When configuring specific design colors, using the bootstrap default section will allow you to keep your Quarto files simple, while providing a high level of control over design.</p>
 </section>
+<section id="sass---syntactically-awesome-style-sheets" class="level4">
+<h4 class="anchored" data-anchor-id="sass---syntactically-awesome-style-sheets">SASS - Syntactically Awesome Style Sheets</h4>
+<p>Remember, whatever you can’t configure simply in your _brand.yml file, you can do so in a .scss file. For example, if you want to create custom light and dark mode themes, just create .scss files with the appropriate code and place this in your docs (main Quarto project) directory. Below is an example of a dark mode theme. I set the default values for the scss bootstrap variables at the top. Then, I specified the specific rules for various parts of the page. For defined variables, blockquote, you don’t need a <code>.</code>, but for features specific to quarto rendered sites, add a . before. For example, to modify the look of code blocks, you must use the <code>.sourceCode</code> variable. To find out the name of a variable you don’t know, just inspect the specific element on the webpage, and the class name will translate 1:1 with the variable name, spaces included. For a list of all CSS variable properties, visit (CSS Web Docs)[https://developer.mozilla.org/en-US/docs/Web/CSS/Reference].</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*-- scss:defaults --*/</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>$background<span class="in">:</span> <span class="pp">#2E4053</span>;</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>$foreground<span class="in">:</span> <span class="pp">#F7F7F7</span>;</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>$primary<span class="in">:</span> <span class="pp">#FF9900</span>;</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>$secondary<span class="in">:</span> <span class="pp">#56B3FA</span>;</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>$tertiary<span class="in">:</span> <span class="pp">#655D4B</span>;</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>$light<span class="in">:</span> <span class="pp">#F7F7F7</span>;</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>$dark<span class="in">:</span> <span class="pp">#1C1F24</span>;</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>$success<span class="in">:</span> <span class="pp">#33373D</span>;</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>$danger<span class="in">:</span> <span class="pp">#1A1D23</span>;</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>$info<span class="in">:</span> <span class="pp">#56B3FA</span>;</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">/*-- scss:rules --*/</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>body {</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-family</span><span class="ch">:</span> <span class="st">'Open Sans'</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span><span class="ch">:</span> $<span class="dv">background</span><span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> $<span class="dv">foreground</span><span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>h1<span class="op">,</span> h2<span class="op">,</span> h3<span class="op">,</span> h4<span class="op">,</span> h5<span class="op">,</span> h6 {</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> $<span class="dv">danger</span><span class="op">;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>blockquote {</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span><span class="ch">:</span> $<span class="dv">success</span><span class="op">;</span> <span class="co">/* added background color */</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="kw">border-color</span><span class="ch">:</span> $<span class="dv">dark</span><span class="op">;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> $<span class="dv">secondary</span><span class="op">;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>code {</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span><span class="ch">:</span> $<span class="dv">success</span><span class="op">;</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> $<span class="dv">info</span><span class="op">;</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">.sourceCode</span> {</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span><span class="ch">:</span> $<span class="dv">success</span><span class="op">;</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> $<span class="dv">info</span><span class="op">;</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  <span class="kw">border-style</span><span class="ch">:</span> <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </section>
 </section>
 <section id="projects" class="level2">
@@ -321,15 +371,15 @@ Write using Pandoc markdown, including equations, citations, crossrefs, figure p
 <section id="the-create-command" class="level4">
 <h4 class="anchored" data-anchor-id="the-create-command">The create command</h4>
 <p>It’s easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process. Furthermore, Quarto provides a simple command for creating (or initializing) a project (or extension), <code>quarto create project</code>, and a handy setup guide to help you use it. The following code shows you my terminal input and outputs.</p>
-<pre class="{bash}"><code>chriskornaros@chriss-air test % quarto create project
-? Type › default
-? Directory › docs
-? Title (docs) › test_docs
-Creating project at /Users/chriskornaros/Documents/test/docs:
-  - Created _quarto.yml
-  - Created .gitignore
-  - Created test_docs.qmd
-? Open With › (don't open)</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">chriskornaros@chriss-air</span> test % quarto create project</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> Type › default</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> Directory › docs</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> Title <span class="er">(</span><span class="ex">docs</span><span class="kw">)</span> <span class="ex">›</span> test_docs</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Creating</span> project at /Users/chriskornaros/Documents/test/docs:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> Created _quarto.yml</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> Created .gitignore</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> Created test_docs.qmd</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> Open With › <span class="er">(</span><span class="ex">don</span><span class="st">'t open)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>For a quick run through: quarto create project initializes a quarto project directory within your current working directory (the uv parent directory), <code>type</code> lets you choose the type of Quarto documentation (book, website, confluence, etc.), title is teh title of your homepage (.qmd) file. Personally, I like to remove the <code>docs/.gitignore</code> file because uv creates one when you initialize a project, in the parent directory. So, having just one .gitignore file helps me keep track of things more easily.</p>
 </section>
 </section>
@@ -342,7 +392,7 @@ Creating project at /Users/chriskornaros/Documents/test/docs:
 <section id="rendering-websites" class="level3">
 <h3 class="anchored" data-anchor-id="rendering-websites">Rendering Websites</h3>
 <p>I run the following code block from my main project directory. My Quarto project directory is a folder called docs. So, I specify to Quarto that I want to render the entire Quarto project <code>docs</code>, but <code>quarto render</code>’s context is specific to the <em>quarto project</em> directory. Therefore, I need to use the <code>.</code> to specify that I want the rendered <code>.html</code> files put in the Quarto project folder, and sub folder.</p>
-<pre class="{bash}"><code>quarto render docs --output-dir .</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render docs <span class="at">--output-dir</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="website-navigation" class="level3">
 <h3 class="anchored" data-anchor-id="website-navigation">Website Navigation</h3>
@@ -353,9 +403,9 @@ Creating project at /Users/chriskornaros/Documents/test/docs:
 <section id="side-navigation" class="level4">
 <h4 class="anchored" data-anchor-id="side-navigation">Side Navigation</h4>
 <p>It’s crucial, for nested subpages, to have the parent landing page’s .qmd file’s path as a standalone line in the contents of the _quarto.yml file. Failing to do so will remove the sidebar from the landing page’s navigation; however, for subsections, those should be specified within an href paramter, under the section line. Additionally, for the collapsable functionality to work consistently in a sidebar, you’ll need it docked. The behavior is inconsistent with floating sidebars. After you’ve set your default color values in <code>_brand.yml</code>, make sure to specify the design details at the top of your <code>sidebar</code> property.</p>
-<div id="4c2f32ab" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="op">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="9accf413" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="op">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>4</code></pre>
 </div>
 </div>
@@ -387,6 +437,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

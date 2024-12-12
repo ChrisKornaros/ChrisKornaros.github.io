@@ -1,0 +1,46 @@
+/*-- scss:defaults --*/
+$background: #2E4053;
+$foreground: #F7F7F7;
+$primary: #FF9900;
+$secondary: #56B3FA;
+$tertiary: #655D4B;
+$light: #F7F7F7;
+$dark: #1C1F24;
+$success: #33373D;
+$danger: #1A1D23;
+//$info: #FF3737;
+$info: #56B3FA;
+
+/*-- scss:rules --*/
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: $background;
+  color: $foreground;
+}
+
+h1, h2, h3 {
+  color: $danger;
+}
+
+h4, h5, h6 {
+  color: $danger;
+  font-weight: bold;
+}
+
+blockquote {
+  background-color: $success; /* added background color */
+  border-color: $dark;
+  color: $secondary;
+}
+
+code {
+  background-color: $success;
+  color: $info;
+}
+
+.sourceCode {
+  background-color: $success;
+  color: $info;
+  display: block;
+  border-radius: 0%;
+}
