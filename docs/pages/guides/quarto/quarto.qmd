@@ -38,7 +38,7 @@ Creating project at /Users/chriskornaros/Documents/test/docs:
 
 For a quick run through: quarto create project initializes a quarto project directory within your current working directory (the uv parent directory), `type` lets you choose the type of Quarto documentation (book, website, confluence, etc.), title is the title of your homepage (`.qmd`) file. Personally, I like to remove the `docs/.gitignore` file because uv creates one when you initialize a project, in the parent directory. So, having just one `.gitignore` file helps me keep track of things more easily.
 
-The only directorues I added to `docs` after it was created by quarto, was a `pages` directory for various subpages and a `brand` directory for `.scss` files, images, etc. Here, I keep the various landing pages and their sub directory structures. Ideally, I won't have any files in there, but the `_quarto.yml` file will point to their locations in my personal GitHub repo. 
+The only directorues I added to `docs` after it was created by quarto, was a `pages` directory for various subpages and a `brand` directory for `.scss` files, images, etc. For project, blog, or guide specific media files, I kept those within their subpage folder. Here, I keep the various landing pages and their sub directory structures. Ideally, I won't have any files in there, but the `_quarto.yml` file will point to their locations in my personal GitHub repo. 
 
 ::: {#tip-docs-context .callout-tip}
 In my time developing this site, it seems that Quarto can only pickup on files within the context of the `docs` (or whatever you name your Quarto project) folder. Furthermore, it struggels with absolute context paths, and at most I could get it to work with `../../file`.
@@ -256,6 +256,14 @@ Then the classic:
 - `git add docs`
 - `git commit -m "Website updates."`
 - `git push`
+
+## Other Notes
+I'll update this section with more notes and tips that come to mind as I finish building out the site, version 1.0. Then, I'll reorganize what goes here into the proper places on the document. 
+
+1. If you want to use past `.ipynb` files as documentation, or add longer write ups to those files, there is a `jupyter` command
+   1. `jupyter nbconvert file.ipynb --to markdown --output file.md`
+   2. `mv file.md > file.qmd`
+   3. Done! Just make any quarto specific modifications that you need 
 
 ## Conclusion
 Now, you're all done with this guide, thank you for reading!

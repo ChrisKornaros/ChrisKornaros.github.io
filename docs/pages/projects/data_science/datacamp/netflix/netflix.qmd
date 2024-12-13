@@ -1,3 +1,476 @@
----
-title: "Netflix Movies Project"
----
+![Movie popcorn on red background](redpopcorn.jpg)
+
+**Netflix**! What started in 1997 as a DVD rental service has since exploded into one of the largest entertainment and media companies.
+
+Given the large number of movies and series available on the platform, it is a perfect opportunity to flex your exploratory data analysis skills and dive into the entertainment industry. Our friend has also been brushing up on their Python skills and has taken a first crack at a CSV file containing Netflix data. They believe that the average duration of movies has been declining. Using your friends initial research, you'll delve into the Netflix data to see if you can determine whether movie lengths are actually getting shorter and explain some of the contributing factors, if any.
+
+You have been supplied with the dataset `netflix_data.csv` , along with the following table detailing the column names and descriptions. This data does contain null values and some outliers, but handling these is out of scope for the project. Feel free to experiment after submitting!
+
+## The data
+### **netflix_data.csv**
+| Column | Description |
+|--------|-------------|
+| `show_id` | The ID of the show |
+| `type` | Type of show |
+| `title` | Title of the show |
+| `director` | Director of the show |
+| `cast` | Cast of the show |
+| `country` | Country of origin |
+| `date_added` | Date added to Netflix |
+| `release_year` | Year of Netflix release |
+| `duration` | Duration of the show in minutes |
+| `description` | Description of the show |
+| `genre` | Show genre |
+
+
+```python
+# Importing pandas and matplotlib
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Start coding!
+netflix_df = pd.read_csv('netflix_data.csv')
+
+```
+
+
+```python
+netflix_subset = netflix_df[netflix_df["type"] == "Movie"]
+```
+
+
+```python
+netflix_movies = netflix_subset[["title", "country", "genre", "release_year", "duration"]]
+netflix_movies.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>title</th>
+      <th>country</th>
+      <th>genre</th>
+      <th>release_year</th>
+      <th>duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>7:19</td>
+      <td>Mexico</td>
+      <td>Dramas</td>
+      <td>2016</td>
+      <td>93</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>23:59</td>
+      <td>Singapore</td>
+      <td>Horror Movies</td>
+      <td>2011</td>
+      <td>78</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>9</td>
+      <td>United States</td>
+      <td>Action</td>
+      <td>2009</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>21</td>
+      <td>United States</td>
+      <td>Dramas</td>
+      <td>2008</td>
+      <td>123</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>122</td>
+      <td>Egypt</td>
+      <td>Horror Movies</td>
+      <td>2019</td>
+      <td>95</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+short_movies = netflix_movies[netflix_movies["duration"]<60]
+short_movies.head(20)
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>title</th>
+      <th>country</th>
+      <th>genre</th>
+      <th>release_year</th>
+      <th>duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>35</th>
+      <td>#Rucker50</td>
+      <td>United States</td>
+      <td>Documentaries</td>
+      <td>2016</td>
+      <td>56</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>100 Things to do Before High School</td>
+      <td>United States</td>
+      <td>Uncategorized</td>
+      <td>2014</td>
+      <td>44</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>13TH: A Conversation with Oprah Winfrey &amp; Ava ...</td>
+      <td>NaN</td>
+      <td>Uncategorized</td>
+      <td>2017</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th>101</th>
+      <td>3 Seconds Divorce</td>
+      <td>Canada</td>
+      <td>Documentaries</td>
+      <td>2018</td>
+      <td>53</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>A 3 Minute Hug</td>
+      <td>Mexico</td>
+      <td>Documentaries</td>
+      <td>2019</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>162</th>
+      <td>A Christmas Special: Miraculous: Tales of Lady...</td>
+      <td>France</td>
+      <td>Uncategorized</td>
+      <td>2016</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>171</th>
+      <td>A Family Reunion Christmas</td>
+      <td>United States</td>
+      <td>Uncategorized</td>
+      <td>2019</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>177</th>
+      <td>A Go! Go! Cory Carson Christmas</td>
+      <td>United States</td>
+      <td>Children</td>
+      <td>2020</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>178</th>
+      <td>A Go! Go! Cory Carson Halloween</td>
+      <td>NaN</td>
+      <td>Children</td>
+      <td>2020</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>179</th>
+      <td>A Go! Go! Cory Carson Summer Camp</td>
+      <td>NaN</td>
+      <td>Children</td>
+      <td>2020</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>181</th>
+      <td>A Grand Night In: The Story of Aardman</td>
+      <td>United Kingdom</td>
+      <td>Documentaries</td>
+      <td>2015</td>
+      <td>59</td>
+    </tr>
+    <tr>
+      <th>200</th>
+      <td>A Love Song for Latasha</td>
+      <td>United States</td>
+      <td>Documentaries</td>
+      <td>2020</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>220</th>
+      <td>A Russell Peters Christmas</td>
+      <td>Canada</td>
+      <td>Stand-Up</td>
+      <td>2011</td>
+      <td>44</td>
+    </tr>
+    <tr>
+      <th>233</th>
+      <td>A StoryBots Christmas</td>
+      <td>United States</td>
+      <td>Children</td>
+      <td>2017</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>237</th>
+      <td>A Tale of Two Kitchens</td>
+      <td>United States</td>
+      <td>Documentaries</td>
+      <td>2019</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>242</th>
+      <td>A Trash Truck Christmas</td>
+      <td>NaN</td>
+      <td>Children</td>
+      <td>2020</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>247</th>
+      <td>A Very Murray Christmas</td>
+      <td>United States</td>
+      <td>Comedies</td>
+      <td>2015</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <th>285</th>
+      <td>Abominable Christmas</td>
+      <td>United States</td>
+      <td>Children</td>
+      <td>2012</td>
+      <td>44</td>
+    </tr>
+    <tr>
+      <th>295</th>
+      <td>Across Grace Alley</td>
+      <td>United States</td>
+      <td>Dramas</td>
+      <td>2013</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>305</th>
+      <td>Adam Devine: Best Time of Our Lives</td>
+      <td>United States</td>
+      <td>Stand-Up</td>
+      <td>2019</td>
+      <td>59</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+colors = []
+```
+
+
+```python
+for lab, row in netflix_movies.iterrows():
+    if row['genre'] == "Children":
+        colors.append("Blue")
+    elif row['genre'] == "Documentaries":
+        colors.append("Red")
+    elif row['genre'] == "Stand-Up":
+        colors.append("Green")
+    else:
+        colors.append("Black")
+```
+
+
+```python
+colors[:10]
+```
+
+
+
+
+    ['Black',
+     'Black',
+     'Black',
+     'Black',
+     'Black',
+     'Black',
+     'Black',
+     'Black',
+     'Black',
+     'Red']
+
+
+
+
+```python
+fig = plt.figure(figsize=(12, 8))
+```
+
+
+    <Figure size 1200x800 with 0 Axes>
+
+
+
+```python
+plt.scatter(netflix_movies['release_year'], netflix_movies['duration'], c=colors)
+```
+
+
+
+
+    <matplotlib.collections.PathCollection at 0x7f49c4f3c430>
+
+
+
+
+    
+![png](netflix_files/netflix_10_1.png)
+    
+
+
+
+```python
+plt.title("Movie Duration by Year of Release")
+plt.xlabel("Release year")
+plt.ylabel("Duration (min)")
+```
+
+
+
+
+    Text(0, 0.5, 'Duration (min)')
+
+
+
+
+    
+![png](netflix_files/netflix_11_1.png)
+    
+
+
+
+```python
+plt.show()
+```
+
+
+```python
+answer = "no"
+```
+
+
+```python
+# Importing pandas and matplotlib
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Read in the Netflix CSV as a DataFrame
+netflix_df = pd.read_csv("netflix_data.csv")
+
+# Subset the DataFrame for type "Movie"
+netflix_subset = netflix_df[netflix_df["type"] == "Movie"]
+
+# Select only the columns of interest
+netflix_movies = netflix_subset[["title", "country", "genre", "release_year", "duration"]]
+
+# Filter for durations shorter than 60 minutes
+short_movies = netflix_movies[netflix_movies.duration < 60]
+
+# Define an empty list
+colors = []
+
+# Iterate over rows of netflix_movies
+for label, row in netflix_movies.iterrows() :
+    if row["genre"] == "Children" :
+        colors.append("red")
+    elif row["genre"] == "Documentaries" :
+        colors.append("blue")
+    elif row["genre"] == "Stand-Up":
+        colors.append("green")
+    else:
+        colors.append("black")
+        
+# Inspect the first 10 values in your list        
+colors[:10]
+
+# Set the figure style and initalize a new figure
+fig = plt.figure(figsize=(12,8))
+
+# Create a scatter plot of duration versus release_year
+plt.scatter(netflix_movies.release_year, netflix_movies.duration, c=colors)
+
+# Create a title and axis labels
+plt.title("Movie Duration by Year of Release")
+plt.xlabel("Release year")
+plt.ylabel("Duration (min)")
+
+# Show the plot
+plt.show()
+
+# Are we certain that movies are getting shorter?
+answer = "no"
+```
+
+
+    
+![png](netflix_files/netflix_14_0.png)
+    
+

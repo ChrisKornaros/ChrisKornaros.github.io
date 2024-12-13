@@ -1,3 +1,261 @@
----
-title: "Gym Market Analysis Project"
----
+![gym](gym.png)
+
+
+You are a product manager for a fitness studio and are interested in understanding the current demand for digital fitness classes. You plan to conduct a market analysis in Python to gauge demand and identify potential areas for growth of digital products and services.
+
+### The Data
+
+You are provided with a number of CSV files in the "Files/data" folder, which offer international and national-level data on Google Trends keyword searches related to fitness and related products. 
+
+### workout.csv
+
+| Column     | Description              |
+|------------|--------------------------|
+| `'month'` | Month when the data was measured. |
+| `'workout_worldwide'` | Index representing the popularity of the keyword 'workout', on a scale of 0 to 100. |
+
+### three_keywords.csv
+
+| Column     | Description              |
+|------------|--------------------------|
+| `'month'` | Month when the data was measured. |
+| `'home_workout_worldwide'` | Index representing the popularity of the keyword 'home workout', on a scale of 0 to 100. |
+| `'gym_workout_worldwide'` | Index representing the popularity of the keyword 'gym workout', on a scale of 0 to 100. |
+| `'home_gym_worldwide'` | Index representing the popularity of the keyword 'home gym', on a scale of 0 to 100. |
+
+### workout_geo.csv
+
+| Column     | Description              |
+|------------|--------------------------|
+| `'country'` | Country where the data was measured. |
+| `'workout_2018_2023'` | Index representing the popularity of the keyword 'workout' during the 5 year period. |
+
+### three_keywords_geo.csv
+
+| Column     | Description              |
+|------------|--------------------------|
+| `'country'` | Country where the data was measured. |
+| `'home_workout_2018_2023'` | Index representing the popularity of the keyword 'home workout' during the 5 year period. |
+| `'gym_workout_2018_2023'` | Index representing the popularity of the keyword 'gym workout' during the 5 year period.  |
+| `'home_gym_2018_2023'` | Index representing the popularity of the keyword 'home gym' during the 5 year period. |
+
+
+```python
+# Import the necessary libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+```
+
+
+```python
+# Start coding here
+import pandas as pd
+
+workout = pd.read_csv('data/workout.csv')
+three_kw = pd.read_csv('data/three_keywords.csv')
+workout_geo = pd.read_csv('data/workout_geo.csv')
+kw_geo = pd.read_csv('data/three_keywords_geo.csv')
+```
+
+
+```python
+workout.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>month</th>
+      <th>workout_worldwide</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018-03</td>
+      <td>59</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2018-04</td>
+      <td>61</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2018-05</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2018-06</td>
+      <td>56</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2018-07</td>
+      <td>51</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+peak = workout.loc[workout['workout_worldwide'].idxmax()]
+```
+
+
+```python
+year_str = peak.str.split('-')[0][0]
+year_str
+```
+
+
+
+
+    '2020'
+
+
+
+
+```python
+workout.dtypes
+```
+
+
+
+
+    month                object
+    workout_worldwide     int64
+    dtype: object
+
+
+
+
+```python
+covid = workout.loc[(workout['month'] > '2019-12') & (workout['month'] <= '2022-12')]
+post_covid = workout.loc[workout['month'] > '2022-12']
+```
+
+
+```python
+peak_covid = three_kw.loc[(workout['month'] > '2019-12') & (workout['month'] <= '2022-12')][['home_workout_worldwide', 'gym_workout_worldwide', 'home_gym_worldwide']].max().idxmax()
+current = three_kw.loc[workout['month'] > '2022-12'][['home_workout_worldwide', 'gym_workout_worldwide', 'home_gym_worldwide']].max().idxmax()
+```
+
+
+```python
+peak_covid
+current
+```
+
+
+
+
+    'gym_workout_worldwide'
+
+
+
+
+```python
+top_country = workout_geo.loc[workout_geo['workout_2018_2023'].idxmax()]['country']
+top_country
+```
+
+
+
+
+    'United States'
+
+
+
+
+```python
+kw_geo1 = kw_geo.loc[(kw_geo['Country']=='Philippines') | (kw_geo['Country']=='Malaysia')]
+kw_geo1
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Country</th>
+      <th>home_workout_2018_2023</th>
+      <th>gym_workout_2018_2023</th>
+      <th>home_gym_2018_2023</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>23</th>
+      <td>Philippines</td>
+      <td>52.0</td>
+      <td>38.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>61</th>
+      <td>Malaysia</td>
+      <td>47.0</td>
+      <td>38.0</td>
+      <td>15.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+home_workout_geo = kw_geo1.loc[kw_geo1['home_workout_2018_2023'] == kw_geo1['home_workout_2018_2023'].max(), 'Country'].values[0]
+```
+
+
+```python
+home_workout_geo
+```
+
+
+
+
+    'Philippines'
+
+

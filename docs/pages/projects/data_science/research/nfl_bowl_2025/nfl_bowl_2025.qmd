@@ -1,3 +1,6 @@
 ---
 title: "NFL Big Data Bowl 2025"
 ---
+
+## Introduction
+I will add to this later. Currently, this will be a rough combination of my early notebooks. 
