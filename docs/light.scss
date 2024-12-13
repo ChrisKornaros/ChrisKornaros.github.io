@@ -9,6 +9,7 @@ $dark: #083D77;
 $success: #E5F2FF;
 $danger: #052F5F;
 $info: #8B0A1A;
+$warning: #2E6490;
 
 /*-- scss:rules --*/
 body {
@@ -26,10 +27,14 @@ h4, h5, h6 {
   font-weight: bold;
 }
 
+.anchored {
+  border-bottom-color: $danger;
+}
+
 blockquote {
   background-color: $success; /* added background color */
   border-color: $dark;
-  color: $secondary;
+  color: $secondary !important;
 }
 
 code {
@@ -40,5 +45,12 @@ code {
 .sourceCode {
   background-color: $success;
   color: $info;
-  border-color: $success;
+}
+
+.sourceCode pre.code-with-copy{
+  padding: 0;
+}
+
+.callout-title-container.flex-fill {
+  color: $danger;
 }

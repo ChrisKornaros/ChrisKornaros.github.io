@@ -8,8 +8,9 @@ $light: #F7F7F7;
 $dark: #1C1F24;
 $success: #33373D;
 $danger: #1A1D23;
-//$info: #FF3737;
 $info: #56B3FA;
+$warning: #2E6490;
+
 
 /*-- scss:rules --*/
 body {
@@ -28,9 +29,9 @@ h4, h5, h6 {
 }
 
 blockquote {
-  background-color: $success; /* added background color */
+  background-color: $warning; /* added background color */
   border-color: $dark;
-  color: $secondary;
+  color: $danger !important;
 }
 
 code {
@@ -41,6 +42,12 @@ code {
 .sourceCode {
   background-color: $success;
   color: $info;
-  display: block;
-  border-radius: 0%;
+}
+
+.sourceCode pre.code-with-copy{
+  padding: 0;
+}
+
+.callout-title-container.flex-fill {
+  color: $danger;
 }

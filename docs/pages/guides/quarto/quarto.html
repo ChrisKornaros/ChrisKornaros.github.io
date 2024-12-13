@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quarto Development Notes – Chris Kornaro</title>
+<title>Quarto – Chris Kornaros</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -73,8 +73,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-c15c7ccb793a8c0145e7ec7341df1540.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-c0c99b698838cc1dcc46ed9f61f50d17.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-6b55fe39fafbb86b29f7fca7485a5352.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-56dfab92d9a1e40e81fa338bab690bac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-fc04f77a8684a1bf80ff1b5fb26ade5a.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../../index.html">
-    <span class="navbar-title">Chris Kornaro</span>
+    <span class="navbar-title">Chris Kornaros</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -232,25 +232,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#quarto" id="toc-quarto" class="nav-link active" data-scroll-target="#quarto">Quarto</a>
-  <ul class="collapse">
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#configurations" id="toc-configurations" class="nav-link" data-scroll-target="#configurations">Configurations</a>
-  <ul class="collapse">
-  <li><a href="#downloading-and-updating" id="toc-downloading-and-updating" class="nav-link" data-scroll-target="#downloading-and-updating">Downloading and Updating</a></li>
-  <li><a href="#the-_brand.yml-file" id="toc-the-_brand.yml-file" class="nav-link" data-scroll-target="#the-_brand.yml-file">The _brand.yml File</a></li>
-  </ul></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#projects" id="toc-projects" class="nav-link" data-scroll-target="#projects">Projects</a>
+  <ul>
+  <li><a href="#initializing-a-project" id="toc-initializing-a-project" class="nav-link" data-scroll-target="#initializing-a-project">Initializing a Project</a>
   <ul class="collapse">
-  <li><a href="#initializing-a-project" id="toc-initializing-a-project" class="nav-link" data-scroll-target="#initializing-a-project">Initializing a Project</a></li>
+  <li><a href="#the-create-command" id="toc-the-create-command" class="nav-link" data-scroll-target="#the-create-command">The create command</a></li>
+  </ul></li>
   <li><a href="#rendering-a-projects" id="toc-rendering-a-projects" class="nav-link" data-scroll-target="#rendering-a-projects">Rendering a Projects</a></li>
   </ul></li>
-  <li><a href="#websites" id="toc-websites" class="nav-link" data-scroll-target="#websites">Websites</a>
+  <li><a href="#configurations" id="toc-configurations" class="nav-link" data-scroll-target="#configurations">Configurations</a>
+  <ul>
+  <li><a href="#downloading-and-updating" id="toc-downloading-and-updating" class="nav-link" data-scroll-target="#downloading-and-updating">Downloading and Updating</a></li>
+  <li><a href="#the-_brand.yml-file" id="toc-the-_brand.yml-file" class="nav-link" data-scroll-target="#the-_brand.yml-file">The _brand.yml File</a>
   <ul class="collapse">
+  <li><a href="#color" id="toc-color" class="nav-link" data-scroll-target="#color">Color</a></li>
+  <li><a href="#typography" id="toc-typography" class="nav-link" data-scroll-target="#typography">Typography</a></li>
+  <li><a href="#defaults" id="toc-defaults" class="nav-link" data-scroll-target="#defaults">Defaults</a></li>
+  <li><a href="#sass---syntactically-awesome-style-sheets" id="toc-sass---syntactically-awesome-style-sheets" class="nav-link" data-scroll-target="#sass---syntactically-awesome-style-sheets">SASS - Syntactically Awesome Style Sheets</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#websites" id="toc-websites" class="nav-link" data-scroll-target="#websites">Websites</a>
+  <ul>
   <li><a href="#rendering-websites" id="toc-rendering-websites" class="nav-link" data-scroll-target="#rendering-websites">Rendering Websites</a></li>
-  <li><a href="#website-navigation" id="toc-website-navigation" class="nav-link" data-scroll-target="#website-navigation">Website Navigation</a></li>
+  <li><a href="#website-navigation" id="toc-website-navigation" class="nav-link" data-scroll-target="#website-navigation">Website Navigation</a>
+  <ul class="collapse">
+  <li><a href="#top-navigation" id="toc-top-navigation" class="nav-link" data-scroll-target="#top-navigation">Top Navigation</a></li>
+  <li><a href="#side-navigation" id="toc-side-navigation" class="nav-link" data-scroll-target="#side-navigation">Side Navigation</a></li>
   </ul></li>
+  <li><a href="#sharing-websites" id="toc-sharing-websites" class="nav-link" data-scroll-target="#sharing-websites">Sharing Websites</a></li>
   </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -259,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Quarto Development Notes</h1>
+<h1 class="title">Quarto</h1>
 </div>
 
 
@@ -276,11 +288,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="quarto" class="level1">
-<h1>Quarto</h1>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>Quarto is:<br>
+<p><a href="https://www.quarto.org/">Quarto</a> is:<br>
 </p>
 <blockquote class="blockquote">
 <p>An open-source scientific and technical publishing system<br>
@@ -291,14 +301,42 @@ Share knowledge and insights organization-wide by publishing to Posit Connect, C
 Write using Pandoc markdown, including equations, citations, crossrefs, figure panels, callouts, advanced layout, and more.</p>
 </blockquote>
 </section>
+<section id="projects" class="level2">
+<h2 class="anchored" data-anchor-id="projects">Projects</h2>
+<p>This section, and the rest of the guide, assume you’re familiar with and using the uv package and project manager for Python, git for version control, and the GitHub CLI for collaboration. I’ll be referencing all of these tools throughout the rest of the guide. You can read my guide to learn more about <a href="https://chriskornaros.github.io/pages/guides/uv/uv.html">uv</a></p>
+<section id="initializing-a-project" class="level3">
+<h3 class="anchored" data-anchor-id="initializing-a-project">Initializing a Project</h3>
+<section id="the-create-command" class="level4">
+<h4 class="anchored" data-anchor-id="the-create-command">The create command</h4>
+<p>It’s easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process. Furthermore, Quarto provides a simple command for creating (or initializing) a project (or extension), <code>quarto create project</code>, and a handy setup guide to help you use it. The following code shows you my terminal input and outputs.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">chriskornaros@chriss-air</span> test % quarto create project</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> Type › default</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> Directory › docs</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> Title <span class="er">(</span><span class="ex">docs</span><span class="kw">)</span> <span class="ex">›</span> test_docs</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Creating</span> project at /Users/chriskornaros/Documents/test/docs:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> Created _quarto.yml</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> Created .gitignore</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> Created test_docs.qmd</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> Open With › <span class="er">(</span><span class="ex">don</span><span class="st">'t open)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For a quick run through: quarto create project initializes a quarto project directory within your current working directory (the uv parent directory), <code>type</code> lets you choose the type of Quarto documentation (book, website, confluence, etc.), title is the title of your homepage (<code>.qmd</code>) file. Personally, I like to remove the <code>docs/.gitignore</code> file because uv creates one when you initialize a project, in the parent directory. So, having just one <code>.gitignore</code> file helps me keep track of things more easily.</p>
+<p>The only directory I added to <code>docs</code> after it was created by quarto, was a <code>pages</code> directory. Here, I keep the various landing pages and their sub directory structures. Ideally, I won’t have any files in there, but the <code>_quarto.yml</code> file will point to their locations in my personal GitHub repo.</p>
+</section>
+</section>
+<section id="rendering-a-projects" class="level3">
+<h3 class="anchored" data-anchor-id="rendering-a-projects">Rendering a Projects</h3>
+<p>This part is blank for now. Rendering websites have some specific components to websites and GitHub pages, that are covered later on. I will update this for other document types in the future.</p>
+</section>
+</section>
 <section id="configurations" class="level2">
 <h2 class="anchored" data-anchor-id="configurations">Configurations</h2>
 <section id="downloading-and-updating" class="level3">
 <h3 class="anchored" data-anchor-id="downloading-and-updating">Downloading and Updating</h3>
+<p>For simple instructions and a download/install guide using a GUI, visit <a href="https://quarto.org/docs/get-started/">Quarto - Get Started</a>.</p>
+<p>For MacOS users, I recommend downloading and learning about Homebrew, the package manager. It drastically simplifies all phases of package management. To install, simply use <code>brew install quarto</code> and you’re done.</p>
 </section>
 <section id="the-_brand.yml-file" class="level3">
 <h3 class="anchored" data-anchor-id="the-_brand.yml-file">The _brand.yml File</h3>
-<p>This is a new feature with Quarto 1.6 that allows you to define and save your design specifications in a YAML file. While this file is specific to your Quarto project directories, you can store and share the file across projects or with others to maintain brand consistency. Luckily, there is great documentation if you want more details <a href="https://posit-dev.github.io/brand-yml/brand/">brand.yml</a>. While there is a lot to cover, I’ll go over some basics to get started. It’s important to remember that if you specify colors for anything within .qmd files, those will overwrite the defaults in the brand file.</p>
+<p>This is a new feature with Quarto 1.6 that allows you to define and save your design specifications in a YAML file. While this file is specific to your Quarto project directories, you can store and share the file across projects or with others to maintain brand consistency. Luckily, there is great documentation if you want more details <a href="https://posit-dev.github.io/brand-yml/brand/">brand.yml</a>. While there is a lot to cover, I’ll go over some basics to get started. It’s important to remember that if you specify colors for anything within <code>.qmd</code> files, those will overwrite the defaults in the brand file. Furthermore, Quarto and <code>_brand.yml</code> both utilize the <code>Bootstrap</code> web development framework. For a list of its full default values, visit the <a href="https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss">repo</a>.</p>
 <section id="color" class="level4">
 <h4 class="anchored" data-anchor-id="color">Color</h4>
 <p>This is obviously an important part of all branding. There are two main components:</p>
@@ -306,13 +344,13 @@ Write using Pandoc markdown, including equations, citations, crossrefs, figure p
 <li><code>palette</code></li>
 <li><code>theme colors</code></li>
 </ol>
-<p>Palette lets you specify hexcodes and assign those to various strings. Those string values could be generic terms, like <em>green</em> (if there is a specific shade you would like), or terms specific to brand.yml’s <em>theme colors</em>. When you set your default colors in this way, you can then customize the output in the _quarto.yml file. To modify, for example, your navigation bar, just define the background and foreground properties under the <code>navbar</code> property.</p>
-<p>Another thing to keep in mind with color, just because it’s available in _brand.yml, like <code>tertiary</code>, doesn’t mean it’s defined and functional in the <code>_quarto.yml</code> file. So, you may need to be creative with how you use protected terms, like success, danger, or warning. Doing so allows you to take advantage of the programmatic benefits of the brand file, while specifying several, possibly, similar shades that would be tricky to do just be renaming colors, such as red, blue, or yellow.</p>
+<p>Palette lets you specify hexcodes and assign those to various strings. Those string values could be generic terms, like <em>green</em> (if there is a specific shade you would like), or terms specific to <code>brand.yml's</code> <em>theme colors</em>. When you set your default colors in this way, you can then customize the output in the <code>_quarto.yml</code> file. To modify, for example, your navigation bar, just define the background and foreground properties under the <code>navbar</code> property.</p>
+<p>Another thing to keep in mind with color, just because it’s available in <code>_brand.yml</code>, like <code>tertiary</code>, doesn’t mean it’s defined and functional in the <code>_quarto.yml</code> file. So, you may need to be creative with how you use protected terms, like success, danger, or warning. Doing so allows you to take advantage of the programmatic benefits of the brand file, while specifying several, possibly, similar shades that would be tricky to do just be renaming colors, such as red, blue, or yellow.</p>
 <p>If you aren’t sure on what colors or palettes to choose, using an LLM based chatbot can be helpful. This allows you to describe the colors and themes you’re going for, as well as refine them over time.</p>
 </section>
 <section id="typography" class="level4">
 <h4 class="anchored" data-anchor-id="typography">Typography</h4>
-<p>This section lets you control which font families are included in your Quarto project. Then, you can specify where various fonts are used and for some properties, even change their specific color. As a heads up, the _brand.yml documentation seems to be correct and updated; however, <code>bash</code> code blocks don’t render the monospace-background the same way. So, while in-line monospace backgrounds and monospace backgrounds for Python (at the very least) will be colored as the documentation says. Bash code blocks will have no background, just the code itself in the specified font color.</p>
+<p>This section lets you control which font families are included in your Quarto project. Then, you can specify where various fonts are used and for some properties, even change their specific color. As a heads up, the <code>_brand.yml</code> documentation seems to be correct and updated; however, <code>bash</code> code blocks don’t render the monospace-background the same way. So, while in-line monospace backgrounds and monospace backgrounds for Python (at the very least) will be colored as the documentation says. Bash code blocks will have no background, just the code itself in the specified font color.</p>
 </section>
 <section id="defaults" class="level4">
 <h4 class="anchored" data-anchor-id="defaults">Defaults</h4>
@@ -320,71 +358,75 @@ Write using Pandoc markdown, including equations, citations, crossrefs, figure p
 </section>
 <section id="sass---syntactically-awesome-style-sheets" class="level4">
 <h4 class="anchored" data-anchor-id="sass---syntactically-awesome-style-sheets">SASS - Syntactically Awesome Style Sheets</h4>
-<p>Remember, whatever you can’t configure simply in your _brand.yml file, you can do so in a .scss file. For example, if you want to create custom light and dark mode themes, just create .scss files with the appropriate code and place this in your docs (main Quarto project) directory. Below is an example of a dark mode theme. I set the default values for the scss bootstrap variables at the top. Then, I specified the specific rules for various parts of the page. For defined variables, blockquote, you don’t need a <code>.</code>, but for features specific to quarto rendered sites, add a . before. For example, to modify the look of code blocks, you must use the <code>.sourceCode</code> variable. To find out the name of a variable you don’t know, just inspect the specific element on the webpage, and the class name will translate 1:1 with the variable name, spaces included. For a list of all CSS variable properties, visit (CSS Web Docs)[https://developer.mozilla.org/en-US/docs/Web/CSS/Reference].</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*-- scss:defaults --*/</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>$background<span class="in">:</span> <span class="pp">#2E4053</span>;</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>$foreground<span class="in">:</span> <span class="pp">#F7F7F7</span>;</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>$primary<span class="in">:</span> <span class="pp">#FF9900</span>;</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>$secondary<span class="in">:</span> <span class="pp">#56B3FA</span>;</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>$tertiary<span class="in">:</span> <span class="pp">#655D4B</span>;</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>$light<span class="in">:</span> <span class="pp">#F7F7F7</span>;</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>$dark<span class="in">:</span> <span class="pp">#1C1F24</span>;</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>$success<span class="in">:</span> <span class="pp">#33373D</span>;</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>$danger<span class="in">:</span> <span class="pp">#1A1D23</span>;</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>$info<span class="in">:</span> <span class="pp">#56B3FA</span>;</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">/*-- scss:rules --*/</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>body {</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-family</span><span class="ch">:</span> <span class="st">'Open Sans'</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span><span class="ch">:</span> $<span class="dv">background</span><span class="op">;</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> $<span class="dv">foreground</span><span class="op">;</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>h1<span class="op">,</span> h2<span class="op">,</span> h3<span class="op">,</span> h4<span class="op">,</span> h5<span class="op">,</span> h6 {</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> $<span class="dv">danger</span><span class="op">;</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>blockquote {</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span><span class="ch">:</span> $<span class="dv">success</span><span class="op">;</span> <span class="co">/* added background color */</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="kw">border-color</span><span class="ch">:</span> $<span class="dv">dark</span><span class="op">;</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> $<span class="dv">secondary</span><span class="op">;</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>code {</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span><span class="ch">:</span> $<span class="dv">success</span><span class="op">;</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> $<span class="dv">info</span><span class="op">;</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">.sourceCode</span> {</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span><span class="ch">:</span> $<span class="dv">success</span><span class="op">;</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> $<span class="dv">info</span><span class="op">;</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  <span class="kw">border-style</span><span class="ch">:</span> <span class="dv">none</span><span class="op">;</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Remember, whatever you can’t configure simply in your <code>_brand.yml</code> file, you can do so in a <code>.scss</code> file. For example, if you want to create custom light and dark mode themes, just create <code>.scss</code> files with the appropriate code and place this in your docs (main Quarto project) directory. Below is an example of a dark mode theme. I set the default values for the scss bootstrap variables at the top. Then, I specified the specific rules for various parts of the page. For defined variables, blockquote, you don’t need a <code>.</code>, but for features specific to quarto rendered sites, add a . before. For example, to modify the look of code blocks, you must use the <code>.sourceCode</code> variable. For child classes, for example the <code>.sourceCode css copy-with-code</code> class, if you want to modify that you’ll need to use <code>.sourceCode pre.copy-with-code</code>. To find out the name of a variable you don’t know, just inspect the specific element on the webpage, and the class name will translate 1:1 with the variable name. Additionally, for any property that you need to specifically update, you can add the <code>!important</code> tag, which means it will override existing rules, but be careful using this.</p>
+<p>For a list of all CSS variable properties, visit <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">CSS Web Docs</a>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*-- scss:defaults --*/</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>$background<span class="in">:</span> <span class="pp">#2E4053</span>;</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>$foreground<span class="in">:</span> <span class="pp">#F7F7F7</span>;</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>$primary<span class="in">:</span> <span class="pp">#FF9900</span>;</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>$secondary<span class="in">:</span> <span class="pp">#56B3FA</span>;</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>$tertiary<span class="in">:</span> <span class="pp">#655D4B</span>;</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>$light<span class="in">:</span> <span class="pp">#F7F7F7</span>;</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>$dark<span class="in">:</span> <span class="pp">#1C1F24</span>;</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>$success<span class="in">:</span> <span class="pp">#33373D</span>;</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>$danger<span class="in">:</span> <span class="pp">#1A1D23</span>;</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>$info<span class="in">:</span> <span class="pp">#56B3FA</span>;</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>$warning<span class="in">:</span> <span class="pp">#FF7575</span>;</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">/*-- scss:rules --*/</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>body {</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-family</span><span class="ch">:</span> <span class="st">'Open Sans'</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span><span class="ch">:</span> $<span class="dv">background</span><span class="op">;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> $<span class="dv">foreground</span><span class="op">;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>h1<span class="op">,</span> h2<span class="op">,</span> h3 {</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> $<span class="dv">danger</span><span class="op">;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>h4<span class="op">,</span> h5<span class="op">,</span> h6 {</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> $<span class="dv">danger</span><span class="op">;</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-weight</span><span class="ch">:</span> <span class="dv">bold</span><span class="op">;</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>blockquote {</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span><span class="ch">:</span> <span class="cn">#2E6490</span><span class="op">;</span> <span class="co">/* added background color */</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="kw">border-color</span><span class="ch">:</span> $<span class="dv">dark</span><span class="op">;</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> $<span class="dv">danger </span><span class="at">!important</span><span class="op">;</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>code {</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span><span class="ch">:</span> $<span class="dv">success</span><span class="op">;</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> $<span class="dv">info</span><span class="op">;</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="fu">.sourceCode</span> {</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span><span class="ch">:</span> $<span class="dv">success</span><span class="op">;</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> $<span class="dv">info</span><span class="op">;</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="fu">.sourceCode</span> pre<span class="fu">.code-with-copy</span>{</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding</span><span class="ch">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="fu">.callout-title-container.flex-fill</span> {</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> $<span class="dv">danger</span><span class="op">;</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="imp-css-var-names" class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important&nbsp;1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are some weird naming convention differences between <code>_brand.yml</code> and Quarto. The big one is monotone being used to reference block quotes, code blocks, and in-line code in _brand, but in Quarto it renders the in-line code as <code>code</code> and the code blocks as <code>sourceCode</code>. Make sure to use inspect element to be sure on what you’re changing. CSS class names can get long, especially when referncing nested classes, just experiment and take your time with things.</p>
+</div>
+</div>
 </section>
-</section>
-</section>
-<section id="projects" class="level2">
-<h2 class="anchored" data-anchor-id="projects">Projects</h2>
-<p>This section, and the rest of the guide, assume you’re familiar with and using the uv package and project manager for Python, git for version control, and the GitHub CLI for collaboration. I’ll be referencing all of these tools throughout the rest of the guide.</p>
-<section id="initializing-a-project" class="level3">
-<h3 class="anchored" data-anchor-id="initializing-a-project">Initializing a Project</h3>
-<section id="the-create-command" class="level4">
-<h4 class="anchored" data-anchor-id="the-create-command">The create command</h4>
-<p>It’s easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process. Furthermore, Quarto provides a simple command for creating (or initializing) a project (or extension), <code>quarto create project</code>, and a handy setup guide to help you use it. The following code shows you my terminal input and outputs.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">chriskornaros@chriss-air</span> test % quarto create project</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> Type › default</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> Directory › docs</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> Title <span class="er">(</span><span class="ex">docs</span><span class="kw">)</span> <span class="ex">›</span> test_docs</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Creating</span> project at /Users/chriskornaros/Documents/test/docs:</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> Created _quarto.yml</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> Created .gitignore</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> Created test_docs.qmd</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> Open With › <span class="er">(</span><span class="ex">don</span><span class="st">'t open)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>For a quick run through: quarto create project initializes a quarto project directory within your current working directory (the uv parent directory), <code>type</code> lets you choose the type of Quarto documentation (book, website, confluence, etc.), title is teh title of your homepage (.qmd) file. Personally, I like to remove the <code>docs/.gitignore</code> file because uv creates one when you initialize a project, in the parent directory. So, having just one .gitignore file helps me keep track of things more easily.</p>
-</section>
-</section>
-<section id="rendering-a-projects" class="level3">
-<h3 class="anchored" data-anchor-id="rendering-a-projects">Rendering a Projects</h3>
 </section>
 </section>
 <section id="websites" class="level2">
@@ -393,27 +435,122 @@ Write using Pandoc markdown, including equations, citations, crossrefs, figure p
 <h3 class="anchored" data-anchor-id="rendering-websites">Rendering Websites</h3>
 <p>I run the following code block from my main project directory. My Quarto project directory is a folder called docs. So, I specify to Quarto that I want to render the entire Quarto project <code>docs</code>, but <code>quarto render</code>’s context is specific to the <em>quarto project</em> directory. Therefore, I need to use the <code>.</code> to specify that I want the rendered <code>.html</code> files put in the Quarto project folder, and sub folder.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render docs <span class="at">--output-dir</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Conversely, you can specify, within the <code>output</code> property of your <code>_quarto.yml</code> file that <code>output-dir: .</code></p>
+<p>This is also the same syntax when previewing your website, using <code>quarto preview docs</code>, the difference is there is no need to specify an output directory. What this does is spin up a jupyter kernel to render your <code>.qmd</code> files, then, it displays the output in a browser. When you hit save on your <code>_quarto.yml</code>, <code>.scss</code>, and <code>.qmd</code> files then the site will automatically update (it doesn’t for <code>_brand.yml</code> saves).</p>
+<p>Once you’ve rendered your website, and pushed the commit, the change is reflected in a few mintues.</p>
+<div id="nte-uv-environment" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note&nbsp;1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The ease of using <code>quarto preview</code> is magnified when using <code>uv</code> as your project/package manager. Instead of having to manage various virtual environments and packages, as well as activation and deactivation, <code>uv</code> does it all. Even VS Code picks up on the context <code>uv</code> provides. The terminal will automatically realize you’re in a <code>uv</code> environment and display output as if you were using a virutal environment (even though you haven’t activated it).</p>
+</div>
+</div>
 </section>
 <section id="website-navigation" class="level3">
 <h3 class="anchored" data-anchor-id="website-navigation">Website Navigation</h3>
 <section id="top-navigation" class="level4">
 <h4 class="anchored" data-anchor-id="top-navigation">Top Navigation</h4>
-<p>After you’ve set your default color values in <code>_brand.yml</code>, make sure to specify the design details at the top of your <code>navbar</code> property.</p>
+<p>After you’ve set your default color values in <code>_brand.yml</code>, make sure to specify the design details at the top of your <code>navbar</code> property. This is useful, even when using <code>.scss</code> files for more specific design control because you can utilize those variables in your light and dark themes.</p>
+<p>For pages on your top navigation bar that just have a landing page, simple use the following syntax</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">left</span><span class="kw">:</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">"Page name"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">href</span><span class="kw">:</span><span class="at"> path/to/page/file.qmd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tip-indent-dash" class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip&nbsp;1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice when I’m using a <code>-</code> and not. This is deliberate. In my development, I realized that where you use and specify the dash can affect functionality. Some places require it, some don’t, and it may depend on the order of various parameters.</p>
+</div>
+</div>
+<p>For page categories that may have several landing pages, or even subcategories, you’ll need to utilize hybrid navigation which combines Top and Side navigation. On the top, you’ll use the following syntax:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">left</span><span class="kw">:</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">"Page group name"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">menu</span><span class="kw">:</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> path/to/page/group/landing.qmd</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> path/to/page/group/1/landing.qmd</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> path/to/page/group/2/landing.qmd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then, you’ll need to handle the rest in Side Navigation.</p>
 </section>
 <section id="side-navigation" class="level4">
 <h4 class="anchored" data-anchor-id="side-navigation">Side Navigation</h4>
-<p>It’s crucial, for nested subpages, to have the parent landing page’s .qmd file’s path as a standalone line in the contents of the _quarto.yml file. Failing to do so will remove the sidebar from the landing page’s navigation; however, for subsections, those should be specified within an href paramter, under the section line. Additionally, for the collapsable functionality to work consistently in a sidebar, you’ll need it docked. The behavior is inconsistent with floating sidebars. After you’ve set your default color values in <code>_brand.yml</code>, make sure to specify the design details at the top of your <code>sidebar</code> property.</p>
-<div id="9accf413" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="op">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>4</code></pre>
-</div>
-</div>
+<p>For some reason, Side Navigation in Quarto is much more robust and intuitive. That being said, by combining features here with the top bar, you can achieve a fairly dynamic navigation experience.</p>
+<p>There are a few key differences. To start with, sidebar objects inherit properties from the first defined, so long as none are changed. Second, you’ll want to use an <code>id</code> with the top level landing pages, because this allows you to reference those in your top navigation bar (for more advanced integrations) using the address <code>sidebar:id</code>, although I struggled with this functionality and didn’t end up using it.</p>
+<p>The general structure for your first page group is as follows.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sidebar</span><span class="kw">:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> guides</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Guides"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">style</span><span class="kw">:</span><span class="at"> </span><span class="st">"docked"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">background</span><span class="kw">:</span><span class="at"> dark</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">foreground</span><span class="kw">:</span><span class="at"> light</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">collapse-level</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">contents</span><span class="kw">:</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> pages/guides/guides.qmd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now, if that’s where things end, you could just list pages on and on using the <code>text: href:</code> syntax. That being said, you probably are going to have a few subcategories, and possibly even further nested subcategories. To enable this, don’t use the <code>text:</code> syntax, instead use <code>section:</code>. This tells Quarto that you are defining a section, rather than just one single page. As you might guess, you can further nest sections, or specific pages, depending on your use of <code>text:</code> and <code>section:</code> with <code>href:</code>. See an example below.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> projects</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Projects"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">contents</span><span class="kw">:</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> pages/projects/projects.qmd</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">section</span><span class="kw">:</span><span class="at"> </span><span class="st">"Data Engineering and Architecture"</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">href</span><span class="kw">:</span><span class="at"> pages/projects/data_engineering/data_engineering.qmd</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">contents</span><span class="kw">:</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> </span><span class="fu">section</span><span class="kw">:</span><span class="at"> </span><span class="st">"DataCamp Data Engineering Projects"</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">href</span><span class="kw">:</span><span class="at"> pages/projects/data_engineering/datacamp/datacamp.qmd</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">contents</span><span class="kw">:</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> Bank Marketing ETL</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="at">                  </span><span class="fu">href</span><span class="kw">:</span><span class="at"> pages/projects/data_engineering/datacamp/bank_etl/bank_etl.qmd</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> </span><span class="fu">section</span><span class="kw">:</span><span class="at"> </span><span class="st">"Data Engineering Research Projects"</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">href</span><span class="kw">:</span><span class="at"> pages/projects/data_engineering/research/research.qmd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Furthermore, it’s crucial, for nested subpages, to have the parent landing page’s <code>.qmd</code> file’s path as a standalone line in the contents of the <code>_quarto.yml</code> file. Failing to do so will remove the sidebar from the landing page’s navigation; however, for subsections, those should be specified within an href paramter, under the section line. Additionally, for the collapsable functionality to work consistently in a sidebar, you’ll need it docked. The behavior is inconsistent with floating sidebars. After you’ve set your default color values in <code>_brand.yml</code>, make sure to specify the design details at the top of your <code>sidebar</code> property.</p>
+</section>
+</section>
+<section id="sharing-websites" class="level3">
+<h3 class="anchored" data-anchor-id="sharing-websites">Sharing Websites</h3>
+<p>There are two primary ways to publish your website once you’re done making edits, assuming you’re also using GitHub Pages.</p>
+<ol type="1">
+<li><code>quarto render docs</code></li>
+<li><code>quarto publish docs</code></li>
+</ol>
+<p>For simplicity, I chose to use <code>quarto render docs</code> (note that docs is used here because that’s the name of my main quarto project directory, not because it’s part of the command itself) because all I need to do is that and then push the changes. With <code>quarto publish docs</code>, it appeared to me that I would need to setup a branch for my git repository and possibly GitHub actions. I will probably do this in the future, for learning purposes, but didn’t want to for the sake of time.</p>
+<p>That being said, the official <a href="https://quarto.org/docs/publishing/github-pages.html">documentation</a> is very straightforward, and regardless of what you choose, there are two common steps:</p>
+<ol type="1">
+<li><code>touch .nojekyll</code>
+<ul>
+<li>This tells GitHub pages not to do any additional processing of your website, include this in your <code>docs</code> directory</li>
+</ul></li>
+<li>In a browser go to <code>GitHubPagesRepo &gt; Settings &gt; Code and automation &gt; Pages</code>
+<ul>
+<li>Then, make sure <code>Source</code> is set to <code>Deploy from a branch</code></li>
+<li>Set your branch to the quarto project directory, in your main project folder, <code>docs</code> in my case</li>
+</ul></li>
+</ol>
+<p>Then the classic:</p>
+<ul>
+<li><code>git add docs</code></li>
+<li><code>git commit -m "Website updates."</code></li>
+<li><code>git push</code></li>
+</ul>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Now, you’re all done with this guide, thank you for reading!</p>
+<p>Currently, this is only updated to include my notes and thoughts from when I built my personal website. As I use Quarto to create a variety of document types, I will update this Guide with more. Follow me on <a href="https://bsky.app/profile/chriskornaros.bsky.social">Bluesky</a> to stay connected with me and up to date with my work.</p>
 
 
-</section>
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
