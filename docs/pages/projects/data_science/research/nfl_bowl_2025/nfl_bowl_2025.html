@@ -340,8 +340,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#exploratory-data-analysis-and-initial-thoughts" id="toc-exploratory-data-analysis-and-initial-thoughts" class="nav-link" data-scroll-target="#exploratory-data-analysis-and-initial-thoughts">Exploratory Data Analysis and Initial Thoughts</a></li>
   <li><a href="#ongoing-thoughts" id="toc-ongoing-thoughts" class="nav-link" data-scroll-target="#ongoing-thoughts">Ongoing Thoughts</a></li>
+  <li><a href="#exploratory-data-analysis-and-initial-thoughts" id="toc-exploratory-data-analysis-and-initial-thoughts" class="nav-link" data-scroll-target="#exploratory-data-analysis-and-initial-thoughts">Exploratory Data Analysis and Initial Thoughts</a></li>
   <li><a href="#knn-classifier-notebook-first-model" id="toc-knn-classifier-notebook-first-model" class="nav-link" data-scroll-target="#knn-classifier-notebook-first-model">KNN Classifier Notebook (First Model)</a></li>
   <li><a href="#linear-regression-notebook-second-model" id="toc-linear-regression-notebook-second-model" class="nav-link" data-scroll-target="#linear-regression-notebook-second-model">Linear Regression Notebook (Second Model)</a></li>
   <li><a href="#random-forest-notebook-third-model" id="toc-random-forest-notebook-third-model" class="nav-link" data-scroll-target="#random-forest-notebook-third-model">Random Forest Notebook (Third Model)</a></li>
@@ -372,20 +372,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>I will add to this later. Currently, this will be a rough combination of my early notebooks.</p>
+<p>I will add to this later. Currently, this is a rough combination of my early notebooks.</p>
+</section>
+<section id="ongoing-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="ongoing-thoughts">Ongoing Thoughts</h2>
+<p>This is the first time I’m adding to a unified document, it’s December 13th, or about 1 month into my project. As of now, Random Forest definitely seems like the best path forward; however, the intial version certainly overfit. I believe the model overfit because some of the <code>plays</code> columns are the pre/post snap home/away team win probability values. In my next iteration, I’m going to remove those values, and in the future I might even try to recreate them. That being said, there’s a little under one month to go, so I’m going to focus on putting together some kind of deliverable/submission, before I go off the deep end. That said, this page and the website in general are going to be sloppy as I figure things out and slowly improve the organization and UI.</p>
 </section>
 <section id="exploratory-data-analysis-and-initial-thoughts" class="level2">
 <h2 class="anchored" data-anchor-id="exploratory-data-analysis-and-initial-thoughts">Exploratory Data Analysis and Initial Thoughts</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This was written on November 26th, 2024. It was later added to this site on December 13th, 2024. This is a general write up on the project, you can see the full notebooks below. The full repo is available <a href="https://www.github.com/ChrisKornaros/NFL_Big_Data_Bowl_2025">here</a>.</p>
+</div>
+</div>
 <p>Currently, I’ve made solid progress with my initial exploratory data analysis and project configuration. Here are some quick notes about the setup of my project environment (from IDE to tools/versions). - Using VS Code with the Jupyter, Jinja, YAML, Quarto (for notes/project submissions), and dbt extensions. - DuckDB is my primary database tool (for now), with dbt for the data modeling - Then, I’m using Python and Jupyter Notebooks for the analysis/ML component</p>
 <p>The reason I may switch to PostgreSQL for the primary Database is to just gain experience with DuckDB as a DEV environement and Postgres for PROD. Realistically, however, for the scope of this project DuckDB accomplishes everything I need it to.</p>
 <p>For the forseeable future, the only side project I’ll be working on is this, so my next few posts will only look at the project progress and my thoughts about the Big Data Bowl, feel free to checkout the <a href="https://www.github.com/ChrisKornaros/NFL_Big_Data_Bowl_2025">GitHub repository</a> where I’m saving my work.</p>
 <p>Some notes about my current project progress: - The project folder has a few subdirectories, including nfl_dbt which is the dbt project folder - The raw data came in the form of 13 CSVs from Kaggle. 4 of which are 50mb or less, 9 of which are ~1gb. - I’m using Databricks’ “Medallion Architecture” to guide my data modeling workflow. - I built the initial dbt models, using DuckDB as the DEV target (enabling 4 threads) and loaded the “bronze” schema which contains the 13 raw tables - I aggregated the data into the “silver” schema, which contains an aggregated play data table - I further aggregated the data into the “gold” schema, which provides basic analytic tables - Currently, I completed an initial analysis using an EDA notebook where I looked at using a LinearRegression and KNN to compare pre-snap play data with play outcomes. - I settled on a KNN model, but I’m only seeing about a 61.1% accuracy rate (confusion matrix and explanation below).</p>
 <p>So, I’m at a bit of a crossroads, with a few ways forward. It may be simpler (for the initial project/submission) to build a linear regression model that takes pre-snap play data as features, and then looks at yards gained (or loss) for the output. Conversely, if I stick with the KNN model I’ll need to make some changes. The majority of the outputs are either Gain or Completed, which refer to a positive rushing play and a completed pass, respectively. The issue here, the model overwhelmingly predicts those values, but fails to accurately predict things like Touchdowns, Sacks, or Interceptions.</p>
 <p>So, I may need to limit possible play outcomes, or at least combine some categories (i.e.&nbsp;Turnover for Fumble + Interception). Or, add some more presnap data, such as down and distance (I currently only use starting yard line, along with categorical data). If you made it this far, thank you! Below is the confusion matrix output from my current KNN model. I’ll add some hashtags at the end as an experiment too, because I’m not sure if that will help with post discoverability and/or integrate with Bluesky feeds. <img src="https://lionsmane.us-east.host.bsky.network/xrpc/com.atproto.sync.getBlob?did=did%3Aplc%3Aqus4ahqunvgwjssmxcjijwlj&amp;cid=bafkreia2oogirvm2hovmgbn73o5joxxfmce55fuh4x3y7faiw6zxu73gw4" class="img-fluid"></p>
-</section>
-<section id="ongoing-thoughts" class="level2">
-<h2 class="anchored" data-anchor-id="ongoing-thoughts">Ongoing Thoughts</h2>
-<p>This is the first time I’m adding to a unified document, it’s December 13th, or about 1 month into my project. As of now, Random Forest definitely seems like the best path forward; however, the intial version certainly overfit. I believe the model overfit because some of the <code>plays</code> columns are the pre/post snap home/away team win probability values. In my next iteration, I’m going to remove those values, and in the future I might even try to recreate them. That being said, there’s a little under one month to go, so I’m going to focus on putting together some kind of deliverable/submission, before I go off the deep end.</p>
 </section>
 <section id="knn-classifier-notebook-first-model" class="level2">
 <h2 class="anchored" data-anchor-id="knn-classifier-notebook-first-model">KNN Classifier Notebook (First Model)</h2>
@@ -1217,8 +1230,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="knn_files/knn_13_0.png" class="img-fluid figure-img"></p>
-<figcaption>png</figcaption>
+<p><img src="knn_13_0.png" class="img-fluid figure-img"></p>
+<figcaption>KNN Classifier Confusion Matrix</figcaption>
 </figure>
 </div>
 </section>
@@ -1701,8 +1714,8 @@ R2 Score: 0.02277208083008464</code></pre>
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Coefficients: </span><span class="sc">{</span>coefficients<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="linreg_files/linreg_7_0.png" class="img-fluid figure-img"></p>
-<figcaption>png</figcaption>
+<p><img src="linreg_7_0.png" class="img-fluid figure-img"></p>
+<figcaption>Linear Regression Scatter Plot</figcaption>
 </figure>
 </div>
 <pre><code>Coefficients: [[ 0.05041481  0.32550574  0.04088819  1.77381568 -0.0198335  -0.16104852]]</code></pre>
@@ -1714,105 +1727,98 @@ R2 Score: 0.02277208083008464</code></pre>
 </section>
 <section id="random-forest-notebook-third-model" class="level2">
 <h2 class="anchored" data-anchor-id="random-forest-notebook-third-model">Random Forest Notebook (Third Model)</h2>
-<pre><code>import duckdb
-import tqdm
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.feature_selection import RFE
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
-from sklearn.metrics import mean_squared_error, r2_score
-</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tqdm</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_selection <span class="im">import</span> RFE</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, GridSearchCV, cross_val_score</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error, r2_score</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code># Create the database connection
 con = duckdb.connect("nfl.duckdb")
 #con.close()</code></pre>
-<pre><code># Creating dataframes with DuckDB, plays and player_play both have 50 columns, more ideal for a broad random forest
-X = con.sql("""
-    SELECT quarter, down, yardsToGo, yardlineNumber, preSnapHomeScore, preSnapVisitorScore,
-    playNullifiedByPenalty, absoluteYardlineNumber, preSnapHomeTeamWinProbability, preSnapVisitorTeamWinProbability, expectedPoints,
-    passResult_complete, passResult_incomplete, passResult_sack, passResult_interception, passResult_scramble, passLength, targetX, targetY,
-    playAction, passTippedAtLine, unblockedPressure, qbSpike, qbKneel, qbSneak, penaltyYards, prePenaltyYardsGained, 
-    homeTeamWinProbabilityAdded, visitorTeamWinProbilityAdded, expectedPointsAdded, isDropback, timeToThrow, timeInTackleBox, timeToSack,
-    dropbackDistance, pff_runPassOption, playClockAtSnap, pff_manZone, pff_runConceptPrimary_num, pff_passCoverage_num, pff_runConceptSecondary_num
-FROM silver.plays_rf
-""").df()
-y = np.array(con.sql("""
-    SELECT yardsGained
-    FROM silver.plays_rf
-""").df()).ravel()</code></pre>
-<pre><code># Having issues with NA values, the below code does a simple count using pandas, will then go back and change the query
-# As of writing this, the issue is solved; however, the dbt model for this is far from efficient
-na_counts = (X == 'NA').sum()
-
-# Optionally, filter only columns with 'NA' values for easier review
-na_counts_filtered = na_counts[na_counts &gt; 0]
-print(na_counts_filtered, "\n", X.shape, "\n", y.shape) # playClockAtSnap has only 1 NA value, will just drop that row
-</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating dataframes with DuckDB, plays and player_play both have 50 columns, more ideal for a broad random forest</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> con.sql(<span class="st">"""</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT quarter, down, yardsToGo, yardlineNumber, preSnapHomeScore, preSnapVisitorScore,</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="st">    playNullifiedByPenalty, absoluteYardlineNumber, preSnapHomeTeamWinProbability, preSnapVisitorTeamWinProbability, expectedPoints,</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="st">    passResult_complete, passResult_incomplete, passResult_sack, passResult_interception, passResult_scramble, passLength, targetX, targetY,</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="st">    playAction, passTippedAtLine, unblockedPressure, qbSpike, qbKneel, qbSneak, penaltyYards, prePenaltyYardsGained, </span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="st">    homeTeamWinProbabilityAdded, visitorTeamWinProbilityAdded, expectedPointsAdded, isDropback, timeToThrow, timeInTackleBox, timeToSack,</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="st">    dropbackDistance, pff_runPassOption, playClockAtSnap, pff_manZone, pff_runConceptPrimary_num, pff_passCoverage_num, pff_runConceptSecondary_num</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="st">FROM silver.plays_rf</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array(con.sql(<span class="st">"""</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT yardsGained</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM silver.plays_rf</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()).ravel()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Having issues with NA values, the below code does a simple count using pandas, will then go back and change the query</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># As of writing this, the issue is solved; however, the dbt model for this is far from efficient</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>na_counts <span class="op">=</span> (X <span class="op">==</span> <span class="st">'NA'</span>).<span class="bu">sum</span>()</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Optionally, filter only columns with 'NA' values for easier review</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>na_counts_filtered <span class="op">=</span> na_counts[na_counts <span class="op">&gt;</span> <span class="dv">0</span>]</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(na_counts_filtered, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, X.shape, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, y.shape) <span class="co"># playClockAtSnap has only 1 NA value, will just drop that row</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>Series([], dtype: int64) 
  (16124, 41) 
  (16124,)</code></pre>
-<pre><code># Instantiate the model and split the data
-rf = RandomForestRegressor(warm_start=True)
-
-selector = RFE(rf, n_features_to_select=10, step=1)
-X_selected = selector.fit_transform(X, y)
-</code></pre>
-<pre><code># Begin Interpretation, first with feature importance
-selected_features = X.columns[selector.support_]
-print(selected_features)
-</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instantiate the model and split the data</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestRegressor(warm_start<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>selector <span class="op">=</span> RFE(rf, n_features_to_select<span class="op">=</span><span class="dv">10</span>, step<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>X_selected <span class="op">=</span> selector.fit_transform(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Begin Interpretation, first with feature importance</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>selected_features <span class="op">=</span> X.columns[selector.support_]</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(selected_features)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>Index(['yardlineNumber', 'absoluteYardlineNumber',
        'preSnapHomeTeamWinProbability', 'expectedPoints',
        'passResult_scramble', 'penaltyYards', 'prePenaltyYardsGained',
        'homeTeamWinProbabilityAdded', 'visitorTeamWinProbilityAdded',
        'expectedPointsAdded'],
       dtype='object')</code></pre>
-<pre><code># Split the data
-X_train, X_test, y_train, y_test = train_test_split(X_selected, y, test_size=0.2, random_state=42)
-
-# Train the model
-rf.fit(X_train, y_train)
-
-# Make predictions
-y_pred = rf.predict(X_test)
-
-# Calculate scores
-mse = mean_squared_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred)
-
-print(f"Mean Squared Error: {mse}")
-print(f"R^2 Score: {r2}")
-</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X_selected, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the model</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>rf.fit(X_train, y_train)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> rf.predict(X_test)</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate scores</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>mse <span class="op">=</span> mean_squared_error(y_test, y_pred)</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> r2_score(y_test, y_pred)</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean Squared Error: </span><span class="sc">{</span>mse<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R^2 Score: </span><span class="sc">{</span>r2<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>Mean Squared Error: 1.7769936744186046
 R^2 Score: 0.9766614590863065</code></pre>
-<pre><code># Continue with the GridSearch
-param_grid = {
-    'n_estimators': [100, 200, 300],
-    'max_depth': [None, 10, 20, 30],
-    'min_samples_split': [2, 5, 10],
-    'min_samples_leaf': [1, 2, 4],
-}
-
-grid_search = GridSearchCV(estimator=rf, param_grid=param_grid, cv=5, scoring='neg_mean_squared_error', n_jobs=4)
-grid_search.fit(X_train, y_train)
-best_rf = grid_search.best_estimator_
-
-# Wrap a progress bar for longer Grid Searches
-"""with tqdm(total=len(param_grid['n_estimators']) * len(param_grid['max_depth']) * len(param_grid['min_samples_split']) * len(param_grid['min_samples_leaf']), desc="GridSearch Progress") as pbar:
-    def callback(*args, **kwargs):
-        pbar.update(1)
-
-    # Add the callback to the grid search
-    grid_search.fit(X, y, callback=callback)"""
-
-print(grid_search.best_params_)
-</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Continue with the GridSearch</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'n_estimators'</span>: [<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>],</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_depth'</span>: [<span class="va">None</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>],</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'min_samples_split'</span>: [<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>],</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'min_samples_leaf'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>],</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>grid_search <span class="op">=</span> GridSearchCV(estimator<span class="op">=</span>rf, param_grid<span class="op">=</span>param_grid, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">'neg_mean_squared_error'</span>, n_jobs<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>grid_search.fit(X_train, y_train)</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>best_rf <span class="op">=</span> grid_search.best_estimator_</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Wrap a progress bar for longer Grid Searches</span></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="co">"""with tqdm(total=len(param_grid['n_estimators']) * len(param_grid['max_depth']) * len(param_grid['min_samples_split']) * len(param_grid['min_samples_leaf']), desc="GridSearch Progress") as pbar:</span></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a><span class="co">    def callback(*args, **kwargs):</span></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a><span class="co">        pbar.update(1)</span></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a><span class="co">    # Add the callback to the grid search</span></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a><span class="co">    grid_search.fit(X, y, callback=callback)"""</span></span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_search.best_params_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>{'max_depth': 20, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 100}</code></pre>
-<pre><code># Continue with the Cross Validation Score
-cv_scores = cross_val_score(rf, X_selected, y, cv=5, scoring='neg_mean_squared_error')
-print(f"Cross-validated MSE: {-cv_scores.mean()}")
-</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Continue with the Cross Validation Score</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>cv_scores <span class="op">=</span> cross_val_score(rf, X_selected, y, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">'neg_mean_squared_error'</span>)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cross-validated MSE: </span><span class="sc">{</span><span class="op">-</span>cv_scores<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>Cross-validated MSE: 1.9303851017196607</code></pre>
 
 
