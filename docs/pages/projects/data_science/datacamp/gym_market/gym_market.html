@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Gym Market Analysis Project – Chris Kornaros</title>
+<title>gym_market – Chris Kornaros</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -235,13 +269,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../pages/projects/data_science/datacamp/login_validation/login_validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Login Validation Function Project</span></a>
+ <span class="menu-text">Re-run this cell</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../pages/projects/data_science/datacamp/netflix/netflix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Netflix Movies Project</span></a>
+ <span class="menu-text">The data</span></a>
   </div>
 </li>
       </ul>
@@ -261,33 +295,321 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link active" data-scroll-target="#the-data">The Data</a></li>
+  <li><a href="#workout.csv" id="toc-workout.csv" class="nav-link" data-scroll-target="#workout.csv">workout.csv</a></li>
+  <li><a href="#three_keywords.csv" id="toc-three_keywords.csv" class="nav-link" data-scroll-target="#three_keywords.csv">three_keywords.csv</a></li>
+  <li><a href="#workout_geo.csv" id="toc-workout_geo.csv" class="nav-link" data-scroll-target="#workout_geo.csv">workout_geo.csv</a></li>
+  <li><a href="#three_keywords_geo.csv" id="toc-three_keywords_geo.csv" class="nav-link" data-scroll-target="#three_keywords_geo.csv">three_keywords_geo.csv</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../../pages/projects/data_science/data_science.html">Data Science and Machine Learning</a></li><li class="breadcrumb-item"><a href="../../../../../pages/projects/data_science/datacamp/datacamp.html">DataCamp Data Science Projects</a></li><li class="breadcrumb-item"><a href="../../../../../pages/projects/data_science/datacamp/gym_market/gym_market.html">gym_market</a></li></ol></nav></header>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../../pages/projects/data_science/data_science.html">Data Science and Machine Learning</a></li><li class="breadcrumb-item"><a href="../../../../../pages/projects/data_science/datacamp/datacamp.html">DataCamp Data Science Projects</a></li><li class="breadcrumb-item"><a href="../../../../../pages/projects/data_science/datacamp/gym_market/gym_market.html">gym_market</a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title">Gym Market Analysis Project</h1>
+
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="gym.png" class="img-fluid figure-img"></p>
+<figcaption>gym</figcaption>
+</figure>
 </div>
+<p>You are a product manager for a fitness studio and are interested in understanding the current demand for digital fitness classes. You plan to conduct a market analysis in Python to gauge demand and identify potential areas for growth of digital products and services.</p>
+<section id="the-data" class="level3">
+<h3 class="anchored" data-anchor-id="the-data">The Data</h3>
+<p>You are provided with a number of CSV files in the “Files/data” folder, which offer international and national-level data on Google Trends keyword searches related to fitness and related products.</p>
+</section>
+<section id="workout.csv" class="level3">
+<h3 class="anchored" data-anchor-id="workout.csv">workout.csv</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 68%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>'month'</code></td>
+<td>Month when the data was measured.</td>
+</tr>
+<tr class="even">
+<td><code>'workout_worldwide'</code></td>
+<td>Index representing the popularity of the keyword ‘workout’, on a scale of 0 to 100.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="three_keywords.csv" class="level3">
+<h3 class="anchored" data-anchor-id="three_keywords.csv">three_keywords.csv</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 68%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>'month'</code></td>
+<td>Month when the data was measured.</td>
+</tr>
+<tr class="even">
+<td><code>'home_workout_worldwide'</code></td>
+<td>Index representing the popularity of the keyword ‘home workout’, on a scale of 0 to 100.</td>
+</tr>
+<tr class="odd">
+<td><code>'gym_workout_worldwide'</code></td>
+<td>Index representing the popularity of the keyword ‘gym workout’, on a scale of 0 to 100.</td>
+</tr>
+<tr class="even">
+<td><code>'home_gym_worldwide'</code></td>
+<td>Index representing the popularity of the keyword ‘home gym’, on a scale of 0 to 100.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="workout_geo.csv" class="level3">
+<h3 class="anchored" data-anchor-id="workout_geo.csv">workout_geo.csv</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 68%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>'country'</code></td>
+<td>Country where the data was measured.</td>
+</tr>
+<tr class="even">
+<td><code>'workout_2018_2023'</code></td>
+<td>Index representing the popularity of the keyword ‘workout’ during the 5 year period.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="three_keywords_geo.csv" class="level3">
+<h3 class="anchored" data-anchor-id="three_keywords_geo.csv">three_keywords_geo.csv</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 68%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>'country'</code></td>
+<td>Country where the data was measured.</td>
+</tr>
+<tr class="even">
+<td><code>'home_workout_2018_2023'</code></td>
+<td>Index representing the popularity of the keyword ‘home workout’ during the 5 year period.</td>
+</tr>
+<tr class="odd">
+<td><code>'gym_workout_2018_2023'</code></td>
+<td>Index representing the popularity of the keyword ‘gym workout’ during the 5 year period.</td>
+</tr>
+<tr class="even">
+<td><code>'home_gym_2018_2023'</code></td>
+<td>Index representing the popularity of the keyword ‘home gym’ during the 5 year period.</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the necessary libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start coding here</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>workout <span class="op">=</span> pd.read_csv(<span class="st">'data/workout.csv'</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>three_kw <span class="op">=</span> pd.read_csv(<span class="st">'data/three_keywords.csv'</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>workout_geo <span class="op">=</span> pd.read_csv(<span class="st">'data/workout_geo.csv'</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>kw_geo <span class="op">=</span> pd.read_csv(<span class="st">'data/three_keywords_geo.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>workout.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+<thead>
+<tr>
+<th>
+</th>
+<th>
+month
+</th>
+<th>
+workout_worldwide
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+2018-03
+</td>
+<td>
+59
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+2018-04
+</td>
+<td>
+61
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+2018-05
+</td>
+<td>
+57
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+2018-06
+</td>
+<td>
+56
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+2018-07
+</td>
+<td>
+51
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>peak <span class="op">=</span> workout.loc[workout[<span class="st">'workout_worldwide'</span>].idxmax()]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>year_str <span class="op">=</span> peak.<span class="bu">str</span>.split(<span class="st">'-'</span>)[<span class="dv">0</span>][<span class="dv">0</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>year_str</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>'2020'</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>workout.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>month                object
+workout_worldwide     int64
+dtype: object</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>covid <span class="op">=</span> workout.loc[(workout[<span class="st">'month'</span>] <span class="op">&gt;</span> <span class="st">'2019-12'</span>) <span class="op">&amp;</span> (workout[<span class="st">'month'</span>] <span class="op">&lt;=</span> <span class="st">'2022-12'</span>)]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>post_covid <span class="op">=</span> workout.loc[workout[<span class="st">'month'</span>] <span class="op">&gt;</span> <span class="st">'2022-12'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>peak_covid <span class="op">=</span> three_kw.loc[(workout[<span class="st">'month'</span>] <span class="op">&gt;</span> <span class="st">'2019-12'</span>) <span class="op">&amp;</span> (workout[<span class="st">'month'</span>] <span class="op">&lt;=</span> <span class="st">'2022-12'</span>)][[<span class="st">'home_workout_worldwide'</span>, <span class="st">'gym_workout_worldwide'</span>, <span class="st">'home_gym_worldwide'</span>]].<span class="bu">max</span>().idxmax()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>current <span class="op">=</span> three_kw.loc[workout[<span class="st">'month'</span>] <span class="op">&gt;</span> <span class="st">'2022-12'</span>][[<span class="st">'home_workout_worldwide'</span>, <span class="st">'gym_workout_worldwide'</span>, <span class="st">'home_gym_worldwide'</span>]].<span class="bu">max</span>().idxmax()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>peak_covid</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>current</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>'gym_workout_worldwide'</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>top_country <span class="op">=</span> workout_geo.loc[workout_geo[<span class="st">'workout_2018_2023'</span>].idxmax()][<span class="st">'country'</span>]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>top_country</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>'United States'</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>kw_geo1 <span class="op">=</span> kw_geo.loc[(kw_geo[<span class="st">'Country'</span>]<span class="op">==</span><span class="st">'Philippines'</span>) <span class="op">|</span> (kw_geo[<span class="st">'Country'</span>]<span class="op">==</span><span class="st">'Malaysia'</span>)]</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>kw_geo1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+<thead>
+<tr>
+<th>
+</th>
+<th>
+Country
+</th>
+<th>
+home_workout_2018_2023
+</th>
+<th>
+gym_workout_2018_2023
+</th>
+<th>
+home_gym_2018_2023
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+23
+</th>
+<td>
+Philippines
+</td>
+<td>
+52.0
+</td>
+<td>
+38.0
+</td>
+<td>
+10.0
+</td>
+</tr>
+<tr>
+<th>
+61
+</th>
+<td>
+Malaysia
+</td>
+<td>
+47.0
+</td>
+<td>
+38.0
+</td>
+<td>
+15.0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>home_workout_geo <span class="op">=</span> kw_geo1.loc[kw_geo1[<span class="st">'home_workout_2018_2023'</span>] <span class="op">==</span> kw_geo1[<span class="st">'home_workout_2018_2023'</span>].<span class="bu">max</span>(), <span class="st">'Country'</span>].values[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>home_workout_geo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>'Philippines'</code></pre>
 
 
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
