@@ -238,6 +238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#projects" id="toc-projects" class="nav-link" data-scroll-target="#projects">Projects</a>
   <ul>
+  <li><a href="#general-workflow" id="toc-general-workflow" class="nav-link" data-scroll-target="#general-workflow">General Workflow</a></li>
   <li><a href="#initializing-a-project" id="toc-initializing-a-project" class="nav-link" data-scroll-target="#initializing-a-project">Initializing a Project</a>
   <ul class="collapse">
   <li><a href="#the-create-command" id="toc-the-create-command" class="nav-link" data-scroll-target="#the-create-command">The create command</a></li>
@@ -314,6 +315,11 @@ Write using Pandoc markdown, including equations, citations, crossrefs, figure p
 <section id="projects" class="level2">
 <h2 class="anchored" data-anchor-id="projects">Projects</h2>
 <p>This section, and the rest of the guide, assume you’re familiar with and using the uv package and project manager for Python, git for version control, and the GitHub CLI for collaboration. I’ll be referencing all of these tools throughout the rest of the guide. You can read my guide to learn more about <a href="https://chriskornaros.github.io/pages/guides/uv/uv.html">uv</a></p>
+<section id="general-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="general-workflow">General Workflow</h3>
+<p>I’ll be walking through the general workflow, but here’s a quick note about how I use Quarto for Data related projects. I use GitHub as my collaboration/repo hosting tool, so all of my projects have a <code>README.md</code> file. That way, if anyone visits the actual repo, they can view a nicely rendered markdown file, but when I’m ready to add a project to my website, I’ll copy the contents into a <code>.qmd</code> file. Then, I can add the Quarto specific formatting.</p>
+<p>This simplifies my general workflow a lot, and makes it easy to formally share and document my research.</p>
+</section>
 <section id="initializing-a-project" class="level3">
 <h3 class="anchored" data-anchor-id="initializing-a-project">Initializing a Project</h3>
 <section id="the-create-command" class="level4">

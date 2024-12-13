@@ -1,0 +1,40 @@
+---
+title: "Open Source Data and Analytics Architecture"
+---
+
+## Introduction
+I will update this when I begin the project. The goal here is to explore and create a tech stack to support modern data and analytical workloads, using entirely open source software. Ideally, I'll be able to scale it to terabytes and then share that template and the guide as a public resource.
+
+Currently, I'm thinking of the following tools, as part of a non-exhaustive list of the stack:\
+
+> OS/Environment: `zsh/bash`\
+> Project and Package Management: `uv`\
+> Collaboration and Source Control: `Github`\
+> Documentation: `Quarto`\
+> Data Modeling: `dbt`\
+> Containerization: `Docker`\
+> Container Orchestration: `Kubernetes`\
+> OLTP Database: `PostgreSQL`\
+> OLAP Database: `DuckDB`\
+> Batch Ingestion: `Python`\
+> ETL: `dbt`\
+> Testing: `pytest`\
+> Data Quality: `Great Expectations`\ 
+> Metadata: `Unity Catalog`\
+> ETL Orchestration: `Airflow` *and/or* `Dagster`\
+> Streaming Ingestion: `Kafka`\
+
+General workflow I'm envisioning:
+1. Initialize project with `uv`, add basic dependencies for the environment
+2. Create the repo with the GitHub CLI
+3. Set the remote as the upstream and do the initial commit
+4. Initialize the `quarto` and `dbt`  projects as subdirectories of the main, `uv` project directory
+5. Create the `postgres` container with `docker`, use this to initialize the `postgres` database (Prod) 
+6. In your `uv` envionrment, initialize the `duckdb` (Dev/Test) persistent database
+   1. Simpler to work quickly with `duckdb`, `postgres` has more configurations/overhead, better for long term persistent
+7. Use `python and duckdb` to ingest the initial batch of raw data
+8. Use `dbt` to define the data model, `pytest` to define the basic tests, and `great expectations` to define data quality
+9. Initialize the `unity catalog` instance, add the connection information (Dev/Test/Prod)
+10. Generate metadata and lineage
+11. Start scheduling and orchestrating jobs
+12. Potentially scale system up to handle stremaing data

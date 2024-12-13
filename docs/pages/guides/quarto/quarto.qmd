@@ -20,6 +20,11 @@ For MacOS users, I recommend downloading and learning about Homebrew, the packag
 ## Projects
 This section, and the rest of the guide, assume you're familiar with and using the uv package and project manager for Python, git for version control, and the GitHub CLI for collaboration. I'll be referencing all of these tools throughout the rest of the guide. You can read my guide to learn more about [uv](https://chriskornaros.github.io/pages/guides/uv/uv.html)
 
+### General Workflow
+I'll be walking through the general workflow, but here's a quick note about how I use Quarto for Data related projects. I use GitHub as my collaboration/repo hosting tool, so all of my projects have a `README.md` file. That way, if anyone visits the actual repo, they can view a nicely rendered markdown file, but when I'm ready to add a project to my website, I'll copy the contents into a `.qmd` file. Then, I can add the Quarto specific formatting.
+
+This simplifies my general workflow a lot, and makes it easy to formally share and document my research.
+
 ### Initializing a Project
 #### The create command
 I'm going to assume you've already run the `uv init` command to initalize your `uv` project. From there, it's easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process. Furthermore, Quarto provides a simple command for creating (or initializing) a project (or extension), `quarto create project`, and a handy setup guide to help you use it. The following code shows you my terminal input and outputs.
