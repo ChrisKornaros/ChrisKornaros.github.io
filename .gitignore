@@ -9,6 +9,9 @@ wheels/
 # Virtual environments
 .venv
 
+# Local environments
+*.DS_Store
+
 # Quarto Files
 docs/*ipynb
 docs/*_files/

@@ -354,7 +354,24 @@ ETL Orchestration: <code>Airflow</code> <em>and/or</em> <code>Dagster</code><br>
 Streaming Ingestion: <code>Kafka</code><br>
 </p>
 </blockquote>
-<p>General workflow I’m envisioning: 1. Initialize project with <code>uv</code>, add basic dependencies for the environment 2. Create the repo with the GitHub CLI 3. Set the remote as the upstream and do the initial commit 4. Initialize the <code>quarto</code> and <code>dbt</code> projects as subdirectories of the main, <code>uv</code> project directory 5. Create the <code>postgres</code> container with <code>docker</code>, use this to initialize the <code>postgres</code> database (Prod) 6. In your <code>uv</code> envionrment, initialize the <code>duckdb</code> (Dev/Test) persistent database 1. Simpler to work quickly with <code>duckdb</code>, <code>postgres</code> has more configurations/overhead, better for long term persistent 7. Use <code>python and duckdb</code> to ingest the initial batch of raw data 8. Use <code>dbt</code> to define the data model, <code>pytest</code> to define the basic tests, and <code>great expectations</code> to define data quality 9. Initialize the <code>unity catalog</code> instance, add the connection information (Dev/Test/Prod) 10. Generate metadata and lineage 11. Start scheduling and orchestrating jobs 12. Potentially scale system up to handle stremaing data</p>
+<p>General workflow I’m envisioning:</p>
+<ol type="1">
+<li>Initialize project with <code>uv</code>, add basic dependencies for the environment</li>
+<li>Create the repo with the GitHub CLI</li>
+<li>Set the remote as the upstream and do the initial commit</li>
+<li>Initialize the <code>quarto</code> and <code>dbt</code> projects as subdirectories of the main, <code>uv</code> project directory</li>
+<li>Create the <code>postgres</code> container with <code>docker</code>, use this to initialize the <code>postgres</code> database (Prod)</li>
+<li>In your <code>uv</code> envionrment, initialize the <code>duckdb</code> (Dev/Test) persistent database
+<ul>
+<li>Simpler to work quickly with <code>duckdb</code>, <code>postgres</code> has more configurations/overhead, but is better for long term persistent</li>
+</ul></li>
+<li>Use <code>python and duckdb</code> to ingest the initial batch of raw data</li>
+<li>Use <code>dbt</code> to define the data model, <code>pytest</code> to define the basic tests, and <code>great expectations</code> to define data quality</li>
+<li>Initialize the <code>unity catalog</code> instance, add the connection information (Dev/Test/Prod)</li>
+<li>Generate metadata and lineage</li>
+<li>Start scheduling and orchestrating jobs</li>
+<li>Potentially scale system up to handle stremaing data</li>
+</ol>
 
 
 </section>
