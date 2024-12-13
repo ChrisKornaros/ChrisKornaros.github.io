@@ -74,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap-56dfab92d9a1e40e81fa338bab690bac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-fc04f77a8684a1bf80ff1b5fb26ade5a.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-e7663df3984f924744eb258d6855637e.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -232,18 +232,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
+  <ul>
+  <li><a href="#downloading-and-updating" id="toc-downloading-and-updating" class="nav-link" data-scroll-target="#downloading-and-updating">Downloading and Updating</a></li>
+  </ul></li>
   <li><a href="#projects" id="toc-projects" class="nav-link" data-scroll-target="#projects">Projects</a>
   <ul>
   <li><a href="#initializing-a-project" id="toc-initializing-a-project" class="nav-link" data-scroll-target="#initializing-a-project">Initializing a Project</a>
   <ul class="collapse">
   <li><a href="#the-create-command" id="toc-the-create-command" class="nav-link" data-scroll-target="#the-create-command">The create command</a></li>
   </ul></li>
+  <li><a href="#working-on-your-project" id="toc-working-on-your-project" class="nav-link" data-scroll-target="#working-on-your-project">Working on your Project</a></li>
   <li><a href="#rendering-a-projects" id="toc-rendering-a-projects" class="nav-link" data-scroll-target="#rendering-a-projects">Rendering a Projects</a></li>
   </ul></li>
   <li><a href="#configurations" id="toc-configurations" class="nav-link" data-scroll-target="#configurations">Configurations</a>
   <ul>
-  <li><a href="#downloading-and-updating" id="toc-downloading-and-updating" class="nav-link" data-scroll-target="#downloading-and-updating">Downloading and Updating</a></li>
+  <li><a href="#the-_quarto.yml-file" id="toc-the-_quarto.yml-file" class="nav-link" data-scroll-target="#the-_quarto.yml-file">The _quarto.yml file</a></li>
   <li><a href="#the-_brand.yml-file" id="toc-the-_brand.yml-file" class="nav-link" data-scroll-target="#the-_brand.yml-file">The _brand.yml File</a>
   <ul class="collapse">
   <li><a href="#color" id="toc-color" class="nav-link" data-scroll-target="#color">Color</a></li>
@@ -300,6 +304,11 @@ Publish reproducible, production quality articles, presentations, dashboards, we
 Share knowledge and insights organization-wide by publishing to Posit Connect, Confluence, or other publishing systems.<br>
 Write using Pandoc markdown, including equations, citations, crossrefs, figure panels, callouts, advanced layout, and more.</p>
 </blockquote>
+<section id="downloading-and-updating" class="level3">
+<h3 class="anchored" data-anchor-id="downloading-and-updating">Downloading and Updating</h3>
+<p>For simple instructions and a download/install guide using a GUI, visit <a href="https://quarto.org/docs/get-started/">Quarto - Get Started</a>.</p>
+<p>For MacOS users, I recommend downloading and learning about Homebrew, the package manager. It drastically simplifies all phases of package management. To install, simply use <code>brew install quarto</code> and you’re done.</p>
+</section>
 </section>
 <section id="projects" class="level2">
 <h2 class="anchored" data-anchor-id="projects">Projects</h2>
@@ -308,7 +317,7 @@ Write using Pandoc markdown, including equations, citations, crossrefs, figure p
 <h3 class="anchored" data-anchor-id="initializing-a-project">Initializing a Project</h3>
 <section id="the-create-command" class="level4">
 <h4 class="anchored" data-anchor-id="the-create-command">The create command</h4>
-<p>It’s easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process. Furthermore, Quarto provides a simple command for creating (or initializing) a project (or extension), <code>quarto create project</code>, and a handy setup guide to help you use it. The following code shows you my terminal input and outputs.</p>
+<p>I’m going to assume you’ve already run the <code>uv init</code> command to initalize your <code>uv</code> project. From there, it’s easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process. Furthermore, Quarto provides a simple command for creating (or initializing) a project (or extension), <code>quarto create project</code>, and a handy setup guide to help you use it. The following code shows you my terminal input and outputs.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">chriskornaros@chriss-air</span> test % quarto create project</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> Type › default</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> Directory › docs</span>
@@ -319,8 +328,26 @@ Write using Pandoc markdown, including equations, citations, crossrefs, figure p
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> Created test_docs.qmd</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> Open With › <span class="er">(</span><span class="ex">don</span><span class="st">'t open)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>For a quick run through: quarto create project initializes a quarto project directory within your current working directory (the uv parent directory), <code>type</code> lets you choose the type of Quarto documentation (book, website, confluence, etc.), title is the title of your homepage (<code>.qmd</code>) file. Personally, I like to remove the <code>docs/.gitignore</code> file because uv creates one when you initialize a project, in the parent directory. So, having just one <code>.gitignore</code> file helps me keep track of things more easily.</p>
-<p>The only directory I added to <code>docs</code> after it was created by quarto, was a <code>pages</code> directory. Here, I keep the various landing pages and their sub directory structures. Ideally, I won’t have any files in there, but the <code>_quarto.yml</code> file will point to their locations in my personal GitHub repo.</p>
+<p>The only directorues I added to <code>docs</code> after it was created by quarto, was a <code>pages</code> directory for various subpages and a <code>brand</code> directory for <code>.scss</code> files, images, etc. Here, I keep the various landing pages and their sub directory structures. Ideally, I won’t have any files in there, but the <code>_quarto.yml</code> file will point to their locations in my personal GitHub repo.</p>
+<div id="tip-docs-context" class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip&nbsp;1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In my time developing this site, it seems that Quarto can only pickup on files within the context of the <code>docs</code> (or whatever you name your Quarto project) folder. Furthermore, it struggels with absolute context paths, and at most I could get it to work with <code>../../file</code>.</p>
+</div>
+</div>
 </section>
+</section>
+<section id="working-on-your-project" class="level3">
+<h3 class="anchored" data-anchor-id="working-on-your-project">Working on your Project</h3>
+<p>Now that you’ve initalized your project directory, you can begin work! Head over to <a href="https://quarto.org/docs/authoring/markdown-basics.html">Quarto Basics</a> for documentation on the basics of <code>.qmd</code> files and authoring with Quarto markdown.</p>
+<p>Just remember, every webpage will need a <code>.qmd</code> file!</p>
 </section>
 <section id="rendering-a-projects" class="level3">
 <h3 class="anchored" data-anchor-id="rendering-a-projects">Rendering a Projects</h3>
@@ -329,10 +356,10 @@ Write using Pandoc markdown, including equations, citations, crossrefs, figure p
 </section>
 <section id="configurations" class="level2">
 <h2 class="anchored" data-anchor-id="configurations">Configurations</h2>
-<section id="downloading-and-updating" class="level3">
-<h3 class="anchored" data-anchor-id="downloading-and-updating">Downloading and Updating</h3>
-<p>For simple instructions and a download/install guide using a GUI, visit <a href="https://quarto.org/docs/get-started/">Quarto - Get Started</a>.</p>
-<p>For MacOS users, I recommend downloading and learning about Homebrew, the package manager. It drastically simplifies all phases of package management. To install, simply use <code>brew install quarto</code> and you’re done.</p>
+<section id="the-_quarto.yml-file" class="level3">
+<h3 class="anchored" data-anchor-id="the-_quarto.yml-file">The _quarto.yml file</h3>
+<p>This YAML file serves as the primary configuration file for your Quarto project. Similar to other Quarto YAML files, this handles document configurations, but adds the Quarto project features to sync those across documents and for more environment control. You have the ability to define project metadata for all of the different document types. In this example, I used it to define the website configurations, but if you’re working on a book or dashboard, then it could be used to normalize chapters or visuals as well.</p>
+<p>You can also specify the formatting, which connects with the <code>_brand.yml</code> file and enables cross referencing of variables and values. Learn more with <a href="https://quarto.org/docs/projects/quarto-projects.html">Quarto Projects</a>.</p>
 </section>
 <section id="the-_brand.yml-file" class="level3">
 <h3 class="anchored" data-anchor-id="the-_brand.yml-file">The _brand.yml File</h3>
@@ -468,7 +495,7 @@ Note&nbsp;1
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip&nbsp;1
+Tip&nbsp;2
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -483,7 +510,7 @@ Tip&nbsp;1
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> path/to/page/group/landing.qmd</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> path/to/page/group/1/landing.qmd</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> path/to/page/group/2/landing.qmd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Then, you’ll need to handle the rest in Side Navigation.</p>
+<p>Then, you’ll need to handle the rest in Side Navigation; however, it isn’t perfect. You can’t have nested drop down options in your top navigation bar, so the best I came up with was having a landing page for the top level and first tier subcategories, then handled the rest on the sidebar (which only pops up on affiliated pages).</p>
 </section>
 <section id="side-navigation" class="level4">
 <h4 class="anchored" data-anchor-id="side-navigation">Side Navigation</h4>

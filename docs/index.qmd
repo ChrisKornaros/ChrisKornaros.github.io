@@ -1,9 +1,10 @@
 ---
 title: "Chris Kornaros"
+image: brand/headshot.jpeg
+about:
+    template: jolla
 ---
 
-This is a Quarto website.
+This site is the personal portfolio and homepage for Chris Kornaros. I'm a Tulane Graduate and professional Data Engineer. On here, you'll find projects and code samples that I can share publicly, guides for various tools or workflows, journal or blog posts, and any independent research or professional updates (including my resume). 
 
-Testing changes/additions.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+This website is a work in progress, so things are going to move around and break. Additionally, there is a lot that I have to still add: past guides, projects, etc. Feel free to connect with me on [Bluesky](https://bsky.app/profile/chriskornaros.bsky.social) to stay up to date with what I'm working on.

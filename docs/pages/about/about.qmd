@@ -1,11 +1,20 @@
 ---
 title: "About"
 ---
-# About
+
 About myself and this site in general. 
 
-## About Chris
+[Resume](https://github.com/ChrisKornaros/Professional/blob/main/Chris%20Kornaros%20Resume.pdf)
+
+## About Me
 I'm a 26 year old Data Scientist, Engineer, Analyst, Architect, etc. that has two degrees from Tulane University in New Orleans-- BSM, Marketing and Asian Studies; MS, Business Analytics. During COVID, I did an extra year of school and received a Masters in Data Science. As a result of my education, I fell in love with data science and machine learning, but due to common data challenges, I developed a professional passion and skillset for database architecture and data engineering.
 
-## About this Website
-This site is the personal portfolio and homepage for Chris Kornaros. I'm a Tulane Graduate and professional Data Engineer. On here, you'll find projects and code samples that I can share publicly, guides for various tools or workflows, journal or blog posts, and any independent research or professional updates (including my resume). 
+## LinkedIn About Me (Will be updated)
+Chris is a seasoned expert in Data Science and Engineering, with a strong focus on driving organizational change and innovation through data strategy. His experience spans leading transformational initiatives and implementing data-driven solutions at an enterprise level. At General Motors, Chris spearheaded the redesign and implementation of a reporting upgrade for global warehouse systems. Additionally, he successfully proposed and designed a critical upgrade to the data architecture of the Accessories Sales Reporting application, an application that supports a $1.2 billion revenue stream by enabling advanced analytics and reporting.
+
+Chris's expertise covers the entire data pipeline, from ingestion and ETL to final reporting. He has hands-on experience in designing, coding, and deploying data ingestion and ETL processes using industry-standard tools such as dbt, Airflow, SQL (PostgreSQL, Hive SQL, T-SQL), and Python (Pandas, PySpark). He is certified in Data Engineering with Databricks (using Python, SQL, PySpark), Microsoft Power BI, and Agile Methodologies. His technical skillset is complemented by his proficiency in Unix scripting (zsh) and Docker for building scalable data environments and architectures. Chris has also led successful migrations of data, models, and reports from On-Premise to Cloud environments.
+
+In the realm of Data Engineering and Database Management, Chris specializes in designing optimized database and reporting architectures, adhering to industry-standard Star and Snowflake schema structures, as well as the Gold, Silver, and Bronze aggregation principles. His expertise in data science includes ML model design and feature engineering, particularly in linear and logistic regression models. He has developed and implemented models that predict consumer behavior in marketing and sales, as well as risk prediction for financial lenders.
+
+At the reporting and Business Intelligence stage, Chris's journey began at General Motors as a BI/Data Analyst. He designed and developed reports to support product development, warranty programs, supply chain, and warehouse operations. Collaborating closely with non-technical partners, he translated business needs into technical requirements, ensuring that the final product met both performance and user experience goals. Chris also served as the lead administrator for GM's Power BI platform, where he established company-wide policies to optimize performance and usability. As a leader, he managed and mentored developers, applying agile principles to balance project demands with team well-being.
+

@@ -88,5 +88,5 @@ format:
     toc-title: "On this page"
     toc-depth: 4
     theme:
-      light: light.scss
-      dark: dark.scss
+      light: brand/light.scss
+      dark: brand/dark.scss
