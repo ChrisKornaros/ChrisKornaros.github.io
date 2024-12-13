@@ -154,7 +154,7 @@
     "href": "index.html",
     "title": "Chris Kornaros",
     "section": "",
-    "text": "This site is the personal portfolio and homepage for Chris Kornaros. I’m a Tulane Graduate and professional Data Engineer. On here, you’ll find projects and code samples that I can share publicly, guides for various tools or workflows, journal or blog posts, and any independent research or professional updates (including my resume).\nThis website is a work in progress, so things are going to move around and break. Additionally, there is a lot that I have to still add: past guides, projects, etc. Feel free to connect with me on Bluesky to stay up to date with what I’m working on."
+    "text": "This site is the personal portfolio and homepage for Chris Kornaros. I’m a Tulane Graduate and professional Data Engineer. On here, you’ll find projects and code samples that I can share publicly, guides for various tools or workflows, journal or blog posts, and any independent research or professional updates (including my resume).\nThis website is a work in progress, so things are going to move around and break. Additionally, there is a lot that I have to still add: past guides, projects, etc. Follow me on social media (links above) to stay up to date with what I’m working on. To learn more about my background visit About, for guides on various open source tools visit Guides, to see my current and past (public) work visit Projects, and to see any blog posts (available on WhiteWind) visit Blogs."
   },
   {
     "objectID": "pages/blogs/research/research.html",
@@ -263,6 +263,18 @@
   {
     "objectID": "pages/projects/data_science/kaggle/titanic/titanic.html",
     "href": "pages/projects/data_science/kaggle/titanic/titanic.html",
+    "title": "Titanic Disaster",
+    "section": "",
+    "text": "The Kaggle Titanic dataset and ML competition is one that many people are familiar with, and if they’re like me, it was also their first ML project. I redid this after 3 years to get familiar with my current workflow of using git, notebooks, venvs, etc. Below I included some notes to myself. While it was overkill, I used a Dockerized environment for this project, just to increase my familiarity with containers and the docker toolset.",
+    "crumbs": [
+      "Data Science and Machine Learning",
+      "Kaggle Projects",
+      "Titanic Disaster"
+    ]
+  },
+  {
+    "objectID": "pages/projects/data_science/kaggle/titanic/titanic.html#general-overview",
+    "href": "pages/projects/data_science/kaggle/titanic/titanic.html#general-overview",
     "title": "Titanic Disaster",
     "section": "",
     "text": "The Kaggle Titanic dataset and ML competition is one that many people are familiar with, and if they’re like me, it was also their first ML project. I redid this after 3 years to get familiar with my current workflow of using git, notebooks, venvs, etc. Below I included some notes to myself. While it was overkill, I used a Dockerized environment for this project, just to increase my familiarity with containers and the docker toolset.",
@@ -405,18 +417,6 @@
     "text": "Here are some topics I plan to cover in the future: - DuckDB - dbt - PostgreSQL - More to come!\nStay tuned for updates!",
     "crumbs": [
       "Guides"
-    ]
-  },
-  {
-    "objectID": "pages/projects/data_science/kaggle/titanic/titanic.html#general-overview",
-    "href": "pages/projects/data_science/kaggle/titanic/titanic.html#general-overview",
-    "title": "Titanic Disaster",
-    "section": "",
-    "text": "The Kaggle Titanic dataset and ML competition is one that many people are familiar with, and if they’re like me, it was also their first ML project. I redid this after 3 years to get familiar with my current workflow of using git, notebooks, venvs, etc. Below I included some notes to myself. While it was overkill, I used a Dockerized environment for this project, just to increase my familiarity with containers and the docker toolset.",
-    "crumbs": [
-      "Data Science and Machine Learning",
-      "Kaggle Projects",
-      "Titanic Disaster"
     ]
   }
 ]
