@@ -3,8 +3,10 @@ title: "Data Engineering and Architecture Projects"
 listing:
     contents: posts
     sort: "date desc"
-    type: default
+    type: grid
     categories: true
 ---
 
 Landing page for all my project posts related to Data Engineering and Architecture.
+
+## Projects

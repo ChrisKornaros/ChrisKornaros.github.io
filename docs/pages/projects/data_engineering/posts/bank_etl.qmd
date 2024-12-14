@@ -6,7 +6,7 @@ categories: ["DataCamp"]
 tags: ["Data Engineering", "Python", "ETL", "Loops", "Lambda Functions"]
 ---
 
-![Piggy bank](piggy_bank.jpg)
+![Piggy bank](images/piggy_bank.jpg)
 
 ::: {.callout-note}
 This is a DataCamp project. I'm not responsible for any part of the problem scope, resources, documents, files, etc. That being said, I converted the Jupyter notebook provided into a Quarto Markdown file to add to my portfolio.

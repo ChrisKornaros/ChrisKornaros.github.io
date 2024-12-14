@@ -1,5 +1,5 @@
 ---
-title: "First Post -- Experimenting with GitHub Pages and WhiteWind"
+title: "1. Experimenting with GitHub Pages and WhiteWind"
 author: "Chris Kornaros"
 date: 2024-12-14
 categories: ["Research", "General"]
@@ -9,6 +9,10 @@ tags: ["Blog", "Journal", "Bluesky", "WhiteWind", "GitHub", "Learning"]
 This is the first part of a blog post I originally wrote over a month ago and posted to WhiteWind.
 
 WhiteWind is a blogging application built on Bluesky's foundational, decentralied network. Half of that post is now the beginning of the NFL Big Data Bowl 2025 project write up.
+
+Eventually, I'd like to find a way to write a post on WhiteWind and have it automatically update my personal site. That way I can do quick, shower thoughts style blog posts there, without having to do the longer Quarto workflow.
+
+## Original Post
 
 In March of 2024, I took a break from social media (Twitter/Instagram/TikTok/Etc.) because the polarizing algorithms and toxicity were driving me nuts. I took to LinkedIn, in search of a community of professional data nerds, that develop and learn in their freetime. Luckily, I found some great people on there, but my feed was quickly inundated with LinkedInfluencers reposting the same content whether recycling their own, other's, or generating posts with AI. Then, in October, I heard that data people were all jumping over to Bluesky, so I thought I'd give it a shot. Needless to say, I love the data and developer community here. Furthermore, the fundamental design and decentralization of the platform make this that much cooler. Then,
 I learned about WhiteWind and some other integrations, and decided this is a great way to post updates and keep myself accountable. 

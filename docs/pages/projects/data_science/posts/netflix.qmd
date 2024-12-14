@@ -6,7 +6,7 @@ categories: ["DataCamp"]
 tags: ["Python", "Pandas", "Matplotlib", "Analytics", "Statistics"]
 ---
 
-![Movie popcorn on red background](redpopcorn.jpg)
+![Movie popcorn on red background](images/redpopcorn.jpg)
 
 **Netflix**! What started in 1997 as a DVD rental service has since exploded into one of the largest entertainment and media companies.
 

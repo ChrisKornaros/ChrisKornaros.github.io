@@ -64,7 +64,7 @@
     "href": "pages/projects/projects.html",
     "title": "Projects",
     "section": "",
-    "text": "Landing page for the project portfolio portion of this website. Contains all of my public repositories and projects (for now, may include future consulting or paid side work, but I don’t do that at the moment), including both the code in repositories and write ups (where applicable).",
+    "text": "Landing page for the project portfolio portion of this website. Contains all of my public repositories and projects (for now, may include future consulting or paid side work, but I don’t do that at the moment), including both the code in repositories and write ups (where applicable).\nCurrently, there are two categories of projects I’m working on:\n\nData Engineering and Architecture\nData Science and Machine Learning",
     "crumbs": [
       "Projects"
     ]
@@ -118,7 +118,17 @@
     "href": "pages/projects/data_engineering/data_engineering.html",
     "title": "Data Engineering and Architecture Projects",
     "section": "",
-    "text": "Landing page for all my project posts related to Data Engineering and Architecture.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBasic OSS Architecture\n\n\n\n\n\n\nResearch\n\n\n\n\n\n\n\n\n\nDec 13, 2024\n\n\nChris Kornaros\n\n\n\n\n\n\n\n\n\n\n\n\nOpen Source Data and Analytics Architecture\n\n\n\n\n\n\nTechnology\n\n\n\n\n\n\n\n\n\nDec 12, 2024\n\n\nChris Kornaros\n\n\n\n\n\n\n\n\n\n\n\n\nBank Marketing ETL Project\n\n\n\n\n\n\nDataCamp\n\n\n\n\n\n\n\n\n\nSep 30, 2024\n\n\nChris Kornaros\n\n\n\n\n\n\nNo matching items",
+    "text": "Landing page for all my project posts related to Data Engineering and Architecture.",
+    "crumbs": [
+      "Data Engineering and Architecture"
+    ]
+  },
+  {
+    "objectID": "pages/projects/data_engineering/data_engineering.html#projects",
+    "href": "pages/projects/data_engineering/data_engineering.html#projects",
+    "title": "Data Engineering and Architecture Projects",
+    "section": "Projects",
+    "text": "Projects",
     "crumbs": [
       "Data Engineering and Architecture"
     ]
@@ -203,11 +213,21 @@
   {
     "objectID": "pages/blogs/posts/first_blog.html",
     "href": "pages/blogs/posts/first_blog.html",
-    "title": "First Post – Experimenting with GitHub Pages and WhiteWind",
+    "title": "1. Experimenting with GitHub Pages and WhiteWind",
     "section": "",
-    "text": "This is the first part of a blog post I originally wrote over a month ago and posted to WhiteWind.\nWhiteWind is a blogging application built on Bluesky’s foundational, decentralied network. Half of that post is now the beginning of the NFL Big Data Bowl 2025 project write up.\nIn March of 2024, I took a break from social media (Twitter/Instagram/TikTok/Etc.) because the polarizing algorithms and toxicity were driving me nuts. I took to LinkedIn, in search of a community of professional data nerds, that develop and learn in their freetime. Luckily, I found some great people on there, but my feed was quickly inundated with LinkedInfluencers reposting the same content whether recycling their own, other’s, or generating posts with AI. Then, in October, I heard that data people were all jumping over to Bluesky, so I thought I’d give it a shot. Needless to say, I love the data and developer community here. Furthermore, the fundamental design and decentralization of the platform make this that much cooler. Then, I learned about WhiteWind and some other integrations, and decided this is a great way to post updates and keep myself accountable.\nA little about me, I’m a Tulane Unviersity graduate (BSM ’20, MS ’21) and currently a Data (Analytics) Engineer at GM. In my current role I wear many hats! In my 3.5 years at General Motors I’ve gained experience desinging database architecture, building ETL pipelines, being an IT admin, owning products, managing projects, automating tests, and providing training/mentorship for Power BI/Databricks; however, most of my experience is in BI reporting and legacy application upgrades.\nSo, this past April I decided I wanted to really learn the ins and outs of modern data engineering and data science. So, I bought a MacBook Air and started coding! From my Masters degree at Tulane, I had experience with R, Python, SQL for coding, as well as the statistical knwoledge needed for machine learning. Instead of those areas, I began with zsh/bash scripting (using the Terminal to do everything I could), then I learned the basics of git for version control, then I jumped into dbt for data modeling, and finally Docker so I could understand containers. Following that, I began Harvard’s CS50p course in Python programming. I wanted to understand Python, the programming language, because I had learned Python using Jupyter notebooks instead of scripts, packages, testing, etc.\nIn the few month or so since then, I’ve worked on a few public projects which you can view on my GitHub. These projects are pretty varied, and narrow in scope.\n\nDataCamp projects based on simple ETL, analytics, or programming.\nMy CS50p lecture notes and problem set submissions.\nA simple Introduction to DuckDB using the NFL Big Data Bowl CSV files.\nA private repository with bash scripts and configuration files for starting up my AWS EC2 instance, connecting via ssh, Docker containers, quarto, and the GitHub CLI.",
+    "text": "This is the first part of a blog post I originally wrote over a month ago and posted to WhiteWind.\nWhiteWind is a blogging application built on Bluesky’s foundational, decentralied network. Half of that post is now the beginning of the NFL Big Data Bowl 2025 project write up.\nEventually, I’d like to find a way to write a post on WhiteWind and have it automatically update my personal site. That way I can do quick, shower thoughts style blog posts there, without having to do the longer Quarto workflow.",
     "crumbs": [
-      "First Blog - Experimenting with GitHub Pages and WhiteWind"
+      "1. Experimenting with GitHub Pages and WhiteWind"
+    ]
+  },
+  {
+    "objectID": "pages/blogs/posts/first_blog.html#original-post",
+    "href": "pages/blogs/posts/first_blog.html#original-post",
+    "title": "1. Experimenting with GitHub Pages and WhiteWind",
+    "section": "Original Post",
+    "text": "Original Post\nIn March of 2024, I took a break from social media (Twitter/Instagram/TikTok/Etc.) because the polarizing algorithms and toxicity were driving me nuts. I took to LinkedIn, in search of a community of professional data nerds, that develop and learn in their freetime. Luckily, I found some great people on there, but my feed was quickly inundated with LinkedInfluencers reposting the same content whether recycling their own, other’s, or generating posts with AI. Then, in October, I heard that data people were all jumping over to Bluesky, so I thought I’d give it a shot. Needless to say, I love the data and developer community here. Furthermore, the fundamental design and decentralization of the platform make this that much cooler. Then, I learned about WhiteWind and some other integrations, and decided this is a great way to post updates and keep myself accountable.\nA little about me, I’m a Tulane Unviersity graduate (BSM ’20, MS ’21) and currently a Data (Analytics) Engineer at GM. In my current role I wear many hats! In my 3.5 years at General Motors I’ve gained experience desinging database architecture, building ETL pipelines, being an IT admin, owning products, managing projects, automating tests, and providing training/mentorship for Power BI/Databricks; however, most of my experience is in BI reporting and legacy application upgrades.\nSo, this past April I decided I wanted to really learn the ins and outs of modern data engineering and data science. So, I bought a MacBook Air and started coding! From my Masters degree at Tulane, I had experience with R, Python, SQL for coding, as well as the statistical knwoledge needed for machine learning. Instead of those areas, I began with zsh/bash scripting (using the Terminal to do everything I could), then I learned the basics of git for version control, then I jumped into dbt for data modeling, and finally Docker so I could understand containers. Following that, I began Harvard’s CS50p course in Python programming. I wanted to understand Python, the programming language, because I had learned Python using Jupyter notebooks instead of scripts, packages, testing, etc.\nIn the few month or so since then, I’ve worked on a few public projects which you can view on my GitHub. These projects are pretty varied, and narrow in scope.\n\nDataCamp projects based on simple ETL, analytics, or programming.\nMy CS50p lecture notes and problem set submissions.\nA simple Introduction to DuckDB using the NFL Big Data Bowl CSV files.\nA private repository with bash scripts and configuration files for starting up my AWS EC2 instance, connecting via ssh, Docker containers, quarto, and the GitHub CLI.",
+    "crumbs": [
+      "1. Experimenting with GitHub Pages and WhiteWind"
     ]
   },
   {
@@ -222,7 +242,7 @@
     "href": "pages/blogs/blogs.html",
     "title": "Blogs",
     "section": "",
-    "text": "A landing page for various blogs, journals, or random thoughts. Some of these will be focused on specific tools or technology, others will be random thoughts or research notes.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFirst Post – Experimenting with GitHub Pages and WhiteWind\n\n\n\n\n\n\nResearch\n\n\nGeneral\n\n\n\n\n\n\n\n\n\nDec 14, 2024\n\n\nChris Kornaros\n\n\n\n\n\n\nNo matching items",
+    "text": "A landing page for various blogs, journals, or random thoughts. Some of these will be focused on specific tools or technology, others will be random thoughts or research notes.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nDec 14, 2024\n\n\n1. Experimenting with GitHub Pages and WhiteWind\n\n\nChris Kornaros\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Blogs"
     ]
@@ -320,7 +340,17 @@
     "href": "pages/projects/data_science/data_science.html",
     "title": "Data Science and Machine Learning Projects",
     "section": "",
-    "text": "Landing page for all my project posts related to Data Science and Machine Learning.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNFL Big Data Bowl 2025\n\n\n\n\n\n\nResearch\n\n\n\n\n\n\n\n\n\nNov 15, 2024\n\n\nChris Kornaros\n\n\n\n\n\n\n\n\n\n\n\n\nTitanic Disaster\n\n\n\n\n\n\nKaggle\n\n\n\n\n\n\n\n\n\nOct 15, 2024\n\n\nChris Kornaros\n\n\n\n\n\n\n\n\n\n\n\n\nGym Market Analysis\n\n\n\n\n\n\nDataCamp\n\n\n\n\n\n\n\n\n\nSep 30, 2024\n\n\nChris Kornaros\n\n\n\n\n\n\n\n\n\n\n\n\nNetflix Movies\n\n\n\n\n\n\nDataCamp\n\n\n\n\n\n\n\n\n\nSep 30, 2024\n\n\nChris Kornaros\n\n\n\n\n\n\n\n\n\n\n\n\nUser Login Validation\n\n\n\n\n\n\nDataCamp\n\n\n\n\n\n\n\n\n\nSep 30, 2024\n\n\nChris Kornaros\n\n\n\n\n\n\nNo matching items",
+    "text": "Landing page for all my project posts related to Data Science and Machine Learning.",
+    "crumbs": [
+      "Data Science and Machine Learning"
+    ]
+  },
+  {
+    "objectID": "pages/projects/data_science/data_science.html#projects",
+    "href": "pages/projects/data_science/data_science.html#projects",
+    "title": "Data Science and Machine Learning Projects",
+    "section": "Projects",
+    "text": "Projects",
     "crumbs": [
       "Data Science and Machine Learning"
     ]

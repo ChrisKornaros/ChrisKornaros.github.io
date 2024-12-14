@@ -24,8 +24,6 @@ website:
       - text: "Blogs"
         menu:
           - pages/blogs/blogs.qmd
-          - pages/blogs/research/research.qmd
-          - pages/blogs/tech/tech.qmd
 
   sidebar:
     - id: guides
@@ -73,7 +71,7 @@ website:
       title: "Blogs"
       contents:
         - pages/blogs/blogs.qmd
-        - text: "First Blog - Experimenting with GitHub Pages and WhiteWind"
+        - text: "1. Experimenting with GitHub Pages and WhiteWind"
           href: pages/blogs/posts/first_blog.qmd
           
 format:
