@@ -43,7 +43,7 @@ Creating project at /Users/chriskornaros/Documents/test/docs:
 
 For a quick run through: quarto create project initializes a quarto project directory within your current working directory (the uv parent directory), `type` lets you choose the type of Quarto documentation (book, website, confluence, etc.), title is the title of your homepage (`.qmd`) file. Personally, I like to remove the `docs/.gitignore` file because uv creates one when you initialize a project, in the parent directory. So, having just one `.gitignore` file helps me keep track of things more easily.
 
-The only directorues I added to `docs` after it was created by quarto, was a `pages` directory for various subpages and a `brand` directory for `.scss` files, images, etc. For project, blog, or guide specific media files, I kept those within their subpage folder. Here, I keep the various landing pages and their sub directory structures. Ideally, I won't have any files in there, but the `_quarto.yml` file will point to their locations in my personal GitHub repo. 
+The only directories I added to `docs` after it was created by quarto, was a `pages` directory for various subpages and a `brand` directory for `.scss` files, images, etc. For project, blog, or guide specific media files, I kept those within their subpage folder. Here, I keep the various landing pages and their sub directory structures. Ideally, I won't have any files in there, but the `_quarto.yml` file will point to their locations in my personal GitHub repo. 
 
 ::: {#tip-docs-context .callout-tip}
 In my time developing this site, it seems that Quarto can only pickup on files within the context of the `docs` (or whatever you name your Quarto project) folder. Furthermore, it struggels with absolute context paths, and at most I could get it to work with `../../file`.
@@ -152,6 +152,11 @@ There are some weird naming convention differences between `_brand.yml` and Quar
 :::
 
 ## Websites
+Websites really stretch and push the boundaries of what you can accomplish with Quarto. In this section, I'll walk through a few key points of developing them.
+
+### Blogs
+Blogs are a special kind of Quarto website that consists of a collection of posts along with a navigational page that lists them in reverse chronological order.
+
 ### Rendering Websites 
 I run the following code block from my main project directory. My Quarto project directory is a folder called docs. So, I specify to Quarto that I want to render the entire Quarto project `docs`, but `quarto render`'s context is specific to the *quarto project* directory. Therefore, I need to use the `.` to specify that I want the rendered `.html` files put in the Quarto project folder, and sub folder.
 

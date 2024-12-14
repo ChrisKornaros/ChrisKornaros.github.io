@@ -22,10 +22,7 @@ website:
           - pages/projects/data_engineering/data_engineering.qmd
           - pages/projects/data_science/data_science.qmd
       - text: "Blogs"
-        menu:
-          - pages/blogs/blogs.qmd
-          - pages/blogs/research/research.qmd
-          - pages/blogs/tech/tech.qmd
+        href: blogs/ 
 
   sidebar:
     - id: guides
@@ -86,12 +83,7 @@ website:
         
     - id: blogs
       title: "Blogs"
-      contents:
-        - pages/blogs/blogs.qmd
-        - section: "Research Blogs"
-          href: pages/blogs/research/research.qmd
-        - section: "Technology Blogs"
-          href: pages/blogs/tech/tech.qmd
+      href: blogs/
           
 format:
   html:

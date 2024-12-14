@@ -1,0 +1,9 @@
+---
+title: "Chris Kornaros' Blog"
+listing:
+  sort: "date desc"
+  categories: true
+  date-format: "long"
+  page-size: 5
+  fields: [title, author, date, categories, tags]
+---
