@@ -59,6 +59,8 @@ website:
               contents:
                 - text: "Open Source Data and Analytics Architecture"
                   href: pages/projects/data_engineering/research/oss_data_arch/oss_data_arch.qmd
+                - text: "Basic Open Source Architecture"
+                  href: pages/projects/data_engineering/research/basic_oss_architecture 
         - section: "Data Science and Machine Learning"
           href: pages/projects/data_science/data_science.qmd
           contents:
