@@ -1,9 +1,0 @@
----
-title: "Sample Tech Post"
-author: "Chris Kornaros"
-date: 2024-12-12
-categories: ["Technology"]
-tags: ["Quarto", "Python"]
----
-
-Testing.

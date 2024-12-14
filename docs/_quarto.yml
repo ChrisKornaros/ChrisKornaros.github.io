@@ -46,43 +46,43 @@ website:
       title: "Projects"
       contents:
         - pages/projects/projects.qmd
-        - section: "Data Engineering and Architecture"
-          href: pages/projects/data_engineering/data_engineering.qmd
+        - section: "Data Engineering and Architecture" 
+          href: pages/projects/posts/data_engineering/data_engineering.qmd
           contents:
             - section: "DataCamp Data Engineering Projects"
-              href: pages/projects/data_engineering/datacamp/datacamp.qmd
+              href: pages/projects/posts/data_engineering/datacamp/datacamp.qmd
               contents:
                 - text: "Bank Marketing ETL"
-                  href: pages/projects/data_engineering/datacamp/bank_etl/bank_etl.qmd
+                  href: pages/projects/posts/data_engineering/datacamp/bank_etl/bank_etl.qmd
             - section: "Data Engineering Research Projects"
-              href: pages/projects/data_engineering/research/research.qmd
+              href: pages/projects/posts/data_engineering/research/research.qmd
               contents:
                 - text: "Open Source Data and Analytics Architecture"
-                  href: pages/projects/data_engineering/research/oss_data_arch/oss_data_arch.qmd
+                  href: pages/projects/posts/data_engineering/research/oss_data_arch/oss_data_arch.qmd
                 - text: "Basic Open Source Architecture"
-                  href: pages/projects/data_engineering/research/basic_oss_architecture/basic_oss.qmd 
+                  href: pages/projects/posts/data_engineering/research/basic_oss_architecture/basic_oss.qmd 
         - section: "Data Science and Machine Learning"
-          href: pages/projects/data_science/data_science.qmd
+          href: pages/projects/posts/data_science/data_science.qmd
           contents:
             - section: "DataCamp Data Science Projects"
-              href: pages/projects/data_science/datacamp/datacamp.qmd
+              href: pages/projects/posts/data_science/datacamp/datacamp.qmd
               contents:
                 - text: "Gym Market Analysis"
-                  href: pages/projects/data_science/datacamp/gym_market/gym_market.qmd
+                  href: pages/projects/posts/data_science/datacamp/gym_market/gym_market.qmd
                 - text: "Login Validation"
-                  href: pages/projects/data_science/datacamp/login_validation/login_validation.qmd
+                  href: pages/projects/posts/data_science/datacamp/login_validation/login_validation.qmd
                 - text: "Netflix Movies"
-                  href: pages/projects/data_science/datacamp/netflix/netflix.qmd
+                  href: pages/projects/posts/data_science/datacamp/netflix/netflix.qmd
             - section: "Kaggle Projects"
-              href: pages/projects/data_science/kaggle/kaggle.qmd
+              href: pages/projects/posts/data_science/kaggle/kaggle.qmd
               contents:
                 - text: "Titanic Disaster"
-                  href: pages/projects/data_science/kaggle/titanic/titanic.qmd
+                  href: pages/projects/posts/data_science/kaggle/titanic/titanic.qmd
             - section: "Research Projects"
-              href: pages/projects/data_science/research/research.qmd
+              href: pages/projects/posts/data_science/research/research.qmd
               contents:
                 - text: "NFL Big Data Bowl 2025"
-                  href: pages/projects/data_science/research/nfl_bowl_2025/nfl_bowl_2025.qmd
+                  href: pages/projects/posts/data_science/research/nfl_bowl_2025/nfl_bowl_2025.qmd
         
     - id: blogs
       title: "Blogs"

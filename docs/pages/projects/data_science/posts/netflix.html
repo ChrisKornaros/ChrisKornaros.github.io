@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Chris Kornaros">
-<meta name="dcterms.date" content="2024-12-13">
+<meta name="dcterms.date" content="2024-09-30">
 
-<title>uv, the Python Project and Package Manager – Chris Kornaros</title>
+<title>Netflix Movies – Chris Kornaros</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,24 +59,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<script src="../../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-fe3d27ad4957b7b46e339d7dc053a392.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-c15c7ccb793a8c0145e7ec7341df1540.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-56dfab92d9a1e40e81fa338bab690bac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-e7663df3984f924744eb258d6855637e.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-fe3d27ad4957b7b46e339d7dc053a392.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-c15c7ccb793a8c0145e7ec7341df1540.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-56dfab92d9a1e40e81fa338bab690bac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-e7663df3984f924744eb258d6855637e.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -108,14 +108,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../index.html">
+    <a class="navbar-brand" href="../../../../index.html">
     <span class="navbar-title">Chris Kornaros</span>
     </a>
   </div>
@@ -126,11 +126,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../index.html"> 
+    <a class="nav-link" href="../../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../pages/about/about.html"> 
+    <a class="nav-link" href="../../../../pages/about/about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -139,7 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-guides">    
         <li>
-    <a class="dropdown-item" href="../../../pages/guides/guides.html">
+    <a class="dropdown-item" href="../../../../pages/guides/guides.html">
  <span class="dropdown-text">Guides</span></a>
   </li>  
     </ul>
@@ -150,15 +150,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
         <li>
-    <a class="dropdown-item" href="../../../pages/projects/projects.html">
+    <a class="dropdown-item" href="../../../../pages/projects/projects.html">
  <span class="dropdown-text">Projects</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../pages/projects/data_engineering/data_engineering.html">
+    <a class="dropdown-item" href="../../../../pages/projects/data_engineering/data_engineering.html">
  <span class="dropdown-text">Data Engineering and Architecture Projects</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../pages/projects/data_science/data_science.html">
+    <a class="dropdown-item" href="../../../../pages/projects/data_science/data_science.html">
  <span class="dropdown-text">Data Science and Machine Learning Projects</span></a>
   </li>  
     </ul>
@@ -169,7 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-blogs">    
         <li>
-    <a class="dropdown-item" href="../../../pages/blogs/blogs.html">
+    <a class="dropdown-item" href="../../../../pages/blogs/blogs.html">
  <span class="dropdown-text">Blogs</span></a>
   </li>  
         <li class="dropdown-header">pages/blogs/research/research.qmd</li>
@@ -183,66 +183,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/guides/posts/uv.html">uv</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-    </div>
-  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/guides/guides.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Guides</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/guides/posts/quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Quarto</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/guides/posts/uv.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">uv</span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#basic-workflow-and-guide" id="toc-basic-workflow-and-guide" class="nav-link" data-scroll-target="#basic-workflow-and-guide">Basic workflow and guide</a>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link active" data-scroll-target="#the-data">The data</a>
   <ul>
-  <li><a href="#sec-0-prereq" id="toc-sec-0-prereq" class="nav-link" data-scroll-target="#sec-0-prereq">Concepts to Know Before Getting Started</a></li>
-  <li><a href="#sec-1-init" id="toc-sec-1-init" class="nav-link" data-scroll-target="#sec-1-init">Initializing a Project</a>
-  <ul class="collapse">
-  <li><a href="#local-repository" id="toc-local-repository" class="nav-link" data-scroll-target="#local-repository">Local Repository</a></li>
-  <li><a href="#remote-repository" id="toc-remote-repository" class="nav-link" data-scroll-target="#remote-repository">Remote Repository</a></li>
-  <li><a href="#using-uv" id="toc-using-uv" class="nav-link" data-scroll-target="#using-uv">Using uv</a></li>
-  </ul></li>
-  <li><a href="#sec-3-convert" id="toc-sec-3-convert" class="nav-link" data-scroll-target="#sec-3-convert">Converting your Legacy Projects to uv</a></li>
-  <li><a href="#sec-4-final" id="toc-sec-4-final" class="nav-link" data-scroll-target="#sec-4-final">Final Thoughts</a>
-  <ul class="collapse">
-  <li><a href="#general-notes" id="toc-general-notes" class="nav-link" data-scroll-target="#general-notes">General Notes</a></li>
-  </ul></li>
+  <li><a href="#netflix_data.csv" id="toc-netflix_data.csv" class="nav-link" data-scroll-target="#netflix_data.csv"><strong>netflix_data.csv</strong></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -252,9 +205,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">uv, the Python Project and Package Manager</h1>
+<h1 class="title">Netflix Movies</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">DevOps</div>
+    <div class="quarto-category">DataCamp</div>
   </div>
   </div>
 
@@ -272,7 +225,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 13, 2024</p>
+      <p class="date">September 30, 2024</p>
     </div>
   </div>
   
@@ -284,225 +237,740 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>A basic guide on using <code>uv</code> the package and projects manager for Python developers.</p>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<div class="callout callout-style-default callout-tip callout-titled" title="VS Code Shortcuts">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="redpopcorn.jpg" class="img-fluid figure-img"></p>
+<figcaption>Movie popcorn on red background</figcaption>
+</figure>
 </div>
-<div class="callout-title-container flex-fill">
-VS Code Shortcuts
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If you’re using VS Code, here are some useful shortcuts. - Note, use CMD-K CMD-S to open the keyboard shortcuts. - <code>SHFT-CMD-i</code> inserts a code block</p>
-</div>
-</div>
-<p><code>uv</code> is an Open Source project by <code>Astral</code>, the makers of <code>ruff</code>, that is self described (and worthy of the title) as <strong>an extremely fast Python package and project manager, written in Rust.</strong></p>
-<blockquote class="blockquote">
-<p>🚀 A single tool to replace pip, pip-tools, pipx, poetry, pyenv, twine, virtualenv, and more.<br>
-⚡️ 10-100x faster than pip.<br>
-🐍 Installs and manages Python versions.<br>
-🛠️ Runs and installs Python applications.<br>
-❇️ Runs scripts, with support for inline dependency metadata.<br>
-🗂️ Provides comprehensive project management, with a universal lockfile.<br>
-🔩 Includes a pip-compatible interface for a performance boost with a familiar CLI.<br>
-🏢 Supports Cargo-style workspaces for scalable projects.<br>
-💾 Disk-space efficient, with a global cache for dependency deduplication.<br>
-⏬ Installable without Rust or Python via curl or pip.<br>
-🖥️ Supports macOS, Linux, and Windows.</p>
-</blockquote>
-<p>I’m only just beginning to learn and use the tool in my own projects (including converting my existing project environments to uv) and from what I’ve seen it’s going to make life much easier. That being said, while you overwrite the muscle memory developed for years with <code>pip</code> and <code>venv</code>, there will be some growing pains; however, for those who are less familiar with what I’m talking about, I’ll still explain some basic concepts and snags that I both run and ran into.</p>
-</section>
-<section id="basic-workflow-and-guide" class="level2">
-<h2 class="anchored" data-anchor-id="basic-workflow-and-guide">Basic workflow and guide</h2>
-<section id="sec-0-prereq" class="level3">
-<h3 class="anchored" data-anchor-id="sec-0-prereq">Concepts to Know Before Getting Started</h3>
-<ul>
-<li>Basic knowledge of directories, bash (zsh in the case of MacOS), and using the CLI <a href="https://www.learnshell.org">bash</a></li>
-<li>Basic knowledge of Python, common project structures, and simple workflows <a href="https://www.python.org/">Python</a></li>
-<li>Basic knowledge of git (for local version control) and GitHub (for collaboration) <a href="https://docs.github.com/en/get-started/start-your-journey">git and GitHub basics</a></li>
-</ul>
-</section>
-<section id="sec-1-init" class="level3">
-<h3 class="anchored" data-anchor-id="sec-1-init">Initializing a Project</h3>
-<section id="local-repository" class="level4">
-<h4 class="anchored" data-anchor-id="local-repository">Local Repository</h4>
-<p>The nice thing about <code>uv</code> is that it’s designed to make Python development easier, so there aren’t any head-scratching gotchas.</p>
-<p>For the sake of this example and entire template, let’s assume I’m currently sitting in my <code>main</code> directory. For some that might be <code>home</code>, others <code>app</code>, for MacOS the default is <code>/usr/yourusername</code>, or maybe you prefer to put all projects in a <code>Documents</code> or <code>Projects</code> folder. Anyways, to start up a project you can do one of two things:</p>
-<ol type="1">
-<li>Have uv do everything, and then change directories
-<ol type="1">
-<li><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init uv_basic</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> uv_basic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ol></li>
-<li>Create the directory, change directories, and then have uv do everything
-<ol type="1">
-<li><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> uv_basic</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> uv_basic</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ol></li>
-</ol>
-<p>This will create 4 files and initalize a local git repository:</p>
-<ol type="1">
-<li><code>.python-version</code></li>
-<li><code>.pyproject.toml</code></li>
-<li><code>hello.py</code></li>
-<li><code>README.md</code></li>
-<li><code>.git</code></li>
-<li><code>.gitignore</code></li>
-</ol>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-uv and the .gitignore file
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The nice thing about <code>uv</code> is that it autopopulates your <code>.gitignore</code> file with a few files and patterns, not to mention, it provides some basic tagging for what it puts in there. Just open the file (it’s plain text) to see. Since I’m saving my progress with this repo using git, I want to keep the overall file size down. So, I also included the <code>.html</code> and <code>.ipynb</code> file that Quarto generates because they can get large fast. Additionally, when you initialize your GitHub repo with the CLI’s repo creation process, I don’t include a README or .gitignore, because those are included in <code>uv init</code>.</p>
-</div>
-</div>
-</section>
-<section id="remote-repository" class="level4">
-<h4 class="anchored" data-anchor-id="remote-repository">Remote Repository</h4>
-<p>For anyone familiar with software development you’ve probably heard of GitHub or GitLab. I’m more familiar, professionally and personally, with GitHub (which is what I’ll be using in this example); however, there are a large amount of people that prefer GitLab because it is better for some enterprise and personal use cases– <a href="https://prismic.io/blog/gitlab-vs-github">GitHub vs.&nbsp;GitLab</a>. For this, you’ll want to install the <a href="https://cli.github.com">GitHub CLI</a>. Then, you can follow along.</p>
-<ol type="1">
-<li>Verify the installations and make sure to get your credentials setup, in git
-<ol type="1">
-<li><code>which gh</code> and <code>which git</code></li>
-</ol></li>
-<li>Add your name and email
-<ol type="1">
-<li><code>git config --global user.name "Your Name"</code></li>
-<li><code>git config --global user.email "your-email@example.com"</code></li>
-</ol></li>
-<li>Authenticate access to GitHub
-<ol type="1">
-<li><code>gh auth login</code></li>
-<li>Using the CLI option, follow the instructions</li>
-<li>Select <code>HTTPS</code> for the easier connection option</li>
-</ol></li>
-<li>Verify you have proper access to your GitHub
-<ol type="1">
-<li><code>gh auth status</code> ```bash github.com ✓ Logged in to github.com account itsmeChis (keyring)</li>
-</ol></li>
-</ol>
-<ul>
-<li>Active account: true</li>
-<li>Git operations protocol: https</li>
-<li>Token: gho_************************************</li>
-<li>Token scopes: ‘delete_repo’, ‘gist’, ‘read:org’, ‘repo’, ‘workflow’</li>
-</ul>
-<pre><code>
-   2. `gh repo list`
-5. Assuming you haven't, create your project repo from the CLI (you can also do so using the GitHub.com GUI, but I prefer this way to reinforce my learning)
-   1. `gh repo create`
-   2. `Create a new repository from scratch`
-   3. `uv basic`
-   4. *optional description*
-   5. `Public`
-   6. `GNU Affero General Public License v3.0` [Which license do you need?](https://choosealicense.com)
-![GitHub CLI Repo Creation](images/gh_cli_repo_setup.png)
-1. Set the newly created repo as the local git repo's upstream
-   1. This will result in an error (`git pull`)
-   2. Set the global config to merge [git pull](https://git-scm.com/docs/git-pull)
-   3. git pull with a commit message
-   4. git status to verify
-   5. git push
+<p><strong>Netflix</strong>! What started in 1997 as a DVD rental service has since exploded into one of the largest entertainment and media companies.</p>
+<p>Given the large number of movies and series available on the platform, it is a perfect opportunity to flex your exploratory data analysis skills and dive into the entertainment industry. Our friend has also been brushing up on their Python skills and has taken a first crack at a CSV file containing Netflix data. They believe that the average duration of movies has been declining. Using your friends initial research, you’ll delve into the Netflix data to see if you can determine whether movie lengths are actually getting shorter and explain some of the contributing factors, if any.</p>
+<p>You have been supplied with the dataset <code>netflix_data.csv</code> , along with the following table detailing the column names and descriptions. This data does contain null values and some outliers, but handling these is out of scope for the project. Feel free to experiment after submitting!</p>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data">The data</h2>
+<section id="netflix_data.csv" class="level3">
+<h3 class="anchored" data-anchor-id="netflix_data.csv"><strong>netflix_data.csv</strong></h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>show_id</code></td>
+<td>The ID of the show</td>
+</tr>
+<tr class="even">
+<td><code>type</code></td>
+<td>Type of show</td>
+</tr>
+<tr class="odd">
+<td><code>title</code></td>
+<td>Title of the show</td>
+</tr>
+<tr class="even">
+<td><code>director</code></td>
+<td>Director of the show</td>
+</tr>
+<tr class="odd">
+<td><code>cast</code></td>
+<td>Cast of the show</td>
+</tr>
+<tr class="even">
+<td><code>country</code></td>
+<td>Country of origin</td>
+</tr>
+<tr class="odd">
+<td><code>date_added</code></td>
+<td>Date added to Netflix</td>
+</tr>
+<tr class="even">
+<td><code>release_year</code></td>
+<td>Year of Netflix release</td>
+</tr>
+<tr class="odd">
+<td><code>duration</code></td>
+<td>Duration of the show in minutes</td>
+</tr>
+<tr class="even">
+<td><code>description</code></td>
+<td>Description of the show</td>
+</tr>
+<tr class="odd">
+<td><code>genre</code></td>
+<td>Show genre</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing pandas and matplotlib</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Start coding!</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>netflix_df <span class="op">=</span> pd.read_csv(<span class="st">'netflix_data.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>netflix_subset <span class="op">=</span> netflix_df[netflix_df[<span class="st">"type"</span>] <span class="op">==</span> <span class="st">"Movie"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>netflix_movies <span class="op">=</span> netflix_subset[[<span class="st">"title"</span>, <span class="st">"country"</span>, <span class="st">"genre"</span>, <span class="st">"release_year"</span>, <span class="st">"duration"</span>]]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>netflix_movies.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div>
 
-### Adding and managing dependencies {#sec-2-dep}
-Thus far, the workflow with uv isn't too dissimilar from using pip and venv, but managing dependencies and testing scripts is where uv shines. As you'll see below, with pip and venv, you have to manually create the virtual environment, activate it, install dependencies, manage requirements files, and then run your script. With uv, however, almost all of that is done automatically and things like uv pip list or uv venv are only there for backwards compatibility. A lot of the tedious pieces of the DevOps workflow are now obsolete or handled in the background.
+<table class="dataframe table table-sm table-striped small">
+<thead>
+<tr>
+<th>
+</th>
+<th>
+title
+</th>
+<th>
+country
+</th>
+<th>
+genre
+</th>
+<th>
+release_year
+</th>
+<th>
+duration
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+1
+</th>
+<td>
+7:19
+</td>
+<td>
+Mexico
+</td>
+<td>
+Dramas
+</td>
+<td>
+2016
+</td>
+<td>
+93
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+23:59
+</td>
+<td>
+Singapore
+</td>
+<td>
+Horror Movies
+</td>
+<td>
+2011
+</td>
+<td>
+78
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+9
+</td>
+<td>
+United States
+</td>
+<td>
+Action
+</td>
+<td>
+2009
+</td>
+<td>
+80
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+21
+</td>
+<td>
+United States
+</td>
+<td>
+Dramas
+</td>
+<td>
+2008
+</td>
+<td>
+123
+</td>
+</tr>
+<tr>
+<th>
+6
+</th>
+<td>
+122
+</td>
+<td>
+Egypt
+</td>
+<td>
+Horror Movies
+</td>
+<td>
+2019
+</td>
+<td>
+95
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>short_movies <span class="op">=</span> netflix_movies[netflix_movies[<span class="st">"duration"</span>]<span class="op">&lt;</span><span class="dv">60</span>]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>short_movies.head(<span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div>
 
-#### Using pip and venv
-When using a combination of pip and venv, your typical workflow is straightforward, but becomes complicated if you need to uninstall certain packages or make quick, iterative tests of code. 
+<table class="dataframe table table-sm table-striped small">
+<thead>
+<tr>
+<th>
+</th>
+<th>
+title
+</th>
+<th>
+country
+</th>
+<th>
+genre
+</th>
+<th>
+release_year
+</th>
+<th>
+duration
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+35
+</th>
+<td>
+#Rucker50
+</td>
+<td>
+United States
+</td>
+<td>
+Documentaries
+</td>
+<td>
+2016
+</td>
+<td>
+56
+</td>
+</tr>
+<tr>
+<th>
+55
+</th>
+<td>
+100 Things to do Before High School
+</td>
+<td>
+United States
+</td>
+<td>
+Uncategorized
+</td>
+<td>
+2014
+</td>
+<td>
+44
+</td>
+</tr>
+<tr>
+<th>
+67
+</th>
+<td>
+13TH: A Conversation with Oprah Winfrey &amp; Ava …
+</td>
+<td>
+NaN
+</td>
+<td>
+Uncategorized
+</td>
+<td>
+2017
+</td>
+<td>
+37
+</td>
+</tr>
+<tr>
+<th>
+101
+</th>
+<td>
+3 Seconds Divorce
+</td>
+<td>
+Canada
+</td>
+<td>
+Documentaries
+</td>
+<td>
+2018
+</td>
+<td>
+53
+</td>
+</tr>
+<tr>
+<th>
+146
+</th>
+<td>
+A 3 Minute Hug
+</td>
+<td>
+Mexico
+</td>
+<td>
+Documentaries
+</td>
+<td>
+2019
+</td>
+<td>
+28
+</td>
+</tr>
+<tr>
+<th>
+162
+</th>
+<td>
+A Christmas Special: Miraculous: Tales of Lady…
+</td>
+<td>
+France
+</td>
+<td>
+Uncategorized
+</td>
+<td>
+2016
+</td>
+<td>
+22
+</td>
+</tr>
+<tr>
+<th>
+171
+</th>
+<td>
+A Family Reunion Christmas
+</td>
+<td>
+United States
+</td>
+<td>
+Uncategorized
+</td>
+<td>
+2019
+</td>
+<td>
+29
+</td>
+</tr>
+<tr>
+<th>
+177
+</th>
+<td>
+A Go! Go! Cory Carson Christmas
+</td>
+<td>
+United States
+</td>
+<td>
+Children
+</td>
+<td>
+2020
+</td>
+<td>
+22
+</td>
+</tr>
+<tr>
+<th>
+178
+</th>
+<td>
+A Go! Go! Cory Carson Halloween
+</td>
+<td>
+NaN
+</td>
+<td>
+Children
+</td>
+<td>
+2020
+</td>
+<td>
+22
+</td>
+</tr>
+<tr>
+<th>
+179
+</th>
+<td>
+A Go! Go! Cory Carson Summer Camp
+</td>
+<td>
+NaN
+</td>
+<td>
+Children
+</td>
+<td>
+2020
+</td>
+<td>
+21
+</td>
+</tr>
+<tr>
+<th>
+181
+</th>
+<td>
+A Grand Night In: The Story of Aardman
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+Documentaries
+</td>
+<td>
+2015
+</td>
+<td>
+59
+</td>
+</tr>
+<tr>
+<th>
+200
+</th>
+<td>
+A Love Song for Latasha
+</td>
+<td>
+United States
+</td>
+<td>
+Documentaries
+</td>
+<td>
+2020
+</td>
+<td>
+20
+</td>
+</tr>
+<tr>
+<th>
+220
+</th>
+<td>
+A Russell Peters Christmas
+</td>
+<td>
+Canada
+</td>
+<td>
+Stand-Up
+</td>
+<td>
+2011
+</td>
+<td>
+44
+</td>
+</tr>
+<tr>
+<th>
+233
+</th>
+<td>
+A StoryBots Christmas
+</td>
+<td>
+United States
+</td>
+<td>
+Children
+</td>
+<td>
+2017
+</td>
+<td>
+26
+</td>
+</tr>
+<tr>
+<th>
+237
+</th>
+<td>
+A Tale of Two Kitchens
+</td>
+<td>
+United States
+</td>
+<td>
+Documentaries
+</td>
+<td>
+2019
+</td>
+<td>
+30
+</td>
+</tr>
+<tr>
+<th>
+242
+</th>
+<td>
+A Trash Truck Christmas
+</td>
+<td>
+NaN
+</td>
+<td>
+Children
+</td>
+<td>
+2020
+</td>
+<td>
+28
+</td>
+</tr>
+<tr>
+<th>
+247
+</th>
+<td>
+A Very Murray Christmas
+</td>
+<td>
+United States
+</td>
+<td>
+Comedies
+</td>
+<td>
+2015
+</td>
+<td>
+57
+</td>
+</tr>
+<tr>
+<th>
+285
+</th>
+<td>
+Abominable Christmas
+</td>
+<td>
+United States
+</td>
+<td>
+Children
+</td>
+<td>
+2012
+</td>
+<td>
+44
+</td>
+</tr>
+<tr>
+<th>
+295
+</th>
+<td>
+Across Grace Alley
+</td>
+<td>
+United States
+</td>
+<td>
+Dramas
+</td>
+<td>
+2013
+</td>
+<td>
+24
+</td>
+</tr>
+<tr>
+<th>
+305
+</th>
+<td>
+Adam Devine: Best Time of Our Lives
+</td>
+<td>
+United States
+</td>
+<td>
+Stand-Up
+</td>
+<td>
+2019
+</td>
+<td>
+59
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> []</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lab, row <span class="kw">in</span> netflix_movies.iterrows():</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> row[<span class="st">'genre'</span>] <span class="op">==</span> <span class="st">"Children"</span>:</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        colors.append(<span class="st">"Blue"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> row[<span class="st">'genre'</span>] <span class="op">==</span> <span class="st">"Documentaries"</span>:</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        colors.append(<span class="st">"Red"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> row[<span class="st">'genre'</span>] <span class="op">==</span> <span class="st">"Stand-Up"</span>:</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        colors.append(<span class="st">"Green"</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        colors.append(<span class="st">"Black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>colors[:<span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>['Black',
+ 'Black',
+ 'Black',
+ 'Black',
+ 'Black',
+ 'Black',
+ 'Black',
+ 'Black',
+ 'Black',
+ 'Red']</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>&lt;Figure size 1200x800 with 0 Axes&gt;</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(netflix_movies[<span class="st">'release_year'</span>], netflix_movies[<span class="st">'duration'</span>], c<span class="op">=</span>colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>&lt;matplotlib.collections.PathCollection at 0x7f49c4f3c430&gt;</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="netflix_files/netflix_10_1.png" class="img-fluid figure-img"></p>
+<figcaption>png</figcaption>
+</figure>
+</div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Movie Duration by Year of Release"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Release year"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Duration (min)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Text(0, 0.5, 'Duration (min)')</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="netflix_files/netflix_11_1.png" class="img-fluid figure-img"></p>
+<figcaption>png</figcaption>
+</figure>
+</div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>answer <span class="op">=</span> <span class="st">"no"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing pandas and matplotlib</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the Netflix CSV as a DataFrame</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>netflix_df <span class="op">=</span> pd.read_csv(<span class="st">"netflix_data.csv"</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset the DataFrame for type "Movie"</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>netflix_subset <span class="op">=</span> netflix_df[netflix_df[<span class="st">"type"</span>] <span class="op">==</span> <span class="st">"Movie"</span>]</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only the columns of interest</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>netflix_movies <span class="op">=</span> netflix_subset[[<span class="st">"title"</span>, <span class="st">"country"</span>, <span class="st">"genre"</span>, <span class="st">"release_year"</span>, <span class="st">"duration"</span>]]</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for durations shorter than 60 minutes</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>short_movies <span class="op">=</span> netflix_movies[netflix_movies.duration <span class="op">&lt;</span> <span class="dv">60</span>]</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Define an empty list</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> []</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate over rows of netflix_movies</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> label, row <span class="kw">in</span> netflix_movies.iterrows() :</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> row[<span class="st">"genre"</span>] <span class="op">==</span> <span class="st">"Children"</span> :</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>        colors.append(<span class="st">"red"</span>)</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> row[<span class="st">"genre"</span>] <span class="op">==</span> <span class="st">"Documentaries"</span> :</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>        colors.append(<span class="st">"blue"</span>)</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> row[<span class="st">"genre"</span>] <span class="op">==</span> <span class="st">"Stand-Up"</span>:</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>        colors.append(<span class="st">"green"</span>)</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>        colors.append(<span class="st">"black"</span>)</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the first 10 values in your list        </span></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>colors[:<span class="dv">10</span>]</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the figure style and initalize a new figure</span></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">8</span>))</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatter plot of duration versus release_year</span></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>plt.scatter(netflix_movies.release_year, netflix_movies.duration, c<span class="op">=</span>colors)</span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a title and axis labels</span></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Movie Duration by Year of Release"</span>)</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Release year"</span>)</span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Duration (min)"</span>)</span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Are we certain that movies are getting shorter?</span></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>answer <span class="op">=</span> <span class="st">"no"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="netflix_files/netflix_14_0.png" class="img-fluid figure-img"></p>
+<figcaption>png</figcaption>
+</figure>
+</div>
 
-```bash
-mkdir uv_basic
-cd uv_basic
-python -m venv .venv
-source .venv/bin/activate
-pip install duckdb
-pip install numpy
-pip freeze &gt; requirements.txt
-python script.py
 
-# Realize you don't need numpy, so you want to uninstall it and keep your environment cleaner
-deactivate
-rm -r .venv
-python -m venv .venv
-source .venv/bin/activate
-# Two options here, delete numpy from requirements.txt, not scalable with many packages, or reinstall just duckdb, also not scaleable
-pip install duckdb
-pip freeze &gt; requirements.txt
-python script.py</code></pre>
-<p>As you can see, the initial workflow isn’t horrible, but if you need to make a change to the environment or just want to test something small, the number of steps quickly multiplies.</p>
-</section>
-<section id="using-uv" class="level4">
-<h4 class="anchored" data-anchor-id="using-uv">Using uv</h4>
-<p>Compare that with the streamlined uv workflow.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init uv_basic</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> uv_basic</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add duckdb</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add numpy</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run script.py</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> remove numpy</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run script.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The workflow improvements and efficiency should be obvious. The nice thing is that uv functions as your standalone virtual environment, without the need for activation or deactivation. Using <code>uv add</code> will add a dependency to both your <code>pyproject.toml</code> file and your <code>uv.lock</code> file. Additionally, if you are more familiar with verifying using pip, running <code>uv pip list</code> will show that the package is there (although the pip functionality is obsolete and only for backwards compatibility at this point). If you want to remove a package, simply use <code>uv remove</code> and that will also remove it from the .toml and .lock files. The last feature you’ll need to understand (to use uv at a basic level) is <code>uv sync</code>. Simply put, it syncs your environment with the project’s dependencies/lock file. This ensures that the exact versions specified in your lockfile are used in your environment– dependencies may be added, removed, or updated if there are updates to the declared dependencies.</p>
-<p>To cap this off, here are some common use cases for <code>uv sync</code>: - Run uv sync (without –frozen) to keep dependencies up-to-date and to resolve changes. - Use uv sync –frozen to validate dependencies without altering them</p>
-</section>
-</section>
-<section id="sec-3-convert" class="level3">
-<h3 class="anchored" data-anchor-id="sec-3-convert">Converting your Legacy Projects to uv</h3>
-<p>Now that you’ve seen the benefits of uv, as well as the workflow differences, you probably want to give it a try or even convert entire projects to uv. The good news is that this is simple and only requires a few modifications to get things up and running. The general workflow is the same as I outlined above, you’ll just be cleaning up your local environment and reinstalling things along the way. The project I converted to use <code>uv</code> for this example utilizes <code>DuckDB</code> and <code>dbt</code> for the database and data modeling/ETL. I’ll include some dbt specific information, for example if you move your database file from a subdirectory to the main one, remember to update your dbt profiles in your global dbt location.</p>
-<ol type="1">
-<li>Change directories to your specific project directory</li>
-<li>Run <code>uv init</code>, it will create any file or folder that isn’t currently in the main folder
-<ul>
-<li>If you already have a <code>.git</code> folder and commit history, <code>uv</code> will <strong>not</strong> delete or overwrite the original folder.</li>
-</ul></li>
-<li>Add all of the dependencies you need, then remove your requirements file (it’s no longer needed)
-<ul>
-<li>As of writing this, I wasn’t sure how to use <code>uv add</code> with the legacy requirements file, <code>uv pip install -r</code> kind of worked, but didn’t actually add the dependencies to the .toml or .lock files</li>
-<li>There must be an easier way to bulk add dependencies, but I manually did it</li>
-<li>In my case, I had to remember to add <strong><em>both</em></strong> <code>dbt</code> and <code>dbt-duckdb</code>, so the adapter would work</li>
-</ul></li>
-<li>Install all of the CLI tools that you need, and don’t want or use globally
-<ul>
-<li>In my case, I need <code>jupyter</code>, <code>quarto</code>, and <code>dbt</code>, but I also have the latter two installed globally</li>
-</ul></li>
-<li>Verify that uv can run things correctly
-<ul>
-<li>I first used <code>uv run hello.py</code> to verify that the basic functionality is there</li>
-<li>Then, I ran a more complex script, that imports and uses duckdb, to ensure the packages are installing and running as intended</li>
-<li>Then, I used <code>uv tool list</code> to verify which CLI tools are installed</li>
-<li>Finally, I verified that the CLI tools work, by using <code>uv run dbt run --select transform</code> to test dbt model functionality in uv</li>
-</ul></li>
-</ol>
-</section>
-<section id="sec-4-final" class="level3">
-<h3 class="anchored" data-anchor-id="sec-4-final">Final Thoughts</h3>
-<p>So that’s it! Overall, uv is incredibly easy to setup and configure because it builds on the classic workflows, while simplifying or abstracting some of the process. You also saw how easy it is to start using uv with older projects that use the legacy workflow. At the time of writing this, I’ve only been using <code>uv</code> for a few days, so I’m sure there are things I got wrong or missed, please comment to let me know!</p>
-<p>I’m happy to chat and love learning about data, as well as what folks in this space are working on. Connect with me on <a href="https://bsky.app/profile/chriskornaros.bsky.social">Bluesky</a> <code>@chriskornaros.bsky.social</code> to follow along with what I’m working on, learning, or just to say hi! Below are some other notes and thoughts I had while working on this write up.</p>
-<section id="general-notes" class="level4">
-<h4 class="anchored" data-anchor-id="general-notes">General Notes</h4>
-<ul>
-<li>It seems that while tools are specific to a uv project instance (i.e.&nbsp;uv_basic returns the .venv dir when asking which jupyter, but test before intalling anything say it can’t be found), when you use uv tool install it installs it to the system wide uv</li>
-<li><code>uv pip list</code> defaults to the global (non-uv or non-pip) python environment (in my case it’s pip and wheel), but once you install something (using add, pip install, etc.) it switches the context to the current parent uv dir (i.e.&nbsp;test, instead of uv_basic)
-<ul>
-<li>Tools are still listed even after this</li>
-</ul></li>
-<li><code>uv tool install</code> only works when installing python package specific tools, but DuckDB for Python (for example) doesn’t come packaged with the DuckDB CLI tools, so <code>uv tool install duckdb</code> won’t install the DuckDB CLI features</li>
-<li>It seems that saving variable with duckdb.sql(…).show() and then printing the type of that, just prints the query output, insteaed of the type</li>
-<li>Based on tests, the workflow changes are as follows</li>
-</ul>
-
-
-</section>
 </section>
 </section>
 

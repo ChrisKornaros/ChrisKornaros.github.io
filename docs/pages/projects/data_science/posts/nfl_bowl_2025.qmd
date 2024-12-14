@@ -1,0 +1,1473 @@
+---
+title: "NFL Big Data Bowl 2025"
+author: "Chris Kornaros"
+date: 2024-11-15
+categories: ["Research"]
+tags: ["Data Science", "Machine Learning", "Analytics", "Statistics", "Football", "Python", "Pandas", "Matplotlib", "DuckDB", "Seaborn", "Numpy", "dbt", "Quarto", "KNN", "Logistic Regression", "Linear Regression", "Random Forest"]
+---
+
+## Introduction
+I will add to this later. Currently, this is a rough combination of my early notebooks. 
+
+## Ongoing Thoughts
+This is the first time I'm adding to a unified document, it's December 13th, or about 1 month into my project. As of now, Random Forest definitely seems like the best path forward; however, the intial version certainly overfit. I believe the model overfit because some of the `plays` columns are the pre/post snap home/away team win probability values. In my next iteration, I'm going to remove those values, and in the future I might even try to recreate them. That being said, there's a little under one month to go, so I'm going to focus on putting together some kind of deliverable/submission, before I go off the deep end. That said, this page and the website in general are going to be sloppy as I figure things out and slowly improve the organization and UI.
+
+## Exploratory Data Analysis and Initial Thoughts
+
+::: {.callout-note}
+This was written on November 26th, 2024. It was later added to this site on December 13th, 2024. This is a general write up on the project, you can see the full notebooks below. The full repo is available [here](https://www.github.com/ChrisKornaros/NFL_Big_Data_Bowl_2025).
+:::
+
+Currently, I've made solid progress with my initial exploratory data analysis and project configuration. Here are some quick notes about the setup of my project environment (from IDE to tools/versions). 
+-  Using VS Code with the Jupyter, Jinja, YAML, Quarto (for notes/project submissions), and dbt extensions.
+-  DuckDB is my primary database tool (for now), with dbt for the data modeling
+- Then, I'm using Python and Jupyter Notebooks for the analysis/ML component
+
+The reason I may switch to PostgreSQL for the primary Database is to just gain experience with DuckDB as a DEV environement and Postgres for PROD. Realistically, however, for the scope of this project DuckDB accomplishes everything I need it to.
+
+For the forseeable future, the only side project I'll be working on is this, so my next few posts will only look at the project progress and my thoughts about the Big Data Bowl, feel free to checkout the [GitHub repository](https://www.github.com/ChrisKornaros/NFL_Big_Data_Bowl_2025) where I'm saving my work. 
+
+Some notes about my current project progress:
+- The project folder has a few subdirectories, including nfl_dbt which is the dbt project folder
+- The raw data came in the form of 13 CSVs from Kaggle. 4 of which are 50mb or less, 9 of which are ~1gb.
+- I'm using Databricks' "Medallion Architecture" to guide my data modeling workflow.
+- I built the initial dbt models, using DuckDB as the DEV target (enabling 4 threads) and loaded the "bronze" schema which contains the 13 raw tables
+- I aggregated the data into the "silver" schema, which contains an aggregated play data table
+- I further aggregated the data into the "gold" schema, which provides basic analytic tables
+- Currently, I completed an initial analysis using an EDA notebook where I looked at using a LinearRegression and KNN to compare pre-snap play data with play outcomes.
+- I settled on a KNN model, but I'm only seeing about a 61.1% accuracy rate (confusion matrix and explanation below). 
+
+So, I'm at a bit of a crossroads, with a few ways forward. It may be simpler (for the initial project/submission) to build a linear regression model that takes pre-snap play data as features, and then looks at yards gained (or loss) for the output. Conversely, if I stick with the KNN model I'll need to make some changes. The majority of the outputs are either Gain or Completed, which refer to a positive rushing play and a completed pass, respectively. The issue here, the model overwhelmingly predicts those values, but fails to accurately predict things like Touchdowns, Sacks, or Interceptions. 
+
+So, I may need to limit possible play outcomes, or at least combine some categories (i.e. Turnover for Fumble + Interception). Or, add some more presnap data, such as down and distance (I currently only use starting yard line, along with categorical data). If you made it this far, thank you! Below is the confusion matrix output from my current KNN model. I'll add some hashtags at the end as an experiment too, because I'm not sure if that will help with post discoverability and/or integrate with Bluesky feeds.
+![](https://lionsmane.us-east.host.bsky.network/xrpc/com.atproto.sync.getBlob?did=did%3Aplc%3Aqus4ahqunvgwjssmxcjijwlj&cid=bafkreia2oogirvm2hovmgbn73o5joxxfmce55fuh4x3y7faiw6zxu73gw4)
+
+
+## KNN Classifier Notebook (First Model)
+
+```python
+# Import dependencies
+import duckdb
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+
+```
+
+
+```python
+# Open the connection to the persistent database
+con = duckdb.connect(".config/nfl.duckdb")
+con.close()
+```
+
+
+```python
+# Create the initial dataframe object with DuckDB
+df = con.sql("""
+    SELECT *
+    FROM gold.plays_numeric             
+""").df()
+
+df.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gameId</th>
+      <th>playId</th>
+      <th>possessionTeam</th>
+      <th>yardlineNumber</th>
+      <th>offenseFormation</th>
+      <th>receiverAlignment</th>
+      <th>playType</th>
+      <th>defensiveFormation</th>
+      <th>pff_manZone</th>
+      <th>yardsGained</th>
+      <th>playOutcome</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2022102302</td>
+      <td>2655</td>
+      <td>CIN</td>
+      <td>21</td>
+      <td>3</td>
+      <td>8</td>
+      <td>2</td>
+      <td>6</td>
+      <td>2</td>
+      <td>9</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2022091809</td>
+      <td>3698</td>
+      <td>CIN</td>
+      <td>8</td>
+      <td>3</td>
+      <td>8</td>
+      <td>2</td>
+      <td>13</td>
+      <td>2</td>
+      <td>4</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2022103004</td>
+      <td>3146</td>
+      <td>HOU</td>
+      <td>20</td>
+      <td>6</td>
+      <td>5</td>
+      <td>2</td>
+      <td>13</td>
+      <td>2</td>
+      <td>6</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2022110610</td>
+      <td>348</td>
+      <td>KC</td>
+      <td>23</td>
+      <td>6</td>
+      <td>5</td>
+      <td>2</td>
+      <td>13</td>
+      <td>2</td>
+      <td>4</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022102700</td>
+      <td>2799</td>
+      <td>BAL</td>
+      <td>27</td>
+      <td>4</td>
+      <td>7</td>
+      <td>1</td>
+      <td>3</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+# Split the table into features and target
+X = con.sql("""
+    SELECT yardlineNumber, offenseFormation, receiverAlignment, playType, defensiveFormation, pff_manZone
+    FROM gold.plays_numeric
+""").df()
+
+y = np.array(con.sql("""
+    SELECT playOutcome
+    FROM gold.plays_numeric
+""").df()).ravel()
+
+print(X.shape, y.shape)
+```
+
+    (16124, 6) (16124,)
+
+
+
+```python
+# Instantiate the model and split the datasets into training/testing
+knn = KNeighborsClassifier(n_neighbors=7)
+X_train, X_val, y_train, y_val = train_test_split(X, y, train_size=0.7, random_state=123)
+```
+
+
+```python
+# Fit the model
+knn.fit(X_train, y_train)
+```
+
+
+
+
+<style>#sk-container-id-1 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: black;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-1 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-1 pre {
+  padding: 0;
+}
+
+#sk-container-id-1 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-1 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-1 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-1 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-1 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-1 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-1 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-1 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-1 label.sk-toggleable__label {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-1 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label label.sk-toggleable__label,
+#sk-container-id-1 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-1 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-1 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-1 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-1 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 1ex;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-1 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-1 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>KNeighborsClassifier(n_neighbors=7)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;&nbsp;KNeighborsClassifier<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.neighbors.KNeighborsClassifier.html">?<span>Documentation for KNeighborsClassifier</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></label><div class="sk-toggleable__content fitted"><pre>KNeighborsClassifier(n_neighbors=7)</pre></div> </div></div></div></div>
+
+
+
+
+```python
+# Basic KNN Performance Metrics
+y_pred = knn.predict(X_val)
+
+print(knn.score(X_val, y_val))
+```
+
+    0.6114096734187681
+
+
+
+```python
+# Datacamp Model performance Loop
+# Create neighbors
+neighbors = np.arange(1, 13)
+train_accuracies = {}
+test_accuracies = {}
+
+for neighbor in neighbors:
+  
+	# Set up a KNN Classifier
+	knn = KNeighborsClassifier(n_neighbors=neighbor)
+  
+	# Fit the model
+	knn.fit(X_train, y_train)
+  
+	# Compute accuracy
+	train_accuracies[neighbor] = knn.score(X_train, y_train)
+	test_accuracies[neighbor] = knn.score(X_val, y_val)
+print(neighbors, '\n', train_accuracies, '\n', test_accuracies)
+```
+
+
+```python
+# Visualize model accuracy with various neighbors
+# Add a title
+plt.title("KNN: Varying Number of Neighbors")
+
+# Plot training accuracies
+plt.plot(neighbors, train_accuracies.values(), label="Training Accuracy")
+
+# Plot test accuracies
+plt.plot(neighbors, test_accuracies.values(), label="Testing Accuracy")
+
+plt.legend()
+plt.xlabel("Number of Neighbors")
+plt.ylabel("Accuracy")
+
+# Display the plot
+plt.show()
+```
+
+
+```python
+# Map the original target variables to the KNN outputs
+play_outcome_map = con.sql("""
+    SELECT
+    CASE
+        WHEN playOutcome = 1 THEN 'Gain'
+        WHEN playOutcome = 2 THEN 'Loss'
+        WHEN playOutcome = 3 THEN 'Completed'
+        WHEN playOutcome = 4 THEN 'Incomplete'
+        WHEN playOutcome = 5 THEN 'Scrambled'
+        WHEN playOutcome = 6 THEN 'Touchdown'
+        WHEN playOutcome = 7 THEN 'Intercepted'
+        WHEN playOutcome = 8 THEN 'Fumbled'
+        WHEN playOutcome = 9 THEN 'Sacked'
+        WHEN playOutcome = 0 THEN 'Penalty'
+        ELSE 'Unknown'  -- Optional, in case there are values not matching any condition
+    END AS playOutcome
+FROM gold.plays_numeric
+""").df()['playOutcome'].tolist()
+
+play_outcome_map = np.unique(play_outcome_map).tolist()
+```
+
+
+```python
+# Create a dictionary to map playOutcome values to corresponding labels
+play_outcome_dict = {i: play_outcome_map[i] for i in range(len(play_outcome_map))}
+
+# Generate a colormap for the string labels (use 'viridis' colormap)
+colors = plt.cm.viridis(np.linspace(0, 1, len(play_outcome_map)))
+play_colors = dict(zip(range(len(play_outcome_map)), colors))
+
+# Create legend patches for each class label
+legend_patches = [mpatches.Patch(color=play_colors[i], label=play_outcome_map[i]) for i in range(len(play_outcome_map))]
+
+# Assuming `y_pred` is a list of predictions, map numeric predictions to string labels
+pred_labels = [play_outcome_dict[val] for val in y_pred]
+
+```
+
+
+```python
+# Attempting to conduct sensitivity analysis for feature importance
+for feature in range(6):
+    plt.figure(figsize=(10, 6))
+    plt.scatter(X_val.iloc[:, feature], y_pred, c=[play_colors[val] for val in y_pred], cmap='viridis', edgecolor='k')
+    plt.xlabel(f"Feature {feature + 1}")
+    plt.ylabel("Predicted Class")
+    plt.yticks(range(len(play_outcome_map)), play_outcome_map)
+    plt.title(f"Predictions by Feature {feature + 1}")
+    plt.legend(handles = legend_patches, title="Actual Class", bbox_to_anchor=(1.05, 1), loc = 'upper left')
+    plt.tight_layout
+    plt.show()
+
+```
+
+
+```python
+# Your play_outcome_dict with correct mapping
+play_outcome_dict = {
+    1: 'Gain',
+    2: 'Loss',
+    3: 'Completed',
+    4: 'Incomplete',
+    5: 'Scrambled',
+    6: 'Touchdown',
+    7: 'Intercepted',
+    8: 'Fumbled',
+    9: 'Sacked',
+    0: 'Penalty'
+}
+
+# Map the y_pred values to the corresponding labels
+pred_labels = [play_outcome_dict[val] for val in y_pred]
+
+# Define the colormap based on the labels
+play_colors = plt.cm.viridis(np.linspace(0, 1, len(play_outcome_dict)))
+
+# Combine your features (X_val) and the predictions (y_pred) into a single DataFrame
+df_features = X_val.copy()
+df_features['Predicted Class'] = [play_outcome_dict[key] for key in y_pred]
+
+# Create a pairplot to visualize pairwise relationships between all features
+sns.pairplot(df_features, hue='Predicted Class', palette=dict(zip(play_outcome_dict.values(), play_colors)), markers='o')
+
+# Customize the plot
+plt.suptitle('Pairplot of Features Colored by Predicted Class', y=1.02)
+plt.legend(handles = legend_patches, title="Actual Class", bbox_to_anchor=(1.05, 1), loc = 'upper left')
+plt.tight_layout()
+plt.show()
+
+```
+
+
+```python
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
+# Assuming y_true contains the true labels and y_pred contains the predicted labels
+# Map numerical values to their respective class labels
+y_true_labels = [play_outcome_dict[val] for val in y_val]  # Replace y_true with your actual true labels
+y_pred_labels = [play_outcome_dict[val] for val in y_pred]
+
+# Generate the confusion matrix
+cm = confusion_matrix(y_true_labels, y_pred_labels, labels=list(play_outcome_dict.values()))
+
+# Visualize the confusion matrix
+fig, ax = plt.subplots(figsize=(10, 8))
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=list(play_outcome_dict.values()))
+disp.plot(cmap='viridis', ax=ax, xticks_rotation=45)
+
+# Customize the plot
+plt.title("Confusion Matrix of KNN Model")
+plt.show()
+
+```
+
+
+    
+![KNN Classifier Confusion Matrix](images/knn_13_0.png)
+    
+## Linear Regression Notebook (Second Model)
+
+```python
+import duckdb
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression, Ridge
+from sklearn.model_selection import train_test_split, KFold, cross_val_score
+from sklearn.metrics import mean_squared_error, r2_score
+```
+
+
+```python
+# Open the DuckDB connection, to the persistent database
+con = duckdb.connect(".config/nfl.duckdb")
+con.close()
+```
+
+
+```python
+# Test converting the play outcomes to just yards gained or lost
+con.sql("""
+    SELECT *
+    FROM gold.plays_numeric   
+""")
+```
+
+
+```python
+# Can still utilize plays_numeric, just won't use the categorical outcomes as the target
+X = con.sql("""
+    SELECT yardlineNumber, offenseFormation, receiverAlignment, playType, defensiveFormation, pff_manZone
+    FROM gold.plays_numeric   
+""").df()
+y = con.sql("""
+    SELECT yardsGained
+    FROM gold.plays_numeric   
+""").df()
+```
+
+
+```python
+# Train test split
+# May need to come back and apply a Standard Scaler later
+
+linreg = LinearRegression()
+scaler = StandardScaler()
+X_train, X_val, y_train, y_val = train_test_split(X, y, train_size = 0.7, random_state = 123)
+
+X_train_scaled = scaler.fit_transform(X_train)
+X_val_scaled = scaler.transform(X_val)
+```
+
+
+```python
+# Fit the model
+linreg.fit(X_train_scaled, y_train)
+```
+
+
+
+
+<style>#sk-container-id-3 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: black;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-3 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-3 pre {
+  padding: 0;
+}
+
+#sk-container-id-3 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-3 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-3 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-3 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-3 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-3 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-3 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-3 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-3 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-3 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-3 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-3 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-3 label.sk-toggleable__label {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+#sk-container-id-3 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-3 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-3 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-3 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-3 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-3 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-3 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-3 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-3 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-3 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-3 div.sk-label label.sk-toggleable__label,
+#sk-container-id-3 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-3 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-3 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-3 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-3 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-3 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-3 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-3 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-3 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 1ex;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-3 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-3 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-3 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-3 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" checked><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;&nbsp;LinearRegression<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></label><div class="sk-toggleable__content fitted"><pre>LinearRegression()</pre></div> </div></div></div></div>
+
+
+
+
+```python
+# Begin testing and scoring
+y_pred = linreg.predict(X_val_scaled)
+
+mse = mean_squared_error(y_val, y_pred)
+r2 = r2_score(y_val, y_pred)
+
+print(f"MSE: {mse}")
+print(f"R2 Score: {r2}")
+```
+
+    MSE: 80.63310622289697
+    R2 Score: 0.02277208083008464
+
+
+
+```python
+plt.scatter(y_val, y_pred)
+plt.xlabel("Actual Values")
+plt.ylabel("Predicted Values")
+plt.title("Linear Regression: Actual vs Predicted")
+plt.show()
+
+coefficients = linreg.coef_
+print(f"Coefficients: {coefficients}")
+
+```
+
+
+    
+![Linear Regression Scatter Plot](images/linreg_7_0.png)
+    
+
+
+    Coefficients: [[ 0.05041481  0.32550574  0.04088819  1.77381568 -0.0198335  -0.16104852]]
+
+
+
+```python
+ridge = Ridge(alpha=1.0)
+ridge.fit(X_train_scaled, y_train)
+y_pred_ridge = ridge.predict(X_val_scaled)
+print(f"Ridge MSE: {mean_squared_error(y_val, y_pred_ridge)}")
+
+```
+
+    Ridge MSE: 80.63311884052399
+
+## Random Forest Notebook (Third Model)
+
+```python
+import duckdb
+import tqdm
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.feature_selection import RFE
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
+from sklearn.metrics import mean_squared_error, r2_score
+
+```
+
+
+```
+# Create the database connection
+con = duckdb.connect("nfl.duckdb")
+#con.close()
+```
+
+
+```python
+# Creating dataframes with DuckDB, plays and player_play both have 50 columns, more ideal for a broad random forest
+X = con.sql("""
+    SELECT quarter, down, yardsToGo, yardlineNumber, preSnapHomeScore, preSnapVisitorScore,
+    playNullifiedByPenalty, absoluteYardlineNumber, preSnapHomeTeamWinProbability, preSnapVisitorTeamWinProbability, expectedPoints,
+    passResult_complete, passResult_incomplete, passResult_sack, passResult_interception, passResult_scramble, passLength, targetX, targetY,
+    playAction, passTippedAtLine, unblockedPressure, qbSpike, qbKneel, qbSneak, penaltyYards, prePenaltyYardsGained, 
+    homeTeamWinProbabilityAdded, visitorTeamWinProbilityAdded, expectedPointsAdded, isDropback, timeToThrow, timeInTackleBox, timeToSack,
+    dropbackDistance, pff_runPassOption, playClockAtSnap, pff_manZone, pff_runConceptPrimary_num, pff_passCoverage_num, pff_runConceptSecondary_num
+FROM silver.plays_rf
+""").df()
+y = np.array(con.sql("""
+    SELECT yardsGained
+    FROM silver.plays_rf
+""").df()).ravel()
+```
+
+
+```python
+# Having issues with NA values, the below code does a simple count using pandas, will then go back and change the query
+# As of writing this, the issue is solved; however, the dbt model for this is far from efficient
+na_counts = (X == 'NA').sum()
+
+# Optionally, filter only columns with 'NA' values for easier review
+na_counts_filtered = na_counts[na_counts > 0]
+print(na_counts_filtered, "\n", X.shape, "\n", y.shape) # playClockAtSnap has only 1 NA value, will just drop that row
+
+```
+
+    Series([], dtype: int64) 
+     (16124, 41) 
+     (16124,)
+
+
+
+```python
+# Instantiate the model and split the data
+rf = RandomForestRegressor(warm_start=True)
+
+selector = RFE(rf, n_features_to_select=10, step=1)
+X_selected = selector.fit_transform(X, y)
+
+```
+
+
+```python
+# Begin Interpretation, first with feature importance
+selected_features = X.columns[selector.support_]
+print(selected_features)
+
+```
+
+    Index(['yardlineNumber', 'absoluteYardlineNumber',
+           'preSnapHomeTeamWinProbability', 'expectedPoints',
+           'passResult_scramble', 'penaltyYards', 'prePenaltyYardsGained',
+           'homeTeamWinProbabilityAdded', 'visitorTeamWinProbilityAdded',
+           'expectedPointsAdded'],
+          dtype='object')
+
+
+
+```python
+# Split the data
+X_train, X_test, y_train, y_test = train_test_split(X_selected, y, test_size=0.2, random_state=42)
+
+# Train the model
+rf.fit(X_train, y_train)
+
+# Make predictions
+y_pred = rf.predict(X_test)
+
+# Calculate scores
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print(f"Mean Squared Error: {mse}")
+print(f"R^2 Score: {r2}")
+
+```
+
+    Mean Squared Error: 1.7769936744186046
+    R^2 Score: 0.9766614590863065
+
+
+
+```python
+# Continue with the GridSearch
+param_grid = {
+    'n_estimators': [100, 200, 300],
+    'max_depth': [None, 10, 20, 30],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4],
+}
+
+grid_search = GridSearchCV(estimator=rf, param_grid=param_grid, cv=5, scoring='neg_mean_squared_error', n_jobs=4)
+grid_search.fit(X_train, y_train)
+best_rf = grid_search.best_estimator_
+
+# Wrap a progress bar for longer Grid Searches
+"""with tqdm(total=len(param_grid['n_estimators']) * len(param_grid['max_depth']) * len(param_grid['min_samples_split']) * len(param_grid['min_samples_leaf']), desc="GridSearch Progress") as pbar:
+    def callback(*args, **kwargs):
+        pbar.update(1)
+
+    # Add the callback to the grid search
+    grid_search.fit(X, y, callback=callback)"""
+
+print(grid_search.best_params_)
+
+```
+
+    {'max_depth': 20, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 100}
+
+
+
+```python
+# Continue with the Cross Validation Score
+cv_scores = cross_val_score(rf, X_selected, y, cv=5, scoring='neg_mean_squared_error')
+print(f"Cross-validated MSE: {-cv_scores.mean()}")
+
+```
+
+    Cross-validated MSE: 1.9303851017196607
+

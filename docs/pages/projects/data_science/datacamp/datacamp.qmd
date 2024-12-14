@@ -1,3 +1,0 @@
----
-title: "DataCamp Data Science Projects"
----

@@ -349,13 +349,13 @@ Write using Pandoc markdown, including equations, citations, crossrefs, figure p
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> Open With › <span class="er">(</span><span class="ex">don</span><span class="st">'t open)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>For a quick run through: quarto create project initializes a quarto project directory within your current working directory (the uv parent directory), <code>type</code> lets you choose the type of Quarto documentation (book, website, confluence, etc.), title is the title of your homepage (<code>.qmd</code>) file. Personally, I like to remove the <code>docs/.gitignore</code> file because uv creates one when you initialize a project, in the parent directory. So, having just one <code>.gitignore</code> file helps me keep track of things more easily.</p>
 <p>The only directories I added to <code>docs</code> after it was created by quarto, was a <code>pages</code> directory for various subpages and a <code>brand</code> directory for <code>.scss</code> files, images, etc. For project, blog, or guide specific media files, I kept those within their subpage folder. Here, I keep the various landing pages and their sub directory structures. Ideally, I won’t have any files in there, but the <code>_quarto.yml</code> file will point to their locations in my personal GitHub repo.</p>
-<div id="tip-docs-context" class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled" title="File Context in Quarto">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip&nbsp;1
+File Context in Quarto
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -460,13 +460,13 @@ Tip&nbsp;1
 <span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="fu">.callout-title-container.flex-fill</span> {</span>
 <span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> $<span class="dv">danger</span><span class="op">;</span></span>
 <span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="imp-css-var-names" class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-important callout-titled" title="CSS Variable Names">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important&nbsp;1
+CSS Variable Names
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -492,13 +492,13 @@ Important&nbsp;1
 <p>Conversely, you can specify, within the <code>output</code> property of your <code>_quarto.yml</code> file that <code>output-dir: .</code></p>
 <p>This is also the same syntax when previewing your website, using <code>quarto preview docs</code>, the difference is there is no need to specify an output directory. What this does is spin up a jupyter kernel to render your <code>.qmd</code> files, then, it displays the output in a browser. When you hit save on your <code>_quarto.yml</code>, <code>.scss</code>, and <code>.qmd</code> files then the site will automatically update (it doesn’t for <code>_brand.yml</code> saves).</p>
 <p>Once you’ve rendered your website, and pushed the commit, the change is reflected in a few mintues.</p>
-<div id="nte-uv-environment" class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="quarto preview with uv">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note&nbsp;1
+quarto preview with uv
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -516,13 +516,13 @@ Note&nbsp;1
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">left</span><span class="kw">:</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">"Page name"</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">href</span><span class="kw">:</span><span class="at"> path/to/page/file.qmd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="tip-indent-dash" class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled" title="Dashes and Intentation Matter in YAML">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip&nbsp;2
+Dashes and Intentation Matter in YAML
 </div>
 </div>
 <div class="callout-body-container callout-body">

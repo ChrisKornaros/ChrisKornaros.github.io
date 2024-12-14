@@ -51,7 +51,7 @@ For a quick run through: quarto create project initializes a quarto project dire
 
 The only directories I added to `docs` after it was created by quarto, was a `pages` directory for various subpages and a `brand` directory for `.scss` files, images, etc. For project, blog, or guide specific media files, I kept those within their subpage folder. Here, I keep the various landing pages and their sub directory structures. Ideally, I won't have any files in there, but the `_quarto.yml` file will point to their locations in my personal GitHub repo. 
 
-::: {#tip-docs-context .callout-tip}
+::: {.callout-tip title="File Context in Quarto"}
 In my time developing this site, it seems that Quarto can only pickup on files within the context of the `docs` (or whatever you name your Quarto project) folder. Furthermore, it struggels with absolute context paths, and at most I could get it to work with `../../file`.
 :::
 
@@ -153,7 +153,7 @@ code {
 
 ```
 
-::: {#imp-css-var-names .callout-important}
+::: {.callout-important title="CSS Variable Names"}
 There are some weird naming convention differences between `_brand.yml` and Quarto. The big one is monotone being used to reference block quotes, code blocks, and in-line code in _brand, but in Quarto it renders the in-line code as `code` and the code blocks as `sourceCode`. Make sure to use inspect element to be sure on what you're changing. CSS class names can get long, especially when referncing nested classes, just experiment and take your time with things.
 :::
 
@@ -180,7 +180,7 @@ This is also the same syntax when previewing your website, using `quarto preview
 
 Once you've rendered your website, and pushed the commit, the change is reflected in a few mintues.
 
-::: {#nte-uv-environment .callout-note}
+::: {.callout-note title="quarto preview with uv"}
 The ease of using `quarto preview` is magnified when using `uv` as your project/package manager. Instead of having to manage various virtual environments and packages, as well as activation and deactivation, `uv` does it all. Even VS Code picks up on the context `uv` provides. The terminal will automatically realize you're in a `uv` environment and display output as if you were using a virutal environment (even though you haven't activated it). 
 :::
 
@@ -197,7 +197,7 @@ navbar:
     href: path/to/page/file.qmd
 ```
 
-::: {#tip-indent-dash .callout-tip}
+::: {.callout-tip title="Dashes and Intentation Matter in YAML"}
 Notice when I'm using a `-` and not. This is deliberate. In my development, I realized that where you use and specify the dash can affect functionality. Some places require it, some don't, and it may depend on the order of various parameters.
 :::
 

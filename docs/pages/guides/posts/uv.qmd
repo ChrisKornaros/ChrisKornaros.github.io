@@ -8,10 +8,9 @@ tags: ["uv", "Python", "git", "GitHub", "CLI", "DevOps", "Project Management", "
 
 A basic guide on using `uv` the package and projects manager for Python developers.
 
-# Getting Started with uv, the Python Project and Package Manager
 ## Introduction
 
-::: {.callout-tip}
+::: {.callout-tip title="VS Code Shortcuts"}
 If you're using VS Code, here are some useful shortcuts.
 - Note, use CMD-K CMD-S to open the keyboard shortcuts.
 - `SHFT-CMD-i` inserts a code block
@@ -47,18 +46,19 @@ The nice thing about `uv` is that it's designed to make Python development easie
 For the sake of this example and entire template, let's assume I'm currently sitting in my `main` directory. For some that might be `home`, others `app`, for MacOS the default is `/usr/yourusername`, or maybe you prefer to put all projects in a `Documents` or `Projects` folder. Anyways, to start up a project you can do one of two things:
 
 1. Have uv do everything, and then change directories
-   1. ```
+   1. ```bash
    uv init uv_basic
    cd uv_basic
    ```
 2. Create the directory, change directories, and then have uv do everything
-   1. ```
+   1. ```bash
    mkdir uv_basic
    cd uv_basic
    uv init
    ```
 
 This will create 4 files and initalize a local git repository:
+
 1. `.python-version`
 2. `.pyproject.toml`
 3. `hello.py`
@@ -85,7 +85,7 @@ For anyone familiar with software development you've probably heard of GitHub or
    3. Select `HTTPS` for the easier connection option
 4. Verify you have proper access to your GitHub
    1. `gh auth status`
-```{bash}
+```bash
 github.com
   ✓ Logged in to github.com account itsmeChis (keyring)
   - Active account: true
@@ -116,7 +116,7 @@ Thus far, the workflow with uv isn't too dissimilar from using pip and venv, but
 #### Using pip and venv
 When using a combination of pip and venv, your typical workflow is straightforward, but becomes complicated if you need to uninstall certain packages or make quick, iterative tests of code. 
 
-```{bash}
+```bash
 mkdir uv_basic
 cd uv_basic
 python -m venv .venv
@@ -142,7 +142,7 @@ As you can see, the initial workflow isn't horrible, but if you need to make a c
 #### Using uv
 Compare that with the streamlined uv workflow.
 
-```{bash}
+```bash
 uv init uv_basic
 cd uv_basic
 uv add duckdb

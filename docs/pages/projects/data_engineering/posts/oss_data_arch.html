@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Chris Kornaros">
+<meta name="dcterms.date" content="2024-12-12">
 
-<title>Guides – Chris Kornaros</title>
+<title>Open Source Data and Analytics Architecture – Chris Kornaros</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +25,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-listing/list.min.js"></script>
-<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fe3d27ad4957b7b46e339d7dc053a392.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-c15c7ccb793a8c0145e7ec7341df1540.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-56dfab92d9a1e40e81fa338bab690bac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-e7663df3984f924744eb258d6855637e.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-fe3d27ad4957b7b46e339d7dc053a392.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-c15c7ccb793a8c0145e7ec7341df1540.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-56dfab92d9a1e40e81fa338bab690bac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark-e7663df3984f924744eb258d6855637e.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,76 +70,18 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../../../../index.html">
     <span class="navbar-title">Chris Kornaros</span>
     </a>
   </div>
@@ -150,11 +92,11 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link" href="../../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../pages/about/about.html"> 
+    <a class="nav-link" href="../../../../pages/about/about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -163,7 +105,7 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-guides">    
         <li>
-    <a class="dropdown-item" href="../../pages/guides/guides.html">
+    <a class="dropdown-item" href="../../../../pages/guides/guides.html">
  <span class="dropdown-text">Guides</span></a>
   </li>  
     </ul>
@@ -174,15 +116,15 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
         <li>
-    <a class="dropdown-item" href="../../pages/projects/projects.html">
+    <a class="dropdown-item" href="../../../../pages/projects/projects.html">
  <span class="dropdown-text">Projects</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../pages/projects/data_engineering/data_engineering.html">
+    <a class="dropdown-item" href="../../../../pages/projects/data_engineering/data_engineering.html">
  <span class="dropdown-text">Data Engineering and Architecture Projects</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../pages/projects/data_science/data_science.html">
+    <a class="dropdown-item" href="../../../../pages/projects/data_science/data_science.html">
  <span class="dropdown-text">Data Science and Machine Learning Projects</span></a>
   </li>  
     </ul>
@@ -193,7 +135,7 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-blogs">    
         <li>
-    <a class="dropdown-item" href="../../pages/blogs/blogs.html">
+    <a class="dropdown-item" href="../../../../pages/blogs/blogs.html">
  <span class="dropdown-text">Blogs</span></a>
   </li>  
         <li class="dropdown-header">pages/blogs/research/research.qmd</li>
@@ -207,69 +149,48 @@ window.Quarto = {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/guides/guides.html">Guides</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-    </div>
-  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../pages/guides/guides.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Guides</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../pages/guides/posts/quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Quarto</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../pages/guides/posts/uv.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">uv</span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#future-guides-planned" id="toc-future-guides-planned" class="nav-link active" data-scroll-target="#future-guides-planned">Future Guides (Planned)</a></li>
-  <li><a href="#current-guides" id="toc-current-guides" class="nav-link" data-scroll-target="#current-guides">Current Guides</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   </ul>
 </nav>
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RGV2T3Bz">DevOps <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UmVwb3J0aW5n">Reporting <span class="quarto-category-count">(1)</span></div></div></div>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Guides</h1>
-</div>
+<h1 class="title">Open Source Data and Analytics Architecture</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Technology</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Chris Kornaros </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 12, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -279,92 +200,53 @@ window.Quarto = {
 </header>
 
 
-<p>Welcome to the <strong>Guides</strong> section of the website! This is the landing page for step-by-step guides and instructions for various tools and workflows that I’ve used in the past or am currently exploring.</p>
-<section id="future-guides-planned" class="level2">
-<h2 class="anchored" data-anchor-id="future-guides-planned">Future Guides (Planned)</h2>
-<p>Here are some topics I plan to cover in the future: - DuckDB - dbt - PostgreSQL</p>
-<p>Stay tuned for updates!</p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>I will update this when I begin the project. The goal here is to explore and create a tech stack to support modern data and analytical workloads, using entirely open source software. Ideally, I’ll be able to scale it to terabytes and then share that template and the guide as a public resource.</p>
+<p>Currently, I’m thinking of the following tools, as part of a non-exhaustive list of the stack:<br>
+</p>
+<blockquote class="blockquote">
+<p>OS/Environment: <code>zsh/bash</code><br>
+Project and Package Management: <code>uv</code><br>
+Collaboration and Source Control: <code>Github</code><br>
+Documentation: <code>Quarto</code><br>
+Data Modeling: <code>dbt</code><br>
+Containerization: <code>Docker</code><br>
+Container Orchestration: <code>Kubernetes</code><br>
+OLTP Database: <code>PostgreSQL</code><br>
+OLAP Database: <code>DuckDB</code><br>
+Batch Ingestion: <code>Python</code><br>
+ETL: <code>dbt</code><br>
+Testing: <code>pytest</code><br>
+Data Quality: <code>Great Expectations</code><br>
+Metadata: <code>Unity Catalog</code><br>
+ETL Orchestration: <code>Airflow</code> <em>and/or</em> <code>Dagster</code><br>
+Streaming Ingestion: <code>Kafka</code><br>
+</p>
+</blockquote>
+<p>General workflow I’m envisioning:</p>
+<ol type="1">
+<li>Initialize project with <code>uv</code>, add basic dependencies for the environment</li>
+<li>Create the repo with the GitHub CLI</li>
+<li>Set the remote as the upstream and do the initial commit</li>
+<li>Initialize the <code>quarto</code> and <code>dbt</code> projects as subdirectories of the main, <code>uv</code> project directory</li>
+<li>Create the <code>postgres</code> container with <code>docker</code>, use this to initialize the <code>postgres</code> database (Prod)</li>
+<li>In your <code>uv</code> envionrment, initialize the <code>duckdb</code> (Dev/Test) persistent database
+<ul>
+<li>Simpler to work quickly with <code>duckdb</code>, <code>postgres</code> has more configurations/overhead, but is better for long term persistent</li>
+</ul></li>
+<li>Use <code>python and duckdb</code> to ingest the initial batch of raw data</li>
+<li>Use <code>dbt</code> to define the data model, <code>pytest</code> to define the basic tests, and <code>great expectations</code> to define data quality</li>
+<li>Initialize the <code>unity catalog</code> instance, add the connection information (Dev/Test/Prod)</li>
+<li>Generate metadata and lineage</li>
+<li>Start scheduling and orchestrating jobs</li>
+<li>Potentially scale system up to handle stremaing data</li>
+</ol>
+
+
 </section>
-<section id="current-guides" class="level2">
-<h2 class="anchored" data-anchor-id="current-guides">Current Guides</h2>
 
-
-
-</section>
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="RGV2T3Bz" data-listing-date-sort="1734069600000" data-listing-file-modified-sort="1734210890544" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2044">
-<div class="thumbnail">
-<p><a href="../../pages/guides/posts/uv.html" class="no-external"></a></p><a href="../../pages/guides/posts/uv.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="../../pages/guides/posts/uv.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../pages/guides/posts/uv.html" class="no-external">uv, the Python Project and Package Manager</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../pages/guides/posts/uv.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('RGV2T3Bz'); return false;">
-DevOps
-</div>
-</div>
-<div class="listing-description">
-<a href="../../pages/guides/posts/uv.html" class="no-external">A basic guide on using <code>uv</code> the package and projects manager for Python developers.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="../../pages/guides/posts/uv.html" class="no-external">
-<div class="listing-date">
-Dec 13, 2024
-</div>
-<div class="listing-author">
-Chris Kornaros
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="UmVwb3J0aW5n" data-listing-date-sort="1734069600000" data-listing-file-modified-sort="1734210163817" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17" data-listing-word-count-sort="3224">
-<div class="thumbnail">
-<p><a href="../../pages/guides/posts/quarto.html" class="no-external"></a></p><a href="../../pages/guides/posts/quarto.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="../../pages/guides/posts/quarto.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../pages/guides/posts/quarto.html" class="no-external">Quarto</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../pages/guides/posts/quarto.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('UmVwb3J0aW5n'); return false;">
-Reporting
-</div>
-</div>
-<div class="listing-description">
-<a href="../../pages/guides/posts/quarto.html" class="no-external">A non-exhaustive guide on using Quarto for project documentation and personal branding.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="../../pages/guides/posts/quarto.html" class="no-external">
-<div class="listing-date">
-Dec 13, 2024
-</div>
-<div class="listing-author">
-Chris Kornaros
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

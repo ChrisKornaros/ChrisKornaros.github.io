@@ -7,8 +7,6 @@ listing:
     categories: true
 ---
 
-# Guides
-
 Welcome to the **Guides** section of the website! This is the landing page for step-by-step guides and instructions for various tools and workflows that I've used in the past or am currently exploring.
 
 ## Future Guides (Planned)

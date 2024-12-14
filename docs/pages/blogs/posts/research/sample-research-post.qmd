@@ -1,9 +1,0 @@
----
-title: "Sample Research Post"
-author: "Chris Kornaros"
-date: 2024-12-14
-categories: ["Research"]
-tags: ["Data Science", "Machine Learning"]
----
-
-Testing.

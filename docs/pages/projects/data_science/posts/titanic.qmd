@@ -1,0 +1,727 @@
+---
+title: "Titanic Disaster"
+author: "Chris Kornaros"
+date: 2024-10-15
+categories: ["Kaggle"]
+tags: ["Data Science", "Machine Learning", "Statistics", "Logistic Regression", "Python", "Docker", "AWS", "Numpy", "Pandas", "DuckDB", "scikit-learn"]
+---
+
+## General Overview
+The Kaggle Titanic dataset and ML competition is one that many people are familiar with, and if they're like me, it was also their first ML project. I redid this after 3 years to get familiar with my current workflow of using git, notebooks, venvs, etc. Below I included some notes to myself. While it was overkill, I used a Dockerized environment for this project, just to increase my familiarity with containers and the docker toolset.
+
+## Notes on the Titanic model and the process for using the Jupyter Kernel on the EC2 Server
+:::{}
+1. First, navigate to Local-Scripts/.AWS/.EC2_Scripts and run the ec2_start.sh script
+   ```zsh ec2_start.sh```
+2. Next, execute the unix_test_dns.sh script to store the EC2 public DNS in the /etc/hosts file
+   ```./unix_test_dns.sh```
+3. Use the ssh -i command to connect to the EC2 server, then run the Jupyter kernel image 
+    ```docker run -p 8888:8888 titanic-env``` **Look into adding a volume mount command here to persist model/file changes in the EC2**
+4. Now that it's running. Use a different terminal window (or the VS Code IDE) and test the DNS name.
+   ```ping unix_test.local``` **Need to make this DNS dynamic**
+5. In VS Code, open the .ipynb file in the model folder and continue work.
+   1. If you need to reconnect to a kernel, use the Titanic preset.
+   2. VS Code connects to the EC2 IPv4 address, even though the Kernel tells you 127.0.0.1
+6. The format for connecting to the Public IPv4 is `http://IPv4:8888/`
+7. To pull the file out of the container and store it on the EC2 server
+   1. `docker cp 786853360d97:/home/files/titanic_submission.csv files/titanic_submission.csv`
+   2. docker copy `instance-id`:`/path/to/file` `local/path`
+:::
+
+### If you need to modify the container
+- Do so locally, or anywhere, and then push the change to the GitHub repoistory
+- Then, pull the changes into the EC2 server
+- Clear the Docker library/cache, and then rebuild the image from scratch, use the following
+```docker build -t titanic-env -f .config/Dockerfile .```
+- Ensure this is done from the main project folder and uses those flags
+  - For Titanic, this is in the admin/Kaggle/Titanic folder in the EC2 instance
+  - `--no-cache` ensures it's a fresh build (This will take a while, not worth it in the smaller environment. Rebuild with cache)
+  - `-t` sets the name of the image
+  - `-f` lets you specify the Dockerfile location
+  - `.` lets Docker know that your current working directory is where the build context should take place
+
+## The Code Portion of this notebook
+
+::: {.callout-caution}
+When I most recently completed this competition, I didn't do it with the goal in mind of doing a nice write-up. This is really just an amalgamation of the notes I made to myself on how to use/modify the Docker container I ran my model on and the actual notebook + code + notes.
+:::
+
+```python
+import numpy as np
+import pandas as pd
+import duckdb
+import sklearn
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split, KFold, RandomizedSearchCV
+from sklearn.metrics import confusion_matrix, classification_report, roc_auc_score
+
+
+```
+
+
+```python
+# Initialize a connection and create a persistent database
+# Worth noting that due to the workflow I'm using, the database was/should be created externally, and then built into the Docker container
+# This way, the raw database files are saved locally, but file size won't grow exponentially
+con = duckdb.connect("files/titanic.duckdb")
+
+```
+
+
+```python
+# Using this to DROP and Recreate train_raw, ensuring a fresh process
+con.sql("DROP TABLE train_raw;")
+con.sql("DROP TABLE test_raw;")
+con.sql("CREATE TABLE train_raw AS SELECT * FROM 'files/train.csv'")
+con.sql("CREATE TABLE test_raw AS SELECT * FROM 'files/test.csv'")
+```
+
+
+```python
+# Create working tables
+#con.sql("DROP TABLE train;")
+#con.sql("DROP TABLE test;")
+con.sql("CREATE TABLE train AS SELECT * FROM train_raw")
+con.sql("CREATE TABLE test AS SELECT * FROM test_raw")
+```
+
+
+```python
+# Verify the proper tables are loaded
+con.sql("SELECT * FROM duckdb_tables()")
+```
+
+
+```python
+# Generate summary statistics
+con.sql("SUMMARIZE train")
+#con.sql("SUMMARIZE test")
+```
+
+
+```python
+# Examine Nulls for the Age, Cabin, and Embarked columns (do this for test as well)
+con.sql("SELECT * FROM train WHERE Age IS NULL") # Seems to make the most sense to use the average age here
+con.sql("SELECT * FROM train WHERE Cabin IS NULL") # Seems likely Cabins not as strictly recorded for lower class guests, probably unnecessary for model
+con.sql("SELECT * FROM train WHERE Embarked IS NULL") # This only comprises 2 records and it's unclear if they made it on in the first place, not a high enough percentage of 1st class survivors to consider keeping
+```
+
+
+```python
+# Update the Age column, replace NULL values with the average Age
+con.sql("""UPDATE train AS train_clean
+        SET Age = (
+            SELECT
+                avg(raw.Age) AS cleanAge
+            FROM train as raw
+            WHERE raw.Age IS NOT NULL
+        )
+        WHERE Age IS NULL""")
+```
+
+
+```python
+# Update the Sex column, change the VARCHAR type to BOOLEAN
+con.sql("""ALTER TABLE train ALTER Sex 
+        SET DATA TYPE BOOLEAN USING CASE
+            WHEN Sex = 'female' THEN 1 ELSE 0 END
+        """)
+```
+
+
+```python
+# Update the Age column in the test dataset
+con.sql("""UPDATE test AS test_clean
+        SET Age = (
+            SELECT
+                avg(raw.Age) AS cleanAge
+            FROM test as raw
+            WHERE raw.Age IS NOT NULL
+        )
+        WHERE Age IS NULL""")
+```
+
+
+```python
+# Update the Sex column, change the VARCHAR type to BOOLEAN
+con.sql("""ALTER TABLE test ALTER Sex 
+        SET DATA TYPE BOOLEAN USING CASE
+            WHEN Sex = 'female' THEN 1 ELSE 0 END
+        """)
+```
+
+
+```python
+# Remove the PassengerId, Name, Cabin, Embarked, Fare, and Ticket columns
+con.sql("ALTER TABLE train DROP PassengerId") # Has no bearing on the outcome of the model
+con.sql("ALTER TABLE train DROP Name") # Has to be numeric data
+con.sql("ALTER TABLE train DROP Cabin")
+con.sql("ALTER TABLE train DROP Embarked")
+con.sql("ALTER TABLE train DROP Fare") # Dropping because there are nulls in the test file
+con.sql("ALTER TABLE train DROP Ticket") # Dropping because of inconsistent values
+
+
+```
+
+
+```python
+# Remove the PassengerId, Name, Cabin, Embarked, Fare, and Ticket columns
+con.sql("ALTER TABLE test DROP Name") # Has to be numeric data
+con.sql("ALTER TABLE test DROP Cabin")
+con.sql("ALTER TABLE test DROP Embarked")
+con.sql("ALTER TABLE test DROP Fare") # Dropping because there are nulls in the test file
+con.sql("ALTER TABLE test DROP Ticket") # Dropping because of inconsistent values
+
+
+```
+
+
+```python
+# Creating dataframes for testing/training, I'll be using sklearn here, which needs both
+train = con.sql("SELECT * FROM train").df()
+test = con.sql("SELECT * FROM test").df()
+```
+
+
+```python
+# Create features and target
+X = train.drop("Survived", axis = 1).values
+y = train["Survived"].values
+
+X_test = test.drop("PassengerId", axis = 1).values
+```
+
+
+```python
+# Initialize Regression object and split data
+logreg = LogisticRegression(penalty = 'l2', tol = np.float64(0.083425), C = np.float64(0.43061224489795924), class_weight = 'balanced')
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size = 0.7, random_state = 123)
+```
+
+
+```python
+# Fit and predict
+logreg.fit(X_train, y_train)
+```
+
+
+
+
+<style>#sk-container-id-5 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: black;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-5 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-5 pre {
+  padding: 0;
+}
+
+#sk-container-id-5 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-5 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-5 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-5 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-5 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-5 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-5 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-5 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-5 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-5 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-5 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-5 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-5 label.sk-toggleable__label {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+#sk-container-id-5 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-5 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-5 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-5 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-5 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-5 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-5 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-5 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-5 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-5 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-5 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-5 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-5 div.sk-label label.sk-toggleable__label,
+#sk-container-id-5 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-5 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-5 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-5 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-5 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-5 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-5 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-5 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-5 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 1ex;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-5 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-5 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-5 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-5 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</style><div id="sk-container-id-5" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LogisticRegression(C=np.float64(0.43061224489795924), class_weight=&#x27;balanced&#x27;,
+                   tol=np.float64(0.083425))</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" checked><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;&nbsp;LogisticRegression<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></label><div class="sk-toggleable__content fitted"><pre>LogisticRegression(C=np.float64(0.43061224489795924), class_weight=&#x27;balanced&#x27;,
+                   tol=np.float64(0.083425))</pre></div> </div></div></div></div>
+
+
+
+
+```python
+# Predict and measure output
+y_pred = logreg.predict(X_val)
+y_pred_probs = logreg.predict_proba(X_val)[:, 1]
+print(roc_auc_score(y_val, y_pred_probs))
+```
+
+    0.8149262043998886
+
+
+
+```python
+# Create Parameter Dictionary for Model Tuning
+kf = KFold(n_splits = 5, shuffle = True, random_state = 123)
+params = {
+    "penalty": ["l1", "l2"],
+    "tol": np.linspace(0.0001, 1.0, 25),
+    "C": np.linspace(0.1, 1.0, 50),
+    "class_weight": ["balanced", {0:0.8, 1:0.2}]
+}
+logreg_cv = RandomizedSearchCV(logreg, params, cv=kf)
+```
+
+
+```python
+# Run the parameter search, fit the object, print the output
+logreg_cv = RandomizedSearchCV(logreg, params, cv=kf)
+logreg_cv.fit(X_train, y_train)
+print("Tuned Logistic Regression Parameters: {}".format(logreg_cv.best_params_))
+print("Tuned Logistic Regression Best Accuracy Score: {}".format(logreg_cv.best_score_))
+```
+
+
+```python
+# Apply the model to the test set
+predictions = logreg.predict(X_test)
+
+submission = pd.DataFrame({
+    'PassengerId': test['PassengerId'],
+    'Survived': predictions
+})
+
+submission.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>892</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>893</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>894</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>895</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>896</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+# Write the file to .csv and submit
+con.sql("SELECT * FROM submission").write_csv("files/titanic_submission.csv")
+```
