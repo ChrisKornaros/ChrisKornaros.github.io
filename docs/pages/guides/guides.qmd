@@ -11,11 +11,6 @@ listing:
 
 Welcome to the **Guides** section of the website! This is the landing page for step-by-step guides and instructions for various tools and workflows that I've used in the past or am currently exploring.
 
-## Current Guides
-
-- [Personal Portfolio with Quarto and GitHub Pages](quarto/quarto.qmd)
-- [Using uv for Project Initialization](uv/uv.qmd)
-
 ## Future Guides (Planned)
 
 Here are some topics I plan to cover in the future:
@@ -24,3 +19,7 @@ Here are some topics I plan to cover in the future:
 - PostgreSQL
 
 Stay tuned for updates!
+
+## Current Guides
+
+
