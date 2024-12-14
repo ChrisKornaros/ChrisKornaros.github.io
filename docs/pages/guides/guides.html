@@ -30,6 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -68,7 +70,65 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -136,14 +196,8 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../../pages/blogs/blogs.html">
  <span class="dropdown-text">Blogs</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="../../pages/blogs/research/research.html">
- <span class="dropdown-text">Research</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../pages/blogs/tech/tech.html">
- <span class="dropdown-text">Technology</span></a>
-  </li>  
+        <li class="dropdown-header">pages/blogs/research/research.qmd</li>
+        <li class="dropdown-header">pages/blogs/tech/tech.qmd</li>
     </ul>
   </li>
 </ul>
@@ -178,13 +232,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/guides/quarto/quarto.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/guides/posts/quarto.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quarto</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/guides/uv/uv.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/guides/posts/uv.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">uv</span></a>
   </div>
 </li>
@@ -234,8 +288,8 @@ ul.task-list li input[type="checkbox"] {
 <section id="current-guides" class="level2">
 <h2 class="anchored" data-anchor-id="current-guides">Current Guides</h2>
 <ul>
-<li><a href="../../pages/guides/quarto/quarto.html">Personal Portfolio with Quarto and GitHub Pages</a></li>
-<li><a href="../../pages/guides/uv/uv.html">Using uv for Project Initialization</a></li>
+<li><a href="quarto/quarto.qmd">Personal Portfolio with Quarto and GitHub Pages</a></li>
+<li><a href="uv/uv.qmd">Using uv for Project Initialization</a></li>
 </ul>
 </section>
 <section id="future-guides-planned" class="level2">
@@ -244,10 +298,74 @@ ul.task-list li input[type="checkbox"] {
 <p>Stay tuned for updates!</p>
 
 
+
 </section>
 </section>
 
-</main> <!-- /main -->
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="UmVwb3J0aW5n" data-listing-date-sort="1734069600000" data-listing-file-modified-sort="1734200995889" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3200">
+<div class="thumbnail">
+<p><a href="../../pages/guides/posts/quarto.html" class="no-external"></a></p><a href="../../pages/guides/posts/quarto.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="../../pages/guides/posts/quarto.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../pages/guides/posts/quarto.html" class="no-external">Quarto</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../pages/guides/posts/quarto.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../pages/guides/posts/quarto.html" class="no-external">Quarto is:<br>
+</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../pages/guides/posts/quarto.html" class="no-external">
+<div class="listing-date">
+Dec 13, 2024
+</div>
+<div class="listing-author">
+Chris Kornaros
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="UmVwb3J0aW5n" data-listing-date-sort="1734069600000" data-listing-file-modified-sort="1734200951142" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="thumbnail">
+<p><a href="../../pages/guides/posts/uv.html" class="no-external"></a></p><a href="../../pages/guides/posts/uv.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="../../pages/guides/posts/uv.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../pages/guides/posts/uv.html" class="no-external">uv, the Python Project and Package Manager</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../pages/guides/posts/uv.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../pages/guides/posts/uv.html" class="no-external"></a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../pages/guides/posts/uv.html" class="no-external">
+<div class="listing-date">
+Dec 13, 2024
+</div>
+<div class="listing-author">
+Chris Kornaros
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

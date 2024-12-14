@@ -1,5 +1,10 @@
 ---
 title: "Guides"
+listing:
+    contents: posts
+    sort: "date desc"
+    type: default
+    categories: true
 ---
 
 # Guides
@@ -17,6 +22,5 @@ Here are some topics I plan to cover in the future:
 - DuckDB
 - dbt
 - PostgreSQL
-- More to come!
 
 Stay tuned for updates!

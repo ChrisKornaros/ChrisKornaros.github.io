@@ -37,9 +37,9 @@ website:
       contents:
         - pages/guides/guides.qmd
         - text: "Quarto"
-          href: pages/guides/quarto/quarto.qmd
+          href: pages/guides/posts/quarto.qmd
         - text: "uv"
-          href: pages/guides/uv/uv.qmd
+          href: pages/guides/posts/uv.qmd
 
       
     - id: projects
@@ -89,9 +89,9 @@ website:
       contents:
         - pages/blogs/blogs.qmd
         - section: "Research Blogs"
-          href: pages/blogs/research/research.qmd
+          href: pages/blogs/posts/research/research.qmd
         - section: "Technology Blogs"
-          href: pages/blogs/tech/tech.qmd
+          href: pages/blogs/posts/tech/tech.qmd
           
 format:
   html:

@@ -6,6 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Chris Kornaros">
+<meta name="dcterms.date" content="2024-12-13">
 
 <title>Quarto – Chris Kornaros</title>
 <style>
@@ -170,14 +172,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../../../pages/blogs/blogs.html">
  <span class="dropdown-text">Blogs</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="../../../pages/blogs/research/research.html">
- <span class="dropdown-text">Research</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../../pages/blogs/tech/tech.html">
- <span class="dropdown-text">Technology</span></a>
-  </li>  
+        <li class="dropdown-header">pages/blogs/research/research.qmd</li>
+        <li class="dropdown-header">pages/blogs/tech/tech.qmd</li>
     </ul>
   </li>
 </ul>
@@ -192,7 +188,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/guides/quarto/quarto.html">Quarto</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/guides/posts/quarto.html">Quarto</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -212,13 +208,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../pages/guides/quarto/quarto.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../pages/guides/posts/quarto.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Quarto</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../pages/guides/uv/uv.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../pages/guides/posts/uv.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">uv</span></a>
   </div>
 </li>
@@ -279,13 +275,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Quarto</h1>
-</div>
+  <div class="quarto-categories">
+    <div class="quarto-category">Reporting</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Chris Kornaros </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 13, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -469,7 +480,9 @@ Important&nbsp;1
 <p>Websites really stretch and push the boundaries of what you can accomplish with Quarto. In this section, I’ll walk through a few key points of developing them.</p>
 <section id="blogs" class="level3">
 <h3 class="anchored" data-anchor-id="blogs">Blogs</h3>
-<p>Blogs are a special kind of Quarto website that consists of a collection of posts along with a navigational page that lists them in reverse chronological order.</p>
+<p>Blogs are a special kind of Quarto website that consists of a collection of posts along with a navigational page that lists them in reverse chronological order. Pretty much all of the information you’ll need about blogs is the same as the parts of this guide covering websites. Just know, it’s easy to integrate a blog as a subpage of a larger website.</p>
+<p>Simply add the blogs project structure as a subdirectory of <code>pages/</code>. To keep track of things, I made the title of the main blog page <code>blogs.qmd</code>, so it doesn’t conflict with the <code>index.qmd</code> that is the home page of my whole website. Then, I added post categories within the <code>posts/</code> directory of the Quarto <code>blogs/</code> directory.</p>
+<p>That being said, and I’m not quite sure why, but the <code>_metadata.yml</code> file</p>
 </section>
 <section id="rendering-websites" class="level3">
 <h3 class="anchored" data-anchor-id="rendering-websites">Rendering Websites</h3>

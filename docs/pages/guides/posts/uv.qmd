@@ -1,0 +1,7 @@
+---
+title: "uv, the Python Project and Package Manager"
+author: "Chris Kornaros"
+date: 2024-12-13
+categories: ["DevOps"]
+tags: ["uv", "Python", "git", "GitHub", "CLI", "DevOps", "Project Management", "Environments"]
+---

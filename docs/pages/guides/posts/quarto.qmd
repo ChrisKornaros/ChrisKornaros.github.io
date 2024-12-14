@@ -1,5 +1,9 @@
 ---
 title: "Quarto"
+author: "Chris Kornaros"
+date: 2024-12-13
+categories: ["Reporting"]
+tags: ["Quarto", "Documentation", "Design", "Guides", "Markdown", "HTML", "CSS", "SASS", "CLI", "git", "GitHub"]
 ---
 
 ## Overview
@@ -155,7 +159,11 @@ There are some weird naming convention differences between `_brand.yml` and Quar
 Websites really stretch and push the boundaries of what you can accomplish with Quarto. In this section, I'll walk through a few key points of developing them.
 
 ### Blogs
-Blogs are a special kind of Quarto website that consists of a collection of posts along with a navigational page that lists them in reverse chronological order.
+Blogs are a special kind of Quarto website that consists of a collection of posts along with a navigational page that lists them in reverse chronological order. Pretty much all of the information you'll need about blogs is the same as the parts of this guide covering websites. Just know, it's easy to integrate a blog as a subpage of a larger website.
+
+Simply add the blogs project structure as a subdirectory of `pages/`. To keep track of things, I made the title of the main blog page `blogs.qmd`, so it doesn't conflict with the `index.qmd` that is the home page of my whole website. Then, I added post categories within the `posts/` directory of the Quarto `blogs/` directory.
+
+That being said, and I'm not quite sure why, but the `_metadata.yml` file 
 
 ### Rendering Websites 
 I run the following code block from my main project directory. My Quarto project directory is a folder called docs. So, I specify to Quarto that I want to render the entire Quarto project `docs`, but `quarto render`'s context is specific to the *quarto project* directory. Therefore, I need to use the `.` to specify that I want the rendered `.html` files put in the Quarto project folder, and sub folder.

@@ -7,5 +7,12 @@
       "/pages/blogs/posts/research/sample-research-post.html",
       "/pages/blogs/posts/tech/sample-tech-post.html"
     ]
+  },
+  {
+    "listing": "/pages/guides/guides.html",
+    "items": [
+      "/pages/guides/posts/quarto.html",
+      "/pages/guides/posts/uv.html"
+    ]
   }
 ]
