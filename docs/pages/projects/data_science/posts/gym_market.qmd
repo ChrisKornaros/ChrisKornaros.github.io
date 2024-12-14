@@ -2,7 +2,7 @@
 title: "Gym Market Analysis"
 author: "Chris Kornaros"
 date: 2024-09-30
-categories: ["DataCamp"]
+categories: ["DataCamp", "Completed"]
 tags: ["Python", "Pandas", "Matplotlib", "Analytics", "Statistics"]
 ---
 

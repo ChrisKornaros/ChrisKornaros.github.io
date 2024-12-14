@@ -2,7 +2,7 @@
 title: "User Login Validation"
 author: "Chris Kornaros"
 date: 2024-09-30
-categories: ["DataCamp"]
+categories: ["DataCamp", "Completed"]
 tags: ["Python", "User Defined Functions", "Programming"]
 ---
 

@@ -2,7 +2,7 @@
 title: "Basic OSS Architecture"
 author: "Chris Kornaros"
 date: 2024-12-13
-categories: ["Research"]
+categories: ["Research", "Ongoing"]
 tags: ["Architecture", "Systems", "Design", "Entity-Relationships", "Open Source", "zsh", "bash", "uv", "Python", "Quarto", "dbt", "Great Expectations", "Testing", "git", "GitHub", "Docker", "Kubernetes", "PostgreSQL", "DuckDB", "Unity Catalog", "Airflow", "Dagster", "Kafka"]
 ---
 

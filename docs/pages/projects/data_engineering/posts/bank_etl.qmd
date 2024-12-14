@@ -2,7 +2,7 @@
 title: "Bank Marketing ETL Project"
 author: "Chris Kornaros"
 date: 2024-09-30
-categories: ["DataCamp"]
+categories: ["DataCamp", "Completed"]
 tags: ["Data Engineering", "Python", "ETL", "Loops", "Lambda Functions"]
 ---
 

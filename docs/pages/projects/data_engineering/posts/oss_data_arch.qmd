@@ -2,7 +2,7 @@
 title: "Open Source Data and Analytics Architecture"
 author: "Chris Kornaros"
 date: 2024-12-12
-categories: ["Technology"]
+categories: ["Technology", "Planning"]
 tags: ["Architecture", "Systems", "Design", "Entity-Relationships", "Open Source", "zsh", "bash", "uv", "Python", "Quarto", "dbt", "Great Expectations", "Testing", "git", "GitHub", "Docker", "Kubernetes", "PostgreSQL", "DuckDB", "Unity Catalog", "Airflow", "Dagster", "Kafka"]
 ---
 

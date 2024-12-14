@@ -2,7 +2,7 @@
 title: "Titanic Disaster"
 author: "Chris Kornaros"
 date: 2024-10-15
-categories: ["Kaggle"]
+categories: ["Kaggle", "Completed"]
 tags: ["Data Science", "Machine Learning", "Statistics", "Logistic Regression", "Python", "Docker", "AWS", "Numpy", "Pandas", "DuckDB", "scikit-learn"]
 ---
 

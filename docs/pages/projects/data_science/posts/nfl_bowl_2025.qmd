@@ -2,7 +2,7 @@
 title: "NFL Big Data Bowl 2025"
 author: "Chris Kornaros"
 date: 2024-11-15
-categories: ["Research"]
+categories: ["Research", "Ongoing"]
 tags: ["Data Science", "Machine Learning", "Analytics", "Statistics", "Football", "Python", "Pandas", "Matplotlib", "DuckDB", "Seaborn", "Numpy", "dbt", "Quarto", "KNN", "Logistic Regression", "Linear Regression", "Random Forest"]
 ---
 

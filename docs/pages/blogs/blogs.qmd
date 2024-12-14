@@ -2,7 +2,7 @@
 title: "Blogs"
 listing:
   contents: posts
-  sort: "date desc"
+  sort: "title desc"
   type: table
   categories: true
 ---
