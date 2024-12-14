@@ -22,7 +22,10 @@ website:
           - pages/projects/data_engineering/data_engineering.qmd
           - pages/projects/data_science/data_science.qmd
       - text: "Blogs"
-        href: blogs/ 
+        menu:
+          - pages/blogs/blogs.qmd
+          - pages/blogs/research/research.qmd
+          - pages/blogs/tech/tech.qmd
 
   sidebar:
     - id: guides
@@ -57,7 +60,7 @@ website:
                 - text: "Open Source Data and Analytics Architecture"
                   href: pages/projects/data_engineering/research/oss_data_arch/oss_data_arch.qmd
                 - text: "Basic Open Source Architecture"
-                  href: pages/projects/data_engineering/research/basic_oss_architecture 
+                  href: pages/projects/data_engineering/research/basic_oss_architecture/basic_oss.qmd 
         - section: "Data Science and Machine Learning"
           href: pages/projects/data_science/data_science.qmd
           contents:
@@ -83,7 +86,12 @@ website:
         
     - id: blogs
       title: "Blogs"
-      href: blogs/
+      contents:
+        - pages/blogs/blogs.qmd
+        - section: "Research Blogs"
+          href: pages/blogs/research/research.qmd
+        - section: "Technology Blogs"
+          href: pages/blogs/tech/tech.qmd
           
 format:
   html:

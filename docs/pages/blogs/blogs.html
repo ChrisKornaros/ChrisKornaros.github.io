@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Engineering Reserach Projects – Chris Kornaros</title>
+<title>Blogs – Chris Kornaros</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +23,26 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../../">
-<script src="../../../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-fe3d27ad4957b7b46e339d7dc053a392.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-c15c7ccb793a8c0145e7ec7341df1540.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-56dfab92d9a1e40e81fa338bab690bac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/bootstrap/bootstrap-dark-e7663df3984f924744eb258d6855637e.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fe3d27ad4957b7b46e339d7dc053a392.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-c15c7ccb793a8c0145e7ec7341df1540.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-56dfab92d9a1e40e81fa338bab690bac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-e7663df3984f924744eb258d6855637e.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,7 +70,65 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -79,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Chris Kornaros</span>
     </a>
   </div>
@@ -90,11 +150,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../../pages/about/about.html"> 
+    <a class="nav-link" href="../../pages/about/about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -103,7 +163,7 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-guides">    
         <li>
-    <a class="dropdown-item" href="../../../../pages/guides/guides.html">
+    <a class="dropdown-item" href="../../pages/guides/guides.html">
  <span class="dropdown-text">Guides</span></a>
   </li>  
     </ul>
@@ -114,15 +174,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
         <li>
-    <a class="dropdown-item" href="../../../../pages/projects/projects.html">
+    <a class="dropdown-item" href="../../pages/projects/projects.html">
  <span class="dropdown-text">Projects</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../../pages/projects/data_engineering/data_engineering.html">
+    <a class="dropdown-item" href="../../pages/projects/data_engineering/data_engineering.html">
  <span class="dropdown-text">Data Engineering and Architecture Projects</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../../pages/projects/data_science/data_science.html">
+    <a class="dropdown-item" href="../../pages/projects/data_science/data_science.html">
  <span class="dropdown-text">Data Science and Machine Learning Projects</span></a>
   </li>  
     </ul>
@@ -133,17 +193,11 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-blogs">    
         <li>
-    <a class="dropdown-item" href="../../../../pages/blogs/blogs.html">
+    <a class="dropdown-item" href="../../pages/blogs/blogs.html">
  <span class="dropdown-text">Blogs</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="../../../../pages/blogs/research/research.html">
- <span class="dropdown-text">Research</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../../../pages/blogs/tech/tech.html">
- <span class="dropdown-text">Technology</span></a>
-  </li>  
+        <li class="dropdown-header">pages/blogs/research/research.qmd</li>
+        <li class="dropdown-header">pages/blogs/tech/tech.qmd</li>
     </ul>
   </li>
 </ul>
@@ -158,7 +212,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../pages/projects/data_engineering/data_engineering.html">Data Engineering and Architecture</a></li><li class="breadcrumb-item"><a href="../../../../pages/projects/data_engineering/research/research.html">Data Engineering Research Projects</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/blogs/blogs.html">Blogs</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -172,149 +226,32 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../pages/projects/projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Projects</span></a>
+  <a href="../../pages/blogs/blogs.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Blogs</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../../pages/projects/data_engineering/data_engineering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Engineering and Architecture</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../../pages/projects/data_engineering/datacamp/datacamp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">DataCamp Data Engineering Projects</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../../pages/projects/data_engineering/datacamp/bank_etl/bank_etl.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bank Marketing ETL</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../../pages/projects/data_engineering/research/research.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Data Engineering Research Projects</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../../pages/projects/data_engineering/research/oss_data_arch/oss_data_arch.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Open Source Data and Analytics Architecture</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../../pages/projects/data_engineering/research/basic_oss_architecture/basic_oss_architecture.qmd" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Basic Open Source Architecture</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Research Blogs</span></span>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../../pages/projects/data_science/data_science.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Science and Machine Learning</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../../pages/projects/data_science/datacamp/datacamp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">DataCamp Data Science Projects</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../../pages/projects/data_science/datacamp/gym_market/gym_market.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Gym Market Analysis</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../../pages/projects/data_science/datacamp/login_validation/login_validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Login Validation</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../../pages/projects/data_science/datacamp/netflix/netflix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Netflix Movies</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../../pages/projects/data_science/kaggle/kaggle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Kaggle Projects</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../../pages/projects/data_science/kaggle/titanic/titanic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Titanic Disaster</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../../pages/projects/data_science/research/research.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Research Projects</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../../pages/projects/data_science/research/nfl_bowl_2025/nfl_bowl_2025.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">NFL Big Data Bowl 2025</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Technology Blogs</span></span>
   </li>
     </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    </div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="UmVzZWFyY2g=">Research <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VGVjaG5vbG9neQ==">Technology <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../pages/projects/data_engineering/data_engineering.html">Data Engineering and Architecture</a></li><li class="breadcrumb-item"><a href="../../../../pages/projects/data_engineering/research/research.html">Data Engineering Research Projects</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Data Engineering Reserach Projects</h1>
+<h1 class="title">Blogs</h1>
 </div>
 
 
@@ -331,10 +268,128 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>A landing page for various blogs, journals, or random thoughts. Some of these will be focused on specific tools or technology, others will be random thoughts or research notes.</p>
 
 
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1733939373167" data-listing-reading-time-sort="1" data-listing-word-count-sort="16">
+<div class="thumbnail">
+<p><a href="../../pages/blogs/posts/research/research.html" class="no-external"></a></p><a href="../../pages/blogs/posts/research/research.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="../../pages/blogs/posts/research/research.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../pages/blogs/posts/research/research.html" class="no-external">Research</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../pages/blogs/posts/research/research.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../pages/blogs/posts/research/research.html" class="no-external">A landing page for my general thoughts and research into what’s interesting me at the time.</a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../../pages/blogs/posts/research/research.html" class="no-external"></a></p><a href="../../pages/blogs/posts/research/research.html" class="no-external">
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1733939376655" data-listing-reading-time-sort="1" data-listing-word-count-sort="20">
+<div class="thumbnail">
+<p><a href="../../pages/blogs/posts/tech/tech.html" class="no-external"></a></p><a href="../../pages/blogs/posts/tech/tech.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="../../pages/blogs/posts/tech/tech.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../pages/blogs/posts/tech/tech.html" class="no-external">Technology</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../pages/blogs/posts/tech/tech.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../pages/blogs/posts/tech/tech.html" class="no-external">A landing page for my blogs (hosted on WhiteWind) about specific technologies. These may be quick notes, or longer demos.</a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../../pages/blogs/posts/tech/tech.html" class="no-external"></a></p><a href="../../pages/blogs/posts/tech/tech.html" class="no-external">
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="UmVzZWFyY2g=" data-listing-date-sort="1734156000000" data-listing-file-modified-sort="1734198589397" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="thumbnail">
+<p><a href="../../pages/blogs/posts/research/sample-research-post.html" class="no-external"></a></p><a href="../../pages/blogs/posts/research/sample-research-post.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="../../pages/blogs/posts/research/sample-research-post.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../pages/blogs/posts/research/sample-research-post.html" class="no-external">Sample Research Post</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../pages/blogs/posts/research/sample-research-post.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('UmVzZWFyY2g='); return false;">
+Research
+</div>
+</div>
+<div class="listing-description">
+<a href="../../pages/blogs/posts/research/sample-research-post.html" class="no-external">Testing.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../pages/blogs/posts/research/sample-research-post.html" class="no-external">
+<div class="listing-date">
+Dec 14, 2024
+</div>
+<div class="listing-author">
+Chris Kornaros
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="VGVjaG5vbG9neQ==" data-listing-date-sort="1733983200000" data-listing-file-modified-sort="1734198591437" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="thumbnail">
+<p><a href="../../pages/blogs/posts/tech/sample-tech-post.html" class="no-external"></a></p><a href="../../pages/blogs/posts/tech/sample-tech-post.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="../../pages/blogs/posts/tech/sample-tech-post.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../pages/blogs/posts/tech/sample-tech-post.html" class="no-external">Sample Tech Post</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../pages/blogs/posts/tech/sample-tech-post.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('VGVjaG5vbG9neQ=='); return false;">
+Technology
+</div>
+</div>
+<div class="listing-description">
+<a href="../../pages/blogs/posts/tech/sample-tech-post.html" class="no-external">Testing.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../pages/blogs/posts/tech/sample-tech-post.html" class="no-external">
+<div class="listing-date">
+Dec 12, 2024
+</div>
+<div class="listing-author">
+Chris Kornaros
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

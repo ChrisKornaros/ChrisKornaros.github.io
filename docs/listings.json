@@ -1,0 +1,11 @@
+[
+  {
+    "listing": "/pages/blogs/blogs.html",
+    "items": [
+      "/pages/blogs/posts/research/research.html",
+      "/pages/blogs/posts/tech/tech.html",
+      "/pages/blogs/posts/research/sample-research-post.html",
+      "/pages/blogs/posts/tech/sample-tech-post.html"
+    ]
+  }
+]
