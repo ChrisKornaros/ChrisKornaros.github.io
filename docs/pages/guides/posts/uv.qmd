@@ -85,6 +85,7 @@ For anyone familiar with software development you've probably heard of GitHub or
    3. Select `HTTPS` for the easier connection option
 4. Verify you have proper access to your GitHub
    1. `gh auth status`
+
 ```bash
 github.com
   ✓ Logged in to github.com account itsmeChis (keyring)
@@ -94,8 +95,8 @@ github.com
   - Token scopes: 'delete_repo', 'gist', 'read:org', 'repo', 'workflow'
 ```
 
-   2. `gh repo list`
-5. Assuming you haven't, create your project repo from the CLI (you can also do so using the GitHub.com GUI, but I prefer this way to reinforce my learning)
+   1. `gh repo list`
+1. Assuming you haven't, create your project repo from the CLI (you can also do so using the GitHub.com GUI, but I prefer this way to reinforce my learning)
    1. `gh repo create`
    2. `Create a new repository from scratch`
    3. `uv basic`

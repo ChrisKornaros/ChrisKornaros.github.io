@@ -1,6 +1,6 @@
 /*-- scss:defaults --*/
 $background: #2E4053;
-$foreground: #F7F7F7;
+$foreground: #4A90E2;
 $primary: #FF9900;
 $secondary: #56B3FA;
 $tertiary: #655D4B;
@@ -16,15 +16,15 @@ $warning: #2E6490;
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: $background;
-  color: $foreground;
+  color: $light;
 }
 
 h1, h2, h3 {
-  color: $danger;
+  color: $dark;
 }
 
 h4, h5, h6 {
-  color: $danger;
+  color: $light;
   font-weight: bold;
 }
 
@@ -56,7 +56,78 @@ code {
   color: $danger;
 }
 
-.about-link {
-  color: $foreground;
-  text-decoration-color: $foreground;
+.about-link-text {
+  color: $light;
+}
+
+.quarto-post { 
+  // General styles for the post container
+  background-color: $background; // Matches the site's background theme
+  border: 1px solid $dark; // Subtle border for separation
+  padding: 2.5px;
+
+  .body {
+    color: $light; // Use the light color for the content text
+
+    // Style the title
+    h3.no-anchor.listing-title {
+      color: $primary; // Bright blue for title text
+    }
+
+    // Style the categories
+    .listing-categories {
+      .listing-category {
+        background-color: $dark; // Dark background for category tags
+        color: $light; // Light text for good contrast
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        display: inline-block;
+        margin-right: 0.5rem;
+        cursor: pointer;
+
+        &:hover {
+          background-color: lighten($dark, 10%); // Lighter on hover
+        }
+      }
+    }
+
+    // Style the description
+    .listing-description {
+      font-size: 1rem;
+      color: $light;
+
+      a {
+        color: $info; // Orange for links
+        text-decoration: underline;
+
+        &:hover {
+          text-decoration: none;
+          color: lighten($primary, 10%);
+        }
+      }
+    }
+  }
+
+  // Style the metadata
+  .metadata {
+    font-size: 0.875rem;
+    color: $secondary; // Use secondary blue for metadata text
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+
+    .listing-date,
+    .listing-author {
+      color: $light;
+
+      a {
+        color: inherit; // Inherit color from parent
+        text-decoration: none;
+
+        &:hover {
+          color: lighten($secondary, 10%);
+        }
+      }
+    }
+  }
 }

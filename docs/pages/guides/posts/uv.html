@@ -75,8 +75,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-c15c7ccb793a8c0145e7ec7341df1540.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-56dfab92d9a1e40e81fa338bab690bac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-e7663df3984f924744eb258d6855637e.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-a860c7563b67f1a5585f6cae080925cc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-b33ed490b84036a91be13512dea01517.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -234,6 +234,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#local-repository" id="toc-local-repository" class="nav-link" data-scroll-target="#local-repository">Local Repository</a></li>
   <li><a href="#remote-repository" id="toc-remote-repository" class="nav-link" data-scroll-target="#remote-repository">Remote Repository</a></li>
+  </ul></li>
+  <li><a href="#sec-2-dep" id="toc-sec-2-dep" class="nav-link" data-scroll-target="#sec-2-dep">Adding and managing dependencies</a>
+  <ul class="collapse">
+  <li><a href="#using-pip-and-venv" id="toc-using-pip-and-venv" class="nav-link" data-scroll-target="#using-pip-and-venv">Using pip and venv</a></li>
   <li><a href="#using-uv" id="toc-using-uv" class="nav-link" data-scroll-target="#using-uv">Using uv</a></li>
   </ul></li>
   <li><a href="#sec-3-convert" id="toc-sec-3-convert" class="nav-link" data-scroll-target="#sec-3-convert">Converting your Legacy Projects to uv</a></li>
@@ -387,69 +391,73 @@ uv and the .gitignore file
 </ol></li>
 <li>Verify you have proper access to your GitHub
 <ol type="1">
-<li><code>gh auth status</code> ```bash github.com ✓ Logged in to github.com account itsmeChis (keyring)</li>
+<li><code>gh auth status</code></li>
 </ol></li>
 </ol>
-<ul>
-<li>Active account: true</li>
-<li>Git operations protocol: https</li>
-<li>Token: gho_************************************</li>
-<li>Token scopes: ‘delete_repo’, ‘gist’, ‘read:org’, ‘repo’, ‘workflow’</li>
-</ul>
-<pre><code>
-   2. `gh repo list`
-5. Assuming you haven't, create your project repo from the CLI (you can also do so using the GitHub.com GUI, but I prefer this way to reinforce my learning)
-   1. `gh repo create`
-   2. `Create a new repository from scratch`
-   3. `uv basic`
-   4. *optional description*
-   5. `Public`
-   6. `GNU Affero General Public License v3.0` [Which license do you need?](https://choosealicense.com)
-![GitHub CLI Repo Creation](images/gh_cli_repo_setup.png)
-1. Set the newly created repo as the local git repo's upstream
-   1. This will result in an error (`git pull`)
-   2. Set the global config to merge [git pull](https://git-scm.com/docs/git-pull)
-   3. git pull with a commit message
-   4. git status to verify
-   5. git push
-
-### Adding and managing dependencies {#sec-2-dep}
-Thus far, the workflow with uv isn't too dissimilar from using pip and venv, but managing dependencies and testing scripts is where uv shines. As you'll see below, with pip and venv, you have to manually create the virtual environment, activate it, install dependencies, manage requirements files, and then run your script. With uv, however, almost all of that is done automatically and things like uv pip list or uv venv are only there for backwards compatibility. A lot of the tedious pieces of the DevOps workflow are now obsolete or handled in the background.
-
-#### Using pip and venv
-When using a combination of pip and venv, your typical workflow is straightforward, but becomes complicated if you need to uninstall certain packages or make quick, iterative tests of code. 
-
-```bash
-mkdir uv_basic
-cd uv_basic
-python -m venv .venv
-source .venv/bin/activate
-pip install duckdb
-pip install numpy
-pip freeze &gt; requirements.txt
-python script.py
-
-# Realize you don't need numpy, so you want to uninstall it and keep your environment cleaner
-deactivate
-rm -r .venv
-python -m venv .venv
-source .venv/bin/activate
-# Two options here, delete numpy from requirements.txt, not scalable with many packages, or reinstall just duckdb, also not scaleable
-pip install duckdb
-pip freeze &gt; requirements.txt
-python script.py</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">github.com</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">✓</span> Logged in to github.com account itsmeChis <span class="er">(</span><span class="ex">keyring</span><span class="kw">)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> Active account: true</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> Git operations protocol: https</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> Token: gho_<span class="pp">************************************</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> Token scopes: <span class="st">'delete_repo'</span>, <span class="st">'gist'</span>, <span class="st">'read:org'</span>, <span class="st">'repo'</span>, <span class="st">'workflow'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol type="1">
+<li><code>gh repo list</code></li>
+<li>Assuming you haven’t, create your project repo from the CLI (you can also do so using the GitHub.com GUI, but I prefer this way to reinforce my learning)
+<ol type="1">
+<li><code>gh repo create</code></li>
+<li><code>Create a new repository from scratch</code></li>
+<li><code>uv basic</code></li>
+<li><em>optional description</em></li>
+<li><code>Public</code></li>
+<li><code>GNU Affero General Public License v3.0</code> <a href="https://choosealicense.com">Which license do you need?</a> <img src="images/gh_cli_repo_setup.png" class="img-fluid" alt="GitHub CLI Repo Creation"></li>
+</ol></li>
+<li>Set the newly created repo as the local git repo’s upstream
+<ol type="1">
+<li>This will result in an error (<code>git pull</code>)</li>
+<li>Set the global config to merge <a href="https://git-scm.com/docs/git-pull">git pull</a></li>
+<li>git pull with a commit message</li>
+<li>git status to verify</li>
+<li>git push</li>
+</ol></li>
+</ol>
+</section>
+</section>
+<section id="sec-2-dep" class="level3">
+<h3 class="anchored" data-anchor-id="sec-2-dep">Adding and managing dependencies</h3>
+<p>Thus far, the workflow with uv isn’t too dissimilar from using pip and venv, but managing dependencies and testing scripts is where uv shines. As you’ll see below, with pip and venv, you have to manually create the virtual environment, activate it, install dependencies, manage requirements files, and then run your script. With uv, however, almost all of that is done automatically and things like uv pip list or uv venv are only there for backwards compatibility. A lot of the tedious pieces of the DevOps workflow are now obsolete or handled in the background.</p>
+<section id="using-pip-and-venv" class="level4">
+<h4 class="anchored" data-anchor-id="using-pip-and-venv">Using pip and venv</h4>
+<p>When using a combination of pip and venv, your typical workflow is straightforward, but becomes complicated if you need to uninstall certain packages or make quick, iterative tests of code.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> uv_basic</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> uv_basic</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv .venv</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install duckdb</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install numpy</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> freeze <span class="op">&gt;</span> requirements.txt</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> script.py</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Realize you don't need numpy, so you want to uninstall it and keep your environment cleaner</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="ex">deactivate</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> .venv</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv .venv</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Two options here, delete numpy from requirements.txt, not scalable with many packages, or reinstall just duckdb, also not scaleable</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install duckdb</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> freeze <span class="op">&gt;</span> requirements.txt</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> script.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>As you can see, the initial workflow isn’t horrible, but if you need to make a change to the environment or just want to test something small, the number of steps quickly multiplies.</p>
 </section>
 <section id="using-uv" class="level4">
 <h4 class="anchored" data-anchor-id="using-uv">Using uv</h4>
 <p>Compare that with the streamlined uv workflow.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init uv_basic</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> uv_basic</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add duckdb</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add numpy</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run script.py</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> remove numpy</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run script.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init uv_basic</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> uv_basic</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add duckdb</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add numpy</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run script.py</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> remove numpy</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run script.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The workflow improvements and efficiency should be obvious. The nice thing is that uv functions as your standalone virtual environment, without the need for activation or deactivation. Using <code>uv add</code> will add a dependency to both your <code>pyproject.toml</code> file and your <code>uv.lock</code> file. Additionally, if you are more familiar with verifying using pip, running <code>uv pip list</code> will show that the package is there (although the pip functionality is obsolete and only for backwards compatibility at this point). If you want to remove a package, simply use <code>uv remove</code> and that will also remove it from the .toml and .lock files. The last feature you’ll need to understand (to use uv at a basic level) is <code>uv sync</code>. Simply put, it syncs your environment with the project’s dependencies/lock file. This ensures that the exact versions specified in your lockfile are used in your environment– dependencies may be added, removed, or updated if there are updates to the declared dependencies.</p>
 <p>To cap this off, here are some common use cases for <code>uv sync</code>: - Run uv sync (without –frozen) to keep dependencies up-to-date and to resolve changes. - Use uv sync –frozen to validate dependencies without altering them</p>
 </section>
