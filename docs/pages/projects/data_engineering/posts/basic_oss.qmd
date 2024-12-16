@@ -363,4 +363,16 @@ At this point, the initial project configuration is just about done. The next st
 The basic data model and ingestion will all be handled in DuckDB and Python.
 
 ## DuckDB
+DuckDB **is:**
+
+> Simple: Easy to install and deploy, has zero external dependencies, and runs in-process in its host app or as a single binary.
+> Portable: Runs on Linux, macOS, Windows, and all popular hardware architectures, has client APIs for major programming languages
+> Feature-rich: Offers a rich SQL dialect. Can read/write files (CSV, Parquet, and JSON), to and from the local file system, and remote endpoints such as S3 buckets.
+> Fast: Runs analytical queries at blazing speed due to its columnar engine, which supports parallel execution and can process larger-than-memory workloads.
+> Extensible: DuckDB is extensible by third-party features such as new data types, functions, file formats and new SQL syntax.
+> Free: DuckDB and its core extensions are open-source under the permissive MIT License.
+
+**TL;DR** DuckDB is awesome.
+
+I'll also add some documentation about persistence, because it's relevant to this POC
 
