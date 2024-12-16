@@ -303,4 +303,64 @@ You can close that connection at any time by typing `\q`.
 I'm working on a MacOS laptop and manage local packages (like Python, Docker, gh, and Postgres) with Homebrew. Even though I had PostgreSQLv17 installed, it wasn't added to my PATH for some reason. So, when I ran `psql ...` I got an error. To fix this, I simply edited the `~/.zshrc` (the MacOS default terminal *zsh* configuration file in my home directory) and added `export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"`.
 :::
 
-### 
+### Exploring the Environment
+Now that you're all setup and connected, it's time to explore the environment and verify your privileges. In this section I'll run through some basic commands that you can use to understand whatever postgres environment you're in. 
+
+First, the `\du` command will tell you which roles are available and their attributes:
+
+```bash
+test=# \du
+                             List of roles
+ Role name |                         Attributes                         
+-----------+------------------------------------------------------------
+ chris     | Superuser, Create role, Create DB, Replication, Bypass RLS
+```
+
+Second, the `\l` command lists all databases:
+
+```bash
+test=# \l
+                                                 List of databases
+   Name    | Owner | Encoding | Locale Provider |  Collate   |   Ctype    | Locale | ICU Rules | Access privileges 
+-----------+-------+----------+-----------------+------------+------------+--------+-----------+-------------------
+ postgres  | chris | UTF8     | libc            | en_US.utf8 | en_US.utf8 |        |           | 
+ template0 | chris | UTF8     | libc            | en_US.utf8 | en_US.utf8 |        |           | =c/chris         +
+           |       |          |                 |            |            |        |           | chris=CTc/chris
+ template1 | chris | UTF8     | libc            | en_US.utf8 | en_US.utf8 |        |           | =c/chris         +
+           |       |          |                 |            |            |        |           | chris=CTc/chris
+ test      | chris | UTF8     | libc            | en_US.utf8 | en_US.utf8 |        |           | 
+(4 rows)
+```
+
+Third, the `\dn` command lists all schemas:
+
+```bash
+test=# \dn
+      List of schemas
+  Name  |       Owner       
+--------+-------------------
+ public | pg_database_owner
+(1 row)
+```
+
+Fourth, the `\dt` command lists all tables. You should expect this output upon creation of a new database:
+
+```bash
+test=# \dt
+Did not find any relations.
+```
+
+Here are some other useful commands that will not be useful with a fresh database:
+
+- `\dv` lists all views
+- `\d table_name` lists all columns in a table with name *table_name*
+- `\di table_name` lists all indexes for a table with name *table_name*
+
+Finally, to really dive into a specific database, you'll use the `\c` command, but in our case we connected when we first ran the `psql` command. If you just type `psql` without the `-d` flag, you'll simply connect to a server in general, not a specific database.
+
+At this point, the initial project configuration is just about done. The next steps involve initializing the persistent DuckDB database to use as the Dev/Test environment and defining the raw data model with dbt. For now, you can close the connection to the Postgres server and shutdown container. 
+
+The basic data model and ingestion will all be handled in DuckDB and Python.
+
+## DuckDB
+

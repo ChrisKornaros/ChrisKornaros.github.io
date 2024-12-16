@@ -357,8 +357,9 @@ cookieconsent.run({
   <li><a href="#verifying-a-successful-run" id="toc-verifying-a-successful-run" class="nav-link" data-scroll-target="#verifying-a-successful-run">Verifying a Successful Run</a></li>
   </ul></li>
   <li><a href="#connecting-to-the-postgresql-server-from-your-command-line-interface" id="toc-connecting-to-the-postgresql-server-from-your-command-line-interface" class="nav-link" data-scroll-target="#connecting-to-the-postgresql-server-from-your-command-line-interface">Connecting to the PostgreSQL Server from your Command-Line Interface</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#exploring-the-environment" id="toc-exploring-the-environment" class="nav-link" data-scroll-target="#exploring-the-environment">Exploring the Environment</a></li>
   </ul></li>
+  <li><a href="#duckdb" id="toc-duckdb" class="nav-link" data-scroll-target="#duckdb">DuckDB</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/projects/data_engineering/posts/basic_oss.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -713,11 +714,52 @@ Note
 </div>
 </div>
 </section>
-<section id="section" class="level3">
-<h3 class="anchored" data-anchor-id="section"></h3>
-
-
+<section id="exploring-the-environment" class="level3">
+<h3 class="anchored" data-anchor-id="exploring-the-environment">Exploring the Environment</h3>
+<p>Now that you’re all setup and connected, it’s time to explore the environment and verify your privileges. In this section I’ll run through some basic commands that you can use to understand whatever postgres environment you’re in.</p>
+<p>First, the <code>\du</code> command will tell you which roles are available and their attributes:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="va">test</span><span class="op">=</span># <span class="ex">\du</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                             <span class="ex">List</span> of roles</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">Role</span> name <span class="kw">|</span>                         <span class="ex">Attributes</span>                         </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="ex">-----------+------------------------------------------------------------</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">chris</span>     <span class="kw">|</span> <span class="ex">Superuser,</span> Create role, Create DB, Replication, Bypass RLS</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Second, the <code>\l</code> command lists all databases:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="va">test</span><span class="op">=</span># <span class="ex">\l</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                                                 <span class="ex">List</span> of databases</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>   <span class="ex">Name</span>    <span class="kw">|</span> <span class="ex">Owner</span> <span class="kw">|</span> <span class="ex">Encoding</span> <span class="kw">|</span> <span class="ex">Locale</span> Provider <span class="kw">|</span>  <span class="ex">Collate</span>   <span class="kw">|</span>   <span class="ex">Ctype</span>    <span class="kw">|</span> <span class="ex">Locale</span> <span class="kw">|</span> <span class="ex">ICU</span> Rules <span class="kw">|</span> <span class="ex">Access</span> privileges </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ex">-----------+-------+----------+-----------------+------------+------------+--------+-----------+-------------------</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">postgres</span>  <span class="kw">|</span> <span class="ex">chris</span> <span class="kw">|</span> <span class="ex">UTF8</span>     <span class="kw">|</span> <span class="ex">libc</span>            <span class="kw">|</span> <span class="ex">en_US.utf8</span> <span class="kw">|</span> <span class="ex">en_US.utf8</span> <span class="kw">|</span>        <span class="kw">|</span>           <span class="kw">|</span> </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">template0</span> <span class="kw">|</span> <span class="ex">chris</span> <span class="kw">|</span> <span class="ex">UTF8</span>     <span class="kw">|</span> <span class="ex">libc</span>            <span class="kw">|</span> <span class="ex">en_US.utf8</span> <span class="kw">|</span> <span class="ex">en_US.utf8</span> <span class="kw">|</span>        <span class="kw">|</span>           <span class="kw">|</span> <span class="ex">=c/chris</span>         +</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>           <span class="kw">|</span>       <span class="kw">|</span>          <span class="kw">|</span>                 <span class="kw">|</span>            <span class="kw">|</span>            <span class="kw">|</span>        <span class="kw">|</span>           <span class="kw">|</span> <span class="va">chris</span><span class="op">=</span>CTc/chris</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">template1</span> <span class="kw">|</span> <span class="ex">chris</span> <span class="kw">|</span> <span class="ex">UTF8</span>     <span class="kw">|</span> <span class="ex">libc</span>            <span class="kw">|</span> <span class="ex">en_US.utf8</span> <span class="kw">|</span> <span class="ex">en_US.utf8</span> <span class="kw">|</span>        <span class="kw">|</span>           <span class="kw">|</span> <span class="ex">=c/chris</span>         +</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>           <span class="kw">|</span>       <span class="kw">|</span>          <span class="kw">|</span>                 <span class="kw">|</span>            <span class="kw">|</span>            <span class="kw">|</span>        <span class="kw">|</span>           <span class="kw">|</span> <span class="va">chris</span><span class="op">=</span>CTc/chris</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a> <span class="bu">test</span>      <span class="kw">|</span> <span class="ex">chris</span> <span class="kw">|</span> <span class="ex">UTF8</span>     <span class="kw">|</span> <span class="ex">libc</span>            <span class="kw">|</span> <span class="ex">en_US.utf8</span> <span class="kw">|</span> <span class="ex">en_US.utf8</span> <span class="kw">|</span>        <span class="kw">|</span>           <span class="kw">|</span> </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">4</span> rows<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Third, the <code>\dn</code> command lists all schemas:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="va">test</span><span class="op">=</span># <span class="ex">\dn</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>      <span class="ex">List</span> of schemas</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Name</span>  <span class="kw">|</span>       <span class="ex">Owner</span>       </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="ex">--------+-------------------</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">public</span> <span class="kw">|</span> <span class="ex">pg_database_owner</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">1</span> row<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Fourth, the <code>\dt</code> command lists all tables. You should expect this output upon creation of a new database:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="va">test</span><span class="op">=</span># <span class="ex">\dt</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Did</span> not find any relations.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here are some other useful commands that will not be useful with a fresh database:</p>
+<ul>
+<li><code>\dv</code> lists all views</li>
+<li><code>\d table_name</code> lists all columns in a table with name <em>table_name</em></li>
+<li><code>\di table_name</code> lists all indexes for a table with name <em>table_name</em></li>
+</ul>
+<p>Finally, to really dive into a specific database, you’ll use the <code>\c</code> command, but in our case we connected when we first ran the <code>psql</code> command. If you just type <code>psql</code> without the <code>-d</code> flag, you’ll simply connect to a server in general, not a specific database.</p>
+<p>At this point, the initial project configuration is just about done. The next steps involve initializing the persistent DuckDB database to use as the Dev/Test environment and defining the raw data model with dbt. For now, you can close the connection to the Postgres server and shutdown container.</p>
+<p>The basic data model and ingestion will all be handled in DuckDB and Python.</p>
 </section>
+</section>
+<section id="duckdb" class="level2">
+<h2 class="anchored" data-anchor-id="duckdb">DuckDB</h2>
+
+
 </section>
 
 </main> <!-- /main -->
