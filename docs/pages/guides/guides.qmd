@@ -13,6 +13,7 @@ Welcome to the **Guides** section of the website! This is the landing page for s
 ## Future Guides (Planned)
 
 Here are some topics I plan to cover in the future:
+
 - DuckDB
 - dbt
 - PostgreSQL
