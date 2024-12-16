@@ -5,6 +5,7 @@ project:
 website:
   title: "Chris Kornaros"
   site-url: "https://chriskornaros.github.io"
+  description: "The personal website, portfolio, and blog of Chris Kornaros."
   twitter-card: true
   open-graph: true
   google-analytics: 
