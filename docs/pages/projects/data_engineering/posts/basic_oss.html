@@ -359,7 +359,10 @@ cookieconsent.run({
   <li><a href="#connecting-to-the-postgresql-server-from-your-command-line-interface" id="toc-connecting-to-the-postgresql-server-from-your-command-line-interface" class="nav-link" data-scroll-target="#connecting-to-the-postgresql-server-from-your-command-line-interface">Connecting to the PostgreSQL Server from your Command-Line Interface</a></li>
   <li><a href="#exploring-the-environment" id="toc-exploring-the-environment" class="nav-link" data-scroll-target="#exploring-the-environment">Exploring the Environment</a></li>
   </ul></li>
-  <li><a href="#duckdb" id="toc-duckdb" class="nav-link" data-scroll-target="#duckdb">DuckDB</a></li>
+  <li><a href="#duckdb" id="toc-duckdb" class="nav-link" data-scroll-target="#duckdb">DuckDB</a>
+  <ul>
+  <li><a href="#a-persistent-database-with-duckdb" id="toc-a-persistent-database-with-duckdb" class="nav-link" data-scroll-target="#a-persistent-database-with-duckdb">A Persistent Database with DuckDB</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/projects/data_engineering/posts/basic_oss.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -763,9 +766,31 @@ Note
 <p>Simple: Easy to install and deploy, has zero external dependencies, and runs in-process in its host app or as a single binary. Portable: Runs on Linux, macOS, Windows, and all popular hardware architectures, has client APIs for major programming languages Feature-rich: Offers a rich SQL dialect. Can read/write files (CSV, Parquet, and JSON), to and from the local file system, and remote endpoints such as S3 buckets. Fast: Runs analytical queries at blazing speed due to its columnar engine, which supports parallel execution and can process larger-than-memory workloads. Extensible: DuckDB is extensible by third-party features such as new data types, functions, file formats and new SQL syntax. Free: DuckDB and its core extensions are open-source under the permissive MIT License.</p>
 </blockquote>
 <p><strong>TL;DR</strong> DuckDB is awesome.</p>
-<p>I’ll also add some documentation about persistence, because it’s relevant to this POC</p>
+<p>As the block of text tells you, while DuckDB is both simple and portable, it is also feature-rich, which is why it’s great for a development or test environment. It’s even easy to spin-up an instance of DuckDB in-memory, while you’re testing or exploring data, and then you can choose to remove that or persist the file in storage.</p>
+<blockquote class="blockquote">
+<p>DuckDB can operate in both persistent mode, where the data is saved to disk, and in in-memory mode, where the entire data set is stored in the main memory. To create or open a persistent database, set the path of the database file, e.g., database.duckdb, when creating the connection. This path can point to an existing database or to a file that does not yet exist and DuckDB will open or create a database at that location as needed. The file may have an arbitrary extension, but .db or .duckdb are two common choices with .ddb also used sometimes. Starting with v0.10, DuckDB’s storage format is backwards-compatible, i.e., DuckDB is able to read database files produced by an older versions of DuckDB. DuckDB can operate in in-memory mode. In most clients, this can be activated by passing the special value :memory: as the database file or omitting the database file argument. In in-memory mode, no data is persisted to disk, therefore, all data is lost when the process finishes.</p>
+</blockquote>
+<p>For more information, here are links to some important pieces of DuckDB:</p>
+<ul>
+<li><a href="https://duckdb.org/2022/10/28/lightweight-compression.html">Compression</a></li>
+<li><a href="https://duckdb.org/docs/connect/concurrency">Concurrency</a></li>
+<li><a href="https://duckdb.org/docs/data/overview">Data Import</a></li>
+<li><a href="https://duckdb.org/docs/sql/introduction">DuckDB SQL</a></li>
+<li><a href="https://duckdb.org/why_duckdb">Why DuckDB?</a></li>
+</ul>
+<p>As you’ll see, I’m planning to use DuckDB with Python to ingest raw data from an API (or flat files) and then build the dbt models based off that (with some help from built-in DuckDB functionality). After that, I’ll connect dbt to Postgres and copy the data model over.</p>
+<section id="a-persistent-database-with-duckdb" class="level3">
+<h3 class="anchored" data-anchor-id="a-persistent-database-with-duckdb">A Persistent Database with DuckDB</h3>
+<p>As you saw above, it’s very easy to get started with DuckDB. To keep with the structure of the project, I’m going to put the <code>.duckdb</code> file in the root project directory because the <code>Dockerfile</code> (which serves as the Postgres file) is there as well.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Basic_OSS_Architecture</span> % duckdb test.duckdb</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">v1.1.3</span> 19864453f7</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Enter</span> <span class="st">".help"</span> for usage hints.</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="ex">D</span> SELECT <span class="pp">*</span> FROM duckdb_tables<span class="er">(</span><span class="kw">);</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="ex">.exit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/duckdb_init.png" class="img-fluid"></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

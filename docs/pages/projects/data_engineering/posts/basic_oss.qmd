@@ -374,5 +374,36 @@ DuckDB **is:**
 
 **TL;DR** DuckDB is awesome.
 
-I'll also add some documentation about persistence, because it's relevant to this POC
+As the block of text tells you, while DuckDB is both simple and portable, it is also feature-rich, which is why it's great for a development or test environment. It's even easy to spin-up an instance of DuckDB in-memory, while you're testing or exploring data, and then you can choose to remove that or persist the file in storage. 
 
+> DuckDB can operate in both persistent mode, where the data is saved to disk, and in in-memory mode, where the entire data set is stored in the main memory.
+> To create or open a persistent database, set the path of the database file, e.g., database.duckdb, when creating the connection.
+> This path can point to an existing database or to a file that does not yet exist and DuckDB will open or create a database at that location as needed. 
+> The file may have an arbitrary extension, but .db or .duckdb are two common choices with .ddb also used sometimes.
+> Starting with v0.10, DuckDB's storage format is backwards-compatible, i.e., DuckDB is able to read database files produced by an older versions of DuckDB. 
+> DuckDB can operate in in-memory mode. In most clients, this can be activated by passing the special value :memory: as the database file or omitting the database file argument. 
+> In in-memory mode, no data is persisted to disk, therefore, all data is lost when the process finishes.
+
+For more information, here are links to some important pieces of DuckDB:
+
+- [Compression](https://duckdb.org/2022/10/28/lightweight-compression.html)
+- [Concurrency](https://duckdb.org/docs/connect/concurrency)
+- [Data Import](https://duckdb.org/docs/data/overview)
+- [DuckDB SQL](https://duckdb.org/docs/sql/introduction)
+- [Why DuckDB?](https://duckdb.org/why_duckdb)
+
+As you'll see, I'm planning to use DuckDB with Python to ingest raw data from an API (or flat files) and then build the dbt models based off that (with some help from built-in DuckDB functionality). After that, I'll connect dbt to Postgres and copy the data model over.
+
+### A Persistent Database with DuckDB
+As you saw above, it's very easy to get started with DuckDB. To keep with the structure of the project, I'm going to put the `.duckdb` file in the root project directory because the `Dockerfile` (which serves as the Postgres file) is there as well.
+
+
+```bash
+Basic_OSS_Architecture % duckdb test.duckdb
+v1.1.3 19864453f7
+Enter ".help" for usage hints.
+D SELECT * FROM duckdb_tables();
+.exit
+```
+
+![](images/duckdb_init.png)
