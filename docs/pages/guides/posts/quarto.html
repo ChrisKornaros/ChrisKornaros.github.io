@@ -301,6 +301,7 @@ cookieconsent.run({
   <li><a href="#side-navigation" id="toc-side-navigation" class="nav-link" data-scroll-target="#side-navigation">Side Navigation</a></li>
   </ul></li>
   <li><a href="#sharing-websites" id="toc-sharing-websites" class="nav-link" data-scroll-target="#sharing-websites">Sharing Websites</a></li>
+  <li><a href="#website-tools" id="toc-website-tools" class="nav-link" data-scroll-target="#website-tools">Website Tools</a></li>
   </ul></li>
   <li><a href="#other-notes" id="toc-other-notes" class="nav-link" data-scroll-target="#other-notes">Other Notes</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
@@ -636,6 +637,11 @@ Dashes and Intentation Matter in YAML
 <li><code>git commit -m "Website updates."</code></li>
 <li><code>git push</code></li>
 </ul>
+</section>
+<section id="website-tools" class="level3">
+<h3 class="anchored" data-anchor-id="website-tools">Website Tools</h3>
+<p>Quarto offers several out of the box tools to enhance websites. Some of these are incredibly common for marketing or sharing your content, but all add value in their own way: Google Analytics, Twitter Cards, Open Graph, and RSS Feeds to name a few. The nice thing is they are incredibly easy to setup, and begin working immediately. Google Analytics for example tracked me when I was testing changes in the preview mode.</p>
+<p>That being said, I tried to implement an RSS feed for the website and it broke Quarto. I was still able to render the output, but I was receiving the “Source cannot be Target” error. To be able to use quarto preview and quarto render (and get a successfull STDOUT) again I had to remove the <code>robot.txt</code> file, the <code>sitemap.xml</code> file, and the <code>feed: true</code> property from the blog landing page files (my guides.qmd for example).</p>
 </section>
 </section>
 <section id="other-notes" class="level2">

@@ -278,6 +278,11 @@ Then the classic:
 - `git commit -m "Website updates."`
 - `git push`
 
+### Website Tools
+Quarto offers several out of the box tools to enhance websites. Some of these are incredibly common for marketing or sharing your content, but all add value in their own way: Google Analytics, Twitter Cards, Open Graph, and RSS Feeds to name a few. The nice thing is they are incredibly easy to setup, and begin working immediately. Google Analytics for example tracked me when I was testing changes in the preview mode.
+
+That being said, I tried to implement an RSS feed for the website and it broke Quarto. I was still able to render the output, but I was receiving the "Source cannot be Target" error. To be able to use quarto preview and quarto render (and get a successfull STDOUT) again I had to remove the `robot.txt` file, the `sitemap.xml` file, and the `feed: true` property from the blog landing page files (my guides.qmd for example). 
+
 ## Other Notes
 I'll update this section with more notes and tips that come to mind as I finish building out the site, version 1.0. Then, I'll reorganize what goes here into the proper places on the document. 
 
