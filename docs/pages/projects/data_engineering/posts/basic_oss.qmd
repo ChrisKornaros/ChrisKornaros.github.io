@@ -25,8 +25,10 @@ You can see here that I have both `jupyter` and `dbt` already installed. That's 
 
 ![First Commit](images/first_commit.png)
 
-### Moving On
-Now, it's time to setup some extra functionality in the project. I'm going to be using Quarto for documentation, so I'll run `quarto create project`. To learn more about Quarto and configuring your documentation in projects, checkout my [guide](https://ChrisKornaros.github.io/guides/quarto/). That being said, if you are ever taking screenshots of your work and want to quickly move them into your images folder, you can do so from the CLI.
+#### Adding Quarto
+Now, it's time to setup some extra functionality in the project. I'm going to be using Quarto for documentation, so I'll run `quarto create project`. To learn more about Quarto and configuring your documentation in projects, checkout my [guide](https://ChrisKornaros.github.io/guides/quarto/). It's a fantastic tool for building beautiful, robust documentation, even in enterprise production environments. Consider it for future papers, websites, dashboards, and reports. 
+
+That being said, if you are ever taking screenshots of your work and want to quickly move them into your images folder, you can do so from the CLI.
 
 ![Quarto Project Initialization](images/quarto_init.png)
 
@@ -47,6 +49,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "dbt-duckdb>=1.9.1",
     "dbt>=1.0.0.38.22",
     "duckdb>=1.1.3",
     "great-expectations>=0.18.22",
@@ -58,6 +61,238 @@ dependencies = [
 ```
 
 #### Using .gitignore effectively
-You probably noticed, but when you initialize a project with `uv` it automatically creates a `.gitignore` file and populates it with basic files and directories which don't need to be checked into source control (like .venv). I take this a step further, and add some Quarto specific files and directories too, `.quarto` and `_files` folders. Below is an example of my file at this early project stage.
+You probably noticed, but when you initialize a project with `uv` it automatically creates a `.gitignore` file and populates it with basic files and directories which don't need to be checked into source control (like .venv). I take this a step further, and add some Quarto specific files and directories too, `.quarto` and `_files` folders. Managing this file effectively can drastically reduce the file size of your commits.
+
+Below is an example of my file at this early project stage.
 
 ![](images/gitignore_sample.png)
+
+### Initializing a Data Environment
+Now, you'll be setting up dbt. Similar to the other CLI tools, dbt uses the `dbt init` command to create the folder structure necessary for the program to be effective. As you can see below, the process is very easy. You'll only enter a name for your project, which will (case sensitively) become the name of the dbt directory. Next, we'll walk through the fundamental pieces of a dbt project in depth. 
+
+![](images/dbt_init.png)
+
+### The Data Build Tool (dbt)
+As I said, creating a dbt project is easy, but it can get confusing from here on out if you're alone with the [dbt documentation](https://docs.getdbt.com/guides/manual-install?step=1). In my experience, dbt initalizes a `logs/` folder in the project root directory **not** the dbt root directory. So, I make sure to add that to the gitignore file, because I don't think that needs to be checked into version control.
+
+So, now that you've initialized your folder, let's go through the basics: 
+
+#### Project Root: Basic_OSS
+In the case of my project, the root folder is called `Basic_OSS`. Here, you'll find the 6 subdirectories, a `.gitignore` file, a `README.md` file, and the `dbt_project.yml` file. The `.gitignore` can be deleted, because you have one in the project root directory, and for the same reason, so can the README. The dbt project file is the core of your entire data environment, in the same exact way that a `_quarto.yml` file is the core of your website, book, or documentation project. 
+
+This is where you'll configure the actual structure and hierarchy of your environment, along with things like schemas or variables, or aliases. 
+
+#### Analyses
+Contains the SQL files for any analysis done that are not part of the core models. Think of these as the `SELECT` statements for analytical queries, whereas models handle the `DDL` statements for database architects. Depending on your workflow, this folder could be unused.
+
+#### Macros
+This is where you can store custom macros (functions) and reusable code written in either SQL or `jinja`. This is the Python package equivalent for SQL and it's often used to ensure **DRY** (Don't Repeat Yourself) principles for ETL and other database work.
+
+#### Models
+This is the core of dbt. Models are the SQL tables themselves, as well as the transformations when cleaning and aggregating data (from raw to reporting). If you have a raw schema (where the raw data is temporarily stored) and a clean schema (where cleaned data is persisted), you would have both a `raw` and `clean` folder within the `models` folder. Then, the individual queries would live within those subfolders as the actual tables and views. 
+
+It is where most of (if not all) your transformations live. So, can become computationally taxing if you aren't careful. 
+
+Run with `dbt run` or `dbt run --select {model_directory_name}`.
+
+#### Seeds
+These are flat files containing static data used for mapping (or reference) data. Only use this if your project needs static data. For more on [seeds](https://docs.getdbt.com/reference/seed-configs).
+
+Run with `dbt seed`.
+
+#### Snapshots
+Stores snapshot definitions for versioning and tracking changes in source data over time. These are commonly used for **SCDs** (slowly changing dimensions) or auditing.
+
+Run with `dbt snapshot`.
+
+#### Tests
+Fairly self explanatory, but this folder contains custom, SQL-defined tests for your models. Dbt allows for both custom tests defined in `.sql` files and *generic* tests defined in a `YAML`. The tests run on various models are defined in the dbt_project.yml file. 
+
+#### Extra Notes
+Dbt also has the `docs/` and `dbt_packages/` folders which are for advanced documentation and shareable, modularized code, respectively. Generally speaking, your workflow will really only involve the following parts of a dbt project:
+
+1. `models/`
+2. `tests/`
+3. `macros/`
+4. `dbt_project.yml`
+
+The others are optional and provide functionality, that while useful and powerful in many cases, is not always needed. Now that we've got the local directory all configured, it's time to start building the container for our PostgreSQL instance (server, cluster, whatever you want to call it).
+
+## Docker and Containers
+Docker is a powerful open-source platform that simplifies the process of developing, packaging, and deploying applications using containers, which are lightweight, portable environments. Unlike traditional virtualization, which replicates an entire computer system, containers virtualize at the operating system (OS) level, creating isolated spaces where applications run with all their dependencies. By isolating apps in containers, Docker ensures that each environment is consistent across different systems, reducing conflicts caused by mismatched dependencies. This approach accelerates development, enhances portability, and enables scalability, making Docker a cornerstone of modern microservices architectures and containerized workflows.
+
+You can learn more about Docker either through their open source [documentation](https://docs.docker.com) or DataCamp's [course](https://app.datacamp.com/learn/courses/introduction-to-docker) by Tim Sangster!
+
+### The Dockerfile and Configuring Your Image
+
+The `Dockerfile` is the foundation of Docker image creation, serving as a script of instructions to define the environment and behavior of your containerized application. Each instruction in the `Dockerfile` builds on the previous one, forming layers that together create a Docker image.
+
+A `Dockerfile` is composed of various instructions, such as:
+
+- **FROM**: Specifies the base image to start with. Always begin with this instruction.
+  ```dockerfile
+  FROM postgres
+  ```
+- **RUN**: Executes shell commands during the build process and creates a new layer.
+  ```dockerfile
+  RUN apt-get update
+  ```
+- **COPY/ADD**: Transfers files from your local system into the image.
+  ```dockerfile
+  COPY postgres-password.txt /usr/home/
+  ```
+- **WORKDIR**: Sets the working directory for subsequent instructions.
+  ```dockerfile
+  WORKDIR /usr/home/
+  ```
+- **CMD**: Specifies the default command to run when the container starts. Unlike `RUN`, `CMD` is executed at runtime.
+  ```dockerfile
+  CMD ["postgres"]
+  ```
+
+#### Optimizing Builds with Caching
+
+Docker employs a layer-caching mechanism to optimize builds. Each instruction in the `Dockerfile` forms a layer, and Docker reuses unchanged layers in subsequent builds to save time. For example:
+
+```dockerfile
+RUN apt-get update
+RUN apt-get install -y libpq-dev
+```
+
+If you rebuild and these instructions remain unchanged, Docker uses cached results. However, if the base image or any instruction changes, the cache is invalidated for that layer and subsequent ones.
+
+::: {.callout-tip title="Maximize Cache Efficiency"}
+Reorder `Dockerfile` instructions to maximize cache efficiency. Place less frequently changing instructions higher in the file. Then, place the layers you need to test changes in more frequently, lower in the file.
+::: 
+
+#### Using Variables in Dockerfiles
+
+Variables make `Dockerfiles` more flexible and maintainable.
+
+- **ARG**: Sets build-time variables.
+  ```dockerfile
+  ARG APP_PORT=5000
+  RUN echo "Application port: $APP_PORT"
+  ```
+  `ARG` values are accessible only during the build process.
+
+- **ENV**: Sets environment variables for runtime.
+  ```dockerfile
+  ENV APP_ENV=production
+  ```
+  These variables persist after the image is built and can be overridden when running the container using the `--env` flag.
+
+::: {.callout-important title="Credentials"} 
+Avoid storing sensitive data like credentials in `ARG` or `ENV`, as they are visible in the image’s history.
+:::
+
+#### Security Best Practices
+
+1. **Use Official Images**: Base your `Dockerfile` on trusted, well-maintained images from sources like Docker Hub.
+2. **Minimize Packages**: Install only what your application needs to reduce potential vulnerabilities.
+3. **Avoid Root Users**: Run applications with restricted permissions by creating a non-root user:
+   ```dockerfile
+   RUN useradd -m appuser
+   USER appuser
+   ```
+4. **Update Regularly**: Keep your base images and software dependencies up to date.
+
+### Write a PostgreSQL Dockerfile and Build the Image
+Below is an example Dockerfile for setting up PostgreSQL, with specified user, password, and database name:
+
+```dockerfile
+# Use an official PostgreSQL base image
+FROM postgres
+
+# Set environment variables from a local file
+COPY .pg-password /etc/postgresql/.pg-password
+
+# Read the password from the file and set it as an environment variable
+RUN POSTGRES_PASSWORD=$(cat /etc/postgresql/.pg-password)
+
+# Set additional environment variables
+ENV POSTGRES_USER=chris
+ENV POSTGRES_DB=test
+
+# Expose the PostgreSQL port
+EXPOSE 5432
+
+# Run commands to configure the environment
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Start PostgreSQL service when the container runs
+CMD ["postgres"]
+``` 
+
+For the purposes of simplicity in this guide, I'm just going to leave the POSTGRES_ variables as they are in the file. The password I'll keep separate to demonstrate how that would work. That being said, after you've writen the image's Dockerfile, you'll build the image.
+
+```bash
+docker build -t test .
+```
+
+If you need to remove the image at any point, first make sure there are no containers using it, then run the following:
+
+```bash
+docker rmi test
+```
+
+### Running the Container
+Next, to run the container, you'll be adding a few flags, which I'll explain below. For simplicity sake, it's probably easiest to store this in a script somewhere and then execute that on start up. `**Note** to myself: Add a section on writing local scripts/executables like this later on in the guide.`
+
+```bash
+docker run \
+  --name pg_test \
+  -e POSTGRES_PASSWORD_FILE=/etc/postgresql/.pg-password \
+  -e POSTGRES_USER=chris \
+  -e POSTGRES_DB=test \
+  -p 5432:5432 \
+  test
+```
+
+#### Flags Explained
+The code above will run a container using the Docker image `test` as the base. 
+
+- The container will have the `--name` **pg_test**
+- You'll use the file located at `/etc/postgresql/.pg-password` to define the `POSTGRES_PASSWORD_FILE` environment variable
+  - In Docker, when you use the -e option to pass environment variables, you typically use *POSTGRES_PASSWORD_FILE* instead of *POSTGRES_PASSWORD* for file-based password configuration because of how Docker processes environment variables and how the underlying system uses them.
+- You'll also pass the `-e`nvironment variables for `POSTGRES_USER` and `POSTGRES_DB`
+  - This isn't necessary because they are defined in the Dockerfile, so they are globally available within the container.
+  - It's useful to specify these values in the `run` command if you want to override the default values or pass different values.
+  - Specifying the user and database in the docker run command allows you to control the environment at runtime. More useful in production envrionments, less so for one-off projects like this
+- Finally, you'll map the container's `-p`ort 5432 to your `port:5432`
+
+#### Verifying a Successful Run
+To verify your container is running, you can use `docker ps` to get a list of active containers, their image, and other bits of information.
+
+```bash
+docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                    NAMES
+5793b64919f0   test      "docker-entrypoint.s…"   14 seconds ago   Up 13 seconds   0.0.0.0:5432->5432/tcp   pg_test
+```
+
+If you need to stop the running container, simply type:
+
+```bash
+docker kill pg_test
+```
+
+### Connecting to the PostgreSQL Server from your Command-Line Interface
+Now that the server is up and running, you can test an active connection (and your user permissions) from your CLI. To do so, run the following:
+
+
+```bash
+psql -h localhost -U chris -d test
+```
+
+- `psql` is the CLI command for postgres, in the same way `gh` is for GitHub
+- `-h` tells postgres that the server's host is ***localhost***
+- `-U` tells postgres to use the *user* ***chris***
+- `-d` tells postgres to connect to the database ***test***
+
+You can close that connection at any time by typing `\q`.
+
+::: {.callout-note}
+I'm working on a MacOS laptop and manage local packages (like Python, Docker, gh, and Postgres) with Homebrew. Even though I had PostgreSQLv17 installed, it wasn't added to my PATH for some reason. So, when I ran `psql ...` I got an error. To fix this, I simply edited the `~/.zshrc` (the MacOS default terminal *zsh* configuration file in my home directory) and added `export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"`.
+:::
