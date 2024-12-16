@@ -159,11 +159,11 @@ window.Quarto = {
 };
 </script>
 
-<link rel="alternate" type="application/rss+xml" title="Chris Kornaros" href="guides.xml" data-external="1"><meta property="og:title" content="Guides – Chris Kornaros">
-<meta property="og:description" content="The personal website, portfolio, and blog of Chris Kornaros.">
+<meta property="og:title" content="Guides – Chris Kornaros">
+<meta property="og:description" content="">
 <meta property="og:site_name" content="Chris Kornaros">
 <meta name="twitter:title" content="Guides – Chris Kornaros">
-<meta name="twitter:description" content="The personal website, portfolio, and blog of Chris Kornaros.">
+<meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -337,10 +337,10 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="RGV2T3Bz" data-listing-date-sort="1734069600000" data-listing-file-modified-sort="1734315144855" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2044">
+<div class="g-col-1" data-index="0" data-categories="RGV2T3Bz" data-listing-date-sort="1734069600000" data-listing-file-modified-sort="1734318403522" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2044">
 <a href="../../pages/guides/posts/uv.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<!-- img(9CEB782EFEE6)[progressive=false, height=150px]:listing:pages/guides/posts/uv.html -->
+<p class="card-img-top"><img src="posts/images/gh_cli_repo_setup.png" alt="GitHub CLI Repo Creation" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 uv, the Python Project and Package Manager
@@ -351,7 +351,7 @@ DevOps
 </div>
 </div>
 <div class="card-text listing-description">
-<!-- desc(5A0113B34292)[max=175]:pages/guides/posts/uv.html -->
+A basic guide on using <code>uv</code> the package and projects manager for Python developers.
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -365,10 +365,10 @@ Dec 13, 2024
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="1" data-categories="UmVwb3J0aW5n" data-listing-date-sort="1734069600000" data-listing-file-modified-sort="1734315144853" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3179">
+<div class="g-col-1" data-index="1" data-categories="UmVwb3J0aW5n" data-listing-date-sort="1734069600000" data-listing-file-modified-sort="1734318630187" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3179">
 <a href="../../pages/guides/posts/quarto.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<!-- img(9CEB782EFEE6)[progressive=false, height=150px]:listing:pages/guides/posts/quarto.html -->
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 Quarto
@@ -379,7 +379,7 @@ Reporting
 </div>
 </div>
 <div class="card-text listing-description">
-<!-- desc(5A0113B34292)[max=175]:pages/guides/posts/quarto.html -->
+A non-exhaustive guide on using Quarto for project documentation and personal branding.
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -632,7 +632,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/chriskornaros\.github\.io");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

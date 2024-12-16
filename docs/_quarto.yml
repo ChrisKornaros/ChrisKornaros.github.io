@@ -4,8 +4,6 @@ project:
 
 website:
   title: "Chris Kornaros"
-  site-url: "https://chriskornaros.github.io"
-  description: "The personal website, portfolio, and blog of Chris Kornaros."
   twitter-card: true
   open-graph: true
   google-analytics: 
@@ -15,6 +13,8 @@ website:
     type: express
     style: headline
     palette: dark
+  repo-url: https://github.com/ChrisKornaros/ChrisKornaros.github.io
+  repo-actions: [source, issue]
   page-footer: 
     background: danger
     center:
@@ -29,8 +29,6 @@ website:
       - icon: envelope-arrow-up-fill
         text: Email
         href: https://forms.gle/gDEjGD9G6VkaxkWX6 
-  repo-url: https://github.com/ChrisKornaros/ChrisKornaros.github.io
-  repo-actions: [source, issue]
   navbar:
     search: true
     background: danger

@@ -14,7 +14,7 @@
     "href": "pages/guides/guides.html#future-guides-planned",
     "title": "Guides",
     "section": "Future Guides (Planned)",
-    "text": "Future Guides (Planned)\nHere are some topics I plan to cover in the future: - DuckDB - dbt - PostgreSQL\nStay tuned for updates!",
+    "text": "Future Guides (Planned)\nHere are some topics I plan to cover in the future:\n\nDuckDB\ndbt\nPostgreSQL\n\nStay tuned for updates!",
     "crumbs": [
       "Guides"
     ]
