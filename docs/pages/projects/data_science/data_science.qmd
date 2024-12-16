@@ -2,6 +2,7 @@
 title: "Data Science and Machine Learning Projects"
 listing:
     contents: posts
+    feed: true
     sort: "date desc"
     type: grid
     categories: true

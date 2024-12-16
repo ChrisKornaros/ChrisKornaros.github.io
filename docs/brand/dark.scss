@@ -56,13 +56,32 @@ code {
   color: $danger;
 }
 
-.about-link-text {
-  color: $light;
+
+.quarto-about-jolla {
+
+  .about-links {
+
+    .about-link-text {
+      color: $light;
+
+      &:hover {
+        color: lighten($primary, 10%);
+      }
+    }
+
+    a {
+     color: $light;
+     
+     &:hover {
+      color: lighten($primary, 10%);
+    }
+     
+    }
+  }
 }
 
 .quarto-post { 
   // General styles for the post container
-  background-color: $background; // Matches the site's background theme
   border: 1px solid $dark; // Subtle border for separation
   padding: 2.5px;
 
@@ -72,6 +91,14 @@ code {
     // Style the title
     h3.no-anchor.listing-title {
       color: $primary; // Bright blue for title text
+
+      a {
+        color: $primary;
+
+        &:hover {
+          color: lighten($primary, 10%);
+        }
+      }
     }
 
     // Style the categories
@@ -97,7 +124,7 @@ code {
       color: $light;
 
       a {
-        color: $info; // Orange for links
+        color: $light; // Orange for links
         text-decoration: underline;
 
         &:hover {

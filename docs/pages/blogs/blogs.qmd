@@ -2,6 +2,7 @@
 title: "Blogs"
 listing:
   contents: posts
+  feed: true
   sort: "title desc"
   type: table
   categories: true

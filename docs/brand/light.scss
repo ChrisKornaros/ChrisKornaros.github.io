@@ -15,11 +15,11 @@ $warning: #2E6490;
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: $background;
-  color: $foreground;
+  color: $dark;
 }
 
 h1, h2, h3 {
-  color: $danger;
+  color: $dark;
 }
 
 h4, h5, h6 {
@@ -55,7 +55,104 @@ code {
   color: $danger;
 }
 
-.about-link-text {
-  color: $foreground;
-  text-decoration-color: $foreground;
+.quarto-about-jolla {
+
+  .about-links {
+
+    .about-link-text {
+      color: $warning;
+
+      &:hover {
+        color: lighten($warning, 10%);
+      }
+    }
+
+    a {
+     color: $warning;
+     
+     &:hover {
+      color: lighten($warning, 10%);
+    }
+     
+    }
+  }
+}
+
+.quarto-post { 
+  // General styles for the post container
+  border: 1px solid $warning; // Subtle border for separation
+  padding: 2.5px;
+
+  .body {
+    color: $warning; // Use the light color for the content text
+
+    // Style the title
+    h3.no-anchor.listing-title {
+      color: $warning; // Bright blue for title text
+
+      a {
+        color: $warning;
+
+        &:hover {
+          color: lighten($warning, 10%);
+        }
+      }
+    }
+
+    // Style the categories
+    .listing-categories {
+      .listing-category {
+        background-color: $dark; // Dark background for category tags
+        color: $light; // Light text for good contrast
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        display: inline-block;
+        margin-right: 0.5rem;
+        cursor: pointer;
+
+        &:hover {
+          background-color: lighten($dark, 10%); // Lighter on hover
+        }
+      }
+    }
+
+    // Style the description
+    .listing-description {
+      font-size: 1rem;
+      color: $light;
+
+      a {
+        color: $warning; // Orange for links
+        text-decoration: underline;
+
+        &:hover {
+          text-decoration: none;
+          color: lighten($warning, 10%);
+        }
+      }
+    }
+  }
+
+  // Style the metadata
+  .metadata {
+    font-size: 0.875rem;
+    color: $danger; // Use secondary blue for metadata text
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+
+    .listing-date,
+    .listing-author {
+      color: $danger;
+
+      a {
+        color: inherit; // Inherit color from parent
+        text-decoration: none;
+
+        &:hover {
+          color: lighten($secondary, 10%);
+        }
+      }
+    }
+  }
 }

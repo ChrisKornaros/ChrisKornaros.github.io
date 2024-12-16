@@ -1,0 +1,33 @@
+[
+  {
+    "listing": "/pages/guides/guides.html",
+    "items": [
+      "/pages/guides/posts/uv.html",
+      "/pages/guides/posts/quarto.html"
+    ]
+  },
+  {
+    "listing": "/pages/projects/data_engineering/data_engineering.html",
+    "items": [
+      "/pages/projects/data_engineering/posts/basic_oss.html",
+      "/pages/projects/data_engineering/posts/oss_data_arch.html",
+      "/pages/projects/data_engineering/posts/bank_etl.html"
+    ]
+  },
+  {
+    "listing": "/pages/blogs/blogs.html",
+    "items": [
+      "/pages/blogs/posts/first_blog.html"
+    ]
+  },
+  {
+    "listing": "/pages/projects/data_science/data_science.html",
+    "items": [
+      "/pages/projects/data_science/posts/nfl_bowl_2025.html",
+      "/pages/projects/data_science/posts/titanic.html",
+      "/pages/projects/data_science/posts/gym_market.html",
+      "/pages/projects/data_science/posts/netflix.html",
+      "/pages/projects/data_science/posts/login_validation.html"
+    ]
+  }
+]

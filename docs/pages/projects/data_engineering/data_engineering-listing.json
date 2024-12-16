@@ -1,0 +1,8 @@
+{
+  "listing": "/pages/projects/data_engineering/data_engineering.html",
+  "items": [
+    "/pages/projects/data_engineering/posts/basic_oss.html",
+    "/pages/projects/data_engineering/posts/oss_data_arch.html",
+    "/pages/projects/data_engineering/posts/bank_etl.html"
+  ]
+}

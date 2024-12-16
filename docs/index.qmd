@@ -12,6 +12,9 @@ about:
           href: https://www.linkedin.com/in/chris-kornaros
         - text: Bluesky
           href: https://bsky.app/profile/chriskornaros.bsky.social
+        - icon: envelope-arrow-up-fill
+          text: Email
+          href: https://forms.gle/gDEjGD9G6VkaxkWX6 
 ---
 
 This site is the personal portfolio and homepage for Chris Kornaros. I'm a Tulane Graduate and professional Data Engineer. On here, you'll find projects and code samples that I can share publicly, guides for various tools or workflows, journal or blog posts, and any independent research or professional updates (including my resume). 

@@ -1,9 +1,35 @@
 project:
   type: website
-  output-dir: .
+  output-dir: _site/
 
 website:
   title: "Chris Kornaros"
+  site-url: "https://chriskornaros.github.io"
+  twitter-card: true
+  open-graph: true
+  google-analytics: 
+    tracking-id: "G-J1EQMCS7CC"
+    anonymize-ip: true
+  cookie-consent: 
+    type: express
+    style: headline
+    palette: dark
+  page-footer: 
+    background: danger
+    center:
+      - icon: github
+        text: GitHub
+        href: https://www.github.com/ChrisKornaros
+      - icon: linkedin
+        text: LinkedIn
+        href: https://www.linkedin.com/in/chris-kornaros
+      - text: Bluesky
+        href: https://bsky.app/profile/chriskornaros.bsky.social
+      - icon: envelope-arrow-up-fill
+        text: Email
+        href: https://forms.gle/gDEjGD9G6VkaxkWX6 
+  repo-url: https://github.com/ChrisKornaros/ChrisKornaros.github.io
+  repo-actions: [source, issue]
   navbar:
     search: true
     background: danger
@@ -33,11 +59,13 @@ website:
       foreground: light
       collapse-level: 2
       contents:
-        - pages/guides/guides.qmd
-        - text: "Quarto"
-          href: pages/guides/posts/quarto.qmd
-        - text: "uv"
-          href: pages/guides/posts/uv.qmd
+        - section: "Guides"
+          href: pages/guides/guides.qmd
+          contents:
+            - text: "Quarto"
+              href: pages/guides/posts/quarto.qmd
+            - text: "uv"
+              href: pages/guides/posts/uv.qmd
 
       
     - id: projects

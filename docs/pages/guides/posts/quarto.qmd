@@ -224,36 +224,37 @@ The general structure for your first page group is as follows.
 
 ```yaml
 sidebar:
-    - id: guides
-      title: "Guides"
-      style: "docked"
-      background: dark
-      foreground: light
-      collapse-level: 2
-      contents:
-        - pages/guides/guides.qmd
+  - id: guides
+    title: "Guides"
+    style: "docked"
+    background: dark
+    foreground: light
+    collapse-level: 2
+    contents:
+      - section: "Guides"
+        href: pages/guides/guides.qmd
+        contents:
 ```
 
 Now, if that's where things end, you could just list pages on and on using the `text: href:` syntax. That being said, you probably are going to have a few subcategories, and possibly even further nested subcategories. To enable this, don't use the `text:` syntax, instead use `section:`. This tells Quarto that you are defining a section, rather than just one single page. As you might guess, you can further nest sections, or specific pages, depending on your use of `text:` and `section:` with `href:`. See an example below.
 
 ```yaml
-- id: projects
+id: projects
       title: "Projects"
       contents:
         - pages/projects/projects.qmd
         - section: "Data Engineering and Architecture"
           href: pages/projects/data_engineering/data_engineering.qmd
           contents:
-            - section: "DataCamp Data Engineering Projects"
-              href: pages/projects/data_engineering/datacamp/datacamp.qmd
-              contents:
-                - text: Bank Marketing ETL
-                  href: pages/projects/data_engineering/datacamp/bank_etl/bank_etl.qmd
-            - section: "Data Engineering Research Projects"
-              href: pages/projects/data_engineering/research/research.qmd
+            - text: "Bank Marketing ETL"
+              href: pages/projects/data_engineering/posts/bank_etl.qmd
+            - text: "Open Source Data and Analytics Architecture"
+              href: pages/projects/data_engineering/posts/oss_data_arch.qmd
+            - text: "Basic Open Source Architecture"
+              href: pages/projects/data_engineering/posts/basic_oss.qmd
 ```
 
-Furthermore, it's crucial, for nested subpages, to have the parent landing page's `.qmd` file's path as a standalone line in the contents of the `_quarto.yml` file. Failing to do so will remove the sidebar from the landing page's navigation; however, for subsections, those should be specified within an href paramter, under the section line. Additionally, for the collapsable functionality to work consistently in a sidebar, you'll need it docked. The behavior is inconsistent with floating sidebars. After you've set your default color values in `_brand.yml`, make sure to specify the design details at the top of your `sidebar` property.
+For subsections, the landing page's `.qmd` file should be specified within an href paramter, under the section line. Additionally, for the collapsable functionality to work consistently in a sidebar, you'll need it docked. The behavior is inconsistent with floating sidebars. After you've set your default color values in `_brand.yml`, make sure to specify the design details at the top of your `sidebar` property. Having a section provides the dropdown functionality on your sidebar.
 
 ### Sharing Websites
 There are two primary ways to publish your website once you're done making edits, assuming you're also using GitHub Pages. 
