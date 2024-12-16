@@ -238,6 +238,8 @@ If you need to remove the image at any point, first make sure there are no conta
 docker rmi test
 ```
 
+![](images/docker_build_output.png)
+
 ### Running the Container
 Next, to run the container, you'll be adding a few flags, which I'll explain below. For simplicity sake, it's probably easiest to store this in a script somewhere and then execute that on start up. `**Note** to myself: Add a section on writing local scripts/executables like this later on in the guide.`
 
@@ -250,6 +252,8 @@ docker run \
   -p 5432:5432 \
   test
 ```
+
+![](images/docker_run_output.png)
 
 #### Flags Explained
 The code above will run a container using the Docker image `test` as the base. 
@@ -293,6 +297,10 @@ psql -h localhost -U chris -d test
 
 You can close that connection at any time by typing `\q`.
 
+![](images/psql_conn.png)
+
 ::: {.callout-note}
 I'm working on a MacOS laptop and manage local packages (like Python, Docker, gh, and Postgres) with Homebrew. Even though I had PostgreSQLv17 installed, it wasn't added to my PATH for some reason. So, when I ran `psql ...` I got an error. To fix this, I simply edited the `~/.zshrc` (the MacOS default terminal *zsh* configuration file in my home directory) and added `export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"`.
 :::
+
+### 

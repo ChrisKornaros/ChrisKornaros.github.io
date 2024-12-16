@@ -357,6 +357,7 @@ cookieconsent.run({
   <li><a href="#verifying-a-successful-run" id="toc-verifying-a-successful-run" class="nav-link" data-scroll-target="#verifying-a-successful-run">Verifying a Successful Run</a></li>
   </ul></li>
   <li><a href="#connecting-to-the-postgresql-server-from-your-command-line-interface" id="toc-connecting-to-the-postgresql-server-from-your-command-line-interface" class="nav-link" data-scroll-target="#connecting-to-the-postgresql-server-from-your-command-line-interface">Connecting to the PostgreSQL Server from your Command-Line Interface</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/projects/data_engineering/posts/basic_oss.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -645,6 +646,7 @@ Credentials
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> test .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If you need to remove the image at any point, first make sure there are no containers using it, then run the following:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> rmi test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/docker_build_output.png" class="img-fluid"></p>
 </section>
 <section id="running-the-container" class="level3">
 <h3 class="anchored" data-anchor-id="running-the-container">Running the Container</h3>
@@ -656,6 +658,7 @@ Credentials
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-e</span> POSTGRES_DB=test <span class="dt">\</span></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">-p</span> 5432:5432 <span class="dt">\</span></span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/docker_run_output.png" class="img-fluid"></p>
 <section id="flags-explained" class="level4">
 <h4 class="anchored" data-anchor-id="flags-explained">Flags Explained</h4>
 <p>The code above will run a container using the Docker image <code>test</code> as the base.</p>
@@ -695,6 +698,7 @@ Credentials
 <li><code>-d</code> tells postgres to connect to the database <strong><em>test</em></strong></li>
 </ul>
 <p>You can close that connection at any time by typing <code>\q</code>.</p>
+<p><img src="images/psql_conn.png" class="img-fluid"></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -708,6 +712,9 @@ Note
 <p>I’m working on a MacOS laptop and manage local packages (like Python, Docker, gh, and Postgres) with Homebrew. Even though I had PostgreSQLv17 installed, it wasn’t added to my PATH for some reason. So, when I ran <code>psql ...</code> I got an error. To fix this, I simply edited the <code>~/.zshrc</code> (the MacOS default terminal <em>zsh</em> configuration file in my home directory) and added <code>export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"</code>.</p>
 </div>
 </div>
+</section>
+<section id="section" class="level3">
+<h3 class="anchored" data-anchor-id="section"></h3>
 
 
 </section>
