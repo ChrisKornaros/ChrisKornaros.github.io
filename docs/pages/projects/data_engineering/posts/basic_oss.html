@@ -363,6 +363,10 @@ cookieconsent.run({
   <ul>
   <li><a href="#a-persistent-database-with-duckdb" id="toc-a-persistent-database-with-duckdb" class="nav-link" data-scroll-target="#a-persistent-database-with-duckdb">A Persistent Database with DuckDB</a></li>
   </ul></li>
+  <li><a href="#dbt" id="toc-dbt" class="nav-link" data-scroll-target="#dbt">dbt</a>
+  <ul>
+  <li><a href="#configuring-database-connections-with-dbt" id="toc-configuring-database-connections-with-dbt" class="nav-link" data-scroll-target="#configuring-database-connections-with-dbt">Configuring Database Connections with dbt</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/projects/data_engineering/posts/basic_oss.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -470,15 +474,16 @@ cookieconsent.run({
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>readme <span class="op">=</span> <span class="st">"README.md"</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>requires<span class="op">-</span>python <span class="op">=</span> <span class="st">"&gt;=3.13"</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>dependencies <span class="op">=</span> [</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dbt-duckdb&gt;=1.9.1"</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dbt&gt;=1.0.0.38.22"</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"duckdb&gt;=1.1.3"</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"great-expectations&gt;=0.18.22"</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"jupyter&gt;=1.1.1"</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pandas&gt;=2.2.3"</span>,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pytest&gt;=8.3.4"</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"quarto&gt;=0.1.0"</span>,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dbt-core&gt;=1.9.1"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dbt-duckdb&gt;=1.9.1"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dbt-postgres&gt;=1.9.0"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"duckdb&gt;=1.1.3"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"great-expectations&gt;=0.18.22"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"jupyter&gt;=1.1.1"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pandas&gt;=2.2.3"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pytest&gt;=8.3.4"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"quarto&gt;=0.1.0"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="using-.gitignore-effectively" class="level4">
 <h4 class="anchored" data-anchor-id="using-.gitignore-effectively">Using .gitignore effectively</h4>
@@ -491,6 +496,19 @@ cookieconsent.run({
 <h3 class="anchored" data-anchor-id="initializing-a-data-environment">Initializing a Data Environment</h3>
 <p>Now, you’ll be setting up dbt. Similar to the other CLI tools, dbt uses the <code>dbt init</code> command to create the folder structure necessary for the program to be effective. As you can see below, the process is very easy. You’ll only enter a name for your project, which will (case sensitively) become the name of the dbt directory. Next, we’ll walk through the fundamental pieces of a dbt project in depth.</p>
 <p><img src="images/dbt_init.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Lower Case Naming Conventions">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lower Case Naming Conventions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Due to some naming conventions and for simplicity, I later changed the name of the dbt projct in my environment to basic_oss. It’s easier to type when it’s all lowercase and it fits with the dbt naming conventions better. So, don’t be surprised if/when you see it later.</p>
+</div>
+</div>
 </section>
 <section id="the-data-build-tool-dbt" class="level3">
 <h3 class="anchored" data-anchor-id="the-data-build-tool-dbt">The Data Build Tool (dbt)</h3>
@@ -781,13 +799,101 @@ Note
 <p>As you’ll see, I’m planning to use DuckDB with Python to ingest raw data from an API (or flat files) and then build the dbt models based off that (with some help from built-in DuckDB functionality). After that, I’ll connect dbt to Postgres and copy the data model over.</p>
 <section id="a-persistent-database-with-duckdb" class="level3">
 <h3 class="anchored" data-anchor-id="a-persistent-database-with-duckdb">A Persistent Database with DuckDB</h3>
-<p>As you saw above, it’s very easy to get started with DuckDB. To keep with the structure of the project, I’m going to put the <code>.duckdb</code> file in the root project directory because the <code>Dockerfile</code> (which serves as the Postgres file) is there as well.</p>
+<p>As you saw above, it’s very easy to get started with DuckDB. To keep with the structure of the project, I’m going to put the <code>.duckdb</code> file in the root project directory because the <code>Dockerfile</code> (which serves as the Postgres file) is there as well. By design, it’s easy to create a persistent database and manage the file (there’s only one). You have two options:</p>
+<ol type="1">
+<li>Launch DuckDB <em>and</em> create your database file on launch (example below)</li>
+<li>Launch DuckDB, then run <code>.open test.duckdb</code></li>
+</ol>
+<p>For the purposes of this workflow, it’s better to create the file when you initially launch DuckDB; however, if you are using DuckDB in-memory for EDA or an adhoc ask, but want to persist your work the second option is valid.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Basic_OSS_Architecture</span> % duckdb test.duckdb</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">v1.1.3</span> 19864453f7</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Enter</span> <span class="st">".help"</span> for usage hints.</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="ex">D</span> SELECT <span class="pp">*</span> FROM duckdb_tables<span class="er">(</span><span class="kw">);</span></span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="ex">.exit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><img src="images/duckdb_init.png" class="img-fluid"></p>
+<p>You can then run <code>ls -lh</code> to verify the file exists, and to see some basic file metadata: read/write/executable permissions, author, file size, last edited. Next, we need to configure DuckDB to work with dbt.</p>
+</section>
+</section>
+<section id="dbt" class="level2">
+<h2 class="anchored" data-anchor-id="dbt">dbt</h2>
+<p>Up to this point, I’ve initialized the project environment and outside of a few lines of code, most of the work has been automated:</p>
+<ul>
+<li>Initialized the project environment with <code>uv</code> and added <code>Python</code> packages</li>
+<li>Initialized the project repository with <code>git</code> and <code>GitHub</code></li>
+<li>Initialized the documentation envrionment with <code>Quarto</code></li>
+<li>Initialized the data model with <code>dbt</code></li>
+<li>Wrote a <code>Docker</code> image to contain the <code>PostgreSQL</code> server</li>
+<li>Created the test database with <code>DuckDB</code></li>
+</ul>
+<p>Now, it’s time to start connecting everything, which is exactly what dbt does best.</p>
+<blockquote class="blockquote">
+<p>dbt Core (data build tool) is an open-source framework designed for transforming raw data in a warehouse into a well-structured and actionable format. It operates by enabling analysts and engineers to write modular SQL queries and manage their transformations as code, following software engineering best practices like version control and testing. dbt is used to define, test, and document data pipelines, helping teams standardize and automate transformations in a consistent and scalable way. Key benefits include increased collaboration, improved data quality through built-in testing, and the ability to easily track and manage changes in data models over time. It integrates seamlessly with modern cloud data warehouses, making it a cornerstone for modern data engineering workflows.</p>
+</blockquote>
+<p>Learn more about getting started with <a href="https://docs.getdbt.com/guides/manual-install?step=1">dbt</a>.</p>
+<section id="configuring-database-connections-with-dbt" class="level3">
+<h3 class="anchored" data-anchor-id="configuring-database-connections-with-dbt">Configuring Database Connections with dbt</h3>
+<p>There are two contexts when working with dbt locally: the <strong><em>project</em></strong> dbt directory and the <strong><em>global</em></strong> dbt configuration. The first is what I initialized for the sake of this project using <code>dbt init</code>. The second is the <code>profiles.yml</code> file in the <code>~/.dbt</code> directory, which is used by dbt to connect to different databases. You’ll also need to install the specific connection type extensions, in this case <code>dbt-duckdb</code> and <code>dbt-postgres</code>– both of these are added like any other dependency with <code>uv add</code>.</p>
+<p>The file and folder should be created when you first install <code>dbt-core</code>. If the file isn’t there, you can simply create one. The general syntax is as follows:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">basic_oss</span><span class="kw">:</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">target</span><span class="kw">:</span><span class="at"> test</span><span class="co"> # The default output for dbt to target (either test or prod in this case)</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">outputs</span><span class="kw">:</span><span class="co"> # The defined outputs for dbt to target</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">test</span><span class="kw">:</span><span class="co"> # Name of the output</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> duckdb</span><span class="co"> # Database type</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> /Users/chriskornaros/Documents/Basic_OSS_Architecture/test.duckdb</span><span class="co"> # Database file path</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">schema</span><span class="kw">:</span><span class="at"> raw</span><span class="co"> # Schema to target</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">threads</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span><span class="co"> # The number of threads dbt is allowed to enable for concurrent use</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">prod</span><span class="kw">:</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> postgres</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">host</span><span class="kw">:</span><span class="at"> localhost</span><span class="co"> # Hostname of the PostgreSQL server/container</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">port</span><span class="kw">:</span><span class="at"> </span><span class="dv">5432</span><span class="co"> # Port postgres listens on</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">user</span><span class="kw">:</span><span class="at"> chris</span><span class="co"> # User must be specified</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">password</span><span class="kw">:</span><span class="co"> # Unfortunately I had to type this in, I haven't found a way to link the key file to profiles.yml yet</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">database</span><span class="kw">:</span><span class="at"> test</span><span class="co"> # Database must be specified</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">schema</span><span class="kw">:</span><span class="at"> raw</span><span class="co"> # Schema to target</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">threads</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span><span class="co"> # Threads for concurrency</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled" title="CPUs and Threads">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+CPUs and Threads
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Threads in a CPU are the smallest units of execution that can run independently, allowing a processor to handle multiple tasks concurrently. They improve performance by utilizing CPU cores more efficiently, especially in multithreaded applications. With Python 3.13, the GIL (global interpreter lock) is gone, you can now actually utilize multiple cores at once. If you want to find out how many cores you have, run <code>sysctl -n hw.logicalcpu</code> (MacOS) or <code>lscpu</code> (Linux).</p>
+<p>Logical CPUs represents the number of threads that the system can handle concurrently, a more accurate measure of how many threads your system can execute simultaneously than Physical CPUs because of <em>hyperthreading</em>.</p>
+</div>
+</div>
+<p>You’ll also need to configure the project specific YAML file– <code>dbt_project.yml</code>. This is easy and, for the most part, the default version of the file that is generated by <code>dbt init</code> is good enough for an initial connection. Later on, I’ll go into some other features and properties that you can define which make dbt even more powerful.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Name your project! Project names should contain only lowercase characters</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and underscores. A good package name should reflect your organization's</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># name or the intended use of these models</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">'basic_oss'</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">'1.0.0'</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># This setting configures which "profile" dbt uses for this project.</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">profile</span><span class="kw">:</span><span class="at"> </span><span class="st">'basic_oss'</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># These configurations specify where dbt should look for different types of files.</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co"># The `model-paths` config, for example, states that models in this project can be</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co"># found in the "models/" directory. You probably won't need to change these!</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="fu">model-paths</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"models"</span><span class="kw">]</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="fu">analysis-paths</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"analyses"</span><span class="kw">]</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="fu">test-paths</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"tests"</span><span class="kw">]</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="fu">seed-paths</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"seeds"</span><span class="kw">]</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="fu">macro-paths</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"macros"</span><span class="kw">]</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="fu">snapshot-paths</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"snapshots"</span><span class="kw">]</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="fu">clean-targets</span><span class="kw">:</span><span class="co">         # directories to be removed by `dbt clean`</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">"target"</span></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">"dbt_packages"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Once you have those files configured and saved, you can verify that things were done correctly by running the code below and seeing a similar output to the subsequent image.</p>
+<p><strong>Note:</strong> It is important that you use <code>uv tool run</code> to execute the command because the dbt-duckdb extension is installed within uv’s project context, not system wide. So, the debug will fail if you just use <code>dbt debug</code>. Additionally, when running from the main project directory, you need to specify the dbt project directory. Otherwise, dbt cannot find the dbt_project.yml file, there is a siimilar flag for the profiles.yml file, if yours is not in your <code>~/.dbt</code> folder.</p>
+<p><strong><em>Furthermore,</em></strong> while VS Code automatically picks up on <code>uv</code> and its environment, you will need to manually activate the virtual environment if working in a standalone terminal. Even inside of that virtual environment, you will need to use <code>uv tool run</code></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> tool run dbt debug <span class="at">--profile</span> basic_oss <span class="at">--target</span> test <span class="at">--project-dir</span> basic_oss</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> tool run dbt debug <span class="at">--profile</span> basic_oss <span class="at">--target</span> prod <span class="at">--project-dir</span> basic_oss  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/dbt_duckdb_no_bug.png" class="img-fluid"> <img src="images/dbt_postgres_no_bug.png" class="img-fluid"></p>
 
 
 </section>
