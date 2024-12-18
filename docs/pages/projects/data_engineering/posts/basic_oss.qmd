@@ -454,7 +454,7 @@ basic_oss:
     test: # Name of the output
       type: duckdb # Database type
       path: /Users/chriskornaros/Documents/Basic_OSS_Architecture/test.duckdb # Database file path
-      schema: raw # Schema to target
+      schema: ingest # Schema to target
       threads: 4 # The number of threads dbt is allowed to enable for concurrent use
     prod:
       type: postgres
@@ -463,7 +463,7 @@ basic_oss:
       user: chris # User must be specified
       password: # Unfortunately I had to type this in, I haven't found a way to link the key file to profiles.yml yet
       database: test # Database must be specified
-      schema: raw # Schema to target
+      schema: stage # Schema to target
       threads: 4 # Threads for concurrency
 ```
 
@@ -606,15 +606,18 @@ Besides my interest in space, the other perk of using NASA's API is that it's fr
 ```python
 # Import the required packages
 import requests
-import pprint
+import pprint # pprint similar to beautiful soup, but better for my specific use case
 import duckdb
 import pandas as pd
 ```
 
+::: {.callout-tip title="Notebook Context"}
+If you're using VS Code, Jupyter notebook context is the parent directory that you opened the file from. In my case `code notebooks/api_exploration.ipynb` resulted in the context being the root dir above notebooks (`Basic_OSS_Architecture/`), instead of notebooks. So, I was initially connecting to a persistent DuckDB file created in my Documents directory, instead of the file within my project directory because my connection string below was `../test.duckdb` instead of `test.duckdb`. As a result, I wasn't able to interact with the environment from my CLI. 
+:::
 
 ```python
 # Open a connection to the persistent database
-con = duckdb.connect('../test.duckdb')
+con = duckdb.connect('test.duckdb')
 duckdb.install_extension("httpfs") # Lets you directly query HTTP endpoints
 duckdb.load_extension("httpfs") # Trying this functionality out to simplify the ETL process
 
@@ -666,7 +669,7 @@ raw = con.sql("""CREATE TABLE asteroids AS
                 FROM flat_data
                 """)
 
-con.sql("SELECT * FROM duckdb_tables()")
+con.sql("SELECT * FROM duckdb_tables()") # Shows table metadata, validates the script worked as intended
 ```
 
 What `flat_data` did is tell Python that the dictionary values for the key 'near_earth_objects' are what I'm looking for and to get rid of the rest of the information, while elevating the nested hierarchy. It takes that one step further, by specifying the actual date (which are the keys in this dataset). That results in an output that you can view below; however, there is still a column with the DuckDB `[struct](https://duckdb.org/docs/sql/data_types/struct)` type. Simply put, the struct type is similar to tuples in Python because the data type is actually an ordered list of columns called `entries`. These entries can even be other lists or structs. 
@@ -681,5 +684,41 @@ Now that the table structure is done and ready for data. It's time to finish off
 #### schema.yml
 The schema.yml file documents and tests the models and columns created within your dbt project, ensuring data quality and consistency. It allows you to define metadata, such as column descriptions, and add constraints like uniqueness or nullability tests to enforce integrity. This fosters trust in your data pipelines, simplifies debugging, and enhances the readability of your data models for developers and stakeholders.
 
+```yaml
+version: 1
+
+models:
+  - name: asteroids
+    description: "A table containing detailed information about near-Earth objects, including their estimated dimensions and close approach data, in metric units."
+    columns:
+      - name: id
+        description: "Unique identifier for the asteroid."
+      - name: neo_reference_id
+        description: "Reference ID assigned by NASA's Near Earth Object program."
+      - name: name
+        description: "Name or designation of the asteroid."
+```
+
 #### sources.yml
 The sources.yml file defines the external data sources your dbt project depends on, such as raw tables or views in your database, and ensures their existence and structure are tested before being used. It helps you document where your data originates, making your project more transparent and easier to maintain. By validating source data and organizing dependencies, it reduces the risk of downstream errors and improves collaboration across teams.
+
+
+```yaml
+version: 1
+
+sources:
+  - name: ingest
+    description: "Data in its base relational form, after being unnested from the API call"
+    database: basic_oss
+    schema: ingest
+    tables:
+        - name: raw
+          description: "A table containing the non-formatted API data"
+          columns:
+            - name: id
+              description: "Unique identifier for the asteroid."
+            - name: neo_reference_id
+              description: "Reference ID assigned by NASA's Near Earth Object program."
+            - name: name
+              description: "Name or designation of the asteroid."
+```
