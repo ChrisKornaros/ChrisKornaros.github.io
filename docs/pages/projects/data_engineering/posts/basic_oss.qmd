@@ -10,7 +10,7 @@ The purpose of this project is to showcase the power of open source tools when d
 
 ## Project Initialization
 ### First Steps
-Let's start from scratch, a blank [VS Code](https://www.code.visualstudio.com/) IDE. We'll do everything from the command line, so make sure to open that up (Ctrl-`).
+Let's start from scratch, a blank [VS Code](https://www.code.visualstudio.com/) IDE. I'll do everything from the command line, so make sure to open that up (Ctrl-`).
 
 ![Blank IDE](images/blank_vscode_ide.png)
 
@@ -53,11 +53,13 @@ dependencies = [
     "dbt-duckdb>=1.9.1",
     "dbt-postgres>=1.9.0",
     "duckdb>=1.1.3",
+    "fsspec>=2024.10.0",
     "great-expectations>=0.18.22",
     "jupyter>=1.1.1",
     "pandas>=2.2.3",
     "pytest>=8.3.4",
     "quarto>=0.1.0",
+    "requests>=2.32.3",
 ]
 ```
 
@@ -69,7 +71,7 @@ Below is an example of my file at this early project stage.
 ![](images/gitignore_sample.png)
 
 ### Initializing a Data Environment
-Now, you'll be setting up dbt. Similar to the other CLI tools, dbt uses the `dbt init` command to create the folder structure necessary for the program to be effective. As you can see below, the process is very easy. You'll only enter a name for your project, which will (case sensitively) become the name of the dbt directory. Next, we'll walk through the fundamental pieces of a dbt project in depth. 
+Now, you'll be setting up dbt. Similar to the other CLI tools, dbt uses the `dbt init` command to create the folder structure necessary for the program to be effective. As you can see below, the process is very easy. You'll only enter a name for your project, which will (case sensitively) become the name of the dbt directory. Next, I'll walk through the fundamental pieces of a dbt project in depth. 
 
 ![](images/dbt_init.png)
 
@@ -121,7 +123,7 @@ Dbt also has the `docs/` and `dbt_packages/` folders which are for advanced docu
 3. `macros/`
 4. `dbt_project.yml`
 
-The others are optional and provide functionality, that while useful and powerful in many cases, is not always needed. Now that we've got the local directory all configured, it's time to start building the container for our PostgreSQL instance (server, cluster, whatever you want to call it).
+The others are optional and provide functionality, that while useful and powerful in many cases, is not always needed. Now that I've got the local directory all configured, it's time to start building the container for my PostgreSQL instance (server, cluster, whatever you want to call it).
 
 ## Docker and Containers
 Docker is a powerful open-source platform that simplifies the process of developing, packaging, and deploying applications using containers, which are lightweight, portable environments. Unlike traditional virtualization, which replicates an entire computer system, containers virtualize at the operating system (OS) level, creating isolated spaces where applications run with all their dependencies. By isolating apps in containers, Docker ensures that each environment is consistent across different systems, reducing conflicts caused by mismatched dependencies. This approach accelerates development, enhances portability, and enables scalability, making Docker a cornerstone of modern microservices architectures and containerized workflows.
@@ -361,7 +363,7 @@ Here are some other useful commands that will not be useful with a fresh databas
 - `\d table_name` lists all columns in a table with name *table_name*
 - `\di table_name` lists all indexes for a table with name *table_name*
 
-Finally, to really dive into a specific database, you'll use the `\c` command, but in our case we connected when we first ran the `psql` command. If you just type `psql` without the `-d` flag, you'll simply connect to a server in general, not a specific database.
+Finally, to really dive into a specific database, you'll use the `\c` command, but in my case I connected when I first ran the `psql` command. If you just type `psql` without the `-d` flag, you'll simply connect to a server in general, not a specific database.
 
 At this point, the initial project configuration is just about done. The next steps involve initializing the persistent DuckDB database to use as the Dev/Test environment and defining the raw data model with dbt. For now, you can close the connection to the Postgres server and shutdown container. 
 
@@ -418,7 +420,7 @@ D SELECT * FROM duckdb_tables();
 
 ![](images/duckdb_init.png)
 
-You can then run `ls -lh` to verify the file exists, and to see some basic file metadata: read/write/executable permissions, author, file size, last edited. Next, we need to configure DuckDB to work with dbt.
+You can then run `ls -lh` to verify the file exists, and to see some basic file metadata: read/write/executable permissions, author, file size, last edited. Next, I need to configure DuckDB to work with dbt.
 
 ## dbt
 Up to this point, I've initialized the project environment and outside of a few lines of code, most of the work has been automated:
@@ -514,3 +516,170 @@ uv tool run dbt debug --profile basic_oss --target prod --project-dir basic_oss
 ![](images/dbt_duckdb_no_bug.png)
 ![](images/dbt_postgres_no_bug.png)
 
+## Data Selection and Ingestion
+Now that I have the environment good to go, the databases configured, and dbt connected, it's time to pick a dataset and start building the data model. To do this, I'm first going to add a directory for notebooks (eventually I'll add one for scripts) and then create a Jupyter notebook. I prefer developing in notebook simply because I can quickly change and test code as I'm iterating. Then, as a reminder, if you haven't installed the Python dependencies, you can do so with `uv add`.
+
+In the following block, you'll see me use `code`. This command is the VS Code CLI tool, you can learn more [here](https://code.visualstudio.com/docs/editor/command-line).
+
+```bash
+mkdir notebooks
+code notebooks/api_axploration.ipynb
+
+uv add dbt-core # The core dbt package, needed for base functionality
+uv add dbt-duckdb # The DuckDB extension, needed to connect with dbt
+uv add dbt-postgres # The postgres extension, needed to conenct with dbt
+uv add duckdb # DuckDB Python package
+uv add fsspec # Dependency for DuckDB JSON functionality
+uv add great-expectations # GX is for data validation/quality, later on
+uv add jupyter # Jupyter will launch a Python kernel and makes the notebooks possible
+uv add pandas # For standard functionality
+uv add pytest # For testing actualy pipeline/script performance, not so much data quality
+uv add quarto # For documentation
+uv add requests # For making API calls
+```
+
+### Configuring and Running a Jupyter Server
+Before you can use the notebook, you'll need to launch and connect to a jupyter server. When developing locally, and not sharing your code or compiled code anywhere, it's much easier to not require an authentication token. To allow this behavior, you'll need to modify your jupyter configuration. 
+
+I modified my global configuration, because I would have to reconfigure jupyter with every project if I did it in the specific project directory. That being said, I'll include the local example as well.
+
+```bash
+# For the global configuration
+code ~/.jupyter/jupyter_server_config.py
+
+c.ServerApp.token = '' # Find this in the .py file, set the value to '' which means nothing
+```
+
+```bash
+# For the local configuration
+mkdir .jupyter
+code .jupyter/jupyter_server_config.py
+
+c.IdentityProvider.token = ''
+```
+
+As you can see, the process is similar, you'll just manually create the `.jupyter/` folder in your project directory first. THe next step is to start the server. Then, you'll see an ouput similar to the image below. It will tell you useful information like the server address (**localhost** in this case), version, et cetera; however, you can now leave that terminal window be, it will continue to run in the background. If you need to stop the server, just go back to the window and hit `Ctrl-C`. 
+
+
+```bash
+uv run jupyter server
+```
+
+![](images/jupyter_server_active.png)
+
+### Using The Notebook
+Now that the server is up and running, you can go back to the notebook you created. To use it, I'll first need to connect to the server (if you see the term `kernel` don't be surprised, that's what a single notebook runs on). Luckily, VS Code provides a really nice UI for connecting a notebook to the Jupyter server. In the images below, I'll walk you through the connection process. First begin by selecting `Select Kernel` in the top-right corner of the notebook UI. From there, VS Code's command palette (the search bar at the top of the window) will interactively walk you through the next steps.
+
+![Select Kernel](images/select_kernel_nb.png)
+![Host Address](images/jupyter_host.png)
+![HTTP Connection](images/yes_to_http.png)
+![Kernel Selection](images/select_kernel.png)
+![Server Name](images/server_name.png)
+
+Then, you can verify your connection by running the first cell (`Ctrl-Enter` on MacOS).
+
+![](images/kernel_connect_success.png)
+
+### GET-ting my Initial Data
+Now that everything is setup and I can actually run Python code within the notebook, it's time to pick an API and make a request to actually get the data. If you aren't sure where to start looking for an API, [PublicAPI](https://publicapi.dev) has a great site of publicly available datasets. Many of which are accesible both programmatically or through GUIs. 
+
+Before I jump into the code, two quick notes about HTTP and GET:
+
+> These are protocols used for transferring data over the internet. 
+> `HTTP` (HyperText Transfer Protocol) and `HTTPS` (Secure HyperText Transfer Protocol) are foundational protocols that allow web browsers and servers to communicate with each other. 
+> HTTPS adds a layer of security by encrypting the data exchanged between the client and the server.
+> `GET` is one of the most common HTTP methods used to request data from a specified resource. 
+> It retrieves information from the server without making any changes. 
+> This method is used when you want to fetch data, such as retrieving data from an API endpoint. 
+> It is simple and effective for read-only operations, such as querying data from a database or fetching information from a web service.
+
+Next, you'll choose the API you want to server as your data source. I decided to use NASA's NEO (Near Earth Object) Feed for the following reasons:
+
+> `Dataset:` Information about NEOs, including size, orbital path, and speed.
+> `API Endpoint:` https://api.nasa.gov/neo/rest/v1/neo/browse?api_key={API key}
+> `Data Characteristics:` JSON structure with a list of NEOs, each containing details like id, name, nasa_jpl_url, absolute_magnitude_h, estimated_diameter, close_approach_date, and more.
+> `Use Case:` Ideal for a beginner, as it provides a simple JSON structure with basic information and is updated regularly.
+
+Besides my interest in space, the other perk of using NASA's API is that it's free and provides a reasonable amount (1,000) of hourly calls. That being said, the documentation isn't perfect, but it's definitely easy enough to query. Below, I'll share the first few cells of my notebook. Learn more on the [NASA API Website](https://api.nasa.gov).
+
+
+```python
+# Import the required packages
+import requests
+import pprint
+import duckdb
+import pandas as pd
+```
+
+
+```python
+# Open a connection to the persistent database
+con = duckdb.connect('../test.duckdb')
+duckdb.install_extension("httpfs") # Lets you directly query HTTP endpoints
+duckdb.load_extension("httpfs") # Trying this functionality out to simplify the ETL process
+
+con.sql("SELECT * FROM duckdb_tables()") # Note: Don't use a semi colon in DuckDB for Python
+```
+
+::: {.callout-note title="httpfs Extension for DuckDb"}
+I tried using the `httpfs` extension from DuckDB to handle the API calls; however, you need a specific file at the location, such as `.csv` or `.parquet`. It didn't work for me, so I ended up doing things differently.
+:::
+
+```python
+# Store the base API information, for this, I'm using NASA's Near Earth Object (NEO) API
+api_key_path = "/Users/chriskornaros/Documents/local-scripts/.api_keys/nasa/key.txt"
+with open(api_key_path, 'r') as file:
+    api_key = file.read().strip()
+start_date, end_date = "2024-12-01", "2024-12-04"
+
+# Then Construct the URL with f-string formatting
+url = f"https://api.nasa.gov/neo/rest/v1/feed?start_date={start_date}&end_date={end_date}&api_key={api_key}"
+```
+
+```python
+# Standalone cell for the API response, ensures I don't call too many times
+response = requests.get(url)
+
+# Check if the response was successful, if so, print the data in a human readable format
+if response.status_code == 200:
+    data = response.json()
+    pprint.pprint(data)
+else:
+    print(f"Error: {response.status_code}")
+```
+
+### Creating the Raw Table
+Now that you've successfully connected to the API and made your first GET request, it's time to get the API output in a format that DuckDB can read into a table. If your API output is anything like mine, it'll be messy, even with the help of pprint, as you can see below. So, before I can create the table, I need to flatten the dictionary output.
+
+![](images/pprint_json.png)
+
+Luckily, there are some simple functions in both Python and DuckDB that can help.
+
+
+```python
+# Flatten the output and then read it with DuckDB to get the column data types
+flat_data = pd.json_normalize(data['near_earth_objects']['2024-12-02'])
+
+raw = con.sql("""CREATE TABLE asteroids AS
+                SELECT * EXCLUDE(nasa_jpl_url, close_approach_data, 'links.self')
+                , unnest(close_approach_data, recursive := true)
+                FROM flat_data
+                """)
+
+con.sql("SELECT * FROM duckdb_tables()")
+```
+
+What `flat_data` did is tell Python that the dictionary values for the key 'near_earth_objects' are what I'm looking for and to get rid of the rest of the information, while elevating the nested hierarchy. It takes that one step further, by specifying the actual date (which are the keys in this dataset). That results in an output that you can view below; however, there is still a column with the DuckDB `[struct](https://duckdb.org/docs/sql/data_types/struct)` type. Simply put, the struct type is similar to tuples in Python because the data type is actually an ordered list of columns called `entries`. These entries can even be other lists or structs. 
+
+![](images/struct_column.png)
+
+So, I'll need to further flatten my dataset. Luckily DuckDB SQL provides a native function for this exact behavior, `UNNEST`, and lets me execute it in the same statement I'm creating a table! This effectively does what flattening with Python functions does, the nice thing is you can set the `recursive :=` parameter to true, letting DuckDB also handle nested structs, within a struct. As you can see, the DuckDB query selects everything except for the data source's GUI URL, the original **struct** data, and the API query for the specific NEO object in that row.
+
+Now that the table structure is done and ready for data. It's time to finish off some final configurations for our dbt project. Both files will go in the `models/` folder, namely `schema.yml` and `sources.yml`. Here's a quick note on the purpose of both.
+
+
+#### schema.yml
+The schema.yml file documents and tests the models and columns created within your dbt project, ensuring data quality and consistency. It allows you to define metadata, such as column descriptions, and add constraints like uniqueness or nullability tests to enforce integrity. This fosters trust in your data pipelines, simplifies debugging, and enhances the readability of your data models for developers and stakeholders.
+
+#### sources.yml
+The sources.yml file defines the external data sources your dbt project depends on, such as raw tables or views in your database, and ensures their existence and structure are tested before being used. It helps you document where your data originates, making your project more transparent and easier to maintain. By validating source data and organizing dependencies, it reduces the risk of downstream errors and improves collaboration across teams.
