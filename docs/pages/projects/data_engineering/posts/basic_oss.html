@@ -367,6 +367,23 @@ cookieconsent.run({
   <ul>
   <li><a href="#configuring-database-connections-with-dbt" id="toc-configuring-database-connections-with-dbt" class="nav-link" data-scroll-target="#configuring-database-connections-with-dbt">Configuring Database Connections with dbt</a></li>
   </ul></li>
+  <li><a href="#data-selection-and-ingestion" id="toc-data-selection-and-ingestion" class="nav-link" data-scroll-target="#data-selection-and-ingestion">Data Selection and Ingestion</a>
+  <ul>
+  <li><a href="#configuring-and-running-a-jupyter-server" id="toc-configuring-and-running-a-jupyter-server" class="nav-link" data-scroll-target="#configuring-and-running-a-jupyter-server">Configuring and Running a Jupyter Server</a></li>
+  <li><a href="#using-the-notebook" id="toc-using-the-notebook" class="nav-link" data-scroll-target="#using-the-notebook">Using The Notebook</a></li>
+  <li><a href="#get-ting-my-initial-data" id="toc-get-ting-my-initial-data" class="nav-link" data-scroll-target="#get-ting-my-initial-data">GET-ting my Initial Data</a></li>
+  <li><a href="#creating-the-raw-table" id="toc-creating-the-raw-table" class="nav-link" data-scroll-target="#creating-the-raw-table">Creating the Raw Table</a>
+  <ul class="collapse">
+  <li><a href="#schema.yml" id="toc-schema.yml" class="nav-link" data-scroll-target="#schema.yml">schema.yml</a></li>
+  <li><a href="#sources.yml" id="toc-sources.yml" class="nav-link" data-scroll-target="#sources.yml">sources.yml</a></li>
+  </ul></li>
+  <li><a href="#creating-dbt-models" id="toc-creating-dbt-models" class="nav-link" data-scroll-target="#creating-dbt-models">Creating dbt models</a>
+  <ul class="collapse">
+  <li><a href="#python-model" id="toc-python-model" class="nav-link" data-scroll-target="#python-model">Python Model</a></li>
+  <li><a href="#sql-model" id="toc-sql-model" class="nav-link" data-scroll-target="#sql-model">SQL Model</a></li>
+  </ul></li>
+  <li><a href="#running-your-models" id="toc-running-your-models" class="nav-link" data-scroll-target="#running-your-models">Running your models</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/projects/data_engineering/posts/basic_oss.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -413,7 +430,7 @@ cookieconsent.run({
 <h2 class="anchored" data-anchor-id="project-initialization">Project Initialization</h2>
 <section id="first-steps" class="level3">
 <h3 class="anchored" data-anchor-id="first-steps">First Steps</h3>
-<p>Let’s start from scratch, a blank <a href="https://www.code.visualstudio.com/">VS Code</a> IDE. We’ll do everything from the command line, so make sure to open that up (Ctrl-`).</p>
+<p>Let’s start from scratch, a blank <a href="https://www.code.visualstudio.com/">VS Code</a> IDE. I’ll do everything from the command line, so make sure to open that up (Ctrl-`).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/blank_vscode_ide.png" class="img-fluid figure-img"></p>
@@ -478,12 +495,15 @@ cookieconsent.run({
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dbt-duckdb&gt;=1.9.1"</span>,</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dbt-postgres&gt;=1.9.0"</span>,</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"duckdb&gt;=1.1.3"</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"great-expectations&gt;=0.18.22"</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"jupyter&gt;=1.1.1"</span>,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pandas&gt;=2.2.3"</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pytest&gt;=8.3.4"</span>,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"quarto&gt;=0.1.0"</span>,</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"fsspec&gt;=2024.10.0"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"great-expectations&gt;=0.18.22"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"jupyter&gt;=1.1.1"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pandas&gt;=2.2.3"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pytest&gt;=8.3.4"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"quarto&gt;=0.1.0"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"requests&gt;=2.32.3"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ruff&gt;=0.8.4"</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="using-.gitignore-effectively" class="level4">
 <h4 class="anchored" data-anchor-id="using-.gitignore-effectively">Using .gitignore effectively</h4>
@@ -494,7 +514,7 @@ cookieconsent.run({
 </section>
 <section id="initializing-a-data-environment" class="level3">
 <h3 class="anchored" data-anchor-id="initializing-a-data-environment">Initializing a Data Environment</h3>
-<p>Now, you’ll be setting up dbt. Similar to the other CLI tools, dbt uses the <code>dbt init</code> command to create the folder structure necessary for the program to be effective. As you can see below, the process is very easy. You’ll only enter a name for your project, which will (case sensitively) become the name of the dbt directory. Next, we’ll walk through the fundamental pieces of a dbt project in depth.</p>
+<p>Now, you’ll be setting up dbt. Similar to the other CLI tools, dbt uses the <code>dbt init</code> command to create the folder structure necessary for the program to be effective. As you can see below, the process is very easy. You’ll only enter a name for your project, which will (case sensitively) become the name of the dbt directory. Next, I’ll walk through the fundamental pieces of a dbt project in depth.</p>
 <p><img src="images/dbt_init.png" class="img-fluid"></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Lower Case Naming Conventions">
 <div class="callout-header d-flex align-content-center">
@@ -526,6 +546,20 @@ Lower Case Naming Conventions
 <section id="macros" class="level4">
 <h4 class="anchored" data-anchor-id="macros">Macros</h4>
 <p>This is where you can store custom macros (functions) and reusable code written in either SQL or <code>jinja</code>. This is the Python package equivalent for SQL and it’s often used to ensure <strong>DRY</strong> (Don’t Repeat Yourself) principles for ETL and other database work.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Custom Schema Macro">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Custom Schema Macro
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By default, dbt will use <code>main</code> for the schema name. Furthermore, I found that even when specifying the schema in the YAML files, it would just append that to main either as <code>main.example_schema.table</code> or <code>main_example_schema.table</code>. For enterprise purposes, this behavior is intended and explained in dbt docs. For my purposes, I would rather the format and reference behavior be <code>schema.table</code>. To do this, I found and modified a custom macro.</p>
+<p><img src="images/custom_schema_code.png" class="img-fluid"></p>
+</div>
+</div>
 </section>
 <section id="models" class="level4">
 <h4 class="anchored" data-anchor-id="models">Models</h4>
@@ -556,7 +590,7 @@ Lower Case Naming Conventions
 <li><code>macros/</code></li>
 <li><code>dbt_project.yml</code></li>
 </ol>
-<p>The others are optional and provide functionality, that while useful and powerful in many cases, is not always needed. Now that we’ve got the local directory all configured, it’s time to start building the container for our PostgreSQL instance (server, cluster, whatever you want to call it).</p>
+<p>The others are optional and provide functionality, that while useful and powerful in many cases, is not always needed. Now that I’ve got the local directory all configured, it’s time to start building the container for my PostgreSQL instance (server, cluster, whatever you want to call it).</p>
 </section>
 </section>
 </section>
@@ -712,8 +746,9 @@ Credentials
 <section id="connecting-to-the-postgresql-server-from-your-command-line-interface" class="level3">
 <h3 class="anchored" data-anchor-id="connecting-to-the-postgresql-server-from-your-command-line-interface">Connecting to the PostgreSQL Server from your Command-Line Interface</h3>
 <p>Now that the server is up and running, you can test an active connection (and your user permissions) from your CLI. To do so, run the following:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-h</span> localhost <span class="at">-U</span> chris <span class="at">-d</span> test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run psql <span class="at">-h</span> localhost <span class="at">-U</span> chris <span class="at">-d</span> test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
+<li><code>uv run</code> ensures that the command is run in the context of uv’s environment</li>
 <li><code>psql</code> is the CLI command for postgres, in the same way <code>gh</code> is for GitHub</li>
 <li><code>-h</code> tells postgres that the server’s host is <strong><em>localhost</em></strong></li>
 <li><code>-U</code> tells postgres to use the <em>user</em> <strong><em>chris</em></strong></li>
@@ -739,30 +774,14 @@ Note
 <h3 class="anchored" data-anchor-id="exploring-the-environment">Exploring the Environment</h3>
 <p>Now that you’re all setup and connected, it’s time to explore the environment and verify your privileges. In this section I’ll run through some basic commands that you can use to understand whatever postgres environment you’re in.</p>
 <p>First, the <code>\du</code> command will tell you which roles are available and their attributes:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="va">test</span><span class="op">=</span># <span class="ex">\du</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                             <span class="ex">List</span> of roles</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">Role</span> name <span class="kw">|</span>                         <span class="ex">Attributes</span>                         </span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="ex">-----------+------------------------------------------------------------</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">chris</span>     <span class="kw">|</span> <span class="ex">Superuser,</span> Create role, Create DB, Replication, Bypass RLS</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="va">test</span><span class="op">=</span># <span class="ex">\du</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/role_list.png" class="img-fluid"></p>
 <p>Second, the <code>\l</code> command lists all databases:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="va">test</span><span class="op">=</span># <span class="ex">\l</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                                                 <span class="ex">List</span> of databases</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>   <span class="ex">Name</span>    <span class="kw">|</span> <span class="ex">Owner</span> <span class="kw">|</span> <span class="ex">Encoding</span> <span class="kw">|</span> <span class="ex">Locale</span> Provider <span class="kw">|</span>  <span class="ex">Collate</span>   <span class="kw">|</span>   <span class="ex">Ctype</span>    <span class="kw">|</span> <span class="ex">Locale</span> <span class="kw">|</span> <span class="ex">ICU</span> Rules <span class="kw">|</span> <span class="ex">Access</span> privileges </span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ex">-----------+-------+----------+-----------------+------------+------------+--------+-----------+-------------------</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">postgres</span>  <span class="kw">|</span> <span class="ex">chris</span> <span class="kw">|</span> <span class="ex">UTF8</span>     <span class="kw">|</span> <span class="ex">libc</span>            <span class="kw">|</span> <span class="ex">en_US.utf8</span> <span class="kw">|</span> <span class="ex">en_US.utf8</span> <span class="kw">|</span>        <span class="kw">|</span>           <span class="kw">|</span> </span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">template0</span> <span class="kw">|</span> <span class="ex">chris</span> <span class="kw">|</span> <span class="ex">UTF8</span>     <span class="kw">|</span> <span class="ex">libc</span>            <span class="kw">|</span> <span class="ex">en_US.utf8</span> <span class="kw">|</span> <span class="ex">en_US.utf8</span> <span class="kw">|</span>        <span class="kw">|</span>           <span class="kw">|</span> <span class="ex">=c/chris</span>         +</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>           <span class="kw">|</span>       <span class="kw">|</span>          <span class="kw">|</span>                 <span class="kw">|</span>            <span class="kw">|</span>            <span class="kw">|</span>        <span class="kw">|</span>           <span class="kw">|</span> <span class="va">chris</span><span class="op">=</span>CTc/chris</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">template1</span> <span class="kw">|</span> <span class="ex">chris</span> <span class="kw">|</span> <span class="ex">UTF8</span>     <span class="kw">|</span> <span class="ex">libc</span>            <span class="kw">|</span> <span class="ex">en_US.utf8</span> <span class="kw">|</span> <span class="ex">en_US.utf8</span> <span class="kw">|</span>        <span class="kw">|</span>           <span class="kw">|</span> <span class="ex">=c/chris</span>         +</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>           <span class="kw">|</span>       <span class="kw">|</span>          <span class="kw">|</span>                 <span class="kw">|</span>            <span class="kw">|</span>            <span class="kw">|</span>        <span class="kw">|</span>           <span class="kw">|</span> <span class="va">chris</span><span class="op">=</span>CTc/chris</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a> <span class="bu">test</span>      <span class="kw">|</span> <span class="ex">chris</span> <span class="kw">|</span> <span class="ex">UTF8</span>     <span class="kw">|</span> <span class="ex">libc</span>            <span class="kw">|</span> <span class="ex">en_US.utf8</span> <span class="kw">|</span> <span class="ex">en_US.utf8</span> <span class="kw">|</span>        <span class="kw">|</span>           <span class="kw">|</span> </span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">4</span> rows<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="va">test</span><span class="op">=</span># <span class="ex">\l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/database_list.png" class="img-fluid"></p>
 <p>Third, the <code>\dn</code> command lists all schemas:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="va">test</span><span class="op">=</span># <span class="ex">\dn</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>      <span class="ex">List</span> of schemas</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Name</span>  <span class="kw">|</span>       <span class="ex">Owner</span>       </span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="ex">--------+-------------------</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">public</span> <span class="kw">|</span> <span class="ex">pg_database_owner</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">1</span> row<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="va">test</span><span class="op">=</span># <span class="ex">\dn</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/schema_list.png" class="img-fluid"></p>
 <p>Fourth, the <code>\dt</code> command lists all tables. You should expect this output upon creation of a new database:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="va">test</span><span class="op">=</span># <span class="ex">\dt</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Did</span> not find any relations.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -772,7 +791,7 @@ Note
 <li><code>\d table_name</code> lists all columns in a table with name <em>table_name</em></li>
 <li><code>\di table_name</code> lists all indexes for a table with name <em>table_name</em></li>
 </ul>
-<p>Finally, to really dive into a specific database, you’ll use the <code>\c</code> command, but in our case we connected when we first ran the <code>psql</code> command. If you just type <code>psql</code> without the <code>-d</code> flag, you’ll simply connect to a server in general, not a specific database.</p>
+<p>Finally, to really dive into a specific database, you’ll use the <code>\c</code> command, but in my case I connected when I first ran the <code>psql</code> command. If you just type <code>psql</code> without the <code>-d</code> flag, you’ll simply connect to a server in general, not a specific database.</p>
 <p>At this point, the initial project configuration is just about done. The next steps involve initializing the persistent DuckDB database to use as the Dev/Test environment and defining the raw data model with dbt. For now, you can close the connection to the Postgres server and shutdown container.</p>
 <p>The basic data model and ingestion will all be handled in DuckDB and Python.</p>
 </section>
@@ -811,7 +830,7 @@ Note
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="ex">D</span> SELECT <span class="pp">*</span> FROM duckdb_tables<span class="er">(</span><span class="kw">);</span></span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="ex">.exit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><img src="images/duckdb_init.png" class="img-fluid"></p>
-<p>You can then run <code>ls -lh</code> to verify the file exists, and to see some basic file metadata: read/write/executable permissions, author, file size, last edited. Next, we need to configure DuckDB to work with dbt.</p>
+<p>You can then run <code>ls -lh</code> to verify the file exists, and to see some basic file metadata: read/write/executable permissions, author, file size, last edited. Next, I need to configure DuckDB to work with dbt.</p>
 </section>
 </section>
 <section id="dbt" class="level2">
@@ -840,7 +859,7 @@ Note
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">test</span><span class="kw">:</span><span class="co"> # Name of the output</span></span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> duckdb</span><span class="co"> # Database type</span></span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> /Users/chriskornaros/Documents/Basic_OSS_Architecture/test.duckdb</span><span class="co"> # Database file path</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">schema</span><span class="kw">:</span><span class="at"> raw</span><span class="co"> # Schema to target</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">schema</span><span class="kw">:</span><span class="at"> ingest</span><span class="co"> # Schema to target</span></span>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">threads</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span><span class="co"> # The number of threads dbt is allowed to enable for concurrent use</span></span>
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">prod</span><span class="kw">:</span></span>
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> postgres</span></span>
@@ -849,7 +868,7 @@ Note
 <span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">user</span><span class="kw">:</span><span class="at"> chris</span><span class="co"> # User must be specified</span></span>
 <span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">password</span><span class="kw">:</span><span class="co"> # Unfortunately I had to type this in, I haven't found a way to link the key file to profiles.yml yet</span></span>
 <span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">database</span><span class="kw">:</span><span class="at"> test</span><span class="co"> # Database must be specified</span></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">schema</span><span class="kw">:</span><span class="at"> raw</span><span class="co"> # Schema to target</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">schema</span><span class="kw">:</span><span class="at"> stage</span><span class="co"> # Schema to target</span></span>
 <span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">threads</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span><span class="co"> # Threads for concurrency</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled" title="CPUs and Threads">
 <div class="callout-header d-flex align-content-center">
@@ -887,13 +906,333 @@ CPUs and Threads
 <span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="fu">clean-targets</span><span class="kw">:</span><span class="co">         # directories to be removed by `dbt clean`</span></span>
 <span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">"target"</span></span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">"dbt_packages"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">"dbt_packages"</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">"logs"</span></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a><span class="fu">models</span><span class="kw">:</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">basic_oss</span><span class="kw">:</span></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ingest</span><span class="kw">:</span></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">+schema</span><span class="kw">:</span><span class="at"> ingest</span></span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">+materialized</span><span class="kw">:</span><span class="at"> table</span></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">+enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">stage</span><span class="kw">:</span></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">+schema</span><span class="kw">:</span><span class="at"> stage</span></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">+materialized</span><span class="kw">:</span><span class="at"> table</span></span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">+enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Once you have those files configured and saved, you can verify that things were done correctly by running the code below and seeing a similar output to the subsequent image.</p>
 <p><strong>Note:</strong> It is important that you use <code>uv tool run</code> to execute the command because the dbt-duckdb extension is installed within uv’s project context, not system wide. So, the debug will fail if you just use <code>dbt debug</code>. Additionally, when running from the main project directory, you need to specify the dbt project directory. Otherwise, dbt cannot find the dbt_project.yml file, there is a siimilar flag for the profiles.yml file, if yours is not in your <code>~/.dbt</code> folder.</p>
 <p><strong><em>Furthermore,</em></strong> while VS Code automatically picks up on <code>uv</code> and its environment, you will need to manually activate the virtual environment if working in a standalone terminal. Even inside of that virtual environment, you will need to use <code>uv tool run</code></p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> tool run dbt debug <span class="at">--profile</span> basic_oss <span class="at">--target</span> test <span class="at">--project-dir</span> basic_oss</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> tool run dbt debug <span class="at">--profile</span> basic_oss <span class="at">--target</span> prod <span class="at">--project-dir</span> basic_oss  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><img src="images/dbt_duckdb_no_bug.png" class="img-fluid"> <img src="images/dbt_postgres_no_bug.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="data-selection-and-ingestion" class="level2">
+<h2 class="anchored" data-anchor-id="data-selection-and-ingestion">Data Selection and Ingestion</h2>
+<p>Now that I have the environment good to go, the databases configured, and dbt connected, it’s time to pick a dataset and start building the data model. To do this, I’m first going to add a directory for notebooks (eventually I’ll add one for scripts) and then create a Jupyter notebook. I prefer developing in notebook simply because I can quickly change and test code as I’m iterating. Then, as a reminder, if you haven’t installed the Python dependencies, you can do so with <code>uv add</code>.</p>
+<p>In the following block, you’ll see me use <code>code</code>. This command is the VS Code CLI tool, you can learn more <a href="https://code.visualstudio.com/docs/editor/command-line">here</a>.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> notebooks</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> notebooks/api_axploration.ipynb</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add dbt-core <span class="co"># The core dbt package, needed for base functionality</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add dbt-duckdb <span class="co"># The DuckDB extension, needed to connect with dbt</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add dbt-postgres <span class="co"># The postgres extension, needed to conenct with dbt</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add duckdb <span class="co"># DuckDB Python package</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add fsspec <span class="co"># Dependency for DuckDB JSON functionality</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add great-expectations <span class="co"># GX is for data validation/quality, later on</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add jupyter <span class="co"># Jupyter will launch a Python kernel and makes the notebooks possible</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add pandas <span class="co"># For standard functionality</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add pytest <span class="co"># For testing actualy pipeline/script performance, not so much data quality</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add quarto <span class="co"># For documentation</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add requests <span class="co"># For making API calls</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add ruff <span class="co"># An extremly fast Python linter made by Astral, the makers of uv</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="configuring-and-running-a-jupyter-server" class="level3">
+<h3 class="anchored" data-anchor-id="configuring-and-running-a-jupyter-server">Configuring and Running a Jupyter Server</h3>
+<p>Before you can use the notebook, you’ll need to launch and connect to a jupyter server. When developing locally, and not sharing your code or compiled code anywhere, it’s much easier to not require an authentication token. To allow this behavior, you’ll need to modify your jupyter configuration.</p>
+<p>I modified my global configuration, because I would have to reconfigure jupyter with every project if I did it in the specific project directory. That being said, I’ll include the local example as well.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For the global configuration</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> ~/.jupyter/jupyter_server_config.py</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="ex">c.ServerApp.token</span> = <span class="st">''</span> <span class="co"># Find this in the .py file, set the value to '' which means nothing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For the local configuration</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> .jupyter</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> .jupyter/jupyter_server_config.py</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="ex">c.IdentityProvider.token</span> = <span class="st">''</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>As you can see, the process is similar, you’ll just manually create the <code>.jupyter/</code> folder in your project directory first. THe next step is to start the server. Then, you’ll see an ouput similar to the image below. It will tell you useful information like the server address (<strong>localhost</strong> in this case), version, et cetera; however, you can now leave that terminal window be, it will continue to run in the background. If you need to stop the server, just go back to the window and hit <code>Ctrl-C</code>.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run jupyter server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/jupyter_server_active.png" class="img-fluid"></p>
+</section>
+<section id="using-the-notebook" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-notebook">Using The Notebook</h3>
+<p>Now that the server is up and running, you can go back to the notebook you created. To use it, I’ll first need to connect to the server (if you see the term <code>kernel</code> don’t be surprised, that’s what a single notebook runs on). Luckily, VS Code provides a really nice UI for connecting a notebook to the Jupyter server. In the images below, I’ll walk you through the connection process. First begin by selecting <code>Select Kernel</code> in the top-right corner of the notebook UI. From there, VS Code’s command palette (the search bar at the top of the window) will interactively walk you through the next steps.</p>
+<p><img src="images/select_kernel_nb.png" class="img-fluid" alt="Select Kernel"> <img src="images/jupyter_host.png" class="img-fluid" alt="Host Address"> <img src="images/yes_to_http.png" class="img-fluid" alt="HTTP Connection"> <img src="images/select_kernel.png" class="img-fluid" alt="Kernel Selection"> <img src="images/server_name.png" class="img-fluid" alt="Server Name"></p>
+<p>Then, you can verify your connection by running the first cell (<code>Ctrl-Enter</code> on MacOS).</p>
+<p><img src="images/kernel_connect_success.png" class="img-fluid"></p>
+</section>
+<section id="get-ting-my-initial-data" class="level3">
+<h3 class="anchored" data-anchor-id="get-ting-my-initial-data">GET-ting my Initial Data</h3>
+<p>Now that everything is setup and I can actually run Python code within the notebook, it’s time to pick an API and make a request to actually get the data. If you aren’t sure where to start looking for an API, <a href="https://publicapi.dev">PublicAPI</a> has a great site of publicly available datasets. Many of which are accesible both programmatically or through GUIs.</p>
+<p>Before I jump into the code, two quick notes about HTTP and GET:</p>
+<blockquote class="blockquote">
+<p>These are protocols used for transferring data over the internet. <code>HTTP</code> (HyperText Transfer Protocol) and <code>HTTPS</code> (Secure HyperText Transfer Protocol) are foundational protocols that allow web browsers and servers to communicate with each other. HTTPS adds a layer of security by encrypting the data exchanged between the client and the server. <code>GET</code> is one of the most common HTTP methods used to request data from a specified resource. It retrieves information from the server without making any changes. This method is used when you want to fetch data, such as retrieving data from an API endpoint. It is simple and effective for read-only operations, such as querying data from a database or fetching information from a web service.</p>
+</blockquote>
+<p>Next, you’ll choose the API you want to server as your data source. I decided to use NASA’s NEO (Near Earth Object) Feed for the following reasons:</p>
+<blockquote class="blockquote">
+<p><code>Dataset:</code> Information about NEOs, including size, orbital path, and speed. <code>API Endpoint:</code> https://api.nasa.gov/neo/rest/v1/neo/browse?api_key={API key} <code>Data Characteristics:</code> JSON structure with a list of NEOs, each containing details like id, name, nasa_jpl_url, absolute_magnitude_h, estimated_diameter, close_approach_date, and more. <code>Use Case:</code> Ideal for a beginner, as it provides a simple JSON structure with basic information and is updated regularly.</p>
+</blockquote>
+<p>Besides my interest in space, the other perk of using NASA’s API is that it’s free and provides a reasonable amount (1,000) of hourly calls. That being said, the documentation isn’t perfect, but it’s definitely easy enough to query. Below, I’ll share the first few cells of my notebook. Learn more on the <a href="https://api.nasa.gov">NASA API Website</a>.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the required packages</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pprint <span class="co"># pprint similar to beautiful soup, but better for my specific use case</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Notebook Context">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Notebook Context
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you’re using VS Code, Jupyter notebook context is the parent directory that you opened the file from. In my case <code>code notebooks/api_exploration.ipynb</code> resulted in the context being the root dir above notebooks (<code>Basic_OSS_Architecture/</code>), instead of notebooks. So, I was initially connecting to a persistent DuckDB file created in my Documents directory, instead of the file within my project directory because my connection string below was <code>../test.duckdb</code> instead of <code>test.duckdb</code>. As a result, I wasn’t able to interact with the environment from my CLI.</p>
+</div>
+</div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Open a connection to the persistent database</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">'test.duckdb'</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>duckdb.install_extension(<span class="st">"httpfs"</span>) <span class="co"># Lets you directly query HTTP endpoints</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>duckdb.load_extension(<span class="st">"httpfs"</span>) <span class="co"># Trying this functionality out to simplify the ETL process</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>con.sql(<span class="st">"SELECT * FROM duckdb_tables()"</span>) <span class="co"># Note: Don't use a semi colon in DuckDB for Python</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled" title="httpfs Extension for DuckDb">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+httpfs Extension for DuckDb
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I tried using the <code>httpfs</code> extension from DuckDB to handle the API calls; however, you need a specific file at the location, such as <code>.csv</code> or <code>.parquet</code>. It didn’t work for me, so I ended up doing things differently.</p>
+</div>
+</div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Store the base API information, for this, I'm using NASA's Near Earth Object (NEO) API</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>api_key_path <span class="op">=</span> <span class="st">"/Users/chriskornaros/Documents/local-scripts/.api_keys/nasa/key.txt"</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(api_key_path, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    api_key <span class="op">=</span> <span class="bu">file</span>.read().strip()</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>start_date, end_date <span class="op">=</span> <span class="st">"2024-12-01"</span>, <span class="st">"2024-12-04"</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Then Construct the URL with f-string formatting</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="ss">f"https://api.nasa.gov/neo/rest/v1/feed?start_date=</span><span class="sc">{</span>start_date<span class="sc">}</span><span class="ss">&amp;end_date=</span><span class="sc">{</span>end_date<span class="sc">}</span><span class="ss">&amp;api_key=</span><span class="sc">{</span>api_key<span class="sc">}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Standalone cell for the API response, ensures I don't call too many times</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the response was successful, if so, print the data in a human readable format</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> response.status_code <span class="op">==</span> <span class="dv">200</span>:</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> response.json()</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    pprint.pprint(data)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Error: </span><span class="sc">{</span>response<span class="sc">.</span>status_code<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="creating-the-raw-table" class="level3">
+<h3 class="anchored" data-anchor-id="creating-the-raw-table">Creating the Raw Table</h3>
+<p>Now that you’ve successfully connected to the API and made your first GET request, it’s time to get the API output in a format that DuckDB can read into a table. If your API output is anything like mine, it’ll be messy, even with the help of pprint, as you can see below. So, before I can create the table, I need to flatten the dictionary output.</p>
+<p><img src="images/pprint_json.png" class="img-fluid"></p>
+<p>Luckily, there are some simple functions in both Python and DuckDB that can help.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Flatten the output and then read it with DuckDB to get the column data types</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>flat_data <span class="op">=</span> pd.json_normalize(data[<span class="st">'near_earth_objects'</span>][<span class="st">'2024-12-02'</span>])</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>raw <span class="op">=</span> con.sql(<span class="st">"""CREATE TABLE asteroids AS</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="st">                SELECT * EXCLUDE(nasa_jpl_url, close_approach_data, 'links.self')</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="st">                , unnest(close_approach_data, recursive := true)</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="st">                FROM flat_data</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="st">                """</span>)</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>con.sql(<span class="st">"SELECT * FROM duckdb_tables()"</span>) <span class="co"># Shows table metadata, validates the script worked as intended</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>What <code>flat_data</code> did is tell Python that the dictionary values for the key ‘near_earth_objects’ are what I’m looking for and to get rid of the rest of the information, while elevating the nested hierarchy. It takes that one step further, by specifying the actual date (which are the keys in this dataset). That results in an output that you can view below; however, there is still a column with the DuckDB <code>[struct](https://duckdb.org/docs/sql/data_types/struct)</code> type. Simply put, the struct type is similar to tuples in Python because the data type is actually an ordered list of columns called <code>entries</code>. These entries can even be other lists or structs.</p>
+<p><img src="images/struct_column.png" class="img-fluid"></p>
+<p>So, I’ll need to further flatten my dataset. Luckily DuckDB SQL provides a native function for this exact behavior, <code>UNNEST</code>, and lets me execute it in the same statement I’m creating a table! This effectively does what flattening with Python functions does, the nice thing is you can set the <code>recursive :=</code> parameter to true, letting DuckDB also handle nested structs, within a struct. As you can see, the DuckDB query selects everything except for the data source’s GUI URL, the original <strong>struct</strong> data, and the API query for the specific NEO object in that row.</p>
+<p>Now that the table structure is done and ready for data. It’s time to finish off some final configurations for our dbt project. Both files will go in the <code>models/</code> folder, namely <code>schema.yml</code> and <code>sources.yml</code>. Here’s a quick note on the purpose of both.</p>
+<section id="schema.yml" class="level4">
+<h4 class="anchored" data-anchor-id="schema.yml">schema.yml</h4>
+<p>The schema.yml file documents and tests the models and columns created within your dbt project, ensuring data quality and consistency. It allows you to define metadata, such as column descriptions, and add constraints like uniqueness or nullability tests to enforce integrity. This fosters trust in your data pipelines, simplifies debugging, and enhances the readability of your data models for developers and stakeholders.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">models</span><span class="kw">:</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> asteroids</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"A table containing detailed information about near-Earth objects, including their estimated dimensions and close approach data, in metric units."</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">columns</span><span class="kw">:</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> id</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Unique identifier for the asteroid."</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> neo_reference_id</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Reference ID assigned by NASA's Near Earth Object program."</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> name</span></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Name or designation of the asteroid."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="sources.yml" class="level4">
+<h4 class="anchored" data-anchor-id="sources.yml">sources.yml</h4>
+<p>The sources.yml file defines the external data sources your dbt project depends on, such as raw tables or views in your database, and ensures their existence and structure are tested before being used. It helps you document where your data originates, making your project more transparent and easier to maintain. By validating source data and organizing dependencies, it reduces the risk of downstream errors and improves collaboration across teams.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sources</span><span class="kw">:</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> ingest</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Data in its base relational form, after being unnested from the API call"</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">database</span><span class="kw">:</span><span class="at"> basic_oss</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">schema</span><span class="kw">:</span><span class="at"> ingest</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">tables</span><span class="kw">:</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> raw</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"A table containing the non-formatted API data"</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">columns</span><span class="kw">:</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> id</span></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Unique identifier for the asteroid."</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> neo_reference_id</span></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Reference ID assigned by NASA's Near Earth Object program."</span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> name</span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Name or designation of the asteroid."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="creating-dbt-models" class="level3">
+<h3 class="anchored" data-anchor-id="creating-dbt-models">Creating dbt models</h3>
+<p>Now that the dbt project is configured and I did some feature testing in a notebook, it’s time to actually write the models which will serve as the tables in our database. The sources and schema files live in the <code>models/</code> directory. Within the models folder, you’ll create subfolders that will house your actual models. I use these subfolders to group models by schema. I’m going to have two schemas with one model each, initially, to showcase some dbt features.</p>
+<ol type="1">
+<li><code>ingest/</code> will house the model that calls the API and creates the table.</li>
+<li><code>stage/</code> will house the data transformations necessary to get the table in a useful state</li>
+</ol>
+<p>The nice thing about DuckDB is that you can directly query files on the internet. Unfortunately, the NASA API I’m calling returns the data as text, not a file. So, I’ll need to use Python to make the initial call and fetch the raw data. Luckily, as of dbt-core v1.3, you can now add <code>.py</code> files as dbt models. So, the first step, after creating the models subdirectories, is to convert the code in the Jupyter notebook to a Python script.</p>
+<p>Fortunately, as of writing this, GitHub Copilot is now free. So, I was able to easily convert the file and then check it using <code>ruff</code> in about 10 seconds. Copilot lets you define the context you’re working in, so I had it look at the notebook file and the raw file. Then, after making some slight changes (because of specific dbt functionality) I was able to click a button and have Copilot paste the code in the editor. Finally, I used <code>ruff</code> to check the file for any errors and format it. I’ll share images below.</p>
+<section id="python-model" class="level4">
+<h4 class="anchored" data-anchor-id="python-model">Python Model</h4>
+<p>It’s important to know that the actual model has a specific format and output requirement. As you’ll see below, instead of a main function, I created a <code>model(dbt, session)</code> function. It’s similar to a main function, but is specific for enabling dbt to read Python. Furthermore, the entire <code>.py</code> file needs to output one single DataFrame.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the required dependencies</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_api_key(file_path):</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Reads the API key from a file.</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="co">        file_path (str): Path to the file containing the API key.</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="co">        str: The API key.</span></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(file_path, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">file</span>.read().strip()</span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> construct_url(api_key, start_date, end_date):</span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a><span class="co">    Constructs the API URL.</span></span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a><span class="co">        api_key (str): The API key.</span></span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a><span class="co">        start_date (str): The start date for the API query.</span></span>
+<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a><span class="co">        end_date (str): The end date for the API query.</span></span>
+<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a><span class="co">        str: The constructed API URL.</span></span>
+<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb37-34"><a href="#cb37-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"https://api.nasa.gov/neo/rest/v1/feed?start_date=</span><span class="sc">{</span>start_date<span class="sc">}</span><span class="ss">&amp;end_date=</span><span class="sc">{</span>end_date<span class="sc">}</span><span class="ss">&amp;api_key=</span><span class="sc">{</span>api_key<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-36"><a href="#cb37-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-37"><a href="#cb37-37" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fetch_data(url):</span>
+<span id="cb37-38"><a href="#cb37-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb37-39"><a href="#cb37-39" aria-hidden="true" tabindex="-1"></a><span class="co">    Fetches data from the API.</span></span>
+<span id="cb37-40"><a href="#cb37-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-41"><a href="#cb37-41" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb37-42"><a href="#cb37-42" aria-hidden="true" tabindex="-1"></a><span class="co">        url (str): The API URL.</span></span>
+<span id="cb37-43"><a href="#cb37-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-44"><a href="#cb37-44" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb37-45"><a href="#cb37-45" aria-hidden="true" tabindex="-1"></a><span class="co">        dict: The JSON response from the API.</span></span>
+<span id="cb37-46"><a href="#cb37-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-47"><a href="#cb37-47" aria-hidden="true" tabindex="-1"></a><span class="co">    Raises:</span></span>
+<span id="cb37-48"><a href="#cb37-48" aria-hidden="true" tabindex="-1"></a><span class="co">        Exception: If the API request fails.</span></span>
+<span id="cb37-49"><a href="#cb37-49" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb37-50"><a href="#cb37-50" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> requests.get(url)</span>
+<span id="cb37-51"><a href="#cb37-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> response.status_code <span class="op">==</span> <span class="dv">200</span>:</span>
+<span id="cb37-52"><a href="#cb37-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> response.json()</span>
+<span id="cb37-53"><a href="#cb37-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb37-54"><a href="#cb37-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="ss">f"Error: </span><span class="sc">{</span>response<span class="sc">.</span>status_code<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb37-55"><a href="#cb37-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-56"><a href="#cb37-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-57"><a href="#cb37-57" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_data(data, date):</span>
+<span id="cb37-58"><a href="#cb37-58" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb37-59"><a href="#cb37-59" aria-hidden="true" tabindex="-1"></a><span class="co">    Processes the API response data using Pandas and DuckDB.</span></span>
+<span id="cb37-60"><a href="#cb37-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-61"><a href="#cb37-61" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb37-62"><a href="#cb37-62" aria-hidden="true" tabindex="-1"></a><span class="co">        data (dict): The JSON response from the API.</span></span>
+<span id="cb37-63"><a href="#cb37-63" aria-hidden="true" tabindex="-1"></a><span class="co">        date (str): The date for which to process the data.</span></span>
+<span id="cb37-64"><a href="#cb37-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-65"><a href="#cb37-65" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb37-66"><a href="#cb37-66" aria-hidden="true" tabindex="-1"></a><span class="co">        DataFrame: The processed data as a pandas DataFrame.</span></span>
+<span id="cb37-67"><a href="#cb37-67" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb37-68"><a href="#cb37-68" aria-hidden="true" tabindex="-1"></a>    flat_data <span class="op">=</span> pd.json_normalize(data[<span class="st">"near_earth_objects"</span>][date])</span>
+<span id="cb37-69"><a href="#cb37-69" aria-hidden="true" tabindex="-1"></a>    unnested_data <span class="op">=</span> duckdb.sql(<span class="st">"""SELECT * EXCLUDE(nasa_jpl_url, close_approach_data, 'links.self')</span></span>
+<span id="cb37-70"><a href="#cb37-70" aria-hidden="true" tabindex="-1"></a><span class="st">                                , unnest(close_approach_data, recursive := true)</span></span>
+<span id="cb37-71"><a href="#cb37-71" aria-hidden="true" tabindex="-1"></a><span class="st">                                FROM </span><span class="sc">{a}</span></span>
+<span id="cb37-72"><a href="#cb37-72" aria-hidden="true" tabindex="-1"></a><span class="st">                                """</span>).fetchdf().<span class="bu">format</span>(a<span class="op">=</span>flat_data) <span class="co"># Test this</span></span>
+<span id="cb37-73"><a href="#cb37-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-74"><a href="#cb37-74" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> unnested_data</span>
+<span id="cb37-75"><a href="#cb37-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-76"><a href="#cb37-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-77"><a href="#cb37-77" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> model(dbt, session):</span>
+<span id="cb37-78"><a href="#cb37-78" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb37-79"><a href="#cb37-79" aria-hidden="true" tabindex="-1"></a><span class="co">    Main function to execute the data ingestion process.</span></span>
+<span id="cb37-80"><a href="#cb37-80" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns a single DataFrame object.</span></span>
+<span id="cb37-81"><a href="#cb37-81" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb37-82"><a href="#cb37-82" aria-hidden="true" tabindex="-1"></a>    api_key_path <span class="op">=</span> <span class="st">"/Users/chriskornaros/Documents/local-scripts/.api_keys/nasa/key.txt"</span></span>
+<span id="cb37-83"><a href="#cb37-83" aria-hidden="true" tabindex="-1"></a>    api_key <span class="op">=</span> read_api_key(api_key_path)</span>
+<span id="cb37-84"><a href="#cb37-84" aria-hidden="true" tabindex="-1"></a>    start_date <span class="op">=</span> <span class="st">"1900-01-01"</span></span>
+<span id="cb37-85"><a href="#cb37-85" aria-hidden="true" tabindex="-1"></a>    end_date <span class="op">=</span> datetime.today().strftime(<span class="st">"%Y-%m-</span><span class="sc">%d</span><span class="st">"</span>)</span>
+<span id="cb37-86"><a href="#cb37-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-87"><a href="#cb37-87" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> construct_url(api_key, start_date, end_date)</span>
+<span id="cb37-88"><a href="#cb37-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-89"><a href="#cb37-89" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb37-90"><a href="#cb37-90" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> fetch_data(url)</span>
+<span id="cb37-91"><a href="#cb37-91" aria-hidden="true" tabindex="-1"></a>        final_data <span class="op">=</span> process_data(data)</span>
+<span id="cb37-92"><a href="#cb37-92" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb37-93"><a href="#cb37-93" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Failed to fetch data: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb37-94"><a href="#cb37-94" aria-hidden="true" tabindex="-1"></a>        final_data <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb37-95"><a href="#cb37-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-96"><a href="#cb37-96" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> final_data</span>
+<span id="cb37-97"><a href="#cb37-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-98"><a href="#cb37-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-99"><a href="#cb37-99" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb37-100"><a href="#cb37-100" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> model()</span>
+<span id="cb37-101"><a href="#cb37-101" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/prompt_context.png" class="img-fluid"> <img src="images/py_output_head.png" class="img-fluid"> <img src="images/ruff_extension.png" class="img-fluid"></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ruff</span> check</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># All checks passed!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="sql-model" class="level4">
+<h4 class="anchored" data-anchor-id="sql-model">SQL Model</h4>
+<p>Next, I’m going to create a simple SQL model to only use the metric data from the table. Additionally, the model cleans up some column names.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Column names and data types taken from the API Exploration Notebook</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> a_raw <span class="kw">AS</span> (</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> main.asteroids</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">id</span>, neo_reference_id, name, close_approach_date, close_approach_date_full, epoch_date_close_approach</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    , absolute_magnitude_h, is_potentially_hazardous_asteroid, is_sentry_object    </span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    , kilometers_per_second, kilometers_per_hour, kilometers_miss, orbiting_body</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>    , <span class="ot">"estimated_diameter.kilometers.estimated_diameter_min"</span> <span class="kw">AS</span> km_estimated_diameter_min</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>    , <span class="ot">"estimated_diameter.kilometers.estimated_diameter_max"</span>AS km_estimated_diameter_max                                                                                 </span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>    , <span class="ot">"estimated_diameter.meters.estimated_diameter_min"</span> <span class="kw">AS</span> meters_estimated_diameter_min</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>    , <span class="ot">"estimated_diameter.meters.estimated_diameter_max"</span> <span class="kw">AS</span> meters_estimated_diameter_max</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> a_raw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="running-your-models" class="level3">
+<h3 class="anchored" data-anchor-id="running-your-models">Running your models</h3>
+<p>Now that everything is ready, it’s finally time for dbt to shine! To ensure functionality, as I expect it, I like to <code>cd dbt_dir/</code> before running the models. Then, once I’m in the dbt project directory, all I have to do is execute <code>dbt run</code> from my CLI for DBT to start exectuing scripts. That being said, if you only want to test or run a specific model, you can tell dbt exactly which folder to look at using <code>dbt run --select ingest</code>. Just know, even though you may only run one specific folder, dbt will throw an error if there is an issue with a model in another subfolder.</p>
 
 
 </section>
