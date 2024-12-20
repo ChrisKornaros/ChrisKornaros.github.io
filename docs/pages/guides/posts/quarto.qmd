@@ -6,6 +6,8 @@ categories: ["Reporting"]
 tags: ["Quarto", "Documentation", "Design", "Guides", "Markdown", "HTML", "CSS", "SASS", "CLI", "git", "GitHub"]
 ---
 
+![](images/quarto.png)
+
 A non-exhaustive guide on using Quarto for project documentation and personal branding.
 
 ## Overview

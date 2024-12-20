@@ -32,7 +32,7 @@ h4, h5, h6 {
 }
 
 blockquote {
-  background-color: $success; /* added background color */
+  background-color: $success;
   border-color: $dark;
   color: $secondary !important;
 }
@@ -44,11 +44,44 @@ code {
 
 .sourceCode {
   background-color: $success;
-  color: $info;
-}
 
-.sourceCode pre.code-with-copy{
-  padding: 0;
+
+  pre.code-with-copy {
+    padding: 0;
+  }
+
+  span {
+    &.al { color: lighten($danger, 20%); } // Adjusted for better contrast
+    &.an { color: lighten($secondary, 20%); } // Adjusted for better contrast
+    &.at { color: lighten($primary, 20%); } // Adjusted for better contrast
+    &.bn { color: $primary; } // Adjusted for better contrast
+    &.bu { color: $warning; font-weight: bold; } // Adjusted for better contrast
+    &.ch { color: lighten($success, 20%); } // Adjusted for better contrast
+    &.co { color: darken(orange, 10%); font-style: italic; } // Adjusted for better contrast
+    &.cv { color: lighten($primary, 20%); } // Adjusted for better contrast
+    &.cn { color: lighten($primary, 20%); } // Adjusted for better contrast
+    &.cf { color: green; font-weight: bold; } // Adjusted for better contrast
+    &.dt { color: lighten($danger, 20%); } // Adjusted for better contrast
+    &.dv { color: lighten($secondary, 20%); } // Adjusted for better contrast
+    &.do { color: lighten($light, 20%); } // Adjusted for better contrast
+    &.er { color: lighten($danger, 20%); text-decoration: underline; } // Adjusted for better contrast
+    &.ex { color: lighten($primary, 20%); font-weight: bold; } // Adjusted for better contrast
+    &.fl { color: lighten($secondary, 20%); } // Adjusted for better contrast
+    &.fu { color: lighten($danger, 20%); } // Adjusted for better contrast
+    &.im { color: rgb(227, 97, 227); font-weight: bold; } // Adjusted for better contrast
+    &.in { color: lighten($secondary, 20%); } // Adjusted for better contrast
+    &.kw { color: $foreground; font-weight: bold;} // Adjusted for better contrast
+    &.op { color: lighten($info, 20%); } // Adjusted for better contrast
+    &.ot { color: lighten($primary, 20%); } // Adjusted for better contrast
+    &.pp { color: lighten($green, 10%); font-weight: bold; } // Adjusted for better contrast
+    &.re { color: lighten($primary, 20%); background-color: lighten($light, 20%); } // Adjusted for better contrast
+    &.sc { color: $primary; } // Adjusted for better contrast
+    &.ss { color: $primary;} // Adjusted for better contrast
+    &.st { color: $primary; } // Adjusted for better contrast
+    &.va { color: $info; } // Adjusted for better contrast
+    &.vs { color: lighten($success, 20%); } // Adjusted for better contrast
+    &.wa { color: lighten($tertiary, 20%); } // Adjusted for better contrast
+  }
 }
 
 .callout-title-container.flex-fill {

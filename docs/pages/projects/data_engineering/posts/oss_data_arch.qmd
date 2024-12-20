@@ -6,6 +6,8 @@ categories: ["Technology", "Planning"]
 tags: ["Architecture", "Systems", "Design", "Entity-Relationships", "Open Source", "zsh", "bash", "uv", "Python", "Quarto", "dbt", "Great Expectations", "Testing", "git", "GitHub", "Docker", "Kubernetes", "PostgreSQL", "DuckDB", "Unity Catalog", "Airflow", "Dagster", "Kafka"]
 ---
 
+![](images/etl_erd.png)
+
 ## Introduction
 I will update this when I begin the project. The goal here is to explore and create a tech stack to support modern data and analytical workloads, using entirely open source software. Ideally, I'll be able to scale it to terabytes and then share that template and the guide as a public resource.
 

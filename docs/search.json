@@ -170,22 +170,11 @@
     ]
   },
   {
-    "objectID": "pages/projects/data_science/posts/titanic.html",
-    "href": "pages/projects/data_science/posts/titanic.html",
-    "title": "Titanic Disaster",
-    "section": "",
-    "text": "The Kaggle Titanic dataset and ML competition is one that many people are familiar with, and if they’re like me, it was also their first ML project. I redid this after 3 years to get familiar with my current workflow of using git, notebooks, venvs, etc. Below I included some notes to myself. While it was overkill, I used a Dockerized environment for this project, just to increase my familiarity with containers and the docker toolset.",
-    "crumbs": [
-      "Data Science and Machine Learning",
-      "Titanic Disaster"
-    ]
-  },
-  {
     "objectID": "pages/projects/data_science/posts/titanic.html#general-overview",
     "href": "pages/projects/data_science/posts/titanic.html#general-overview",
     "title": "Titanic Disaster",
-    "section": "",
-    "text": "The Kaggle Titanic dataset and ML competition is one that many people are familiar with, and if they’re like me, it was also their first ML project. I redid this after 3 years to get familiar with my current workflow of using git, notebooks, venvs, etc. Below I included some notes to myself. While it was overkill, I used a Dockerized environment for this project, just to increase my familiarity with containers and the docker toolset.",
+    "section": "General Overview",
+    "text": "General Overview\nThe Kaggle Titanic dataset and ML competition is one that many people are familiar with, and if they’re like me, it was also their first ML project. I redid this after 3 years to get familiar with my current workflow of using git, notebooks, venvs, etc. Below I included some notes to myself. While it was overkill, I used a Dockerized environment for this project, just to increase my familiarity with containers and the docker toolset.",
     "crumbs": [
       "Data Science and Machine Learning",
       "Titanic Disaster"
@@ -359,22 +348,11 @@
     ]
   },
   {
-    "objectID": "pages/projects/data_engineering/posts/oss_data_arch.html",
-    "href": "pages/projects/data_engineering/posts/oss_data_arch.html",
-    "title": "Open Source Data and Analytics Architecture",
-    "section": "",
-    "text": "I will update this when I begin the project. The goal here is to explore and create a tech stack to support modern data and analytical workloads, using entirely open source software. Ideally, I’ll be able to scale it to terabytes and then share that template and the guide as a public resource.\nCurrently, I’m thinking of the following tools, as part of a non-exhaustive list of the stack:\n\n\nOS/Environment: zsh/bash\nProject and Package Management: uv\nCollaboration and Source Control: Github\nDocumentation: Quarto\nData Modeling: dbt\nContainerization: Docker\nContainer Orchestration: Kubernetes\nOLTP Database: PostgreSQL\nOLAP Database: DuckDB\nBatch Ingestion: Python\nETL: dbt\nTesting: pytest\nData Quality: Great Expectations\nMetadata: Unity Catalog\nETL Orchestration: Airflow and/or Dagster\nStreaming Ingestion: Kafka\n\n\nGeneral workflow I’m envisioning:\n\nInitialize project with uv, add basic dependencies for the environment\nCreate the repo with the GitHub CLI\nSet the remote as the upstream and do the initial commit\nInitialize the quarto and dbt projects as subdirectories of the main, uv project directory\nCreate the postgres container with docker, use this to initialize the postgres database (Prod)\nIn your uv envionrment, initialize the duckdb (Dev/Test) persistent database\n\nSimpler to work quickly with duckdb, postgres has more configurations/overhead, but is better for long term persistent\n\nUse python and duckdb to ingest the initial batch of raw data\nUse dbt to define the data model, pytest to define the basic tests, and great expectations to define data quality\nInitialize the unity catalog instance, add the connection information (Dev/Test/Prod)\nGenerate metadata and lineage\nStart scheduling and orchestrating jobs\nPotentially scale system up to handle stremaing data",
-    "crumbs": [
-      "Data Engineering and Architecture",
-      "Open Source Data and Analytics Architecture"
-    ]
-  },
-  {
     "objectID": "pages/projects/data_engineering/posts/oss_data_arch.html#introduction",
     "href": "pages/projects/data_engineering/posts/oss_data_arch.html#introduction",
     "title": "Open Source Data and Analytics Architecture",
-    "section": "",
-    "text": "I will update this when I begin the project. The goal here is to explore and create a tech stack to support modern data and analytical workloads, using entirely open source software. Ideally, I’ll be able to scale it to terabytes and then share that template and the guide as a public resource.\nCurrently, I’m thinking of the following tools, as part of a non-exhaustive list of the stack:\n\n\nOS/Environment: zsh/bash\nProject and Package Management: uv\nCollaboration and Source Control: Github\nDocumentation: Quarto\nData Modeling: dbt\nContainerization: Docker\nContainer Orchestration: Kubernetes\nOLTP Database: PostgreSQL\nOLAP Database: DuckDB\nBatch Ingestion: Python\nETL: dbt\nTesting: pytest\nData Quality: Great Expectations\nMetadata: Unity Catalog\nETL Orchestration: Airflow and/or Dagster\nStreaming Ingestion: Kafka\n\n\nGeneral workflow I’m envisioning:\n\nInitialize project with uv, add basic dependencies for the environment\nCreate the repo with the GitHub CLI\nSet the remote as the upstream and do the initial commit\nInitialize the quarto and dbt projects as subdirectories of the main, uv project directory\nCreate the postgres container with docker, use this to initialize the postgres database (Prod)\nIn your uv envionrment, initialize the duckdb (Dev/Test) persistent database\n\nSimpler to work quickly with duckdb, postgres has more configurations/overhead, but is better for long term persistent\n\nUse python and duckdb to ingest the initial batch of raw data\nUse dbt to define the data model, pytest to define the basic tests, and great expectations to define data quality\nInitialize the unity catalog instance, add the connection information (Dev/Test/Prod)\nGenerate metadata and lineage\nStart scheduling and orchestrating jobs\nPotentially scale system up to handle stremaing data",
+    "section": "Introduction",
+    "text": "Introduction\nI will update this when I begin the project. The goal here is to explore and create a tech stack to support modern data and analytical workloads, using entirely open source software. Ideally, I’ll be able to scale it to terabytes and then share that template and the guide as a public resource.\nCurrently, I’m thinking of the following tools, as part of a non-exhaustive list of the stack:\n\n\nOS/Environment: zsh/bash\nProject and Package Management: uv\nCollaboration and Source Control: Github\nDocumentation: Quarto\nData Modeling: dbt\nContainerization: Docker\nContainer Orchestration: Kubernetes\nOLTP Database: PostgreSQL\nOLAP Database: DuckDB\nBatch Ingestion: Python\nETL: dbt\nTesting: pytest\nData Quality: Great Expectations\nMetadata: Unity Catalog\nETL Orchestration: Airflow and/or Dagster\nStreaming Ingestion: Kafka\n\n\nGeneral workflow I’m envisioning:\n\nInitialize project with uv, add basic dependencies for the environment\nCreate the repo with the GitHub CLI\nSet the remote as the upstream and do the initial commit\nInitialize the quarto and dbt projects as subdirectories of the main, uv project directory\nCreate the postgres container with docker, use this to initialize the postgres database (Prod)\nIn your uv envionrment, initialize the duckdb (Dev/Test) persistent database\n\nSimpler to work quickly with duckdb, postgres has more configurations/overhead, but is better for long term persistent\n\nUse python and duckdb to ingest the initial batch of raw data\nUse dbt to define the data model, pytest to define the basic tests, and great expectations to define data quality\nInitialize the unity catalog instance, add the connection information (Dev/Test/Prod)\nGenerate metadata and lineage\nStart scheduling and orchestrating jobs\nPotentially scale system up to handle stremaing data",
     "crumbs": [
       "Data Engineering and Architecture",
       "Open Source Data and Analytics Architecture"
