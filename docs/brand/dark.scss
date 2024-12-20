@@ -54,7 +54,7 @@ code {
   span {
     &.al { color: lighten($danger, 20%); } // Adjusted for better contrast
     &.an { color: lighten($secondary, 20%); } // Adjusted for better contrast
-    &.at { color: lighten($primary, 20%); } // Adjusted for better contrast
+    &.at { color: $primary; } // Adjusted for better contrast
     &.bn { color: $primary; } // Adjusted for better contrast
     &.bu { color: lighten($info, 10%); font-weight: bold; } // Adjusted for better contrast
     &.ch { color: lighten($success, 20%); } // Adjusted for better contrast
@@ -68,7 +68,7 @@ code {
     &.er { color: lighten($danger, 20%); text-decoration: underline; } // Adjusted for better contrast
     &.ex { color: lighten($primary, 20%); font-weight: bold; } // Adjusted for better contrast
     &.fl { color: lighten($secondary, 20%); } // Adjusted for better contrast
-    &.fu { color: lighten($danger, 20%); } // Adjusted for better contrast
+    &.fu { color: $info; } // Adjusted for better contrast
     &.im { color: rgb(227, 97, 227); font-weight: bold; } // Adjusted for better contrast
     &.in { color: lighten($secondary, 20%); } // Adjusted for better contrast
     &.kw { color: $foreground; font-weight: bold;} // Adjusted for better contrast
