@@ -9,7 +9,7 @@
 <meta name="author" content="Chris Kornaros">
 <meta name="dcterms.date" content="2024-12-29">
 
-<title>Basic OSS Architecture – Chris Kornaros</title>
+<title>Guide to Setting Up Raspberry Pi for Data Engineering and Virtualization Projects – Chris Kornaros</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -135,14 +135,12 @@ cookieconsent.run({
   
 
 
-<meta property="og:title" content="Basic OSS Architecture – Chris Kornaros">
+<meta property="og:title" content="Guide to Setting Up Raspberry Pi for Data Engineering and Virtualization Projects – Chris Kornaros">
 <meta property="og:description" content="">
-<meta property="og:image" content="images/rasp_pi_logo.png">
 <meta property="og:site_name" content="Chris Kornaros">
-<meta name="twitter:title" content="Basic OSS Architecture – Chris Kornaros">
+<meta name="twitter:title" content="Guide to Setting Up Raspberry Pi for Data Engineering and Virtualization Projects – Chris Kornaros">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="images/rasp_pi_logo.png">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-fixed">
@@ -233,6 +231,42 @@ cookieconsent.run({
   <li><a href="#hardware-requirements" id="toc-hardware-requirements" class="nav-link" data-scroll-target="#hardware-requirements"><strong>Hardware Requirements</strong></a></li>
   <li><a href="#installing-linux-server-lts-on-the-ssd" id="toc-installing-linux-server-lts-on-the-ssd" class="nav-link" data-scroll-target="#installing-linux-server-lts-on-the-ssd"><strong>Installing Linux Server LTS on the SSD</strong></a></li>
   </ul></li>
+  <li><a href="#ssh" id="toc-ssh" class="nav-link" data-scroll-target="#ssh">SSH</a>
+  <ul>
+  <li><a href="#understanding-ssh-configuration-files" id="toc-understanding-ssh-configuration-files" class="nav-link" data-scroll-target="#understanding-ssh-configuration-files">Understanding SSH Configuration Files</a>
+  <ul class="collapse">
+  <li><a href="#ssh-client-vs-server-configuration" id="toc-ssh-client-vs-server-configuration" class="nav-link" data-scroll-target="#ssh-client-vs-server-configuration">SSH Client vs Server Configuration</a></li>
+  </ul></li>
+  <li><a href="#key-based-authentication-setup" id="toc-key-based-authentication-setup" class="nav-link" data-scroll-target="#key-based-authentication-setup">Key-Based Authentication Setup</a>
+  <ul class="collapse">
+  <li><a href="#understanding-ssh-keys-and-security" id="toc-understanding-ssh-keys-and-security" class="nav-link" data-scroll-target="#understanding-ssh-keys-and-security">Understanding SSH Keys and Security</a></li>
+  <li><a href="#generating-your-ssh-keys" id="toc-generating-your-ssh-keys" class="nav-link" data-scroll-target="#generating-your-ssh-keys">Generating Your SSH Keys</a></li>
+  <li><a href="#installing-your-public-key-on-the-raspberry-pi" id="toc-installing-your-public-key-on-the-raspberry-pi" class="nav-link" data-scroll-target="#installing-your-public-key-on-the-raspberry-pi">Installing Your Public Key on the Raspberry Pi</a></li>
+  </ul></li>
+  <li><a href="#server-side-ssh-configuration" id="toc-server-side-ssh-configuration" class="nav-link" data-scroll-target="#server-side-ssh-configuration">Server-Side SSH Configuration</a>
+  <ul class="collapse">
+  <li><a href="#understanding-server-host-keys" id="toc-understanding-server-host-keys" class="nav-link" data-scroll-target="#understanding-server-host-keys">Understanding Server Host Keys</a></li>
+  <li><a href="#optimizing-server-security" id="toc-optimizing-server-security" class="nav-link" data-scroll-target="#optimizing-server-security">Optimizing Server Security</a></li>
+  </ul></li>
+  <li><a href="#client-side-configuration" id="toc-client-side-configuration" class="nav-link" data-scroll-target="#client-side-configuration">Client-Side Configuration</a>
+  <ul class="collapse">
+  <li><a href="#setting-up-your-ssh-config" id="toc-setting-up-your-ssh-config" class="nav-link" data-scroll-target="#setting-up-your-ssh-config">Setting Up Your SSH Config</a></li>
+  <li><a href="#managing-known-hosts" id="toc-managing-known-hosts" class="nav-link" data-scroll-target="#managing-known-hosts">Managing Known Hosts</a></li>
+  </ul></li>
+  <li><a href="#additional-security-measures" id="toc-additional-security-measures" class="nav-link" data-scroll-target="#additional-security-measures">Additional Security Measures</a>
+  <ul class="collapse">
+  <li><a href="#firewall-configuration" id="toc-firewall-configuration" class="nav-link" data-scroll-target="#firewall-configuration">Firewall Configuration</a></li>
+  <li><a href="#fail2ban" id="toc-fail2ban" class="nav-link" data-scroll-target="#fail2ban">Fail2Ban</a></li>
+  </ul></li>
+  <li><a href="#system-updates" id="toc-system-updates" class="nav-link" data-scroll-target="#system-updates">System Updates</a></li>
+  <li><a href="#monitoring-and-maintenance" id="toc-monitoring-and-maintenance" class="nav-link" data-scroll-target="#monitoring-and-maintenance">Monitoring and Maintenance</a>
+  <ul class="collapse">
+  <li><a href="#regular-security-checks" id="toc-regular-security-checks" class="nav-link" data-scroll-target="#regular-security-checks">Regular Security Checks</a></li>
+  <li><a href="#key-management-best-practices" id="toc-key-management-best-practices" class="nav-link" data-scroll-target="#key-management-best-practices">Key Management Best Practices</a></li>
+  </ul></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   <li><a href="#configuring-microsd-cards" id="toc-configuring-microsd-cards" class="nav-link" data-scroll-target="#configuring-microsd-cards"><strong>2. Configuring MicroSD Cards</strong></a>
   <ul>
   <li><a href="#purpose-of-microsd-cards" id="toc-purpose-of-microsd-cards" class="nav-link" data-scroll-target="#purpose-of-microsd-cards"><strong>Purpose of MicroSD Cards</strong></a></li>
@@ -259,7 +293,7 @@ cookieconsent.run({
   <li><a href="#apache-spark" id="toc-apache-spark" class="nav-link" data-scroll-target="#apache-spark"><strong>Apache Spark</strong></a></li>
   <li><a href="#docker-vs.-lxclxd" id="toc-docker-vs.-lxclxd" class="nav-link" data-scroll-target="#docker-vs.-lxclxd"><strong>Docker vs.&nbsp;LXC/LXD</strong></a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><strong>Conclusion</strong></a></li>
+  <li><a href="#conclusion-1" id="toc-conclusion-1" class="nav-link" data-scroll-target="#conclusion-1"><strong>Conclusion</strong></a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/projects/data_engineering/posts/raspberry_pi_server.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -268,7 +302,7 @@ cookieconsent.run({
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Basic OSS Architecture</h1>
+<h1 class="title">Guide to Setting Up Raspberry Pi for Data Engineering and Virtualization Projects</h1>
   <div class="quarto-categories">
     <div class="quarto-category">Research</div>
     <div class="quarto-category">Ongoing</div>
@@ -301,9 +335,8 @@ cookieconsent.run({
 </header>
 
 
-<p><img src="images/rasp_pi_logo.png" class="img-fluid"></p>
-<p>I used ChatGPT to help me put together a guide/outline for the steps to set things up as I want. The reason being, I want to be able to reference the explanations here in case I need to research/learn something. In my opinion, LLMs are great for tasks like this.</p>
-<p>This guide provides step-by-step instructions and explanations for configuring a Raspberry Pi 4 to learn about hardware, servers, virtualization, and distributed computing systems. It includes everything we’ve discussed, formatted for clarity and learning purposes.</p>
+<p>I used a combination of ChatGPT and Claude to create an outline and then detailed guides for each step, respectively. In my experience, Claude handles the detailed guides and explanations better, but I still make sure to check, test, and proofread everything it gives me.</p>
+<p>This guide provides step-by-step instructions and explanations for configuring a Raspberry Pi 4 to learn about hardware, servers, virtualization, and distributed computing systems.</p>
 <hr>
 <section id="initial-setup" class="level2">
 <h2 class="anchored" data-anchor-id="initial-setup"><strong>1. Initial Setup</strong></h2>
@@ -311,6 +344,8 @@ cookieconsent.run({
 <h3 class="anchored" data-anchor-id="hardware-requirements"><strong>Hardware Requirements</strong></h3>
 <ul>
 <li>Raspberry Pi 4</li>
+<li>Micro HDMI to HDMI cord (for direct access)</li>
+<li>Keyboard (connected via USB for direct access)</li>
 <li>1TB Samsung T7 SSD (connected via USB)</li>
 <li>Amazon Basics 128GB microSD card (or other microSD cards for boot media)</li>
 <li>SSH-capable devices for headless access</li>
@@ -321,16 +356,257 @@ cookieconsent.run({
 <ol type="1">
 <li><strong>Prepare the SSD:</strong>
 <ul>
-<li>Flash the Linux Server LTS image onto the SSD using tools like <code>balenaEtcher</code> or <code>dd</code>.</li>
+<li>Flash the Linux Server LTS image onto the SSD using tools like <code>balenaEtcher</code>, <code>dd</code>, or <code>rpi-imager</code>.</li>
 </ul></li>
 <li><strong>Boot from the SSD:</strong>
 <ul>
-<li>Remove the microSD card and reboot the Raspberry Pi.</li>
-<li>Confirm successful boot by connecting via SSH.</li>
+<li>Connect the SSD to the Raspberry Pi.</li>
+<li>Connect the Raspberry Pi to the power source.</li>
 </ul></li>
 </ol>
-<hr>
 </section>
+</section>
+<section id="ssh" class="level2">
+<h2 class="anchored" data-anchor-id="ssh">SSH</h2>
+<p>This section provides a thorough walkthrough of setting up and securing SSH (Secure Shell) on a Raspberry Pi running Ubuntu Server. SSH is a network protocol that creates an encrypted tunnel between computers, allowing secure remote management. Think of it as establishing a private, secure telephone line that only authorized parties can use to communicate.</p>
+<section id="understanding-ssh-configuration-files" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-ssh-configuration-files">Understanding SSH Configuration Files</h3>
+<p>Before diving into the setup, it’s important to understand the key configuration files:</p>
+<section id="ssh-client-vs-server-configuration" class="level4">
+<h4 class="anchored" data-anchor-id="ssh-client-vs-server-configuration">SSH Client vs Server Configuration</h4>
+<p>The SSH system uses two main configuration files with distinct purposes:</p>
+<ol type="1">
+<li><code>ssh_config</code>:
+<ul>
+<li>Lives on your client machine (like your laptop)</li>
+<li>Controls how your system behaves when connecting to other SSH servers</li>
+<li>Affects outgoing SSH connections</li>
+<li>Located at <code>/etc/ssh/ssh_config</code> (system-wide) and <code>~/.ssh/config</code> (user-specific)</li>
+</ul></li>
+<li><code>sshd_config</code>:
+<ul>
+<li>Lives on your server (the Raspberry Pi)</li>
+<li>Controls how your SSH server accepts incoming connections</li>
+<li>Determines who can connect and how</li>
+<li>Located at <code>/etc/ssh/sshd_config</code></li>
+<li>Requires root privileges to modify</li>
+<li>Changes require restarting the SSH service</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="key-based-authentication-setup" class="level3">
+<h3 class="anchored" data-anchor-id="key-based-authentication-setup">Key-Based Authentication Setup</h3>
+<section id="understanding-ssh-keys-and-security" class="level4">
+<h4 class="anchored" data-anchor-id="understanding-ssh-keys-and-security">Understanding SSH Keys and Security</h4>
+<p>This guide uses ECDSA-384 keys, which offer several advantages: - Uses the NIST P-384 curve, providing security equivalent to 192-bit symmetric encryption - Better resistance to potential quantum computing attacks compared to smaller key sizes - Standardized under FIPS 186-4 - Excellent balance between security and performance</p>
+</section>
+<section id="generating-your-ssh-keys" class="level4">
+<h4 class="anchored" data-anchor-id="generating-your-ssh-keys">Generating Your SSH Keys</h4>
+<p>On your laptop, generate a new SSH key pair:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a new SSH key pair using ECDSA-384</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ecdsa <span class="at">-b</span> 384 <span class="at">-C</span> <span class="st">"ubuntu-pi-server"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This command: - <code>-t ecdsa</code>: Specifies the ECDSA algorithm - <code>-b 384</code>: Sets the key size to 384 bits - <code>-C "ubuntu-pi-server"</code>: Adds a descriptive comment</p>
+<p>The command generates two files: - <code>~/.ssh/id_ecdsa</code>: Your private key (keep this secret!) - <code>~/.ssh/id_ecdsa.pub</code>: Your public key (safe to share)</p>
+</section>
+<section id="installing-your-public-key-on-the-raspberry-pi" class="level4">
+<h4 class="anchored" data-anchor-id="installing-your-public-key-on-the-raspberry-pi">Installing Your Public Key on the Raspberry Pi</h4>
+<p>Transfer your public key to the Pi:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ssh-copy-id</span> <span class="at">-i</span> ~/.ssh/id_ecdsa.pub chris@ubuntu-pi-server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This command: 1. Connects to your Pi using password authentication 2. Creates the <code>.ssh</code> directory if needed 3. Adds your public key to <code>authorized_keys</code> 4. Sets appropriate permissions automatically</p>
+</section>
+</section>
+<section id="server-side-ssh-configuration" class="level3">
+<h3 class="anchored" data-anchor-id="server-side-ssh-configuration">Server-Side SSH Configuration</h3>
+<section id="understanding-server-host-keys" class="level4">
+<h4 class="anchored" data-anchor-id="understanding-server-host-keys">Understanding Server Host Keys</h4>
+<p>Your Pi’s <code>/etc/ssh</code> directory contains several important files: - Host key pairs (public and private) for different algorithms - Configuration files and directories - The moduli file for key exchange</p>
+</section>
+<section id="optimizing-server-security" class="level4">
+<h4 class="anchored" data-anchor-id="optimizing-server-security">Optimizing Server Security</h4>
+<ol type="1">
+<li>Back up the original configuration:</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /etc/ssh/sshd_config /etc/ssh/sshd_config.backup-<span class="va">$(</span><span class="fu">date</span> +%Y%m%d<span class="va">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Create a custom security configuration:</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nano /etc/ssh/sshd_config.d/99-custom-security.conf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Add these security settings:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Disable password authentication</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">PasswordAuthentication</span> no</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Disable root login</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">PermitRootLogin</span> no</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify allowed users</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ex">AllowUsers</span> chris</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Use SSH Protocol 2</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Protocol</span> 2</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Set idle timeout (optional)</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="ex">ClientAliveInterval</span> 300</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="ex">ClientAliveCountMax</span> 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li>Optimize host key settings in sshd_config:</li>
+</ol>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify host key order (prioritize ECDSA)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">HostKey</span> /etc/ssh/ssh_host_ecdsa_key</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">HostKey</span> /etc/ssh/ssh_host_ed25519_key</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">HostKey</span> /etc/ssh/ssh_host_rsa_key</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify key exchange algorithms</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">KexAlgorithms</span> ecdh-sha2-nistp384,curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify host key algorithms</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ex">HostKeyAlgorithms</span> ecdsa-sha2-nistp384,ssh-ed25519,rsa-sha2-512,rsa-sha2-256</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="4" type="1">
+<li>Strengthen the moduli file:</li>
+</ol>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Back up the existing file</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /etc/ssh/moduli /etc/ssh/moduli.backup</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove moduli less than 3072 bits</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> awk <span class="st">'$5 &gt;= 3072'</span> /etc/ssh/moduli <span class="op">&gt;</span> /tmp/moduli</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mv /tmp/moduli /etc/ssh/moduli</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="5" type="1">
+<li>Apply changes:</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the configuration</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sshd <span class="at">-t</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart the SSH service (on Ubuntu Server)</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart ssh</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the service status</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status ssh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="client-side-configuration" class="level3">
+<h3 class="anchored" data-anchor-id="client-side-configuration">Client-Side Configuration</h3>
+<section id="setting-up-your-ssh-config" class="level4">
+<h4 class="anchored" data-anchor-id="setting-up-your-ssh-config">Setting Up Your SSH Config</h4>
+<p>Create or edit <code>~/.ssh/config</code> on your laptop:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Host</span> ubuntu-pi-server</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">HostName</span> ubuntu-pi-server</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">User</span> chris</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">IdentityFile</span> ~/.ssh/id_ecdsa</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Port</span> 22</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="managing-known-hosts" class="level4">
+<h4 class="anchored" data-anchor-id="managing-known-hosts">Managing Known Hosts</h4>
+<ol type="1">
+<li>Back up your current known_hosts file:</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ~/.ssh/known_hosts ~/.ssh/known_hosts.backup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>View current entries:</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-l</span> <span class="at">-f</span> ~/.ssh/known_hosts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li>Remove old entries:</li>
+</ol>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove specific host</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-R</span> ubuntu-pi-server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="4" type="1">
+<li>Hash your known_hosts file for security:</li>
+</ol>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-H</span> <span class="at">-f</span> ~/.ssh/known_hosts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="additional-security-measures" class="level3">
+<h3 class="anchored" data-anchor-id="additional-security-measures">Additional Security Measures</h3>
+<section id="firewall-configuration" class="level4">
+<h4 class="anchored" data-anchor-id="firewall-configuration">Firewall Configuration</h4>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install UFW</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install ufw</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Allow SSH connections</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow ssh</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Enable the firewall</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw enable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="fail2ban" class="level4">
+<h4 class="anchored" data-anchor-id="fail2ban">Fail2Ban</h4>
+<p>Fail2Ban is a security tool designed to protect servers from brute force attacks. It works by monitoring log files for specified patterns, identifying suspicious activity (like multiple failed login attempts), and banning the offending IP addresses using firewall rules for a set period. It’s especially useful for securing SSH, FTP, and web services.</p>
+<p>The best part is the project is entirely open source, you can view the source code and contribute <a href="https://https://github.com/fail2ban/fail2ban">here</a>.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install Fail2Ban</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install fail2ban</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Start and enable Fail2Ban</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl start fail2ban</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable fail2ban</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="system-updates" class="level3">
+<h3 class="anchored" data-anchor-id="system-updates">System Updates</h3>
+<p>Keep your system updated:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt upgrade</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="monitoring-and-maintenance" class="level3">
+<h3 class="anchored" data-anchor-id="monitoring-and-maintenance">Monitoring and Maintenance</h3>
+<section id="regular-security-checks" class="level4">
+<h4 class="anchored" data-anchor-id="regular-security-checks">Regular Security Checks</h4>
+<ol type="1">
+<li>Monitor SSH login attempts:</li>
+</ol>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> journalctl <span class="at">-u</span> ssh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Check authentication logs:</li>
+</ol>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tail <span class="at">-f</span> /var/log/auth.log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="key-management-best-practices" class="level4">
+<h4 class="anchored" data-anchor-id="key-management-best-practices">Key Management Best Practices</h4>
+<ol type="1">
+<li>Protect your private key:</li>
+</ol>
+<ul>
+<li>Use a strong passphrase</li>
+<li>Never share or copy to unsecured devices</li>
+<li>Keep secure backups</li>
+</ul>
+<ol start="2" type="1">
+<li>Verify file permissions:</li>
+</ol>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On your laptop</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 700 ~/.ssh</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 600 ~/.ssh/id_ecdsa</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 644 ~/.ssh/id_ecdsa.pub</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># On your Pi</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 700 ~/.ssh</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 600 ~/.ssh/authorized_keys</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="troubleshooting" class="level3">
+<h3 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h3>
+<p>If you can’t connect:</p>
+<ol type="1">
+<li>Verify SSH service status:</li>
+</ol>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status ssh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Check SSH connectivity:</li>
+</ol>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test SSH connection verbosely</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-v</span> chris@ubuntu-pi-server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li>Verify host key fingerprints:</li>
+</ol>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On the Pi</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-l</span> <span class="at">-f</span> /etc/ssh/ssh_host_ecdsa_key.pub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Remember: When you see a host key verification prompt, always verify the fingerprint matches your server’s key before accepting.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>This configuration provides a robust, secure SSH setup for your Raspberry Pi. It uses modern cryptography (ECDSA-384) while maintaining compatibility with other systems. Regular monitoring and maintenance will help ensure your server remains secure.</p>
+<p>Remember to keep your private keys secure and regularly update your system. If you need to make changes to the SSH configuration, always test them before disconnecting from your current session to avoid being locked out.</p>
+<hr>
 </section>
 <section id="configuring-microsd-cards" class="level2">
 <h2 class="anchored" data-anchor-id="configuring-microsd-cards"><strong>2. Configuring MicroSD Cards</strong></h2>
@@ -376,7 +652,7 @@ cookieconsent.run({
 <h3 class="anchored" data-anchor-id="steps-to-partition-the-ssd"><strong>Steps to Partition the SSD</strong></h3>
 <ol type="1">
 <li><p><strong>Install Partitioning Tools:</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt install gparted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt install gparted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Create Partitions:</strong></p>
 <ul>
 <li>Open <code>gparted</code> and select your SSD.</li>
@@ -390,11 +666,11 @@ cookieconsent.run({
 <li><p><strong>Mount Partitions:</strong></p>
 <ul>
 <li><p>Add entries to <code>/etc/fstab</code> for automatic mounting during boot. Replace <code>xxxx-xxxx</code> with your partition’s UUID, which can be found using <code>lsblk -f</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">UUID</span><span class="op">=</span>xxxx-xxxx <span class="ex">/mnt/shared</span> ext4 defaults 0 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="va">UUID</span><span class="op">=</span>xxxx-xxxx <span class="ex">/mnt/shared</span> ext4 defaults 0 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Save and exit the file, then run:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount <span class="at">-a</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount <span class="at">-a</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Verify the partitions are mounted correctly with:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul></li>
 </ol>
 <hr>
@@ -451,37 +727,37 @@ cookieconsent.run({
 <h2 class="anchored" data-anchor-id="using-lxclxd-for-virtualization"><strong>5. Using LXC/LXD for Virtualization</strong></h2>
 <section id="installing-lxd" class="level3">
 <h3 class="anchored" data-anchor-id="installing-lxd"><strong>Installing LXD</strong></h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt install <span class="at">-y</span> lxd</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> lxd init</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt install <span class="at">-y</span> lxd</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> lxd init</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="creating-and-managing-containers" class="level3">
 <h3 class="anchored" data-anchor-id="creating-and-managing-containers"><strong>Creating and Managing Containers</strong></h3>
 <ol type="1">
 <li><p><strong>Launch a Container:</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> launch ubuntu:20.04 my-container</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> launch ubuntu:20.04 my-container</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>List Running Containers:</strong></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Access a Container:</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> exec my-container <span class="at">--</span> /bin/bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> exec my-container <span class="at">--</span> /bin/bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Snapshot and Export:</strong></p>
 <ul>
 <li>Create a snapshot:</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> snapshot my-container snapshot1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> snapshot my-container snapshot1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Export the container as an image:</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> publish my-container <span class="at">--alias</span> my-image</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> publish my-container <span class="at">--alias</span> my-image</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <h3 id="deploying-multiple-vms" class="anchored"><strong>Deploying Multiple VMs</strong></h3></li>
 <li><p><strong>Create Instances:</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> launch my-image vm1  </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> launch my-image vm2  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> launch my-image vm1  </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> launch my-image vm2  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Set Up Networking:</strong></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> network create my-bridge  </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Attach</span> containers or VMs to this network using:  </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> network attach my-bridge vm1 eth0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> network create my-bridge  </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Attach</span> containers or VMs to this network using:  </span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> network attach my-bridge vm1 eth0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
 <hr>
 </section>
@@ -492,19 +768,19 @@ cookieconsent.run({
 <h3 class="anchored" data-anchor-id="docker"><strong>Docker</strong></h3>
 <ol type="1">
 <li><p><strong>Install Docker:</strong></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update  </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> docker.io</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update  </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> docker.io</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Run a Container:</strong></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">-p</span> 8080:80 nginx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">-p</span> 8080:80 nginx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Create a Dockerfile:</strong></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">FROM</span> python:3.8-slim  </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">COPY</span> app.py /app.py  </span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">CMD</span> [<span class="st">"python"</span>, <span class="st">"/app.py"</span>]  </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Build</span> and run the image:  </span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> my-python-app .  </span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> my-python-app</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">FROM</span> python:3.8-slim  </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="ex">COPY</span> app.py /app.py  </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="ex">CMD</span> [<span class="st">"python"</span>, <span class="st">"/app.py"</span>]  </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Build</span> and run the image:  </span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> my-python-app .  </span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> my-python-app</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
 <hr>
 </section>
@@ -512,31 +788,31 @@ cookieconsent.run({
 <h3 class="anchored" data-anchor-id="kubernetes-k3s"><strong>Kubernetes (K3s)</strong></h3>
 <ol type="1">
 <li><p><strong>Install K3s:</strong></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sfL</span> https://get.k3s.io <span class="kw">|</span> <span class="fu">sh</span> <span class="at">-</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sfL</span> https://get.k3s.io <span class="kw">|</span> <span class="fu">sh</span> <span class="at">-</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Deploy Applications:</strong></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Create</span> a deployment file <span class="er">(</span><span class="kw">`</span><span class="ex">nginx-deployment.yaml</span><span class="kw">`)</span><span class="bu">:</span>  </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="ex">apiVersion:</span> apps/v1  </span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="ex">kind:</span> Deployment  </span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="ex">metadata:</span>  </span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">name:</span> nginx-deployment  </span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="ex">spec:</span>  </span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">replicas:</span> 2  </span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="ex">selector:</span>  </span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">matchLabels:</span>  </span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>      <span class="ex">app:</span> nginx  </span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="ex">template:</span>  </span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="ex">metadata:</span>  </span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>      <span class="ex">labels:</span>  </span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>        <span class="ex">app:</span> nginx  </span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    <span class="ex">spec:</span>  </span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>      <span class="ex">containers:</span>  </span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>      <span class="ex">-</span> name: nginx  </span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>        <span class="ex">image:</span> nginx:latest  </span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ports:</span>  </span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>        <span class="ex">-</span> containerPort: 80</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Create</span> a deployment file <span class="er">(</span><span class="kw">`</span><span class="ex">nginx-deployment.yaml</span><span class="kw">`)</span><span class="bu">:</span>  </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="ex">apiVersion:</span> apps/v1  </span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="ex">kind:</span> Deployment  </span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="ex">metadata:</span>  </span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">name:</span> nginx-deployment  </span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="ex">spec:</span>  </span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">replicas:</span> 2  </span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  <span class="ex">selector:</span>  </span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">matchLabels:</span>  </span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>      <span class="ex">app:</span> nginx  </span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>  <span class="ex">template:</span>  </span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>    <span class="ex">metadata:</span>  </span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>      <span class="ex">labels:</span>  </span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>        <span class="ex">app:</span> nginx  </span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>    <span class="ex">spec:</span>  </span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>      <span class="ex">containers:</span>  </span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>      <span class="ex">-</span> name: nginx  </span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>        <span class="ex">image:</span> nginx:latest  </span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ports:</span>  </span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>        <span class="ex">-</span> containerPort: 80</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Apply the deployment:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> apply <span class="at">-f</span> nginx-deployment.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> apply <span class="at">-f</span> nginx-deployment.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
 <hr>
 </section>
@@ -544,16 +820,16 @@ cookieconsent.run({
 <h3 class="anchored" data-anchor-id="apache-spark"><strong>Apache Spark</strong></h3>
 <ol type="1">
 <li><p><strong>Install Spark:</strong></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://dlcdn.apache.org/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz  </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xzf</span> spark-3.5.0-bin-hadoop3.tgz  </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SPARK_HOME</span><span class="op">=</span>~/spark-3.5.0-bin-hadoop3  </span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$SPARK_HOME</span>/bin:<span class="va">$PATH</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://dlcdn.apache.org/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz  </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xzf</span> spark-3.5.0-bin-hadoop3.tgz  </span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SPARK_HOME</span><span class="op">=</span>~/spark-3.5.0-bin-hadoop3  </span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$SPARK_HOME</span>/bin:<span class="va">$PATH</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Run Spark:</strong> Start the master:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">start-master.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">start-master.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Start a worker:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">start-worker.sh</span> spark://<span class="op">&lt;</span>master-ip<span class="op">&gt;</span>:7077</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">start-worker.sh</span> spark://<span class="op">&lt;</span>master-ip<span class="op">&gt;</span>:7077</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Submit a Job:</strong></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">spark-submit</span> <span class="at">--master</span> spark://<span class="op">&lt;</span>master-ip<span class="op">&gt;</span>:7077 my_script.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="ex">spark-submit</span> <span class="at">--master</span> spark://<span class="op">&lt;</span>master-ip<span class="op">&gt;</span>:7077 my_script.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
 <hr>
 </section>
@@ -592,8 +868,8 @@ cookieconsent.run({
 <hr>
 </section>
 </section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion"><strong>Conclusion</strong></h2>
+<section id="conclusion-1" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-1"><strong>Conclusion</strong></h2>
 <p>This guide outlines how to configure and use your Raspberry Pi for a robust learning environment. By combining tools like Docker, LXC/LXD, Kubernetes, and Spark, you can simulate enterprise-grade distributed computing clusters and practice advanced data engineering techniques.</p>
 <p>If you need further assistance, feel free to revisit specific sections or ask for clarification!</p>
 

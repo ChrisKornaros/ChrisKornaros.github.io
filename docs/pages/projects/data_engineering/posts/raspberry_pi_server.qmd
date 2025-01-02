@@ -1,6 +1,12 @@
-# Comprehensive Guide to Setting Up Raspberry Pi for Data Engineering and Virtualization
+---
+title: "Guide to Setting Up Raspberry Pi for Data Engineering and Virtualization Projects"
+author: "Chris Kornaros"
+date: 2024-12-29
+categories: ["Research", "Ongoing"]
+tags: ["Architecture", "Systems", "Design", "Open Source", "Raspberry Pi", "Linux", "NetBSD", "bash", "ssh", "ufw", "fail2ban", "Cybersecurity", "Networking", "Backup and Recovery", "balenaetcher", "gparted", "MicroSD Card", "SSD", "Partitioning", "LXC", "LXD", "Kubernetes", "Spark", "Docker"] 
+---
 
-I used ChatGPT to help me put together a guide/outline for the steps to set things up as I want. The reason being, I want to be able to reference the explanations here in case I need to research/learn something. In my opinion, LLMs are great for tasks like this.
+I used a combination of ChatGPT and Claude to create an outline and then detailed guides for each step, respectively. In my experience, Claude handles the detailed guides and explanations better, but I still make sure to check, test, and proofread everything it gives me. 
 
 This guide provides step-by-step instructions and explanations for configuring a Raspberry Pi 4 to learn about hardware, servers, virtualization, and distributed computing systems.
 
