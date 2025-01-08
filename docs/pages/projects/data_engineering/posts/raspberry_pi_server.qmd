@@ -186,6 +186,10 @@ Host ubuntu-pi-server
     Port 22
 ```
 
+::: {.callout-note title="SSH Config: Include"}
+If your ssh isn't picking up on the ~/.ssh/ssh_config then you might need to specify it in the system config. Find the line in `/etc/ssh/ssh_config` that says **Include** and add the absolute file path. If you need to include more than your user specific config, such as the default `/etc/ssh/ssh_config.d/*` just add that absolute path separated by a space from any other path included.
+:::
+
 #### Managing Known Hosts
 
 1. Back up your current known_hosts file:
