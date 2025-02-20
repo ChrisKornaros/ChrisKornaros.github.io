@@ -231,6 +231,11 @@ cookieconsent.run({
   <li><a href="#hardware-requirements" id="toc-hardware-requirements" class="nav-link" data-scroll-target="#hardware-requirements"><strong>Hardware Requirements</strong></a></li>
   <li><a href="#installing-linux-server-lts-on-the-ssd" id="toc-installing-linux-server-lts-on-the-ssd" class="nav-link" data-scroll-target="#installing-linux-server-lts-on-the-ssd"><strong>Installing Linux Server LTS on the SSD</strong></a></li>
   </ul></li>
+  <li><a href="#networking-basics" id="toc-networking-basics" class="nav-link" data-scroll-target="#networking-basics">Networking Basics</a>
+  <ul>
+  <li><a href="#quick-background" id="toc-quick-background" class="nav-link" data-scroll-target="#quick-background">Quick Background</a></li>
+  <li><a href="#connecting-to-wifi" id="toc-connecting-to-wifi" class="nav-link" data-scroll-target="#connecting-to-wifi">Connecting to WiFi</a></li>
+  </ul></li>
   <li><a href="#ssh" id="toc-ssh" class="nav-link" data-scroll-target="#ssh">SSH</a>
   <ul>
   <li><a href="#understanding-ssh-configuration-files" id="toc-understanding-ssh-configuration-files" class="nav-link" data-scroll-target="#understanding-ssh-configuration-files">Understanding SSH Configuration Files</a>
@@ -265,8 +270,21 @@ cookieconsent.run({
   <li><a href="#key-management-best-practices" id="toc-key-management-best-practices" class="nav-link" data-scroll-target="#key-management-best-practices">Key Management Best Practices</a></li>
   </ul></li>
   <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
+  <li><a href="#using-scp-to-transfer-files" id="toc-using-scp-to-transfer-files" class="nav-link" data-scroll-target="#using-scp-to-transfer-files">Using SCP to transfer files</a>
+  <ul class="collapse">
+  <li><a href="#ensure-the-ssh-configuration-works" id="toc-ensure-the-ssh-configuration-works" class="nav-link" data-scroll-target="#ensure-the-ssh-configuration-works">Ensure the SSH Configuration Works</a></li>
+  <li><a href="#copying-scripts-from-server-to-macbook-air" id="toc-copying-scripts-from-server-to-macbook-air" class="nav-link" data-scroll-target="#copying-scripts-from-server-to-macbook-air">Copying Scripts from Server to MacBook Air</a></li>
+  <li><a href="#copying-multiple-files-at-once" id="toc-copying-multiple-files-at-once" class="nav-link" data-scroll-target="#copying-multiple-files-at-once">Copying Multiple Files at Once</a></li>
+  <li><a href="#copying-files-from-macbook-air-to-server" id="toc-copying-files-from-macbook-air-to-server" class="nav-link" data-scroll-target="#copying-files-from-macbook-air-to-server">Copying Files from MacBook Air to Server</a></li>
+  <li><a href="#scp-notes" id="toc-scp-notes" class="nav-link" data-scroll-target="#scp-notes">SCP Notes</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#partitioning-the-ssd" id="toc-partitioning-the-ssd" class="nav-link" data-scroll-target="#partitioning-the-ssd"><strong>3. Partitioning the SSD</strong></a>
+  <ul>
+  <li><a href="#why-partition-the-ssd" id="toc-why-partition-the-ssd" class="nav-link" data-scroll-target="#why-partition-the-ssd"><strong>Why Partition the SSD?</strong></a></li>
+  <li><a href="#steps-to-partition-the-ssd" id="toc-steps-to-partition-the-ssd" class="nav-link" data-scroll-target="#steps-to-partition-the-ssd"><strong>Steps to Partition the SSD</strong></a></li>
+  </ul></li>
   <li><a href="#system-backups-and-upgrades" id="toc-system-backups-and-upgrades" class="nav-link" data-scroll-target="#system-backups-and-upgrades">System Backups and Upgrades</a>
   <ul>
   <li><a href="#comprehensive-linux-configuration-backup-guide-for-raspberry-pi-server" id="toc-comprehensive-linux-configuration-backup-guide-for-raspberry-pi-server" class="nav-link" data-scroll-target="#comprehensive-linux-configuration-backup-guide-for-raspberry-pi-server">Comprehensive Linux Configuration Backup Guide for Raspberry Pi Server</a></li>
@@ -285,11 +303,6 @@ cookieconsent.run({
   <ul>
   <li><a href="#purpose-of-microsd-cards" id="toc-purpose-of-microsd-cards" class="nav-link" data-scroll-target="#purpose-of-microsd-cards"><strong>Purpose of MicroSD Cards</strong></a></li>
   <li><a href="#steps-to-use-microsd-cards" id="toc-steps-to-use-microsd-cards" class="nav-link" data-scroll-target="#steps-to-use-microsd-cards"><strong>Steps to Use MicroSD Cards</strong></a></li>
-  </ul></li>
-  <li><a href="#partitioning-the-ssd" id="toc-partitioning-the-ssd" class="nav-link" data-scroll-target="#partitioning-the-ssd"><strong>3. Partitioning the SSD</strong></a>
-  <ul>
-  <li><a href="#why-partition-the-ssd" id="toc-why-partition-the-ssd" class="nav-link" data-scroll-target="#why-partition-the-ssd"><strong>Why Partition the SSD?</strong></a></li>
-  <li><a href="#steps-to-partition-the-ssd" id="toc-steps-to-partition-the-ssd" class="nav-link" data-scroll-target="#steps-to-partition-the-ssd"><strong>Steps to Partition the SSD</strong></a></li>
   </ul></li>
   <li><a href="#lxc-vs.-lxd" id="toc-lxc-vs.-lxd" class="nav-link" data-scroll-target="#lxc-vs.-lxd"><strong>4. LXC vs.&nbsp;LXD</strong></a>
   <ul>
@@ -380,6 +393,16 @@ cookieconsent.run({
 </ol>
 </section>
 </section>
+<section id="networking-basics" class="level2">
+<h2 class="anchored" data-anchor-id="networking-basics">Networking Basics</h2>
+<p>This section provides a brief example of how to connect your server to WiFi. It assumes you are using just the basics, but I’ll also provide an exmaple for</p>
+<section id="quick-background" class="level3">
+<h3 class="anchored" data-anchor-id="quick-background">Quick Background</h3>
+</section>
+<section id="connecting-to-wifi" class="level3">
+<h3 class="anchored" data-anchor-id="connecting-to-wifi">Connecting to WiFi</h3>
+</section>
+</section>
 <section id="ssh" class="level2">
 <h2 class="anchored" data-anchor-id="ssh">SSH</h2>
 <p>This section provides a thorough walkthrough of setting up and securing SSH (Secure Shell) on a Raspberry Pi running Ubuntu Server. SSH is a network protocol that creates an encrypted tunnel between computers, allowing secure remote management. Think of it as establishing a private, secure telephone line that only authorized parties can use to communicate.</p>
@@ -395,7 +418,10 @@ cookieconsent.run({
 <li>Lives on your client machine (like your laptop)</li>
 <li>Controls how your system behaves when connecting to other SSH servers</li>
 <li>Affects outgoing SSH connections</li>
-<li>Located at <code>/etc/ssh/ssh_config</code> (system-wide) and <code>~/.ssh/config</code> (user-specific)</li>
+<li>Located at <code>/etc/ssh/ssh_config</code> (system-wide) and <code>~/.ssh/config</code> (user-specific)
+<ul>
+<li>If your server ever moves or connects to a new IP address, simply update it in the user config file</li>
+</ul></li>
 </ul></li>
 <li><code>sshd_config</code>:
 <ul>
@@ -413,21 +439,42 @@ cookieconsent.run({
 <h3 class="anchored" data-anchor-id="key-based-authentication-setup">Key-Based Authentication Setup</h3>
 <section id="understanding-ssh-keys-and-security" class="level4">
 <h4 class="anchored" data-anchor-id="understanding-ssh-keys-and-security">Understanding SSH Keys and Security</h4>
-<p>This guide uses ECDSA-384 keys, which offer several advantages: - Uses the NIST P-384 curve, providing security equivalent to 192-bit symmetric encryption - Better resistance to potential quantum computing attacks compared to smaller key sizes - Standardized under FIPS 186-4 - Excellent balance between security and performance</p>
+<p>This guide uses ECDSA-384 keys, which offer several advantages:</p>
+<ul>
+<li>Uses the NIST P-384 curve, providing security equivalent to 192-bit symmetric encryption</li>
+<li>Better resistance to potential quantum computing attacks compared to smaller key sizes</li>
+<li>Standardized under FIPS 186-4</li>
+<li>Excellent balance between security and performance</li>
+</ul>
 </section>
 <section id="generating-your-ssh-keys" class="level4">
 <h4 class="anchored" data-anchor-id="generating-your-ssh-keys">Generating Your SSH Keys</h4>
 <p>On your laptop, generate a new SSH key pair:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a new SSH key pair using ECDSA-384</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ecdsa <span class="at">-b</span> 384 <span class="at">-C</span> <span class="st">"ubuntu-pi-server"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This command: - <code>-t ecdsa</code>: Specifies the ECDSA algorithm - <code>-b 384</code>: Sets the key size to 384 bits - <code>-C "ubuntu-pi-server"</code>: Adds a descriptive comment</p>
-<p>The command generates two files: - <code>~/.ssh/id_ecdsa</code>: Your private key (keep this secret!) - <code>~/.ssh/id_ecdsa.pub</code>: Your public key (safe to share)</p>
+<p>This command:</p>
+<ul>
+<li><code>-t ecdsa</code>: Specifies the ECDSA algorithm</li>
+<li><code>-b 384</code>: Sets the key size to 384 bits</li>
+<li><code>-C "ubuntu-pi-server"</code>: Adds a descriptive comment</li>
+</ul>
+<p>The command generates two files:</p>
+<ul>
+<li><code>~/.ssh/id_ecdsa</code>: Your private key (keep this secret!)</li>
+<li><code>~/.ssh/id_ecdsa.pub</code>: Your public key (safe to share)</li>
+</ul>
 </section>
 <section id="installing-your-public-key-on-the-raspberry-pi" class="level4">
 <h4 class="anchored" data-anchor-id="installing-your-public-key-on-the-raspberry-pi">Installing Your Public Key on the Raspberry Pi</h4>
 <p>Transfer your public key to the Pi:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ssh-copy-id</span> <span class="at">-i</span> ~/.ssh/id_ecdsa.pub chris@ubuntu-pi-server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This command: 1. Connects to your Pi using password authentication 2. Creates the <code>.ssh</code> directory if needed 3. Adds your public key to <code>authorized_keys</code> 4. Sets appropriate permissions automatically</p>
+<p>This command:</p>
+<ol type="1">
+<li>Connects to your Pi using password authentication</li>
+<li>Creates the <code>.ssh</code> directory if needed</li>
+<li>Adds your public key to <code>authorized_keys</code></li>
+<li>Sets appropriate permissions automatically</li>
+</ol>
 </section>
 </section>
 <section id="server-side-ssh-configuration" class="level3">
@@ -443,58 +490,33 @@ cookieconsent.run({
 </ol>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /etc/ssh/sshd_config /etc/ssh/sshd_config.backup-<span class="va">$(</span><span class="fu">date</span> +%Y%m%d<span class="va">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="2" type="1">
-<li>Create a custom security configuration:</li>
-</ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nano /etc/ssh/sshd_config.d/99-custom-security.conf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Add these security settings:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Disable password authentication</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">PasswordAuthentication</span> no</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Disable root login</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">PermitRootLogin</span> no</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify allowed users</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ex">AllowUsers</span> chris</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Use SSH Protocol 2</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Protocol</span> 2</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Set idle timeout (optional)</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="ex">ClientAliveInterval</span> 300</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="ex">ClientAliveCountMax</span> 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="3" type="1">
 <li>Optimize host key settings in sshd_config:</li>
 </ol>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify host key order (prioritize ECDSA)</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">HostKey</span> /etc/ssh/ssh_host_ecdsa_key</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">HostKey</span> /etc/ssh/ssh_host_ed25519_key</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">HostKey</span> /etc/ssh/ssh_host_rsa_key</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify key exchange algorithms</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">KexAlgorithms</span> ecdh-sha2-nistp384,curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify host key algorithms</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ex">HostKeyAlgorithms</span> ecdsa-sha2-nistp384,ssh-ed25519,rsa-sha2-512,rsa-sha2-256</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="4" type="1">
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify host key order (prioritize ECDSA)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">HostKey</span> /etc/ssh/ssh_host_ecdsa_key</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">HostKey</span> /etc/ssh/ssh_host_ed25519_key</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">HostKey</span> /etc/ssh/ssh_host_rsa_key</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
 <li>Strengthen the moduli file:</li>
 </ol>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Back up the existing file</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /etc/ssh/moduli /etc/ssh/moduli.backup</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove moduli less than 3072 bits</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> awk <span class="st">'$5 &gt;= 3072'</span> /etc/ssh/moduli <span class="op">&gt;</span> /tmp/moduli</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mv /tmp/moduli /etc/ssh/moduli</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="5" type="1">
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Back up the existing file</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /etc/ssh/moduli /etc/ssh/moduli.backup</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove moduli less than 3072 bits</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> awk <span class="st">'$5 &gt;= 3072'</span> /etc/ssh/moduli <span class="op">&gt;</span> /tmp/moduli</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mv /tmp/moduli /etc/ssh/moduli</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="4" type="1">
 <li>Apply changes:</li>
 </ol>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the configuration</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sshd <span class="at">-t</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart the SSH service (on Ubuntu Server)</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart ssh</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the service status</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status ssh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the configuration</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sshd <span class="at">-t</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart the SSH service (on Ubuntu Server)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart ssh</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the service status</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status ssh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Just note, you’ll probably need to reboot (<code>sudo reboot</code>) your server before all of the changes fully take place. Once you’ve done that, you may need to run <code>sudo systemctl start ssh</code>.</p>
 </section>
 </section>
 <section id="client-side-configuration" class="level3">
@@ -502,11 +524,11 @@ cookieconsent.run({
 <section id="setting-up-your-ssh-config" class="level4">
 <h4 class="anchored" data-anchor-id="setting-up-your-ssh-config">Setting Up Your SSH Config</h4>
 <p>Create or edit <code>~/.ssh/config</code> on your laptop:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Host</span> ubuntu-pi-server</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">HostName</span> ubuntu-pi-server</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">User</span> chris</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">IdentityFile</span> ~/.ssh/id_ecdsa</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Port</span> 22</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Host</span> ubuntu-pi-server</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">HostName</span> ubuntu-pi-server</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">User</span> chris</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">IdentityFile</span> ~/.ssh/id_ecdsa</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Port</span> 22</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled" title="SSH Config: Include">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -526,52 +548,61 @@ SSH Config: Include
 <ol type="1">
 <li>Back up your current known_hosts file:</li>
 </ol>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ~/.ssh/known_hosts ~/.ssh/known_hosts.backup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ~/.ssh/known_hosts ~/.ssh/known_hosts.backup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="2" type="1">
 <li>View current entries:</li>
 </ol>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-l</span> <span class="at">-f</span> ~/.ssh/known_hosts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-l</span> <span class="at">-f</span> ~/.ssh/known_hosts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="3" type="1">
 <li>Remove old entries:</li>
 </ol>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove specific host</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-R</span> ubuntu-pi-server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove specific host</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-R</span> ubuntu-pi-server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="4" type="1">
 <li>Hash your known_hosts file for security:</li>
 </ol>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-H</span> <span class="at">-f</span> ~/.ssh/known_hosts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-H</span> <span class="at">-f</span> ~/.ssh/known_hosts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="additional-security-measures" class="level3">
 <h3 class="anchored" data-anchor-id="additional-security-measures">Additional Security Measures</h3>
 <section id="firewall-configuration" class="level4">
 <h4 class="anchored" data-anchor-id="firewall-configuration">Firewall Configuration</h4>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install UFW</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install ufw</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Allow SSH connections</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow ssh</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Enable the firewall</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw enable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install UFW (if it isn't already)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install ufw</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Allow SSH connections</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow ssh</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Enable the firewall</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw enable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now, you’ll want to add rules for example, allowing traffic on a specific port if you took the step to choose a nonstandard, one that isn’t the default <strong>Port 22</strong>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a new rule in the port/protocol format</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw add 30025/tcp</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># See a list of all rules</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status numbered</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the default rules</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw delete 1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="fail2ban" class="level4">
 <h4 class="anchored" data-anchor-id="fail2ban">Fail2Ban</h4>
 <p>Fail2Ban is a security tool designed to protect servers from brute force attacks. It works by monitoring log files for specified patterns, identifying suspicious activity (like multiple failed login attempts), and banning the offending IP addresses using firewall rules for a set period. It’s especially useful for securing SSH, FTP, and web services.</p>
 <p>The best part is the project is entirely open source, you can view the source code and contribute <a href="https://https://github.com/fail2ban/fail2ban">here</a>.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install Fail2Ban</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install fail2ban</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Start and enable Fail2Ban</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl start fail2ban</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable fail2ban</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install Fail2Ban</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install fail2ban</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Start and enable Fail2Ban</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl start fail2ban</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable fail2ban</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="system-updates" class="level3">
 <h3 class="anchored" data-anchor-id="system-updates">System Updates</h3>
 <p>Keep your system updated:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt upgrade</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt upgrade</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="monitoring-and-maintenance" class="level3">
 <h3 class="anchored" data-anchor-id="monitoring-and-maintenance">Monitoring and Maintenance</h3>
@@ -580,11 +611,11 @@ SSH Config: Include
 <ol type="1">
 <li>Monitor SSH login attempts:</li>
 </ol>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> journalctl <span class="at">-u</span> ssh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> journalctl <span class="at">-u</span> ssh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="2" type="1">
 <li>Check authentication logs:</li>
 </ol>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tail <span class="at">-f</span> /var/log/auth.log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tail <span class="at">-f</span> /var/log/auth.log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="key-management-best-practices" class="level4">
 <h4 class="anchored" data-anchor-id="key-management-best-practices">Key Management Best Practices</h4>
@@ -599,14 +630,14 @@ SSH Config: Include
 <ol start="2" type="1">
 <li>Verify file permissions:</li>
 </ol>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On your laptop</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 700 ~/.ssh</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 600 ~/.ssh/id_ecdsa</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 644 ~/.ssh/id_ecdsa.pub</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># On your Pi</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 700 ~/.ssh</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 600 ~/.ssh/authorized_keys</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On your laptop</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 700 ~/.ssh</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 600 ~/.ssh/id_ecdsa</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 644 ~/.ssh/id_ecdsa.pub</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># On your Pi</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 700 ~/.ssh</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 600 ~/.ssh/authorized_keys</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="troubleshooting" class="level3">
@@ -615,18 +646,72 @@ SSH Config: Include
 <ol type="1">
 <li>Verify SSH service status:</li>
 </ol>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status ssh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status ssh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="2" type="1">
 <li>Check SSH connectivity:</li>
 </ol>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test SSH connection verbosely</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-v</span> chris@ubuntu-pi-server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test SSH connection verbosely</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-v</span> chris@ubuntu-pi-server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="3" type="1">
 <li>Verify host key fingerprints:</li>
 </ol>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On the Pi</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-l</span> <span class="at">-f</span> /etc/ssh/ssh_host_ecdsa_key.pub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On the Pi</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-l</span> <span class="at">-f</span> /etc/ssh/ssh_host_ecdsa_key.pub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Remember: When you see a host key verification prompt, always verify the fingerprint matches your server’s key before accepting.</p>
+</section>
+<section id="using-scp-to-transfer-files" class="level3">
+<h3 class="anchored" data-anchor-id="using-scp-to-transfer-files">Using SCP to transfer files</h3>
+<p>This document outlines the process of securely copying Bash scripts from an Ubuntu Pi Server to a MacBook Air using SCP (Secure Copy Protocol), a file transfer tool built on top of SSH. The user should have an SSH configuration file (<code>~/.ssh/config</code>) set up to simplify connections to their Raspberry Pi server.</p>
+<section id="ensure-the-ssh-configuration-works" class="level4">
+<h4 class="anchored" data-anchor-id="ensure-the-ssh-configuration-works">Ensure the SSH Configuration Works</h4>
+<p>Initially, the <code>ssh ubuntu-pi-server</code> command did not use the expected user-specific SSH configuration (<code>~/.ssh/config</code>). Instead, it defaulted to the system-wide configuration (<code>/etc/ssh/ssh_config</code>).To fix this, I ran the command with the <code>-F</code> flag explicitly specifying the user config:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-F</span> ~/.ssh/config ubuntu-pi-server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Note:</strong> To make sure SSH always uses the correct config, I tried the following:</p>
+<ul>
+<li>Made sure <code>~/.ssh/config</code> exists and has the correct permissions (<code>chmod 600 ~/.ssh/config</code>).</li>
+<li>Modified the <code>/etc/ssh/ssh_config</code> to include the user config:</li>
+</ul>
+<pre class="plaintext"><code>Include ~/.ssh/config</code></pre>
+<p>After fixing the issue, the command <code>ssh ubuntu-pi-server</code> worked as expected.</p>
+</section>
+<section id="copying-scripts-from-server-to-macbook-air" class="level4">
+<h4 class="anchored" data-anchor-id="copying-scripts-from-server-to-macbook-air">Copying Scripts from Server to MacBook Air</h4>
+<p>Once SSH was working correctly, the next step was to copy two Bash scripts from the Ubuntu Pi Server to the MacBook Air using <code>scp</code>.</p>
+<p>The scripts were stored on the Pi as:</p>
+<pre class="plaintext"><code>/home/chris/scripts/system_backup.sh
+/home/chris/scripts/config_backup.sh</code></pre>
+<p>The following <code>scp</code> commands were used to transfer them to the MacBook Air:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> ubuntu-pi-server:~/scripts/backup.sh ~/Documents/pi-scripts/</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> ubuntu-pi-server:~/scripts/maintenance.sh ~/Documents/pi-scripts/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="copying-multiple-files-at-once" class="level4">
+<h4 class="anchored" data-anchor-id="copying-multiple-files-at-once">Copying Multiple Files at Once</h4>
+<p>To copy all Bash scripts from the <code>scripts</code> directory in one command:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> ubuntu-pi-server:~/scripts/<span class="pp">*</span>.sh ~/Documents/pi-scripts/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="copying-files-from-macbook-air-to-server" class="level4">
+<h4 class="anchored" data-anchor-id="copying-files-from-macbook-air-to-server">Copying Files from MacBook Air to Server</h4>
+<p>Simply enter the command in reverse, but notice here I did things a little differently.</p>
+<ul>
+<li><code>-r</code> tells <code>scp</code> to <em>recursively</em> copy a directory, meaning it moves it and all of its contents</li>
+<li><code>chris@</code> tells <code>scp</code> to specify the user when connecting to the server, this can be helpful if you have connection issues</li>
+</ul>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> ~/Documents/pi-scripts chris@ubuntu-pi-server:~/scripts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="scp-notes" class="level4">
+<h4 class="anchored" data-anchor-id="scp-notes">SCP Notes</h4>
+<ul>
+<li>SSH is now correctly configured and working using <code>ssh ubuntu-pi-server</code>.</li>
+<li>Bash scripts can be securely copied from the Ubuntu Pi Server to the MacBook Air using <code>scp</code>.
+<ul>
+<li>Just take note of the specific syntax used, namely <code>server-name:path/to/files</code></li>
+</ul></li>
+<li>The user can now maintain local backups of important scripts efficiently.
+<ul>
+<li>Enables you to develop where you’d like and then easily move files to test scripts</li>
+</ul></li>
+</ul>
+</section>
 </section>
 </section>
 <section id="conclusion" class="level2">
@@ -634,6 +719,43 @@ SSH Config: Include
 <p>This configuration provides a robust, secure SSH setup for your Raspberry Pi. It uses modern cryptography (ECDSA-384) while maintaining compatibility with other systems. Regular monitoring and maintenance will help ensure your server remains secure.</p>
 <p>Remember to keep your private keys secure and regularly update your system. If you need to make changes to the SSH configuration, always test them before disconnecting from your current session to avoid being locked out.</p>
 <hr>
+</section>
+<section id="partitioning-the-ssd" class="level2">
+<h2 class="anchored" data-anchor-id="partitioning-the-ssd"><strong>3. Partitioning the SSD</strong></h2>
+<section id="why-partition-the-ssd" class="level3">
+<h3 class="anchored" data-anchor-id="why-partition-the-ssd"><strong>Why Partition the SSD?</strong></h3>
+<ul>
+<li>Organize storage for multiple OS installations or shared data.</li>
+<li>Separate OS environments and workloads.</li>
+</ul>
+</section>
+<section id="steps-to-partition-the-ssd" class="level3">
+<h3 class="anchored" data-anchor-id="steps-to-partition-the-ssd"><strong>Steps to Partition the SSD</strong></h3>
+<ol type="1">
+<li><p><strong>Install Partitioning Tools:</strong></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt install gparted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><strong>Create Partitions:</strong></p>
+<ul>
+<li>Open <code>gparted</code> and select your SSD.</li>
+<li>Create the following partitions:
+<ul>
+<li><strong>Partition 1:</strong> Linux root (e.g., 100GB, ext4).</li>
+<li><strong>Partition 2:</strong> NetBSD or another OS (e.g., 100GB, FFS).</li>
+<li><strong>Partition 3:</strong> Shared storage (remaining space, ext4 or exFAT).</li>
+</ul></li>
+</ul></li>
+<li><p><strong>Mount Partitions:</strong></p>
+<ul>
+<li><p>Add entries to <code>/etc/fstab</code> for automatic mounting during boot. Replace <code>xxxx-xxxx</code> with your partition’s UUID, which can be found using <code>lsblk -f</code>:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="va">UUID</span><span class="op">=</span>xxxx-xxxx <span class="ex">/mnt/shared</span> ext4 defaults 0 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Save and exit the file, then run:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount <span class="at">-a</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Verify the partitions are mounted correctly with:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul></li>
+</ol>
+<hr>
+</section>
 </section>
 <section id="system-backups-and-upgrades" class="level2">
 <h2 class="anchored" data-anchor-id="system-backups-and-upgrades">System Backups and Upgrades</h2>
@@ -654,146 +776,145 @@ SSH Config: Include
 <li>Raspberry Pi Server running Ubuntu Server LTS</li>
 <li>Physical keyboard access</li>
 <li>Root or sudo privileges</li>
-<li>Mounted backup drive at <code>/mnt/backup/</code></li>
+<li>Mounted backup drive at <code>/mnt/backups/</code></li>
 <li>rsync (typically pre-installed on Ubuntu Server)</li>
 </ul>
 </section>
 <section id="setting-up-the-backup-directory" class="level3">
 <h3 class="anchored" data-anchor-id="setting-up-the-backup-directory">Setting Up the Backup Directory</h3>
 <p>First, we’ll prepare the backup directory structure and set appropriate permissions:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create backup directories if they don't exist</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /mnt/backup/configs</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /mnt/backup/system</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Change ownership to your user (replace 'chris' with your username)</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chown <span class="at">-R</span> chris:chris /mnt/backup</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Set appropriate permissions</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod 700 /mnt/backup  <span class="co"># Only owner can read/write/execute</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create backup directories if they don't exist</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /mnt/backups/configs</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /mnt/backups/system</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Change ownership to your user (replace 'chris' with your username)</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chown <span class="at">-R</span> chris:chris /mnt/backups</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Set appropriate permissions</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod 700 /mnt/backups  <span class="co"># Only owner can read/write/execute</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="configuration-files-backup" class="level3">
 <h3 class="anchored" data-anchor-id="configuration-files-backup">Configuration Files Backup</h3>
 <p>We’ll use rsync to create a structured backup of essential configuration files. The following script demonstrates how to perform the backup while preserving all file attributes:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the {} around DATEYMD in the file path ensure it's specified as the variable's value, and the subsequent parts are not included</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="va">DATEYMD</span><span class="op">=</span><span class="va">$(</span><span class="fu">date</span> +%Y%m%d<span class="va">)</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="va">BACKUP_DIR</span><span class="op">=</span><span class="st">"/mnt/backup/configs/</span><span class="va">$DATEYMD</span><span class="st">"</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_DIR</span><span class="op">=</span><span class="st">"/mnt/backup/logs"</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">$LOG_DIR</span><span class="st">/</span><span class="va">${DATEYMD}</span><span class="st">_config_backup.log"</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create backup directory</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. User and Group Information</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/passwd <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/passwd.bak"</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/group <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/group.bak"</span></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/shadow <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/shadow.bak"</span></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/gshadow <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/gshadow.bak"</span></span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Crontab Configurations</span></span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/crontab <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/"</span></span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /var/spool/cron/crontabs/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/crontabs/"</span></span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. SSH Configuration</span></span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/ssh/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ssh/"</span></span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> ~/.ssh/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/user_ssh/"</span></span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 4. UFW (Uncomplicated Firewall) Configuration</span></span>
-<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/ufw/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ufw/"</span></span>
-<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> ufw status verbose <span class="op">&gt;</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ufw_rules.txt"</span></span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 5. Fail2Ban Configuration</span></span>
-<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/fail2ban/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/fail2ban/"</span></span>
-<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 6. Network Configuration</span></span>
-<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/network/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/network/"</span></span>
-<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/hosts <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hosts.bak"</span></span>
-<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/hostname <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hostname.bak"</span></span>
-<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/resolv.conf <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/resolv.conf.bak"</span></span>
-<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/wpa_supplicant/wpa_supplicant.conf <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/wpa_supplicant.conf.bak"</span></span>
-<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 7. Package Manager Configurations (apt)</span></span>
-<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/apt/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/apt/"</span></span>
-<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 8. Systemd Services and Timers</span></span>
-<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/systemd/system/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/systemd/"</span></span>
-<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 9. Logrotate Configuration</span></span>
-<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/logrotate.conf <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/logrotate.conf.bak"</span></span>
-<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/logrotate.d/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/logrotate.d/"</span></span>
-<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 10. Custom Application Configurations (add more as needed)</span></span>
-<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/myapp/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/myapp/"</span></span>
-<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 11. Timezone and Locale</span></span>
-<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/timezone <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/timezone.bak"</span></span>
-<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/localtime <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/localtime.bak"</span></span>
-<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/default/locale <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/locale.bak"</span></span>
-<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 12. Keyboard Configuration</span></span>
-<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/default/keyboard <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/keyboard.bak"</span></span>
-<span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 13. Package List</span></span>
-<span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a>    <span class="ex">dpkg</span> <span class="at">--get-selections</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/package_list.txt"</span></span>
-<span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-65"><a href="#cb24-65" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set appropriate permissions</span></span>
-<span id="cb24-66"><a href="#cb24-66" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chown <span class="at">-R</span> chris:chris <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb24-67"><a href="#cb24-67" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chmod <span class="at">-R</span> 600 <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb24-68"><a href="#cb24-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-69"><a href="#cb24-69" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Configuration backup completed at: </span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb24-70"><a href="#cb24-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-71"><a href="#cb24-71" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$LOG_FILE</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
-<span id="cb24-72"><a href="#cb24-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-73"><a href="#cb24-73" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Logs available at: </span><span class="va">$LOG_FILE</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the script executable</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x /scripts/config_backup.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the {} around DATEYMD in the file path ensure it's specified as the variable's value, and the subsequent parts are not included</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="va">DATEYMD</span><span class="op">=</span><span class="va">$(</span><span class="fu">date</span> +%Y%m%d<span class="va">)</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="va">BACKUP_DIR</span><span class="op">=</span><span class="st">"/mnt/backups/configs/</span><span class="va">$DATEYMD</span><span class="st">"</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_DIR</span><span class="op">=</span><span class="st">"/mnt/backups/logs"</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">$LOG_DIR</span><span class="st">/</span><span class="va">${DATEYMD}</span><span class="st">_config_backup.log"</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create backup directory</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. User and Group Information</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/passwd <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/passwd.bak"</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/group <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/group.bak"</span></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/shadow <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/shadow.bak"</span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/gshadow <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/gshadow.bak"</span></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Crontab Configurations</span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/crontab <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/"</span></span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /var/spool/cron/crontabs/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/crontabs/"</span></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. SSH Configuration</span></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/ssh/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ssh/"</span></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> ~/.ssh/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/user_ssh/"</span></span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 4. UFW (Uncomplicated Firewall) Configuration</span></span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/ufw/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ufw/"</span></span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> ufw status verbose <span class="op">&gt;</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ufw_rules.txt"</span></span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 5. Fail2Ban Configuration</span></span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/fail2ban/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/fail2ban/"</span></span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 6. Network Configuration</span></span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/network/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/network/"</span></span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/netplan/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/netplan/"</span></span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/NetworkManager/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/NetworkManager/"</span></span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/hosts <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hosts.bak"</span></span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/hostname <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hostname.bak"</span></span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/resolv.conf <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/resolv.conf.bak"</span></span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/wpa_supplicant/wpa_supplicant.conf <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/wpa_supplicant.conf.bak"</span></span>
+<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 7. Package Manager Configurations (apt)</span></span>
+<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/apt/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/apt/"</span></span>
+<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 8. Systemd Services and Timers</span></span>
+<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/systemd/system/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/systemd/"</span></span>
+<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 9. Logrotate Configuration</span></span>
+<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/logrotate.conf <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/logrotate.conf.bak"</span></span>
+<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/logrotate.d/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/logrotate.d/"</span></span>
+<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 10. Timezone and Locale</span></span>
+<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/timezone <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/timezone.bak"</span></span>
+<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/localtime <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/localtime.bak"</span></span>
+<span id="cb33-56"><a href="#cb33-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/default/locale <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/locale.bak"</span></span>
+<span id="cb33-57"><a href="#cb33-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-58"><a href="#cb33-58" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 11. Keyboard Configuration</span></span>
+<span id="cb33-59"><a href="#cb33-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/default/keyboard <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/keyboard.bak"</span></span>
+<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-61"><a href="#cb33-61" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 12. Package List</span></span>
+<span id="cb33-62"><a href="#cb33-62" aria-hidden="true" tabindex="-1"></a>    <span class="ex">dpkg</span> <span class="at">--get-selections</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/package_list.txt"</span></span>
+<span id="cb33-63"><a href="#cb33-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-64"><a href="#cb33-64" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set appropriate permissions</span></span>
+<span id="cb33-65"><a href="#cb33-65" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chown <span class="at">-R</span> chris:chris <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb33-66"><a href="#cb33-66" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chmod <span class="at">-R</span> 600 <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb33-67"><a href="#cb33-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-68"><a href="#cb33-68" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Configuration backup completed at: </span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb33-69"><a href="#cb33-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-70"><a href="#cb33-70" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$LOG_FILE</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb33-71"><a href="#cb33-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-72"><a href="#cb33-72" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Logs available at: </span><span class="va">$LOG_FILE</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the script executable</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x /scripts/config_backup.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="system-files-backup" class="level3">
 <h3 class="anchored" data-anchor-id="system-files-backup">System Files Backup</h3>
 <p>For system files, we’ll create a separate rsync script that handles system directories efficiently:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="va">DATEYMD</span><span class="op">=</span><span class="va">$(</span><span class="fu">date</span> +%Y%m%d<span class="va">)</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="va">BACKUP_DIR</span><span class="op">=</span><span class="st">"/mnt/backup/system/</span><span class="va">$DATEYMD</span><span class="st">"</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_DIR</span><span class="op">=</span><span class="st">"/mnt/backup/logs"</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">$LOG_DIR</span><span class="st">/</span><span class="va">${DATEYMD}</span><span class="st">_system_backup.log"</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create backup directory</span></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Starting script</span></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Starting system backup at: </span><span class="va">$(</span><span class="fu">date</span><span class="va">)</span><span class="st">"</span></span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Backup directory: </span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The --one-file-system option prevents crossing filesystem boundaries</span></span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --hard-links preserves hard links</span></span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --acls and --xattrs preserve extended attributes</span></span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> <span class="at">--one-file-system</span> <span class="at">--hard-links</span> <span class="dt">\</span></span>
-<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">--exclude</span><span class="op">=</span><span class="st">"/mnt/"</span> <span class="dt">\</span></span>
-<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>        / <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. System Information Files</span></span>
-<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Partition layout</span></span>
-<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> fdisk <span class="at">-l</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/partition_layout.txt"</span></span>
-<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Disk UUIDs</span></span>
-<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> blkid <span class="op">&gt;</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/disk_uuids.txt"</span></span>
-<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set appropriate permissions</span></span>
-<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chown <span class="at">-R</span> chris:chris <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chmod <span class="at">-R</span> 600 <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"System backup completed at: </span><span class="va">$BACKUP_DIR</span><span class="st">."</span></span>
-<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$LOG_FILE</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
-<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Logs available at: </span><span class="va">$LOG_FILE</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the script executable</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x /scripts/system_backup.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="va">DATEYMD</span><span class="op">=</span><span class="va">$(</span><span class="fu">date</span> +%Y%m%d<span class="va">)</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="va">BACKUP_DIR</span><span class="op">=</span><span class="st">"/mnt/backups/system/</span><span class="va">$DATEYMD</span><span class="st">"</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_DIR</span><span class="op">=</span><span class="st">"/mnt/backups/logs"</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">$LOG_DIR</span><span class="st">/</span><span class="va">${DATEYMD}</span><span class="st">_system_backup.log"</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create backup directory</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Starting script</span></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Starting system backup at: </span><span class="va">$(</span><span class="fu">date</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Backup directory: </span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The --one-file-system option prevents crossing filesystem boundaries</span></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --hard-links preserves hard links</span></span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --acls and --xattrs preserve extended attributes</span></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> <span class="at">--one-file-system</span> <span class="at">--hard-links</span> <span class="dt">\</span></span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">--exclude</span><span class="op">=</span><span class="st">"/mnt/"</span> <span class="dt">\</span></span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>        / <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. System Information Files</span></span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Partition layout</span></span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> fdisk <span class="at">-l</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/partition_layout.txt"</span></span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Disk UUIDs</span></span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> blkid <span class="op">&gt;</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/disk_uuids.txt"</span></span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set appropriate permissions</span></span>
+<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chown <span class="at">-R</span> chris:chris <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chmod <span class="at">-R</span> 600 <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"System backup completed at: </span><span class="va">$BACKUP_DIR</span><span class="st">."</span></span>
+<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-37"><a href="#cb35-37" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$LOG_FILE</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb35-38"><a href="#cb35-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-39"><a href="#cb35-39" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Logs available at: </span><span class="va">$LOG_FILE</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the script executable</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x /scripts/system_backup.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="understanding-the-rsync-options" class="level3">
 <h3 class="anchored" data-anchor-id="understanding-the-rsync-options">Understanding the rsync Options</h3>
@@ -815,19 +936,6 @@ SSH Config: Include
 <section id="restoring-from-backup" class="level3">
 <h3 class="anchored" data-anchor-id="restoring-from-backup">Restoring from Backup</h3>
 <p>To restore your system from these backups:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Restore configuration files</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /mnt/backup/configs/<span class="pp">[</span><span class="ss">TIMESTAMP</span><span class="pp">]</span>/passwd.bak /etc/passwd</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /mnt/backup/configs/<span class="pp">[</span><span class="ss">TIMESTAMP</span><span class="pp">]</span>/group.bak /etc/group</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /mnt/backup/configs/<span class="pp">[</span><span class="ss">TIMESTAMP</span><span class="pp">]</span>/ssh/ /etc/ssh/</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /mnt/backup/configs/<span class="pp">[</span><span class="ss">TIMESTAMP</span><span class="pp">]</span>/ufw/ /etc/ufw/</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /mnt/backup/configs/<span class="pp">[</span><span class="ss">TIMESTAMP</span><span class="pp">]</span>/fail2ban/ /etc/fail2ban/</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Restore installed packages</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dpkg <span class="at">--set-selections</span> <span class="op">&lt;</span> /mnt/backup/configs/<span class="pp">[</span><span class="ss">TIMESTAMP</span><span class="pp">]</span>/package_list.txt</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get dselect-upgrade</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. For a full system restore</span></span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rsync <span class="at">-aAXv</span> <span class="at">--delete</span> /mnt/backup/system/<span class="pp">[</span><span class="ss">TIMESTAMP</span><span class="pp">]</span>/ /</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="important-notes" class="level3">
 <h3 class="anchored" data-anchor-id="important-notes">Important Notes</h3>
@@ -842,29 +950,29 @@ SSH Config: Include
 <section id="automating-the-backup" class="level3">
 <h3 class="anchored" data-anchor-id="automating-the-backup">Automating the Backup</h3>
 <p>Create a master backup script that runs both configuration and system backups:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create master backup script (save as master-backup.sh)</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&lt;&lt; 'EOF'</span> <span class="op">&gt;</span> /mnt/backup/master-backup.sh</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="st">#!/bin/bash</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="st"># Set up logging</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="st">exec 1&gt; &gt;(logger -s -t $(basename $0)) 2&gt;&amp;1</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="st"># Run configuration backup</span></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="st">/mnt/backup/backup-configs.sh</span></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="st"># Run system backup</span></span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="st">/mnt/backup/backup-system.sh</span></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="st"># Remove backups older than 30 days</span></span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="st">find /mnt/backup/configs/ -type d -mtime +30 -exec rm -rf {} +</span></span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="st">find /mnt/backup/system/ -type d -mtime +30 -exec rm -rf {} +</span></span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the script executable</span></span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x /mnt/backup/master-backup.sh</span>
-<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to crontab (run daily at 2 AM)</span></span>
-<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="fu">crontab</span> <span class="at">-l</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null<span class="kw">;</span> <span class="bu">echo</span> <span class="st">"0 2 * * * /mnt/backup/master-backup.sh"</span><span class="kw">)</span> <span class="kw">|</span> <span class="fu">crontab</span> <span class="at">-</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create master backup script (save as master-backup.sh)</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&lt;&lt; 'EOF'</span> <span class="op">&gt;</span> /mnt/backups/master-backup.sh</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="st">#!/bin/bash</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="st"># Set up logging</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="st">exec 1&gt; &gt;(logger -s -t $(basename $0)) 2&gt;&amp;1</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="st"># Run configuration backup</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="st">/mnt/backup/backup-configs.sh</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="st"># Run system backup</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="st">/mnt/backup/backup-system.sh</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="st"># Remove backups older than 30 days</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="st">find /mnt/backups/configs/ -type d -mtime +30 -exec rm -rf {} +</span></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="st">find /mnt/backups/system/ -type d -mtime +30 -exec rm -rf {} +</span></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the script executable</span></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x /mnt/backup/master-backup.sh</span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to crontab (run daily at 2 AM)</span></span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="fu">crontab</span> <span class="at">-l</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null<span class="kw">;</span> <span class="bu">echo</span> <span class="st">"0 2 * * * /mnt/backup/master-backup.sh"</span><span class="kw">)</span> <span class="kw">|</span> <span class="fu">crontab</span> <span class="at">-</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="troubleshooting-1" class="level3">
 <h3 class="anchored" data-anchor-id="troubleshooting-1">Troubleshooting</h3>
@@ -906,43 +1014,6 @@ SSH Config: Include
 <li><strong>Switching OS:</strong>
 <ul>
 <li>Insert the appropriate microSD card and reboot the Raspberry Pi.</li>
-</ul></li>
-</ol>
-<hr>
-</section>
-</section>
-<section id="partitioning-the-ssd" class="level2">
-<h2 class="anchored" data-anchor-id="partitioning-the-ssd"><strong>3. Partitioning the SSD</strong></h2>
-<section id="why-partition-the-ssd" class="level3">
-<h3 class="anchored" data-anchor-id="why-partition-the-ssd"><strong>Why Partition the SSD?</strong></h3>
-<ul>
-<li>Organize storage for multiple OS installations or shared data.</li>
-<li>Separate OS environments and workloads.</li>
-</ul>
-</section>
-<section id="steps-to-partition-the-ssd" class="level3">
-<h3 class="anchored" data-anchor-id="steps-to-partition-the-ssd"><strong>Steps to Partition the SSD</strong></h3>
-<ol type="1">
-<li><p><strong>Install Partitioning Tools:</strong></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt install gparted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><strong>Create Partitions:</strong></p>
-<ul>
-<li>Open <code>gparted</code> and select your SSD.</li>
-<li>Create the following partitions:
-<ul>
-<li><strong>Partition 1:</strong> Linux root (e.g., 100GB, ext4).</li>
-<li><strong>Partition 2:</strong> NetBSD or another OS (e.g., 100GB, FFS).</li>
-<li><strong>Partition 3:</strong> Shared storage (remaining space, ext4 or exFAT).</li>
-</ul></li>
-</ul></li>
-<li><p><strong>Mount Partitions:</strong></p>
-<ul>
-<li><p>Add entries to <code>/etc/fstab</code> for automatic mounting during boot. Replace <code>xxxx-xxxx</code> with your partition’s UUID, which can be found using <code>lsblk -f</code>:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="va">UUID</span><span class="op">=</span>xxxx-xxxx <span class="ex">/mnt/shared</span> ext4 defaults 0 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>Save and exit the file, then run:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount <span class="at">-a</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>Verify the partitions are mounted correctly with:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul></li>
 </ol>
 <hr>
@@ -999,37 +1070,37 @@ SSH Config: Include
 <h2 class="anchored" data-anchor-id="using-lxclxd-for-virtualization"><strong>5. Using LXC/LXD for Virtualization</strong></h2>
 <section id="installing-lxd" class="level3">
 <h3 class="anchored" data-anchor-id="installing-lxd"><strong>Installing LXD</strong></h3>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt install <span class="at">-y</span> lxd</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> lxd init</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt install <span class="at">-y</span> lxd</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> lxd init</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="creating-and-managing-containers" class="level3">
 <h3 class="anchored" data-anchor-id="creating-and-managing-containers"><strong>Creating and Managing Containers</strong></h3>
 <ol type="1">
 <li><p><strong>Launch a Container:</strong></p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> launch ubuntu:20.04 my-container</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> launch ubuntu:20.04 my-container</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>List Running Containers:</strong></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Access a Container:</strong></p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> exec my-container <span class="at">--</span> /bin/bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> exec my-container <span class="at">--</span> /bin/bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Snapshot and Export:</strong></p>
 <ul>
 <li>Create a snapshot:</li>
 </ul>
-<div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> snapshot my-container snapshot1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> snapshot my-container snapshot1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Export the container as an image:</li>
 </ul>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> publish my-container <span class="at">--alias</span> my-image</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> publish my-container <span class="at">--alias</span> my-image</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <h3 id="deploying-multiple-vms" class="anchored"><strong>Deploying Multiple VMs</strong></h3></li>
 <li><p><strong>Create Instances:</strong></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> launch my-image vm1  </span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> launch my-image vm2  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> launch my-image vm1  </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> launch my-image vm2  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Set Up Networking:</strong></p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> network create my-bridge  </span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Attach</span> containers or VMs to this network using:  </span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> network attach my-bridge vm1 eth0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> network create my-bridge  </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Attach</span> containers or VMs to this network using:  </span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> network attach my-bridge vm1 eth0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
 <hr>
 </section>
@@ -1040,19 +1111,19 @@ SSH Config: Include
 <h3 class="anchored" data-anchor-id="docker"><strong>Docker</strong></h3>
 <ol type="1">
 <li><p><strong>Install Docker:</strong></p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update  </span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> docker.io</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update  </span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> docker.io</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Run a Container:</strong></p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">-p</span> 8080:80 nginx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">-p</span> 8080:80 nginx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Create a Dockerfile:</strong></p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="ex">FROM</span> python:3.8-slim  </span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="ex">COPY</span> app.py /app.py  </span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="ex">CMD</span> [<span class="st">"python"</span>, <span class="st">"/app.py"</span>]  </span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Build</span> and run the image:  </span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> my-python-app .  </span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> my-python-app</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="ex">FROM</span> python:3.8-slim  </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="ex">COPY</span> app.py /app.py  </span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="ex">CMD</span> [<span class="st">"python"</span>, <span class="st">"/app.py"</span>]  </span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Build</span> and run the image:  </span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> my-python-app .  </span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> my-python-app</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
 <hr>
 </section>
@@ -1060,31 +1131,31 @@ SSH Config: Include
 <h3 class="anchored" data-anchor-id="kubernetes-k3s"><strong>Kubernetes (K3s)</strong></h3>
 <ol type="1">
 <li><p><strong>Install K3s:</strong></p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sfL</span> https://get.k3s.io <span class="kw">|</span> <span class="fu">sh</span> <span class="at">-</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sfL</span> https://get.k3s.io <span class="kw">|</span> <span class="fu">sh</span> <span class="at">-</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Deploy Applications:</strong></p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Create</span> a deployment file <span class="er">(</span><span class="kw">`</span><span class="ex">nginx-deployment.yaml</span><span class="kw">`)</span><span class="bu">:</span>  </span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="ex">apiVersion:</span> apps/v1  </span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="ex">kind:</span> Deployment  </span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="ex">metadata:</span>  </span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">name:</span> nginx-deployment  </span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="ex">spec:</span>  </span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">replicas:</span> 2  </span>
-<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>  <span class="ex">selector:</span>  </span>
-<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">matchLabels:</span>  </span>
-<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>      <span class="ex">app:</span> nginx  </span>
-<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>  <span class="ex">template:</span>  </span>
-<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>    <span class="ex">metadata:</span>  </span>
-<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>      <span class="ex">labels:</span>  </span>
-<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>        <span class="ex">app:</span> nginx  </span>
-<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>    <span class="ex">spec:</span>  </span>
-<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>      <span class="ex">containers:</span>  </span>
-<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a>      <span class="ex">-</span> name: nginx  </span>
-<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a>        <span class="ex">image:</span> nginx:latest  </span>
-<span id="cb46-20"><a href="#cb46-20" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ports:</span>  </span>
-<span id="cb46-21"><a href="#cb46-21" aria-hidden="true" tabindex="-1"></a>        <span class="ex">-</span> containerPort: 80</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Create</span> a deployment file <span class="er">(</span><span class="kw">`</span><span class="ex">nginx-deployment.yaml</span><span class="kw">`)</span><span class="bu">:</span>  </span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="ex">apiVersion:</span> apps/v1  </span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="ex">kind:</span> Deployment  </span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="ex">metadata:</span>  </span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">name:</span> nginx-deployment  </span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="ex">spec:</span>  </span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">replicas:</span> 2  </span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="ex">selector:</span>  </span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">matchLabels:</span>  </span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>      <span class="ex">app:</span> nginx  </span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>  <span class="ex">template:</span>  </span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>    <span class="ex">metadata:</span>  </span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>      <span class="ex">labels:</span>  </span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>        <span class="ex">app:</span> nginx  </span>
+<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>    <span class="ex">spec:</span>  </span>
+<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>      <span class="ex">containers:</span>  </span>
+<span id="cb50-18"><a href="#cb50-18" aria-hidden="true" tabindex="-1"></a>      <span class="ex">-</span> name: nginx  </span>
+<span id="cb50-19"><a href="#cb50-19" aria-hidden="true" tabindex="-1"></a>        <span class="ex">image:</span> nginx:latest  </span>
+<span id="cb50-20"><a href="#cb50-20" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ports:</span>  </span>
+<span id="cb50-21"><a href="#cb50-21" aria-hidden="true" tabindex="-1"></a>        <span class="ex">-</span> containerPort: 80</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Apply the deployment:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> apply <span class="at">-f</span> nginx-deployment.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> apply <span class="at">-f</span> nginx-deployment.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
 <hr>
 </section>
@@ -1092,16 +1163,16 @@ SSH Config: Include
 <h3 class="anchored" data-anchor-id="apache-spark"><strong>Apache Spark</strong></h3>
 <ol type="1">
 <li><p><strong>Install Spark:</strong></p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://dlcdn.apache.org/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz  </span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xzf</span> spark-3.5.0-bin-hadoop3.tgz  </span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SPARK_HOME</span><span class="op">=</span>~/spark-3.5.0-bin-hadoop3  </span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$SPARK_HOME</span>/bin:<span class="va">$PATH</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://dlcdn.apache.org/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz  </span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xzf</span> spark-3.5.0-bin-hadoop3.tgz  </span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SPARK_HOME</span><span class="op">=</span>~/spark-3.5.0-bin-hadoop3  </span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$SPARK_HOME</span>/bin:<span class="va">$PATH</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Run Spark:</strong> Start the master:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="ex">start-master.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="ex">start-master.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Start a worker:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="ex">start-worker.sh</span> spark://<span class="op">&lt;</span>master-ip<span class="op">&gt;</span>:7077</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb54"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="ex">start-worker.sh</span> spark://<span class="op">&lt;</span>master-ip<span class="op">&gt;</span>:7077</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Submit a Job:</strong></p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">spark-submit</span> <span class="at">--master</span> spark://<span class="op">&lt;</span>master-ip<span class="op">&gt;</span>:7077 my_script.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="ex">spark-submit</span> <span class="at">--master</span> spark://<span class="op">&lt;</span>master-ip<span class="op">&gt;</span>:7077 my_script.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
 <hr>
 </section>

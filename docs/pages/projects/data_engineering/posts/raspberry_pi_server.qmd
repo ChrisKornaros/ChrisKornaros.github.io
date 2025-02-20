@@ -28,6 +28,16 @@ This guide provides step-by-step instructions and explanations for configuring a
    - Connect the SSD to the Raspberry Pi.
    - Connect the Raspberry Pi to the power source.
 
+## Networking Basics
+
+This section provides a brief example of how to connect your server to WiFi. It assumes you are using just the basics, but I'll also provide an exmaple for 
+
+### Quick Background
+
+
+### Connecting to WiFi 
+
+
 ## SSH
 
 This section provides a thorough walkthrough of setting up and securing SSH (Secure Shell) on a Raspberry Pi running Ubuntu Server. SSH is a network protocol that creates an encrypted tunnel between computers, allowing secure remote management. Think of it as establishing a private, secure telephone line that only authorized parties can use to communicate.
@@ -45,6 +55,7 @@ The SSH system uses two main configuration files with distinct purposes:
    - Controls how your system behaves when connecting to other SSH servers
    - Affects outgoing SSH connections
    - Located at `/etc/ssh/ssh_config` (system-wide) and `~/.ssh/config` (user-specific)
+     - If your server ever moves or connects to a new IP address, simply update it in the user config file
 
 2. `sshd_config`:
    - Lives on your server (the Raspberry Pi)
@@ -59,6 +70,7 @@ The SSH system uses two main configuration files with distinct purposes:
 #### Understanding SSH Keys and Security
 
 This guide uses ECDSA-384 keys, which offer several advantages:
+
 - Uses the NIST P-384 curve, providing security equivalent to 192-bit symmetric encryption
 - Better resistance to potential quantum computing attacks compared to smaller key sizes
 - Standardized under FIPS 186-4
@@ -74,11 +86,13 @@ ssh-keygen -t ecdsa -b 384 -C "ubuntu-pi-server"
 ```
 
 This command:
+
 - `-t ecdsa`: Specifies the ECDSA algorithm
 - `-b 384`: Sets the key size to 384 bits
 - `-C "ubuntu-pi-server"`: Adds a descriptive comment
 
 The command generates two files:
+
 - `~/.ssh/id_ecdsa`: Your private key (keep this secret!)
 - `~/.ssh/id_ecdsa.pub`: Your public key (safe to share)
 
@@ -91,6 +105,7 @@ ssh-copy-id -i ~/.ssh/id_ecdsa.pub chris@ubuntu-pi-server
 ```
 
 This command:
+
 1. Connects to your Pi using password authentication
 2. Creates the `.ssh` directory if needed
 3. Adds your public key to `authorized_keys`
@@ -112,45 +127,15 @@ Your Pi's `/etc/ssh` directory contains several important files:
 sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.backup-$(date +%Y%m%d)
 ```
 
-2. Create a custom security configuration:
-```bash
-sudo nano /etc/ssh/sshd_config.d/99-custom-security.conf
-```
-
-Add these security settings:
-```bash
-# Disable password authentication
-PasswordAuthentication no
-
-# Disable root login
-PermitRootLogin no
-
-# Specify allowed users
-AllowUsers chris
-
-# Use SSH Protocol 2
-Protocol 2
-
-# Set idle timeout (optional)
-ClientAliveInterval 300
-ClientAliveCountMax 2
-```
-
-3. Optimize host key settings in sshd_config:
+2. Optimize host key settings in sshd_config:
 ```bash
 # Specify host key order (prioritize ECDSA)
 HostKey /etc/ssh/ssh_host_ecdsa_key
 HostKey /etc/ssh/ssh_host_ed25519_key
 HostKey /etc/ssh/ssh_host_rsa_key
-
-# Specify key exchange algorithms
-KexAlgorithms ecdh-sha2-nistp384,curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512
-
-# Specify host key algorithms
-HostKeyAlgorithms ecdsa-sha2-nistp384,ssh-ed25519,rsa-sha2-512,rsa-sha2-256
 ```
 
-4. Strengthen the moduli file:
+3. Strengthen the moduli file:
 ```bash
 # Back up the existing file
 sudo cp /etc/ssh/moduli /etc/ssh/moduli.backup
@@ -160,7 +145,7 @@ sudo awk '$5 >= 3072' /etc/ssh/moduli > /tmp/moduli
 sudo mv /tmp/moduli /etc/ssh/moduli
 ```
 
-5. Apply changes:
+4. Apply changes:
 ```bash
 # Test the configuration
 sudo sshd -t
@@ -171,6 +156,8 @@ sudo systemctl restart ssh
 # Verify the service status
 sudo systemctl status ssh
 ```
+
+Just note, you'll probably need to reboot (`sudo reboot`) your server before all of the changes fully take place. Once you've done that, you may need to run `sudo systemctl start ssh`.
 
 ### Client-Side Configuration
 
@@ -218,7 +205,7 @@ ssh-keygen -H -f ~/.ssh/known_hosts
 #### Firewall Configuration
 
 ```bash
-# Install UFW
+# Install UFW (if it isn't already)
 sudo apt install ufw
 
 # Allow SSH connections
@@ -226,6 +213,19 @@ sudo ufw allow ssh
 
 # Enable the firewall
 sudo ufw enable
+```
+
+Now, you'll want to add rules for example, allowing traffic on a specific port if you took the step to choose a nonstandard, one that isn't the default **Port 22**. 
+
+```bash
+# Add a new rule in the port/protocol format
+sudo ufw add 30025/tcp
+
+# See a list of all rules
+sudo ufw status numbered
+
+# Remove the default rules
+sudo ufw delete 1
 ```
 
 #### Fail2Ban
@@ -307,12 +307,108 @@ ssh-keygen -l -f /etc/ssh/ssh_host_ecdsa_key.pub
 
 Remember: When you see a host key verification prompt, always verify the fingerprint matches your server's key before accepting.
 
+### Using SCP to transfer files
+This document outlines the process of securely copying Bash scripts from an Ubuntu Pi Server to a MacBook Air using SCP (Secure Copy Protocol), a file transfer tool built on top of SSH. The user should have an SSH configuration file (`~/.ssh/config`) set up to simplify connections to their Raspberry Pi server.
+
+#### Ensure the SSH Configuration Works
+
+Initially, the `ssh ubuntu-pi-server` command did not use the expected user-specific SSH configuration (`~/.ssh/config`). Instead, it defaulted to the system-wide configuration (`/etc/ssh/ssh_config`).To fix this, I ran the command with the `-F` flag explicitly specifying the user config:
+
+```bash
+ssh -F ~/.ssh/config ubuntu-pi-server
+```
+
+**Note:** To make sure SSH always uses the correct config, I tried the following:
+
+- Made sure `~/.ssh/config` exists and has the correct permissions (`chmod 600 ~/.ssh/config`).
+- Modified the `/etc/ssh/ssh_config` to include the user config:
+```plaintext
+Include ~/.ssh/config
+```
+
+After fixing the issue, the command `ssh ubuntu-pi-server` worked as expected.
+
+#### Copying Scripts from Server to MacBook Air
+Once SSH was working correctly, the next step was to copy two Bash scripts from the Ubuntu Pi Server to the MacBook Air using `scp`.
+
+The scripts were stored on the Pi as:
+
+```plaintext
+/home/chris/scripts/system_backup.sh
+/home/chris/scripts/config_backup.sh
+```
+
+The following `scp` commands were used to transfer them to the MacBook Air:
+
+```bash
+scp ubuntu-pi-server:~/scripts/backup.sh ~/Documents/pi-scripts/
+scp ubuntu-pi-server:~/scripts/maintenance.sh ~/Documents/pi-scripts/
+```
+
+#### Copying Multiple Files at Once
+To copy all Bash scripts from the `scripts` directory in one command:
+
+```bash
+scp ubuntu-pi-server:~/scripts/*.sh ~/Documents/pi-scripts/
+```
+
+#### Copying Files from MacBook Air to Server
+Simply enter the command in reverse, but notice here I did things a little differently.
+
+- `-r` tells `scp` to *recursively* copy a directory, meaning it moves it and all of its contents
+- `chris@` tells `scp` to specify the user when connecting to the server, this can be helpful if you have connection issues
+
+```bash
+scp -r ~/Documents/pi-scripts chris@ubuntu-pi-server:~/scripts
+```
+
+#### SCP Notes
+
+- SSH is now correctly configured and working using `ssh ubuntu-pi-server`.
+- Bash scripts can be securely copied from the Ubuntu Pi Server to the MacBook Air using `scp`.
+  - Just take note of the specific syntax used, namely `server-name:path/to/files`
+- The user can now maintain local backups of important scripts efficiently.
+  - Enables you to develop where you'd like and then easily move files to test scripts
+
 ## Conclusion
 
 This configuration provides a robust, secure SSH setup for your Raspberry Pi. It uses modern cryptography (ECDSA-384) while maintaining compatibility with other systems. Regular monitoring and maintenance will help ensure your server remains secure.
 
 Remember to keep your private keys secure and regularly update your system. If you need to make changes to the SSH configuration, always test them before disconnecting from your current session to avoid being locked out.
 
+
+---
+
+## **3. Partitioning the SSD**
+### **Why Partition the SSD?**
+- Organize storage for multiple OS installations or shared data.
+- Separate OS environments and workloads.
+
+### **Steps to Partition the SSD**
+1. **Install Partitioning Tools:**
+   ```bash
+   sudo apt update && sudo apt install gparted
+   ```
+2. **Create Partitions:**
+   - Open `gparted` and select your SSD.
+   - Create the following partitions:
+     - **Partition 1:** Linux root (e.g., 100GB, ext4).
+     - **Partition 2:** NetBSD or another OS (e.g., 100GB, FFS).
+     - **Partition 3:** Shared storage (remaining space, ext4 or exFAT).
+
+3. **Mount Partitions:**
+   - Add entries to `/etc/fstab` for automatic mounting during boot. Replace `xxxx-xxxx` with your partition's UUID, which can be found using `lsblk -f`:
+     ```bash
+     UUID=xxxx-xxxx /mnt/shared ext4 defaults 0 2
+     ```
+   - Save and exit the file, then run:
+     ```bash
+     sudo mount -a
+     ```
+   - Verify the partitions are mounted correctly with:
+     ```bash
+     df -h
+     ```
 
 ---
 
@@ -332,7 +428,7 @@ This guide explains how to create a complete backup of Linux configurations and 
 - Raspberry Pi Server running Ubuntu Server LTS
 - Physical keyboard access
 - Root or sudo privileges
-- Mounted backup drive at `/mnt/backup/`
+- Mounted backup drive at `/mnt/backups/`
 - rsync (typically pre-installed on Ubuntu Server)
 
 ### Setting Up the Backup Directory
@@ -341,14 +437,14 @@ First, we'll prepare the backup directory structure and set appropriate permissi
 
 ```bash
 # Create backup directories if they don't exist
-sudo mkdir -p /mnt/backup/configs
-sudo mkdir -p /mnt/backup/system
+sudo mkdir -p /mnt/backups/configs
+sudo mkdir -p /mnt/backups/system
 
 # Change ownership to your user (replace 'chris' with your username)
-sudo chown -R chris:chris /mnt/backup
+sudo chown -R chris:chris /mnt/backups
 
 # Set appropriate permissions
-sudo chmod 700 /mnt/backup  # Only owner can read/write/execute
+sudo chmod 700 /mnt/backups  # Only owner can read/write/execute
 ```
 
 ### Configuration Files Backup
@@ -360,8 +456,8 @@ We'll use rsync to create a structured backup of essential configuration files. 
 # Using the {} around DATEYMD in the file path ensure it's specified as the variable's value, and the subsequent parts are not included
 
 DATEYMD=$(date +%Y%m%d)
-BACKUP_DIR="/mnt/backup/configs/$DATEYMD"
-LOG_DIR="/mnt/backup/logs"
+BACKUP_DIR="/mnt/backups/configs/$DATEYMD"
+LOG_DIR="/mnt/backups/logs"
 LOG_FILE="$LOG_DIR/${DATEYMD}_config_backup.log"
 
 # Create backup directory
@@ -391,6 +487,8 @@ mkdir -p "$BACKUP_DIR"
 
     # 6. Network Configuration
     sudo rsync -aAXv /etc/network/. "$BACKUP_DIR/network/"
+    sudo rsync -aAXv /etc/netplan/. "$BACKUP_DIR/netplan/"
+    sudo rsync -aAXv /etc/NetworkManager/. "$BACKUP_DIR/NetworkManager/"
     sudo rsync -aAXv /etc/hosts "$BACKUP_DIR/hosts.bak"
     sudo rsync -aAXv /etc/hostname "$BACKUP_DIR/hostname.bak"
     sudo rsync -aAXv /etc/resolv.conf "$BACKUP_DIR/resolv.conf.bak"
@@ -406,18 +504,15 @@ mkdir -p "$BACKUP_DIR"
     sudo rsync -aAXv /etc/logrotate.conf "$BACKUP_DIR/logrotate.conf.bak"
     sudo rsync -aAXv /etc/logrotate.d/. "$BACKUP_DIR/logrotate.d/"
 
-    # 10. Custom Application Configurations (add more as needed)
-    sudo rsync -aAXv /etc/myapp/. "$BACKUP_DIR/myapp/"
-
-    # 11. Timezone and Locale
+    # 10. Timezone and Locale
     sudo rsync -aAXv /etc/timezone "$BACKUP_DIR/timezone.bak"
     sudo rsync -aAXv /etc/localtime "$BACKUP_DIR/localtime.bak"
     sudo rsync -aAXv /etc/default/locale "$BACKUP_DIR/locale.bak"
 
-    # 12. Keyboard Configuration
+    # 11. Keyboard Configuration
     sudo rsync -aAXv /etc/default/keyboard "$BACKUP_DIR/keyboard.bak"
 
-    # 13. Package List
+    # 12. Package List
     dpkg --get-selections > "$BACKUP_DIR/package_list.txt"
 
     # Set appropriate permissions
@@ -444,8 +539,8 @@ For system files, we'll create a separate rsync script that handles system direc
 #!/bin/bash
 
 DATEYMD=$(date +%Y%m%d)
-BACKUP_DIR="/mnt/backup/system/$DATEYMD"
-LOG_DIR="/mnt/backup/logs"
+BACKUP_DIR="/mnt/backups/system/$DATEYMD"
+LOG_DIR="/mnt/backups/logs"
 LOG_FILE="$LOG_DIR/${DATEYMD}_system_backup.log"
 
 
@@ -506,21 +601,7 @@ The rsync commands use several important options:
 
 To restore your system from these backups:
 
-```bash
-# 1. Restore configuration files
-sudo rsync -aAXv /mnt/backup/configs/[TIMESTAMP]/passwd.bak /etc/passwd
-sudo rsync -aAXv /mnt/backup/configs/[TIMESTAMP]/group.bak /etc/group
-sudo rsync -aAXv /mnt/backup/configs/[TIMESTAMP]/ssh/ /etc/ssh/
-sudo rsync -aAXv /mnt/backup/configs/[TIMESTAMP]/ufw/ /etc/ufw/
-sudo rsync -aAXv /mnt/backup/configs/[TIMESTAMP]/fail2ban/ /etc/fail2ban/
 
-# 2. Restore installed packages
-sudo dpkg --set-selections < /mnt/backup/configs/[TIMESTAMP]/package_list.txt
-sudo apt-get dselect-upgrade
-
-# 3. For a full system restore
-sudo rsync -aAXv --delete /mnt/backup/system/[TIMESTAMP]/ /
-```
 
 ### Important Notes
 
@@ -536,7 +617,7 @@ Create a master backup script that runs both configuration and system backups:
 
 ```bash
 # Create master backup script (save as master-backup.sh)
-cat << 'EOF' > /mnt/backup/master-backup.sh
+cat << 'EOF' > /mnt/backups/master-backup.sh
 #!/bin/bash
 
 # Set up logging
@@ -549,8 +630,8 @@ exec 1> >(logger -s -t $(basename $0)) 2>&1
 /mnt/backup/backup-system.sh
 
 # Remove backups older than 30 days
-find /mnt/backup/configs/ -type d -mtime +30 -exec rm -rf {} +
-find /mnt/backup/system/ -type d -mtime +30 -exec rm -rf {} +
+find /mnt/backups/configs/ -type d -mtime +30 -exec rm -rf {} +
+find /mnt/backups/system/ -type d -mtime +30 -exec rm -rf {} +
 EOF
 
 # Make the script executable
@@ -588,39 +669,6 @@ Remember to regularly verify your backups by checking the log files and occasion
    - Flash the image to the card using `balenaEtcher` or `Raspberry Pi Imager`.
 3. **Switching OS:**
    - Insert the appropriate microSD card and reboot the Raspberry Pi.
-
----
-
-## **3. Partitioning the SSD**
-### **Why Partition the SSD?**
-- Organize storage for multiple OS installations or shared data.
-- Separate OS environments and workloads.
-
-### **Steps to Partition the SSD**
-1. **Install Partitioning Tools:**
-   ```bash
-   sudo apt update && sudo apt install gparted
-   ```
-2. **Create Partitions:**
-   - Open `gparted` and select your SSD.
-   - Create the following partitions:
-     - **Partition 1:** Linux root (e.g., 100GB, ext4).
-     - **Partition 2:** NetBSD or another OS (e.g., 100GB, FFS).
-     - **Partition 3:** Shared storage (remaining space, ext4 or exFAT).
-
-3. **Mount Partitions:**
-   - Add entries to `/etc/fstab` for automatic mounting during boot. Replace `xxxx-xxxx` with your partition's UUID, which can be found using `lsblk -f`:
-     ```bash
-     UUID=xxxx-xxxx /mnt/shared ext4 defaults 0 2
-     ```
-   - Save and exit the file, then run:
-     ```bash
-     sudo mount -a
-     ```
-   - Verify the partitions are mounted correctly with:
-     ```bash
-     df -h
-     ```
 
 ---
 
