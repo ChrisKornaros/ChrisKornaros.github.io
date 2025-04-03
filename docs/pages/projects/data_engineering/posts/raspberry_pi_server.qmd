@@ -350,8 +350,10 @@ ssh-keygen -l -f /etc/ssh/ssh_host_ecdsa_key.pub
 
 Remember: When you see a host key verification prompt, always verify the fingerprint matches your server's key before accepting.
 
-### Using SCP to transfer files
-This document outlines the process of securely copying Bash scripts from an Ubuntu Pi Server to a MacBook Air using SCP (Secure Copy Protocol), a file transfer tool built on top of SSH. The user should have an SSH configuration file (`~/.ssh/config`) set up to simplify connections to their Raspberry Pi server.
+### Using SCP to Transfer Scripts
+This section outlines the process of securely copying Bash scripts from an Ubuntu Pi Server to a MacBook Air using SCP (Secure Copy Protocol), a file transfer tool built on top of SSH. The user should have an SSH configuration file (`~/.ssh/config`) set up to simplify connections to their Raspberry Pi server. 
+
+For a few basic scripts, SCP is fine, but for larger file transfers `rsync` is better suited and a more efficient solution.
 
 #### Ensure the SSH Configuration Works
 
@@ -422,7 +424,7 @@ Remember to keep your private keys secure and regularly update your system. If y
 
 ---
 
-## **3. Partitioning the SSD**
+## Partitions and Backups
 ### **Why Partition the SSD?**
 - Organize storage for multiple OS installations or shared data.
 - Separate OS environments and workloads.
@@ -456,6 +458,23 @@ Remember to keep your private keys secure and regularly update your system. If y
 ---
 
 ## System Backups and Upgrades
+### Partitions
+Before diving into the actual backup process for your server, it's best to figure out your storage media and partition your drives. Partitions are just logicial divisions in your physical storage, each of which can use different filesystems. With some examples below:
+
+- `ext4`: Standard Linux filesystem
+- `FAT32`: Compatible with most systems but limited to 4GB files
+- `exFAT`: Enhanced FAT, good for cross-platform use
+- `NTFS`: Windows filesystem, readable by Linux
+
+#### Partitioning Tools
+Before you can partition your hard drive or another piece of physical storage (like a microSD), you'll need to be connected to your boot media. In my case, that's the 1TB SSD I have plugged into my server. You are not able to partition the active storage device on any server or computer. 
+
+So, your first step is to take a look at the block devices available to you.
+
+```bash
+sudo lsblk
+```
+
 ### Comprehensive Linux Configuration Backup Guide for Raspberry Pi Server
 
 This guide explains how to create a complete backup of Linux configurations and system files on a Raspberry Pi Server running Ubuntu Server LTS using rsync. We'll use rsync because it provides several important advantages over simple copy commands:
@@ -636,6 +655,30 @@ The rsync commands use several important options:
 - `--one-file-system`: Don't cross filesystem boundaries
 - `--hard-links`: Preserve hard links
 - `--exclude`: Skip specified directories
+
+### Storing your backups externally
+While it's definitely beneficial to have a local copy of your backups to easily roll back changes, it isn't the most secure solution to have all of your information in one place. So, how can you go about transferring your system and configuration backups to another storage system? 
+
+For the purpose of this guide, I'll be showing you how to use `rsync` for a remote transfer and how to flash the backup onto a `microSD`. 
+
+#### Rsync for Remote Transfers
+Rsync is specifically designed for copying and transferring files, so it offers more sophisticated file synchronization capabilities than basic tools like SCP.
+
+
+```bash
+rsync -avz --partial --progress --update chris@ubuntu-pi-server:/mnt/backups/system/master/ ~/Documents/raspberry_pi_server/backups/system/master
+```
+
+The flags do the following:
+
+- `-a`: Archive mode, which preserves permissions, timestamps, symbolic links, etc.
+- `-v`: Verbose output, showing what files are being transferred
+- `-z`: Compress data during transfer for faster transmission
+- `--partial`: Keep partially transferred files, allowing you to resume interrupted transfers
+- `--progress`: Show progress during transfer
+- `--update`: Skip files that are newer on the receiver (only transfer if source is newer)
+
+#### Hardware Transfers
 
 ### **Note:**
 **Everything up until this point has been tested and works-- relatively efficiently for such a simple setup. That being said, I still haven't tested the restore script, nor have I tried to setup simple cron jobs to automate and cleanup the backups.**
