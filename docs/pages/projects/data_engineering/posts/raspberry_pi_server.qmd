@@ -392,7 +392,7 @@ scp ubuntu-pi-server:~/scripts/maintenance.sh ~/Documents/pi-scripts/
 To copy all Bash scripts from the `scripts` directory in one command:
 
 ```bash
-scp ubuntu-pi-server:~/scripts/*.sh ~/Documents/pi-scripts/
+scp chris@ubuntu-pi-server:~/mnt/backups/ ~/Documents/pi-scripts/backups
 ```
 
 #### Copying Files from MacBook Air to Server
