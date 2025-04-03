@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Chris Kornaros</title>
+<link>https://chriskornaros.github.io/pages/projects/data_science/data_science.html</link>
+<atom:link href="https://chriskornaros.github.io/pages/projects/data_science/data_science.xml" rel="self" type="application/rss+xml"/>
+<description>The personal website, portfolio, and blog of Chris Kornaros.</description>
+<generator>quarto-1.6.39</generator>
+<lastBuildDate>Fri, 15 Nov 2024 06:00:00 GMT</lastBuildDate>
+<item>
+  <title>{B4F502887207:/pages/projects/data_science/posts/nfl_bowl_2025.html}</title>
+  <dc:creator>Chris Kornaros</dc:creator>
+  <link>https://chriskornaros.github.io/pages/projects/data_science/posts/nfl_bowl_2025.html</link>
+  <description>{B4F502887207:/pages/projects/data_science/posts/nfl_bowl_2025.html}</description>
+  <category>Research</category>
+  <category>Ongoing</category>
+  <guid>https://chriskornaros.github.io/pages/projects/data_science/posts/nfl_bowl_2025.html</guid>
+  <pubDate>Fri, 15 Nov 2024 06:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>{B4F502887207:/pages/projects/data_science/posts/titanic.html}</title>
+  <dc:creator>Chris Kornaros</dc:creator>
+  <link>https://chriskornaros.github.io/pages/projects/data_science/posts/titanic.html</link>
+  <description>{B4F502887207:/pages/projects/data_science/posts/titanic.html}</description>
+  <category>Kaggle</category>
+  <category>Completed</category>
+  <guid>https://chriskornaros.github.io/pages/projects/data_science/posts/titanic.html</guid>
+  <pubDate>Tue, 15 Oct 2024 05:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>{B4F502887207:/pages/projects/data_science/posts/gym_market.html}</title>
+  <dc:creator>Chris Kornaros</dc:creator>
+  <link>https://chriskornaros.github.io/pages/projects/data_science/posts/gym_market.html</link>
+  <description>{B4F502887207:/pages/projects/data_science/posts/gym_market.html}</description>
+  <category>DataCamp</category>
+  <category>Completed</category>
+  <guid>https://chriskornaros.github.io/pages/projects/data_science/posts/gym_market.html</guid>
+  <pubDate>Mon, 30 Sep 2024 05:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>{B4F502887207:/pages/projects/data_science/posts/netflix.html}</title>
+  <dc:creator>Chris Kornaros</dc:creator>
+  <link>https://chriskornaros.github.io/pages/projects/data_science/posts/netflix.html</link>
+  <description>{B4F502887207:/pages/projects/data_science/posts/netflix.html}</description>
+  <category>DataCamp</category>
+  <category>Completed</category>
+  <guid>https://chriskornaros.github.io/pages/projects/data_science/posts/netflix.html</guid>
+  <pubDate>Mon, 30 Sep 2024 05:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>{B4F502887207:/pages/projects/data_science/posts/login_validation.html}</title>
+  <dc:creator>Chris Kornaros</dc:creator>
+  <link>https://chriskornaros.github.io/pages/projects/data_science/posts/login_validation.html</link>
+  <description>{B4F502887207:/pages/projects/data_science/posts/login_validation.html}</description>
+  <category>DataCamp</category>
+  <category>Completed</category>
+  <guid>https://chriskornaros.github.io/pages/projects/data_science/posts/login_validation.html</guid>
+  <pubDate>Mon, 30 Sep 2024 05:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

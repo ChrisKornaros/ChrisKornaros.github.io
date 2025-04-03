@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Chris Kornaros</title>
+<link>https://chriskornaros.github.io/pages/projects/data_engineering/data_engineering.html</link>
+<atom:link href="https://chriskornaros.github.io/pages/projects/data_engineering/data_engineering.xml" rel="self" type="application/rss+xml"/>
+<description>The personal website, portfolio, and blog of Chris Kornaros.</description>
+<generator>quarto-1.6.39</generator>
+<lastBuildDate>Fri, 13 Dec 2024 06:00:00 GMT</lastBuildDate>
+<item>
+  <title>{B4F502887207:/pages/projects/data_engineering/posts/basic_oss.html}</title>
+  <dc:creator>Chris Kornaros</dc:creator>
+  <link>https://chriskornaros.github.io/pages/projects/data_engineering/posts/basic_oss.html</link>
+  <description>{B4F502887207:/pages/projects/data_engineering/posts/basic_oss.html}</description>
+  <category>Research</category>
+  <category>Ongoing</category>
+  <guid>https://chriskornaros.github.io/pages/projects/data_engineering/posts/basic_oss.html</guid>
+  <pubDate>Fri, 13 Dec 2024 06:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>{B4F502887207:/pages/projects/data_engineering/posts/oss_data_arch.html}</title>
+  <dc:creator>Chris Kornaros</dc:creator>
+  <link>https://chriskornaros.github.io/pages/projects/data_engineering/posts/oss_data_arch.html</link>
+  <description>{B4F502887207:/pages/projects/data_engineering/posts/oss_data_arch.html}</description>
+  <category>Technology</category>
+  <category>Planning</category>
+  <guid>https://chriskornaros.github.io/pages/projects/data_engineering/posts/oss_data_arch.html</guid>
+  <pubDate>Thu, 12 Dec 2024 06:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>{B4F502887207:/pages/projects/data_engineering/posts/bank_etl.html}</title>
+  <dc:creator>Chris Kornaros</dc:creator>
+  <link>https://chriskornaros.github.io/pages/projects/data_engineering/posts/bank_etl.html</link>
+  <description>{B4F502887207:/pages/projects/data_engineering/posts/bank_etl.html}</description>
+  <category>DataCamp</category>
+  <category>Completed</category>
+  <guid>https://chriskornaros.github.io/pages/projects/data_engineering/posts/bank_etl.html</guid>
+  <pubDate>Mon, 30 Sep 2024 05:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

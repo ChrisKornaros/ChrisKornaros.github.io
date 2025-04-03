@@ -1,0 +1,47 @@
+typography:
+  fonts:
+    - family: Open Sans
+      source: google
+  base: 
+    family: Open Sans
+  headings: 
+    family: Open Sans
+    color: danger
+  monospace: 
+    family: Open Sans
+    background-color: success
+  monospace-block: 
+    family: Open Sans
+    color: info # For Dark Mode, use secondary
+    background-color: success
+  monospace-inline:
+    family: Open Sans
+    color: secondary 
+    background-color: success
+
+  
+# Light mode
+# Background (#F7F7F7): soft, creamy white base
+# Foreground (#083D77): deep blue for text
+# Primary (#FF9900): rich, golden orange for accents
+# Secondary (#1A4D6E): softer blue for secondary elements
+# Tertiary (#8B9467): muted, greenish-brown for added depth
+# Light (#F7F7F7): soft, creamy white base
+# Dark (#083D77): deep blue for text
+# Success (#E5F2FF): light, serene blue for monospace code blocks
+# Danger (#052F5F): slightly darker blue for top navigation bar background
+# Info (#8B0A1A): soft, dark crimson color for bash code blocks
+# Warning (#2E6490): A darker shaded blue, than Info, dark mode blockquote background color
+
+# Dark mode
+# Background (#2E4053): A deep, cool blue tone that sets the foundation for the dark mode design
+# Foreground (#F7F7F7): A clean and neutral white tone used for primary text
+# Primary (#FF9900): A vibrant and energetic orange tone 
+# Secondary (#56B3FA): A bright and calming blue tone 
+# Tertiary (#655D4B): A muted and earthy brown tone used for added depth and texture
+# Light (#F7F7F7): A soft and creamy white tone used for highlights and contrast.
+# Dark (#1C1F24): A deep, cool grey tone used for sidebar background
+# Success (#33373D): A dark, muted blue-green tone used for the monospace backgrounds
+# Danger (#1A1D23): A very dark, almost black tone with a blue undertone used for the header text
+# Info (#56B3FA): A bright and calming blue tone code text
+# Warning (#2E6490): A darker shaded blue, than Info, dark mode blockquote background color

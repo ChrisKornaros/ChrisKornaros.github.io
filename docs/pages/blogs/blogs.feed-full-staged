@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Chris Kornaros</title>
+<link>https://chriskornaros.github.io/pages/blogs/blogs.html</link>
+<atom:link href="https://chriskornaros.github.io/pages/blogs/blogs.xml" rel="self" type="application/rss+xml"/>
+<description>The personal website, portfolio, and blog of Chris Kornaros.</description>
+<generator>quarto-1.6.39</generator>
+<lastBuildDate>Sat, 14 Dec 2024 06:00:00 GMT</lastBuildDate>
+<item>
+  <title>{B4F502887207:/pages/blogs/posts/first_blog.html}</title>
+  <dc:creator>Chris Kornaros</dc:creator>
+  <link>https://chriskornaros.github.io/pages/blogs/posts/first_blog.html</link>
+  <description>{B4F502887207:/pages/blogs/posts/first_blog.html}</description>
+  <category>Research</category>
+  <category>General</category>
+  <guid>https://chriskornaros.github.io/pages/blogs/posts/first_blog.html</guid>
+  <pubDate>Sat, 14 Dec 2024 06:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

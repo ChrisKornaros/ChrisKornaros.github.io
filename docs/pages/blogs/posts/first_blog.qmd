@@ -1,0 +1,29 @@
+---
+title: "1. Experimenting with GitHub Pages and WhiteWind"
+author: "Chris Kornaros"
+date: 2024-12-14
+categories: ["Research", "General"]
+tags: ["Blog", "Journal", "Bluesky", "WhiteWind", "GitHub", "Learning"]
+---
+
+This is the first part of a blog post I originally wrote over a month ago and posted to WhiteWind.
+
+WhiteWind is a blogging application built on Bluesky's foundational, decentralied network. Half of that post is now the beginning of the NFL Big Data Bowl 2025 project write up.
+
+Eventually, I'd like to find a way to write a post on WhiteWind and have it automatically update my personal site. That way I can do quick, shower thoughts style blog posts there, without having to do the longer Quarto workflow.
+
+## Original Post
+
+In March of 2024, I took a break from social media (Twitter/Instagram/TikTok/Etc.) because the polarizing algorithms and toxicity were driving me nuts. I took to LinkedIn, in search of a community of professional data nerds, that develop and learn in their freetime. Luckily, I found some great people on there, but my feed was quickly inundated with LinkedInfluencers reposting the same content whether recycling their own, other's, or generating posts with AI. Then, in October, I heard that data people were all jumping over to Bluesky, so I thought I'd give it a shot. Needless to say, I love the data and developer community here. Furthermore, the fundamental design and decentralization of the platform make this that much cooler. Then,
+I learned about WhiteWind and some other integrations, and decided this is a great way to post updates and keep myself accountable. 
+
+A little about me, I'm a Tulane Unviersity graduate (BSM '20, MS '21) and currently a Data (Analytics) Engineer at GM. In my current role I wear many hats! In my 3.5 years at General Motors I've gained experience desinging database architecture, building ETL pipelines, being an IT admin, owning products, managing projects, automating tests, and providing training/mentorship for Power BI/Databricks; however, most of my experience is in BI reporting and legacy application upgrades. 
+
+So, this past April I decided I wanted to really learn the ins and outs of modern data engineering and data science. So, I bought a MacBook Air and started coding! From my Masters degree at Tulane, I had experience with R, Python, SQL for coding, as well as the statistical knwoledge needed for machine learning. Instead of those areas, I began with zsh/bash scripting (using the Terminal to do everything I could), then I learned the basics of git for version control, then I jumped into dbt for data modeling, and finally Docker so I could understand containers. Following that, I began Harvard's CS50p course in Python programming. I wanted to understand Python, the programming language, because I had learned Python using Jupyter notebooks instead of scripts, packages, testing, etc.
+
+In the few month or so since then, I've worked on a few public projects which you can view on my [GitHub](https://www.github.com/ChrisKornaros). These projects are pretty varied, and narrow in scope.
+
+1. [DataCamp](https://app.datacamp.com/learn/projects) projects based on simple ETL, analytics, or programming.
+2. My [CS50p](https://www.github.com/ChrisKornaros/CS50p) lecture notes and problem set submissions.
+3. A simple [Introduction to DuckDB](https://www.github.com/ChrisKornaros/DuckDB_Introduction) using the NFL Big Data Bowl CSV files.
+4. A private repository with bash scripts and configuration files for starting up my AWS EC2 instance, connecting via ssh, Docker containers, quarto, and the GitHub CLI.

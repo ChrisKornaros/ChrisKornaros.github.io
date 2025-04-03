@@ -1,0 +1,299 @@
+---
+title: "Quarto"
+author: "Chris Kornaros"
+date: 2024-12-13
+categories: ["Reporting"]
+tags: ["Quarto", "Documentation", "Design", "Guides", "Markdown", "HTML", "CSS", "SASS", "CLI", "git", "GitHub"]
+---
+
+![](images/quarto.png)
+
+A non-exhaustive guide on using Quarto for project documentation and personal branding.
+
+## Overview
+[Quarto](https://www.quarto.org/) is:\
+
+> An open-source scientific and technical publishing system\
+> Author using Jupyter notebooks or with plain text markdown in your favorite editor.\
+> Create dynamic content with Python, R, Julia, and Observable.\
+> Publish reproducible, production quality articles, presentations, dashboards, websites, blogs, and books in HTML, PDF, MS Word ePub, and more.\
+> Share knowledge and insights organization-wide by publishing to Posit Connect, Confluence, or other publishing systems.\
+> Write using Pandoc markdown, including equations, citations, crossrefs, figure panels, callouts, advanced layout, and more.
+
+### Downloading and Updating
+For simple instructions and a download/install guide using a GUI, visit [Quarto - Get Started](https://quarto.org/docs/get-started/). 
+
+For MacOS users, I recommend downloading and learning about Homebrew, the package manager. It drastically simplifies all phases of package management. To install, simply use `brew install quarto` and you're done.
+
+## Projects
+This section, and the rest of the guide, assume you're familiar with and using the uv package and project manager for Python, git for version control, and the GitHub CLI for collaboration. I'll be referencing all of these tools throughout the rest of the guide. You can read my guide to learn more about [uv](https://chriskornaros.github.io/pages/guides/uv/uv.html)
+
+### General Workflow
+I'll be walking through the general workflow, but here's a quick note about how I use Quarto for Data related projects. I use GitHub as my collaboration/repo hosting tool, so all of my projects have a `README.md` file. That way, if anyone visits the actual repo, they can view a nicely rendered markdown file, but when I'm ready to add a project to my website, I'll copy the contents into a `.qmd` file. Then, I can add the Quarto specific formatting.
+
+This simplifies my general workflow a lot, and makes it easy to formally share and document my research.
+
+### Initializing a Project
+#### The create command
+I'm going to assume you've already run the `uv init` command to initalize your `uv` project. From there, it's easy to start a project with Quarto from the command line, and there are a few built-in project types to further simplify the startup process. Furthermore, Quarto provides a simple command for creating (or initializing) a project (or extension), `quarto create project`, and a handy setup guide to help you use it. The following code shows you my terminal input and outputs.
+
+```bash
+chriskornaros@chriss-air test % quarto create project
+? Type › default
+? Directory › docs
+? Title (docs) › test_docs
+Creating project at /Users/chriskornaros/Documents/test/docs:
+  - Created _quarto.yml
+  - Created .gitignore
+  - Created test_docs.qmd
+? Open With › (don't open)
+```
+
+For a quick run through: quarto create project initializes a quarto project directory within your current working directory (the uv parent directory), `type` lets you choose the type of Quarto documentation (book, website, confluence, etc.), title is the title of your homepage (`.qmd`) file. Personally, I like to remove the `docs/.gitignore` file because uv creates one when you initialize a project, in the parent directory. So, having just one `.gitignore` file helps me keep track of things more easily.
+
+The only directories I added to `docs` after it was created by quarto, was a `pages` directory for various subpages and a `brand` directory for `.scss` files, images, etc. For project, blog, or guide specific media files, I kept those within their subpage folder. Here, I keep the various landing pages and their sub directory structures. Ideally, I won't have any files in there, but the `_quarto.yml` file will point to their locations in my personal GitHub repo. 
+
+::: {.callout-tip title="File Context in Quarto"}
+In my time developing this site, it seems that Quarto can only pickup on files within the context of the `docs` (or whatever you name your Quarto project) folder. Furthermore, it struggels with absolute context paths, and at most I could get it to work with `../../file`.
+:::
+
+### Working on your Project
+Now that you've initalized your project directory, you can begin work! Head over to [Quarto Basics](https://quarto.org/docs/authoring/markdown-basics.html) for documentation on the basics of `.qmd` files and authoring with Quarto markdown. 
+
+Just remember, every webpage will need a `.qmd` file!
+
+### Rendering a Projects
+This part is blank for now. Rendering websites have some specific components to websites and GitHub pages, that are covered later on. I will update this for other document types in the future.
+
+## Configurations
+### The _quarto.yml file
+This YAML file serves as the primary configuration file for your Quarto project. Similar to other Quarto YAML files, this handles document configurations, but adds the Quarto project features to sync those across documents and for more environment control. You have the ability to define project metadata for all of the different document types. In this example, I used it to define the website configurations, but if you're working on a book or dashboard, then it could be used to normalize chapters or visuals as well. 
+
+You can also specify the formatting, which connects with the `_brand.yml` file and enables cross referencing of variables and values. Learn more with [Quarto Projects](https://quarto.org/docs/projects/quarto-projects.html).
+
+
+### The _brand.yml File
+This is a new feature with Quarto 1.6 that allows you to define and save your design specifications in a YAML file. While this file is specific to your Quarto project directories, you can store and share the file across projects or with others to maintain brand consistency. Luckily, there is great documentation if you want more details [brand.yml](https://posit-dev.github.io/brand-yml/brand/). While there is a lot to cover, I'll go over some basics to get started. It's important to remember that if you specify colors for anything within `.qmd` files, those will overwrite the defaults in the brand file. Furthermore, Quarto and `_brand.yml` both utilize the `Bootstrap` web development framework. For a list of its full default values, visit the [repo](https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss).
+
+#### Color
+This is obviously an important part of all branding. There are two main components:
+
+1. `palette`
+2. `theme colors`
+
+Palette lets you specify hexcodes and assign those to various strings. Those string values could be generic terms, like *green* (if there is a specific shade you would like), or terms specific to `brand.yml's` *theme colors*. When you set your default colors in this way, you can then customize the output in the `_quarto.yml` file. To modify, for example, your navigation bar, just define the background and foreground properties under the `navbar` property. 
+
+Another thing to keep in mind with color, just because it's available in `_brand.yml`, like `tertiary`, doesn't mean it's defined and functional in the `_quarto.yml` file. So, you may need to be creative with how you use protected terms, like success, danger, or warning. Doing so allows you to take advantage of the programmatic benefits of the brand file, while specifying several, possibly, similar shades that would be tricky to do just be renaming colors, such as red, blue, or yellow. 
+
+If you aren't sure on what colors or palettes to choose, using an LLM based chatbot can be helpful. This allows you to describe the colors and themes you're going for, as well as refine them over time.
+
+#### Typography
+This section lets you control which font families are included in your Quarto project. Then, you can specify where various fonts are used and for some properties, even change their specific color. As a heads up, the `_brand.yml` documentation seems to be correct and updated; however, `bash` code blocks don't render the monospace-background the same way. So, while in-line monospace backgrounds and monospace backgrounds for Python (at the very least) will be colored as the documentation says. Bash code blocks will have no background, just the code itself in the specified font color.
+
+#### Defaults
+This section gives you more control over various defaults, for HTML Bootstrap, Quarto, Shiny, etc. When configuring specific design colors, using the bootstrap default section will allow you to keep your Quarto files simple, while providing a high level of control over design.
+
+#### SASS - Syntactically Awesome Style Sheets
+Remember, whatever you can't configure simply in your `_brand.yml` file, you can do so in a `.scss` file. For example, if you want to create custom light and dark mode themes, just create `.scss` files with the appropriate code and place this in your docs (main Quarto project) directory. Below is an example of a dark mode theme. I set the default values for the scss bootstrap variables at the top. Then, I specified the specific rules for various parts of the page. For defined variables, blockquote, you don't need a `.`, but for features specific to quarto rendered sites, add a . before. For example, to modify the look of code blocks, you must use the `.sourceCode` variable. For child classes, for example the `.sourceCode css copy-with-code` class, if you want to modify that you'll need to use `.sourceCode pre.copy-with-code`. To find out the name of a variable you don't know, just inspect the specific element on the webpage, and the class name will translate 1:1 with the variable name. Additionally, for any property that you need to specifically update, you can add the `!important` tag, which means it will override existing rules, but be careful using this.
+
+For a list of all CSS variable properties, visit [CSS Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference). 
+
+```css
+/*-- scss:defaults --*/
+$background: #2E4053;
+$foreground: #F7F7F7;
+$primary: #FF9900;
+$secondary: #56B3FA;
+$tertiary: #655D4B;
+$light: #F7F7F7;
+$dark: #1C1F24;
+$success: #33373D;
+$danger: #1A1D23;
+$info: #56B3FA;
+$warning: #FF7575;
+
+
+/*-- scss:rules --*/
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: $background;
+  color: $foreground;
+}
+
+h1, h2, h3 {
+  color: $danger;
+}
+
+h4, h5, h6 {
+  color: $danger;
+  font-weight: bold;
+}
+
+blockquote {
+  background-color: #2E6490; /* added background color */
+  border-color: $dark;
+  color: $danger !important;
+}
+
+code {
+  background-color: $success;
+  color: $info;
+}
+
+.sourceCode {
+  background-color: $success;
+  color: $info;
+}
+
+.sourceCode pre.code-with-copy{
+  padding: 0;
+}
+
+.callout-title-container.flex-fill {
+  color: $danger;
+}
+
+```
+
+::: {.callout-important title="CSS Variable Names"}
+There are some weird naming convention differences between `_brand.yml` and Quarto. The big one is monotone being used to reference block quotes, code blocks, and in-line code in _brand, but in Quarto it renders the in-line code as `code` and the code blocks as `sourceCode`. Make sure to use inspect element to be sure on what you're changing. CSS class names can get long, especially when referncing nested classes, just experiment and take your time with things.
+:::
+
+## Websites
+Websites really stretch and push the boundaries of what you can accomplish with Quarto. In this section, I'll walk through a few key points of developing them.
+
+### Blogs
+Blogs are a special kind of Quarto website that consists of a collection of posts along with a navigational page that lists them in reverse chronological order. Pretty much all of the information you'll need about blogs is the same as the parts of this guide covering websites. Just know, it's easy to integrate a blog as a subpage of a larger website.
+
+Simply add the blogs project structure as a subdirectory of `pages/`. To keep track of things, I made the title of the main blog page `blogs.qmd`, so it doesn't conflict with the `index.qmd` that is the home page of my whole website. Then, I added post categories within the `posts/` directory of the Quarto `blogs/` directory.
+
+That being said, and I'm not quite sure why, but the `_metadata.yml` file 
+
+### Rendering Websites 
+I run the following code block from my main project directory. My Quarto project directory is a folder called docs. So, I specify to Quarto that I want to render the entire Quarto project `docs`, but `quarto render`'s context is specific to the *quarto project* directory. Therefore, I need to use the `.` to specify that I want the rendered `.html` files put in the Quarto project folder, and sub folder.
+
+```bash
+quarto render docs --output-dir .
+```
+
+Conversely, you can specify, within the `output` property of your `_quarto.yml` file that `output-dir: .`
+
+This is also the same syntax when previewing your website, using `quarto preview docs`, the difference is there is no need to specify an output directory. What this does is spin up a jupyter kernel to render your `.qmd` files, then, it displays the output in a browser. When you hit save on your `_quarto.yml`, `.scss`, and `.qmd` files then the site will automatically update (it doesn't for `_brand.yml` saves).
+
+Once you've rendered your website, and pushed the commit, the change is reflected in a few mintues.
+
+::: {.callout-note title="quarto preview with uv"}
+The ease of using `quarto preview` is magnified when using `uv` as your project/package manager. Instead of having to manage various virtual environments and packages, as well as activation and deactivation, `uv` does it all. Even VS Code picks up on the context `uv` provides. The terminal will automatically realize you're in a `uv` environment and display output as if you were using a virutal environment (even though you haven't activated it). 
+:::
+
+### Website Navigation
+#### Top Navigation
+After you've set your default color values in `_brand.yml`, make sure to specify the design details at the top of your `navbar` property. This is useful, even when using `.scss` files for more specific design control because you can utilize those variables in your light and dark themes. 
+
+For pages on your top navigation bar that just have a landing page, simple use the following syntax 
+
+```yaml
+navbar:
+  left:
+    text: "Page name"
+    href: path/to/page/file.qmd
+```
+
+::: {.callout-tip title="Dashes and Intentation Matter in YAML"}
+Notice when I'm using a `-` and not. This is deliberate. In my development, I realized that where you use and specify the dash can affect functionality. Some places require it, some don't, and it may depend on the order of various parameters.
+:::
+
+For page categories that may have several landing pages, or even subcategories, you'll need to utilize hybrid navigation which combines Top and Side navigation. On the top, you'll use the following syntax:
+
+```yaml
+navbar:
+  left:
+    text: "Page group name"
+    menu:
+      - path/to/page/group/landing.qmd
+      - path/to/page/group/1/landing.qmd
+      - path/to/page/group/2/landing.qmd
+```
+
+Then, you'll need to handle the rest in Side Navigation; however, it isn't perfect. You can't have nested drop down options in your top navigation bar, so the best I came up with was having a landing page for the top level and first tier subcategories, then handled the rest on the sidebar (which only pops up on affiliated pages).
+
+#### Side Navigation
+For some reason, Side Navigation in Quarto is much more robust and intuitive. That being said, by combining features here with the top bar, you can achieve a fairly dynamic navigation experience. 
+
+There are a few key differences. To start with, sidebar objects inherit properties from the first defined, so long as none are changed. Second, you'll want to use an `id` with the top level landing pages, because this allows you to reference those in your top navigation bar (for more advanced integrations) using the address `sidebar:id`, although I struggled with this functionality and didn't end up using it.
+
+The general structure for your first page group is as follows.
+
+```yaml
+sidebar:
+  - id: guides
+    title: "Guides"
+    style: "docked"
+    background: dark
+    foreground: light
+    collapse-level: 2
+    contents:
+      - section: "Guides"
+        href: pages/guides/guides.qmd
+        contents:
+```
+
+Now, if that's where things end, you could just list pages on and on using the `text: href:` syntax. That being said, you probably are going to have a few subcategories, and possibly even further nested subcategories. To enable this, don't use the `text:` syntax, instead use `section:`. This tells Quarto that you are defining a section, rather than just one single page. As you might guess, you can further nest sections, or specific pages, depending on your use of `text:` and `section:` with `href:`. See an example below.
+
+```yaml
+id: projects
+      title: "Projects"
+      contents:
+        - pages/projects/projects.qmd
+        - section: "Data Engineering and Architecture"
+          href: pages/projects/data_engineering/data_engineering.qmd
+          contents:
+            - text: "Bank Marketing ETL"
+              href: pages/projects/data_engineering/posts/bank_etl.qmd
+            - text: "Open Source Data and Analytics Architecture"
+              href: pages/projects/data_engineering/posts/oss_data_arch.qmd
+            - text: "Basic Open Source Architecture"
+              href: pages/projects/data_engineering/posts/basic_oss.qmd
+```
+
+For subsections, the landing page's `.qmd` file should be specified within an href paramter, under the section line. Additionally, for the collapsable functionality to work consistently in a sidebar, you'll need it docked. The behavior is inconsistent with floating sidebars. After you've set your default color values in `_brand.yml`, make sure to specify the design details at the top of your `sidebar` property. Having a section provides the dropdown functionality on your sidebar.
+
+### Sharing Websites
+There are two primary ways to publish your website once you're done making edits, assuming you're also using GitHub Pages. 
+
+1. `quarto render docs`
+2. `quarto publish docs`
+
+For simplicity, I chose to use `quarto render docs` (note that docs is used here because that's the name of my main quarto project directory, not because it's part of the command itself) because all I need to do is that and then push the changes. With `quarto publish docs`, it appeared to me that I would need to setup a branch for my git repository and possibly GitHub actions. I will probably do this in the future, for learning purposes, but didn't want to for the sake of time. 
+
+That being said, the official [documentation](https://quarto.org/docs/publishing/github-pages.html) is very straightforward, and regardless of what you choose, there are two common steps:
+
+1. `touch .nojekyll`
+    - This tells GitHub pages not to do any additional processing of your website, include this in your `docs` directory
+2. In a browser go to `GitHubPagesRepo > Settings > Code and automation > Pages`
+    - Then, make sure `Source` is set to `Deploy from a branch`
+    - Set your branch to the quarto project directory, in your main project folder, `docs` in my case
+
+Then the classic:
+
+- `git add docs`
+- `git commit -m "Website updates."`
+- `git push`
+
+### Website Tools
+Quarto offers several out of the box tools to enhance websites. Some of these are incredibly common for marketing or sharing your content, but all add value in their own way: Google Analytics, Twitter Cards, Open Graph, and RSS Feeds to name a few. The nice thing is they are incredibly easy to setup, and begin working immediately. Google Analytics for example tracked me when I was testing changes in the preview mode.
+
+That being said, I tried to implement an RSS feed for the website and it broke Quarto. I was still able to render the output, but I was receiving the "Source cannot be Target" error. To be able to use quarto preview and quarto render (and get a successfull STDOUT) again I had to remove the `robot.txt` file, the `sitemap.xml` file, and the `feed: true` property from the blog landing page files (my guides.qmd for example). 
+
+## Other Notes
+I'll update this section with more notes and tips that come to mind as I finish building out the site, version 1.0. Then, I'll reorganize what goes here into the proper places on the document. 
+
+1. If you want to use past `.ipynb` files as documentation, or add longer write ups to those files, there is a `jupyter` command
+   1. `jupyter nbconvert file.ipynb --to markdown --output file.md`
+   2. `mv file.md > file.qmd`
+   3. Done! Just make any quarto specific modifications that you need 
+
+## Conclusion
+Now, you're all done with this guide, thank you for reading!
+
+Currently, this is only updated to include my notes and thoughts from when I built my personal website. As I use Quarto to create a variety of document types, I will update this Guide with more. Follow me on [Bluesky](https://bsky.app/profile/chriskornaros.bsky.social) to stay connected with me and up to date with my work.

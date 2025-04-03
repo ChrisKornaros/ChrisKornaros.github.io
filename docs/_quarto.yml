@@ -1,0 +1,111 @@
+project:
+  type: website
+  output-dir: .
+
+website:
+  title: "Chris Kornaros"
+  twitter-card: true
+  open-graph: true
+  google-analytics: 
+    tracking-id: "G-J1EQMCS7CC"
+    anonymize-ip: true
+  cookie-consent: 
+    type: express
+    style: headline
+    palette: dark
+  repo-url: https://github.com/ChrisKornaros/ChrisKornaros.github.io
+  repo-actions: [source, issue]
+  page-footer: 
+    background: danger
+    center:
+      - icon: github
+        text: GitHub
+        href: https://www.github.com/ChrisKornaros
+      - icon: linkedin
+        text: LinkedIn
+        href: https://www.linkedin.com/in/chris-kornaros
+      - text: Bluesky
+        href: https://bsky.app/profile/chriskornaros.bsky.social
+      - icon: envelope-arrow-up-fill
+        text: Email
+        href: https://forms.gle/gDEjGD9G6VkaxkWX6 
+  navbar:
+    search: true
+    background: danger
+    foreground: light
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "About"
+        href: pages/about/about.qmd
+      - text: "Guides"
+        menu: 
+          - pages/guides/guides.qmd
+      - text: "Projects"
+        menu:
+          - pages/projects/projects.qmd
+          - pages/projects/data_engineering/data_engineering.qmd
+          - pages/projects/data_science/data_science.qmd
+      - text: "Blogs"
+        menu:
+          - pages/blogs/blogs.qmd
+
+  sidebar:
+    - id: guides
+      title: "Guides"
+      style: "docked"
+      background: dark
+      foreground: light
+      collapse-level: 2
+      contents:
+        - section: "Guides"
+          href: pages/guides/guides.qmd
+          contents:
+            - text: "Quarto"
+              href: pages/guides/posts/quarto.qmd
+            - text: "uv"
+              href: pages/guides/posts/uv.qmd
+
+      
+    - id: projects
+      title: "Projects"
+      contents:
+        - pages/projects/projects.qmd
+        - section: "Data Engineering and Architecture"
+          href: pages/projects/data_engineering/data_engineering.qmd
+          contents:
+            - text: "Bank Marketing ETL"
+              href: pages/projects/data_engineering/posts/bank_etl.qmd
+            - text: "Open Source Data and Analytics Architecture"
+              href: pages/projects/data_engineering/posts/oss_data_arch.qmd
+            - text: "Basic Open Source Architecture"
+              href: pages/projects/data_engineering/posts/basic_oss.qmd 
+        - section: "Data Science and Machine Learning"
+          href: pages/projects/data_science/data_science.qmd
+          contents:
+            - text: "Gym Market Analysis"
+              href: pages/projects/data_science/posts/gym_market.qmd
+            - text: "Login Validation"
+              href: pages/projects/data_science/posts/login_validation.qmd
+            - text: "Netflix Movies"
+              href: pages/projects/data_science/posts/netflix.qmd
+            - text: "Titanic Disaster"
+              href: pages/projects/data_science/posts/titanic.qmd
+            - text: "NFL Big Data Bowl 2025"
+              href: pages/projects/data_science/posts/nfl_bowl_2025.qmd
+        
+    - id: blogs
+      title: "Blogs"
+      contents:
+        - pages/blogs/blogs.qmd
+        - text: "1. Experimenting with GitHub Pages and WhiteWind"
+          href: pages/blogs/posts/first_blog.qmd
+          
+format:
+  html:
+    toc: true
+    toc-title: "On this page"
+    toc-depth: 4
+    theme:
+      light: brand/light.scss
+      dark: brand/dark.scss

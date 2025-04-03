@@ -1,0 +1,12 @@
+---
+title: "Data Science and Machine Learning Projects"
+listing:
+    contents: posts
+    sort: "date desc"
+    type: grid
+    categories: true
+---
+
+Landing page for all my project posts related to Data Science and Machine Learning.
+
+## Projects
