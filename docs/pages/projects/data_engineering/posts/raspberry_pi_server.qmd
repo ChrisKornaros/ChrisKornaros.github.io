@@ -3,30 +3,64 @@ title: "Guide to Setting Up Raspberry Pi for Data Engineering and Virtualization
 author: "Chris Kornaros"
 date: 2024-12-29
 categories: ["Research", "Ongoing"]
-tags: ["Architecture", "Systems", "Design", "Open Source", "Raspberry Pi", "Linux", "NetBSD", "bash", "ssh", "ufw", "fail2ban", "Cybersecurity", "Networking", "Backup and Recovery", "balenaetcher", "gparted", "MicroSD Card", "SSD", "Partitioning", "LXC", "LXD", "Kubernetes", "Spark", "Docker"] 
+tags: ["Architecture", "Systems", "Design", "Open Source", "Raspberry Pi", "Linux", "bash", "ssh", "ufw", "fail2ban", "Cybersecurity", "Networking", "Backup and Recovery", "RPi Imager", "gparted", "MicroSD Card", "SSD", "Partitioning", "Docker", "Kubernetes", "Spark"] 
 ---
+
+## Introduction {#sec-introduction}
 
 I used a combination of ChatGPT and Claude to create an outline and then detailed guides for each step, respectively. In my experience, Claude handles the detailed guides and explanations better, but I still make sure to check, test, and proofread everything it gives me. 
 
-This guide provides step-by-step instructions and explanations for configuring a Raspberry Pi 4 to learn about hardware, servers, virtualization, and distributed computing systems.
+This guide provides step-by-step instructions and explanations for configuring a Raspberry Pi 4 to learn about hardware, servers, containerization, and self-hosting principles. Eventually, I'd like to setup an actual server cluster and self-host some interesting, more resource-intensive applications. Before I make that kind of commitment, I wanted to learn the basics and see if this is something I would enjoy-- the good news, I learned I do. The great news, Raspberry Pi makes their hardware very affordable and easy to purchase. Here's the official webpage for the exact computer I [bought](https://www.pishop.us/product/raspberry-pi-4-model-b-8gb/?searchid=0&search_query=Raspberry+Pi+4). 
 
----
+It's worth adding, I bought the 8GB Raspberry Pi 4. The price difference isn't that great, but the performance is between the lesser 2GB and 4GB models. Additionally, because I'm planning to host and experiment with CI/CD, I also bought a case and cooling fan to help with longevity. All in, the base price for that (with the power supply and HDMI cable) is $107.30 before taxes, shipping, and other fees.
 
-## **1. Initial Setup**
-### **Hardware Requirements**
-- Raspberry Pi 4
+## Starting from (*close*) to Zero {#sec-requirements}
+### Hardware Requirements
+This section will provide basic setup instructions, so you'll have the same tools I do and can follow along with this guide, step-by-step.
+
+- Raspberry Pi 4 8GB
 - Micro HDMI to HDMI cord (for direct access)
+- Appropriate Power Supply
 - Keyboard (connected via USB for direct access)
-- 1TB Samsung T7 SSD (connected via USB)
-- Amazon Basics 128GB microSD card (or other microSD cards for boot media)
+- 1TB Samsung T7 SSD (connected via USB for boot media/core memory)
+- Amazon Basics 128GB microSD card (or other microSD cards for backups media)
 - SSH-capable devices for headless access
+  - I'm using a MacBook Air
+  - I prefer the MacOS and Terminal for personal development, because I use Windows at my day job
 
-### **Installing Linux Server LTS on the SSD**
-1. **Prepare the SSD:**
-   - Flash the Linux Server LTS image onto the SSD using tools like `balenaEtcher`, `dd`, or `rpi-imager`.
-2. **Boot from the SSD:**
-   - Connect the SSD to the Raspberry Pi.
-   - Connect the Raspberry Pi to the power source.
+### Image requirements 
+Once you have your hardware ready to go, you can being setting up the software. I'm using Linux Server LTS because it's a stable version of Linux intended for headless, server environments. LTS means ***long-term support***, so unlike the more frequently updated versions, these OS versions are supported for 5 years. Additionally, you'll want to use ***public-key authentication*** for better security purposes, but more on that in the [SSH Section](@sec-ssh).
+
+1. Have your SSD ready and able to connect to your laptop or desktop (whichever you plan to use with SSH)
+2. Download Raspberry Pi Imager from the official [website](https://www.raspberrypi.com/software/)
+3. Run the Imager and configure your installation of the most recent Linux Server LTS image
+   1. **Select your Raspberry Pi device**
+   
+   ![](images/ubuntu-pi-device.png)
+
+   2. **Select the OS Image you want to flash**
+   
+   ![](images/ubuntu-pi-os.png)
+
+   3. **Select the media storage device for the image**
+   
+   ![](images/ubuntu-pi-storage.png)
+
+   4. **Configure settings**
+   
+   ![](images/ubuntu-pi-config-general.png)
+   Here, you'll configure your primary user ID and password; network connection; locale and timezone; and your hostname (the nickname your computer remembers the IP address as). 
+
+   ![](images/ubuntu-pi-config-service.png)
+   Here, you'll configure your SSH settings. Remember to use ***public-key authentication*** only, and to keep the private key generated on your local machine safe.
+
+   ![](images/ubuntu-pi-config-options.png)
+   These are more preference based, but it's nice to have the storage device automatically eject once the flashing is complete. Then, you just need to unplug it and plug it into your Raspberry Pi to get going.
+
+### Initial Boot
+Now you're ready to plug your boot media device (the SSD) into your Raspberry Pi. You can also connect a keyboard, monitor, and power supply. Once all of this is connected, your Raspberry Pi will boot up. Connecting a monitor and keyboard will allow your to directly interact with the system's terminal. Ideally, you'll use SSH, but it may be helpful to have direct access in case there are any network issues.
+
+Next we'll cover the basic structure of the Linux Server OS as well as go over some basic network connectivity and configurations.
 
 ## Networking Basics
 
@@ -38,7 +72,7 @@ This section provides a brief example of how to connect your server to WiFi. It 
 ### Connecting to WiFi 
 
 
-## SSH
+## SSH {#sec-ssh}
 
 This section provides a thorough walkthrough of setting up and securing SSH (Secure Shell) on a Raspberry Pi running Ubuntu Server. SSH is a network protocol that creates an encrypted tunnel between computers, allowing secure remote management. Think of it as establishing a private, secure telephone line that only authorized parties can use to communicate.
 
@@ -107,6 +141,7 @@ ssh-copy-id -i ~/.ssh/id_ecdsa.pub chris@ubuntu-pi-server
 This command:
 
 1. Connects to your Pi using password authentication
+   1. If you're restoring your config, you'll need to temporarily set ***PasswordAuthentication*** in `/etc/ssh/sshd_config` to yes
 2. Creates the `.ssh` directory if needed
 3. Adds your public key to `authorized_keys`
 4. Sets appropriate permissions automatically
@@ -755,181 +790,3 @@ Remember to regularly verify your backups by checking the log files and occasion
    - Flash the image to the card using `balenaEtcher` or `Raspberry Pi Imager`.
 3. **Switching OS:**
    - Insert the appropriate microSD card and reboot the Raspberry Pi.
-
----
-
-## **4. LXC vs. LXD**
-### **Definitions**
-- **LXC:** Low-level tool for managing lightweight containers that share the host OS kernel.
-- **LXD:** High-level manager for LXC, adding user-friendly features, API, and support for virtual machines (VMs).
-
-| Feature                  | LXC                          | LXD                          |
-|--------------------------|------------------------------|------------------------------|
-| **Role**                 | Low-level container tool     | High-level container and VM manager |
-| **Ease of Use**          | Manual configuration         | User-friendly CLI and API    |
-| **VM Support**           | No                          | Yes                          |
-| **Target Users**         | Advanced users, developers   | Developers, system admins    |
-
----
-
-## **5. Using LXC/LXD for Virtualization**
-### **Installing LXD**
-```bash
-sudo apt update && sudo apt install -y lxd
-sudo lxd init
-```
-
-### **Creating and Managing Containers**
-
-1. **Launch a Container:**
-   ```bash
-   lxc launch ubuntu:20.04 my-container
-   ```
-2. **List Running Containers:**
-   ```bash
-   lxc list
-   ```   
-3. **Access a Container:**
-   ```bash
-   lxc exec my-container -- /bin/bash
-   ```
-4. **Snapshot and Export:**
-   - Create a snapshot:
-   ```bash
-   lxc snapshot my-container snapshot1
-   ```
-   - Export the container as an image:
-   ```bash
-   lxc publish my-container --alias my-image
-   ```
-### **Deploying Multiple VMs**
-
-1. **Create Instances:**
-   ```bash
-   lxc launch my-image vm1  
-   lxc launch my-image vm2  
-   ```
-2. **Set Up Networking:**
-   ```bash
-   lxc network create my-bridge  
-
-   Attach containers or VMs to this network using:  
-
-   lxc network attach my-bridge vm1 eth0
-   ```
-
----
-
-## **6. Setting Up Docker, Kubernetes, and Spark**
-
-### **Docker**
-
-1. **Install Docker:**
-   ```bash
-   sudo apt update  
-   sudo apt install -y docker.io
-   ```
-
-2. **Run a Container:**
-   ```bash
-   docker run -d -p 8080:80 nginx
-   ```
-
-3. **Create a Dockerfile:**
-   ```bash
-   FROM python:3.8-slim  
-   COPY app.py /app.py  
-   CMD ["python", "/app.py"]  
-
-   Build and run the image:  
-
-   docker build -t my-python-app .  
-   docker run -d my-python-app
-   ```
-
----
-
-### **Kubernetes (K3s)**
-
-1. **Install K3s:**
-   ```bash
-   curl -sfL https://get.k3s.io | sh -
-   ```
-
-2. **Deploy Applications:**
-   ```bash
-   Create a deployment file (`nginx-deployment.yaml`):  
-
-   apiVersion: apps/v1  
-   kind: Deployment  
-   metadata:  
-     name: nginx-deployment  
-   spec:  
-     replicas: 2  
-     selector:  
-       matchLabels:  
-         app: nginx  
-     template:  
-       metadata:  
-         labels:  
-           app: nginx  
-       spec:  
-         containers:  
-         - name: nginx  
-           image: nginx:latest  
-           ports:  
-           - containerPort: 80
-   ```
-
-   Apply the deployment:  
-   ```bash
-   kubectl apply -f nginx-deployment.yaml
-   ```
-
----
-
-### **Apache Spark**
-
-1. **Install Spark:**
-   ```bash
-   wget https://dlcdn.apache.org/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz  
-   tar -xzf spark-3.5.0-bin-hadoop3.tgz  
-   export SPARK_HOME=~/spark-3.5.0-bin-hadoop3  
-   export PATH=$SPARK_HOME/bin:$PATH
-   ```
-
-2. **Run Spark:**
-   Start the master:  
-   ```bash
-   start-master.sh
-   ```
-
-   Start a worker:  
-   ```bash
-   start-worker.sh spark://<master-ip>:7077
-   ```
-
-3. **Submit a Job:**
-   ```bash
-   spark-submit --master spark://<master-ip>:7077 my_script.py
-   ```
-
----
-
-### **Docker vs. LXC/LXD**
-
-| **Use Case**                                | **Recommended Tool** |
-|---------------------------------------------|-----------------------|
-| Packaging an app and its dependencies       | Docker               |
-| Running a full Linux distro in a container  | LXC or LXD           |
-| Managing containers and VMs at scale        | LXD                  |
-| Simulating enterprise clusters              | LXD with Kubernetes  |
-| Running a multi-container app (microservices) | Docker + Kubernetes |
-
----
-
-## **Conclusion**
-
-This guide outlines how to configure and use your Raspberry Pi for a robust learning environment. By combining tools like Docker, LXC/LXD, Kubernetes, and Spark, you can simulate enterprise-grade distributed computing clusters and practice advanced data engineering techniques.
-
-If you need further assistance, feel free to revisit specific sections or ask for clarification!

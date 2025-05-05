@@ -137,10 +137,12 @@ cookieconsent.run({
 
 <meta property="og:title" content="Guide to Setting Up Raspberry Pi for Data Engineering and Virtualization Projects – Chris Kornaros">
 <meta property="og:description" content="">
+<meta property="og:image" content="images/ubuntu-pi-device.png">
 <meta property="og:site_name" content="Chris Kornaros">
 <meta name="twitter:title" content="Guide to Setting Up Raspberry Pi for Data Engineering and Virtualization Projects – Chris Kornaros">
 <meta name="twitter:description" content="">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="images/ubuntu-pi-device.png">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed">
@@ -226,17 +228,19 @@ cookieconsent.run({
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#initial-setup" id="toc-initial-setup" class="nav-link active" data-scroll-target="#initial-setup"><strong>1. Initial Setup</strong></a>
+  <li><a href="#sec-introduction" id="toc-sec-introduction" class="nav-link active" data-scroll-target="#sec-introduction">Introduction</a></li>
+  <li><a href="#sec-requirements" id="toc-sec-requirements" class="nav-link" data-scroll-target="#sec-requirements">Starting from (<em>close</em>) to Zero</a>
   <ul>
-  <li><a href="#hardware-requirements" id="toc-hardware-requirements" class="nav-link" data-scroll-target="#hardware-requirements"><strong>Hardware Requirements</strong></a></li>
-  <li><a href="#installing-linux-server-lts-on-the-ssd" id="toc-installing-linux-server-lts-on-the-ssd" class="nav-link" data-scroll-target="#installing-linux-server-lts-on-the-ssd"><strong>Installing Linux Server LTS on the SSD</strong></a></li>
+  <li><a href="#hardware-requirements" id="toc-hardware-requirements" class="nav-link" data-scroll-target="#hardware-requirements">Hardware Requirements</a></li>
+  <li><a href="#image-requirements" id="toc-image-requirements" class="nav-link" data-scroll-target="#image-requirements">Image requirements</a></li>
+  <li><a href="#initial-boot" id="toc-initial-boot" class="nav-link" data-scroll-target="#initial-boot">Initial Boot</a></li>
   </ul></li>
   <li><a href="#networking-basics" id="toc-networking-basics" class="nav-link" data-scroll-target="#networking-basics">Networking Basics</a>
   <ul>
   <li><a href="#quick-background" id="toc-quick-background" class="nav-link" data-scroll-target="#quick-background">Quick Background</a></li>
   <li><a href="#connecting-to-wifi" id="toc-connecting-to-wifi" class="nav-link" data-scroll-target="#connecting-to-wifi">Connecting to WiFi</a></li>
   </ul></li>
-  <li><a href="#ssh" id="toc-ssh" class="nav-link" data-scroll-target="#ssh">SSH</a>
+  <li><a href="#sec-ssh" id="toc-sec-ssh" class="nav-link" data-scroll-target="#sec-ssh">SSH</a>
   <ul>
   <li><a href="#understanding-ssh-configuration-files" id="toc-understanding-ssh-configuration-files" class="nav-link" data-scroll-target="#understanding-ssh-configuration-files">Understanding SSH Configuration Files</a>
   <ul class="collapse">
@@ -314,23 +318,6 @@ cookieconsent.run({
   <li><a href="#purpose-of-microsd-cards" id="toc-purpose-of-microsd-cards" class="nav-link" data-scroll-target="#purpose-of-microsd-cards"><strong>Purpose of MicroSD Cards</strong></a></li>
   <li><a href="#steps-to-use-microsd-cards" id="toc-steps-to-use-microsd-cards" class="nav-link" data-scroll-target="#steps-to-use-microsd-cards"><strong>Steps to Use MicroSD Cards</strong></a></li>
   </ul></li>
-  <li><a href="#lxc-vs.-lxd" id="toc-lxc-vs.-lxd" class="nav-link" data-scroll-target="#lxc-vs.-lxd"><strong>4. LXC vs.&nbsp;LXD</strong></a>
-  <ul>
-  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><strong>Definitions</strong></a></li>
-  </ul></li>
-  <li><a href="#using-lxclxd-for-virtualization" id="toc-using-lxclxd-for-virtualization" class="nav-link" data-scroll-target="#using-lxclxd-for-virtualization"><strong>5. Using LXC/LXD for Virtualization</strong></a>
-  <ul>
-  <li><a href="#installing-lxd" id="toc-installing-lxd" class="nav-link" data-scroll-target="#installing-lxd"><strong>Installing LXD</strong></a></li>
-  <li><a href="#creating-and-managing-containers" id="toc-creating-and-managing-containers" class="nav-link" data-scroll-target="#creating-and-managing-containers"><strong>Creating and Managing Containers</strong></a></li>
-  </ul></li>
-  <li><a href="#setting-up-docker-kubernetes-and-spark" id="toc-setting-up-docker-kubernetes-and-spark" class="nav-link" data-scroll-target="#setting-up-docker-kubernetes-and-spark"><strong>6. Setting Up Docker, Kubernetes, and Spark</strong></a>
-  <ul>
-  <li><a href="#docker" id="toc-docker" class="nav-link" data-scroll-target="#docker"><strong>Docker</strong></a></li>
-  <li><a href="#kubernetes-k3s" id="toc-kubernetes-k3s" class="nav-link" data-scroll-target="#kubernetes-k3s"><strong>Kubernetes (K3s)</strong></a></li>
-  <li><a href="#apache-spark" id="toc-apache-spark" class="nav-link" data-scroll-target="#apache-spark"><strong>Apache Spark</strong></a></li>
-  <li><a href="#docker-vs.-lxclxd" id="toc-docker-vs.-lxclxd" class="nav-link" data-scroll-target="#docker-vs.-lxclxd"><strong>Docker vs.&nbsp;LXC/LXD</strong></a></li>
-  </ul></li>
-  <li><a href="#conclusion-1" id="toc-conclusion-1" class="nav-link" data-scroll-target="#conclusion-1"><strong>Conclusion</strong></a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/projects/data_engineering/posts/raspberry_pi_server.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -372,35 +359,62 @@ cookieconsent.run({
 </header>
 
 
+<section id="sec-introduction" class="level2">
+<h2 class="anchored" data-anchor-id="sec-introduction">Introduction</h2>
 <p>I used a combination of ChatGPT and Claude to create an outline and then detailed guides for each step, respectively. In my experience, Claude handles the detailed guides and explanations better, but I still make sure to check, test, and proofread everything it gives me.</p>
-<p>This guide provides step-by-step instructions and explanations for configuring a Raspberry Pi 4 to learn about hardware, servers, virtualization, and distributed computing systems.</p>
-<hr>
-<section id="initial-setup" class="level2">
-<h2 class="anchored" data-anchor-id="initial-setup"><strong>1. Initial Setup</strong></h2>
+<p>This guide provides step-by-step instructions and explanations for configuring a Raspberry Pi 4 to learn about hardware, servers, containerization, and self-hosting principles. Eventually, I’d like to setup an actual server cluster and self-host some interesting, more resource-intensive applications. Before I make that kind of commitment, I wanted to learn the basics and see if this is something I would enjoy– the good news, I learned I do. The great news, Raspberry Pi makes their hardware very affordable and easy to purchase. Here’s the official webpage for the exact computer I <a href="https://www.pishop.us/product/raspberry-pi-4-model-b-8gb/?searchid=0&amp;search_query=Raspberry+Pi+4">bought</a>.</p>
+<p>It’s worth adding, I bought the 8GB Raspberry Pi 4. The price difference isn’t that great, but the performance is between the lesser 2GB and 4GB models. Additionally, because I’m planning to host and experiment with CI/CD, I also bought a case and cooling fan to help with longevity. All in, the base price for that (with the power supply and HDMI cable) is $107.30 before taxes, shipping, and other fees.</p>
+</section>
+<section id="sec-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="sec-requirements">Starting from (<em>close</em>) to Zero</h2>
 <section id="hardware-requirements" class="level3">
-<h3 class="anchored" data-anchor-id="hardware-requirements"><strong>Hardware Requirements</strong></h3>
+<h3 class="anchored" data-anchor-id="hardware-requirements">Hardware Requirements</h3>
+<p>This section will provide basic setup instructions, so you’ll have the same tools I do and can follow along with this guide, step-by-step.</p>
 <ul>
-<li>Raspberry Pi 4</li>
+<li>Raspberry Pi 4 8GB</li>
 <li>Micro HDMI to HDMI cord (for direct access)</li>
+<li>Appropriate Power Supply</li>
 <li>Keyboard (connected via USB for direct access)</li>
-<li>1TB Samsung T7 SSD (connected via USB)</li>
-<li>Amazon Basics 128GB microSD card (or other microSD cards for boot media)</li>
-<li>SSH-capable devices for headless access</li>
+<li>1TB Samsung T7 SSD (connected via USB for boot media/core memory)</li>
+<li>Amazon Basics 128GB microSD card (or other microSD cards for backups media)</li>
+<li>SSH-capable devices for headless access
+<ul>
+<li>I’m using a MacBook Air</li>
+<li>I prefer the MacOS and Terminal for personal development, because I use Windows at my day job</li>
+</ul></li>
 </ul>
 </section>
-<section id="installing-linux-server-lts-on-the-ssd" class="level3">
-<h3 class="anchored" data-anchor-id="installing-linux-server-lts-on-the-ssd"><strong>Installing Linux Server LTS on the SSD</strong></h3>
+<section id="image-requirements" class="level3">
+<h3 class="anchored" data-anchor-id="image-requirements">Image requirements</h3>
+<p>Once you have your hardware ready to go, you can being setting up the software. I’m using Linux Server LTS because it’s a stable version of Linux intended for headless, server environments. LTS means <strong><em>long-term support</em></strong>, so unlike the more frequently updated versions, these OS versions are supported for 5 years. Additionally, you’ll want to use <strong><em>public-key authentication</em></strong> for better security purposes, but more on that in the <a href="@sec-ssh">SSH Section</a>.</p>
 <ol type="1">
-<li><strong>Prepare the SSD:</strong>
-<ul>
-<li>Flash the Linux Server LTS image onto the SSD using tools like <code>balenaEtcher</code>, <code>dd</code>, or <code>rpi-imager</code>.</li>
-</ul></li>
-<li><strong>Boot from the SSD:</strong>
-<ul>
-<li>Connect the SSD to the Raspberry Pi.</li>
-<li>Connect the Raspberry Pi to the power source.</li>
-</ul></li>
+<li><p>Have your SSD ready and able to connect to your laptop or desktop (whichever you plan to use with SSH)</p></li>
+<li><p>Download Raspberry Pi Imager from the official <a href="https://www.raspberrypi.com/software/">website</a></p></li>
+<li><p>Run the Imager and configure your installation of the most recent Linux Server LTS image</p>
+<ol type="1">
+<li><strong>Select your Raspberry Pi device</strong></li>
 </ol>
+<p><img src="images/ubuntu-pi-device.png" class="img-fluid"></p>
+<ol start="2" type="1">
+<li><strong>Select the OS Image you want to flash</strong></li>
+</ol>
+<p><img src="images/ubuntu-pi-os.png" class="img-fluid"></p>
+<ol start="3" type="1">
+<li><strong>Select the media storage device for the image</strong></li>
+</ol>
+<p><img src="images/ubuntu-pi-storage.png" class="img-fluid"></p>
+<ol start="4" type="1">
+<li><strong>Configure settings</strong></li>
+</ol>
+<p><img src="images/ubuntu-pi-config-general.png" class="img-fluid"> Here, you’ll configure your primary user ID and password; network connection; locale and timezone; and your hostname (the nickname your computer remembers the IP address as).</p>
+<p><img src="images/ubuntu-pi-config-service.png" class="img-fluid"> Here, you’ll configure your SSH settings. Remember to use <strong><em>public-key authentication</em></strong> only, and to keep the private key generated on your local machine safe.</p>
+<p><img src="images/ubuntu-pi-config-options.png" class="img-fluid"> These are more preference based, but it’s nice to have the storage device automatically eject once the flashing is complete. Then, you just need to unplug it and plug it into your Raspberry Pi to get going.</p></li>
+</ol>
+</section>
+<section id="initial-boot" class="level3">
+<h3 class="anchored" data-anchor-id="initial-boot">Initial Boot</h3>
+<p>Now you’re ready to plug your boot media device (the SSD) into your Raspberry Pi. You can also connect a keyboard, monitor, and power supply. Once all of this is connected, your Raspberry Pi will boot up. Connecting a monitor and keyboard will allow your to directly interact with the system’s terminal. Ideally, you’ll use SSH, but it may be helpful to have direct access in case there are any network issues.</p>
+<p>Next we’ll cover the basic structure of the Linux Server OS as well as go over some basic network connectivity and configurations.</p>
 </section>
 </section>
 <section id="networking-basics" class="level2">
@@ -413,8 +427,8 @@ cookieconsent.run({
 <h3 class="anchored" data-anchor-id="connecting-to-wifi">Connecting to WiFi</h3>
 </section>
 </section>
-<section id="ssh" class="level2">
-<h2 class="anchored" data-anchor-id="ssh">SSH</h2>
+<section id="sec-ssh" class="level2">
+<h2 class="anchored" data-anchor-id="sec-ssh">SSH</h2>
 <p>This section provides a thorough walkthrough of setting up and securing SSH (Secure Shell) on a Raspberry Pi running Ubuntu Server. SSH is a network protocol that creates an encrypted tunnel between computers, allowing secure remote management. Think of it as establishing a private, secure telephone line that only authorized parties can use to communicate.</p>
 <section id="understanding-ssh-configuration-files" class="level3">
 <h3 class="anchored" data-anchor-id="understanding-ssh-configuration-files">Understanding SSH Configuration Files</h3>
@@ -480,7 +494,10 @@ cookieconsent.run({
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ssh-copy-id</span> <span class="at">-i</span> ~/.ssh/id_ecdsa.pub chris@ubuntu-pi-server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This command:</p>
 <ol type="1">
-<li>Connects to your Pi using password authentication</li>
+<li>Connects to your Pi using password authentication
+<ol type="1">
+<li>If you’re restoring your config, you’ll need to temporarily set <strong><em>PasswordAuthentication</em></strong> in <code>/etc/ssh/sshd_config</code> to yes</li>
+</ol></li>
 <li>Creates the <code>.ssh</code> directory if needed</li>
 <li>Adds your public key to <code>authorized_keys</code></li>
 <li>Sets appropriate permissions automatically</li>
@@ -1087,207 +1104,9 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 <li>Insert the appropriate microSD card and reboot the Raspberry Pi.</li>
 </ul></li>
 </ol>
-<hr>
-</section>
-</section>
-<section id="lxc-vs.-lxd" class="level2">
-<h2 class="anchored" data-anchor-id="lxc-vs.-lxd"><strong>4. LXC vs.&nbsp;LXD</strong></h2>
-<section id="definitions" class="level3">
-<h3 class="anchored" data-anchor-id="definitions"><strong>Definitions</strong></h3>
-<ul>
-<li><strong>LXC:</strong> Low-level tool for managing lightweight containers that share the host OS kernel.</li>
-<li><strong>LXD:</strong> High-level manager for LXC, adding user-friendly features, API, and support for virtual machines (VMs).</li>
-</ul>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 30%">
-<col style="width: 34%">
-<col style="width: 34%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Feature</th>
-<th>LXC</th>
-<th>LXD</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Role</strong></td>
-<td>Low-level container tool</td>
-<td>High-level container and VM manager</td>
-</tr>
-<tr class="even">
-<td><strong>Ease of Use</strong></td>
-<td>Manual configuration</td>
-<td>User-friendly CLI and API</td>
-</tr>
-<tr class="odd">
-<td><strong>VM Support</strong></td>
-<td>No</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><strong>Target Users</strong></td>
-<td>Advanced users, developers</td>
-<td>Developers, system admins</td>
-</tr>
-</tbody>
-</table>
-<hr>
-</section>
-</section>
-<section id="using-lxclxd-for-virtualization" class="level2">
-<h2 class="anchored" data-anchor-id="using-lxclxd-for-virtualization"><strong>5. Using LXC/LXD for Virtualization</strong></h2>
-<section id="installing-lxd" class="level3">
-<h3 class="anchored" data-anchor-id="installing-lxd"><strong>Installing LXD</strong></h3>
-<div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt install <span class="at">-y</span> lxd</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> lxd init</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="creating-and-managing-containers" class="level3">
-<h3 class="anchored" data-anchor-id="creating-and-managing-containers"><strong>Creating and Managing Containers</strong></h3>
-<ol type="1">
-<li><p><strong>Launch a Container:</strong></p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> launch ubuntu:20.04 my-container</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><strong>List Running Containers:</strong></p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><strong>Access a Container:</strong></p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> exec my-container <span class="at">--</span> /bin/bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><strong>Snapshot and Export:</strong></p>
-<ul>
-<li>Create a snapshot:</li>
-</ul>
-<div class="sourceCode" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> snapshot my-container snapshot1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Export the container as an image:</li>
-</ul>
-<div class="sourceCode" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> publish my-container <span class="at">--alias</span> my-image</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<h3 id="deploying-multiple-vms" class="anchored"><strong>Deploying Multiple VMs</strong></h3></li>
-<li><p><strong>Create Instances:</strong></p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> launch my-image vm1  </span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> launch my-image vm2  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><strong>Set Up Networking:</strong></p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> network create my-bridge  </span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Attach</span> containers or VMs to this network using:  </span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="ex">lxc</span> network attach my-bridge vm1 eth0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ol>
-<hr>
-</section>
-</section>
-<section id="setting-up-docker-kubernetes-and-spark" class="level2">
-<h2 class="anchored" data-anchor-id="setting-up-docker-kubernetes-and-spark"><strong>6. Setting Up Docker, Kubernetes, and Spark</strong></h2>
-<section id="docker" class="level3">
-<h3 class="anchored" data-anchor-id="docker"><strong>Docker</strong></h3>
-<ol type="1">
-<li><p><strong>Install Docker:</strong></p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update  </span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> docker.io</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><strong>Run a Container:</strong></p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">-p</span> 8080:80 nginx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><strong>Create a Dockerfile:</strong></p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="ex">FROM</span> python:3.8-slim  </span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="ex">COPY</span> app.py /app.py  </span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="ex">CMD</span> [<span class="st">"python"</span>, <span class="st">"/app.py"</span>]  </span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Build</span> and run the image:  </span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> my-python-app .  </span>
-<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> my-python-app</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ol>
-<hr>
-</section>
-<section id="kubernetes-k3s" class="level3">
-<h3 class="anchored" data-anchor-id="kubernetes-k3s"><strong>Kubernetes (K3s)</strong></h3>
-<ol type="1">
-<li><p><strong>Install K3s:</strong></p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sfL</span> https://get.k3s.io <span class="kw">|</span> <span class="fu">sh</span> <span class="at">-</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><strong>Deploy Applications:</strong></p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Create</span> a deployment file <span class="er">(</span><span class="kw">`</span><span class="ex">nginx-deployment.yaml</span><span class="kw">`)</span><span class="bu">:</span>  </span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="ex">apiVersion:</span> apps/v1  </span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="ex">kind:</span> Deployment  </span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="ex">metadata:</span>  </span>
-<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">name:</span> nginx-deployment  </span>
-<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="ex">spec:</span>  </span>
-<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">replicas:</span> 2  </span>
-<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>  <span class="ex">selector:</span>  </span>
-<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">matchLabels:</span>  </span>
-<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>      <span class="ex">app:</span> nginx  </span>
-<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>  <span class="ex">template:</span>  </span>
-<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a>    <span class="ex">metadata:</span>  </span>
-<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a>      <span class="ex">labels:</span>  </span>
-<span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a>        <span class="ex">app:</span> nginx  </span>
-<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a>    <span class="ex">spec:</span>  </span>
-<span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a>      <span class="ex">containers:</span>  </span>
-<span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a>      <span class="ex">-</span> name: nginx  </span>
-<span id="cb57-19"><a href="#cb57-19" aria-hidden="true" tabindex="-1"></a>        <span class="ex">image:</span> nginx:latest  </span>
-<span id="cb57-20"><a href="#cb57-20" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ports:</span>  </span>
-<span id="cb57-21"><a href="#cb57-21" aria-hidden="true" tabindex="-1"></a>        <span class="ex">-</span> containerPort: 80</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Apply the deployment:</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kubectl</span> apply <span class="at">-f</span> nginx-deployment.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ol>
-<hr>
-</section>
-<section id="apache-spark" class="level3">
-<h3 class="anchored" data-anchor-id="apache-spark"><strong>Apache Spark</strong></h3>
-<ol type="1">
-<li><p><strong>Install Spark:</strong></p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://dlcdn.apache.org/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz  </span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xzf</span> spark-3.5.0-bin-hadoop3.tgz  </span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SPARK_HOME</span><span class="op">=</span>~/spark-3.5.0-bin-hadoop3  </span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$SPARK_HOME</span>/bin:<span class="va">$PATH</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><strong>Run Spark:</strong> Start the master:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="ex">start-master.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Start a worker:</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="ex">start-worker.sh</span> spark://<span class="op">&lt;</span>master-ip<span class="op">&gt;</span>:7077</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><strong>Submit a Job:</strong></p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="ex">spark-submit</span> <span class="at">--master</span> spark://<span class="op">&lt;</span>master-ip<span class="op">&gt;</span>:7077 my_script.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ol>
-<hr>
-</section>
-<section id="docker-vs.-lxclxd" class="level3">
-<h3 class="anchored" data-anchor-id="docker-vs.-lxclxd"><strong>Docker vs.&nbsp;LXC/LXD</strong></h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th><strong>Use Case</strong></th>
-<th><strong>Recommended Tool</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Packaging an app and its dependencies</td>
-<td>Docker</td>
-</tr>
-<tr class="even">
-<td>Running a full Linux distro in a container</td>
-<td>LXC or LXD</td>
-</tr>
-<tr class="odd">
-<td>Managing containers and VMs at scale</td>
-<td>LXD</td>
-</tr>
-<tr class="even">
-<td>Simulating enterprise clusters</td>
-<td>LXD with Kubernetes</td>
-</tr>
-<tr class="odd">
-<td>Running a multi-container app (microservices)</td>
-<td>Docker + Kubernetes</td>
-</tr>
-</tbody>
-</table>
-<hr>
-</section>
-</section>
-<section id="conclusion-1" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion-1"><strong>Conclusion</strong></h2>
-<p>This guide outlines how to configure and use your Raspberry Pi for a robust learning environment. By combining tools like Docker, LXC/LXD, Kubernetes, and Spark, you can simulate enterprise-grade distributed computing clusters and practice advanced data engineering techniques.</p>
-<p>If you need further assistance, feel free to revisit specific sections or ask for clarification!</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
