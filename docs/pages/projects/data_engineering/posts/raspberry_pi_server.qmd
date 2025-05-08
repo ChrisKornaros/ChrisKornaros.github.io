@@ -25,6 +25,7 @@ This section will provide basic setup instructions, so you'll have the same tool
 -   Appropriate Power Supply
 -   Keyboard (connected via USB for direct access)
 -   1TB Samsung T7 SSD (connected via USB for boot media/core memory)
+-   64GB Generic Flash Drive (used as the boot media when partitioning the SSD)
 -   Amazon Basics 128GB microSD card (or other microSD cards for backups media)
 -   SSH-capable devices for headless access
     -   I'm using a MacBook Air
@@ -34,7 +35,7 @@ This section will provide basic setup instructions, so you'll have the same tool
 
 Once you have your hardware ready to go, you can being setting up the software. I'm using Linux Server LTS because it's a stable version of Linux intended for headless, server environments. LTS means ***long-term support***, so unlike the more frequently updated versions, these OS versions are supported for 5 years. Additionally, you'll want to use ***public-key authentication*** for better security purposes, but more on that in the [SSH Section](@sec-ssh).
 
-1.  Have your SSD ready and able to connect to either a laptop or desktop (whichever you plan to use with SSH)
+1.  Have your Thumb Drive ready and able to connect to either a laptop or desktop (whichever you plan to use with SSH)
 
 2.  Download Raspberry Pi Imager from the official [website](https://www.raspberrypi.com/software/)
 
@@ -62,7 +63,7 @@ Once you have your hardware ready to go, you can being setting up the software. 
 
 ### Get Started
 
-Now you're ready to plug your boot media device (the SSD) into your Raspberry Pi. You should also connect a keyboard, monitor, and power supply. Once all of this is connected, your Raspberry Pi will boot up. Connecting a monitor and keyboard will allow you to directly interact with the system's terminal. Ideally, you'll use SSH, but it may be helpful to have direct access in case there are any network issues.
+Now you're ready to plug your boot media device (the Thumb Drive) into your Raspberry Pi. You should also connect a keyboard, monitor, and power supply. Once all of this is connected, your Raspberry Pi will boot up. Connecting a monitor and keyboard will allow you to directly interact with the system's terminal. Ideally, you'll use SSH, but it may be helpful to have direct access in case there are any network issues. Eventually, the SSD will serve as the boot media and primary storage device for the server; however, we can't modify its partitions while it's serving as the boot device. So, we'll use a thumb drive as the boot media device, until we complete the partitions.
 
 When first connecting from the wired keyboard and monitor, let all of the start up processes finish running (these will *hopefully* have brackets with the word `Success` in green). Then, type in the name of the User ID you wish to login with, in my case it's `chris`. Then, enter the password (no characters will show up as you type it in) and hit enter. You'll see a plaintext message telling you the OS version, some system information (memory usage, temperature, etc.), and you'll see a line where you can enter commands (the CLI). In my case, it looks like this: `chris@ubuntu-pi-server:~$`
 
@@ -78,7 +79,7 @@ When you first boot a fresh Ubuntu Server LTS image on your Raspberry Pi, severa
 
 -   **Hardware Detection:** The system performs comprehensive hardware detection to identify and configure your Raspberry Pi's components.
 -   **Initial RAM Disk (initrd):** The bootloader loads a temporary filesystem into memory that contains essential drivers and modules needed to mount the real root filesystem.
--   **Filesystem Check and Expansion:** On first boot, the system checks the integrity of the filesystem and often expands it to utilize the full available space on your SSD.
+-   **Filesystem Check and Expansion:** On first boot, the system checks the integrity of the filesystem and often expands it to utilize the full available space on your Flash Drive.
 -   **Cloud-Init Processing:** Ubuntu Server uses cloud-init to perform first-boot configuration tasks (the processes you see running on the monitor on startup)
     -   Setting the hostname
     -   Generating SSH host keys
@@ -646,14 +647,25 @@ Although it seems redundant if you already viewed your IP addresses, you can als
 **Test basic connectivity to a host:**
 
 ``` bash
-ping google.com
+ping -c 4 google.com
 ```
+
+![](images/network-ping-success.png)
 
 **Trace the route to a destination:**
 
 ``` bash
+# First update and install your packages
+sudo apt update && sudo apt upgrade -y
+
+# Install traceroute
+sudo apt install traceroute -y
+
+# Run traceroute
 traceroute google.com
 ```
+
+![](images/network-traceroute-success.png)
 
 **Check the DNS resolution:**
 
@@ -661,6 +673,8 @@ traceroute google.com
 nslookup google.com
 # dig google.com
 ```
+
+![](images/network-nslookup-success.png)
 
 #### Viewing Network Statistics
 
@@ -800,24 +814,24 @@ Name=wlan0
 DHCP=yes
 ```
 
--   **Wireless Interface:**
-    -   The configuration targets wlan0, which is the traditional name for the first wireless network interface in Linux.
--   **Minimal Configuration:**
-    -   The file only has the information needed by systemd-networkd to manage the IP addressing aspect of the wireless connection. Note what's missing: there's no SSID, password, or security protocol information. This is because:
-    -   systemd-networkd isn't designed to handle wireless authentication and association
-    -   This separation of concerns is intentional in the systemd design philosophy - specialized tools should handle specialized tasks
--   **Integration with wpa_supplicant:**
-    -   `wpa_supplicant` is the standard Linux utility for managing wireless connections
-    -   `systemd-networkd` handles the network layer (Layer 3) configuration once wpa_supplicant establishes the data link layer (Layer 2) connection
-    -   This division follows the OSI model's separation of network layers
--   **Behind the scenes:**
-    -   wpa_supplicant handles wireless scanning, authentication, and association
-    -   Once a wireless link is established, it notifies the system
-    -   systemd-networkd detects the active interface that matches wlan0
-    -   It then initiates the DHCP client process to configure the network parameters
--   This separation provides flexibility and security
-    -   The wireless security operations are handled by a dedicated, well-tested component
-    -   Networking remains under systemd-networkd's control for consistency with other interfaces
+- **Wireless Interface:**
+    - The configuration targets wlan0, which is the traditional name for the first wireless network interface in Linux.
+- **Minimal Configuration:**
+    - The file only has the information needed by systemd-networkd to manage the IP addressing aspect of the wireless connection. Note what's missing: there's no SSID, password, or security protocol information. This is because:
+    - systemd-networkd isn't designed to handle wireless authentication and association
+    - This separation of concerns is intentional in the systemd design philosophy - specialized tools should handle specialized tasks
+- **Integration with wpa_supplicant:**
+    - `wpa_supplicant` is the standard Linux utility for managing wireless connections
+    - `systemd-networkd` handles the network layer (Layer 3) configuration once wpa_supplicant establishes the data link layer (Layer 2) connection
+    - This division follows the OSI model's separation of network layers
+- **Behind the scenes:**
+    - wpa_supplicant handles wireless scanning, authentication, and association
+    - Once a wireless link is established, it notifies the system
+    - systemd-networkd detects the active interface that matches wlan0
+    - It then initiates the DHCP client process to configure the network parameters
+- This separation provides flexibility and security
+    - The wireless security operations are handled by a dedicated, well-tested component
+    - Networking remains under systemd-networkd's control for consistency with other interfaces
 
 While the `systemd-networkd` configuration is straightforward, things get more complicated with WPA. In standard wpa_supplicant configuration files, wireless passwords are often stored in plaintext. This creates a security vulnerability - anyone with access to the configuration file can view the password.
 
@@ -1142,7 +1156,7 @@ These commands are crucial for integrating wpa_supplicant with systemd, let's br
     -   Consistent management interface alongside other system services
     -   The template approach allows for modular configuration that can be easily expanded if you add more wireless interfaces to your Raspberry Pi.
 
-6.  Verify the new configuration
+6.  Verify the new configuration by checking the `systemctl status` and running simple network check commands
 
 ``` bash
 # Check systemd-networkd status
@@ -1152,7 +1166,6 @@ systemctl status systemd-networkd
 ip addr show
 
 # Test connectivity
-ping -c 4 8.8.8.8
 ping -c 4 google.com
 ```
 
@@ -1160,9 +1173,9 @@ ping -c 4 google.com
 
 ![](images/networkd-status.png)
 
-![](images/ping_google.png)
+![](images/network-ping-success.png)
 
-7.  Make the change permanent
+1.  Make the change permanent
 
 ``` bash
 # Remove the minimal Netplan configuration
@@ -1967,7 +1980,7 @@ Both SCP and rsync are invaluable tools for managing files on your Raspberry Pi 
 
 ### Partitioning Basics
 
-Partitions are logical divisions of a physical storage device. Think of a storage device like a large piece of land, and partitions as fenced areas within that land dedicated to different purposes. Each partition appears to the operating system as a separate disk, even though physically they're on the same device. Remember from the beginning of this guide, I'm using an SSD for my primary memory and a microSD card for backups.
+Partitions are logical divisions of a physical storage device. Think of a storage device like a large piece of land, and partitions as fenced areas within that land dedicated to different purposes. Each partition appears to the operating system as a separate disk, even though physically they're on the same device. Remember from the beginning of this guide, I'm currently using a Flash Drive for my primary memory and a microSD card for backups; however, the SSD is what I want to serve as the boot device. Once we complete the partitioning, we can flash the base image from RPi onto the SSD and then reboot, with the SSD as the boot device.
 
 -   **Separation of concerns:** Isolate the operating system from user data, which improves security and simplifies backups
 -   **Performance optimization:** Different filesystems can be used for different workloads
@@ -2043,7 +2056,7 @@ For this project, and after doing some research, I chose parted for both the mic
 - It's included in most Ubuntu installations
 
 ### Partitioning a MicroSD Card for Backups
-Let's partition our microSD card to serve as backup media. You can get great quality cards from Amazon Basics that are perfect for this use case. We'll use a simple, effective partition scheme. Before we dive into the actual commands, it's important to know that you can't modify the memory of the active primary drive. Meaning, that you'll need to use an SSD or thumbdrive as the boot media while you modify the SD card. Similarly, you'll need to use a different piece of boot media (you could use the micro SD) when partitioning the SSD. 
+Let's partition our microSD card to serve as backup media. You can get great quality cards from Amazon Basics that are perfect for this use case. We'll use a simple, effective partition scheme. Before we dive into the actual commands, it's important to remember that you can't modify the memory of the active primary drive. Meaning, that you'll need to use an SSD or thumb drive as the boot media while you modify the SD card. Similarly, you'll need to use a different piece of boot media (you could use the micro SD) when partitioning the SSD. 
 
 Now, let's walk through this step-by-step:
 
@@ -2052,6 +2065,8 @@ Now, let's walk through this step-by-step:
 ```bash
 sudo lsblk -o NAME,SIZE,FSTYPE,TYPE,MOUNTPOINT
 ```
+
+The lsblk command lists all block devices, which includes your storage devices. The -o flag specifies which columns to display in the output. This final check ensures you're working with the correct device and helps you confirm the partition structure you just created.
 
 - **NAME:** Device identifier
 - **SIZE:** Storage capacity
@@ -2139,101 +2154,86 @@ sudo chmod -R 700 /mnt/backups/
 - `chmod -R 700`: Sets permissions so only the owner can read/write/execute
 
 ### Partitioning your SSD
+For a Raspberry Pi server, a two-partition scheme offers the perfect balance of simplicity and functionality. This approach mirrors what RPi Imager creates automatically, but gives us control over the sizes:
 
-1. For the Samsung T7 SSD, we'll follow a similar workflow, but we'll create a more sophisticated partition scheme to support different use cases. The Samsung T7 SSD will likely appear as `/dev/sdX` (where X is a letter like a, b, c), mine is `/dev/sdb`.
+- A small `FAT32` boot partition for firmware and boot files
+- A large `ext4` root partition for the entire operating system and data
+
+This simplified structure eliminates the complexity of separate swap and data partitions while maintaining full functionality. The Raspberry Pi can use swap files instead of dedicated partitions, which provides more flexibility for managing memory as your needs change.
+
+1. For the Samsung T7 SSD, we'll follow a similar workflow. The Samsung T7 SSD will likely appear as `/dev/sdX` (where X is a letter like a, b, c), mine is `/dev/sdb`.
 
 ```bash
 sudo lsblk -o NAME,SIZE,FSTYPE,TYPE,MOUNTPOINT
 ```
 
-2. For flexibility, we'll create the following partitions:
-
-- A small `EFI System Partition` for UEFI boot compatibility
-- A `root partition` for the Ubuntu OS
-- A `swap partition`, a dedicated section of your hard drive used as virtual memory when your computer's RAM (Random Access Memory) fills up
-- A `data partition` for general storage
+2. In this code block, I'll show you a way to use `parted` without entering the interactive mode. 
 
 ```bash
-# Start parted on the SSD (replace /dev/sda with your device)
-sudo parted /dev/sdb
-
 # Create a new GPT partition table
-(parted) mklabel gpt
+sudo parted /dev/sdb mklabel gpt
 
 # Create the EFI System Partition (ESP)
-(parted) mkpart primary fat32 1MiB 513MiB
-(parted) name 1 ESP
-(parted) set 1 esp on
+sudo parted /dev/sdb mkpart boot fat32 1MiB 513MiB
+sudo parted /dev/sdb set 1 esp on
+sudo parted /dev/sdb set 1 boot on
 
 # Create the root partition
-(parted) mkpart primary ext4 513MiB 100GiB
-(parted) name 2 ubuntu-root
-
-# Create a swap partition (adjust size based on your RAM)
-(parted) mkpart swap linux-swap 100GiB 108GiB
-
-# Create a data partition using the remaining space
-(parted) mkpart data ext4 108GiB 100%
+sudo parted /dev/sdb mkpart ubuntu-root ext4 513MiB 100%
 
 # Verify the partition layout
-(parted) print
-
-# Exit parted
-(parted) quit
+sudo parted /dev/sdb print
 ```
 
-- `mkpart primary fat32 1MiB 513MiB`: Creates a 512MiB FAT32 partition starting at 1MiB
-- `set 1 esp on`: Sets the ESP flag on the first partition
-- The sizes (100GiB, 108GiB) are specific positions on the disk, not partition sizes
-- Using MiB and GiB ensures proper alignment for better performance
+- `/dev/sdc1`: 512MB FAT32 partition for boot files.
+- `/dev/sdc2`: Remaining space (about 931GB) ext4 partition for the entire system.
+- The `set 1 boot on` command marks the partition as bootable.
+- The `set 1 esp on` marks it as an EFI System Partition, ensuring compatibility with both legacy and UEFI boot methods.
 
 3. Now we need to format each partition.
 
 ```bash
 # Format the ESP partition
-sudo mkfs.fat -F32 -n ESP /dev/sdb1
+sudo mkfs.fat -F32 -n BOOT /dev/sdb1
 
 # Format the root partition
 sudo mkfs.ext4 -L ubuntu-root /dev/sdb2
-
-# Create the swap space
-sudo mkswap -L swap /dev/sdb3
-
-# Format the data partition
-sudo mkfs.ext4 -L data /dev/sdb4
 ```
 
 - `mkfs.fat -F32`: Creates a FAT32 filesystem
 - `-n ESP`: Sets the volume label to "ESP"
 - `mkfs.ext4`: Creates an ext4 filesystem
 - `-L ubuntu-root`: Sets the filesystem label
-- `mkswap`: Initializes a swap area
 - `/dev/sdb1, /dev/sdb2, etc.`: The specific partitions we created
 
-4. Now we'll need to mount the partitions by setting up mount points and telling the system to use them.
+4. Now, we will verify that the partitions went as we hoped
 
 ```bash
-# Activate the swap
-sudo swapon /dev/sdb3
+# Check the partition layout
+sudo lsblk -o NAME,SIZE,FSTYPE,LABEL,TYPE,MOUNTPOINT
 
-# Create mount points
-sudo mkdir -p /mnt/data
-
-# Add entries to /etc/fstab (using UUIDs for reliability)
-echo "UUID=$(sudo blkid -s UUID -o value /dev/sdb2) / ext4 defaults,noatime 0 1" | sudo tee -a /etc/fstab
-echo "UUID=$(sudo blkid -s UUID -o value /dev/sdb1) /boot/efi vfat defaults 0 2" | sudo tee -a /etc/fstab
-echo "UUID=$(sudo blkid -s UUID -o value /dev/sdb3) none swap sw 0 0" | sudo tee -a /etc/fstab
-echo "UUID=$(sudo blkid -s UUID -o value /dev/sdb4) /mnt/data ext4 defaults,noatime 0 2" | sudo tee -a /etc/fstab
-
-# Mount all filesystems TBD ON THIS
-sudo mount -a TBD HERE
+# Verify the filesystem types and labels
+sudo blkid | grep sdc
 ```
 
-- `swapon`: Activates the swap partition
-- `defaults,noatime`: Standard mount options with access time recording disabled for better performance
-- `0 1`: For the root partition, enabling filesystem checks with high priority
-- `sw`: Indicates swap space
-- The different numbers at the end indicate filesystem check priority (0 = no check, 1 = highest priority)
+This approach to partitioning offers several advantages:
+
+- **Matches RPi Imager default:** Aligns with what users expect from standard Raspberry Pi installations
+- **Easier to manage:** Fewer partitions mean simpler maintenance and troubleshooting
+- The Raspberry Pi firmware requires a FAT32 boot partition to find and load the kernel. 
+- The 512MB size ensures plenty of space for kernel updates and multiple kernel versions if needed.
+
+Now you're ready to flash Ubuntu Server to these properly prepared partitions! The RPi Imager will use this partition structure and write the system files to the correct locations.
+
+5. Now we'll need to mount the partitions by setting up mount points and telling the system to use them.
+
+```bash
+# Check the partition layout
+sudo lsblk -o NAME,SIZE,FSTYPE,LABEL,TYPE,MOUNTPOINT
+
+# Verify the filesystem types and labels
+sudo blkid | grep sdc
+```
 
 #### Advanced Partitioning
 As you begin to utilize your server more, you're bound to use up more memory. So, it's important to monitor your partition space usage.
@@ -2270,19 +2270,19 @@ sudo resize2fs /dev/sda4
 - `resize2fs`: Resizes an ext2/3/4 filesystem to match the partition size
 
 ## Backups and Basic Automation
-Now that we've configured the basics, from permissions to networking and ssh to partitions, we'll want to save those changes in case something happens. You've already seen some basic backups. The process is the same, essentially creating a folder and then putting a copy of the current file into it and maybe adding a `.bak` extension to make it clear this is a previous version. That being said, to go through and do this for each and every folder we've made changes in is impractical now, let alone in the future when more complex configurations are done. So, in this section, we'll go over creating a basic script to backup all of our configs and automating the backups. 
+Now that we've configured the basics, from permissions to networking and ssh to partitions, we'll want to save those changes in case something happens and to ensure a seamless transition to the SSD for boot media. You've already seen some basic backups. The process is the same, essentially creating a folder and then putting a copy of the current file into it and maybe adding a `.bak` extension to make it clear this is a previous version. That being said, to go through and do this for each and every folder we've made changes in is impractical now, let alone in the future when more complex configurations are done. So, in this section, we'll go over creating a basic script to backup all of our configs and automating the backups. 
 
 For this section, we'll use `rsync` because it provides several important advantages over simple copy commands, that you may remember from the section on `ssh`:
 
--   Incremental backups that only transfer changed files
--   Preservation of file permissions, ownership, and timestamps
--   Built-in compression for efficient transfers
--   Detailed progress information and logging
--   The ability to resume interrupted transfers
+- Incremental backups that only transfer changed files
+- Preservation of file permissions, ownership, and timestamps
+- Built-in compression for efficient transfers
+- Detailed progress information and logging
+- The ability to resume interrupted transfers
 
 Before we start, make sure you have:
 
--   A mounted backup drive at `/mnt/backups/`
+- A mounted backup drive at `/mnt/backups/`
 
 ### Setting Up the Backup Directory
 
@@ -2302,7 +2302,9 @@ sudo chmod -R 700 /mnt/backups  # Only owner can read/write/execute
 
 ### Configuration Files Backup
 
-We'll use rsync to create a structured backup of essential configuration files. The following script demonstrates how to perform the backup while preserving all file attributes:
+While it's definitely beneficial to have a local copy of your backups to easily roll back changes, it isn't the most secure solution to have all of your information in one place. Furthermore, the SSD is partitioned, but it doesn't currently have an OS or any files stored. So, now it's time to take advantage of the microSD card we formatted earlier.
+
+For the purpose of this guide, I'll be showing you how to use `rsync` for a remote transfer to your client machine and how to automatically store backups on the SD card. The script we'll use saves all of the key user and system information (things like passwords), as well as the configuration changes we made. Additionally, as long as your SD card is mounted to `/mnt/backups` the backup will automatically be saved to the external memory. The following script demonstrates how to perform the backup while preserving all file attributes:
 
 ``` bash
 #!/bin/bash
@@ -2391,15 +2393,9 @@ The rsync commands use several important options:
 -   `--hard-links`: Preserve hard links
 -   `--exclude`: Skip specified directories
 
-### Storing your backups externally
+#### Remote Transfers of Backups
 
-While it's definitely beneficial to have a local copy of your backups to easily roll back changes, it isn't the most secure solution to have all of your information in one place. So, how can you go about transferring your system and configuration backups to another storage system?
-
-For the purpose of this guide, I'll be showing you how to use `rsync` for a remote transfer and how to flash the backup onto a `microSD`.
-
-#### Rsync for Remote Transfers
-
-Rsync is specifically designed for copying and transferring files, so it offers more sophisticated file synchronization capabilities than basic tools like SCP.
+We covered `rsync` vs. `scp` earlier, so remember that rsync is specifically designed for copying and transferring files, so it offers more sophisticated file synchronization capabilities than basic tools like SCP. If you need a refresher, run the following command from your client machine (laptop), just change the paths to match what your system uses.
 
 ``` bash
 rsync -avz --partial --progress --update chris@ubuntu-pi-server:/mnt/backups/configs/master/ ~/Documents/raspberry_pi_server/backups/configs/master
@@ -2414,15 +2410,9 @@ The flags do the following:
 -   `--progress`: Show progress during transfer
 -   `--update`: Skip files that are newer on the receiver (only transfer if source is newer)
 
-#### Hardware Transfers
-
-### **Note:**
-
-**Everything up until this point has been tested and works-- relatively efficiently for such a simple setup. That being said, I still haven't tested the restore script, nor have I tried to setup simple cron jobs to automate and cleanup the backups.**
-
 ### Restoring from Backup
 
-Now that we've backed up all of the configurations we've made so far, it's time to create a script that restores that backup. At the time of writing this, I've probably had to reflash a fresh image and reconfigure things between 10 and 20 times. I'm so good at it, that I can now do it all in under 30 minutes. That being said, it's much easier to do when you can just run a script that takes all of the configurations from your `Master` backup and overwrites the defaults. 
+Now that we've backed up all of the configurations we've made so far, it's time to create a script that restores that backup. At the time of writing this, I've probably had to reflash a fresh image and reconfigure things between 10 and 20 times. I'm so good at it, that I can now do it all in under 20 minutes. That being said, it's much easier to do when you can just run a script that takes all of the configurations from your `Master` backup and overwrites the defaults. 
 
 First, here are some important things to remember:
 
@@ -2432,7 +2422,7 @@ First, here are some important things to remember:
 - Consider encrypting the backup directory for additional security.
 - Test the restore process in a safe environment before using in production.
 
-Now, let's write the script.
+After writing this, you can test the script by running it on your server with the boot media you've been using (***not*** the SSD)-- just make sure you save the `master/` backup and any scripts/configs externally first. You'll know this succeeds, if nothing changes after the reboot. When you've verified that's done, we'll shutdown the server and make the SSD the boot media. For now, let's write the `config_restore` script.
 
 
 ```bash
@@ -2525,3 +2515,216 @@ read -p "Would you like to reboot now? (y/n): " REBOOT
 
 exit 0
 ```
+
+You probably have some questions about the script let me explain some of the decisions I made while doing some trial and error testing.
+
+- Originally, I had the backup directory as a value in the script call itself, now it just defaults to the `master/` backup
+  - This backup is one I know that works and is in the format I'm hoping
+  - Easier to have a standard version to reference than relying on monthly backups
+- I had a lot of issues with incorrect permissions after restoring backups previously, so it needs to be run with `sudo`
+- First, the user and group information is important, a lot of processes behind the scenes rely on these configurations
+  - Part of this, I added an explicit `chmod` call because after the reboot, I was getting an error with `whoami`
+    - The command `whoami` returns which user you are/currently running commands as
+    - The user and group info wasn't exactly the same, it was leaving my user `chris` as UID 1000, but changing the group to 1003
+    - The `chmod` call fixes that
+- Second, restoring the `ssh` configurations ensures security and remote connectivity
+- Third, `ufw` increases your system security
+- Fourth, `fail2ban` does the same by improving security
+- Fifth, restoring the network configurations, originally, I had issues because `networkd` wasn't included
+  - This block ensures all of the `systemd` configurations are included
+- Sixth **Package List TBD**
+- Then, the specific services we modified are all explicitly started
+  - While developing this, some of the services wouldn't necessarily start, so I would run into network or ssh issues post-reboot
+- Finally, the script asks you to `reboot` your system so all of the changes take affect
+
+``` bash
+# Make the script executable
+chmod +x /scripts/config_restore.sh
+
+# Run the script
+sudo ./scripts/config_restore.sh
+```
+
+### Final Thoughts
+At the time of writing this, I've tested and revised everything up until this point. There are a few things I haven't added yet, that I want to later, once it's necessary. 
+
+1. Saving the installed packages and their requirements, similar to a `uv` lockfile or `.venv` requirements.txt file.
+   1. Modify the restore script to restore packages to exactly where they should be
+   2. Not necessary now, because only Traceroute, ufw, and fail2ban were installed; however, when other apps are added this will be helpful for tracking dependencies and versioning issues
+2. Creating a private repoistory for storing configuration files, scripts, etc. and then using that, rather than rsync with my laptop
+3. Do some more granular network configurations, inlcuding subnets and static IPs
+
+## Changing Your Boot Media Device
+When you're moving from one boot device to another on a Raspberry Pi, you're essentially telling the system where to find its operating system files. The Raspberry Pi's bootloader looks for specific files on a FAT32 partition to begin the boot process, then loads the main operating system from the root partition. This transition is a fundamental server administration skill that every system administrator should understand.
+
+The transition involves several critical steps. 
+
+- First, we prepare the SSD with a fresh operating system installation. 
+- Then we properly shut down the system to ensure no data corruption occurs. 
+- Next, we physically reconfigure the hardware to make the SSD the primary boot device. 
+- Finally, we verify that everything works correctly and remove the temporary boot media.
+
+Think of this process like moving into a new house. You've already built the structure (partitioning), but now you need to move all your belongings (the operating system) into it, update your mailing address (boot configuration), and ensure everything works in the new location.
+
+### Boot Configuration Transition Process
+The good news, we've already done most of the work required and what we haven't is going to be something we did for the original boot device. We'll first run a few commands from the server, do one thing on a different computer, and then we'll be back to the server.
+
+1. First, you'll need to flash a fresh Ubuntu Server LTS image onto your newly partitioned SSD. This process will write the operating system files to the appropriate partitions you created. This should be done on your Raspberry Pi server.
+
+```bash
+# Before removing the SSD, check its device identifier one more time
+sudo lsblk -o NAME,SIZE,FSTYPE,LABEL,TYPE,MOUNTPOINT
+```
+
+Now you'll need to use RPi Imager on your MacBook:
+
+- Connect the SSD to your MacBook
+- Open Raspberry Pi Imager
+- Select Ubuntu Server LTS (same version you used before)
+- Select your SSD as the storage device
+- Use the exact same advanced settings you used when first setting up your Raspberry Pi:
+  - Same username (chris)
+  - Same password
+  - Same SSH key settings
+  - Same WiFi credentials
+
+The reason we use identical settings is to reduce the amount of changes needed to replicate the environment we previously configured. Your SSH keys, user permissions, and network configurations will all match what we know works for an initial boot, eliminating the need to reconfigure everything from scratch.
+
+2. Before making any hardware changes, we need to ensure all data is written to disk and all processes are safely terminated. This prevents corruption and data loss during the transition.
+
+
+```bash
+# Save any unsaved work and exit all applications
+# Ensure no important processes are running
+
+# Sync all file system buffers to disk
+sudo sync
+
+# Check for any open files on your current boot device (thumb drive)
+sudo lsof | grep -E '^[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +FIFO'
+
+# Display active processes to ensure nothing critical is running
+ps aux | grep -v '\['
+```
+
+- The `sync` command forces all pending disk writes to complete immediately. This is crucial because Linux uses write caching for performance, meaning data might still be in memory waiting to be written. 
+- The `lsof` command lists open files, helping you identify any processes that might be accessing the current boot device.
+- The `ps aux` command shows all active processes, giving you a final check that nothing important is running.
+
+3. A proper shutdown sequence ensures all services stop gracefully and file systems are cleanly unmounted:
+
+```bash
+# Perform a clean system shutdown
+sudo shutdown now
+```
+
+The shutdown command initiates a clean shutdown sequence. The `-h` flag tells the system to halt (power off) after shutdown. This is important because the system may not power off, especially on older systems—it could just bring it to single-user mode or runlevel 1, depending on configuration. While now indicates the shutdown should happen immediately. This command:
+
+- Sends a termination signal to all running processes
+- Allows services to save their state and clean up
+- Unmounts all filesystems in the correct order
+- Finally powers down the system
+
+4. Now comes the physical hardware transition. With your Raspberry Pi powered off:
+
+- Remove the thumb drive (current boot device)
+- Connect the SSD via USB to the Raspberry Pi
+- Set aside the microSD card (backup device)
+- Ensure all connections are secure
+
+This step is straightforward but crucial. The Raspberry Pi will attempt to boot from the first bootable device it finds. By removing the thumb drive and connecting the SSD, we're ensuring the Pi finds and uses the SSD as its boot device. We do not need to remove the SD card used for backups, because it never had an OS flashed onto it. The card's file system just provides extra memory, instead of being an extra operating system.
+
+5. Power on your Raspberry Pi and observe the boot process. 
+
+Make sure to connect your monitor and keyboard before the boto begins. The boot process should proceed similarly to your initial setup. The Raspberry Pi firmware reads the configuration from the SSD's boot partition, loads the kernel, and then mounts the root filesystem. If everything works correctly, you should see the familiar Ubuntu Server boot messages and eventually reach a login prompt.
+
+**Good news,** you won't need to do this again (for this server). After this, you'll have your core system, memory, and configurations complete.
+
+6. After booting, you'll need to log in directly to the Raspberry Pi using a keyboard and monitor. This is because the SSH service may not be running automatically on the fresh installation.
+
+- Connect a keyboard and monitor to your Raspberry Pi
+- Log in with your username and password
+- Start the SSH service manually:
+
+```bash
+# Start the SSH service to enable remote connections
+sudo systemctl start ssh
+
+# Verify the service is running
+sudo systemctl status ssh
+
+# Test a remote connection from your client machine
+# Test SSH connection (initially with password authentication)
+ssh chris@192.168.1.152
+```
+
+- You'll need to specify the local IP because none of the ssh configs are updated yet
+  - Your nonstandard port, `45000` in this guide
+  - The local IP may be a different one in the 192.168.0.0/16 range (which is reserved for local IPs)
+- If this is working and you can remotely connect, then we can move on to the next step
+
+7. With SSH access established, transfer your configuration backup and restore scripts from your computer to the Raspberry Pi:
+
+First, make sure to create the directory, because it won't exist on a fresh boot. The, from your client computer, a MacBook in my case, you'll run the `rsync` commands to move the master backup and scripts. Notice that you can use either the `~` shortcut to denote your home directory, or write the path explicitly. We'll also need to move the master backup to the proper backup directory, so the restore script works properly.
+
+```bash
+# On the Raspberry Pi, create the backup directory structure
+sudo mkdir -p /mnt/backups/configs/
+
+# From your MacBook, copy your backup files to the Pi
+rsync -avz ~/path/to/backups/configs/master chris@ubuntu-pi-server:/home/chris/
+
+# Copy your restore script to the Pi
+rsync -avz ~/path/to/scripts/config_restore.sh chris@ubuntu-pi-server:~/scripts/
+
+# Move the master backup directory to the correct location
+sudo mv /home/chris/master /mnt/backups/configs/
+```
+
+8. Run the Configuration Restore Script
+
+```bash
+# Make sure the script is executable
+chmod +x ~/scripts/config_restore.sh
+
+# Run the restore script
+sudo ./scripts/config_restore.sh
+```
+
+9. Verify the System
+
+```bash
+# Verify the root filesystem device
+df -h /
+
+# Verify the microSD card is mounted properly
+df -h /mnt/backups
+
+# Check that your backup files are accessible
+ls -la /mnt/backups/configs/
+
+# Verify your network settings
+ip addr show
+
+# Check System configurations
+sudo systemctl status ssh
+sudo systemctl status ufw
+sudo systemctl status fail2ban
+sudo systemctl status systemd-networkd
+sudo systemctl status wpa_supplicant@wlan0.service
+```
+
+The `df -h /` command shows disk usage statistics for the root filesystem, including which device it's mounted from. You should see `/dev/sdb2` (or similar) listed as the root device, and `/dev/sdb1` as the boot device, not the thumb drive identifier you used before. You'll see a similar output, just focused on your `/backups` directory when running the second command. The `ls -la` command shows you all of the contents of a directory, as well as the permissions. The other commands you should be familiar with by now.
+
+### Final Thoughts
+Our Ubuntu Raspberry Pi Server is now booting from the SSD, and all your previous configurations have been restored. This configuration provides a solid foundation for the more advanced server features we'll implement in the next sections. By moving to SSD boot, we've significantly improved our server's performance profile. SSDs offer several advantages over traditional storage media:
+
+- **Faster boot times:** Your Raspberry Pi will start much more quickly
+- **Improved I/O performance:** Database operations, file access, and application loading will be noticeably faster
+- **Better reliability:** SSDs have no moving parts, making them more resilient to physical impacts
+- **Lower power consumption:** SSDs typically use less power than traditional hard drives
+  
+The transition to SSD boot also aligns with modern server practices, where solid-state storage is becoming the standard for production environments. This configuration will serve us well as we expand into containerization with Docker and orchestration with Kubernetes.
+
+## Remote Development with VS Code
+

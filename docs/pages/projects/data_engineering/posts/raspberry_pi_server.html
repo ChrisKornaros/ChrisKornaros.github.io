@@ -355,15 +355,19 @@ cookieconsent.run({
   <li><a href="#backups-and-basic-automation" id="toc-backups-and-basic-automation" class="nav-link" data-scroll-target="#backups-and-basic-automation">Backups and Basic Automation</a>
   <ul>
   <li><a href="#setting-up-the-backup-directory" id="toc-setting-up-the-backup-directory" class="nav-link" data-scroll-target="#setting-up-the-backup-directory">Setting Up the Backup Directory</a></li>
-  <li><a href="#configuration-files-backup" id="toc-configuration-files-backup" class="nav-link" data-scroll-target="#configuration-files-backup">Configuration Files Backup</a></li>
-  <li><a href="#storing-your-backups-externally" id="toc-storing-your-backups-externally" class="nav-link" data-scroll-target="#storing-your-backups-externally">Storing your backups externally</a>
+  <li><a href="#configuration-files-backup" id="toc-configuration-files-backup" class="nav-link" data-scroll-target="#configuration-files-backup">Configuration Files Backup</a>
   <ul class="collapse">
-  <li><a href="#rsync-for-remote-transfers" id="toc-rsync-for-remote-transfers" class="nav-link" data-scroll-target="#rsync-for-remote-transfers">Rsync for Remote Transfers</a></li>
-  <li><a href="#hardware-transfers" id="toc-hardware-transfers" class="nav-link" data-scroll-target="#hardware-transfers">Hardware Transfers</a></li>
+  <li><a href="#remote-transfers-of-backups" id="toc-remote-transfers-of-backups" class="nav-link" data-scroll-target="#remote-transfers-of-backups">Remote Transfers of Backups</a></li>
   </ul></li>
-  <li><a href="#note" id="toc-note" class="nav-link" data-scroll-target="#note"><strong>Note:</strong></a></li>
   <li><a href="#restoring-from-backup" id="toc-restoring-from-backup" class="nav-link" data-scroll-target="#restoring-from-backup">Restoring from Backup</a></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts">Final Thoughts</a></li>
   </ul></li>
+  <li><a href="#changing-your-boot-media-device" id="toc-changing-your-boot-media-device" class="nav-link" data-scroll-target="#changing-your-boot-media-device">Changing Your Boot Media Device</a>
+  <ul>
+  <li><a href="#boot-configuration-transition-process" id="toc-boot-configuration-transition-process" class="nav-link" data-scroll-target="#boot-configuration-transition-process">Boot Configuration Transition Process</a></li>
+  <li><a href="#final-thoughts-1" id="toc-final-thoughts-1" class="nav-link" data-scroll-target="#final-thoughts-1">Final Thoughts</a></li>
+  </ul></li>
+  <li><a href="#remote-development-with-vs-code" id="toc-remote-development-with-vs-code" class="nav-link" data-scroll-target="#remote-development-with-vs-code">Remote Development with VS Code</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/projects/data_engineering/posts/raspberry_pi_server.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -422,6 +426,7 @@ cookieconsent.run({
 <li>Appropriate Power Supply</li>
 <li>Keyboard (connected via USB for direct access)</li>
 <li>1TB Samsung T7 SSD (connected via USB for boot media/core memory)</li>
+<li>64GB Generic Flash Drive (used as the boot media when partitioning the SSD)</li>
 <li>Amazon Basics 128GB microSD card (or other microSD cards for backups media)</li>
 <li>SSH-capable devices for headless access
 <ul>
@@ -434,7 +439,7 @@ cookieconsent.run({
 <h3 class="anchored" data-anchor-id="image-requirements">Image requirements</h3>
 <p>Once you have your hardware ready to go, you can being setting up the software. I’m using Linux Server LTS because it’s a stable version of Linux intended for headless, server environments. LTS means <strong><em>long-term support</em></strong>, so unlike the more frequently updated versions, these OS versions are supported for 5 years. Additionally, you’ll want to use <strong><em>public-key authentication</em></strong> for better security purposes, but more on that in the <a href="@sec-ssh">SSH Section</a>.</p>
 <ol type="1">
-<li><p>Have your SSD ready and able to connect to either a laptop or desktop (whichever you plan to use with SSH)</p></li>
+<li><p>Have your Thumb Drive ready and able to connect to either a laptop or desktop (whichever you plan to use with SSH)</p></li>
 <li><p>Download Raspberry Pi Imager from the official <a href="https://www.raspberrypi.com/software/">website</a></p></li>
 <li><p>Run the Imager and configure your installation of the most recent Linux Server LTS image</p>
 <ol type="1">
@@ -459,7 +464,7 @@ cookieconsent.run({
 </section>
 <section id="get-started" class="level3">
 <h3 class="anchored" data-anchor-id="get-started">Get Started</h3>
-<p>Now you’re ready to plug your boot media device (the SSD) into your Raspberry Pi. You should also connect a keyboard, monitor, and power supply. Once all of this is connected, your Raspberry Pi will boot up. Connecting a monitor and keyboard will allow you to directly interact with the system’s terminal. Ideally, you’ll use SSH, but it may be helpful to have direct access in case there are any network issues.</p>
+<p>Now you’re ready to plug your boot media device (the Thumb Drive) into your Raspberry Pi. You should also connect a keyboard, monitor, and power supply. Once all of this is connected, your Raspberry Pi will boot up. Connecting a monitor and keyboard will allow you to directly interact with the system’s terminal. Ideally, you’ll use SSH, but it may be helpful to have direct access in case there are any network issues. Eventually, the SSD will serve as the boot media and primary storage device for the server; however, we can’t modify its partitions while it’s serving as the boot device. So, we’ll use a thumb drive as the boot media device, until we complete the partitions.</p>
 <p>When first connecting from the wired keyboard and monitor, let all of the start up processes finish running (these will <em>hopefully</em> have brackets with the word <code>Success</code> in green). Then, type in the name of the User ID you wish to login with, in my case it’s <code>chris</code>. Then, enter the password (no characters will show up as you type it in) and hit enter. You’ll see a plaintext message telling you the OS version, some system information (memory usage, temperature, etc.), and you’ll see a line where you can enter commands (the CLI). In my case, it looks like this: <code>chris@ubuntu-pi-server:~$</code></p>
 <p>Now you can run some basic commands to see where you are and what you have available to you. Spoiler alert, you’re in your home directory and have no files. In my case it’s <code>/home/chris</code>, where the <code>/home</code> directory is owned by <em>root</em> and <code>/chris</code> is owned by my user– UID 1000 (the default for new users on a fresh system/image). Right now your directory will be empty, outside of some hidden folders like <code>.ssh</code>. More on this later.</p>
 <p>Next we’ll cover what happened during the boot process, the basic structure of the Linux Server OS, and some important information related to permissions, before we move on to basic networking concepts and configurations.</p>
@@ -473,7 +478,7 @@ cookieconsent.run({
 <ul>
 <li><strong>Hardware Detection:</strong> The system performs comprehensive hardware detection to identify and configure your Raspberry Pi’s components.</li>
 <li><strong>Initial RAM Disk (initrd):</strong> The bootloader loads a temporary filesystem into memory that contains essential drivers and modules needed to mount the real root filesystem.</li>
-<li><strong>Filesystem Check and Expansion:</strong> On first boot, the system checks the integrity of the filesystem and often expands it to utilize the full available space on your SSD.</li>
+<li><strong>Filesystem Check and Expansion:</strong> On first boot, the system checks the integrity of the filesystem and often expands it to utilize the full available space on your Flash Drive.</li>
 <li><strong>Cloud-Init Processing:</strong> Ubuntu Server uses cloud-init to perform first-boot configuration tasks (the processes you see running on the monitor on startup)
 <ul>
 <li>Setting the hostname</li>
@@ -1073,12 +1078,22 @@ Tip
 <h4 class="anchored" data-anchor-id="testing-connectivity">Testing Connectivity</h4>
 <p>Although it seems redundant if you already viewed your IP addresses, you can also test connectivity using the <code>ping</code> and <code>traceroute</code> commands. These will be more useful for checking your servers network status from your desktop or laptop.</p>
 <p><strong>Test basic connectivity to a host:</strong></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ping</span> google.com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ping</span> <span class="at">-c</span> 4 google.com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/network-ping-success.png" class="img-fluid"></p>
 <p><strong>Trace the route to a destination:</strong></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">traceroute</span> google.com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First update and install your packages</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt upgrade <span class="at">-y</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Install traceroute</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install traceroute <span class="at">-y</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Run traceroute</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="ex">traceroute</span> google.com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/network-traceroute-success.png" class="img-fluid"></p>
 <p><strong>Check the DNS resolution:</strong></p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nslookup</span> google.com</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># dig google.com</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/network-nslookup-success.png" class="img-fluid"></p>
 </section>
 <section id="viewing-network-statistics" class="level4">
 <h4 class="anchored" data-anchor-id="viewing-network-statistics">Viewing Network Statistics</h4>
@@ -1589,7 +1604,7 @@ Important
 </ul></li>
 </ul>
 <ol start="6" type="1">
-<li>Verify the new configuration</li>
+<li>Verify the new configuration by checking the <code>systemctl status</code> and running simple network check commands</li>
 </ol>
 <div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check systemd-networkd status</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> status systemd-networkd</span>
@@ -1598,12 +1613,11 @@ Important
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="ex">ip</span> addr show</span>
 <span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Test connectivity</span></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ping</span> <span class="at">-c</span> 4 8.8.8.8</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ping</span> <span class="at">-c</span> 4 google.com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ping</span> <span class="at">-c</span> 4 google.com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>You should see outputs that look like this:</strong> Note, I didn’t show the output of <code>id addr</code> because I don’t want to accidentally post my actual IP address online.</p>
 <p><img src="images/networkd-status.png" class="img-fluid"></p>
-<p><img src="images/ping_google.png" class="img-fluid"></p>
-<ol start="7" type="1">
+<p><img src="images/network-ping-success.png" class="img-fluid"></p>
+<ol type="1">
 <li>Make the change permanent</li>
 </ol>
 <div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the minimal Netplan configuration</span></span>
@@ -2326,7 +2340,7 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 <h2 class="anchored" data-anchor-id="partitions">Partitions</h2>
 <section id="partitioning-basics" class="level3">
 <h3 class="anchored" data-anchor-id="partitioning-basics">Partitioning Basics</h3>
-<p>Partitions are logical divisions of a physical storage device. Think of a storage device like a large piece of land, and partitions as fenced areas within that land dedicated to different purposes. Each partition appears to the operating system as a separate disk, even though physically they’re on the same device. Remember from the beginning of this guide, I’m using an SSD for my primary memory and a microSD card for backups.</p>
+<p>Partitions are logical divisions of a physical storage device. Think of a storage device like a large piece of land, and partitions as fenced areas within that land dedicated to different purposes. Each partition appears to the operating system as a separate disk, even though physically they’re on the same device. Remember from the beginning of this guide, I’m currently using a Flash Drive for my primary memory and a microSD card for backups; however, the SSD is what I want to serve as the boot device. Once we complete the partitioning, we can flash the base image from RPi onto the SSD and then reboot, with the SSD as the boot device.</p>
 <ul>
 <li><strong>Separation of concerns:</strong> Isolate the operating system from user data, which improves security and simplifies backups</li>
 <li><strong>Performance optimization:</strong> Different filesystems can be used for different workloads</li>
@@ -2495,12 +2509,13 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 </section>
 <section id="partitioning-a-microsd-card-for-backups" class="level3">
 <h3 class="anchored" data-anchor-id="partitioning-a-microsd-card-for-backups">Partitioning a MicroSD Card for Backups</h3>
-<p>Let’s partition our microSD card to serve as backup media. You can get great quality cards from Amazon Basics that are perfect for this use case. We’ll use a simple, effective partition scheme. Before we dive into the actual commands, it’s important to know that you can’t modify the memory of the active primary drive. Meaning, that you’ll need to use an SSD or thumbdrive as the boot media while you modify the SD card. Similarly, you’ll need to use a different piece of boot media (you could use the micro SD) when partitioning the SSD.</p>
+<p>Let’s partition our microSD card to serve as backup media. You can get great quality cards from Amazon Basics that are perfect for this use case. We’ll use a simple, effective partition scheme. Before we dive into the actual commands, it’s important to remember that you can’t modify the memory of the active primary drive. Meaning, that you’ll need to use an SSD or thumb drive as the boot media while you modify the SD card. Similarly, you’ll need to use a different piece of boot media (you could use the micro SD) when partitioning the SSD.</p>
 <p>Now, let’s walk through this step-by-step:</p>
 <ol type="1">
 <li>Identify the device name of the microSD. Your microSD card will typically appear as something like /dev/mmcblk0 (what mine showed as) or /dev/sdX (where X is a letter like a, b, c). This command lists block devices with key information:</li>
 </ol>
 <div class="sourceCode" id="cb86"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> lsblk <span class="at">-o</span> NAME,SIZE,FSTYPE,TYPE,MOUNTPOINT</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The lsblk command lists all block devices, which includes your storage devices. The -o flag specifies which columns to display in the output. This final check ensures you’re working with the correct device and helps you confirm the partition structure you just created.</p>
 <ul>
 <li><strong>NAME:</strong> Device identifier</li>
 <li><strong>SIZE:</strong> Storage capacity</li>
@@ -2586,108 +2601,88 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 </section>
 <section id="partitioning-your-ssd" class="level3">
 <h3 class="anchored" data-anchor-id="partitioning-your-ssd">Partitioning your SSD</h3>
+<p>For a Raspberry Pi server, a two-partition scheme offers the perfect balance of simplicity and functionality. This approach mirrors what RPi Imager creates automatically, but gives us control over the sizes:</p>
+<ul>
+<li>A small <code>FAT32</code> boot partition for firmware and boot files</li>
+<li>A large <code>ext4</code> root partition for the entire operating system and data</li>
+</ul>
+<p>This simplified structure eliminates the complexity of separate swap and data partitions while maintaining full functionality. The Raspberry Pi can use swap files instead of dedicated partitions, which provides more flexibility for managing memory as your needs change.</p>
 <ol type="1">
-<li>For the Samsung T7 SSD, we’ll follow a similar workflow, but we’ll create a more sophisticated partition scheme to support different use cases. The Samsung T7 SSD will likely appear as <code>/dev/sdX</code> (where X is a letter like a, b, c), mine is <code>/dev/sdb</code>.</li>
+<li>For the Samsung T7 SSD, we’ll follow a similar workflow. The Samsung T7 SSD will likely appear as <code>/dev/sdX</code> (where X is a letter like a, b, c), mine is <code>/dev/sdb</code>.</li>
 </ol>
 <div class="sourceCode" id="cb90"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> lsblk <span class="at">-o</span> NAME,SIZE,FSTYPE,TYPE,MOUNTPOINT</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="2" type="1">
-<li>For flexibility, we’ll create the following partitions:</li>
+<li>In this code block, I’ll show you a way to use <code>parted</code> without entering the interactive mode.</li>
 </ol>
-<ul>
-<li>A small <code>EFI System Partition</code> for UEFI boot compatibility</li>
-<li>A <code>root partition</code> for the Ubuntu OS</li>
-<li>A <code>swap partition</code>, a dedicated section of your hard drive used as virtual memory when your computer’s RAM (Random Access Memory) fills up</li>
-<li>A <code>data partition</code> for general storage</li>
-</ul>
-<div class="sourceCode" id="cb91"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start parted on the SSD (replace /dev/sda with your device)</span></span>
-<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> parted /dev/sdb</span>
+<div class="sourceCode" id="cb91"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new GPT partition table</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> parted /dev/sdb mklabel gpt</span>
 <span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new GPT partition table</span></span>
-<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">parted</span><span class="kw">)</span> <span class="ex">mklabel</span> gpt</span>
-<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-7"><a href="#cb91-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the EFI System Partition (ESP)</span></span>
-<span id="cb91-8"><a href="#cb91-8" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">parted</span><span class="kw">)</span> <span class="ex">mkpart</span> primary fat32 1MiB 513MiB</span>
-<span id="cb91-9"><a href="#cb91-9" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">parted</span><span class="kw">)</span> <span class="ex">name</span> 1 ESP</span>
-<span id="cb91-10"><a href="#cb91-10" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">parted</span><span class="kw">)</span> <span class="bu">set</span> 1 esp on</span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the EFI System Partition (ESP)</span></span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> parted /dev/sdb mkpart boot fat32 1MiB 513MiB</span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> parted /dev/sdb set 1 esp on</span>
+<span id="cb91-7"><a href="#cb91-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> parted /dev/sdb set 1 boot on</span>
+<span id="cb91-8"><a href="#cb91-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-9"><a href="#cb91-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the root partition</span></span>
+<span id="cb91-10"><a href="#cb91-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> parted /dev/sdb mkpart ubuntu-root ext4 513MiB 100%</span>
 <span id="cb91-11"><a href="#cb91-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-12"><a href="#cb91-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the root partition</span></span>
-<span id="cb91-13"><a href="#cb91-13" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">parted</span><span class="kw">)</span> <span class="ex">mkpart</span> primary ext4 513MiB 100GiB</span>
-<span id="cb91-14"><a href="#cb91-14" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">parted</span><span class="kw">)</span> <span class="ex">name</span> 2 ubuntu-root</span>
-<span id="cb91-15"><a href="#cb91-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-16"><a href="#cb91-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a swap partition (adjust size based on your RAM)</span></span>
-<span id="cb91-17"><a href="#cb91-17" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">parted</span><span class="kw">)</span> <span class="ex">mkpart</span> swap linux-swap 100GiB 108GiB</span>
-<span id="cb91-18"><a href="#cb91-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-19"><a href="#cb91-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data partition using the remaining space</span></span>
-<span id="cb91-20"><a href="#cb91-20" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">parted</span><span class="kw">)</span> <span class="ex">mkpart</span> data ext4 108GiB 100%</span>
-<span id="cb91-21"><a href="#cb91-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-22"><a href="#cb91-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the partition layout</span></span>
-<span id="cb91-23"><a href="#cb91-23" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">parted</span><span class="kw">)</span> <span class="ex">print</span></span>
-<span id="cb91-24"><a href="#cb91-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-25"><a href="#cb91-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Exit parted</span></span>
-<span id="cb91-26"><a href="#cb91-26" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">parted</span><span class="kw">)</span> <span class="ex">quit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb91-12"><a href="#cb91-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the partition layout</span></span>
+<span id="cb91-13"><a href="#cb91-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> parted /dev/sdb print</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li><code>mkpart primary fat32 1MiB 513MiB</code>: Creates a 512MiB FAT32 partition starting at 1MiB</li>
-<li><code>set 1 esp on</code>: Sets the ESP flag on the first partition</li>
-<li>The sizes (100GiB, 108GiB) are specific positions on the disk, not partition sizes</li>
-<li>Using MiB and GiB ensures proper alignment for better performance</li>
+<li><code>/dev/sdc1</code>: 512MB FAT32 partition for boot files.</li>
+<li><code>/dev/sdc2</code>: Remaining space (about 931GB) ext4 partition for the entire system.</li>
+<li>The <code>set 1 boot on</code> command marks the partition as bootable.</li>
+<li>The <code>set 1 esp on</code> marks it as an EFI System Partition, ensuring compatibility with both legacy and UEFI boot methods.</li>
 </ul>
 <ol start="3" type="1">
 <li>Now we need to format each partition.</li>
 </ol>
 <div class="sourceCode" id="cb92"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Format the ESP partition</span></span>
-<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkfs.fat <span class="at">-F32</span> <span class="at">-n</span> ESP /dev/sdb1</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkfs.fat <span class="at">-F32</span> <span class="at">-n</span> BOOT /dev/sdb1</span>
 <span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Format the root partition</span></span>
-<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkfs.ext4 <span class="at">-L</span> ubuntu-root /dev/sdb2</span>
-<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the swap space</span></span>
-<span id="cb92-8"><a href="#cb92-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkswap <span class="at">-L</span> swap /dev/sdb3</span>
-<span id="cb92-9"><a href="#cb92-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-10"><a href="#cb92-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Format the data partition</span></span>
-<span id="cb92-11"><a href="#cb92-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkfs.ext4 <span class="at">-L</span> data /dev/sdb4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkfs.ext4 <span class="at">-L</span> ubuntu-root /dev/sdb2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><code>mkfs.fat -F32</code>: Creates a FAT32 filesystem</li>
 <li><code>-n ESP</code>: Sets the volume label to “ESP”</li>
 <li><code>mkfs.ext4</code>: Creates an ext4 filesystem</li>
 <li><code>-L ubuntu-root</code>: Sets the filesystem label</li>
-<li><code>mkswap</code>: Initializes a swap area</li>
 <li><code>/dev/sdb1, /dev/sdb2, etc.</code>: The specific partitions we created</li>
 </ul>
 <ol start="4" type="1">
+<li>Now, we will verify that the partitions went as we hoped</li>
+</ol>
+<div class="sourceCode" id="cb93"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the partition layout</span></span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> lsblk <span class="at">-o</span> NAME,SIZE,FSTYPE,LABEL,TYPE,MOUNTPOINT</span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the filesystem types and labels</span></span>
+<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> blkid <span class="kw">|</span> <span class="fu">grep</span> sdc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This approach to partitioning offers several advantages:</p>
+<ul>
+<li><strong>Matches RPi Imager default:</strong> Aligns with what users expect from standard Raspberry Pi installations</li>
+<li><strong>Easier to manage:</strong> Fewer partitions mean simpler maintenance and troubleshooting</li>
+<li>The Raspberry Pi firmware requires a FAT32 boot partition to find and load the kernel.</li>
+<li>The 512MB size ensures plenty of space for kernel updates and multiple kernel versions if needed.</li>
+</ul>
+<p>Now you’re ready to flash Ubuntu Server to these properly prepared partitions! The RPi Imager will use this partition structure and write the system files to the correct locations.</p>
+<ol start="5" type="1">
 <li>Now we’ll need to mount the partitions by setting up mount points and telling the system to use them.</li>
 </ol>
-<div class="sourceCode" id="cb93"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Activate the swap</span></span>
-<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> swapon /dev/sdb3</span>
-<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create mount points</span></span>
-<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /mnt/data</span>
-<span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb93-7"><a href="#cb93-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Add entries to /etc/fstab (using UUIDs for reliability)</span></span>
-<span id="cb93-8"><a href="#cb93-8" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"UUID=</span><span class="va">$(</span><span class="fu">sudo</span> blkid <span class="at">-s</span> UUID <span class="at">-o</span> value /dev/sdb2<span class="va">)</span><span class="st"> / ext4 defaults,noatime 0 1"</span> <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="at">-a</span> /etc/fstab</span>
-<span id="cb93-9"><a href="#cb93-9" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"UUID=</span><span class="va">$(</span><span class="fu">sudo</span> blkid <span class="at">-s</span> UUID <span class="at">-o</span> value /dev/sdb1<span class="va">)</span><span class="st"> /boot/efi vfat defaults 0 2"</span> <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="at">-a</span> /etc/fstab</span>
-<span id="cb93-10"><a href="#cb93-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"UUID=</span><span class="va">$(</span><span class="fu">sudo</span> blkid <span class="at">-s</span> UUID <span class="at">-o</span> value /dev/sdb3<span class="va">)</span><span class="st"> none swap sw 0 0"</span> <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="at">-a</span> /etc/fstab</span>
-<span id="cb93-11"><a href="#cb93-11" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"UUID=</span><span class="va">$(</span><span class="fu">sudo</span> blkid <span class="at">-s</span> UUID <span class="at">-o</span> value /dev/sdb4<span class="va">)</span><span class="st"> /mnt/data ext4 defaults,noatime 0 2"</span> <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="at">-a</span> /etc/fstab</span>
-<span id="cb93-12"><a href="#cb93-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb93-13"><a href="#cb93-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Mount all filesystems </span><span class="al">TBD</span><span class="co"> ON THIS</span></span>
-<span id="cb93-14"><a href="#cb93-14" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount <span class="at">-a</span> TBD HERE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li><code>swapon</code>: Activates the swap partition</li>
-<li><code>defaults,noatime</code>: Standard mount options with access time recording disabled for better performance</li>
-<li><code>0 1</code>: For the root partition, enabling filesystem checks with high priority</li>
-<li><code>sw</code>: Indicates swap space</li>
-<li>The different numbers at the end indicate filesystem check priority (0 = no check, 1 = highest priority)</li>
-</ul>
+<div class="sourceCode" id="cb94"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the partition layout</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> lsblk <span class="at">-o</span> NAME,SIZE,FSTYPE,LABEL,TYPE,MOUNTPOINT</span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the filesystem types and labels</span></span>
+<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> blkid <span class="kw">|</span> <span class="fu">grep</span> sdc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="advanced-partitioning" class="level4">
 <h4 class="anchored" data-anchor-id="advanced-partitioning">Advanced Partitioning</h4>
 <p>As you begin to utilize your server more, you’re bound to use up more memory. So, it’s important to monitor your partition space usage.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View disk usage</span></span>
-<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span></span>
-<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View inode usage (for number of files)</span></span>
-<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-i</span></span>
-<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a><span class="co"># View detailed filesystem information</span></span>
-<span id="cb94-8"><a href="#cb94-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tune2fs <span class="at">-l</span> /dev/sda2 <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-E</span> <span class="st">'Block count|Block size|Inode count|Inode size'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View disk usage</span></span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span></span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View inode usage (for number of files)</span></span>
+<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-i</span></span>
+<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a><span class="co"># View detailed filesystem information</span></span>
+<span id="cb95-8"><a href="#cb95-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tune2fs <span class="at">-l</span> /dev/sda2 <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-E</span> <span class="st">'Block count|Block size|Inode count|Inode size'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><code>df -h</code>: Shows disk usage in human-readable format</li>
 <li><code>df -i</code>: Shows inode usage (inode = index node, representing a file)</li>
@@ -2695,13 +2690,13 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 <li><code>grep -E</code>: Filters output for specified patterns</li>
 </ul>
 <p>Furthermore, you may realize that you want to reformat your SSD at some point because your storage needs changed. You can reformat the partitions using the following code.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For online resizing of ext4 (unmounting not required)</span></span>
-<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> parted /dev/sda</span>
-<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">parted</span><span class="kw">)</span> <span class="ex">resizepart</span> 4 100%  <span class="co"># Resize partition 4 to use all available space</span></span>
-<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">parted</span><span class="kw">)</span> <span class="ex">quit</span></span>
-<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a><span class="co"># After resizing the partition, expand the filesystem</span></span>
-<span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> resize2fs /dev/sda4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For online resizing of ext4 (unmounting not required)</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> parted /dev/sda</span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">parted</span><span class="kw">)</span> <span class="ex">resizepart</span> 4 100%  <span class="co"># Resize partition 4 to use all available space</span></span>
+<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">parted</span><span class="kw">)</span> <span class="ex">quit</span></span>
+<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="co"># After resizing the partition, expand the filesystem</span></span>
+<span id="cb96-7"><a href="#cb96-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> resize2fs /dev/sda4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><code>resizepart 4 100%</code>: Resizes partition 4 to use 100% of the remaining available space</li>
 <li><code>resize2fs</code>: Resizes an ext2/3/4 filesystem to match the partition size</li>
@@ -2711,7 +2706,7 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 </section>
 <section id="backups-and-basic-automation" class="level2">
 <h2 class="anchored" data-anchor-id="backups-and-basic-automation">Backups and Basic Automation</h2>
-<p>Now that we’ve configured the basics, from permissions to networking and ssh to partitions, we’ll want to save those changes in case something happens. You’ve already seen some basic backups. The process is the same, essentially creating a folder and then putting a copy of the current file into it and maybe adding a <code>.bak</code> extension to make it clear this is a previous version. That being said, to go through and do this for each and every folder we’ve made changes in is impractical now, let alone in the future when more complex configurations are done. So, in this section, we’ll go over creating a basic script to backup all of our configs and automating the backups.</p>
+<p>Now that we’ve configured the basics, from permissions to networking and ssh to partitions, we’ll want to save those changes in case something happens and to ensure a seamless transition to the SSD for boot media. You’ve already seen some basic backups. The process is the same, essentially creating a folder and then putting a copy of the current file into it and maybe adding a <code>.bak</code> extension to make it clear this is a previous version. That being said, to go through and do this for each and every folder we’ve made changes in is impractical now, let alone in the future when more complex configurations are done. So, in this section, we’ll go over creating a basic script to backup all of our configs and automating the backups.</p>
 <p>For this section, we’ll use <code>rsync</code> because it provides several important advantages over simple copy commands, that you may remember from the section on <code>ssh</code>:</p>
 <ul>
 <li>Incremental backups that only transfer changed files</li>
@@ -2727,90 +2722,91 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 <section id="setting-up-the-backup-directory" class="level3">
 <h3 class="anchored" data-anchor-id="setting-up-the-backup-directory">Setting Up the Backup Directory</h3>
 <p>First, in case you didn’t do this earlier, we’ll prepare the backup directory structure and set appropriate permissions:</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create backup directories if they don't exist</span></span>
-<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /mnt/backups/configs</span>
-<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /mnt/backups/system</span>
-<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Change ownership to your user (replace 'chris' with your username)</span></span>
-<span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chown <span class="at">-R</span> chris:chris /mnt/backups</span>
-<span id="cb96-7"><a href="#cb96-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-8"><a href="#cb96-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Set appropriate permissions</span></span>
-<span id="cb96-9"><a href="#cb96-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod <span class="at">-R</span> 700 /mnt/backups  <span class="co"># Only owner can read/write/execute</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create backup directories if they don't exist</span></span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /mnt/backups/configs</span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /mnt/backups/system</span>
+<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Change ownership to your user (replace 'chris' with your username)</span></span>
+<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chown <span class="at">-R</span> chris:chris /mnt/backups</span>
+<span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Set appropriate permissions</span></span>
+<span id="cb97-9"><a href="#cb97-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod <span class="at">-R</span> 700 /mnt/backups  <span class="co"># Only owner can read/write/execute</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="configuration-files-backup" class="level3">
 <h3 class="anchored" data-anchor-id="configuration-files-backup">Configuration Files Backup</h3>
-<p>We’ll use rsync to create a structured backup of essential configuration files. The following script demonstrates how to perform the backup while preserving all file attributes:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the {} around DATEYMD in the file path ensure it's specified as the variable's value, and the subsequent parts are not included</span></span>
-<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a><span class="va">DATEYMD</span><span class="op">=</span><span class="va">$(</span><span class="fu">date</span> +%Y%m%d<span class="va">)</span></span>
-<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a><span class="va">BACKUP_DIR</span><span class="op">=</span><span class="st">"/mnt/backups/configs/</span><span class="va">$DATEYMD</span><span class="st">"</span></span>
-<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_DIR</span><span class="op">=</span><span class="st">"/mnt/backups/logs"</span></span>
-<span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">$LOG_DIR</span><span class="st">/</span><span class="va">${DATEYMD}</span><span class="st">_config_backup.log"</span></span>
-<span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-9"><a href="#cb97-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create backup directory</span></span>
-<span id="cb97-10"><a href="#cb97-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb97-11"><a href="#cb97-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-12"><a href="#cb97-12" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
-<span id="cb97-13"><a href="#cb97-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. User and Group Information</span></span>
-<span id="cb97-14"><a href="#cb97-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/passwd <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/passwd.bak"</span></span>
-<span id="cb97-15"><a href="#cb97-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/group <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/group.bak"</span></span>
-<span id="cb97-16"><a href="#cb97-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/shadow <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/shadow.bak"</span></span>
-<span id="cb97-17"><a href="#cb97-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/gshadow <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/gshadow.bak"</span></span>
-<span id="cb97-18"><a href="#cb97-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-19"><a href="#cb97-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Crontab Configurations</span></span>
-<span id="cb97-20"><a href="#cb97-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/crontab <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/"</span></span>
-<span id="cb97-21"><a href="#cb97-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /var/spool/cron/crontabs/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/crontabs/"</span></span>
-<span id="cb97-22"><a href="#cb97-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-23"><a href="#cb97-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. SSH Configuration</span></span>
-<span id="cb97-24"><a href="#cb97-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/ssh/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ssh/"</span></span>
-<span id="cb97-25"><a href="#cb97-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> ~/.ssh/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/user_ssh/"</span></span>
-<span id="cb97-26"><a href="#cb97-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-27"><a href="#cb97-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 4. UFW (Uncomplicated Firewall) Configuration</span></span>
-<span id="cb97-28"><a href="#cb97-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/ufw/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ufw/"</span></span>
-<span id="cb97-29"><a href="#cb97-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> ufw status verbose <span class="op">&gt;</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ufw_rules.txt"</span></span>
-<span id="cb97-30"><a href="#cb97-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-31"><a href="#cb97-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 5. Fail2Ban Configuration</span></span>
-<span id="cb97-32"><a href="#cb97-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/fail2ban/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/fail2ban/"</span></span>
-<span id="cb97-33"><a href="#cb97-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-34"><a href="#cb97-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 6. Network Configuration</span></span>
-<span id="cb97-35"><a href="#cb97-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/network/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/network/"</span></span>
-<span id="cb97-36"><a href="#cb97-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXV</span> /etc/systemd/network/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/systemd_network/"</span></span>
-<span id="cb97-37"><a href="#cb97-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/netplan/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/netplan/"</span></span>
-<span id="cb97-38"><a href="#cb97-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/hosts <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hosts.bak"</span></span>
-<span id="cb97-39"><a href="#cb97-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/hostname <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hostname.bak"</span></span>
-<span id="cb97-40"><a href="#cb97-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/resolv.conf <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/resolv.conf.bak"</span></span>
-<span id="cb97-41"><a href="#cb97-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/wpa_supplicant/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/wpa_supplicant/"</span></span>
-<span id="cb97-42"><a href="#cb97-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-43"><a href="#cb97-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 7. Systemd Services and Timers</span></span>
-<span id="cb97-44"><a href="#cb97-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/systemd/system/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/systemd/"</span></span>
-<span id="cb97-45"><a href="#cb97-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-46"><a href="#cb97-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 8. Logrotate Configuration</span></span>
-<span id="cb97-47"><a href="#cb97-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/logrotate.conf <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/logrotate.conf.bak"</span></span>
-<span id="cb97-48"><a href="#cb97-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/logrotate.d/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/logrotate.d/"</span></span>
-<span id="cb97-49"><a href="#cb97-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-50"><a href="#cb97-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 9. Timezone and Locale</span></span>
-<span id="cb97-51"><a href="#cb97-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/timezone <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/timezone.bak"</span></span>
-<span id="cb97-52"><a href="#cb97-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/localtime <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/localtime.bak"</span></span>
-<span id="cb97-53"><a href="#cb97-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/default/locale <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/locale.bak"</span></span>
-<span id="cb97-54"><a href="#cb97-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-55"><a href="#cb97-55" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 10. Keyboard Configuration</span></span>
-<span id="cb97-56"><a href="#cb97-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/default/keyboard <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/keyboard.bak"</span></span>
-<span id="cb97-57"><a href="#cb97-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-58"><a href="#cb97-58" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set appropriate permissions</span></span>
-<span id="cb97-59"><a href="#cb97-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chown <span class="at">-R</span> chris:chris <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb97-60"><a href="#cb97-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chmod <span class="at">-R</span> 600 <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb97-61"><a href="#cb97-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-62"><a href="#cb97-62" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Configuration backup completed at: </span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb97-63"><a href="#cb97-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-64"><a href="#cb97-64" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$LOG_FILE</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
-<span id="cb97-65"><a href="#cb97-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-66"><a href="#cb97-66" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Logs available at: </span><span class="va">$LOG_FILE</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb98"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the script executable</span></span>
-<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x /scripts/config_backup.sh</span>
+<p>While it’s definitely beneficial to have a local copy of your backups to easily roll back changes, it isn’t the most secure solution to have all of your information in one place. Furthermore, the SSD is partitioned, but it doesn’t currently have an OS or any files stored. So, now it’s time to take advantage of the microSD card we formatted earlier.</p>
+<p>For the purpose of this guide, I’ll be showing you how to use <code>rsync</code> for a remote transfer to your client machine and how to automatically store backups on the SD card. The script we’ll use saves all of the key user and system information (things like passwords), as well as the configuration changes we made. Additionally, as long as your SD card is mounted to <code>/mnt/backups</code> the backup will automatically be saved to the external memory. The following script demonstrates how to perform the backup while preserving all file attributes:</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the {} around DATEYMD in the file path ensure it's specified as the variable's value, and the subsequent parts are not included</span></span>
 <span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the script</span></span>
-<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/config_backup.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a><span class="va">DATEYMD</span><span class="op">=</span><span class="va">$(</span><span class="fu">date</span> +%Y%m%d<span class="va">)</span></span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a><span class="va">BACKUP_DIR</span><span class="op">=</span><span class="st">"/mnt/backups/configs/</span><span class="va">$DATEYMD</span><span class="st">"</span></span>
+<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_DIR</span><span class="op">=</span><span class="st">"/mnt/backups/logs"</span></span>
+<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">$LOG_DIR</span><span class="st">/</span><span class="va">${DATEYMD}</span><span class="st">_config_backup.log"</span></span>
+<span id="cb98-8"><a href="#cb98-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-9"><a href="#cb98-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create backup directory</span></span>
+<span id="cb98-10"><a href="#cb98-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb98-11"><a href="#cb98-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-12"><a href="#cb98-12" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
+<span id="cb98-13"><a href="#cb98-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. User and Group Information</span></span>
+<span id="cb98-14"><a href="#cb98-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/passwd <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/passwd.bak"</span></span>
+<span id="cb98-15"><a href="#cb98-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/group <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/group.bak"</span></span>
+<span id="cb98-16"><a href="#cb98-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/shadow <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/shadow.bak"</span></span>
+<span id="cb98-17"><a href="#cb98-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/gshadow <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/gshadow.bak"</span></span>
+<span id="cb98-18"><a href="#cb98-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-19"><a href="#cb98-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Crontab Configurations</span></span>
+<span id="cb98-20"><a href="#cb98-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/crontab <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/"</span></span>
+<span id="cb98-21"><a href="#cb98-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /var/spool/cron/crontabs/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/crontabs/"</span></span>
+<span id="cb98-22"><a href="#cb98-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-23"><a href="#cb98-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. SSH Configuration</span></span>
+<span id="cb98-24"><a href="#cb98-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/ssh/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ssh/"</span></span>
+<span id="cb98-25"><a href="#cb98-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> ~/.ssh/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/user_ssh/"</span></span>
+<span id="cb98-26"><a href="#cb98-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-27"><a href="#cb98-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 4. UFW (Uncomplicated Firewall) Configuration</span></span>
+<span id="cb98-28"><a href="#cb98-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/ufw/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ufw/"</span></span>
+<span id="cb98-29"><a href="#cb98-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> ufw status verbose <span class="op">&gt;</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ufw_rules.txt"</span></span>
+<span id="cb98-30"><a href="#cb98-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-31"><a href="#cb98-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 5. Fail2Ban Configuration</span></span>
+<span id="cb98-32"><a href="#cb98-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/fail2ban/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/fail2ban/"</span></span>
+<span id="cb98-33"><a href="#cb98-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-34"><a href="#cb98-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 6. Network Configuration</span></span>
+<span id="cb98-35"><a href="#cb98-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/network/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/network/"</span></span>
+<span id="cb98-36"><a href="#cb98-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXV</span> /etc/systemd/network/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/systemd_network/"</span></span>
+<span id="cb98-37"><a href="#cb98-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/netplan/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/netplan/"</span></span>
+<span id="cb98-38"><a href="#cb98-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/hosts <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hosts.bak"</span></span>
+<span id="cb98-39"><a href="#cb98-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/hostname <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hostname.bak"</span></span>
+<span id="cb98-40"><a href="#cb98-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/resolv.conf <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/resolv.conf.bak"</span></span>
+<span id="cb98-41"><a href="#cb98-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/wpa_supplicant/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/wpa_supplicant/"</span></span>
+<span id="cb98-42"><a href="#cb98-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-43"><a href="#cb98-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 7. Systemd Services and Timers</span></span>
+<span id="cb98-44"><a href="#cb98-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/systemd/system/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/systemd/"</span></span>
+<span id="cb98-45"><a href="#cb98-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-46"><a href="#cb98-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 8. Logrotate Configuration</span></span>
+<span id="cb98-47"><a href="#cb98-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/logrotate.conf <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/logrotate.conf.bak"</span></span>
+<span id="cb98-48"><a href="#cb98-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/logrotate.d/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/logrotate.d/"</span></span>
+<span id="cb98-49"><a href="#cb98-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-50"><a href="#cb98-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 9. Timezone and Locale</span></span>
+<span id="cb98-51"><a href="#cb98-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/timezone <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/timezone.bak"</span></span>
+<span id="cb98-52"><a href="#cb98-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/localtime <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/localtime.bak"</span></span>
+<span id="cb98-53"><a href="#cb98-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/default/locale <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/locale.bak"</span></span>
+<span id="cb98-54"><a href="#cb98-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-55"><a href="#cb98-55" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 10. Keyboard Configuration</span></span>
+<span id="cb98-56"><a href="#cb98-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/default/keyboard <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/keyboard.bak"</span></span>
+<span id="cb98-57"><a href="#cb98-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-58"><a href="#cb98-58" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set appropriate permissions</span></span>
+<span id="cb98-59"><a href="#cb98-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chown <span class="at">-R</span> chris:chris <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb98-60"><a href="#cb98-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chmod <span class="at">-R</span> 600 <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb98-61"><a href="#cb98-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-62"><a href="#cb98-62" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Configuration backup completed at: </span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb98-63"><a href="#cb98-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-64"><a href="#cb98-64" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$LOG_FILE</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb98-65"><a href="#cb98-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-66"><a href="#cb98-66" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Logs available at: </span><span class="va">$LOG_FILE</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the script executable</span></span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x /scripts/config_backup.sh</span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the script</span></span>
+<span id="cb99-5"><a href="#cb99-5" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/config_backup.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The rsync commands use several important options:</p>
 <ul>
 <li><code>-a</code>: Archive mode, preserves almost everything</li>
@@ -2821,15 +2817,10 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 <li><code>--hard-links</code>: Preserve hard links</li>
 <li><code>--exclude</code>: Skip specified directories</li>
 </ul>
-</section>
-<section id="storing-your-backups-externally" class="level3">
-<h3 class="anchored" data-anchor-id="storing-your-backups-externally">Storing your backups externally</h3>
-<p>While it’s definitely beneficial to have a local copy of your backups to easily roll back changes, it isn’t the most secure solution to have all of your information in one place. So, how can you go about transferring your system and configuration backups to another storage system?</p>
-<p>For the purpose of this guide, I’ll be showing you how to use <code>rsync</code> for a remote transfer and how to flash the backup onto a <code>microSD</code>.</p>
-<section id="rsync-for-remote-transfers" class="level4">
-<h4 class="anchored" data-anchor-id="rsync-for-remote-transfers">Rsync for Remote Transfers</h4>
-<p>Rsync is specifically designed for copying and transferring files, so it offers more sophisticated file synchronization capabilities than basic tools like SCP.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-avz</span> <span class="at">--partial</span> <span class="at">--progress</span> <span class="at">--update</span> chris@ubuntu-pi-server:/mnt/backups/configs/master/ ~/Documents/raspberry_pi_server/backups/configs/master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="remote-transfers-of-backups" class="level4">
+<h4 class="anchored" data-anchor-id="remote-transfers-of-backups">Remote Transfers of Backups</h4>
+<p>We covered <code>rsync</code> vs.&nbsp;<code>scp</code> earlier, so remember that rsync is specifically designed for copying and transferring files, so it offers more sophisticated file synchronization capabilities than basic tools like SCP. If you need a refresher, run the following command from your client machine (laptop), just change the paths to match what your system uses.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-avz</span> <span class="at">--partial</span> <span class="at">--progress</span> <span class="at">--update</span> chris@ubuntu-pi-server:/mnt/backups/configs/master/ ~/Documents/raspberry_pi_server/backups/configs/master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The flags do the following:</p>
 <ul>
 <li><code>-a</code>: Archive mode, which preserves permissions, timestamps, symbolic links, etc.</li>
@@ -2840,17 +2831,10 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 <li><code>--update</code>: Skip files that are newer on the receiver (only transfer if source is newer)</li>
 </ul>
 </section>
-<section id="hardware-transfers" class="level4">
-<h4 class="anchored" data-anchor-id="hardware-transfers">Hardware Transfers</h4>
-</section>
-</section>
-<section id="note" class="level3">
-<h3 class="anchored" data-anchor-id="note"><strong>Note:</strong></h3>
-<p><strong>Everything up until this point has been tested and works– relatively efficiently for such a simple setup. That being said, I still haven’t tested the restore script, nor have I tried to setup simple cron jobs to automate and cleanup the backups.</strong></p>
 </section>
 <section id="restoring-from-backup" class="level3">
 <h3 class="anchored" data-anchor-id="restoring-from-backup">Restoring from Backup</h3>
-<p>Now that we’ve backed up all of the configurations we’ve made so far, it’s time to create a script that restores that backup. At the time of writing this, I’ve probably had to reflash a fresh image and reconfigure things between 10 and 20 times. I’m so good at it, that I can now do it all in under 30 minutes. That being said, it’s much easier to do when you can just run a script that takes all of the configurations from your <code>Master</code> backup and overwrites the defaults.</p>
+<p>Now that we’ve backed up all of the configurations we’ve made so far, it’s time to create a script that restores that backup. At the time of writing this, I’ve probably had to reflash a fresh image and reconfigure things between 10 and 20 times. I’m so good at it, that I can now do it all in under 20 minutes. That being said, it’s much easier to do when you can just run a script that takes all of the configurations from your <code>Master</code> backup and overwrites the defaults.</p>
 <p>First, here are some important things to remember:</p>
 <ul>
 <li>The <code>--delete</code> option during restore will remove files at the destination that don’t exist in the backup. Use with caution.</li>
@@ -2859,98 +2843,313 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 <li>Consider encrypting the backup directory for additional security.</li>
 <li>Test the restore process in a safe environment before using in production.</li>
 </ul>
-<p>Now, let’s write the script.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple Configuration Restoration Script for Ubuntu Pi Server</span></span>
-<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a><span class="va">BACKUP_DIR</span><span class="op">=</span><span class="va">${1</span><span class="op">:-</span><span class="st">"/mnt/backups/configs/master"</span><span class="va">}</span></span>
-<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-6"><a href="#cb100-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if script is run as root</span></span>
-<span id="cb100-7"><a href="#cb100-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$(</span><span class="fu">id</span> <span class="at">-u</span><span class="va">)</span><span class="st">"</span> <span class="ot">-ne</span> 0 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb100-8"><a href="#cb100-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Error: This script must be run as root. Try using sudo."</span></span>
-<span id="cb100-9"><a href="#cb100-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
-<span id="cb100-10"><a href="#cb100-10" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb100-11"><a href="#cb100-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-12"><a href="#cb100-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the backup directory exists</span></span>
-<span id="cb100-13"><a href="#cb100-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb100-14"><a href="#cb100-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Error: Backup directory not found: </span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb100-15"><a href="#cb100-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Usage: </span><span class="va">$0</span><span class="st"> [backup_directory_path]"</span></span>
-<span id="cb100-16"><a href="#cb100-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
-<span id="cb100-17"><a href="#cb100-17" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb100-18"><a href="#cb100-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-19"><a href="#cb100-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Begin restoration process</span></span>
-<span id="cb100-20"><a href="#cb100-20" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Starting configuration restoration from </span><span class="va">$BACKUP_DIR</span><span class="st">..."</span></span>
-<span id="cb100-21"><a href="#cb100-21" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"This will overwrite current system configurations with those from the backup."</span></span>
-<span id="cb100-22"><a href="#cb100-22" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span> <span class="at">-p</span> <span class="st">"Continue with restoration? (y/n): "</span> <span class="va">CONFIRM</span></span>
-<span id="cb100-23"><a href="#cb100-23" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">[[</span> <span class="st">"</span><span class="va">$CONFIRM</span><span class="st">"</span> <span class="ot">!=</span> <span class="st">"y"</span> <span class="kw">&amp;&amp;</span> <span class="st">"</span><span class="va">$CONFIRM</span><span class="st">"</span> <span class="ot">!=</span> <span class="st">"Y"</span> <span class="kw">]];</span> <span class="cf">then</span></span>
-<span id="cb100-24"><a href="#cb100-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Restoration aborted by user."</span></span>
-<span id="cb100-25"><a href="#cb100-25" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 0</span>
-<span id="cb100-26"><a href="#cb100-26" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb100-27"><a href="#cb100-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-28"><a href="#cb100-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Restore User and Group Information</span></span>
-<span id="cb100-29"><a href="#cb100-29" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Restoring user and group information..."</span></span>
-<span id="cb100-30"><a href="#cb100-30" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/passwd.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/passwd.bak"</span> /etc/passwd</span>
-<span id="cb100-31"><a href="#cb100-31" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/group.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/group.bak"</span> /etc/group</span>
-<span id="cb100-32"><a href="#cb100-32" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/shadow.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/shadow.bak"</span> /etc/shadow</span>
-<span id="cb100-33"><a href="#cb100-33" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/gshadow.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/gshadow.bak"</span> /etc/gshadow</span>
-<span id="cb100-34"><a href="#cb100-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-35"><a href="#cb100-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Explicitly Set Permissions for Critical System Files</span></span>
-<span id="cb100-36"><a href="#cb100-36" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Fixing critical system file permissions..."</span></span>
-<span id="cb100-37"><a href="#cb100-37" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 644 /etc/passwd   <span class="co"># Read-write for root, read-only for everyone else</span></span>
-<span id="cb100-38"><a href="#cb100-38" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 644 /etc/group    <span class="co"># Read-write for root, read-only for everyone else  </span></span>
-<span id="cb100-39"><a href="#cb100-39" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 640 /etc/shadow   <span class="co"># Read-write for root, read-only for shadow group</span></span>
-<span id="cb100-40"><a href="#cb100-40" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 640 /etc/gshadow  <span class="co"># Read-write for root, read-only for shadow group</span></span>
-<span id="cb100-41"><a href="#cb100-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-42"><a href="#cb100-42" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Restore SSH Configuration</span></span>
-<span id="cb100-43"><a href="#cb100-43" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Restoring SSH configuration..."</span></span>
-<span id="cb100-44"><a href="#cb100-44" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ssh"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ssh/"</span> /etc/ssh/</span>
-<span id="cb100-45"><a href="#cb100-45" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 600 /etc/ssh/ssh_host_<span class="pp">*</span>_key <span class="dv">2</span><span class="op">&gt;</span>/dev/null <span class="kw">||</span> <span class="fu">true</span></span>
-<span id="cb100-46"><a href="#cb100-46" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 644 /etc/ssh/ssh_host_<span class="pp">*</span>_key.pub <span class="dv">2</span><span class="op">&gt;</span>/dev/null <span class="kw">||</span> <span class="fu">true</span></span>
-<span id="cb100-47"><a href="#cb100-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-48"><a href="#cb100-48" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Restore UFW Configuration</span></span>
-<span id="cb100-49"><a href="#cb100-49" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Restoring UFW configuration..."</span></span>
-<span id="cb100-50"><a href="#cb100-50" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ufw"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb100-51"><a href="#cb100-51" aria-hidden="true" tabindex="-1"></a>    <span class="ex">apt-get</span> install <span class="at">-y</span> ufw <span class="op">&gt;</span>/dev/null</span>
-<span id="cb100-52"><a href="#cb100-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ufw/"</span> /etc/ufw/</span>
-<span id="cb100-53"><a href="#cb100-53" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb100-54"><a href="#cb100-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-55"><a href="#cb100-55" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Restore Fail2Ban Configuration</span></span>
-<span id="cb100-56"><a href="#cb100-56" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Restoring Fail2Ban configuration..."</span></span>
-<span id="cb100-57"><a href="#cb100-57" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/fail2ban"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb100-58"><a href="#cb100-58" aria-hidden="true" tabindex="-1"></a>    <span class="ex">apt-get</span> install <span class="at">-y</span> fail2ban <span class="op">&gt;</span>/dev/null</span>
-<span id="cb100-59"><a href="#cb100-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/fail2ban/"</span> /etc/fail2ban/</span>
-<span id="cb100-60"><a href="#cb100-60" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb100-61"><a href="#cb100-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-62"><a href="#cb100-62" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Restore Network Configuration</span></span>
-<span id="cb100-63"><a href="#cb100-63" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Restoring network configuration..."</span></span>
-<span id="cb100-64"><a href="#cb100-64" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/network"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/network/"</span> /etc/network/</span>
-<span id="cb100-65"><a href="#cb100-65" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/systemd_network"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/systemd_network/"</span> /etc/systemd/network/</span>
-<span id="cb100-66"><a href="#cb100-66" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/netplan"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/netplan/"</span> /etc/netplan/</span>
-<span id="cb100-67"><a href="#cb100-67" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hosts.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hosts.bak"</span> /etc/hosts</span>
-<span id="cb100-68"><a href="#cb100-68" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hostname.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hostname.bak"</span> /etc/hostname</span>
-<span id="cb100-69"><a href="#cb100-69" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/resolv.conf.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/resolv.conf.bak"</span> /etc/resolv.conf</span>
-<span id="cb100-70"><a href="#cb100-70" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/wpa_supplicant"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/wpa_supplicant/"</span> /etc/wpa_supplicant/</span>
-<span id="cb100-71"><a href="#cb100-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-72"><a href="#cb100-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-73"><a href="#cb100-73" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Restore Package List</span></span>
-<span id="cb100-74"><a href="#cb100-74" aria-hidden="true" tabindex="-1"></a><span class="co">#echo "Reinstalling packages from backup..."</span></span>
-<span id="cb100-75"><a href="#cb100-75" aria-hidden="true" tabindex="-1"></a><span class="co">#if [ -f "$BACKUP_DIR/package_list.txt" ]; then</span></span>
-<span id="cb100-76"><a href="#cb100-76" aria-hidden="true" tabindex="-1"></a><span class="co">#    apt-get update &amp;&amp; apt-get install -y dselect</span></span>
-<span id="cb100-77"><a href="#cb100-77" aria-hidden="true" tabindex="-1"></a><span class="co">#    dpkg --set-selections &lt; "$BACKUP_DIR/package_list.txt"</span></span>
-<span id="cb100-78"><a href="#cb100-78" aria-hidden="true" tabindex="-1"></a><span class="co">#    apt-get dselect-upgrade -y</span></span>
-<span id="cb100-79"><a href="#cb100-79" aria-hidden="true" tabindex="-1"></a><span class="co">#fi</span></span>
-<span id="cb100-80"><a href="#cb100-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-81"><a href="#cb100-81" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart services</span></span>
-<span id="cb100-82"><a href="#cb100-82" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart systemd-networkd wpa_supplicant@wlan0.service ssh ufw fail2ban </span>
-<span id="cb100-83"><a href="#cb100-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-84"><a href="#cb100-84" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Configuration restoration completed. A system reboot is recommended."</span></span>
-<span id="cb100-85"><a href="#cb100-85" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span> <span class="at">-p</span> <span class="st">"Would you like to reboot now? (y/n): "</span> <span class="va">REBOOT</span></span>
-<span id="cb100-86"><a href="#cb100-86" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span> <span class="st">"</span><span class="va">$REBOOT</span><span class="st">"</span> <span class="ot">==</span> <span class="st">"y"</span> <span class="kw">||</span> <span class="st">"</span><span class="va">$REBOOT</span><span class="st">"</span> <span class="ot">==</span> <span class="st">"Y"</span> <span class="kw">]]</span> <span class="kw">&amp;&amp;</span> <span class="ex">reboot</span></span>
-<span id="cb100-87"><a href="#cb100-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-88"><a href="#cb100-88" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-
+<p>After writing this, you can test the script by running it on your server with the boot media you’ve been using (<strong><em>not</em></strong> the SSD)– just make sure you save the <code>master/</code> backup and any scripts/configs externally first. You’ll know this succeeds, if nothing changes after the reboot. When you’ve verified that’s done, we’ll shutdown the server and make the SSD the boot media. For now, let’s write the <code>config_restore</code> script.</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple Configuration Restoration Script for Ubuntu Pi Server</span></span>
+<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a><span class="va">BACKUP_DIR</span><span class="op">=</span><span class="va">${1</span><span class="op">:-</span><span class="st">"/mnt/backups/configs/master"</span><span class="va">}</span></span>
+<span id="cb101-5"><a href="#cb101-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-6"><a href="#cb101-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if script is run as root</span></span>
+<span id="cb101-7"><a href="#cb101-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$(</span><span class="fu">id</span> <span class="at">-u</span><span class="va">)</span><span class="st">"</span> <span class="ot">-ne</span> 0 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb101-8"><a href="#cb101-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Error: This script must be run as root. Try using sudo."</span></span>
+<span id="cb101-9"><a href="#cb101-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb101-10"><a href="#cb101-10" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb101-11"><a href="#cb101-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-12"><a href="#cb101-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the backup directory exists</span></span>
+<span id="cb101-13"><a href="#cb101-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb101-14"><a href="#cb101-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Error: Backup directory not found: </span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb101-15"><a href="#cb101-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Usage: </span><span class="va">$0</span><span class="st"> [backup_directory_path]"</span></span>
+<span id="cb101-16"><a href="#cb101-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb101-17"><a href="#cb101-17" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb101-18"><a href="#cb101-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-19"><a href="#cb101-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Begin restoration process</span></span>
+<span id="cb101-20"><a href="#cb101-20" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Starting configuration restoration from </span><span class="va">$BACKUP_DIR</span><span class="st">..."</span></span>
+<span id="cb101-21"><a href="#cb101-21" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"This will overwrite current system configurations with those from the backup."</span></span>
+<span id="cb101-22"><a href="#cb101-22" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span> <span class="at">-p</span> <span class="st">"Continue with restoration? (y/n): "</span> <span class="va">CONFIRM</span></span>
+<span id="cb101-23"><a href="#cb101-23" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">[[</span> <span class="st">"</span><span class="va">$CONFIRM</span><span class="st">"</span> <span class="ot">!=</span> <span class="st">"y"</span> <span class="kw">&amp;&amp;</span> <span class="st">"</span><span class="va">$CONFIRM</span><span class="st">"</span> <span class="ot">!=</span> <span class="st">"Y"</span> <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb101-24"><a href="#cb101-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Restoration aborted by user."</span></span>
+<span id="cb101-25"><a href="#cb101-25" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 0</span>
+<span id="cb101-26"><a href="#cb101-26" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb101-27"><a href="#cb101-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-28"><a href="#cb101-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Restore User and Group Information</span></span>
+<span id="cb101-29"><a href="#cb101-29" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Restoring user and group information..."</span></span>
+<span id="cb101-30"><a href="#cb101-30" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/passwd.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/passwd.bak"</span> /etc/passwd</span>
+<span id="cb101-31"><a href="#cb101-31" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/group.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/group.bak"</span> /etc/group</span>
+<span id="cb101-32"><a href="#cb101-32" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/shadow.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/shadow.bak"</span> /etc/shadow</span>
+<span id="cb101-33"><a href="#cb101-33" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/gshadow.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/gshadow.bak"</span> /etc/gshadow</span>
+<span id="cb101-34"><a href="#cb101-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-35"><a href="#cb101-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Explicitly Set Permissions for Critical System Files</span></span>
+<span id="cb101-36"><a href="#cb101-36" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Fixing critical system file permissions..."</span></span>
+<span id="cb101-37"><a href="#cb101-37" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 644 /etc/passwd   <span class="co"># Read-write for root, read-only for everyone else</span></span>
+<span id="cb101-38"><a href="#cb101-38" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 644 /etc/group    <span class="co"># Read-write for root, read-only for everyone else  </span></span>
+<span id="cb101-39"><a href="#cb101-39" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 640 /etc/shadow   <span class="co"># Read-write for root, read-only for shadow group</span></span>
+<span id="cb101-40"><a href="#cb101-40" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 640 /etc/gshadow  <span class="co"># Read-write for root, read-only for shadow group</span></span>
+<span id="cb101-41"><a href="#cb101-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-42"><a href="#cb101-42" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Restore SSH Configuration</span></span>
+<span id="cb101-43"><a href="#cb101-43" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Restoring SSH configuration..."</span></span>
+<span id="cb101-44"><a href="#cb101-44" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ssh"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ssh/"</span> /etc/ssh/</span>
+<span id="cb101-45"><a href="#cb101-45" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 600 /etc/ssh/ssh_host_<span class="pp">*</span>_key <span class="dv">2</span><span class="op">&gt;</span>/dev/null <span class="kw">||</span> <span class="fu">true</span></span>
+<span id="cb101-46"><a href="#cb101-46" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 644 /etc/ssh/ssh_host_<span class="pp">*</span>_key.pub <span class="dv">2</span><span class="op">&gt;</span>/dev/null <span class="kw">||</span> <span class="fu">true</span></span>
+<span id="cb101-47"><a href="#cb101-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-48"><a href="#cb101-48" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Restore UFW Configuration</span></span>
+<span id="cb101-49"><a href="#cb101-49" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Restoring UFW configuration..."</span></span>
+<span id="cb101-50"><a href="#cb101-50" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ufw"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb101-51"><a href="#cb101-51" aria-hidden="true" tabindex="-1"></a>    <span class="ex">apt-get</span> install <span class="at">-y</span> ufw <span class="op">&gt;</span>/dev/null</span>
+<span id="cb101-52"><a href="#cb101-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ufw/"</span> /etc/ufw/</span>
+<span id="cb101-53"><a href="#cb101-53" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb101-54"><a href="#cb101-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-55"><a href="#cb101-55" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Restore Fail2Ban Configuration</span></span>
+<span id="cb101-56"><a href="#cb101-56" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Restoring Fail2Ban configuration..."</span></span>
+<span id="cb101-57"><a href="#cb101-57" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/fail2ban"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb101-58"><a href="#cb101-58" aria-hidden="true" tabindex="-1"></a>    <span class="ex">apt-get</span> install <span class="at">-y</span> fail2ban <span class="op">&gt;</span>/dev/null</span>
+<span id="cb101-59"><a href="#cb101-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/fail2ban/"</span> /etc/fail2ban/</span>
+<span id="cb101-60"><a href="#cb101-60" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb101-61"><a href="#cb101-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-62"><a href="#cb101-62" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Restore Network Configuration</span></span>
+<span id="cb101-63"><a href="#cb101-63" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Restoring network configuration..."</span></span>
+<span id="cb101-64"><a href="#cb101-64" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/network"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/network/"</span> /etc/network/</span>
+<span id="cb101-65"><a href="#cb101-65" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/systemd_network"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/systemd_network/"</span> /etc/systemd/network/</span>
+<span id="cb101-66"><a href="#cb101-66" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/netplan"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/netplan/"</span> /etc/netplan/</span>
+<span id="cb101-67"><a href="#cb101-67" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hosts.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hosts.bak"</span> /etc/hosts</span>
+<span id="cb101-68"><a href="#cb101-68" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hostname.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hostname.bak"</span> /etc/hostname</span>
+<span id="cb101-69"><a href="#cb101-69" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/resolv.conf.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/resolv.conf.bak"</span> /etc/resolv.conf</span>
+<span id="cb101-70"><a href="#cb101-70" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/wpa_supplicant"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/wpa_supplicant/"</span> /etc/wpa_supplicant/</span>
+<span id="cb101-71"><a href="#cb101-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-72"><a href="#cb101-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-73"><a href="#cb101-73" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Restore Package List</span></span>
+<span id="cb101-74"><a href="#cb101-74" aria-hidden="true" tabindex="-1"></a><span class="co">#echo "Reinstalling packages from backup..."</span></span>
+<span id="cb101-75"><a href="#cb101-75" aria-hidden="true" tabindex="-1"></a><span class="co">#if [ -f "$BACKUP_DIR/package_list.txt" ]; then</span></span>
+<span id="cb101-76"><a href="#cb101-76" aria-hidden="true" tabindex="-1"></a><span class="co">#    apt-get update &amp;&amp; apt-get install -y dselect</span></span>
+<span id="cb101-77"><a href="#cb101-77" aria-hidden="true" tabindex="-1"></a><span class="co">#    dpkg --set-selections &lt; "$BACKUP_DIR/package_list.txt"</span></span>
+<span id="cb101-78"><a href="#cb101-78" aria-hidden="true" tabindex="-1"></a><span class="co">#    apt-get dselect-upgrade -y</span></span>
+<span id="cb101-79"><a href="#cb101-79" aria-hidden="true" tabindex="-1"></a><span class="co">#fi</span></span>
+<span id="cb101-80"><a href="#cb101-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-81"><a href="#cb101-81" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart services</span></span>
+<span id="cb101-82"><a href="#cb101-82" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart systemd-networkd wpa_supplicant@wlan0.service ssh ufw fail2ban </span>
+<span id="cb101-83"><a href="#cb101-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-84"><a href="#cb101-84" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Configuration restoration completed. A system reboot is recommended."</span></span>
+<span id="cb101-85"><a href="#cb101-85" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span> <span class="at">-p</span> <span class="st">"Would you like to reboot now? (y/n): "</span> <span class="va">REBOOT</span></span>
+<span id="cb101-86"><a href="#cb101-86" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span> <span class="st">"</span><span class="va">$REBOOT</span><span class="st">"</span> <span class="ot">==</span> <span class="st">"y"</span> <span class="kw">||</span> <span class="st">"</span><span class="va">$REBOOT</span><span class="st">"</span> <span class="ot">==</span> <span class="st">"Y"</span> <span class="kw">]]</span> <span class="kw">&amp;&amp;</span> <span class="ex">reboot</span></span>
+<span id="cb101-87"><a href="#cb101-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-88"><a href="#cb101-88" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You probably have some questions about the script let me explain some of the decisions I made while doing some trial and error testing.</p>
+<ul>
+<li>Originally, I had the backup directory as a value in the script call itself, now it just defaults to the <code>master/</code> backup
+<ul>
+<li>This backup is one I know that works and is in the format I’m hoping</li>
+<li>Easier to have a standard version to reference than relying on monthly backups</li>
+</ul></li>
+<li>I had a lot of issues with incorrect permissions after restoring backups previously, so it needs to be run with <code>sudo</code></li>
+<li>First, the user and group information is important, a lot of processes behind the scenes rely on these configurations
+<ul>
+<li>Part of this, I added an explicit <code>chmod</code> call because after the reboot, I was getting an error with <code>whoami</code>
+<ul>
+<li>The command <code>whoami</code> returns which user you are/currently running commands as</li>
+<li>The user and group info wasn’t exactly the same, it was leaving my user <code>chris</code> as UID 1000, but changing the group to 1003</li>
+<li>The <code>chmod</code> call fixes that</li>
+</ul></li>
+</ul></li>
+<li>Second, restoring the <code>ssh</code> configurations ensures security and remote connectivity</li>
+<li>Third, <code>ufw</code> increases your system security</li>
+<li>Fourth, <code>fail2ban</code> does the same by improving security</li>
+<li>Fifth, restoring the network configurations, originally, I had issues because <code>networkd</code> wasn’t included
+<ul>
+<li>This block ensures all of the <code>systemd</code> configurations are included</li>
+</ul></li>
+<li>Sixth <strong>Package List TBD</strong></li>
+<li>Then, the specific services we modified are all explicitly started
+<ul>
+<li>While developing this, some of the services wouldn’t necessarily start, so I would run into network or ssh issues post-reboot</li>
+</ul></li>
+<li>Finally, the script asks you to <code>reboot</code> your system so all of the changes take affect</li>
+</ul>
+<div class="sourceCode" id="cb102"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the script executable</span></span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x /scripts/config_restore.sh</span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the script</span></span>
+<span id="cb102-5"><a href="#cb102-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./scripts/config_restore.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
+<section id="final-thoughts" class="level3">
+<h3 class="anchored" data-anchor-id="final-thoughts">Final Thoughts</h3>
+<p>At the time of writing this, I’ve tested and revised everything up until this point. There are a few things I haven’t added yet, that I want to later, once it’s necessary.</p>
+<ol type="1">
+<li>Saving the installed packages and their requirements, similar to a <code>uv</code> lockfile or <code>.venv</code> requirements.txt file.
+<ol type="1">
+<li>Modify the restore script to restore packages to exactly where they should be</li>
+<li>Not necessary now, because only Traceroute, ufw, and fail2ban were installed; however, when other apps are added this will be helpful for tracking dependencies and versioning issues</li>
+</ol></li>
+<li>Creating a private repoistory for storing configuration files, scripts, etc. and then using that, rather than rsync with my laptop</li>
+<li>Do some more granular network configurations, inlcuding subnets and static IPs</li>
+</ol>
+</section>
+</section>
+<section id="changing-your-boot-media-device" class="level2">
+<h2 class="anchored" data-anchor-id="changing-your-boot-media-device">Changing Your Boot Media Device</h2>
+<p>When you’re moving from one boot device to another on a Raspberry Pi, you’re essentially telling the system where to find its operating system files. The Raspberry Pi’s bootloader looks for specific files on a FAT32 partition to begin the boot process, then loads the main operating system from the root partition. This transition is a fundamental server administration skill that every system administrator should understand.</p>
+<p>The transition involves several critical steps.</p>
+<ul>
+<li>First, we prepare the SSD with a fresh operating system installation.</li>
+<li>Then we properly shut down the system to ensure no data corruption occurs.</li>
+<li>Next, we physically reconfigure the hardware to make the SSD the primary boot device.</li>
+<li>Finally, we verify that everything works correctly and remove the temporary boot media.</li>
+</ul>
+<p>Think of this process like moving into a new house. You’ve already built the structure (partitioning), but now you need to move all your belongings (the operating system) into it, update your mailing address (boot configuration), and ensure everything works in the new location.</p>
+<section id="boot-configuration-transition-process" class="level3">
+<h3 class="anchored" data-anchor-id="boot-configuration-transition-process">Boot Configuration Transition Process</h3>
+<p>The good news, we’ve already done most of the work required and what we haven’t is going to be something we did for the original boot device. We’ll first run a few commands from the server, do one thing on a different computer, and then we’ll be back to the server.</p>
+<ol type="1">
+<li>First, you’ll need to flash a fresh Ubuntu Server LTS image onto your newly partitioned SSD. This process will write the operating system files to the appropriate partitions you created. This should be done on your Raspberry Pi server.</li>
+</ol>
+<div class="sourceCode" id="cb103"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Before removing the SSD, check its device identifier one more time</span></span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> lsblk <span class="at">-o</span> NAME,SIZE,FSTYPE,LABEL,TYPE,MOUNTPOINT</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now you’ll need to use RPi Imager on your MacBook:</p>
+<ul>
+<li>Connect the SSD to your MacBook</li>
+<li>Open Raspberry Pi Imager</li>
+<li>Select Ubuntu Server LTS (same version you used before)</li>
+<li>Select your SSD as the storage device</li>
+<li>Use the exact same advanced settings you used when first setting up your Raspberry Pi:
+<ul>
+<li>Same username (chris)</li>
+<li>Same password</li>
+<li>Same SSH key settings</li>
+<li>Same WiFi credentials</li>
+</ul></li>
+</ul>
+<p>The reason we use identical settings is to reduce the amount of changes needed to replicate the environment we previously configured. Your SSH keys, user permissions, and network configurations will all match what we know works for an initial boot, eliminating the need to reconfigure everything from scratch.</p>
+<ol start="2" type="1">
+<li>Before making any hardware changes, we need to ensure all data is written to disk and all processes are safely terminated. This prevents corruption and data loss during the transition.</li>
+</ol>
+<div class="sourceCode" id="cb104"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save any unsaved work and exit all applications</span></span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure no important processes are running</span></span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sync all file system buffers to disk</span></span>
+<span id="cb104-5"><a href="#cb104-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sync</span>
+<span id="cb104-6"><a href="#cb104-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-7"><a href="#cb104-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for any open files on your current boot device (thumb drive)</span></span>
+<span id="cb104-8"><a href="#cb104-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> lsof <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-E</span> <span class="st">'^[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +FIFO'</span></span>
+<span id="cb104-9"><a href="#cb104-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-10"><a href="#cb104-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Display active processes to ensure nothing critical is running</span></span>
+<span id="cb104-11"><a href="#cb104-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> aux <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> <span class="st">'\['</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>The <code>sync</code> command forces all pending disk writes to complete immediately. This is crucial because Linux uses write caching for performance, meaning data might still be in memory waiting to be written.</li>
+<li>The <code>lsof</code> command lists open files, helping you identify any processes that might be accessing the current boot device.</li>
+<li>The <code>ps aux</code> command shows all active processes, giving you a final check that nothing important is running.</li>
+</ul>
+<ol start="3" type="1">
+<li>A proper shutdown sequence ensures all services stop gracefully and file systems are cleanly unmounted:</li>
+</ol>
+<div class="sourceCode" id="cb105"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform a clean system shutdown</span></span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> shutdown now</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The shutdown command initiates a clean shutdown sequence. The <code>-h</code> flag tells the system to halt (power off) after shutdown. This is important because the system may not power off, especially on older systems—it could just bring it to single-user mode or runlevel 1, depending on configuration. While now indicates the shutdown should happen immediately. This command:</p>
+<ul>
+<li>Sends a termination signal to all running processes</li>
+<li>Allows services to save their state and clean up</li>
+<li>Unmounts all filesystems in the correct order</li>
+<li>Finally powers down the system</li>
+</ul>
+<ol start="4" type="1">
+<li>Now comes the physical hardware transition. With your Raspberry Pi powered off:</li>
+</ol>
+<ul>
+<li>Remove the thumb drive (current boot device)</li>
+<li>Connect the SSD via USB to the Raspberry Pi</li>
+<li>Set aside the microSD card (backup device)</li>
+<li>Ensure all connections are secure</li>
+</ul>
+<p>This step is straightforward but crucial. The Raspberry Pi will attempt to boot from the first bootable device it finds. By removing the thumb drive and connecting the SSD, we’re ensuring the Pi finds and uses the SSD as its boot device. We do not need to remove the SD card used for backups, because it never had an OS flashed onto it. The card’s file system just provides extra memory, instead of being an extra operating system.</p>
+<ol start="5" type="1">
+<li>Power on your Raspberry Pi and observe the boot process.</li>
+</ol>
+<p>Make sure to connect your monitor and keyboard before the boto begins. The boot process should proceed similarly to your initial setup. The Raspberry Pi firmware reads the configuration from the SSD’s boot partition, loads the kernel, and then mounts the root filesystem. If everything works correctly, you should see the familiar Ubuntu Server boot messages and eventually reach a login prompt.</p>
+<p><strong>Good news,</strong> you won’t need to do this again (for this server). After this, you’ll have your core system, memory, and configurations complete.</p>
+<ol start="6" type="1">
+<li>After booting, you’ll need to log in directly to the Raspberry Pi using a keyboard and monitor. This is because the SSH service may not be running automatically on the fresh installation.</li>
+</ol>
+<ul>
+<li>Connect a keyboard and monitor to your Raspberry Pi</li>
+<li>Log in with your username and password</li>
+<li>Start the SSH service manually:</li>
+</ul>
+<div class="sourceCode" id="cb106"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start the SSH service to enable remote connections</span></span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl start ssh</span>
+<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-4"><a href="#cb106-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the service is running</span></span>
+<span id="cb106-5"><a href="#cb106-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status ssh</span>
+<span id="cb106-6"><a href="#cb106-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-7"><a href="#cb106-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Test a remote connection from your client machine</span></span>
+<span id="cb106-8"><a href="#cb106-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Test SSH connection (initially with password authentication)</span></span>
+<span id="cb106-9"><a href="#cb106-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> chris@192.168.1.152</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>You’ll need to specify the local IP because none of the ssh configs are updated yet
+<ul>
+<li>Your nonstandard port, <code>45000</code> in this guide</li>
+<li>The local IP may be a different one in the 192.168.0.0/16 range (which is reserved for local IPs)</li>
+</ul></li>
+<li>If this is working and you can remotely connect, then we can move on to the next step</li>
+</ul>
+<ol start="7" type="1">
+<li>With SSH access established, transfer your configuration backup and restore scripts from your computer to the Raspberry Pi:</li>
+</ol>
+<p>First, make sure to create the directory, because it won’t exist on a fresh boot. The, from your client computer, a MacBook in my case, you’ll run the <code>rsync</code> commands to move the master backup and scripts. Notice that you can use either the <code>~</code> shortcut to denote your home directory, or write the path explicitly. We’ll also need to move the master backup to the proper backup directory, so the restore script works properly.</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On the Raspberry Pi, create the backup directory structure</span></span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /mnt/backups/configs/</span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a><span class="co"># From your MacBook, copy your backup files to the Pi</span></span>
+<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-avz</span> ~/path/to/backups/configs/master chris@ubuntu-pi-server:/home/chris/</span>
+<span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-7"><a href="#cb107-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy your restore script to the Pi</span></span>
+<span id="cb107-8"><a href="#cb107-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-avz</span> ~/path/to/scripts/config_restore.sh chris@ubuntu-pi-server:~/scripts/</span>
+<span id="cb107-9"><a href="#cb107-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-10"><a href="#cb107-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Move the master backup directory to the correct location</span></span>
+<span id="cb107-11"><a href="#cb107-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mv /home/chris/master /mnt/backups/configs/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="8" type="1">
+<li>Run the Configuration Restore Script</li>
+</ol>
+<div class="sourceCode" id="cb108"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure the script is executable</span></span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x ~/scripts/config_restore.sh</span>
+<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the restore script</span></span>
+<span id="cb108-5"><a href="#cb108-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./scripts/config_restore.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="9" type="1">
+<li>Verify the System</li>
+</ol>
+<div class="sourceCode" id="cb109"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the root filesystem device</span></span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span> /</span>
+<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-4"><a href="#cb109-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the microSD card is mounted properly</span></span>
+<span id="cb109-5"><a href="#cb109-5" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span> /mnt/backups</span>
+<span id="cb109-6"><a href="#cb109-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-7"><a href="#cb109-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that your backup files are accessible</span></span>
+<span id="cb109-8"><a href="#cb109-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /mnt/backups/configs/</span>
+<span id="cb109-9"><a href="#cb109-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-10"><a href="#cb109-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify your network settings</span></span>
+<span id="cb109-11"><a href="#cb109-11" aria-hidden="true" tabindex="-1"></a><span class="ex">ip</span> addr show</span>
+<span id="cb109-12"><a href="#cb109-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-13"><a href="#cb109-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Check System configurations</span></span>
+<span id="cb109-14"><a href="#cb109-14" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status ssh</span>
+<span id="cb109-15"><a href="#cb109-15" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status ufw</span>
+<span id="cb109-16"><a href="#cb109-16" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status fail2ban</span>
+<span id="cb109-17"><a href="#cb109-17" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status systemd-networkd</span>
+<span id="cb109-18"><a href="#cb109-18" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status wpa_supplicant@wlan0.service</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>df -h /</code> command shows disk usage statistics for the root filesystem, including which device it’s mounted from. You should see <code>/dev/sdb2</code> (or similar) listed as the root device, and <code>/dev/sdb1</code> as the boot device, not the thumb drive identifier you used before. You’ll see a similar output, just focused on your <code>/backups</code> directory when running the second command. The <code>ls -la</code> command shows you all of the contents of a directory, as well as the permissions. The other commands you should be familiar with by now.</p>
+</section>
+<section id="final-thoughts-1" class="level3">
+<h3 class="anchored" data-anchor-id="final-thoughts-1">Final Thoughts</h3>
+<p>Our Ubuntu Raspberry Pi Server is now booting from the SSD, and all your previous configurations have been restored. This configuration provides a solid foundation for the more advanced server features we’ll implement in the next sections. By moving to SSD boot, we’ve significantly improved our server’s performance profile. SSDs offer several advantages over traditional storage media:</p>
+<ul>
+<li><strong>Faster boot times:</strong> Your Raspberry Pi will start much more quickly</li>
+<li><strong>Improved I/O performance:</strong> Database operations, file access, and application loading will be noticeably faster</li>
+<li><strong>Better reliability:</strong> SSDs have no moving parts, making them more resilient to physical impacts</li>
+<li><strong>Lower power consumption:</strong> SSDs typically use less power than traditional hard drives</li>
+</ul>
+<p>The transition to SSD boot also aligns with modern server practices, where solid-state storage is becoming the standard for production environments. This configuration will serve us well as we expand into containerization with Docker and orchestration with Kubernetes.</p>
+</section>
+</section>
+<section id="remote-development-with-vs-code" class="level2">
+<h2 class="anchored" data-anchor-id="remote-development-with-vs-code">Remote Development with VS Code</h2>
+
+
 </section>
 
 </main> <!-- /main -->
