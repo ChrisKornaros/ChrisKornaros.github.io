@@ -2470,6 +2470,13 @@ echo "Restoring user and group information..."
 [ -f "$BACKUP_DIR/shadow.bak" ] && rsync -a "$BACKUP_DIR/shadow.bak" /etc/shadow
 [ -f "$BACKUP_DIR/gshadow.bak" ] && rsync -a "$BACKUP_DIR/gshadow.bak" /etc/gshadow
 
+# Explicitly Set Permissions for Critical System Files
+echo "Fixing critical system file permissions..."
+chmod 644 /etc/passwd   # Read-write for root, read-only for everyone else
+chmod 644 /etc/group    # Read-write for root, read-only for everyone else  
+chmod 640 /etc/shadow   # Read-write for root, read-only for shadow group
+chmod 640 /etc/gshadow  # Read-write for root, read-only for shadow group
+
 # 2. Restore SSH Configuration
 echo "Restoring SSH configuration..."
 [ -d "$BACKUP_DIR/ssh" ] && rsync -a "$BACKUP_DIR/ssh/" /etc/ssh/

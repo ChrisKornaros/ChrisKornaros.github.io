@@ -356,8 +356,6 @@ cookieconsent.run({
   <ul>
   <li><a href="#setting-up-the-backup-directory" id="toc-setting-up-the-backup-directory" class="nav-link" data-scroll-target="#setting-up-the-backup-directory">Setting Up the Backup Directory</a></li>
   <li><a href="#configuration-files-backup" id="toc-configuration-files-backup" class="nav-link" data-scroll-target="#configuration-files-backup">Configuration Files Backup</a></li>
-  <li><a href="#system-files-backup" id="toc-system-files-backup" class="nav-link" data-scroll-target="#system-files-backup">System Files Backup</a></li>
-  <li><a href="#understanding-the-rsync-options" id="toc-understanding-the-rsync-options" class="nav-link" data-scroll-target="#understanding-the-rsync-options">Understanding the rsync Options</a></li>
   <li><a href="#storing-your-backups-externally" id="toc-storing-your-backups-externally" class="nav-link" data-scroll-target="#storing-your-backups-externally">Storing your backups externally</a>
   <ul class="collapse">
   <li><a href="#rsync-for-remote-transfers" id="toc-rsync-for-remote-transfers" class="nav-link" data-scroll-target="#rsync-for-remote-transfers">Rsync for Remote Transfers</a></li>
@@ -365,9 +363,6 @@ cookieconsent.run({
   </ul></li>
   <li><a href="#note" id="toc-note" class="nav-link" data-scroll-target="#note"><strong>Note:</strong></a></li>
   <li><a href="#restoring-from-backup" id="toc-restoring-from-backup" class="nav-link" data-scroll-target="#restoring-from-backup">Restoring from Backup</a></li>
-  <li><a href="#important-notes" id="toc-important-notes" class="nav-link" data-scroll-target="#important-notes">Important Notes</a></li>
-  <li><a href="#automating-the-backup" id="toc-automating-the-backup" class="nav-link" data-scroll-target="#automating-the-backup">Automating the Backup</a></li>
-  <li><a href="#troubleshooting-2" id="toc-troubleshooting-2" class="nav-link" data-scroll-target="#troubleshooting-2">Troubleshooting</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/projects/data_engineering/posts/raspberry_pi_server.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -497,7 +492,7 @@ cookieconsent.run({
 <ul>
 <li><strong>Units:</strong> Everything systemd manages is represented as a “unit” with a corresponding configuration file. Units include:
 <ul>
-<li><strong>Service units (<code>.service</code>):</strong> Define how to start, stop, and manage daemons</li>
+<li><strong>Service units (<code>.service</code>):</strong> Define how to start, stop, and manage daemons (background processes that are always on)</li>
 <li><strong>Socket units (<code>.socket</code>):</strong> Manage network/IPC sockets</li>
 <li><strong>Timer units (<code>.timer</code>):</strong> Trigger other units based on timers</li>
 <li><strong>Mount units (<code>.mount</code>):</strong> Control filesystem mount points</li>
@@ -2674,7 +2669,7 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 <span id="cb93-11"><a href="#cb93-11" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"UUID=</span><span class="va">$(</span><span class="fu">sudo</span> blkid <span class="at">-s</span> UUID <span class="at">-o</span> value /dev/sdb4<span class="va">)</span><span class="st"> /mnt/data ext4 defaults,noatime 0 2"</span> <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="at">-a</span> /etc/fstab</span>
 <span id="cb93-12"><a href="#cb93-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb93-13"><a href="#cb93-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Mount all filesystems </span><span class="al">TBD</span><span class="co"> ON THIS</span></span>
-<span id="cb93-14"><a href="#cb93-14" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount <span class="at">-a</span> !!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb93-14"><a href="#cb93-14" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount <span class="at">-a</span> TBD HERE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><code>swapon</code>: Activates the swap partition</li>
 <li><code>defaults,noatime</code>: Standard mount options with access time recording disabled for better performance</li>
@@ -2731,7 +2726,7 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 </ul>
 <section id="setting-up-the-backup-directory" class="level3">
 <h3 class="anchored" data-anchor-id="setting-up-the-backup-directory">Setting Up the Backup Directory</h3>
-<p>First, we’ll prepare the backup directory structure and set appropriate permissions:</p>
+<p>First, in case you didn’t do this earlier, we’ll prepare the backup directory structure and set appropriate permissions:</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create backup directories if they don't exist</span></span>
 <span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /mnt/backups/configs</span>
 <span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /mnt/backups/system</span>
@@ -2780,93 +2775,42 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 <span id="cb97-33"><a href="#cb97-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-34"><a href="#cb97-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 6. Network Configuration</span></span>
 <span id="cb97-35"><a href="#cb97-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/network/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/network/"</span></span>
-<span id="cb97-36"><a href="#cb97-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/netplan/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/netplan/"</span></span>
-<span id="cb97-37"><a href="#cb97-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/NetworkManager/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/NetworkManager/"</span></span>
+<span id="cb97-36"><a href="#cb97-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXV</span> /etc/systemd/network/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/systemd_network/"</span></span>
+<span id="cb97-37"><a href="#cb97-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/netplan/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/netplan/"</span></span>
 <span id="cb97-38"><a href="#cb97-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/hosts <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hosts.bak"</span></span>
 <span id="cb97-39"><a href="#cb97-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/hostname <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hostname.bak"</span></span>
 <span id="cb97-40"><a href="#cb97-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/resolv.conf <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/resolv.conf.bak"</span></span>
-<span id="cb97-41"><a href="#cb97-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/wpa_supplicant/wpa_supplicant.conf <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/wpa_supplicant.conf.bak"</span></span>
+<span id="cb97-41"><a href="#cb97-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/wpa_supplicant/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/wpa_supplicant/"</span></span>
 <span id="cb97-42"><a href="#cb97-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-43"><a href="#cb97-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 7. Package Manager Configurations (apt)</span></span>
-<span id="cb97-44"><a href="#cb97-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/apt/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/apt/"</span></span>
+<span id="cb97-43"><a href="#cb97-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 7. Systemd Services and Timers</span></span>
+<span id="cb97-44"><a href="#cb97-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/systemd/system/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/systemd/"</span></span>
 <span id="cb97-45"><a href="#cb97-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-46"><a href="#cb97-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 8. Systemd Services and Timers</span></span>
-<span id="cb97-47"><a href="#cb97-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/systemd/system/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/systemd/"</span></span>
-<span id="cb97-48"><a href="#cb97-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-49"><a href="#cb97-49" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 9. Logrotate Configuration</span></span>
-<span id="cb97-50"><a href="#cb97-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/logrotate.conf <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/logrotate.conf.bak"</span></span>
-<span id="cb97-51"><a href="#cb97-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/logrotate.d/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/logrotate.d/"</span></span>
-<span id="cb97-52"><a href="#cb97-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-53"><a href="#cb97-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 10. Timezone and Locale</span></span>
-<span id="cb97-54"><a href="#cb97-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/timezone <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/timezone.bak"</span></span>
-<span id="cb97-55"><a href="#cb97-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/localtime <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/localtime.bak"</span></span>
-<span id="cb97-56"><a href="#cb97-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/default/locale <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/locale.bak"</span></span>
+<span id="cb97-46"><a href="#cb97-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 8. Logrotate Configuration</span></span>
+<span id="cb97-47"><a href="#cb97-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/logrotate.conf <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/logrotate.conf.bak"</span></span>
+<span id="cb97-48"><a href="#cb97-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/logrotate.d/. <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/logrotate.d/"</span></span>
+<span id="cb97-49"><a href="#cb97-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-50"><a href="#cb97-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 9. Timezone and Locale</span></span>
+<span id="cb97-51"><a href="#cb97-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/timezone <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/timezone.bak"</span></span>
+<span id="cb97-52"><a href="#cb97-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/localtime <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/localtime.bak"</span></span>
+<span id="cb97-53"><a href="#cb97-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/default/locale <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/locale.bak"</span></span>
+<span id="cb97-54"><a href="#cb97-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-55"><a href="#cb97-55" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 10. Keyboard Configuration</span></span>
+<span id="cb97-56"><a href="#cb97-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/default/keyboard <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/keyboard.bak"</span></span>
 <span id="cb97-57"><a href="#cb97-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-58"><a href="#cb97-58" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 11. Keyboard Configuration</span></span>
-<span id="cb97-59"><a href="#cb97-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/default/keyboard <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/keyboard.bak"</span></span>
-<span id="cb97-60"><a href="#cb97-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-61"><a href="#cb97-61" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 12. Package List</span></span>
-<span id="cb97-62"><a href="#cb97-62" aria-hidden="true" tabindex="-1"></a>    <span class="ex">dpkg</span> <span class="at">--get-selections</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/package_list.txt"</span></span>
+<span id="cb97-58"><a href="#cb97-58" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set appropriate permissions</span></span>
+<span id="cb97-59"><a href="#cb97-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chown <span class="at">-R</span> chris:chris <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb97-60"><a href="#cb97-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chmod <span class="at">-R</span> 600 <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb97-61"><a href="#cb97-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-62"><a href="#cb97-62" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Configuration backup completed at: </span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
 <span id="cb97-63"><a href="#cb97-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-64"><a href="#cb97-64" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set appropriate permissions</span></span>
-<span id="cb97-65"><a href="#cb97-65" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chown <span class="at">-R</span> chris:chris <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb97-66"><a href="#cb97-66" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chmod <span class="at">-R</span> 600 <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb97-67"><a href="#cb97-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-68"><a href="#cb97-68" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Configuration backup completed at: </span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb97-69"><a href="#cb97-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-70"><a href="#cb97-70" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$LOG_FILE</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
-<span id="cb97-71"><a href="#cb97-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-72"><a href="#cb97-72" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Logs available at: </span><span class="va">$LOG_FILE</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb97-64"><a href="#cb97-64" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$LOG_FILE</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb97-65"><a href="#cb97-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-66"><a href="#cb97-66" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Logs available at: </span><span class="va">$LOG_FILE</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb98"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the script executable</span></span>
-<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x /scripts/config_backup.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="system-files-backup" class="level3">
-<h3 class="anchored" data-anchor-id="system-files-backup">System Files Backup</h3>
-<p>For system files, we’ll create a separate rsync script that handles system directories efficiently:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="va">DATEYMD</span><span class="op">=</span><span class="va">$(</span><span class="fu">date</span> +%Y%m%d<span class="va">)</span></span>
-<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a><span class="va">BACKUP_DIR</span><span class="op">=</span><span class="st">"/mnt/backups/system/</span><span class="va">$DATEYMD</span><span class="st">"</span></span>
-<span id="cb99-5"><a href="#cb99-5" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_DIR</span><span class="op">=</span><span class="st">"/mnt/backups/logs"</span></span>
-<span id="cb99-6"><a href="#cb99-6" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_FILE</span><span class="op">=</span><span class="st">"</span><span class="va">$LOG_DIR</span><span class="st">/</span><span class="va">${DATEYMD}</span><span class="st">_system_backup.log"</span></span>
-<span id="cb99-7"><a href="#cb99-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-8"><a href="#cb99-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-9"><a href="#cb99-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-10"><a href="#cb99-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create backup directory</span></span>
-<span id="cb99-11"><a href="#cb99-11" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb99-12"><a href="#cb99-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-13"><a href="#cb99-13" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
-<span id="cb99-14"><a href="#cb99-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Starting script</span></span>
-<span id="cb99-15"><a href="#cb99-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Starting system backup at: </span><span class="va">$(</span><span class="fu">date</span><span class="va">)</span><span class="st">"</span></span>
-<span id="cb99-16"><a href="#cb99-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Backup directory: </span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb99-17"><a href="#cb99-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-18"><a href="#cb99-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The --one-file-system option prevents crossing filesystem boundaries</span></span>
-<span id="cb99-19"><a href="#cb99-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --hard-links preserves hard links</span></span>
-<span id="cb99-20"><a href="#cb99-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --acls and --xattrs preserve extended attributes</span></span>
-<span id="cb99-21"><a href="#cb99-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> <span class="at">--one-file-system</span> <span class="at">--hard-links</span> <span class="dt">\</span></span>
-<span id="cb99-22"><a href="#cb99-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">--exclude</span><span class="op">=</span><span class="st">"/mnt/"</span> <span class="dt">\</span></span>
-<span id="cb99-23"><a href="#cb99-23" aria-hidden="true" tabindex="-1"></a>        / <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb99-24"><a href="#cb99-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-25"><a href="#cb99-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. System Information Files</span></span>
-<span id="cb99-26"><a href="#cb99-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Partition layout</span></span>
-<span id="cb99-27"><a href="#cb99-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> fdisk <span class="at">-l</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/partition_layout.txt"</span></span>
-<span id="cb99-28"><a href="#cb99-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Disk UUIDs</span></span>
-<span id="cb99-29"><a href="#cb99-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> blkid <span class="op">&gt;</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/disk_uuids.txt"</span></span>
-<span id="cb99-30"><a href="#cb99-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-31"><a href="#cb99-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set appropriate permissions</span></span>
-<span id="cb99-32"><a href="#cb99-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chown <span class="at">-R</span> chris:chris <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb99-33"><a href="#cb99-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chmod <span class="at">-R</span> 600 <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb99-34"><a href="#cb99-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-35"><a href="#cb99-35" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"System backup completed at: </span><span class="va">$BACKUP_DIR</span><span class="st">."</span></span>
-<span id="cb99-36"><a href="#cb99-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-37"><a href="#cb99-37" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$LOG_FILE</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
-<span id="cb99-38"><a href="#cb99-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-39"><a href="#cb99-39" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Logs available at: </span><span class="va">$LOG_FILE</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb100"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the script executable</span></span>
-<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x /scripts/system_backup.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="understanding-the-rsync-options" class="level3">
-<h3 class="anchored" data-anchor-id="understanding-the-rsync-options">Understanding the rsync Options</h3>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x /scripts/config_backup.sh</span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the script</span></span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/config_backup.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The rsync commands use several important options:</p>
 <ul>
 <li><code>-a</code>: Archive mode, preserves almost everything</li>
@@ -2885,7 +2829,7 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 <section id="rsync-for-remote-transfers" class="level4">
 <h4 class="anchored" data-anchor-id="rsync-for-remote-transfers">Rsync for Remote Transfers</h4>
 <p>Rsync is specifically designed for copying and transferring files, so it offers more sophisticated file synchronization capabilities than basic tools like SCP.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-avz</span> <span class="at">--partial</span> <span class="at">--progress</span> <span class="at">--update</span> chris@ubuntu-pi-server:/mnt/backups/system/master/ ~/Documents/raspberry_pi_server/backups/system/master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-avz</span> <span class="at">--partial</span> <span class="at">--progress</span> <span class="at">--update</span> chris@ubuntu-pi-server:/mnt/backups/configs/master/ ~/Documents/raspberry_pi_server/backups/configs/master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The flags do the following:</p>
 <ul>
 <li><code>-a</code>: Archive mode, which preserves permissions, timestamps, symbolic links, etc.</li>
@@ -2906,57 +2850,104 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 </section>
 <section id="restoring-from-backup" class="level3">
 <h3 class="anchored" data-anchor-id="restoring-from-backup">Restoring from Backup</h3>
-<p>To restore your system from these backups:</p>
-</section>
-<section id="important-notes" class="level3">
-<h3 class="anchored" data-anchor-id="important-notes">Important Notes</h3>
-<ol type="1">
+<p>Now that we’ve backed up all of the configurations we’ve made so far, it’s time to create a script that restores that backup. At the time of writing this, I’ve probably had to reflash a fresh image and reconfigure things between 10 and 20 times. I’m so good at it, that I can now do it all in under 30 minutes. That being said, it’s much easier to do when you can just run a script that takes all of the configurations from your <code>Master</code> backup and overwrites the defaults.</p>
+<p>First, here are some important things to remember:</p>
+<ul>
 <li>The <code>--delete</code> option during restore will remove files at the destination that don’t exist in the backup. Use with caution.</li>
 <li>Consider using rsync’s <code>--dry-run</code> option to test backups and restores without making changes.</li>
 <li>The backup includes sensitive system files. Store it securely and restrict access.</li>
 <li>Consider encrypting the backup directory for additional security.</li>
 <li>Test the restore process in a safe environment before using in production.</li>
-</ol>
-</section>
-<section id="automating-the-backup" class="level3">
-<h3 class="anchored" data-anchor-id="automating-the-backup">Automating the Backup</h3>
-<p>Create a master backup script that runs both configuration and system backups:</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create master backup script (save as master-backup.sh)</span></span>
-<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&lt;&lt; 'EOF'</span> <span class="op">&gt;</span> /mnt/backups/master-backup.sh</span>
-<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a><span class="st">#!/bin/bash</span></span>
-<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb102-5"><a href="#cb102-5" aria-hidden="true" tabindex="-1"></a><span class="st"># Set up logging</span></span>
-<span id="cb102-6"><a href="#cb102-6" aria-hidden="true" tabindex="-1"></a><span class="st">exec 1&gt; &gt;(logger -s -t $(basename $0)) 2&gt;&amp;1</span></span>
-<span id="cb102-7"><a href="#cb102-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb102-8"><a href="#cb102-8" aria-hidden="true" tabindex="-1"></a><span class="st"># Run configuration backup</span></span>
-<span id="cb102-9"><a href="#cb102-9" aria-hidden="true" tabindex="-1"></a><span class="st">/mnt/backup/backup-configs.sh</span></span>
-<span id="cb102-10"><a href="#cb102-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb102-11"><a href="#cb102-11" aria-hidden="true" tabindex="-1"></a><span class="st"># Run system backup</span></span>
-<span id="cb102-12"><a href="#cb102-12" aria-hidden="true" tabindex="-1"></a><span class="st">/mnt/backup/backup-system.sh</span></span>
-<span id="cb102-13"><a href="#cb102-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb102-14"><a href="#cb102-14" aria-hidden="true" tabindex="-1"></a><span class="st"># Remove backups older than 30 days</span></span>
-<span id="cb102-15"><a href="#cb102-15" aria-hidden="true" tabindex="-1"></a><span class="st">find /mnt/backups/configs/ -type d -mtime +30 -exec rm -rf {} +</span></span>
-<span id="cb102-16"><a href="#cb102-16" aria-hidden="true" tabindex="-1"></a><span class="st">find /mnt/backups/system/ -type d -mtime +30 -exec rm -rf {} +</span></span>
-<span id="cb102-17"><a href="#cb102-17" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
-<span id="cb102-18"><a href="#cb102-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb102-19"><a href="#cb102-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the script executable</span></span>
-<span id="cb102-20"><a href="#cb102-20" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x /mnt/backup/master-backup.sh</span>
-<span id="cb102-21"><a href="#cb102-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb102-22"><a href="#cb102-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to crontab (run daily at 2 AM)</span></span>
-<span id="cb102-23"><a href="#cb102-23" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="fu">crontab</span> <span class="at">-l</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null<span class="kw">;</span> <span class="bu">echo</span> <span class="st">"0 2 * * * /mnt/backup/master-backup.sh"</span><span class="kw">)</span> <span class="kw">|</span> <span class="fu">crontab</span> <span class="at">-</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="troubleshooting-2" class="level3">
-<h3 class="anchored" data-anchor-id="troubleshooting-2">Troubleshooting</h3>
-<p>If you encounter issues:</p>
-<ol type="1">
-<li>Check rsync error messages with <code>--verbose</code> option</li>
-<li>Verify sufficient disk space with <code>df -h</code></li>
-<li>Monitor backup progress with <code>--progress</code> option</li>
-<li>Check system logs: <code>sudo journalctl -u cron</code></li>
-<li>Verify file permissions and ownership</li>
-<li>Test network connectivity for remote backups</li>
-</ol>
-<p>Remember to regularly verify your backups by checking the log files and occasionally testing the restore process in a safe environment.</p>
+</ul>
+<p>Now, let’s write the script.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple Configuration Restoration Script for Ubuntu Pi Server</span></span>
+<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a><span class="va">BACKUP_DIR</span><span class="op">=</span><span class="va">${1</span><span class="op">:-</span><span class="st">"/mnt/backups/configs/master"</span><span class="va">}</span></span>
+<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-6"><a href="#cb100-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if script is run as root</span></span>
+<span id="cb100-7"><a href="#cb100-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$(</span><span class="fu">id</span> <span class="at">-u</span><span class="va">)</span><span class="st">"</span> <span class="ot">-ne</span> 0 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb100-8"><a href="#cb100-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Error: This script must be run as root. Try using sudo."</span></span>
+<span id="cb100-9"><a href="#cb100-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb100-10"><a href="#cb100-10" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb100-11"><a href="#cb100-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-12"><a href="#cb100-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the backup directory exists</span></span>
+<span id="cb100-13"><a href="#cb100-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb100-14"><a href="#cb100-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Error: Backup directory not found: </span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb100-15"><a href="#cb100-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Usage: </span><span class="va">$0</span><span class="st"> [backup_directory_path]"</span></span>
+<span id="cb100-16"><a href="#cb100-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb100-17"><a href="#cb100-17" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb100-18"><a href="#cb100-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-19"><a href="#cb100-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Begin restoration process</span></span>
+<span id="cb100-20"><a href="#cb100-20" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Starting configuration restoration from </span><span class="va">$BACKUP_DIR</span><span class="st">..."</span></span>
+<span id="cb100-21"><a href="#cb100-21" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"This will overwrite current system configurations with those from the backup."</span></span>
+<span id="cb100-22"><a href="#cb100-22" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span> <span class="at">-p</span> <span class="st">"Continue with restoration? (y/n): "</span> <span class="va">CONFIRM</span></span>
+<span id="cb100-23"><a href="#cb100-23" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">[[</span> <span class="st">"</span><span class="va">$CONFIRM</span><span class="st">"</span> <span class="ot">!=</span> <span class="st">"y"</span> <span class="kw">&amp;&amp;</span> <span class="st">"</span><span class="va">$CONFIRM</span><span class="st">"</span> <span class="ot">!=</span> <span class="st">"Y"</span> <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb100-24"><a href="#cb100-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Restoration aborted by user."</span></span>
+<span id="cb100-25"><a href="#cb100-25" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 0</span>
+<span id="cb100-26"><a href="#cb100-26" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb100-27"><a href="#cb100-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-28"><a href="#cb100-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Restore User and Group Information</span></span>
+<span id="cb100-29"><a href="#cb100-29" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Restoring user and group information..."</span></span>
+<span id="cb100-30"><a href="#cb100-30" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/passwd.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/passwd.bak"</span> /etc/passwd</span>
+<span id="cb100-31"><a href="#cb100-31" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/group.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/group.bak"</span> /etc/group</span>
+<span id="cb100-32"><a href="#cb100-32" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/shadow.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/shadow.bak"</span> /etc/shadow</span>
+<span id="cb100-33"><a href="#cb100-33" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/gshadow.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/gshadow.bak"</span> /etc/gshadow</span>
+<span id="cb100-34"><a href="#cb100-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-35"><a href="#cb100-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Explicitly Set Permissions for Critical System Files</span></span>
+<span id="cb100-36"><a href="#cb100-36" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Fixing critical system file permissions..."</span></span>
+<span id="cb100-37"><a href="#cb100-37" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 644 /etc/passwd   <span class="co"># Read-write for root, read-only for everyone else</span></span>
+<span id="cb100-38"><a href="#cb100-38" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 644 /etc/group    <span class="co"># Read-write for root, read-only for everyone else  </span></span>
+<span id="cb100-39"><a href="#cb100-39" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 640 /etc/shadow   <span class="co"># Read-write for root, read-only for shadow group</span></span>
+<span id="cb100-40"><a href="#cb100-40" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 640 /etc/gshadow  <span class="co"># Read-write for root, read-only for shadow group</span></span>
+<span id="cb100-41"><a href="#cb100-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-42"><a href="#cb100-42" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Restore SSH Configuration</span></span>
+<span id="cb100-43"><a href="#cb100-43" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Restoring SSH configuration..."</span></span>
+<span id="cb100-44"><a href="#cb100-44" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ssh"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ssh/"</span> /etc/ssh/</span>
+<span id="cb100-45"><a href="#cb100-45" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 600 /etc/ssh/ssh_host_<span class="pp">*</span>_key <span class="dv">2</span><span class="op">&gt;</span>/dev/null <span class="kw">||</span> <span class="fu">true</span></span>
+<span id="cb100-46"><a href="#cb100-46" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 644 /etc/ssh/ssh_host_<span class="pp">*</span>_key.pub <span class="dv">2</span><span class="op">&gt;</span>/dev/null <span class="kw">||</span> <span class="fu">true</span></span>
+<span id="cb100-47"><a href="#cb100-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-48"><a href="#cb100-48" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Restore UFW Configuration</span></span>
+<span id="cb100-49"><a href="#cb100-49" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Restoring UFW configuration..."</span></span>
+<span id="cb100-50"><a href="#cb100-50" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ufw"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb100-51"><a href="#cb100-51" aria-hidden="true" tabindex="-1"></a>    <span class="ex">apt-get</span> install <span class="at">-y</span> ufw <span class="op">&gt;</span>/dev/null</span>
+<span id="cb100-52"><a href="#cb100-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/ufw/"</span> /etc/ufw/</span>
+<span id="cb100-53"><a href="#cb100-53" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb100-54"><a href="#cb100-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-55"><a href="#cb100-55" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Restore Fail2Ban Configuration</span></span>
+<span id="cb100-56"><a href="#cb100-56" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Restoring Fail2Ban configuration..."</span></span>
+<span id="cb100-57"><a href="#cb100-57" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/fail2ban"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb100-58"><a href="#cb100-58" aria-hidden="true" tabindex="-1"></a>    <span class="ex">apt-get</span> install <span class="at">-y</span> fail2ban <span class="op">&gt;</span>/dev/null</span>
+<span id="cb100-59"><a href="#cb100-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/fail2ban/"</span> /etc/fail2ban/</span>
+<span id="cb100-60"><a href="#cb100-60" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb100-61"><a href="#cb100-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-62"><a href="#cb100-62" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Restore Network Configuration</span></span>
+<span id="cb100-63"><a href="#cb100-63" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Restoring network configuration..."</span></span>
+<span id="cb100-64"><a href="#cb100-64" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/network"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/network/"</span> /etc/network/</span>
+<span id="cb100-65"><a href="#cb100-65" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/systemd_network"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/systemd_network/"</span> /etc/systemd/network/</span>
+<span id="cb100-66"><a href="#cb100-66" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/netplan"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/netplan/"</span> /etc/netplan/</span>
+<span id="cb100-67"><a href="#cb100-67" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hosts.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hosts.bak"</span> /etc/hosts</span>
+<span id="cb100-68"><a href="#cb100-68" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hostname.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/hostname.bak"</span> /etc/hostname</span>
+<span id="cb100-69"><a href="#cb100-69" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/resolv.conf.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/resolv.conf.bak"</span> /etc/resolv.conf</span>
+<span id="cb100-70"><a href="#cb100-70" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/wpa_supplicant"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/wpa_supplicant/"</span> /etc/wpa_supplicant/</span>
+<span id="cb100-71"><a href="#cb100-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-72"><a href="#cb100-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-73"><a href="#cb100-73" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Restore Package List</span></span>
+<span id="cb100-74"><a href="#cb100-74" aria-hidden="true" tabindex="-1"></a><span class="co">#echo "Reinstalling packages from backup..."</span></span>
+<span id="cb100-75"><a href="#cb100-75" aria-hidden="true" tabindex="-1"></a><span class="co">#if [ -f "$BACKUP_DIR/package_list.txt" ]; then</span></span>
+<span id="cb100-76"><a href="#cb100-76" aria-hidden="true" tabindex="-1"></a><span class="co">#    apt-get update &amp;&amp; apt-get install -y dselect</span></span>
+<span id="cb100-77"><a href="#cb100-77" aria-hidden="true" tabindex="-1"></a><span class="co">#    dpkg --set-selections &lt; "$BACKUP_DIR/package_list.txt"</span></span>
+<span id="cb100-78"><a href="#cb100-78" aria-hidden="true" tabindex="-1"></a><span class="co">#    apt-get dselect-upgrade -y</span></span>
+<span id="cb100-79"><a href="#cb100-79" aria-hidden="true" tabindex="-1"></a><span class="co">#fi</span></span>
+<span id="cb100-80"><a href="#cb100-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-81"><a href="#cb100-81" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart services</span></span>
+<span id="cb100-82"><a href="#cb100-82" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart systemd-networkd wpa_supplicant@wlan0.service ssh ufw fail2ban </span>
+<span id="cb100-83"><a href="#cb100-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-84"><a href="#cb100-84" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Configuration restoration completed. A system reboot is recommended."</span></span>
+<span id="cb100-85"><a href="#cb100-85" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span> <span class="at">-p</span> <span class="st">"Would you like to reboot now? (y/n): "</span> <span class="va">REBOOT</span></span>
+<span id="cb100-86"><a href="#cb100-86" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span> <span class="st">"</span><span class="va">$REBOOT</span><span class="st">"</span> <span class="ot">==</span> <span class="st">"y"</span> <span class="kw">||</span> <span class="st">"</span><span class="va">$REBOOT</span><span class="st">"</span> <span class="ot">==</span> <span class="st">"Y"</span> <span class="kw">]]</span> <span class="kw">&amp;&amp;</span> <span class="ex">reboot</span></span>
+<span id="cb100-87"><a href="#cb100-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-88"><a href="#cb100-88" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
