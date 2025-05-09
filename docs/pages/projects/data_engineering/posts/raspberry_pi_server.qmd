@@ -14,22 +14,211 @@ Back to this guide, eventually I'd like to setup an actual server cluster and se
 
 It's worth adding, I bought the 8GB Raspberry Pi 4. The price difference isn't that great, but the performance is between the lesser 2GB and 4GB models. Additionally, because I'm planning to host and experiment with CI/CD, I also bought a case and cooling fan to help with longevity. All in, the base price for that (with the power supply and HDMI cable) is \$107.30 before taxes, shipping, and other fees.
 
-## Starting from (*close*) to Zero {#sec-requirements}
+### Guide Outline
 
+1. [Introduction](@sec-introduction)
+
+- Purpose and scope of the guide
+- What you'll learn and build
+- Prerequisites and assumptions
+
+2. [Initial Setup](@sec-setup)
+
+- [Hardware Requirements](@sec-hardware_requirements)
+  - Raspberry Pi 4 specifications
+  - Storage devices (Thumbdrive, SSD, microSD cards)
+  - Accessories and peripherals (Keyboard, monitor, etc.)
+- [Image Requirements](@sec-image_requirements)
+  - Selecting and downloading Ubuntu Server LTS
+  - Using Raspberry Pi Imager
+  - Initial configuration options
+- [First Boot Process](@sec-first_boot)
+  - Connection and startup
+  - Understanding initialization
+
+3. [Linux Server Basics](@sec-linux)
+
+- [Service Management with systemd](@sec-systemd)
+  - Understanding systemd units and targets
+  - Basic service commands
+- [Understanding Your Home Directory](@sec-home_directory)
+  - Shell configuration files
+  - Hidden application directories
+- [The Root Filesystem](@sec-root_filesystem)
+  - Filesystem Hierarchy Standard (FHS)
+  - Key directories and their purposes
+- [User and Group Permissions](@sec-permissions)
+  - Basic permission concepts
+  - chmod and chown usage
+  - Understanding advanced permissions
+
+4. [Networking Basics](@sec-network)
+
+- [Computer Networking Fundamentals](@sec-network_fundamentals)
+  - OSI and TCP/IP models
+  - Key networking protocols
+
+
+Network Connections
+
+Wired vs wireless configurations
+Understanding IP addressing
+
+
+Ubuntu Server Networking Tools
+
+Testing connectivity
+Viewing network statistics
+
+
+systemd-networkd
+
+Configuration file structure
+Wired and wireless setup
+
+
+Converting Netplan to networkd
+
+Why and how to transition
+Troubleshooting network issues
+
+
+Advanced Networking
+
+Subnets and routing
+Security considerations
+
+
+
+1. [SSH (Secure Shell)](@sec-ssh)
+
+Understanding SSH Configuration
+
+Client vs server setup
+Key-based authentication
+
+
+Server-Side SSH Configuration
+
+Host keys and security options
+Optimizing for security
+
+
+Client-Side Configuration
+
+Setting up SSH config
+Managing known hosts
+
+
+Additional Security Measures
+
+Firewall configuration with UFW
+Intrusion prevention with Fail2Ban
+
+
+Secure File Transfers
+
+Using SCP (Secure Copy Protocol)
+Using rsync for efficient transfers
+
+
+
+6. Partitions
+
+Partitioning Basics
+
+Understanding partition tables and types
+Filesystem options and considerations
+
+
+Partitioning Tools
+
+Using parted and other utilities
+
+
+Partitioning for Backups
+
+Setting up microSD cards
+Mount points and fstab configuration
+
+
+Partitioning your SSD
+
+Boot and root partitions
+Formatting and preparation
+
+
+Advanced Partitioning
+
+Monitoring usage
+Resizing partitions
+
+
+
+7. Backups and Basic Automation
+
+Setting Up the Backup Directory
+
+Directory structure and permissions
+
+
+Configuration Files Backup
+
+Using rsync for system configurations
+Remote transfers of backups
+
+
+Restoring from Backup
+
+Creating restoration scripts
+Testing recovery procedures
+
+
+
+8. Changing Your Boot Media Device
+
+Boot Configuration Transition
+
+Flashing OS to new media
+Proper shutdown procedures
+
+
+Hardware Reconfiguration
+
+Physically changing boot devices
+
+
+Verification and Restoration
+
+Testing the new boot configuration
+Restoring configurations
+
+
+
+9. Remote Development with VS Code
+
+Setting Up VS Code Remote SSH
+Managing Remote Projects
+Debugging and Terminal Integration
+
+## Starting from (*close*) to Zero {#sec-requirements}
 ### Hardware Requirements
 
 This section will provide basic setup instructions, so you'll have the same tools I do and can follow along with this guide, step-by-step.
 
--   Raspberry Pi 4 8GB
--   Micro HDMI to HDMI cord (for direct access)
--   Appropriate Power Supply
--   Keyboard (connected via USB for direct access)
--   1TB Samsung T7 SSD (connected via USB for boot media/core memory)
--   64GB Generic Flash Drive (used as the boot media when partitioning the SSD)
--   Amazon Basics 128GB microSD card (or other microSD cards for backups media)
--   SSH-capable devices for headless access
-    -   I'm using a MacBook Air
-    -   I prefer the MacOS and Terminal for personal development, because I use Windows at my day job
+- Raspberry Pi 4 8GB
+  - Micro HDMI to HDMI cord (for direct access)
+  - Protective case
+  - Cooling fan
+  - Appropriate Power Supply
+- Keyboard (connected via USB for direct access)
+- Monitor (for direct access)
+- 1TB Samsung T7 SSD (connected via USB for boot media/core memory)
+- 64GB Generic Flash Drive (used as the boot media when partitioning the SSD)
+- Amazon Basics 128GB microSD card (or other microSD cards for backups media)
+- SSH-capable devices for headless access
+    - I'm using a MacBook Air
+    - I prefer the MacOS and Terminal for personal development, because I use Windows at my day job
 
 ### Image requirements
 
@@ -62,6 +251,9 @@ Once you have your hardware ready to go, you can being setting up the software. 
     ![](images/ubuntu-pi-config-options.png) These are more preference based, but it's nice to have the storage device automatically eject once the flashing is complete. Then, you just need to unplug it and plug it into your Raspberry Pi to get going.
 
 ### Get Started
+It's time to get the actual Raspberry Pi device setup. For most of this guide, I recommend leaving the Pi outside of the case, because it'll be easier to plug and unplug some of the devices-- the microSD slot is not accessible while the case is on. Later, once we've got everything configured and setup as we like, we will attach the fan and case, so it's a bit safer and able to run in an *always-on* state. I'll share a picture of what my server looks like during the early development, and then later I'll show what it looks like with everything connected and setup. 
+
+![](images/naked-pi.png)
 
 Now you're ready to plug your boot media device (the Thumb Drive) into your Raspberry Pi. You should also connect a keyboard, monitor, and power supply. Once all of this is connected, your Raspberry Pi will boot up. Connecting a monitor and keyboard will allow you to directly interact with the system's terminal. Ideally, you'll use SSH, but it may be helpful to have direct access in case there are any network issues. Eventually, the SSD will serve as the boot media and primary storage device for the server; however, we can't modify its partitions while it's serving as the boot device. So, we'll use a thumb drive as the boot media device, until we complete the partitions.
 
