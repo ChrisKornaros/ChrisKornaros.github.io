@@ -201,6 +201,35 @@ Setting Up VS Code Remote SSH
 Managing Remote Projects
 Debugging and Terminal Integration
 
+11. Containerization with Docker
+
+Docker Installation and Setup
+Managing Images and Containers
+Creating Custom Images
+Docker Compose for Multi-container Applications
+CI/CD Integration
+
+12. Container Orchestration with Kubernetes
+
+Kubernetes Concepts
+Setting Up a Kubernetes Cluster
+Deployment Strategies
+Managing Resources
+Scaling Applications
+
+14. Monitoring and Maintenance
+
+System Monitoring Tools
+Log Management
+Performance Optimization
+Security Updates and Patching
+
+15. Advanced Topics and Next Steps
+
+Expanding Your Cluster
+Additional Self-hosted Services
+Contributing to Open Source
+
 ## Starting from (*close*) to Zero {#sec-requirements}
 ### Hardware Requirements
 
@@ -383,7 +412,7 @@ Beyond those, you'll also find hidden application directories.
 -   `.dotnet`: Contains .NET Core SDK and runtime files if you've installed the .NET development platform.
 -   `.ssh`: Stores SSH configuration files and keys:
     -   `authorized_keys`: Lists public keys that can authenticate to your account
-    -   `id_ecdsa` & `id_ecdsa.pub`: Your private and public ECDSA keys (More on this in the [SSH Section](@sec-ssh))
+    -   `ubuntu_pi_ecdsa` & `ubuntu_pi_ecdsa.pub`: Your private and public ECDSA keys (More on this in the [SSH Section](@sec-ssh))
     -   `known_hosts`: Tracks hosts you've connected to previously
     -   `ssh_config`: Optional configuration file for SSH connections
 -   `.sudo_as_admin_successful`: A marker file created when you successfully use sudo. Its presence suppresses the "sudo capabilities" message when opening a terminal.
@@ -1632,15 +1661,15 @@ This command:
 
 The command generates two files:
 
--   `~/.ssh/id_ecdsa`: Your private key (keep this secret!)
--   `~/.ssh/id_ecdsa.pub`: Your public key (safe to share)
+-   `~/.ssh/ubuntu_pi_ecdsa`: Your private key (keep this secret!)
+-   `~/.ssh/ubuntu_pi_ecdsa.pub`: Your public key (safe to share)
 
 #### Installing Your Public Key on the Raspberry Pi
 
 Transferring your public key to your Raspberry Pi is easy, just know the following will not work if you generated a key-pair when flashing the image. This only works if you currently have password authentication enabled.
 
 ``` bash
-ssh-copy-id -i ~/.ssh/id_ecdsa.pub chris@ubuntu-pi-server
+ssh-copy-id -i ~/.ssh/ubuntu_pi_ecdsa.pub chris@ubuntu-pi-server
 ```
 
 This command:
@@ -1744,7 +1773,7 @@ Create or edit `~/.ssh/config` on your laptop:
 Host ubuntu-pi-server
     HostName ubuntu-pi-server
     User chris
-    IdentityFile ~/.ssh/id_ecdsa
+    IdentityFile ~/.ssh/ubuntu_pi_ecdsa
     Port 45000
 ```
 
@@ -1936,8 +1965,8 @@ sudo tail -f /var/log/auth.log
 ``` bash
 # On your laptop
 chmod 700 ~/.ssh
-chmod 600 ~/.ssh/id_ecdsa
-chmod 644 ~/.ssh/id_ecdsa.pub
+chmod 600 ~/.ssh/ubuntu_pi_ecdsa
+chmod 644 ~/.ssh/ubuntu_pi_ecdsa.pub
 
 # On your Pi
 chmod 700 ~/.ssh
@@ -2051,7 +2080,7 @@ The wildcard pattern `*.sh` tells SCP to match all files with the `.sh` extensio
 To copy entire directories with their contents:
 
 ``` bash
-scp -r chris@ubuntu-pi-server:~/mnt/backups/ ~/Documents/raspberry_pi_server/configsbackups
+scp -r chris@ubuntu-pi-server:~/mnt/backups/ ~/Documents/raspberry_pi_server/backups/configs
 ```
 
 The `-r` flag (recursive) tells SCP to copy directories and their contents.
@@ -2074,7 +2103,11 @@ To copy a single file from server to client:
 rsync -avz ubuntu-pi-server:~/configs/25-wireless.network ~/Documents/raspberry_pi_server/configs
 ```
 
-Let's break down these common flags: - `-a`: Archive mode, preserves permissions, timestamps, etc. (shorthand for `-rlptgoD`) - `-v`: Verbose, shows detailed progress - `-z`: Compresses data during transfer, saving bandwidth
+Let's break down these common flags:
+
+- `-a`: Archive mode, preserves permissions, timestamps, etc. (shorthand for `-rlptgoD`)
+- `-v`: Verbose, shows detailed progress 
+- `-z`: Compresses data during transfer, saving bandwidth
 
 #### Syncing Directories with rsync
 
@@ -2086,7 +2119,10 @@ rsync -avz --progress ubuntu-pi-server:~/configs/ ~/Documents/raspberry_pi_serve
 
 The `--progress` flag shows a progress bar for each file transfer, which is particularly useful for large files.
 
-**Important Note**: The trailing slash on the source path (`~/configs/`) is significant: - **With trailing slash**: Copies the contents of the directory - **Without trailing slash**: Copies the directory itself and its contents
+**Important Note**: The trailing slash on the source path (`~/configs/`) is significant
+
+- **With trailing slash**: Copies the contents of the directory 
+- **Without trailing slash**: Copies the directory itself and its contents
 
 #### Syncing in Reverse (Client to Server)
 
@@ -2117,6 +2153,15 @@ rsync -avz --delete ~/Documents/raspberry_pi_server/configs chris@ubuntu-pi-serv
 The `--delete` flag removes files from the destination that no longer exist in the source, creating a perfect mirror. Use with caution!
 
 #### Advanced rsync Examples
+#### Custom SSH Parameters
+
+To specify specific ssh paramters, such as key file or port:
+
+```bash
+rsync -avz --progress -e 'ssh -p 45000 -i ~/.ssh/ubuntu_pi_ecdsa'  chris@192.168.1.151:/mnt/backups/configs/master backups/configs/
+```
+
+The `e` flag tells rsync to execute ssh with those specific flags, when it initiates the connection.
 
 #### Excluding Files or Directories
 
@@ -2507,34 +2552,61 @@ BACKUP_DIR="/mnt/backups/configs/$DATEYMD"
 LOG_DIR="/mnt/backups/logs"
 LOG_FILE="$LOG_DIR/${DATEYMD}_config_backup.log"
 
+# Check if script is run as root
+if [ "$(id -u)" -ne 0 ]; then
+    echo "Error: This script must be run as root. Try using sudo."
+    exit 1
+fi
+
 # Create backup directory
 mkdir -p "$BACKUP_DIR"
 
 {
     # 1. User and Group Information
+    echo "Backing up User and Group configuration..."
     sudo rsync -aAXv /etc/passwd "$BACKUP_DIR/passwd.bak"
     sudo rsync -aAXv /etc/group "$BACKUP_DIR/group.bak"
     sudo rsync -aAXv /etc/shadow "$BACKUP_DIR/shadow.bak"
     sudo rsync -aAXv /etc/gshadow "$BACKUP_DIR/gshadow.bak"
 
     # 2. Crontab Configurations
+    echo "Backing up Crontab configuration..."
     sudo rsync -aAXv /etc/crontab "$BACKUP_DIR/"
     sudo rsync -aAXv /var/spool/cron/crontabs/. "$BACKUP_DIR/crontabs/"
 
-    # 3. SSH Configuration
+     # 3. SSH Configuration
+    echo "Backing up SSH configuration..."
     sudo rsync -aAXv /etc/ssh/. "$BACKUP_DIR/ssh/"
-    sudo rsync -aAXv ~/.ssh/. "$BACKUP_DIR/user_ssh/"
+    
+    # Create user_ssh directory
+    mkdir -p "$BACKUP_DIR/user_ssh"
+    
+    # Copy SSH user configuration with explicit handling of authorized_keys
+    rsync -aAXv /home/chris/.ssh/config "$BACKUP_DIR/user_ssh/" 2>/dev/null || true
+    rsync -aAXv /home/chris/.ssh/id_* "$BACKUP_DIR/user_ssh/" 2>/dev/null || true
+    rsync -aAXv /home/chris/.ssh/known_hosts "$BACKUP_DIR/user_ssh/" 2>/dev/null || true
+    
+    # Explicitly backup authorized_keys if it exists
+    if [ -f /home/chris/.ssh/authorized_keys ]; then
+        echo "Backing up authorized_keys file..."
+        rsync -aAXv /home/chris/.ssh/authorized_keys "$BACKUP_DIR/user_ssh/"
+    else
+        echo "No authorized_keys file found in /home/chris/.ssh/"
+    fi
 
     # 4. UFW (Uncomplicated Firewall) Configuration
+    echo "Backing up ufw configuration..."
     sudo rsync -aAXv /etc/ufw/. "$BACKUP_DIR/ufw/"
     sudo ufw status verbose > "$BACKUP_DIR/ufw_rules.txt"
 
     # 5. Fail2Ban Configuration
+    echo "Backing up fail2ban configuration..."
     sudo rsync -aAXv /etc/fail2ban/. "$BACKUP_DIR/fail2ban/"
 
     # 6. Network Configuration
+    echo "Backing up Network configuration..."
     sudo rsync -aAXv /etc/network/. "$BACKUP_DIR/network/"
-    sudo rsync -aAXV /etc/systemd/network/. "$BACKUP_DIR/systemd_network/"
+    sudo rsync -aAXv /etc/systemd/network/. "$BACKUP_DIR/systemd/network/"
     sudo rsync -aAXv /etc/netplan/. "$BACKUP_DIR/netplan/"
     sudo rsync -aAXv /etc/hosts "$BACKUP_DIR/hosts.bak"
     sudo rsync -aAXv /etc/hostname "$BACKUP_DIR/hostname.bak"
@@ -2542,21 +2614,30 @@ mkdir -p "$BACKUP_DIR"
     sudo rsync -aAXv /etc/wpa_supplicant/. "$BACKUP_DIR/wpa_supplicant/"
 
     # 7. Systemd Services and Timers
+    echo "Backing up Systemd Timers configuration..."
     sudo rsync -aAXv /etc/systemd/system/. "$BACKUP_DIR/systemd/"
 
     # 8. Logrotate Configuration
+    echo "Backing up Logrotate configuration..."
     sudo rsync -aAXv /etc/logrotate.conf "$BACKUP_DIR/logrotate.conf.bak"
     sudo rsync -aAXv /etc/logrotate.d/. "$BACKUP_DIR/logrotate.d/"
 
     # 9. Timezone and Locale
+    echo "Backing up Timezone and Locale configuration..."
     sudo rsync -aAXv /etc/timezone "$BACKUP_DIR/timezone.bak"
     sudo rsync -aAXv /etc/localtime "$BACKUP_DIR/localtime.bak"
     sudo rsync -aAXv /etc/default/locale "$BACKUP_DIR/locale.bak"
 
     # 10. Keyboard Configuration
+    echo "Backing up Keyboard configuration..."
     sudo rsync -aAXv /etc/default/keyboard "$BACKUP_DIR/keyboard.bak"
 
+    # 11. Filesystem Table (fstab)
+    echo "Backing up filesystem table (fstab)..."
+    sudo rsync -aAXv /etc/fstab "$BACKUP_DIR/fstab.bak"
+
     # Set appropriate permissions
+    echo "Configuring backup directory permissions..."
     sudo chown -R chris:chris "$BACKUP_DIR"
     sudo chmod -R 600 "$BACKUP_DIR"
 
@@ -2682,15 +2763,18 @@ fi
 # 5. Restore Network Configuration
 echo "Restoring network configuration..."
 [ -d "$BACKUP_DIR/network" ] && rsync -a "$BACKUP_DIR/network/" /etc/network/
-[ -d "$BACKUP_DIR/systemd_network" ] && rsync -a "$BACKUP_DIR/systemd_network/" /etc/systemd/network/
+[ -d "$BACKUP_DIR/systemd/network" ] && rsync -a "$BACKUP_DIR/systemd/network/" /etc/systemd/network/
 [ -d "$BACKUP_DIR/netplan" ] && rsync -a "$BACKUP_DIR/netplan/" /etc/netplan/
 [ -f "$BACKUP_DIR/hosts.bak" ] && rsync -a "$BACKUP_DIR/hosts.bak" /etc/hosts
 [ -f "$BACKUP_DIR/hostname.bak" ] && rsync -a "$BACKUP_DIR/hostname.bak" /etc/hostname
 [ -f "$BACKUP_DIR/resolv.conf.bak" ] && rsync -a "$BACKUP_DIR/resolv.conf.bak" /etc/resolv.conf
 [ -d "$BACKUP_DIR/wpa_supplicant" ] && rsync -a "$BACKUP_DIR/wpa_supplicant/" /etc/wpa_supplicant/
 
+# 6. Restore Filesystem Table (fstab)
+echo "Restoring filesystem table (fstab)..."
+[ -f "$BACKUP_DIR/fstab.bak" ] && rsync -a "$BACKUP_DIR/fstab.bak" /etc/fstab
 
-# 6. Restore Package List
+# 7. Restore Package List
 #echo "Reinstalling packages from backup..."
 #if [ -f "$BACKUP_DIR/package_list.txt" ]; then
 #    apt-get update && apt-get install -y dselect
@@ -2719,6 +2803,7 @@ You probably have some questions about the script let me explain some of the dec
     - The command `whoami` returns which user you are/currently running commands as
     - The user and group info wasn't exactly the same, it was leaving my user `chris` as UID 1000, but changing the group to 1003
     - The `chmod` call fixes that
+    - You can use `getent group | grep 'chris'` to view all group IDs and assignments
 - Second, restoring the `ssh` configurations ensures security and remote connectivity
 - Third, `ufw` increases your system security
 - Fourth, `fail2ban` does the same by improving security
@@ -2847,7 +2932,7 @@ sudo systemctl status ssh
 
 # Test a remote connection from your client machine
 # Test SSH connection (initially with password authentication)
-ssh chris@192.168.1.152
+ssh chris@192.168.1.151
 ```
 
 - You'll need to specify the local IP because none of the ssh configs are updated yet
@@ -2909,7 +2994,7 @@ sudo systemctl status wpa_supplicant@wlan0.service
 The `df -h /` command shows disk usage statistics for the root filesystem, including which device it's mounted from. You should see `/dev/sdb2` (or similar) listed as the root device, and `/dev/sdb1` as the boot device, not the thumb drive identifier you used before. You'll see a similar output, just focused on your `/backups` directory when running the second command. The `ls -la` command shows you all of the contents of a directory, as well as the permissions. The other commands you should be familiar with by now.
 
 ### Final Thoughts
-Our Ubuntu Raspberry Pi Server is now booting from the SSD, and all your previous configurations have been restored. This configuration provides a solid foundation for the more advanced server features we'll implement in the next sections. By moving to SSD boot, we've significantly improved our server's performance profile. SSDs offer several advantages over traditional storage media:
+Our Ubuntu Raspberry Pi Server is now booting from the SSD, and all your previous configurations have been restored. You may notice that on reboot, running `sudo lsblk` will show your SSD under a different This configuration provides a solid foundation for the more advanced server features we'll implement in the next sections. By moving to SSD boot, we've significantly improved our server's performance profile. SSDs offer several advantages over traditional storage media:
 
 - **Faster boot times:** Your Raspberry Pi will start much more quickly
 - **Improved I/O performance:** Database operations, file access, and application loading will be noticeably faster
@@ -2920,3 +3005,14 @@ The transition to SSD boot also aligns with modern server practices, where solid
 
 ## Remote Development with VS Code
 
+
+
+## Automation and Monitoring
+
+
+
+## Docker
+
+
+
+## Kubernetes
