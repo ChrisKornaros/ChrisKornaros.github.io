@@ -12,226 +12,176 @@ This guide provides step-by-step instructions and explanations for configuring a
 
 Back to this guide, eventually I'd like to setup an actual server cluster and self-host some interesting, more resource-intensive applications. Before I make that kind of commitment, I wanted to learn the basics and see if this is something I would enjoy-- the good news, I learned I do. The great news, Raspberry Pi makes their hardware very affordable and easy to purchase. Here's the official webpage for the exact computer I [bought](https://www.pishop.us/product/raspberry-pi-4-model-b-8gb/?searchid=0&search_query=Raspberry+Pi+4).
 
-It's worth adding, I bought the 8GB Raspberry Pi 4. The price difference isn't that great, but the performance is between the lesser 2GB and 4GB models. Additionally, because I'm planning to host and experiment with CI/CD, I also bought a case and cooling fan to help with longevity. All in, the base price for that (with the power supply and HDMI cable) is \$107.30 before taxes, shipping, and other fees.
+It's worth adding, I bought the 8GB Raspberry Pi 4. The price difference isn't that great, but the performance is, between the lesser 2GB and 4GB models. Additionally, because I'm planning to host and experiment with CI/CD, I also bought a case and cooling fan to help with longevity. All in, the base price for that (with the power supply and HDMI cable) is $107.30 before taxes, shipping, and other fees.
+
+Finally, you'll see an outline below, you can gloss over it to get a general idea of what we'll be doing and in what order. At the start of each section I'll include a key terms list that has all of the fundamental terms which are important for a given topic.
 
 ### Guide Outline
 
 1. [Introduction](@sec-introduction)
 
-- Purpose and scope of the guide
-- What you'll learn and build
-- Prerequisites and assumptions
+   - Purpose and scope of the guide
+   - What you'll learn and build
+   - Prerequisites and assumptions
 
 2. [Initial Setup](@sec-setup)
 
-- [Hardware Requirements](@sec-hardware_requirements)
-  - Raspberry Pi 4 specifications
-  - Storage devices (Thumbdrive, SSD, microSD cards)
-  - Accessories and peripherals (Keyboard, monitor, etc.)
-- [Image Requirements](@sec-image_requirements)
-  - Selecting and downloading Ubuntu Server LTS
-  - Using Raspberry Pi Imager
-  - Initial configuration options
-- [First Boot Process](@sec-first_boot)
-  - Connection and startup
-  - Understanding initialization
+   - [Hardware Requirements](@sec-hardware_requirements)
+     - Raspberry Pi 4 specifications
+     - Storage devices (Thumbdrive, SSD, microSD cards)
+     - Accessories and peripherals (Keyboard, monitor, etc.)
+   - [Image Requirements](@sec-image_requirements)
+     - Selecting and downloading Ubuntu Server LTS
+     - Using Raspberry Pi Imager
+     - Initial configuration options
+   - [Get Started](@sec-get_started)
+     - The physical setup of the Raspberry Pi, what to plug in, where, etc.
+     - What to expect as things turn on
 
 3. [Linux Server Basics](@sec-linux)
 
-- [Service Management with systemd](@sec-systemd)
-  - Understanding systemd units and targets
-  - Basic service commands
-- [Understanding Your Home Directory](@sec-home_directory)
-  - Shell configuration files
-  - Hidden application directories
-- [The Root Filesystem](@sec-root_filesystem)
-  - Filesystem Hierarchy Standard (FHS)
-  - Key directories and their purposes
-- [User and Group Permissions](@sec-permissions)
-  - Basic permission concepts
-  - chmod and chown usage
-  - Understanding advanced permissions
+   - [First Boot Process](@sec-first_boot)
+     - Connection and startup
+     - Understanding initialization
+   - [Service Management with systemd](@sec-systemd)
+     - Understanding systemd units and targets
+     - Basic service commands
+   - [Understanding Your Home Directory](@sec-home_directory)
+     - Shell configuration files
+     - Hidden application directories
+   - [The Root Filesystem](@sec-root_filesystem)
+     - Filesystem Hierarchy Standard (FHS)
+     - Key directories and their purposes
+   - [User and Group Permissions](@sec-permissions)
+     - Basic permission concepts
+     - chmod and chown usage
+     - Understanding advanced permissions
 
 4. [Networking Basics](@sec-network)
 
-- [Computer Networking Fundamentals](@sec-network_fundamentals)
-  - OSI and TCP/IP models
-  - Key networking protocols
+   - [Computer Networking Fundamentals](@sec-network_fundamentals)
+     - OSI and TCP/IP models
+     - Key networking protocols
+   - [Network Connections](@sec-network_connections)
+     - Wired vs wireless configurations
+     - Understanding IP addressing
+   - [Ubuntu Server Networking Tools](@sec-ubuntu_server_network_tools)
+     - Testing connectivity
+     - Viewing network statistics
+   - [systemd-networkd](@sec-systemd_networkd)
+     - Configuration file structure
+     - Wired and wireless setup
+   - [Converting Netplan to networkd](@sec-netplan_to_networkd)
+     - Why and how to transition
+     - Troubleshooting network issues
+   - [Advanced Networking](@sec-advanced_networking)
+     - Subnets and routing
+     - Security considerations
+
+5. [SSH (Secure Shell)](@sec-ssh)
+
+   - [Understanding SSH Configuration](@sec-ssh_config)
+     - Client vs server setup
+     - Key-based authentication
+   - [Key-Based Authentication](@sec-ssh_keys)
+     - Types of SSH key encryption
+     - Generating keys
+     - Installing the public key
+   - [Server-Side SSH Configuration](@sec-ssh_config_server)
+     - Host keys and security options
+     - Optimizing for security
+   - [Client-Side Configuration](@sec-ssh_config_client)
+     - Setting up SSH config
+     - Managing known hosts
+   - [Additional Security Measures](@sec-ssh_security)
+     - Firewall configuration with UFW
+     - Intrusion prevention with Fail2Ban
+   - [Secure File Transfers](@sec-scp_rsync)
+     - Using SCP (Secure Copy Protocol)
+     - Using rsync for efficient transfers
+
+6. [Partitions](@sec-partitions)
+
+   - [Partitioning Basics](@sec-partition_basics)
+     - Understanding partition tables and types
+     - Filesystem options and considerations
+   - [Partitioning Tools](@sec-partition_tools)
+     - Using parted and other utilities
+   - [Partitioning for Backups](@sec-partition_for_backups)
+     - Setting up microSD cards
+     - Mount points and fstab configuration
+   - [Partitioning your SSD](@sec-partition_ssd)
+     - Boot and root partitions
+     - Formatting and preparation
+   - [Advanced Partitioning](@sec-partition_advanced)
+     - Monitoring usage
+     - Resizing partitions
+
+7. [Backups and Basic Automation](@sec-backups)
+   
+   - [Setting Up the Backup Directory](@sec-backups_directory)
+     - Directory structure and permissions
+   - [Configuration Files Backup](@sec-backups_configs)
+     - Using rsync for system configurations
+     - Remote transfers of backups
+   - [Restoring from Backup](@sec-backups_restore)
+     - Creating restoration scripts
+     - Testing recovery procedures
+
+8. [Changing Your Boot Media Device](@sec-change_boot_media)
+
+   - [Boot Configuration Transition](@sec-boot_transition)
+     - Flashing OS to new media
+     - Proper shutdown procedures
+     - Physically changing boot devices
+     - Testing the new boot configuration
+     - Restoring configurations
+
+9. [Remote Development with VS Code](@sec-remote_with_vs_code)
+
+   - Setting Up VS Code Remote SSH
+   - Managing Remote Projects
+   - Debugging and Terminal Integration
+
+10. [Monitoring and Maintenance](@sec-monitor_maintain)
+
+    - System Monitoring Tools
+    - Log Management
+    - Performance Optimization
+    - Security Updates and Patching
+
+11. [Containerization with Docker](@sec-docker)
+
+    - Containerization and Virtualization Basics
+    - Docker Installation and Setup
+    - Creating Images with Dockerfile
+    - Managing Images and Containers
+    - Docker Compose for Multi-container Applications
+    - CI/CD Integration
+
+12. [Container Orchestration with Kubernetes](@sec-kubernetes)
 
+    - Orchestration Basics
+    - Kubernetes Concepts, Installation, and Setup
+    - Setting Up a Kubernetes Cluster
+    - Deployment Strategies
+    - Managing Resources
+    - Scaling Applications
 
-Network Connections
 
-Wired vs wireless configurations
-Understanding IP addressing
 
+## Initial Setup {#sec-setup}
+### Key Terms
 
-Ubuntu Server Networking Tools
+- **HDMI:**
+- **SSD:**
+- **Flash Drive:**
+- **SD Card:**
+- **Memory Sizes:**
+- **Bit:**
+- **Byte:**
 
-Testing connectivity
-Viewing network statistics
-
-
-systemd-networkd
-
-Configuration file structure
-Wired and wireless setup
-
-
-Converting Netplan to networkd
-
-Why and how to transition
-Troubleshooting network issues
-
-
-Advanced Networking
-
-Subnets and routing
-Security considerations
-
-
-
-1. [SSH (Secure Shell)](@sec-ssh)
-
-Understanding SSH Configuration
-
-Client vs server setup
-Key-based authentication
-
-
-Server-Side SSH Configuration
-
-Host keys and security options
-Optimizing for security
-
-
-Client-Side Configuration
-
-Setting up SSH config
-Managing known hosts
-
-
-Additional Security Measures
-
-Firewall configuration with UFW
-Intrusion prevention with Fail2Ban
-
-
-Secure File Transfers
-
-Using SCP (Secure Copy Protocol)
-Using rsync for efficient transfers
-
-
-
-6. Partitions
-
-Partitioning Basics
-
-Understanding partition tables and types
-Filesystem options and considerations
-
-
-Partitioning Tools
-
-Using parted and other utilities
-
-
-Partitioning for Backups
-
-Setting up microSD cards
-Mount points and fstab configuration
-
-
-Partitioning your SSD
-
-Boot and root partitions
-Formatting and preparation
-
-
-Advanced Partitioning
-
-Monitoring usage
-Resizing partitions
-
-
-
-7. Backups and Basic Automation
-
-Setting Up the Backup Directory
-
-Directory structure and permissions
-
-
-Configuration Files Backup
-
-Using rsync for system configurations
-Remote transfers of backups
-
-
-Restoring from Backup
-
-Creating restoration scripts
-Testing recovery procedures
-
-
-
-8. Changing Your Boot Media Device
-
-Boot Configuration Transition
-
-Flashing OS to new media
-Proper shutdown procedures
-
-
-Hardware Reconfiguration
-
-Physically changing boot devices
-
-
-Verification and Restoration
-
-Testing the new boot configuration
-Restoring configurations
-
-
-
-9. Remote Development with VS Code
-
-Setting Up VS Code Remote SSH
-Managing Remote Projects
-Debugging and Terminal Integration
-
-11. Containerization with Docker
-
-Docker Installation and Setup
-Managing Images and Containers
-Creating Custom Images
-Docker Compose for Multi-container Applications
-CI/CD Integration
-
-12. Container Orchestration with Kubernetes
-
-Kubernetes Concepts
-Setting Up a Kubernetes Cluster
-Deployment Strategies
-Managing Resources
-Scaling Applications
-
-14. Monitoring and Maintenance
-
-System Monitoring Tools
-Log Management
-Performance Optimization
-Security Updates and Patching
-
-15. Advanced Topics and Next Steps
-
-Expanding Your Cluster
-Additional Self-hosted Services
-Contributing to Open Source
-
-## Starting from (*close*) to Zero {#sec-requirements}
-### Hardware Requirements
+### Hardware Requirements {#sec-hardware_requirements}
 
 This section will provide basic setup instructions, so you'll have the same tools I do and can follow along with this guide, step-by-step.
 
@@ -249,7 +199,7 @@ This section will provide basic setup instructions, so you'll have the same tool
     - I'm using a MacBook Air
     - I prefer the MacOS and Terminal for personal development, because I use Windows at my day job
 
-### Image requirements
+### Image Requirements {#sec-image_requirements}
 
 Once you have your hardware ready to go, you can being setting up the software. I'm using Linux Server LTS because it's a stable version of Linux intended for headless, server environments. LTS means ***long-term support***, so unlike the more frequently updated versions, these OS versions are supported for 5 years. Additionally, you'll want to use ***public-key authentication*** for better security purposes, but more on that in the [SSH Section](@sec-ssh).
 
@@ -279,7 +229,7 @@ Once you have your hardware ready to go, you can being setting up the software. 
 
     ![](images/ubuntu-pi-config-options.png) These are more preference based, but it's nice to have the storage device automatically eject once the flashing is complete. Then, you just need to unplug it and plug it into your Raspberry Pi to get going.
 
-### Get Started
+### Get Started {#sec-get_started}
 It's time to get the actual Raspberry Pi device setup. For most of this guide, I recommend leaving the Pi outside of the case, because it'll be easier to plug and unplug some of the devices-- the microSD slot is not accessible while the case is on. Later, once we've got everything configured and setup as we like, we will attach the fan and case, so it's a bit safer and able to run in an *always-on* state. I'll share a picture of what my server looks like during the early development, and then later I'll show what it looks like with everything connected and setup. 
 
 ![](images/naked-pi.png)
@@ -292,38 +242,49 @@ Now you can run some basic commands to see where you are and what you have avail
 
 Next we'll cover what happened during the boot process, the basic structure of the Linux Server OS, and some important information related to permissions, before we move on to basic networking concepts and configurations.
 
-## Linux Server Basics
+## Linux Server Basics {#sec-linux_basics}
+### Key Terms
 
-### First Boot Process
+- **Hardware:**
+- **Software:**
+- **Filesystem:**
+- **OS (Operating System):**
+- **Unix:**
+- **Linux:**
+- **Filesystem Hierarchy Standard:**
+- **RAM:**
+- **Kernel:**
+
+### First Boot Process {#sec-first_boot}
 
 When you first boot a fresh Ubuntu Server LTS image on your Raspberry Pi, several important initialization processes occur that don't happen during subsequent boots. The first boot of your Ubuntu Server LTS on the Raspberry Pi is fundamentally different from subsequent boots because it performs one-time initialization tasks. While later boots will simply load the configured system, this first boot sets up critical system components.
 
--   **Hardware Detection:** The system performs comprehensive hardware detection to identify and configure your Raspberry Pi's components.
--   **Initial RAM Disk (initrd):** The bootloader loads a temporary filesystem into memory that contains essential drivers and modules needed to mount the real root filesystem.
--   **Filesystem Check and Expansion:** On first boot, the system checks the integrity of the filesystem and often expands it to utilize the full available space on your Flash Drive.
--   **Cloud-Init Processing:** Ubuntu Server uses cloud-init to perform first-boot configuration tasks (the processes you see running on the monitor on startup)
-    -   Setting the hostname
-    -   Generating SSH host keys
-    -   Creating the default user account
-    -   Running package updates
--   **Machine ID Generation:** A unique machine ID is generated and stored in /etc/machine-id.
--   **Network Configuration:** The system attempts initial network setup based on detected hardware.
+- **Hardware Detection:** The system performs comprehensive hardware detection to identify and configure your Raspberry Pi's components.
+- **Initial RAM Disk (initrd):** The bootloader loads a temporary filesystem into memory that contains essential drivers and modules needed to mount the real root filesystem.
+- **Filesystem Check and Expansion:** On first boot, the system checks the integrity of the filesystem and often expands it to utilize the full available space on your Flash Drive.
+- **Cloud-Init Processing:** Ubuntu Server uses cloud-init to perform first-boot configuration tasks (the processes you see running on the monitor on startup)
+    - Setting the hostname
+    - Generating SSH host keys
+    - Creating the default user account
+    - Running package updates
+- **Machine ID Generation:** A unique machine ID is generated and stored in /etc/machine-id.
+- **Network Configuration:** The system attempts initial network setup based on detected hardware.
 
 The key difference is that subsequent boots skip these initialization steps since they've already been completed, making them significantly faster.
 
-### Service Management with systemd
+### Service Management with systemd {#sec-systemd}
 
 Systemd is the modern initialization and service management system for Linux. It's responsible for bootstrapping the user space and managing all processes afterward. Key components of systemd include:
 
--   **Units:** Everything systemd manages is represented as a "unit" with a corresponding configuration file. Units include:
-    -   **Service units (`.service`):** Define how to start, stop, and manage daemons (background processes that are always on)
-    -   **Socket units (`.socket`):** Manage network/IPC sockets
-    -   **Timer units (`.timer`):** Trigger other units based on timers
-    -   **Mount units (`.mount`):** Control filesystem mount points
--   **Target units:** Represent system states (similar to runlevels in older systems)
-    -   `multi-user.target`: Traditional text-mode system
-    -   `graphical.target`: Graphical user interface
-    -   `network.target`: Network services are ready
+- **Units:** Everything systemd manages is represented as a "unit" with a corresponding configuration file. Units include:
+    - **Service units (`.service`):** Define how to start, stop, and manage daemons (background processes that are always on)
+    - **Socket units (`.socket`):** Manage network/IPC sockets
+    - **Timer units (`.timer`):** Trigger other units based on timers
+    - **Mount units (`.mount`):** Control filesystem mount points
+- **Target units:** Represent system states (similar to runlevels in older systems)
+    - `multi-user.target`: Traditional text-mode system
+    - `graphical.target`: Graphical user interface
+    - `network.target`: Network services are ready
 
 For example, let's take a look at a generic SSH service file.
 
@@ -351,43 +312,43 @@ WantedBy=multi-user.target
 
 To break this down:
 
--   **\[Unit\]:** Metadata and dependencies
-    -   `Description`: Human-readable service description
-    -   `Documentation`: Where to find documentation
-    -   `After`: Units that should be started before this one
-    -   `Wants`: Soft dependencies
--   **\[Service\]:** Runtime behavior
-    -   `ExecStart`: Command to start the service
-    -   `ExecReload`: Command to reload the service
-    -   `Restart`: When to restart the service
-    -   `Type`: How systemd should consider the service started
--   **\[Install\]:** Installation information
-    -   `WantedBy`: Target that should include this service
+- **\[Unit\]:** Metadata and dependencies
+    - `Description`: Human-readable service description
+    - `Documentation`: Where to find documentation
+    - `After`: Units that should be started before this one
+    - `Wants`: Soft dependencies
+- **\[Service\]:** Runtime behavior
+    - `ExecStart`: Command to start the service
+    - `ExecReload`: Command to reload the service
+    - `Restart`: When to restart the service
+    - `Type`: How systemd should consider the service started
+- **\[Install\]:** Installation information
+    - `WantedBy`: Target that should include this service
 
 Ubuntu Server's current standard is `systemd`, but previously it was `SysV`. A few key improvements include:
 
--   **Parallel Service Startup:** Systemd can start services in parallel, improving boot times.
--   **Dependency Management:** Systemd handles service dependencies more effectively.
--   **Service Supervision:** Systemd continuously monitors and can automatically restart services.
--   **Socket Activation:** Services can be started on-demand when a connection request arrives.
+- **Parallel Service Startup:** Systemd can start services in parallel, improving boot times.
+- **Dependency Management:** Systemd handles service dependencies more effectively.
+- **Service Supervision:** Systemd continuously monitors and can automatically restart services.
+- **Socket Activation:** Services can be started on-demand when a connection request arrives.
 
 Managing services is easy using the command line, a crucial component of headless applications, a few examples are:
 
--   **View service status:** `systemctl status ssh`
--   **Start a service:** `sudo systemctl start ssh`
--   **Stop a service:** `sudo systemctl stop ssh`
--   **Enable at boot:** `sudo systemctl enable ssh`
--   **Disable at boot:** `sudo systemctl disable ssh`
--   **View logs:** `journalctl -u ssh`
+- **View service status:** `systemctl status ssh`
+- **Start a service:** `sudo systemctl start ssh`
+- **Stop a service:** `sudo systemctl stop ssh`
+- **Enable at boot:** `sudo systemctl enable ssh`
+- **Disable at boot:** `sudo systemctl disable ssh`
+- **View logs:** `journalctl -u ssh`
 
-### Understanding Your Home Directory
+### Understanding Your Home Directory {#sec-home_directory}
 
 Now that you've logged in and can work on your server, you may wonder where you are and what's there. Running `pwd` will return the file path of your current location. Running `ls -a` will show you all available files and directories in your current location. Running these, you'll see a few things specifically for Shell configuration (your terminal/CLI):
 
--   `.bash_history`: Contains a record of commands you've executed in the bash shell. This helps with command recall using the up arrow or history command.
--   `.bash_logout`: Executed when you log out of a bash shell. Often used for cleanup tasks like clearing the screen.
--   `.bashrc`: The primary bash configuration file that's loaded for interactive non-login shells. It defines aliases, functions, and shell behavior. When you open a terminal window, this file is read.
--   `.profile`: Executed for login shells. It typically sets environment variables and executes commands that should run once per login session, not for each new terminal.
+- `.bash_history`: Contains a record of commands you've executed in the bash shell. This helps with command recall using the up arrow or history command.
+- `.bash_logout`: Executed when you log out of a bash shell. Often used for cleanup tasks like clearing the screen.
+- `.bashrc`: The primary bash configuration file that's loaded for interactive non-login shells. It defines aliases, functions, and shell behavior. When you open a terminal window, this file is read.
+- `.profile`: Executed for login shells. It typically sets environment variables and executes commands that should run once per login session, not for each new terminal.
 
 ``` bash
 # Sample .bashrc section
@@ -408,79 +369,79 @@ alias l='ls -CF'
 
 Beyond those, you'll also find hidden application directories.
 
--   `.cache`: Contains non-essential data that can be regenerated as needed. Applications store temporary files here to improve performance on subsequent runs.
--   `.dotnet`: Contains .NET Core SDK and runtime files if you've installed the .NET development platform.
--   `.ssh`: Stores SSH configuration files and keys:
-    -   `authorized_keys`: Lists public keys that can authenticate to your account
-    -   `ubuntu_pi_ecdsa` & `ubuntu_pi_ecdsa.pub`: Your private and public ECDSA keys (More on this in the [SSH Section](@sec-ssh))
-    -   `known_hosts`: Tracks hosts you've connected to previously
-    -   `ssh_config`: Optional configuration file for SSH connections
--   `.sudo_as_admin_successful`: A marker file created when you successfully use sudo. Its presence suppresses the "sudo capabilities" message when opening a terminal.
--   `.vscode-server`: Created when you connect to your server using Visual Studio Code's remote development feature. Contains the VS Code server components. (More on this in the [SSH Section](@sec-ssh))
--   `.wget-hsts`: Wget's HTTP Strict Transport Security database. Tracks websites that require secure (HTTPS) connections.
+- `.cache`: Contains non-essential data that can be regenerated as needed. Applications store temporary files here to improve performance on subsequent runs.
+- `.dotnet`: Contains .NET Core SDK and runtime files if you've installed the .NET development platform.
+- `.ssh`: Stores SSH configuration files and keys:
+    - `authorized_keys`: Lists public keys that can authenticate to your account
+    - `ubuntu_pi_ecdsa` & `ubuntu_pi_ecdsa.pub`: Your private and public ECDSA keys (More on this in the [SSH Section](@sec-ssh))
+    - `known_hosts`: Tracks hosts you've connected to previously
+    - `ssh_config`: Optional configuration file for SSH connections
+- `.sudo_as_admin_successful`: A marker file created when you successfully use sudo. Its presence suppresses the "sudo capabilities" message when opening a terminal.
+- `.vscode-server`: Created when you connect to your server using Visual Studio Code's remote development feature. Contains the VS Code server components. (More on this in the [SSH Section](@sec-ssh))
+- `.wget-hsts`: Wget's HTTP Strict Transport Security database. Tracks websites that require secure (HTTPS) connections.
 
-### The Root Filesystem
+### The Root Filesystem {#sec-root_filesystem}
 
 The Linux filesystem follows the Filesystem Hierarchy Standard (FHS), which defines the directory structure and contents of Unix-like systems. Here's a breakdown of key directories:
 
--   `/bin`: Contains essential command binaries (programs) needed for basic system functionality. These commands are available to all users and are required during boot or in single-user mode.
-    -   Historical note: Originally separated from /usr/bin because early Unix systems had limited disk space on the root partition.
--   `/boot`: Contains boot loader files including the Linux kernel, initial RAM disk (initrd), and bootloader configuration (**GRUB**).
-    -   For Raspberry Pi, this contains the firmware and various boot-related files.
--   `/dev`: Contains device files that represent hardware devices. These are not actual files but interfaces to device drivers in the kernel.
-    -   **Example:** /dev/sda represents the first SATA disk.
--   `/etc`: Contains system-wide configuration files. The name originated from "et cetera" but is now often interpreted as "Editable Text Configuration." Critical files include:
-    -   `/etc/fstab`: Filesystem mount configuration
-    -   `/etc/passwd`: User account information
-    -   `/etc/ssh/sshd_config`: SSH server configuration
--   `/home`: Contains user home directories where personal files and user-specific configuration files are stored.
--   `/lib`: Contains essential shared libraries needed by programs in /bin and system boot.
-    -   On modern 64-bit systems, you'll also find /lib64 for 64-bit libraries.
--   `/media`: Mount point for removable media like USB drives and DVDs.
--   `/mnt`: Temporarily mounted filesystems. This is often used as a manual mount point.
--   `/opt`: Optional application software packages. Used for third-party applications that don't follow the standard file system layout.
--   `/proc`: A virtual filesystem providing process and kernel information. Files here don't exist on disk but represent system state.
-    -   **Example:** /proc/cpuinfo shows CPU information.
--   `/root`: Home directory for the root user. Separated from /home to ensure it's available even if /home is on a separate partition.
--   `/run`: Runtime data for processes started since last boot. This is a tmpfs (memory-based) filesystem.
--   `/sbin`: System binaries for system administration tasks, typically only usable by the root user.
--   `/srv`: Data for services provided by the system, such as web or FTP servers.
--   `/snap`: The /snap directory is, by default, where the files and folders from installed snap packages appear on your system.
--   `/sys`: Another virtual filesystem exposing device and driver information from the kernel. Provides a more structured view than /proc.
--   `/tmp`: Temporary files that may be cleared on reboot. Applications should not rely on data here persisting.
--   `/usr`: Contains the majority of user utilities and applications. Originally stood for "Unix System Resources."
-    -   `/usr/bin`: User commands
-    -   `/usr/lib`: Libraries for the commands in /usr/bin
-    -   `/usr/local`: Locally installed software
-    -   `/usr/share`: Architecture-independent data
--   `/var`: Variable data files that change during normal operation:
-    -   `/var/log`: System log files
-    -   `/var/mail`: Mail spool
-    -   `/var/cache`: Application cache data
-    -   `/var/spool`: Spool for tasks waiting to be processed (print queues, outgoing mail)
+- `/bin`: Contains essential command binaries (programs) needed for basic system functionality. These commands are available to all users and are required during boot or in single-user mode.
+    - Historical note: Originally separated from /usr/bin because early Unix systems had limited disk space on the root partition.
+- `/boot`: Contains boot loader files including the Linux kernel, initial RAM disk (initrd), and bootloader configuration (**GRUB**).
+    - For Raspberry Pi, this contains the firmware and various boot-related files.
+- `/dev`: Contains device files that represent hardware devices. These are not actual files but interfaces to device drivers in the kernel.
+    - **Example:** /dev/sda represents the first SATA disk.
+- `/etc`: Contains system-wide configuration files. The name originated from "et cetera" but is now often interpreted as "Editable Text Configuration." Critical files include:
+    - `/etc/fstab`: Filesystem mount configuration
+    - `/etc/passwd`: User account information
+    - `/etc/ssh/sshd_config`: SSH server configuration
+- `/home`: Contains user home directories where personal files and user-specific configuration files are stored.
+- `/lib`: Contains essential shared libraries needed by programs in /bin and system boot.
+    - On modern 64-bit systems, you'll also find /lib64 for 64-bit libraries.
+- `/media`: Mount point for removable media like USB drives and DVDs.
+- `/mnt`: Temporarily mounted filesystems. This is often used as a manual mount point.
+- `/opt`: Optional application software packages. Used for third-party applications that don't follow the standard file system layout.
+- `/proc`: A virtual filesystem providing process and kernel information. Files here don't exist on disk but represent system state.
+    - **Example:** /proc/cpuinfo shows CPU information.
+- `/root`: Home directory for the root user. Separated from /home to ensure it's available even if /home is on a separate partition.
+- `/run`: Runtime data for processes started since last boot. This is a tmpfs (memory-based) filesystem.
+- `/sbin`: System binaries for system administration tasks, typically only usable by the root user.
+- `/srv`: Data for services provided by the system, such as web or FTP servers.
+- `/snap`: The /snap directory is, by default, where the files and folders from installed snap packages appear on your system.
+- `/sys`: Another virtual filesystem exposing device and driver information from the kernel. Provides a more structured view than /proc.
+- `/tmp`: Temporary files that may be cleared on reboot. Applications should not rely on data here persisting.
+- `/usr`: Contains the majority of user utilities and applications. Originally stood for "Unix System Resources."
+    - `/usr/bin`: User commands
+    - `/usr/lib`: Libraries for the commands in /usr/bin
+    - `/usr/local`: Locally installed software
+    - `/usr/share`: Architecture-independent data
+- `/var`: Variable data files that change during normal operation:
+    - `/var/log`: System log files
+    - `/var/mail`: Mail spool
+    - `/var/cache`: Application cache data
+    - `/var/spool`: Spool for tasks waiting to be processed (print queues, outgoing mail)
 
 The core philosophy behind this structure separates:
 
--   Static vs. variable content
--   Shareable vs. non-shareable files
--   Essential vs. non-essential components
+- Static vs. variable content
+- Shareable vs. non-shareable files
+- Essential vs. non-essential components
 
 Understanding this hierarchy helps you navigate any Linux system and locate important files intuitively.
 
-### User and Group Permissions
+### User and Group Permissions {#sec-permissions}
 
 #### Basics
 
 Linux inherits its permission system from Unix, providing a robust framework for controlling access to files and directories. Understanding this system is essential for maintaining security and proper functionality of your Raspberry Pi server, as well as any Linux based system. At its core, the Linux permission model operates with three basic permission types applied to three different categories of users:
 
--   **Permission Types:**
-    -   **Read (r):** Allows viewing file contents or listing directory contents
-    -   **Write (w):** Allows modifying file contents or creating/deleting files within a directory
-    -   **Execute (x):** Allows running a file as a program or accessing files within a directory
--   **User Categories:**
-    -   **Owner (u):** The user who owns the file or directory
-    -   **Group (g):** Users who belong to the file's assigned group
-    -   **Others (o):** All other users on the system
+- **Permission Types:**
+    - **Read (r):** Allows viewing file contents or listing directory contents
+    - **Write (w):** Allows modifying file contents or creating/deleting files within a directory
+    - **Execute (x):** Allows running a file as a program or accessing files within a directory
+- **User Categories:**
+    - **Owner (u):** The user who owns the file or directory
+    - **Group (g):** Users who belong to the file's assigned group
+    - **Others (o):** All other users on the system
 
 It's not only important to know how to set permissions, but also how to view existing ones. When you run ls -l in a directory, you'll see a detailed listing including permission information.
 
@@ -490,10 +451,10 @@ It's not only important to know how to set permissions, but also how to view exi
 
 In this example, the owner can read and write, while group members and others can only read. The first string of characters -rw-r--r-- represents the permissions:
 
--   **First character:** File type (- for regular file, d for directory, l for symbolic link)
--   **Characters 2-4:** Owner permissions (rw-)
--   **Characters 5-7:** Group permissions (r--)
--   **Characters 8-10:** Others permissions (r--)
+- **First character:** File type (- for regular file, d for directory, l for symbolic link)
+- **Characters 2-4:** Owner permissions (rw-)
+- **Characters 5-7:** Group permissions (r--)
+- **Characters 8-10:** Others permissions (r--)
 
 #### chmod
 
@@ -517,27 +478,27 @@ chmod ug+w shared_document.txt
 
 Each symbol has a specific meaning:
 
--   `u`: Owner permissions
--   `g`: Group permissions
--   `o`: Other user permissions
--   `a`: All permissions
--   `+`: Add permissions
--   `-`: Remove permissions
--   `=`: Set exact permissions
+- `u`: Owner permissions
+- `g`: Group permissions
+- `o`: Other user permissions
+- `a`: All permissions
+- `+`: Add permissions
+- `-`: Remove permissions
+- `=`: Set exact permissions
 
 Octal mode represents permissions as a 3-digit number, where each digit represents the permissions for owner, group, and others:
 
--   `Read (r)` = 4
--   `Write (w)` = 2
--   `Execute (x)` = 1
+- `Read (r)` = 4
+- `Write (w)` = 2
+- `Execute (x)` = 1
 
 Permissions are calculated by adding these values:
 
--   `7 (4+2+1)` = Read, write, and execute
--   `6 (4+2)` = Read and write
--   `5 (4+1)` = Read and execute
--   `4 (4)` = Read only
--   `0` = No permissions
+- `7 (4+2+1)` = Read, write, and execute
+- `6 (4+2)` = Read and write
+- `5 (4+1)` = Read and execute
+- `4 (4)` = Read only
+- `0` = No permissions
 
 ``` bash
 # rwxr-xr-x (755): Owner can read, write, execute; group and others can read and execute
@@ -552,9 +513,9 @@ chmod 700 private_directory
 
 Beyond the basic rwx permissions, Linux has three special permission bits:
 
--   `setuid (4000)`: When set on an executable file, it runs with the privileges of the file owner instead of the user executing it.
--   `setgid (2000)`: Similar to setuid but for group permissions. When set on a directory, new files created within inherit the directory's group.
--   `sticky bit (1000)`: When set on a directory, files can only be deleted by their owner, the directory owner, or root (commonly used for /tmp).
+- `setuid (4000)`: When set on an executable file, it runs with the privileges of the file owner instead of the user executing it.
+- `setgid (2000)`: Similar to setuid but for group permissions. When set on a directory, new files created within inherit the directory's group.
+- `sticky bit (1000)`: When set on a directory, files can only be deleted by their owner, the directory owner, or root (commonly used for /tmp).
 
 #### chown
 
@@ -576,10 +537,10 @@ sudo chown -R chris:chris /home/chris/projects
 
 The flags do the following:
 
--   `-R, --recursive`: Change ownership recursively
--   `-c, --changes`: Report only when a change is made
--   `-f, --silent`: Suppress most error messages
--   `-v, --verbose`: Output a diagnostic for every file processed
+- `-R, --recursive`: Change ownership recursively
+- `-c, --changes`: Report only when a change is made
+- `-f, --silent`: Suppress most error messages
+- `-v, --verbose`: Output a diagnostic for every file processed
 
 ``` bash
 # Verbose recursive ownership change
@@ -590,29 +551,29 @@ sudo chown -Rv chris:developers /opt/application
 
 Linux manages permissions through users and groups:
 
--   Each user has a unique User ID (UID)
--   Each group has a unique Group ID (GID)
--   Users can belong to multiple groups
--   The first 1000 UIDs/GIDs are typically reserved for system users/groups
+- Each user has a unique User ID (UID)
+- Each group has a unique Group ID (GID)
+- Users can belong to multiple groups
+- The first 1000 UIDs/GIDs are typically reserved for system users/groups
 
 **Important files** include:
 
--   `/etc/passwd`: Contains basic user account information
-    -   **Fields:** username, password placeholder, UID, primary GID, full name, home directory, login shell
+- `/etc/passwd`: Contains basic user account information
+    - **Fields:** username, password placeholder, UID, primary GID, full name, home directory, login shell
 
 ``` plaintext
 chris:x:1000:1000:Chris Kornaros:/home/chris:/bin/bash
 ```
 
--   `/etc/shadow`: Contains encrypted passwords and password policy information
-    -   **Fields:** username, encrypted password, days since epoch of last change, min days between changes, max days password valid, warning days, inactive days, expiration date
+- `/etc/shadow`: Contains encrypted passwords and password policy information
+    - **Fields:** username, encrypted password, days since epoch of last change, min days between changes, max days password valid, warning days, inactive days, expiration date
 
 ``` plaintext
 chris:$6$xyz...hash:19000:0:99999:7:::
 ```
 
--   `/etc/group`: Contains group definitions
-    -   **Fields:** group name, password placeholder, GID, comma-separated list of members
+- `/etc/group`: Contains group definitions
+    - **Fields:** group name, password placeholder, GID, comma-separated list of members
 
 ``` plaintext
 developers:x:1001:chris,bob,alice
@@ -620,14 +581,14 @@ developers:x:1001:chris,bob,alice
 
 There are two categories of groups you should understand, **Primary** and **Supplementary**:
 
--   **Primary Group:** Set in /etc/passwd, used as the default group for new files
--   **Supplementary Groups:** Additional groups a user belongs to, defined in /etc/group
+- **Primary Group:** Set in /etc/passwd, used as the default group for new files
+- **Supplementary Groups:** Additional groups a user belongs to, defined in /etc/group
 
 You can view your current user's groups with the `groups` command, or view them for a specific user with `groups chris` (replace `chris` with the name of the user). That being said, directory permissions differ slightly from file permissions:
 
--   **Read (r):** List directory contents
--   **Write (w):** Create, delete, or rename files within the directory
--   **Execute (x):** Access files within the directory (crucial for navigation)
+- **Read (r):** List directory contents
+- **Write (w):** Create, delete, or rename files within the directory
+- **Execute (x):** Access files within the directory (crucial for navigation)
 
 ::: callout-tip
 **A common confusion:** You may have read permission for a file but not execute permission for its parent directory, preventing access.
@@ -635,11 +596,11 @@ You can view your current user's groups with the `groups` command, or view them 
 
 The umask (user mask) determines the default permissions for newly created files and directories:
 
--   **Default for files:** 666 (rw-rw-rw-)
--   **Default for directories:** 777 (rwxrwxrwx)
--   The umask is subtracted from these defaults, for example, a umask of 022 results in:
-    -   **Files:** 644 (rw-r--r--)
-    -   **Directories:** 755 (rwxr-xr-x)
+- **Default for files:** 666 (rw-rw-rw-)
+- **Default for directories:** 777 (rwxrwxrwx)
+- The umask is subtracted from these defaults, for example, a umask of 022 results in:
+    - **Files:** 644 (rw-r--r--)
+    - **Directories:** 755 (rwxr-xr-x)
 
 ``` bash
 # View current umask (in octal)
@@ -685,23 +646,23 @@ getfacl file.txt
 
 A few final notes on permissions that are especially relevant for this project, becaue you'll be working with external storage devices:
 
--   Not all filesystems support the same permission features:
-    -   `ext4`: Full support for traditional permissions, ACLs, and extended attributes
-    -   `NTFS (via NTFS-3G)`: Simulated Unix permissions, basic ACL support
-    -   `FAT32`: No native permission support (mounted with fixed permissions)
-    -   `exFAT`: No native permission support
--   Common Permission Patterns:
-    -   **Configuration Files:** 644 or 640 (owner can edit, restricted read access)
-    -   **Program Binaries:** 755 (everyone can execute, only owner can modify)
-    -   **Web Content:** 644 for regular files, 755 for directories
-    -   **SSH Keys:** 600 for private keys (owner only), 644 for public keys
-    -   **Scripts:** 700 or 750 (executable by owner or group)
+- Not all filesystems support the same permission features:
+    - `ext4`: Full support for traditional permissions, ACLs, and extended attributes
+    - `NTFS (via NTFS-3G)`: Simulated Unix permissions, basic ACL support
+    - `FAT32`: No native permission support (mounted with fixed permissions)
+    - `exFAT`: No native permission support
+- Common Permission Patterns:
+    - **Configuration Files:** 644 or 640 (owner can edit, restricted read access)
+    - **Program Binaries:** 755 (everyone can execute, only owner can modify)
+    - **Web Content:** 644 for regular files, 755 for directories
+    - **SSH Keys:** 600 for private keys (owner only), 644 for public keys
+    - **Scripts:** 700 or 750 (executable by owner or group)
 
-## Networking Basics
+## Computer Networking {#sec-network}
 
 This section provides a brief example of how to connect your server to WiFi. It assumes you are already connected using the wireless network settings you configured in the [Requirements Section](@sec-requirements). That being said, I'll also go over some basic networking concepts and background information. As a result, some of the decisiions and terminology in this guide will make more sense (it also helps me remember what I'm doing and why).
 
-### Computer Networking
+### Fundamental Concepts of Computer Networking {#sec-network_fundamentals}
 
 Simply put, a computer network is a collection of interconnected devices that can communicate with each other using a set of rules called protocols. Networking allows devices to share resources, exchange data, and collaborate on tasks. On a deeper level, it helps to understand the conceptual models that describes how data moves through a network. Before we dive in, let's go over some basic terminology.
 
@@ -709,40 +670,40 @@ Simply put, a computer network is a collection of interconnected devices that ca
 
 **Basic Networking Concepts:**
 
--   **Protocol:** A set of rules that determine how data is transmitted between devices on a network. Examples include TCP, UDP, and HTTP.
--   **MAC Address:** Media Access Control address; a unique hardware identifier assigned to network interfaces. It's a 48-bit address (e.g., 00:1A:2B:3C:4D:5E) permanently assigned to a network adapter.
--   **IP Address:** A numerical label assigned to each device on a network that uses the Internet Protocol. Functions like a postal address for devices.
--   **Packet:** A unit of data transmitted over a network. Includes both the data payload and header information for routing.
--   **Subnet:** A logical subdivision of an IP network that allows for more efficient routing and security segmentation.
--   **Gateway:** A network node that serves as an access point to another network, typically connecting a local network to the wider internet.
--   **DNS:** Domain Name System; translates human-readable domain names (like google.com) into IP addresses computers can understand.
--   **DHCP:** Dynamic Host Configuration Protocol; automatically assigns IP addresses and other network configuration parameters to devices.
+- **Protocol:** A set of rules that determine how data is transmitted between devices on a network. Examples include TCP, UDP, and HTTP.
+- **MAC Address:** Media Access Control address; a unique hardware identifier assigned to network interfaces. It's a 48-bit address (e.g., 00:1A:2B:3C:4D:5E) permanently assigned to a network adapter.
+- **IP Address:** A numerical label assigned to each device on a network that uses the Internet Protocol. Functions like a postal address for devices.
+- **Packet:** A unit of data transmitted over a network. Includes both the data payload and header information for routing.
+- **Subnet:** A logical subdivision of an IP network that allows for more efficient routing and security segmentation.
+- **Gateway:** A network node that serves as an access point to another network, typically connecting a local network to the wider internet.
+- **DNS:** Domain Name System; translates human-readable domain names (like google.com) into IP addresses computers can understand.
+- **DHCP:** Dynamic Host Configuration Protocol; automatically assigns IP addresses and other network configuration parameters to devices.
 
 **Network Types and Components:**
 
--   **LAN:** Local Area Network; a network confined to a small geographic area, like a home or office.
--   **WAN:** Wide Area Network; connects multiple LANs across large geographic distances.
--   **Router:** A device that forwards data packets between computer networks, determining the best path for data transmission.
--   **Switch:** A networking device that connects devices within a single network and uses MAC addresses to forward data to the correct destination.
--   **Bandwidth:** The maximum data transfer rate of a network connection, measured in bits per second (bps).
--   **Latency:** The delay between sending and receiving data, typically measured in milliseconds.
+- **LAN:** Local Area Network; a network confined to a small geographic area, like a home or office.
+- **WAN:** Wide Area Network; connects multiple LANs across large geographic distances.
+- **Router:** A device that forwards data packets between computer networks, determining the best path for data transmission.
+- **Switch:** A networking device that connects devices within a single network and uses MAC addresses to forward data to the correct destination.
+- **Bandwidth:** The maximum data transfer rate of a network connection, measured in bits per second (bps).
+- **Latency:** The delay between sending and receiving data, typically measured in milliseconds.
 
 **Linux Networking Terminology:**
 
--   **Interface:** A connection between a device and a network. In Linux, these have names like eth0 (Ethernet) or wlan0 (wireless).
--   **Netplan:** Ubuntu's default network configuration tool that uses YAML files to define network settings.
--   **systemd-networkd:** A system daemon that manages network configurations in modern Linux distributions.
--   **NetworkManager:** An alternative network management daemon that provides detection and configuration for automatic network connectivity.
--   **Socket:** An endpoint for sending or receiving data across a network, defined by an IP address and port number.
+- **Interface:** A connection between a device and a network. In Linux, these have names like eth0 (Ethernet) or wlan0 (wireless).
+- **Netplan:** Ubuntu's default network configuration tool that uses YAML files to define network settings.
+- **systemd-networkd:** A system daemon that manages network configurations in modern Linux distributions.
+- **NetworkManager:** An alternative network management daemon that provides detection and configuration for automatic network connectivity.
+- **Socket:** An endpoint for sending or receiving data across a network, defined by an IP address and port number.
 
 **Security Concepts:**
 
--   **Firewall:** Software or hardware that monitors and filters incoming and outgoing network traffic based on predetermined security rules.
--   **SSH:** Secure Shell; a cryptographic network protocol for secure data communication and remote command execution.
--   **Encryption:** The process of encoding information to prevent unauthorized access.
--   **Port:** A virtual point where network connections start and end. Ports are identified by numbers (0-65535).
--   **NAT:** Network Address Translation; allows multiple devices on a local network to share a single public IP address.
--   **VPN:** Virtual Private Network; extends a private network across a public network, enabling secure data transmission.
+- **Firewall:** Software or hardware that monitors and filters incoming and outgoing network traffic based on predetermined security rules.
+- **SSH:** Secure Shell; a cryptographic network protocol for secure data communication and remote command execution.
+- **Encryption:** The process of encoding information to prevent unauthorized access.
+- **Port:** A virtual point where network connections start and end. Ports are identified by numbers (0-65535).
+- **NAT:** Network Address Translation; allows multiple devices on a local network to share a single public IP address.
+- **VPN:** Virtual Private Network; extends a private network across a public network, enabling secure data transmission.
 
 #### The OSI Model
 
@@ -771,32 +732,32 @@ Remember, a protocol is a set of rules that determine how data is transmitted be
 
 ***TCP (Transmission Control Protocol)*** is a connection-oriented protocol that establishes a dedicated end-to-end connection before transmitting data. TCP is used when reliability is more important than speed (e.g., web browsing, email, file transfers). It has four defining traits:
 
--   **Reliability:** Guarantees delivery of packets in the correct order
--   **Flow Control:** Prevents overwhelming receivers with too much data
--   **Error Detection:** Identifies and retransmits lost or corrupted packets
--   **Handshake Process:** Three-way handshake establishes connections
+- **Reliability:** Guarantees delivery of packets in the correct order
+- **Flow Control:** Prevents overwhelming receivers with too much data
+- **Error Detection:** Identifies and retransmits lost or corrupted packets
+- **Handshake Process:** Three-way handshake establishes connections
 
 ***UDP (User Datagram Protocol)*** is a connectionless protocol that sends data without establishing a dedicated connection. UDP is used for real-time applications (e.g., video streaming, VoIP, online gaming). It also has four defining traits:
 
--   **Simplicity:** No connection setup or maintenance overhead
--   **Speed:** Faster than TCP due to fewer checks and guarantees
--   **Lower Reliability:** No guarantee of delivery or correct ordering
--   **Efficiency:** Better for real-time applications where occasional data loss is acceptable
+- **Simplicity:** No connection setup or maintenance overhead
+- **Speed:** Faster than TCP due to fewer checks and guarantees
+- **Lower Reliability:** No guarantee of delivery or correct ordering
+- **Efficiency:** Better for real-time applications where occasional data loss is acceptable
 
 Beyond those, there are some other important protocols to know, because they provide the foundation for most of the user friendly features we are used to today.
 
--   ***IP (Internet Protocol)***
-    -   IP handles addressing and routing of packets across networks. There are two versions in common use:
-    -   IPv4: 32-bit addresses (e.g., 192.168.1.1)
-    -   IPv6: 128-bit addresses (e.g., 2001:0db8:85a3:0000:0000:8a2e:0370:7334)
--   ***ICMP (Internet Control Message Protocol)***
-    -   ICMP helps diagnose network issues by sending error messages and operational information. The ping command uses ICMP to test connectivity.
--   ***HTTP/HTTPS (Hypertext Transfer Protocol)***
-    -   HTTP and its secure variant HTTPS are application-layer protocols used for web browsing.
--   ***DNS (Domain Name System)***
-    -   DNS translates human-readable domain names (like google.com) into IP addresses.
+- ***IP (Internet Protocol)***
+    - IP handles addressing and routing of packets across networks. There are two versions in common use:
+    - IPv4: 32-bit addresses (e.g., 192.168.1.1)
+    - IPv6: 128-bit addresses (e.g., 2001:0db8:85a3:0000:0000:8a2e:0370:7334)
+- ***ICMP (Internet Control Message Protocol)***
+    - ICMP helps diagnose network issues by sending error messages and operational information. The ping command uses ICMP to test connectivity.
+- ***HTTP/HTTPS (Hypertext Transfer Protocol)***
+    - HTTP and its secure variant HTTPS are application-layer protocols used for web browsing.
+- ***DNS (Domain Name System)***
+    - DNS translates human-readable domain names (like google.com) into IP addresses.
 
-### Network Connections
+### Network Connections {#sec-network_connections}
 
 There are two ways for systems to connect to the internet: **wired** and **wireless**.
 
@@ -804,27 +765,27 @@ There are two ways for systems to connect to the internet: **wired** and **wirel
 
 ***Ethernet*** is the most common wired networking technology. Its name comes from the term *ether* referring to a theoretical medium that was believed to carry light waves through space. It was developed by Robert Metcalf and David Boggs at Xerox's PARC facility in the 1970s. The goal was to provide a more stable LAN which could facilitate high speed transfers between computers and laser printers. They succeeded, and had improved on a precursor's, ALOHAnet, design by creating a system that could detect collisions-- when two devices try to transmit at the same time. Here are some key traits:
 
--   **Reliability:** Less susceptible to interference
--   **Speed:** Typically faster and more stable than wireless
--   **Security:** Harder to intercept without physical access
--   **Connectors:** RJ45 connectors on Ethernet cables
--   **Standards:** 10/100/1000 Mbps (Gigabit) are common speeds
+- **Reliability:** Less susceptible to interference
+- **Speed:** Typically faster and more stable than wireless
+- **Security:** Harder to intercept without physical access
+- **Connectors:** RJ45 connectors on Ethernet cables
+- **Standards:** 10/100/1000 Mbps (Gigabit) are common speeds
 
 #### Wireless Connections
 
 ***Wi-Fi*** allows devices to connect to networks without physical cables. Its name is ***not*** short for *Wireless Fidelity*, but actually a marketing choice by the brand-consulting firm Interbrand. They chose the name because it sounded similar to Hi-Fi. Wi-Fi was developed by numerous researchers and engineers, but the key breakthrough was by Dr. John O'Sullivan from CSIRO in Australia. His work focused on a wireless LAN, which would eventually become the ***IEEE (Institute of Electrical and Electronics Engineers)*** 802.11 standard in 1997. Eventually, Apple would help with widespread adoption by including the AirPort feature on its laptops, enabling W-Fi connectivity out of the box. Here are some key traits:
 
--   **Convenience:** No cables required, more flexible placement
--   **Standards:** 802.11a/b/g/n/ac/ax (Wi-Fi 6) with varying speeds and ranges
--   **Security:** WEP, WPA, WPA2, and WPA3 encryption standards (WPA2/WPA3 recommended)
+- **Convenience:** No cables required, more flexible placement
+- **Standards:** 802.11a/b/g/n/ac/ax (Wi-Fi 6) with varying speeds and ranges
+- **Security:** WEP, WPA, WPA2, and WPA3 encryption standards (WPA2/WPA3 recommended)
 
 #### Network Interface Names in Linux
 
 In Ubuntu Server, network interfaces follow a predictable naming convention:
 
--   **eth0, eth1:** Traditional Ethernet interface names
--   **wlan0, wlan1:** Traditional wireless interface names
--   **enp2s0, wlp3s0:** Modern predictable interface names (based on device location)
+- **eth0, eth1:** Traditional Ethernet interface names
+- **wlan0, wlan1:** Traditional wireless interface names
+- **enp2s0, wlp3s0:** Modern predictable interface names (based on device location)
 
 #### IP Addressing
 
@@ -832,32 +793,32 @@ An ***IP (Internet Protocol) Address***, is a unique identifier for a device on 
 
 ***IPv4*** uses 32-bit addresses, providing approximately 4.3 billion unique addresses (now largely exhausted):
 
--   **Format:** Four octets (numbers 0-255) separated by dots (e.g., 192.168.1.1)
--   **Classes:** Traditionally divided into classes A, B, C, D, and E
--   **Private Ranges:**
-    -   10.0.0.0 to 10.255.255.255 (10.0.0.0/8)
-    -   172.16.0.0 to 172.31.255.255 (172.16.0.0/12)
-    -   192.168.0.0 to 192.168.255.255 (192.168.0.0/16)
--   **Subnet Masks:** Used to divide networks (e.g., 255.255.255.0 or /24)
--   **Issues:** IPv4 address exhaustion due to limited capacity
+- **Format:** Four octets (numbers 0-255) separated by dots (e.g., 192.168.1.1)
+- **Classes:** Traditionally divided into classes A, B, C, D, and E
+- **Private Ranges:**
+    - 10.0.0.0 to 10.255.255.255 (10.0.0.0/8)
+    - 172.16.0.0 to 172.31.255.255 (172.16.0.0/12)
+    - 192.168.0.0 to 192.168.255.255 (192.168.0.0/16)
+- **Subnet Masks:** Used to divide networks (e.g., 255.255.255.0 or /24)
+- **Issues:** IPv4 address exhaustion due to limited capacity
 
 ***IPv6*** uses 128-bit addresses, providing approximately 3.4×10\^38 unique addresses:
 
--   **Format:** Eight groups of four hexadecimal digits separated by colons (e.g., 2001:0db8:85a3:0000:0000:8a2e:0370:7334)
--   **Shorthand:** Leading zeros in a group can be omitted, and consecutive groups of zeros can be replaced with :: (only once)
-    -   **Example:** 2001:db8:85a3::8a2e:370:7334
--   **Address Types:**
-    -   **Unicast:** Single interface
-    -   **Anycast:** Multiple interfaces (closest responds)
-    -   **Multicast:** Multiple interfaces (all respond)
--   **Benefits:** More addresses, improved security, simplified headers, no need for NAT
+- **Format:** Eight groups of four hexadecimal digits separated by colons (e.g., 2001:0db8:85a3:0000:0000:8a2e:0370:7334)
+- **Shorthand:** Leading zeros in a group can be omitted, and consecutive groups of zeros can be replaced with :: (only once)
+    - **Example:** 2001:db8:85a3::8a2e:370:7334
+- **Address Types:**
+    - **Unicast:** Single interface
+    - **Anycast:** Multiple interfaces (closest responds)
+    - **Multicast:** Multiple interfaces (all respond)
+- **Benefits:** More addresses, improved security, simplified headers, no need for NAT
 
 One final note, ***CIDR (Classless Inter-Domain Routing)*** notation represents IP addresses and their associated routing prefix:
 
--   **Format:** IP address followed by "/" and prefix length (e.g., 192.168.1.0/24)
--   **Calculation:** A prefix of /24 means the first 24 bits are the network portion, leaving 8 bits for hosts (allowing 2\^8 = 256 addresses)
+- **Format:** IP address followed by "/" and prefix length (e.g., 192.168.1.0/24)
+- **Calculation:** A prefix of /24 means the first 24 bits are the network portion, leaving 8 bits for hosts (allowing 2\^8 = 256 addresses)
 
-### Ubuntu Server Networking Tools
+### Ubuntu Server Networking Tools {#sec-ubuntu_server_network_tools}
 
 Now that we've covered the basic concepts, it's time to dive into the actual commands and tools that will let you configure and manage your server's network. To start, you can view network interfaces and their statuses using the command `ip link show`, or `ip addr show` for your IP Address configuration. You can view only the IPv4 or IPv6 addresses using `ip -4 addr` or `ip -6 addr`, respectively.
 
@@ -907,10 +868,10 @@ ss -tuln
 
 The `tuln` flag is made up of four separate flags:
 
--   `-t`, displays only TCP sockets
--   `-u`, displays only UDP sockets
--   `-l`, displays listening sockets
--   `-n`, displays address numerically, instead of resolving them
+- `-t`, displays only TCP sockets
+- `-u`, displays only UDP sockets
+- `-l`, displays listening sockets
+- `-n`, displays address numerically, instead of resolving them
 
 #### Configuration Files
 
@@ -918,24 +879,24 @@ Finally, there are a few crucial configuration files that will handle the bulk o
 
 **Network Interfaces:**
 
--   `/etc/netplan/:` Contains YAML configuration files for Netplan
--   `/etc/network/interfaces:` Configuration method (if NetworkManager is used)
+- `/etc/netplan/:` Contains YAML configuration files for Netplan
+- `/etc/network/interfaces:` Configuration method (if NetworkManager is used)
 
 **DNS Configuration:**
 
--   **/etc/resolv.conf:** DNS resolver configuration
--   **/etc/hosts:** Static hostname to IP mappings
--   **/etc/hostname:** System hostname
+- **/etc/resolv.conf:** DNS resolver configuration
+- **/etc/hosts:** Static hostname to IP mappings
+- **/etc/hostname:** System hostname
 
-### systemd-networkd
+### systemd-networkd {#sec-systemd_networkd}
 
 ***systemd-networkd*** is a system daemon that manages network configurations in modern Linux distributions. It's part of the systemd suite and provides network configuration capabilities through simple configuration files.
 
 It generally works using three key components:
 
--   **Configuration Files:** You define network settings in .network files located in /etc/systemd/network/
--   **Service Management:** systemd-networkd runs as a system service to apply and maintain network configurations
--   **Integration:** Works closely with other systemd components for DNS resolution and networking
+- **Configuration Files:** You define network settings in .network files located in /etc/systemd/network/
+- **Service Management:** systemd-networkd runs as a system service to apply and maintain network configurations
+- **Integration:** Works closely with other systemd components for DNS resolution and networking
 
 #### Basic Wired Configuration
 
@@ -955,29 +916,29 @@ DNS=8.8.4.4
 
 Let's walk through the configuration file's structure:
 
--   **File Naming Convention:**
-    -   The file is named 20-wired.network.
-    -   The number prefix (20-) determines the processing order (lower numbers processed first), allowing you to create prioritized configurations.
-    -   The suffix .network tells systemd-networkd that this is a network interface configuration file.
--   **\[Match\] Section:**
-    -   This critical section determines which network interfaces the configuration applies to.
-    -   `Name=eth0`: This specifies that the configuration should apply to the eth0 interface only.
-    -   You can use wildcards (e.g., eth\* would match all Ethernet interfaces) or match by other properties such as MAC address using MACAddress=xx:xx:xx:xx:xx:xx.
-    -   *Behind the scenes:*
-        -   systemd-networkd scans all available network interfaces.
-        -   Compares their properties against those specified in the \[Match\] section.
-        -   If all properties match, the configuration is applied to that interface.
--   **\[Network\] Section:**
-    -   This section defines the network configuration parameters.
-    -   `Address=192.168.1.100/24`: Sets a static IPv4 address with CIDR notation. The /24 represents the subnet mask (equivalent to 255.255.255.0) and defines the network boundary.
-    -   `Gateway=192.168.1.1`: Specifies the default gateway for routing traffic outside the local network. All traffic not destined for the local subnet (192.168.1.0/24) will be sent to this IP address.
-    -   `DNS=8.8.8.8` and `DNS=8.8.4.4`: These are Google's public DNS servers. When specified, systemd-networkd will automatically configure /etc/resolv.conf through systemd-resolved. You can specify multiple DNS servers, and they will be tried in order.
--   **Behind the scenes:**
-    -   systemd-networkd identifies the eth0 interface
-    -   Assigns the static IP address using kernel netlink sockets
-    -   Sets up the routing table to use the specified gateway
-    -   Communicates with systemd-resolved to configure DNS settings
-    -   Maintains this configuration and reapplies it if the interface goes down and back up
+- **File Naming Convention:**
+    - The file is named 20-wired.network.
+    - The number prefix (20-) determines the processing order (lower numbers processed first), allowing you to create prioritized configurations.
+    - The suffix .network tells systemd-networkd that this is a network interface configuration file.
+- **\[Match\] Section:**
+    - This critical section determines which network interfaces the configuration applies to.
+    - `Name=eth0`: This specifies that the configuration should apply to the eth0 interface only.
+    - You can use wildcards (e.g., eth\* would match all Ethernet interfaces) or match by other properties such as MAC address using MACAddress=xx:xx:xx:xx:xx:xx.
+    - *Behind the scenes:*
+        - systemd-networkd scans all available network interfaces.
+        - Compares their properties against those specified in the \[Match\] section.
+        - If all properties match, the configuration is applied to that interface.
+- **\[Network\] Section:**
+    - This section defines the network configuration parameters.
+    - `Address=192.168.1.100/24`: Sets a static IPv4 address with CIDR notation. The /24 represents the subnet mask (equivalent to 255.255.255.0) and defines the network boundary.
+    - `Gateway=192.168.1.1`: Specifies the default gateway for routing traffic outside the local network. All traffic not destined for the local subnet (192.168.1.0/24) will be sent to this IP address.
+    - `DNS=8.8.8.8` and `DNS=8.8.4.4`: These are Google's public DNS servers. When specified, systemd-networkd will automatically configure /etc/resolv.conf through systemd-resolved. You can specify multiple DNS servers, and they will be tried in order.
+- **Behind the scenes:**
+    - systemd-networkd identifies the eth0 interface
+    - Assigns the static IP address using kernel netlink sockets
+    - Sets up the routing table to use the specified gateway
+    - Communicates with systemd-resolved to configure DNS settings
+    - Maintains this configuration and reapplies it if the interface goes down and back up
 
 This configuration example works well for server environments where static, predictable networking is preferable. This is a declarative configuration, it describes the desired state, rather than the steps to achieve it, so repeated application produces the same result.
 
@@ -996,23 +957,23 @@ DHCP=yes
 
 Let's walk through the differences between a dynamic and static host configuration file structure:
 
--   `DHCP=yes`: This single line replaces all the static configuration parameters from the previous example.
-    -   It instructs systemd-networkd to obtain IP address, subnet mask, gateway, DNS servers, and other network parameters automatically from a DHCP server.
-    -   You can also use `DHCP=ipv4` to enable only IPv4 DHCP, or `DHCP=ipv6` for only IPv6 DHCP, or `DHCP=yes` for both.
--   **Behind the scenes:**
-    -   systemd-networkd identifies the eth0 interface
-    -   Initiates the DHCP client process, which follows the DHCP protocol's Discover-Offer-Request-Acknowledge (DORA) sequence:
-        -   The client broadcasts a DISCOVER message
-        -   Available DHCP servers respond with OFFER messages
-        -   The client selects an offer and sends a REQUEST
-        -   The selected server sends an ACKNOWLEDGE
-    -   Applies all the received network parameters (IP, subnet, gateway, DNS)
-    -   Sets up a lease timer to manage when the configuration needs renewal
-    -   Handles DHCP lease renewals automatically
--   **Advantages:**
-    -   Simplified configuration maintenance - no need to update parameters when network details change
-    -   Works well in networks where IP assignments are centrally managed
-    -   Automatically adapts to network changes
+- `DHCP=yes`: This single line replaces all the static configuration parameters from the previous example.
+    - It instructs systemd-networkd to obtain IP address, subnet mask, gateway, DNS servers, and other network parameters automatically from a DHCP server.
+    - You can also use `DHCP=ipv4` to enable only IPv4 DHCP, or `DHCP=ipv6` for only IPv6 DHCP, or `DHCP=yes` for both.
+- **Behind the scenes:**
+    - systemd-networkd identifies the eth0 interface
+    - Initiates the DHCP client process, which follows the DHCP protocol's Discover-Offer-Request-Acknowledge (DORA) sequence:
+        - The client broadcasts a DISCOVER message
+        - Available DHCP servers respond with OFFER messages
+        - The client selects an offer and sends a REQUEST
+        - The selected server sends an ACKNOWLEDGE
+    - Applies all the received network parameters (IP, subnet, gateway, DNS)
+    - Sets up a lease timer to manage when the configuration needs renewal
+    - Handles DHCP lease renewals automatically
+- **Advantages:**
+    - Simplified configuration maintenance - no need to update parameters when network details change
+    - Works well in networks where IP assignments are centrally managed
+    - Automatically adapts to network changes
 
 This configuration works well for environments where network parameters are dynamic or managed by a network admin through DHCP.
 
@@ -1020,9 +981,9 @@ This configuration works well for environments where network parameters are dyna
 
 While wired connections are a basic part of networking, wireless connections require some extra work. More specifically, with systemd-networkd, you'll need a tool like WPA. Wi-Fi Protected Access (WPA) emerged as a response to weaknesses in the original Wired Equivalent Privacy (WEP) security protocol. As wireless networks became ubiquitous, secure authentication and encryption mechanisms became essential. The Linux ecosystem offers several powerful tools for managing these connections:
 
--   `wpa_supplicant`: The core daemon that handles wireless connections
--   `wpa_cli`: A command-line interface for controlling wpa_supplicant dynamically
--   `wpa_passphrase`: A utility for generating secure password hashes
+- `wpa_supplicant`: The core daemon that handles wireless connections
+- `wpa_cli`: A command-line interface for controlling wpa_supplicant dynamically
+- `wpa_passphrase`: A utility for generating secure password hashes
 
 On the `systemd-networkd` side of things, the configuration is simple, broken down in detail below.
 
@@ -1099,28 +1060,28 @@ network={
 
 Now that you have an idea about the basic structure of this file, lets go over some key points:
 
--   **File Naming Convention:**
-    -   The file wpa_supplicant-wlan0.conf is specifically named to associate with the wlan0 interface.
-    -   This naming allows different wireless interfaces to have different configurations.
--   **Configuration Directives:**
-    -   `ctrl_interface=/run/wpa_supplicant`: This specifies the control interface path, which is a socket that allows programs to communicate with wpa_supplicant. This enables tools like wpa_cli to connect and control wpa_supplicant dynamically.
-    -   `update_config=1`: Allows wpa_supplicant to update the configuration file automatically, useful when network details change or when using wpa_cli to add networks interactively.
--   **Network Block:**
-    -   The `network={}` block defines a single wireless network configuration.
-    -   `ssid="YourNetworkSSID"`: The Service Set Identifier - the name of the wireless network to connect to.
-    -   `psk="YourWiFiPassword"`: The Pre-Shared Key - the password for the wireless network in plaintext.
--   **Security Considerations:**
-    -   When you enter the password in plaintext as shown, wpa_supplicant will automatically convert it to a hash during processing.
-    -   For better security, you can pre-hash the password using: wpa_passphrase "YourNetworkSSID" "YourWiFiPassword" and use the generated hash.
-    -   The configuration file should have restricted permissions (600) to prevent other users from reading the passwords.
--   **Behind the scenes:**
-    -   wpa_supplicant reads this configuration at startup
-    -   It scans for available wireless networks
-    -   When it finds the specified SSID, it attempts to authenticate using the provided credentials
-    -   It handles all the wireless protocol handshakes, including:
-        -   Authentication and association with the access point
-        -   Negotiation of encryption parameters
-        -   Establishment of the encrypted channel
+- **File Naming Convention:**
+    - The file wpa_supplicant-wlan0.conf is specifically named to associate with the wlan0 interface.
+    - This naming allows different wireless interfaces to have different configurations.
+- **Configuration Directives:**
+    - `ctrl_interface=/run/wpa_supplicant`: This specifies the control interface path, which is a socket that allows programs to communicate with wpa_supplicant. This enables tools like wpa_cli to connect and control wpa_supplicant dynamically.
+    - `update_config=1`: Allows wpa_supplicant to update the configuration file automatically, useful when network details change or when using wpa_cli to add networks interactively.
+- **Network Block:**
+    - The `network={}` block defines a single wireless network configuration.
+    - `ssid="YourNetworkSSID"`: The Service Set Identifier - the name of the wireless network to connect to.
+    - `psk="YourWiFiPassword"`: The Pre-Shared Key - the password for the wireless network in plaintext.
+- **Security Considerations:**
+    - When you enter the password in plaintext as shown, wpa_supplicant will automatically convert it to a hash during processing.
+    - For better security, you can pre-hash the password using: wpa_passphrase "YourNetworkSSID" "YourWiFiPassword" and use the generated hash.
+    - The configuration file should have restricted permissions (600) to prevent other users from reading the passwords.
+- **Behind the scenes:**
+    - wpa_supplicant reads this configuration at startup
+    - It scans for available wireless networks
+    - When it finds the specified SSID, it attempts to authenticate using the provided credentials
+    - It handles all the wireless protocol handshakes, including:
+        - Authentication and association with the access point
+        - Negotiation of encryption parameters
+        - Establishment of the encrypted channel
 
 Once connected, it maintains the connection and handles roaming between access points with the same SSID. This configuration represents the minimum needed for a WPA/WPA2 Personal network connection. For more complex scenarios like enterprise authentication (WPA-EAP), additional parameters would be needed in the network block.
 
@@ -1222,21 +1183,21 @@ ip_address=192.168.1.100
 
 Now that we've covered a lot of the great features available with wpa_cli, it's time to continue configuring our server. You may remember me mentioning that the Raspberry Pi default networking tool is Netplan. Before we can enable and start the `wlan0` service (meaning your primary wifi is on), we need to safely shut down Netplan.
 
-### Converting Netplan to networkd
+### Converting Netplan to networkd {#sec-netplan_to_networkd}
 
 It's no surprise that Raspberry Pi uses Netplan as the default network manager because it provides a consistent interface for network configuration; however, there are several reasons you might want to use systemd-networkd directly:
 
--   **Simplicity:** Direct systemd-networkd configuration eliminates a layer of abstraction
--   **Control:** Direct access to all of systemd-networkd's features without Netplan's limitations
--   **Integration:** Better alignment with other systemd components
--   **Learning:** Understanding the underlying network configuration system
--   **Performance:** Potentially faster setup without the translation layer
+- **Simplicity:** Direct systemd-networkd configuration eliminates a layer of abstraction
+- **Control:** Direct access to all of systemd-networkd's features without Netplan's limitations
+- **Integration:** Better alignment with other systemd components
+- **Learning:** Understanding the underlying network configuration system
+- **Performance:** Potentially faster setup without the translation layer
 
 Ubuntu Server uses a layered approach to network configuration:
 
--   **User configuration layer:** YAML files in /etc/netplan/
--   **Translation layer:** Netplan reads YAML files and generates configurations for a backend
--   **Backend layer:** Either systemd-networkd or NetworkManager applies the actual configuration
+- **User configuration layer:** YAML files in /etc/netplan/
+- **Translation layer:** Netplan reads YAML files and generates configurations for a backend
+- **Backend layer:** Either systemd-networkd or NetworkManager applies the actual configuration
 
 By removing the middle layer (Netplan), we're configuring the backend directly. As you can see from the previous parts of this Networking section in the guide, I like the learning value and longterm potential of systemd, which is why I went with it over Netplan.
 
@@ -1301,37 +1262,37 @@ EOF
 
 Let's take a look at the systemctl `enable` and `start` commands, because without them we will lose connectivity when turning off netplan. Before we do that, however, what the minimal netplan configuration file does is essentially tell Netplan to just use networkd. We'll remove it once we are sure everything is up and running.
 
--   **Enable Command:**
-    -   `sudo systemctl enable systemd-networkd`: This configures systemd-networkd to start automatically when the system boots.
-    -   Behind the scenes:
-        -   This command creates the necessary symbolic links in systemd's unit directories so that the network daemon will be started by systemd during the boot process.
-        -   It integrates the service into systemd's dependency tree.
-        -   Without this step, you would need to manually start networkd after each reboot, which is impractical for a server environment.
--   **Start Command:**
-    -   `sudo systemctl start systemd-networkd`: This launches the systemd-networkd daemon immediately.
-    -   Behind the scenes:
-        -   systemd spawns the networkd process, which then:
-            -   Reads all .network, .netdev, and .link configuration files in `/etc/systemd/network/` and `/usr/lib/systemd/network/`
-            -   Applies the configurations to matching interfaces
-            -   Sets up monitoring for network changes
--   **Restart Command:**
-    -   `sudo systemctl restart systemd-networkd`: This stops and then starts the daemon again, ensuring all configuration changes are applied.
-    -   Behind the scenes:
-        -   systemd sends a termination signal to the running networkd process, waits for it to exit cleanly, and then starts a new instance.
-        -   The new instance repeats the initialization process, reading all configuration files again.
-        -   This is the command you'll use most frequently when making changes to network configurations.
--   **Why Restart Is Necessary:**
-    -   While systemd-networkd does monitor for some changes, editing configuration files doesn't automatically trigger a reconfiguration.
-    -   The restart ensures that:
-        -   All new or modified configuration files are re-read
-        -   Any removed configurations are no longer applied
-        -   All interface configurations are freshly evaluated against the current state
--   **Impact on Network Connectivity:**
-    -   A restart will temporarily disrupt network connectivity as interfaces are reconfigured
-    -   For remote servers, use caution when restarting network services to avoid losing your connection
-    -   For critical remote systems, consider using a command pipeline, like:
-        -   `sudo systemctl restart systemd-networkd.service || (sleep 30 && sudo systemctl start systemd-networkd.service)`
-        -   Which attempts to restart and then tries to start the service again after 30 seconds if connectivity is lost
+- **Enable Command:**
+    - `sudo systemctl enable systemd-networkd`: This configures systemd-networkd to start automatically when the system boots.
+    - Behind the scenes:
+        - This command creates the necessary symbolic links in systemd's unit directories so that the network daemon will be started by systemd during the boot process.
+        - It integrates the service into systemd's dependency tree.
+        - Without this step, you would need to manually start networkd after each reboot, which is impractical for a server environment.
+- **Start Command:**
+    - `sudo systemctl start systemd-networkd`: This launches the systemd-networkd daemon immediately.
+    - Behind the scenes:
+        - systemd spawns the networkd process, which then:
+            - Reads all .network, .netdev, and .link configuration files in `/etc/systemd/network/` and `/usr/lib/systemd/network/`
+            - Applies the configurations to matching interfaces
+            - Sets up monitoring for network changes
+- **Restart Command:**
+    - `sudo systemctl restart systemd-networkd`: This stops and then starts the daemon again, ensuring all configuration changes are applied.
+    - Behind the scenes:
+        - systemd sends a termination signal to the running networkd process, waits for it to exit cleanly, and then starts a new instance.
+        - The new instance repeats the initialization process, reading all configuration files again.
+        - This is the command you'll use most frequently when making changes to network configurations.
+- **Why Restart Is Necessary:**
+    - While systemd-networkd does monitor for some changes, editing configuration files doesn't automatically trigger a reconfiguration.
+    - The restart ensures that:
+        - All new or modified configuration files are re-read
+        - Any removed configurations are no longer applied
+        - All interface configurations are freshly evaluated against the current state
+- **Impact on Network Connectivity:**
+    - A restart will temporarily disrupt network connectivity as interfaces are reconfigured
+    - For remote servers, use caution when restarting network services to avoid losing your connection
+    - For critical remote systems, consider using a command pipeline, like:
+        - `sudo systemctl restart systemd-networkd.service || (sleep 30 && sudo systemctl start systemd-networkd.service)`
+        - Which attempts to restart and then tries to start the service again after 30 seconds if connectivity is lost
 
 5.  Apply the systemd-networkd network configuration
 
@@ -1350,32 +1311,32 @@ sudo systemctl start wpa_supplicant@wlan0.service
 
 These commands are crucial for integrating wpa_supplicant with systemd, let's break them down:
 
--   **Service Template:**
-    -   The `wpa_supplicant@wlan0.service` syntax uses systemd's template unit feature.
-    -   The \@ symbol indicates a template service, and wlan0 is the instance name that gets passed to the template.
-    -   This allows the same service definition to be used for different wireless interfaces.
--   **Enable Command:**
-    -   `sudo systemctl enable wpa_supplicant@wlan0.service`: This creates symbolic links from the system's service definition directory to systemd's active service directory, ensuring the service starts automatically at boot.
-    -   Behind the scenes:
-        -   This modifies systemd's startup configuration by adding the service to the correct target units. Typically multi-user.target.
-        -   The symbolic links created point to the wpa_supplicant service template file.
--   **Start Command:**
-    -   `sudo systemctl start wpa_supplicant@wlan0.service`: This immediately starts the service without waiting for a reboot.
-    -   Behind the scenes:
-        -   systemd executes the wpa_supplicant binary with appropriate arguments
-        -   Derived from the service template and the instance name (wlan0).
-        -   The command effectively executed is similar to: `/usr/sbin/wpa_supplicant -c /etc/wpa_supplicant/wpa_supplicant-wlan0.conf -i wlan0`
--   **Integration with systemd-networkd:**
-    -   When wpa_supplicant successfully connects to a wireless network, it brings the interface up
-    -   systemd-networkd detects this state change through kernel events
-    -   systemd-networkd then applies the matching network configuration (our earlier 25-wireless.network file)
-    -   If DHCP is enabled, the DHCP client process begins
--   **Benefits of this systemd configuration:**
-    -   Dependency management (services can start in the correct order)
-    -   Automatic restart if the service fails
-    -   Standardized logging through journald
-    -   Consistent management interface alongside other system services
-    -   The template approach allows for modular configuration that can be easily expanded if you add more wireless interfaces to your Raspberry Pi.
+- **Service Template:**
+    - The `wpa_supplicant@wlan0.service` syntax uses systemd's template unit feature.
+    - The \@ symbol indicates a template service, and wlan0 is the instance name that gets passed to the template.
+    - This allows the same service definition to be used for different wireless interfaces.
+- **Enable Command:**
+    - `sudo systemctl enable wpa_supplicant@wlan0.service`: This creates symbolic links from the system's service definition directory to systemd's active service directory, ensuring the service starts automatically at boot.
+    - Behind the scenes:
+        - This modifies systemd's startup configuration by adding the service to the correct target units. Typically multi-user.target.
+        - The symbolic links created point to the wpa_supplicant service template file.
+- **Start Command:**
+    - `sudo systemctl start wpa_supplicant@wlan0.service`: This immediately starts the service without waiting for a reboot.
+    - Behind the scenes:
+        - systemd executes the wpa_supplicant binary with appropriate arguments
+        - Derived from the service template and the instance name (wlan0).
+        - The command effectively executed is similar to: `/usr/sbin/wpa_supplicant -c /etc/wpa_supplicant/wpa_supplicant-wlan0.conf -i wlan0`
+- **Integration with systemd-networkd:**
+    - When wpa_supplicant successfully connects to a wireless network, it brings the interface up
+    - systemd-networkd detects this state change through kernel events
+    - systemd-networkd then applies the matching network configuration (our earlier 25-wireless.network file)
+    - If DHCP is enabled, the DHCP client process begins
+- **Benefits of this systemd configuration:**
+    - Dependency management (services can start in the correct order)
+    - Automatic restart if the service fails
+    - Standardized logging through journald
+    - Consistent management interface alongside other system services
+    - The template approach allows for modular configuration that can be easily expanded if you add more wireless interfaces to your Raspberry Pi.
 
 6.  Verify the new configuration by checking the `systemctl status` and running simple network check commands
 
@@ -1427,90 +1388,89 @@ networkctl list
 
 These are crucial commands for troubleshooting and confirming your network configuration, let's break them down:
 
--   **systemd-networkd Status Check:**
-    -   `systemctl status systemd-networkd`: This displays the current status of the systemd-networkd service. The output includes:
-        -   Whether the service is active, inactive, or failed
-        -   When it was started and how long it's been running
-        -   The process ID and memory usage
-        -   Recent log entries directly related to the service
-    -   Behind the scenes:
-        -   This queries systemd's internal service management database and pulls relevant information from the journal logging system.
-        -   Useful pattern: Look for "Active: active (running)" to confirm the service is working properly and check the logs for any warning or error messages.
--   **Network Status Overview:**
-    -   `networkctl status`: This command provides a comprehensive overview of your system's network state.
-        -   The output includes:
-            -   Hostname and domain information
-            -   Gateway and DNS server configurations
-            -   Current network interfaces and their states
-            -   Network addresses (IPv4 and IPv6)
-    -   Behind the scenes:
-        -   This tool directly communicates with systemd-networkd using its D-Bus API to retrieve the current network state.
-        -   This command is particularly useful because it aggregates information that would otherwise require multiple different commands to collect.
--   **Network Links Enumeration:**
-    -   `networkctl list`: This lists all network interfaces known to systemd-networkd.
-        -   The output shows:
-            -   Interface index numbers
-            -   Interface names
-            -   Interface types (ether, wlan, loopback, etc.)
-            -   Operational state (up, down, dormant, etc.)
-            -   Setup state (configured, configuring, unmanaged)
-    -   Behind the scenes:
-        -   Like the status command, this uses systemd-networkd's D-Bus API to enumerate all network links and their current states.
-        -   This provides a quick way to verify which interfaces systemd-networkd is managing and their current status.
--   **Troubleshooting with These Commands:**
-    -   Start with systemctl status systemd-networkd to ensure the service is running
-    -   Use networkctl list to see which interfaces are detected and their states
-    -   If an interface shows "configuring" instead of "configured," check for configuration errors
-    -   Use networkctl status to verify DNS settings and addressing
-    -   For more detailed logs: journalctl -u systemd-networkd shows all logs from the networkd service
+- **systemd-networkd Status Check:**
+    - `systemctl status systemd-networkd`: This displays the current status of the systemd-networkd service. The output includes:
+        - Whether the service is active, inactive, or failed
+        - When it was started and how long it's been running
+        - The process ID and memory usage
+        - Recent log entries directly related to the service
+    - Behind the scenes:
+        - This queries systemd's internal service management database and pulls relevant information from the journal logging system.
+        - Useful pattern: Look for "Active: active (running)" to confirm the service is working properly and check the logs for any warning or error messages.
+- **Network Status Overview:**
+    - `networkctl status`: This command provides a comprehensive overview of your system's network state.
+        - The output includes:
+            - Hostname and domain information
+            - Gateway and DNS server configurations
+            - Current network interfaces and their states
+            - Network addresses (IPv4 and IPv6)
+    - Behind the scenes:
+        - This tool directly communicates with systemd-networkd using its D-Bus API to retrieve the current network state.
+        - This command is particularly useful because it aggregates information that would otherwise require multiple different commands to collect.
+- **Network Links Enumeration:**
+    - `networkctl list`: This lists all network interfaces known to systemd-networkd.
+        - The output shows:
+            - Interface index numbers
+            - Interface names
+            - Interface types (ether, wlan, loopback, etc.)
+            - Operational state (up, down, dormant, etc.)
+            - Setup state (configured, configuring, unmanaged)
+    - Behind the scenes:
+        - Like the status command, this uses systemd-networkd's D-Bus API to enumerate all network links and their current states.
+        - This provides a quick way to verify which interfaces systemd-networkd is managing and their current status.
+- **Troubleshooting with These Commands:**
+    - Start with systemctl status systemd-networkd to ensure the service is running
+    - Use networkctl list to see which interfaces are detected and their states
+    - If an interface shows "configuring" instead of "configured," check for configuration errors
+    - Use networkctl status to verify DNS settings and addressing
+    - For more detailed logs: journalctl -u systemd-networkd shows all logs from the networkd service
 
 These commands represent the primary diagnostic tools when working with systemd-networkd. They provide a layered approach to troubleshooting - from service-level status to detailed interface information - that helps pinpoint issues in your network configuration. If you need more:
 
--   **Network Connectivity Loss:**
-    -   Connect directly to the device via console or keyboard/monitor
-    -   Check logs with `journalctl -u systemd-networkd`
-    -   Restore the Netplan configuration from your backup if needed
--   **DNS Resolution Issues:**
-    -   Ensure systemd-resolved is running: `systemctl status systemd-resolved`
-    -   Check `/etc/resolv.conf` is a symlink to `/run/systemd/resolve/stub-resolv.conf`
-    -   If not, create it: `sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf`
--   **Configuration Errors:**
-    -   Verify syntax with `networkctl list` to see if interfaces are "configured" or "configuring"
-    -   Check for errors with `journalctl -u systemd-networkd -n 50`
+- **Network Connectivity Loss:**
+    - Connect directly to the device via console or keyboard/monitor
+    - Check logs with `journalctl -u systemd-networkd`
+    - Restore the Netplan configuration from your backup if needed
+- **DNS Resolution Issues:**
+    - Ensure systemd-resolved is running: `systemctl status systemd-resolved`
+    - Check `/etc/resolv.conf` is a symlink to `/run/systemd/resolve/stub-resolv.conf`
+    - If not, create it: `sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf`
+- **Configuration Errors:**
+    - Verify syntax with `networkctl list` to see if interfaces are "configured" or "configuring"
+    - Check for errors with `journalctl -u systemd-networkd -n 50`
 
-### Advanced Networking
-
+### Advanced Networking {#sec-advanced_networking}
 #### Subnets
 
 A subnet is a logical subdivision of an IP network. Subnetting allows network administrators to partition a large network into smaller, more manageable segments. Subnetting serves several important functions:
 
--   Address Conservation: More efficient allocation of limited IPv4 address space
--   Security Segmentation: Isolating sensitive systems from general network traffic
--   Broadcast Domain Control: Reducing broadcast traffic by limiting its scope
--   Hierarchical Addressing: Simplifying routing tables and network management
--   Traffic Optimization: Improving network performance by segregating traffic types
+- Address Conservation: More efficient allocation of limited IPv4 address space
+- Security Segmentation: Isolating sensitive systems from general network traffic
+- Broadcast Domain Control: Reducing broadcast traffic by limiting its scope
+- Hierarchical Addressing: Simplifying routing tables and network management
+- Traffic Optimization: Improving network performance by segregating traffic types
 
 A subnet mask determines which portion of an IP address refers to the network and which portion refers to hosts within that network. Consider an IPv4 address: 192.168.1.10 with subnet mask 255.255.255.0 (/24)
 
--   **In binary:**
-    -   IP: 11000000.10101000.00000001.00001010
-    -   Mask: 11111111.11111111.11111111.00000000
-    -   The 1s in the mask represent the network portion, while the 0s represent the host portion.
--   **In CIDR Notation:**
-    -   /24 means the first 24 bits identify the network (equivalent to 255.255.255.0)
-    -   /16 means the first 16 bits identify the network (equivalent to 255.255.0.0)
--   **Subnet Calculations:** For a /24 network
-    -   **Network address:** First address in range (e.g., 192.168.1.0)
-    -   **Broadcast address:** Last address in range (e.g., 192.168.1.255)
-    -   **Available host addresses:** 2\^(32-prefix) - 2 = 2\^8 - 2 = 254 usable addresses
+- **In binary:**
+    - IP: 11000000.10101000.00000001.00001010
+    - Mask: 11111111.11111111.11111111.00000000
+    - The 1s in the mask represent the network portion, while the 0s represent the host portion.
+- **In CIDR Notation:**
+    - /24 means the first 24 bits identify the network (equivalent to 255.255.255.0)
+    - /16 means the first 16 bits identify the network (equivalent to 255.255.0.0)
+- **Subnet Calculations:** For a /24 network
+    - **Network address:** First address in range (e.g., 192.168.1.0)
+    - **Broadcast address:** Last address in range (e.g., 192.168.1.255)
+    - **Available host addresses:** 2\^(32-prefix) - 2 = 2\^8 - 2 = 254 usable addresses
 
 Creating subnets involves both network design and interface configuration. Here's how to implement subnetting on a Linux server using systemd-networkd:
 
--   **Scenario 1:** Simple Subnet Isolation
-    -   This configuration matches the eth1 interface
-    -   Assigns it the IP 10.0.1.1 within a /24 subnet (255.255.255.0)
-    -   Enables IP forwarding to allow traffic between this subnet and others
-    -   When applied, this creates a subnet with 254 usable addresses (10.0.1.1 through 10.0.1.254, excluding the network address 10.0.1.0 and broadcast address 10.0.1.255).
+- **Scenario 1:** Simple Subnet Isolation
+    - This configuration matches the eth1 interface
+    - Assigns it the IP 10.0.1.1 within a /24 subnet (255.255.255.0)
+    - Enables IP forwarding to allow traffic between this subnet and others
+    - When applied, this creates a subnet with 254 usable addresses (10.0.1.1 through 10.0.1.254, excluding the network address 10.0.1.0 and broadcast address 10.0.1.255).
 
 ``` ini
 # /etc/systemd/network/25-subnet.network
@@ -1522,11 +1482,11 @@ Address=10.0.1.1/24
 IPForward=yes
 ```
 
--   **Scenario 2:** Multiple Subnets on a Single Interface
-    -   This configuration creates three separate subnets accessed through the same physical interface
-        -   A /24 subnet (256 addresses) in the 192.168.1.x range
-        -   A /24 subnet (256 addresses) in the 10.10.10.x range
-        -   A /16 subnet (65,536 addresses) in the 172.16.x.x range
+- **Scenario 2:** Multiple Subnets on a Single Interface
+    - This configuration creates three separate subnets accessed through the same physical interface
+        - A /24 subnet (256 addresses) in the 192.168.1.x range
+        - A /24 subnet (256 addresses) in the 10.10.10.x range
+        - A /16 subnet (65,536 addresses) in the 172.16.x.x range
 
 The system serves as a router/gateway for all three networks simultaneously.
 
@@ -1541,11 +1501,11 @@ Address=10.10.10.1/24
 Address=172.16.1.1/16
 ```
 
--   **DHCP Server Configuration for Subnets**
-    -   This configuration, creates a subnet (10.0.1.0/24) on eth1
-    -   Enables a DHCP server
-    -   Allocates IPs from 10.0.1.11 (base + offset of 10) through 10.0.1.210 (for 200 addresses)
-    -   Provides DNS server information to DHCP clients
+- **DHCP Server Configuration for Subnets**
+    - This configuration, creates a subnet (10.0.1.0/24) on eth1
+    - Enables a DHCP server
+    - Allocates IPs from 10.0.1.11 (base + offset of 10) through 10.0.1.210 (for 200 addresses)
+    - Provides DNS server information to DHCP clients
 
 ``` ini
 # /etc/systemd/network/25-dhcp-server.network
@@ -1613,36 +1573,35 @@ Now that you have your basic Ubuntu Pi server configured and connected to a netw
 
 Once we have SSH setup, configured, and secured, we'll use a feature in VS Code called `Remote - SSH` which lets us use the nice UI of an IDE while working on the actual server. This is really beneficial for a variety of reasons: one of them being the fantastic community-built extensions that drastically improve the development experience, another being the integration with other tools for things like CI/CD.
 
-### Understanding SSH Configuration Files
-
+### Understanding SSH Configuration Files {#sec-ssh_configs}
 #### SSH Client vs Server Configuration
 
 The SSH system uses two main configuration files with distinct purposes:
 
 1.  `ssh_config`:
-    -   Lives on your client machine (like your laptop)
-    -   Controls how your system behaves when connecting to other SSH servers
-    -   Affects outgoing SSH connections
-    -   Located at `/etc/ssh/ssh_config` (system-wide) and `~/.ssh/config` (user-specific)
-        -   If your server ever moves or connects to a new IP address, simply update it in the user config file
+    - Lives on your client machine (like your laptop)
+    - Controls how your system behaves when connecting to other SSH servers
+    - Affects outgoing SSH connections
+    - Located at `/etc/ssh/ssh_config` (system-wide) and `~/.ssh/config` (user-specific)
+        - If your server ever moves or connects to a new IP address, simply update it in the user config file
 2.  `sshd_config`:
-    -   Lives on your server (the Raspberry Pi)
-    -   Controls how your SSH server accepts incoming connections
-    -   Determines who can connect and how
-    -   Located at `/etc/ssh/sshd_config`
-    -   Requires root privileges to modify
-    -   Changes require restarting the SSH service
+    - Lives on your server (the Raspberry Pi)
+    - Controls how your SSH server accepts incoming connections
+    - Determines who can connect and how
+    - Located at `/etc/ssh/sshd_config`
+    - Requires root privileges to modify
+    - Changes require restarting the SSH service
 
-### Key-Based Authentication Setup
+### Key-Based Authentication Setup {#sec-ssh_keys}
 
 #### Understanding SSH Keys and Security
 
 This guide uses ECDSA-384 keys, which offer several advantages:
 
--   Uses the NIST P-384 curve, providing security equivalent to 192-bit symmetric encryption
--   Better resistance to potential quantum computing attacks compared to smaller key sizes
--   Standardized under FIPS 186-4
--   Excellent balance between security and performance
+- Uses the NIST P-384 curve, providing security equivalent to 192-bit symmetric encryption
+- Better resistance to potential quantum computing attacks compared to smaller key sizes
+- Standardized under FIPS 186-4
+- Excellent balance between security and performance
 
 #### Generating Your SSH Keys
 
@@ -1655,14 +1614,14 @@ ssh-keygen -t ecdsa -b 384 -C "ubuntu-pi-server"
 
 This command:
 
--   `-t ecdsa`: Specifies the ECDSA algorithm
--   `-b 384`: Sets the key size to 384 bits
--   `-C "ubuntu-pi-server"`: Adds a descriptive comment
+- `-t ecdsa`: Specifies the ECDSA algorithm
+- `-b 384`: Sets the key size to 384 bits
+- `-C "ubuntu-pi-server"`: Adds a descriptive comment
 
 The command generates two files:
 
--   `~/.ssh/ubuntu_pi_ecdsa`: Your private key (keep this secret!)
--   `~/.ssh/ubuntu_pi_ecdsa.pub`: Your public key (safe to share)
+- `~/.ssh/ubuntu_pi_ecdsa`: Your private key (keep this secret!)
+- `~/.ssh/ubuntu_pi_ecdsa.pub`: Your public key (safe to share)
 
 #### Installing Your Public Key on the Raspberry Pi
 
@@ -1680,25 +1639,25 @@ This command:
 3.  Adds your public key to `authorized_keys`
 4.  Sets appropriate permissions automatically
 
-### Server-Side SSH Configuration
+### Server-Side SSH Configuration {#sec-ssh_config_server}
 
 A client-server relationship is a fundamental computing model that underpins most network communications and distributed systems. This architecture divides computing responsibilities between service requestors (clients, your laptop in this case) and service providers (servers, the Raspberry Pi in this case).
 
 A server is a computer program or device that provides functionality, resources, or services to multiple clients.
 
--   **Service Provider:** Responds to client requests rather than initiating communication
--   **Resource Management:** Manages shared resources (files, databases, computational power)
--   **Continuous Operation:** Typically runs continuously, waiting for client requests
--   **Scalability:** Often designed to handle multiple concurrent client connections
--   **Examples:** Web servers, database servers, file servers, mail servers, authentication servers
+- **Service Provider:** Responds to client requests rather than initiating communication
+- **Resource Management:** Manages shared resources (files, databases, computational power)
+- **Continuous Operation:** Typically runs continuously, waiting for client requests
+- **Scalability:** Often designed to handle multiple concurrent client connections
+- **Examples:** Web servers, database servers, file servers, mail servers, authentication servers
 
 Client-server communication follows a request-response pattern:
 
--   **Connection:** The client establishes a connection to the server
--   **Request:** The client sends a formatted request for a specific service
--   **Processing:** The server processes the request according to its business logic
--   **Response:** The server returns appropriate data or status information
--   **Disconnection or Persistence:** The connection may be terminated or maintained for future requests
+- **Connection:** The client establishes a connection to the server
+- **Request:** The client sends a formatted request for a specific service
+- **Processing:** The server processes the request according to its business logic
+- **Response:** The server returns appropriate data or status information
+- **Disconnection or Persistence:** The connection may be terminated or maintained for future requests
 
 This communication typically occurs over TCP/IP networks using standardized protocols that define the format and sequence of messages exchanged.
 
@@ -1749,21 +1708,21 @@ sudo systemctl status ssh
 
 Just note, you'll probably need to reboot (`sudo reboot`) your server before all of the changes fully take place. Once you've done that, you may need to run `sudo systemctl start ssh`.
 
-### Client-Side Configuration
+### Client-Side Configuration {#sec-ssh_config_client}
 
 A client is a computer program or device that requests services, resources, or information from a server.
 
--   **Request Initiator:** Clients always initiate communication with servers
--   **User Interface:** Often provides the interface through which users interact with remote services
--   **Limited Resources:** Typically has fewer resources than servers and offloads intensive processing
--   **Dependency:** Relies on servers to fulfill requests and cannot function independently for networked operations
--   **Examples:** Web browsers, email clients, SSH clients, mobile applications
+- **Request Initiator:** Clients always initiate communication with servers
+- **User Interface:** Often provides the interface through which users interact with remote services
+- **Limited Resources:** Typically has fewer resources than servers and offloads intensive processing
+- **Dependency:** Relies on servers to fulfill requests and cannot function independently for networked operations
+- **Examples:** Web browsers, email clients, SSH clients, mobile applications
 
 From a technical perspective, clients:
 
--   Formulate and send requests using specific protocols (HTTP, FTP, SMTP, etc.)
--   Wait for and process server responses
--   Present results to users or use them for further operations
+- Formulate and send requests using specific protocols (HTTP, FTP, SMTP, etc.)
+- Wait for and process server responses
+- Present results to users or use them for further operations
 
 #### Setting Up Your SSH Config
 
@@ -1855,7 +1814,7 @@ If you added a passphrase, you'll be prompted to enter it when connecting.
 
 By using a passphrase, your SSH key is protected against unauthorized use in case it gets compromised. If you frequently use your SSH key, consider using an SSH agent (ssh-agent) to cache your passphrase securely.
 
-### Additional Security Measures
+### Additional Security Measures {#sec-ssh_security}
 
 Network security for a Linux server relies on multiple layers of protection. Two essential components are a properly configured firewall and intrusion prevention systems. This section covers UFW (Uncomplicated Firewall) and Fail2Ban, two powerful yet accessible tools for hardening your Ubuntu Pi Server.
 
@@ -1863,10 +1822,10 @@ Network security for a Linux server relies on multiple layers of protection. Two
 
 A firewall acts as a barrier between your server and potentially hostile networks by controlling incoming and outgoing traffic based on predetermined rules. UFW provides a user-friendly interface to the underlying iptables firewall system in Linux.
 
--   **Default Deny Policy:** Start with blocking all connections and only allow specific permitted traffic
--   **Stateful Inspection:** Track the state of active connections rather than just examining individual packets
--   **Port Control:** Allow or block access based on specific network ports
--   **Source Filtering:** Control traffic based on originating IP addresses or networks
+- **Default Deny Policy:** Start with blocking all connections and only allow specific permitted traffic
+- **Stateful Inspection:** Track the state of active connections rather than just examining individual packets
+- **Port Control:** Allow or block access based on specific network ports
+- **Source Filtering:** Control traffic based on originating IP addresses or networks
 
 ``` bash
 # Install UFW (if it isn't already)
@@ -1922,21 +1881,11 @@ sudo iptables -L -n | grep f2b
 
 I want to add that `fail2ban` automatically pulls values for its jails depending on how you've configured things on your system, at least I assume so. I'm assuming that because I never configured specific ssh rules for fail2ban, but it knows to allow the port I set in my `sshd_config`. That being said, you can see how simple it was to setup these tools, and how they work together to create a comprehensive security system:
 
--   UFW establishes the baseline by controlling which ports are accessible
--   Fail2Ban adds behavioral analysis by monitoring authentication attempts
--   Together they provide both static and dynamic protection
+- UFW establishes the baseline by controlling which ports are accessible
+- Fail2Ban adds behavioral analysis by monitoring authentication attempts
+- Together they provide both static and dynamic protection
 
 This layered approach follows the defense-in-depth principle essential to modern cybersecurity. By combining a properly configured firewall with an intrusion prevention system, you significantly reduce the attack surface of your Ubuntu Pi Server.
-
-### System Updates
-
-Keep your system updated:
-
-``` bash
-sudo apt update && sudo apt upgrade
-```
-
-### Monitoring and Maintenance
 
 #### Regular Security Checks
 
@@ -1952,54 +1901,7 @@ sudo journalctl -u ssh
 sudo tail -f /var/log/auth.log
 ```
 
-#### Key Management Best Practices
-
-1.  Protect your private key:
-
--   Use a strong passphrase
--   Never share or copy to unsecured devices
--   Keep secure backups
-
-2.  Verify file permissions:
-
-``` bash
-# On your laptop
-chmod 700 ~/.ssh
-chmod 600 ~/.ssh/ubuntu_pi_ecdsa
-chmod 644 ~/.ssh/ubuntu_pi_ecdsa.pub
-
-# On your Pi
-chmod 700 ~/.ssh
-chmod 600 ~/.ssh/authorized_keys
-```
-
-### Troubleshooting
-
-If you can't connect:
-
-1.  Verify SSH service status:
-
-``` bash
-sudo systemctl status ssh
-```
-
-2.  Check SSH connectivity:
-
-``` bash
-# Test SSH connection verbosely
-ssh -v chris@ubuntu-pi-server
-```
-
-3.  Verify host key fingerprints:
-
-``` bash
-# On the Pi
-ssh-keygen -l -f /etc/ssh/ssh_host_ecdsa_key.pub
-```
-
-Remember: When you see a host key verification prompt, always verify the fingerprint matches your server's key before accepting.
-
-### SCP (Secure Copy Protocol) and rsync (Remote Sync)
+### SCP (Secure Copy Protocol) and rsync (Remote Sync) {#sec-scp_rsync}
 
 This section outlines the process of securely copying files between your Ubuntu Pi Server and your Client machine. I'll cover two powerful methods: SCP (Secure Copy Protocol) and rsync. Both tools operate over SSH, ensuring your file transfers remain encrypted and secure.
 
@@ -2007,12 +1909,12 @@ This section outlines the process of securely copying files between your Ubuntu 
 
 `rsync` is a more sophisticated file synchronization and transfer utility that offers several advantages over SCP:
 
--   **Incremental transfers**: Only sends parts of files that changed
--   **Resume capability**: Can continue interrupted transfers
--   **Bandwidth control**: Can limit how much network it uses
--   **Preservation options**: Maintains file timestamps, permissions, etc.
--   **Directory synchronization**: Can mirror directory structures
--   **Exclusion patterns**: Can skip specified files/directories
+- **Incremental transfers**: Only sends parts of files that changed
+- **Resume capability**: Can continue interrupted transfers
+- **Bandwidth control**: Can limit how much network it uses
+- **Preservation options**: Maintains file timestamps, permissions, etc.
+- **Directory synchronization**: Can mirror directory structures
+- **Exclusion patterns**: Can skip specified files/directories
 
 #### Ensuring Your SSH Configuration Works
 
@@ -2061,9 +1963,9 @@ scp ubuntu-pi-server:~/configs/25-wireless.network ~/Documents/raspberry_pi_serv
 
 Each command performs the following actions:
 
--   `scp`: Invokes the secure copy program
--   `ubuntu-pi-server:~/configs/wpa_supplicant-wlan0.conf`: Specifies the source file on the remote server
--   `~/Documents/raspberry_pi_server/25-wireless.network`: Specifies the destination directory on your local machine
+- `scp`: Invokes the secure copy program
+- `ubuntu-pi-server:~/configs/wpa_supplicant-wlan0.conf`: Specifies the source file on the remote server
+- `~/Documents/raspberry_pi_server/25-wireless.network`: Specifies the destination directory on your local machine
 
 #### Copying Multiple Files at Once
 
@@ -2199,31 +2101,30 @@ Use **SCP** when: - You need a quick, one-time file transfer - You want a simple
 
 Use **rsync** when: - You need to synchronize directories - You're transferring large files that might get interrupted - You want to maintain exact mirrors of directory structures - You're setting up automated backups - You need to preserve file attributes like permissions and timestamps - You need to exclude certain files or patterns
 
--   **SSH Configuration**: Ensure your SSH config is properly set up before attempting file transfers
--   **SCP**: Simple, straightforward file copying between systems
--   **rsync**: More powerful synchronization tool with many options for efficiency
-    -   SSH is now correctly configured and working using `ssh ubuntu-pi-server`.
-    -   Bash scripts can be securely copied from the Ubuntu Pi Server to the client machine using `scp`.
-        -   Just take note of the specific syntax used, namely `server-name:path/to/files`
-    -   The user can now maintain local backups of important scripts efficiently.
-        -   Enables you to develop where you'd like and then easily move files to test scripts
--   **Trailing Slashes**: Pay attention to trailing slashes in paths, as they change behavior
--   **Dry Run**: Use `--dry-run` with rsync to preview what will happen
--   **Automation**: Consider creating scripts for routine backup tasks
+- **SSH Configuration**: Ensure your SSH config is properly set up before attempting file transfers
+- **SCP**: Simple, straightforward file copying between systems
+- **rsync**: More powerful synchronization tool with many options for efficiency
+    - SSH is now correctly configured and working using `ssh ubuntu-pi-server`.
+    - Bash scripts can be securely copied from the Ubuntu Pi Server to the client machine using `scp`.
+        - Just take note of the specific syntax used, namely `server-name:path/to/files`
+    - The user can now maintain local backups of important scripts efficiently.
+        - Enables you to develop where you'd like and then easily move files to test scripts
+- **Trailing Slashes**: Pay attention to trailing slashes in paths, as they change behavior
+- **Dry Run**: Use `--dry-run` with rsync to preview what will happen
+- **Automation**: Consider creating scripts for routine backup tasks
 
 Both SCP and rsync are invaluable tools for managing files on your Raspberry Pi server. While SCP is perfect for quick, simple transfers, rsync provides the power and flexibility needed for maintaining backups and keeping systems synchronized.
 
-## Partitions
-
-### Partitioning Basics
+## Partitions {#sec-partitions}
+### Partitioning Basics {#sec-partition_basics}
 
 Partitions are logical divisions of a physical storage device. Think of a storage device like a large piece of land, and partitions as fenced areas within that land dedicated to different purposes. Each partition appears to the operating system as a separate disk, even though physically they're on the same device. Remember from the beginning of this guide, I'm currently using a Flash Drive for my primary memory and a microSD card for backups; however, the SSD is what I want to serve as the boot device. Once we complete the partitioning, we can flash the base image from RPi onto the SSD and then reboot, with the SSD as the boot device.
 
--   **Separation of concerns:** Isolate the operating system from user data, which improves security and simplifies backups
--   **Performance optimization:** Different filesystems can be used for different workloads
--   **Multi-boot capability:** Install multiple operating systems on the same physical device
--   **Data protection:** Limiting the scope of filesystem corruption to a single partition
--   **Resource management:** Setting size limits for specific system functions
+- **Separation of concerns:** Isolate the operating system from user data, which improves security and simplifies backups
+- **Performance optimization:** Different filesystems can be used for different workloads
+- **Multi-boot capability:** Install multiple operating systems on the same physical device
+- **Data protection:** Limiting the scope of filesystem corruption to a single partition
+- **Resource management:** Setting size limits for specific system functions
 
 For our Raspberry Pi server, proper partitioning creates a solid foundation for everything else you'll build. We'll primarily use ext4 for Linux partitions and FAT32 for the microSD card that needs broader compatibility.
 
@@ -2251,18 +2152,18 @@ For our Raspberry Pi server, proper partitioning creates a solid foundation for 
 
 Finally, let's cover some important terms:
 
--   **Partition Table:** A data structure on a disk that describes how the disk is divided
-    -   **MBR (Master Boot Record):** Traditional partition scheme limited to 2TB drives and 4 primary partitions
-    -   **GPT (GUID Partition Table):** Modern scheme supporting larger drives and more partitions
--   **Partition Types:**
-    -   **Primary:** Can be bootable and hold an operating system
-    -   **Extended:** Acts as a container for logical partitions (MBR only)
-    -   **Logical:** Created within an extended partition (MBR only)
--   **Filesystem:** The method used to organize and store data within a partition
-    -   **Common Linux filesystems:** `ext4`, `Btrfs`
-    -   **Cross-platform filesystems:** `FAT32`, `exFAT`
+- **Partition Table:** A data structure on a disk that describes how the disk is divided
+    - **MBR (Master Boot Record):** Traditional partition scheme limited to 2TB drives and 4 primary partitions
+    - **GPT (GUID Partition Table):** Modern scheme supporting larger drives and more partitions
+- **Partition Types:**
+    - **Primary:** Can be bootable and hold an operating system
+    - **Extended:** Acts as a container for logical partitions (MBR only)
+    - **Logical:** Created within an extended partition (MBR only)
+- **Filesystem:** The method used to organize and store data within a partition
+    - **Common Linux filesystems:** `ext4`, `Btrfs`
+    - **Cross-platform filesystems:** `FAT32`, `exFAT`
 
-### Partitioning Tools
+### Partitioning Tools {#sec-partition_tootls}
 
 Several command-line tools are available for disk partitioning on Linux. Each has strengths for different scenarios:
 
@@ -2292,7 +2193,7 @@ For this project, and after doing some research, I chose parted for both the mic
 - It supports both interactive and command-line usage
 - It's included in most Ubuntu installations
 
-### Partitioning a MicroSD Card for Backups
+### Partitioning a MicroSD Card for Backups {#partition_for_backups}
 Let's partition our microSD card to serve as backup media. You can get great quality cards from Amazon Basics that are perfect for this use case. We'll use a simple, effective partition scheme. Before we dive into the actual commands, it's important to remember that you can't modify the memory of the active primary drive. Meaning, that you'll need to use an SSD or thumb drive as the boot media while you modify the SD card. Similarly, you'll need to use a different piece of boot media (you could use the micro SD) when partitioning the SSD. 
 
 Now, let's walk through this step-by-step:
@@ -2390,7 +2291,7 @@ sudo chmod -R 700 /mnt/backups/
 - `mount -a`: Mounts all filesystems specified in fstab
 - `chmod -R 700`: Sets permissions so only the owner can read/write/execute
 
-### Partitioning your SSD
+### Partitioning your SSD {#sec-partition_ssd}
 For a Raspberry Pi server, a two-partition scheme offers the perfect balance of simplicity and functionality. This approach mirrors what RPi Imager creates automatically, but gives us control over the sizes:
 
 - A small `FAT32` boot partition for firmware and boot files
@@ -2472,7 +2373,7 @@ sudo lsblk -o NAME,SIZE,FSTYPE,LABEL,TYPE,MOUNTPOINT
 sudo blkid | grep sdc
 ```
 
-#### Advanced Partitioning
+### Advanced Partitioning {#sec-partition_advanced}
 As you begin to utilize your server more, you're bound to use up more memory. So, it's important to monitor your partition space usage.
 
 ```bash
@@ -2506,7 +2407,7 @@ sudo resize2fs /dev/sda4
 - `resizepart 4 100%`: Resizes partition 4 to use 100% of the remaining available space
 - `resize2fs`: Resizes an ext2/3/4 filesystem to match the partition size
 
-## Backups and Basic Automation
+## Backups and Basic Automation {#sec-backups}
 Now that we've configured the basics, from permissions to networking and ssh to partitions, we'll want to save those changes in case something happens and to ensure a seamless transition to the SSD for boot media. You've already seen some basic backups. The process is the same, essentially creating a folder and then putting a copy of the current file into it and maybe adding a `.bak` extension to make it clear this is a previous version. That being said, to go through and do this for each and every folder we've made changes in is impractical now, let alone in the future when more complex configurations are done. So, in this section, we'll go over creating a basic script to backup all of our configs and automating the backups. 
 
 For this section, we'll use `rsync` because it provides several important advantages over simple copy commands, that you may remember from the section on `ssh`:
@@ -2521,7 +2422,7 @@ Before we start, make sure you have:
 
 - A mounted backup drive at `/mnt/backups/`
 
-### Setting Up the Backup Directory
+### Setting Up the Backup Directory {#sec-backups_directory}
 
 First, in case you didn't do this earlier, we'll prepare the backup directory structure and set appropriate permissions:
 
@@ -2537,7 +2438,7 @@ sudo chown -R chris:chris /mnt/backups
 sudo chmod -R 700 /mnt/backups  # Only owner can read/write/execute
 ```
 
-### Configuration Files Backup
+### Configuration Files Backup {#sec-backups_configs}
 
 While it's definitely beneficial to have a local copy of your backups to easily roll back changes, it isn't the most secure solution to have all of your information in one place. Furthermore, the SSD is partitioned, but it doesn't currently have an OS or any files stored. So, now it's time to take advantage of the microSD card we formatted earlier.
 
@@ -2658,13 +2559,13 @@ chmod +x /scripts/config_backup.sh
 
 The rsync commands use several important options:
 
--   `-a`: Archive mode, preserves almost everything
--   `-A`: Preserve ACLs (Access Control Lists)
--   `-X`: Preserve extended attributes
--   `-v`: Verbose output
--   `--one-file-system`: Don't cross filesystem boundaries
--   `--hard-links`: Preserve hard links
--   `--exclude`: Skip specified directories
+- `-a`: Archive mode, preserves almost everything
+- `-A`: Preserve ACLs (Access Control Lists)
+- `-X`: Preserve extended attributes
+- `-v`: Verbose output
+- `--one-file-system`: Don't cross filesystem boundaries
+- `--hard-links`: Preserve hard links
+- `--exclude`: Skip specified directories
 
 #### Remote Transfers of Backups
 
@@ -2676,14 +2577,14 @@ rsync -avz --partial --progress --update chris@ubuntu-pi-server:/mnt/backups/con
 
 The flags do the following:
 
--   `-a`: Archive mode, which preserves permissions, timestamps, symbolic links, etc.
--   `-v`: Verbose output, showing what files are being transferred
--   `-z`: Compress data during transfer for faster transmission
--   `--partial`: Keep partially transferred files, allowing you to resume interrupted transfers
--   `--progress`: Show progress during transfer
--   `--update`: Skip files that are newer on the receiver (only transfer if source is newer)
+- `-a`: Archive mode, which preserves permissions, timestamps, symbolic links, etc.
+- `-v`: Verbose output, showing what files are being transferred
+- `-z`: Compress data during transfer for faster transmission
+- `--partial`: Keep partially transferred files, allowing you to resume interrupted transfers
+- `--progress`: Show progress during transfer
+- `--update`: Skip files that are newer on the receiver (only transfer if source is newer)
 
-### Restoring from Backup
+### Restoring from Backup {#sec-backups_restore}
 
 Now that we've backed up all of the configurations we've made so far, it's time to create a script that restores that backup. At the time of writing this, I've probably had to reflash a fresh image and reconfigure things between 10 and 20 times. I'm so good at it, that I can now do it all in under 20 minutes. That being said, it's much easier to do when you can just run a script that takes all of the configurations from your `Master` backup and overwrites the defaults. 
 
@@ -2831,7 +2732,7 @@ At the time of writing this, I've tested and revised everything up until this po
 2. Creating a private repoistory for storing configuration files, scripts, etc. and then using that, rather than rsync with my laptop
 3. Do some more granular network configurations, inlcuding subnets and static IPs
 
-## Changing Your Boot Media Device
+## Changing Your Boot Media Device {#sec-change_boot_media}
 When you're moving from one boot device to another on a Raspberry Pi, you're essentially telling the system where to find its operating system files. The Raspberry Pi's bootloader looks for specific files on a FAT32 partition to begin the boot process, then loads the main operating system from the root partition. This transition is a fundamental server administration skill that every system administrator should understand.
 
 The transition involves several critical steps. 
@@ -2843,7 +2744,7 @@ The transition involves several critical steps.
 
 Think of this process like moving into a new house. You've already built the structure (partitioning), but now you need to move all your belongings (the operating system) into it, update your mailing address (boot configuration), and ensure everything works in the new location.
 
-### Boot Configuration Transition Process
+### Boot Configuration Transition Process {#sec-boot_transition}
 The good news, we've already done most of the work required and what we haven't is going to be something we did for the original boot device. We'll first run a few commands from the server, do one thing on a different computer, and then we'll be back to the server.
 
 1. First, you'll need to flash a fresh Ubuntu Server LTS image onto your newly partitioned SSD. This process will write the operating system files to the appropriate partitions you created. This should be done on your Raspberry Pi server.
@@ -2892,7 +2793,7 @@ ps aux | grep -v '\['
 
 ```bash
 # Perform a clean system shutdown
-sudo shutdown now
+sudo shutdown -h now
 ```
 
 The shutdown command initiates a clean shutdown sequence. The `-h` flag tells the system to halt (power off) after shutdown. This is important because the system may not power off, especially on older systems—it could just bring it to single-user mode or runlevel 1, depending on configuration. While now indicates the shutdown should happen immediately. This command:
@@ -2993,7 +2894,7 @@ sudo systemctl status wpa_supplicant@wlan0.service
 
 The `df -h /` command shows disk usage statistics for the root filesystem, including which device it's mounted from. You should see `/dev/sdb2` (or similar) listed as the root device, and `/dev/sdb1` as the boot device, not the thumb drive identifier you used before. You'll see a similar output, just focused on your `/backups` directory when running the second command. The `ls -la` command shows you all of the contents of a directory, as well as the permissions. The other commands you should be familiar with by now.
 
-### Final Thoughts
+### Final Thoughts 
 Our Ubuntu Raspberry Pi Server is now booting from the SSD, and all your previous configurations have been restored. You may notice that on reboot, running `sudo lsblk` will show your SSD under a different This configuration provides a solid foundation for the more advanced server features we'll implement in the next sections. By moving to SSD boot, we've significantly improved our server's performance profile. SSDs offer several advantages over traditional storage media:
 
 - **Faster boot times:** Your Raspberry Pi will start much more quickly
@@ -3003,16 +2904,19 @@ Our Ubuntu Raspberry Pi Server is now booting from the SSD, and all your previou
   
 The transition to SSD boot also aligns with modern server practices, where solid-state storage is becoming the standard for production environments. This configuration will serve us well as we expand into containerization with Docker and orchestration with Kubernetes.
 
-## Remote Development with VS Code
+## Remote Development with VS Code {#sec-remote_vs_code}
 
 
 
-## Automation and Monitoring
+## Monitoring and Maintenance {#sec-monitor_maintain}
 
 
 
-## Docker
+## Docker {#sec-docker}
 
 
 
-## Kubernetes
+## Kubernetes {#sec-kubernetes}
+
+
+
