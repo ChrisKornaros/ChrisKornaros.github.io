@@ -38,7 +38,7 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
      - The physical setup of the Raspberry Pi, what to plug in, where, etc.
      - What to expect as things turn on
 
-3. [Linux Server Basics](@sec-linux)
+3. [Linux Server Basics](@sec-linux_basics)
 
    - [First Boot Process](@sec-first_boot)
      - Connection and startup
@@ -59,7 +59,7 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
 
 4. [Networking Basics](@sec-network)
 
-   - [Computer Networking Fundamentals](@sec-network_fundamentals)
+   - [Computer Networking Basics](@sec-network_basics)
      - OSI and TCP/IP models
      - Key networking protocols
    - [Network Connections](@sec-network_connections)
@@ -80,7 +80,7 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
 
 5. [SSH (Secure Shell)](@sec-ssh)
 
-   - [Understanding SSH Configuration](@sec-ssh_config)
+   - [SSH Basics](@sec-ssh_basics)
      - Client vs server setup
      - Key-based authentication
    - [Key-Based Authentication](@sec-ssh_keys)
@@ -119,7 +119,7 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
 
 7. [Backups and Basic Automation](@sec-backups)
    
-   - [Setting Up the Backup Directory](@sec-backups_directory)
+   - [Backup Basics](@sec-backups_basics)
      - Directory structure and permissions
    - [Configuration Files Backup](@sec-backups_configs)
      - Using rsync for system configurations
@@ -173,13 +173,32 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
 ## Initial Setup {#sec-setup}
 ### Key Terms
 
-- **HDMI:**
-- **SSD:**
-- **Flash Drive:**
-- **SD Card:**
-- **Memory Sizes:**
-- **Bit:**
-- **Byte:**
+**Hardware Terminology:**
+
+- **Raspberry Pi 4:** A single-board computer developed by the Raspberry Pi Foundation, featuring a Broadcom BCM2711 processor, various RAM options, USB 3.0 ports, and GPIO pins.
+- **SoC (System on Chip):** An integrated circuit that combines the components of a computer or electronic system into a single chip
+- **GPIO (General Purpose Input/Output):** Programmable pins on the Raspberry Pi that allow interaction with physical components and sensors.
+- **SSD (Solid State Drive):** Storage device using flash memory that offers faster access times and better reliability than traditional hard drives.
+- **Boot Media:** The storage device containing the operating system files from which the computer starts.
+- **USB 3.0:** A USB standard offering data transfer speeds up to 5 Gbps, significantly faster than previous versions.
+- **microSD Card:** A small form factor removable flash memory card used as storage media.
+- **eMMC (embedded MultiMediaCard):** An integrated flash storage solution often found in compact devices.
+
+**Software and Imaging Terminology:**
+
+- **Ubuntu Server LTS:** A long-term support version of Ubuntu's server operating system, maintaining security updates for 5 years.
+- **Raspberry Pi Imager:** Official software tool for flashing operating system images to SD cards and other storage devices.
+- **Image:** A file containing the complete contents and structure of a storage device or filesystem.
+- **Flashing:** The process of writing an operating system image to a storage device.
+- **Headless Setup:** Configuring a device to operate without a monitor, keyboard, or mouse.
+- **Public-key Authentication:** An authentication method using cryptographic key pairs instead of passwords.
+
+**First Boot Terminology:**
+
+- **Cloud-Init:** A utility used by Ubuntu Server to handle early initialization when a server instance boots for the first time.
+- **First Boot Experience:** The initial setup process that occurs the first time an operating system is booted.
+- **Initial RAM Disk (initrd):** A temporary root filesystem loaded into memory during the boot process.
+- **Bootloader:** Software that loads the operating system kernel into memory.
 
 ### Hardware Requirements {#sec-hardware_requirements}
 
@@ -243,17 +262,48 @@ Now you can run some basic commands to see where you are and what you have avail
 Next we'll cover what happened during the boot process, the basic structure of the Linux Server OS, and some important information related to permissions, before we move on to basic networking concepts and configurations.
 
 ## Linux Server Basics {#sec-linux_basics}
-### Key Terms
+### Key Terms 
 
-- **Hardware:**
-- **Software:**
-- **Filesystem:**
-- **OS (Operating System):**
-- **Unix:**
-- **Linux:**
-- **Filesystem Hierarchy Standard:**
-- **RAM:**
-- **Kernel:**
+**System Initialization Concepts:**
+
+- **Initialization:** The process of starting up the operating system and bringing it to an operational state.
+- **Boot Process:** The sequence of steps that occur from powering on a computer to loading the operating system.
+- **BIOS/UEFI:** Firmware interfaces that initialize hardware and start the boot process.
+- **Kernel:** The core component of an operating system that manages system resources and hardware.
+
+**Systemd Terminology:**
+
+- **systemd:** The init system and system/service manager used by modern Linux distributions.
+- **Unit:** Systemd's representation of system resources, including services, devices, and mount points.
+- **Service Unit:** Configuration files with .service extension that define how to start, stop, and manage daemons.
+- **Socket Unit:** Configuration files with .socket extension that define communication sockets.
+- **Timer Unit:** Configuration files with .timer extension that trigger actions at specified times.
+- **Target:** A grouping of units that represents a system state (similar to runlevels in older systems).
+- **Daemon:** A background process that runs continuously, providing services.
+
+**File System and Directory Terminology:**
+
+- **FHS (Filesystem Hierarchy Standard):** The standard directory structure and contents of Unix-like operating systems.
+- **Root Directory (`/`):** The top-level directory in a Linux filesystem hierarchy.
+- **home Directory (`/home`):** Contains user home directories where personal files are stored.
+- **etc Directory (`/etc`):** Contains system-wide configuration files.
+- **bin Directory (`/bin`):** Contains essential command binaries needed for system functionality.
+- **Hidden Files/Directories:** Files or directories that begin with a dot (.) and don't appear in default directory listings.
+- **Shell Configuration Files:** Files like .bashrc and .profile that configure the user's command-line environment.
+
+**User and Permissions Terminology:**
+
+- **User:** An account on a Linux system with specific privileges and access rights.
+- **Group:** A collection of users with shared permissions to files and directories.
+- **UID (User ID):** A numerical identifier assigned to each user on a Linux system.
+- **GID (Group ID):** A numerical identifier assigned to each group on a Linux system.
+- **Permission:** Access rights assigned to users and groups determining what actions they can perform on files and directories.
+- **chmod:** Command used to change file and directory permissions.
+- **chown:** Command used to change file and directory ownership.
+- **umask:** Default permissions applied to newly created files and directories.
+- **ACL (Access Control List):** Extended permissions that provide more granular control than traditional Unix permissions.
+- **setuid/setgid:** Special permissions that allow users to execute files with the permissions of the file owner or group.
+- **Sticky Bit:** A special permission bit that restricts file deletion in shared directories.
 
 ### First Boot Process {#sec-first_boot}
 
@@ -662,11 +712,7 @@ A few final notes on permissions that are especially relevant for this project, 
 
 This section provides a brief example of how to connect your server to WiFi. It assumes you are already connected using the wireless network settings you configured in the [Requirements Section](@sec-requirements). That being said, I'll also go over some basic networking concepts and background information. As a result, some of the decisiions and terminology in this guide will make more sense (it also helps me remember what I'm doing and why).
 
-### Fundamental Concepts of Computer Networking {#sec-network_fundamentals}
-
-Simply put, a computer network is a collection of interconnected devices that can communicate with each other using a set of rules called protocols. Networking allows devices to share resources, exchange data, and collaborate on tasks. On a deeper level, it helps to understand the conceptual models that describes how data moves through a network. Before we dive in, let's go over some basic terminology.
-
-#### Key Terms
+### Key Terms
 
 **Basic Networking Concepts:**
 
@@ -704,6 +750,10 @@ Simply put, a computer network is a collection of interconnected devices that ca
 - **Port:** A virtual point where network connections start and end. Ports are identified by numbers (0-65535).
 - **NAT:** Network Address Translation; allows multiple devices on a local network to share a single public IP address.
 - **VPN:** Virtual Private Network; extends a private network across a public network, enabling secure data transmission.
+
+### Computer Networking {#sec-network_basics}
+
+Simply put, a computer network is a collection of interconnected devices that can communicate with each other using a set of rules called protocols. Networking allows devices to share resources, exchange data, and collaborate on tasks. On a deeper level, it helps to understand the conceptual models that describes how data moves through a network. Before we dive in, let's go over some basic terminology.
 
 #### The OSI Model
 
@@ -1573,7 +1623,49 @@ Now that you have your basic Ubuntu Pi server configured and connected to a netw
 
 Once we have SSH setup, configured, and secured, we'll use a feature in VS Code called `Remote - SSH` which lets us use the nice UI of an IDE while working on the actual server. This is really beneficial for a variety of reasons: one of them being the fantastic community-built extensions that drastically improve the development experience, another being the integration with other tools for things like CI/CD.
 
-### Understanding SSH Configuration Files {#sec-ssh_configs}
+### Key Terms
+
+**SSH Basic Concepts:**
+
+- **SSH (Secure Shell):** A cryptographic network protocol for secure communication between computers over an unsecured network.
+- **SSH Server:** The computer or service that accepts incoming SSH connections.
+- **SSH Client:** The application used to initiate connections to SSH servers.
+- **sshd:** The SSH server daemon that listens for and handles SSH connections.
+- **ssh_config:** The client-side configuration file that controls outgoing SSH connections.
+- **sshd_config:** The server-side configuration file that controls incoming SSH connections.
+- **Host Key:** A cryptographic key that identifies an SSH server.
+
+**Authentication Methods:**
+
+- **Password Authentication:** Authentication using a traditional username and password.
+- **Public Key Authentication:** Authentication using asymmetric cryptographic key pairs.
+- **Private Key:** The secret half of a key pair that should never be shared.
+- **Public Key:** The shareable half of a key pair that can be distributed to servers.
+- **Passphrase:** An optional password that encrypts and protects a private SSH key.
+- **authorized_keys:** A file containing public keys that are allowed to authenticate to an SSH server.
+- **known_hosts:** A file on the client side that stores server host keys to verify server identity.
+
+**SSH Key Types and Security:**
+
+- **RSA (Rivest-Shamir-Adleman):** A widely used public-key cryptosystem for secure data transmission.
+- **ECDSA (Elliptic Curve Digital Signature Algorithm):** A cryptographic algorithm offering good security with shorter key lengths.
+- **Ed25519:** A modern, secure, and efficient public-key signature system.
+- **Key Length:** The size of a cryptographic key, typically measured in bits.
+- **Fingerprint:** A short sequence used to identify a longer public key.
+- **SSH Agent:** A program that holds private keys in memory to avoid repeatedly typing passphrases.
+
+**SSH Security and Tools:**
+
+- **Port Forwarding:** The ability to tunnel network connections through an SSH connection.
+- **X11 Forwarding:** A mechanism for securely running graphical applications over a network.
+- **SSH Tunnel:** An encrypted network connection established through SSH.
+- **SCP (Secure Copy Protocol):** A means of securely transferring files between hosts based on SSH.
+- **SFTP (SSH File Transfer Protocol):** A secure file transfer protocol that operates over SSH.
+- **UFW (Uncomplicated Firewall):** A simplified firewall management interface for iptables.
+- **Fail2Ban:** An intrusion prevention software that protects servers from brute-force attacks.
+- **Bastion Host:** A special-purpose server designed to withstand attacks, situated outside the firewall.
+
+### SSH Basics {#sec-ssh_basics}
 #### SSH Client vs Server Configuration
 
 The SSH system uses two main configuration files with distinct purposes:
@@ -2116,6 +2208,46 @@ Use **rsync** when: - You need to synchronize directories - You're transferring 
 Both SCP and rsync are invaluable tools for managing files on your Raspberry Pi server. While SCP is perfect for quick, simple transfers, rsync provides the power and flexibility needed for maintaining backups and keeping systems synchronized.
 
 ## Partitions {#sec-partitions}
+### Key Terms
+
+**Partition Basics:**
+
+- **Partition:** A logical division of a physical storage device.
+- **Disk:** A physical storage device (HDD, SSD, etc.).
+- **Partition Table:** A data structure on a disk that describes how the disk is divided.
+- **MBR (Master Boot Record):** A traditional partition scheme limited to 2TB drives and 4 primary partitions.
+- **GPT (GUID Partition Table):** A modern partition scheme supporting larger drives and more partitions.
+- **Primary Partition:** A partition that can be bootable and hold an operating system.
+- **Extended Partition:** A special type of partition that acts as a container for logical partitions (MBR only).
+- **Logical Partition:** A partition created within an extended partition (MBR only).
+- **Boot Partition:** A partition containing files needed to start the operating system.
+- **Root Partition:** The primary partition containing the operating system and most files.
+
+**Filesystem Types:**
+
+- **Filesystem:** The method used to organize and store data within a partition.
+- **ext4:** The fourth extended filesystem, a journaling filesystem commonly used in Linux.
+- **FAT32:** File Allocation Table 32-bit, a simple filesystem compatible with most operating systems.
+- **exFAT:** Extended File Allocation Table, designed for flash drives with support for larger files than FAT32.
+- **NTFS:** New Technology File System, primarily used by Windows.
+- **Btrfs:** B-tree File System, a modern Linux filesystem with advanced features like snapshots.
+- **Journaling:** A technique that maintains a record of filesystem changes before committing them.
+- **Mounting:** The process of making a filesystem accessible through the file hierarchy.
+- **Mount Point:** A directory where a filesystem is attached to the system's file hierarchy.
+
+**Partitioning Tools:**
+
+- **fdisk:** A traditional command-line utility for disk partitioning.
+- **parted:** A more powerful partitioning tool with support for larger drives and GPT.
+- **gdisk:** A GPT-focused partitioning utility.
+- **sfdisk:** A scriptable version of fdisk for automation.
+- **gparted:** A graphical partition editor for Linux.
+- **mkfs:** Command used to create a filesystem on a partition.
+- **fsck:** Filesystem consistency check and repair tool.
+- **blkid:** Command that displays attributes of block devices like UUID.
+- **lsblk:** Command that lists information about block devices.
+- **fstab:** System configuration file that defines how filesystems are mounted.
+
 ### Partitioning Basics {#sec-partition_basics}
 
 Partitions are logical divisions of a physical storage device. Think of a storage device like a large piece of land, and partitions as fenced areas within that land dedicated to different purposes. Each partition appears to the operating system as a separate disk, even though physically they're on the same device. Remember from the beginning of this guide, I'm currently using a Flash Drive for my primary memory and a microSD card for backups; however, the SSD is what I want to serve as the boot device. Once we complete the partitioning, we can flash the base image from RPi onto the SSD and then reboot, with the SSD as the boot device.
@@ -2422,7 +2554,47 @@ Before we start, make sure you have:
 
 - A mounted backup drive at `/mnt/backups/`
 
-### Setting Up the Backup Directory {#sec-backups_directory}
+### Key Terms
+
+**Backup Concepts:**
+
+- **Backup:** A copy of data that can be recovered if the original is lost or damaged.
+- **Full Backup:** A complete copy of all selected data.
+- **Incremental Backup:** A backup of only the data changed since the last backup.
+- **Differential Backup:** A backup of all data changed since the last full backup.
+- **Snapshot:** A point-in-time copy of data, often using filesystem features for efficiency.
+- **Restoration:** The process of recovering data from a backup.
+- **Retention Policy:** Rules determining how long backups should be kept.
+- **Backup Rotation:** A systematic approach to reusing backup media over time.
+- **Offsite Backup:** Backups stored in a different physical location for disaster recovery.
+
+**Backup Tools and Methods:**
+
+- **rsync:** A utility for efficiently copying and synchronizing files locally or remotely.
+- **tar:** Tape Archive, a utility for collecting multiple files into a single archive file.
+- **dd:** A low-level utility that can copy data at the block level.
+- **cron:** A time-based job scheduler in Unix-like systems.
+- **anacron:** A job scheduler that doesn't require the system to be running continuously.
+- **systemd timers:** An alternative to cron for scheduling recurring tasks.
+- **Archive:** A single file containing multiple files, often compressed.
+- **Compression:** Reducing the size of data to save storage space.
+- **Deduplication:** Eliminating duplicate copies of repeating data to save space.
+- **Checksums:** Values calculated from file contents to verify data integrity.
+
+**Automation Concepts:**
+
+- **Script:** A file containing a series of commands to be executed.
+- **Shell Script:** A script written in a shell language like Bash.
+- **Crontab:** A configuration file specifying scheduled tasks.
+- **Scheduler:** A system component that executes tasks at specified times.
+- **Environment Variable:** A named value that can affect the behavior of running processes.
+- **Exit Code:** A value returned by a command indicating its success or failure.
+- **Redirection:** Changing where command input comes from or output goes to.
+- **Pipeline:** Connecting multiple commands by passing the output of one as input to another.
+- **Background Process:** A process that runs without user interaction, often denoted by an ampersand (&).
+- **Job Control:** Managing the execution of multiple processes from a shell.
+
+### Setting Up the Backup Directory {#sec-backups_basics}
 
 First, in case you didn't do this earlier, we'll prepare the backup directory structure and set appropriate permissions:
 
