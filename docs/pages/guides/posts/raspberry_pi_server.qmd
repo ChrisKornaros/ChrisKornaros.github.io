@@ -130,6 +130,9 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
 
 8. [Changing Your Boot Media Device](@sec-change_boot_media)
 
+   - [Boot Basics](@sec-boot_basics)
+     - Basics of transitioning boot media
+     - Key concepts
    - [Boot Configuration Transition](@sec-boot_transition)
      - Flashing OS to new media
      - Proper shutdown procedures
@@ -145,28 +148,35 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
 
 10. [Monitoring and Maintenance](@sec-monitor_maintain)
 
-    - System Monitoring Tools
-    - Log Management
-    - Performance Optimization
-    - Security Updates and Patching
+    - [Monitoring Basics](@sec-monitor_basics) 
+      - `smartmon`
+      - `vcgencmd`
+    - [Log Management](@sec-monitor_logs)
+      - Log basics
+      - Management tools and strategy
+    - [Performance Optimization](@sec-monitor_optimize)
+      - Identifying areas to optimize
+      - Optimization strategies
+    - [Security Updates and Patching](@sec-monitor_patching)
+      - 
 
 11. [Containerization with Docker](@sec-docker)
 
-    - Containerization and Virtualization Basics
-    - Docker Installation and Setup
-    - Creating Images with Dockerfile
-    - Managing Images and Containers
-    - Docker Compose for Multi-container Applications
-    - CI/CD Integration
+    - [Containerization and Virtualization Basics](@sec-docker_basics)
+    - [Docker Installation and Setup](@sec-docker_setup)
+    - [Creating Images with Dockerfile](@sec-docker_images)
+    - [Managing Images and Containers](@sec-docker_manage)
+    - [Docker Compose for Multi-container Applications](@sec-docker_compose)
+    - [CI/CD Integration](@sec-docker_ci_cd)
 
 12. [Container Orchestration with Kubernetes](@sec-kubernetes)
 
-    - Orchestration Basics
-    - Kubernetes Concepts, Installation, and Setup
-    - Setting Up a Kubernetes Cluster
-    - Deployment Strategies
-    - Managing Resources
-    - Scaling Applications
+    - [Orchestration Basics](@sec-kubernetes_basics)
+    - [Kubernetes Concepts, Installation, and Setup](@sec-kubernetes_setup)
+    - [Setting Up a Kubernetes Cluster](@sec-kubernetes_cluster)
+    - [Deployment Strategies](@sec-kubernetes_deployment)
+    - [Managing Resources](@sec-kubernetes_resources)
+    - [Scaling Applications](@sec-kubernetes_scaling)
 
 
 
@@ -2594,7 +2604,7 @@ Before we start, make sure you have:
 - **Background Process:** A process that runs without user interaction, often denoted by an ampersand (&).
 - **Job Control:** Managing the execution of multiple processes from a shell.
 
-### Setting Up the Backup Directory {#sec-backups_basics}
+### Backup Basics {#sec-backups_basics}
 
 First, in case you didn't do this earlier, we'll prepare the backup directory structure and set appropriate permissions:
 
@@ -2610,11 +2620,12 @@ sudo chown -R chris:chris /mnt/backups
 sudo chmod -R 700 /mnt/backups  # Only owner can read/write/execute
 ```
 
-### Configuration Files Backup {#sec-backups_configs}
-
 While it's definitely beneficial to have a local copy of your backups to easily roll back changes, it isn't the most secure solution to have all of your information in one place. Furthermore, the SSD is partitioned, but it doesn't currently have an OS or any files stored. So, now it's time to take advantage of the microSD card we formatted earlier.
 
-For the purpose of this guide, I'll be showing you how to use `rsync` for a remote transfer to your client machine and how to automatically store backups on the SD card. The script we'll use saves all of the key user and system information (things like passwords), as well as the configuration changes we made. Additionally, as long as your SD card is mounted to `/mnt/backups` the backup will automatically be saved to the external memory. The following script demonstrates how to perform the backup while preserving all file attributes:
+For the purpose of this guide, I'll be showing you how to use `rsync` for a remote transfer to your client machine and how to automatically store backups on the SD card. The script we'll use saves all of the key user and system information (things like passwords), as well as the configuration changes we made. Additionally, as long as your SD card is mounted to `/mnt/backups` the backup will automatically be saved to the external memory. 
+
+### Config Backups {#sec-backups_configs}
+The following script demonstrates how to perform the backup while preserving all file attributes:
 
 ``` bash
 #!/bin/bash
@@ -2905,6 +2916,36 @@ At the time of writing this, I've tested and revised everything up until this po
 3. Do some more granular network configurations, inlcuding subnets and static IPs
 
 ## Changing Your Boot Media Device {#sec-change_boot_media}
+### Key Terms
+
+**Boot Process Terminology:**
+
+- **Boot Sequence:** The ordered steps followed during system startup.
+- **Boot Media:** The storage device from which a system loads its operating system.
+- **Boot Loader:** Software responsible for loading the operating system kernel.
+- **Firmware:** Software embedded in hardware that provides low-level control.
+- **UEFI (Unified Extensible Firmware Interface):** A modern firmware interface that replaces BIOS.
+- **EFI System Partition (ESP):** A FAT32-formatted partition containing boot loaders and files needed by UEFI.
+- **Boot Flag:** A marker that identifies a partition as bootable.
+- **GRUB (GRand Unified Bootloader):** A popular boot loader for Linux systems.
+- **Kernel Parameters:** Options passed to the Linux kernel during boot.
+- `initramfs`: An initial RAM filesystem loaded during boot to prepare the actual root filesystem.
+
+**Media Transition Concepts:**
+
+- **Cloning:** Creating an exact copy of a storage device or partition.
+- **Imaging:** Creating a file representation of the contents of a storage device.
+- **Bootable Media:** Storage media configured to start an operating system.
+- **Flash:** To write data to a memory device, particularly firmware or an operating system image.
+- **Device ID:** A unique identifier assigned to hardware components.
+- **UUID (Universally Unique Identifier):** A standardized identifier format used to identify filesystems.
+- **Partition UUID:** A unique identifier assigned to a specific partition.
+- **Filesystem UUID:** A unique identifier assigned to a filesystem on a partition.
+- **syslinux:** A lightweight boot loader for Linux systems.
+- `dd`: A command-line utility used for low-level copying of data between devices.
+
+### Boot Media Basics {#sec-boot_basics}
+
 When you're moving from one boot device to another on a Raspberry Pi, you're essentially telling the system where to find its operating system files. The Raspberry Pi's bootloader looks for specific files on a FAT32 partition to begin the boot process, then loads the main operating system from the root partition. This transition is a fundamental server administration skill that every system administrator should understand.
 
 The transition involves several critical steps. 
