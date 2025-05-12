@@ -130,9 +130,6 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
 
 8. [Changing Your Boot Media Device](@sec-change_boot_media)
 
-   - [Boot Basics](@sec-boot_basics)
-     - Basics of transitioning boot media
-     - Key concepts
    - [Boot Configuration Transition](@sec-boot_transition)
      - Flashing OS to new media
      - Proper shutdown procedures
@@ -149,16 +146,14 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
 10. [Monitoring and Maintenance](@sec-monitor_maintain)
 
     - [Monitoring Basics](@sec-monitor_basics) 
-      - `smartmon`
-      - `vcgencmd`
+      - `smartmon`, `vcgencmd`
+      - Resolving SSD health issues
+    - [Security Updates and Patching](@sec-monitor_patching)
+      - Preventetive Measures
+      - System patching schedules
     - [Log Management](@sec-monitor_logs)
       - Log basics
       - Management tools and strategy
-    - [Performance Optimization](@sec-monitor_optimize)
-      - Identifying areas to optimize
-      - Optimization strategies
-    - [Security Updates and Patching](@sec-monitor_patching)
-      - 
 
 11. [Containerization with Docker](@sec-docker)
 
@@ -2944,7 +2939,7 @@ At the time of writing this, I've tested and revised everything up until this po
 - **syslinux:** A lightweight boot loader for Linux systems.
 - `dd`: A command-line utility used for low-level copying of data between devices.
 
-### Boot Media Basics {#sec-boot_basics}
+### Boot Configuration Transition Process {#sec-boot_transition}
 
 When you're moving from one boot device to another on a Raspberry Pi, you're essentially telling the system where to find its operating system files. The Raspberry Pi's bootloader looks for specific files on a FAT32 partition to begin the boot process, then loads the main operating system from the root partition. This transition is a fundamental server administration skill that every system administrator should understand.
 
@@ -2957,7 +2952,6 @@ The transition involves several critical steps.
 
 Think of this process like moving into a new house. You've already built the structure (partitioning), but now you need to move all your belongings (the operating system) into it, update your mailing address (boot configuration), and ensure everything works in the new location.
 
-### Boot Configuration Transition Process {#sec-boot_transition}
 The good news, we've already done most of the work required and what we haven't is going to be something we did for the original boot device. We'll first run a few commands from the server, do one thing on a different computer, and then we'll be back to the server.
 
 1. First, you'll need to flash a fresh Ubuntu Server LTS image onto your newly partitioned SSD. This process will write the operating system files to the appropriate partitions you created. This should be done on your Raspberry Pi server.
@@ -3118,18 +3112,201 @@ Our Ubuntu Raspberry Pi Server is now booting from the SSD, and all your previou
 The transition to SSD boot also aligns with modern server practices, where solid-state storage is becoming the standard for production environments. This configuration will serve us well as we expand into containerization with Docker and orchestration with Kubernetes.
 
 ## Remote Development with VS Code {#sec-remote_vs_code}
+### Key Terms
+
+**Remote Development Concepts:**
+
+- **IDE (Integrated Development Environment):** A software application that provides comprehensive facilities for software development.
+- **Remote Development:** Developing code on a remote machine while using local tools and interfaces.
+- **Headless Development:** Writing code on a system without a graphical interface, often remotely.
+- **Extension:** Add-ons that enhance the functionality of development tools.
+- **Workspace:** A collection of files and folders that make up a development project.
+- **Sync:** The process of keeping files consistent between local and remote systems.
+- **Port Forwarding:** Redirecting communication from one network port to another.
+- **Development Container:** A container configured specifically for development purposes.
+
+**VS Code Specific Terminology:**
+
+- **VS Code:** Visual Studio Code, a code editor developed by Microsoft.
+- **Remote - SSH Extension:** A VS Code extension that allows connecting to and developing on remote machines over SSH.
+- **Remote Explorer:** A VS Code interface for managing remote connections.
+- **SSH Target:** A remote machine configured for SSH access in VS Code.
+- **SSH Config:** Configuration file defining SSH connection properties.
+- **Dev Container:** A containerized development environment defined for a VS Code project.
+- **Workspace Settings:** Project-specific configurations in VS Code.
+- **Settings Sync:** A feature that synchronizes VS Code settings across different instances.
+- **Task:** Configured commands that can be executed within VS Code.
+- **Launch Configuration:** Settings that define how to debug applications in VS Code.
 
 
 
 ## Monitoring and Maintenance {#sec-monitor_maintain}
+### Key Terms
+
+**System Monitoring Concepts:**
+
+- **Monitoring:** The process of observing and tracking system performance and status.
+- **Metrics:** Measurable values that indicate performance or resource usage.
+- **Resource Utilization:** The degree to which system resources are being used.
+- **Load Average:** A measure of CPU utilization over time.
+- **Threshold:** A predefined value that, when exceeded, may trigger notifications or actions.
+- **Baseline:** Normal or expected performance values for comparison.
+- **Real-time Monitoring:** Observing system status as it happens.
+- **Historical Data:** Saved metrics showing performance trends over time.
+- **Alert:** A notification triggered when monitored values exceed thresholds.
+- **Dashboard:** A visual interface displaying multiple metrics at once.
+
+**Monitoring Tools and Commands:**
+
+- `top`: A command-line utility showing real-time system resource usage.
+- `htop`: An enhanced version of top with a more user-friendly interface.
+- `iotop`: A utility for monitoring disk I/O usage by processes.
+- `iostat`: A command that reports CPU and disk I/O statistics.
+- `vmstat`: A tool that displays virtual memory statistics.
+- `free`: A command that displays amount of free and used memory.
+- `df`: A utility that reports filesystem disk space usage.
+- `du`: A command that estimates file and directory space usage.
+- `netstat`: A command-line tool that displays network connections, routing tables, and interface statistics.
+- `ss`: A modern replacement for netstat for investigating sockets.
+
+**Maintenance Terminology:**
+
+- **Patch:** A piece of software designed to update or fix issues in a program.
+- **Update:** New versions of software that add features or fix bugs.
+- **Upgrade:** A significant update that may involve major changes.
+- **Package Manager:** A system for installing, updating, and removing software packages.
+- `apt`: Advanced Package Tool, the package management system used by Debian and Ubuntu.
+- **Repository:** A storage location from which software packages can be retrieved.
+- **Dependency:** A software package required by another package to function.
+- **Cleanup:** The process of removing unnecessary files or data.
+- **Scheduled Maintenance:** Regular, planned maintenance activities.
+- **Preventive Maintenance:** Activities performed to prevent system failures.
+
+**Log Management:**
+
+- **Log:** A record of events that occur within the system.
+- `syslog`: A standard for message logging.
+- `journald`: Systemd's logging service that collects and stores logging data.
+- **Log Rotation:** The process of archiving and removing old log files.
+- **Log Level:** The severity or importance assigned to a log entry.
+- `stdout`: Standard output stream where normal process output is written.
+- `stderr`: Standard error stream where error messages are written.
+- **Audit Log:** A record of events relevant to security.
+- **logrotate:** A utility that manages automatic rotation of log files.
+- **Centralized Logging:** Collecting logs from multiple systems in a central location.
 
 
 
 ## Docker {#sec-docker}
+### Key Terms
+
+**Container Concepts:**
+
+- **Container:** A lightweight, standalone, executable package that includes everything needed to run an application.
+- **Image:** A read-only template containing instructions for creating a container.
+- **Containerization:** The process of packaging an application with its dependencies into a container.
+- **Isolation:** The separation of applications from each other and the underlying system.
+- **Virtual Machine (VM):** A virtualized instance of an operating system running on hypervisor software.
+- **Container Runtime:** Software that executes containers and manages their lifecycle.
+- **Namespace:** A Linux kernel feature that isolates system resources for containers.
+- **Control Group (`cgroup`):** A Linux kernel feature that limits, accounts for, and isolates resource usage of process groups.
+- **Layer:** A set of read-only files that represent filesystem differences in a Docker image.
+- **Union Filesystem:** A filesystem service that layers multiple directories into a single unified view.
+
+**Docker Specific Terminology:**
+
+- **Docker:** A platform for developing, shipping, and running applications in containers.
+- **Docker Engine:** The runtime that builds and runs Docker containers.
+- **Docker Hub:** A cloud-based registry service for Docker images.
+- **Docker Desktop:** An application for managing Docker on Windows and Mac.
+- **Dockerfile:** A text file containing instructions to build a Docker image.
+- **Docker Compose:** A tool for defining and running multi-container Docker applications.
+- **Docker Swarm:** A native clustering and orchestration solution for Docker.
+- **Docker Network:** A communication system that enables containers to communicate with each other and the outside world.
+- **Docker Volume:** A mechanism for persisting data generated by and used by Docker containers.
+- **Docker Registry:** A storage and distribution system for Docker images.
+
+**Container Management:**
+
+- **Tag:** A label attached to an image version for identification.
+- **Repository:** A collection of related Docker images with the same name but different tags.
+- **Pull:** The action of downloading an image from a registry.
+- **Push:** The action of uploading an image to a registry.
+- **Build:** The process of creating a Docker image from a Dockerfile.
+- **Run:** The command to start a container from an image.
+- **Exec:** A command to run additional processes in a running container.
+- **Commit:** Creating a new image from changes made to a container.
+- **Stop/Start:** Commands to halt and resume container execution.
+- **Remove:** The action of deleting a container or image.
+
+**CI/CD with Containers:**
+
+- **CI/CD (Continuous Integration/Continuous Deployment):** Practices that automate the integration and deployment of code changes.
+- **Pipeline:** A series of automated steps that code changes go through from development to production.
+- **Build Automation:** The process of automating the creation of software builds.
+- **Integration Testing:** Testing the interaction between integrated units/modules.
+- **Deployment Strategy:** A planned approach for releasing changes to production.
+- **Artifact:** A byproduct of software development, such as a compiled application or container image.
+- **Registry Authentication:** The process of securely accessing a container registry.
+- **Webhook:** An HTTP callback triggered by specific events in a development workflow.
+- **GitHub Actions:** GitHub's built-in CI/CD tool.
+- **Jenkins:** An open-source automation server often used for CI/CD.
 
 
 
 ## Kubernetes {#sec-kubernetes}
+### Key Terms
 
+**Kubernetes Architecture:**
+
+- **Kubernetes (K8s):** An open-source platform for automating deployment, scaling, and management of containerized applications.
+- **Cluster:** A set of worker machines (nodes) that run containerized applications managed by Kubernetes.
+- **Control Plane:** The container orchestration layer that exposes the API and interfaces to define, deploy, and manage the lifecycle - of containers.
+- **Node:** A worker machine in Kubernetes, which may be a virtual or physical machine.
+- **Master Node:** A node that controls the Kubernetes cluster.
+- **Worker Node:** A node that runs applications and workloads.
+- `kubelet`: An agent that runs on each node to ensure containers are running in a Pod.
+- `kube-proxy`: A network proxy that runs on each node to maintain network rules.
+- `etcd`: A consistent and highly-available key-value store used as Kubernetes' backing store for all cluster data.
+- **Container Runtime Interface (CRI):** The primary protocol for communication between kubelet and container runtime.
+
+**Kubernetes Resources:**
+
+- **Pod:** The smallest deployable unit in Kubernetes that can contain one or more containers.
+- **Deployment:** A resource that provides declarative updates for Pods and ReplicaSets.
+- **ReplicaSet:** A resource that ensures a specified number of pod replicas are running at any given time.
+- **Service:** An abstraction which defines a logical set of Pods and a policy by which to access them.
+- **Namespace:** A mechanism to divide cluster resources between multiple users or projects.
+- **ConfigMap:** A resource that stores non-confidential data in key-value pairs.
+- **Secret:** A resource that stores sensitive information such as passwords and tokens.
+- **Volume:** A directory accessible to all containers in a pod, which may be backed by various storage types.
+- **Ingress:** A resource that manages external access to services in a cluster, typically HTTP.
+- **StatefulSet:** A resource used to manage stateful applications.
+
+**Kubernetes Management:**
+
+- `kubectl`: The command-line tool for interacting with a Kubernetes cluster.
+- `kubeadm`: A tool for creating and managing Kubernetes clusters.
+- **Helm:** A package manager for Kubernetes that helps install and manage applications.
+- **Manifest:** YAML or JSON files that describe Kubernetes resources.
+- **Scaling:** Increasing or decreasing the number of replicas of an application.
+- **Self-healing:** The ability of Kubernetes to automatically replace failed containers.
+- **Rolling Update:** A deployment strategy that updates pods one at a time without service interruption.
+- **Blue-Green Deployment:** A deployment strategy that maintains two production environments.
+- **Canary Deployment:** A deployment strategy that releases a new version to a small subset of users.
+- **Affinity/Anti-Affinity:** Rules that influence pod scheduling based on the topology of other pods.
+
+**Distributed Computing:**
+
+- **Distributed System:** A system whose components are located on different networked computers.
+- **PySpark:** The Python API for Apache Spark, a unified analytics engine for large-scale data processing.
+- **Data Parallelism:** A computation pattern where the same operation is performed on different pieces of data simultaneously.
+- **Task Parallelism:** A computation pattern where different operations are performed simultaneously.
+- **Worker:** A node or process that executes assigned tasks.
+- **Master:** A node or process that coordinates the distribution of tasks to workers.
+- **Job:** A complete computational task, often broken down into smaller tasks.
+- **Task:** A unit of work assigned to a worker.
+- **DAG (Directed Acyclic Graph):** A structure used to represent the sequence of operations in a job.
+- **Resource Allocation:** The process of assigning computational resources to jobs or tasks.
 
 
