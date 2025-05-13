@@ -18,13 +18,13 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
 
 ### Guide Outline
 
-1. **Introduction**
+**1.** **Introduction**
 
    - Purpose and scope of the guide
    - What you'll learn and build
    - Prerequisites and assumptions
 
-2. **Initial Setup**
+**2.** **Initial Setup**
 
    - **Hardware Requirements**
      - Raspberry Pi 4 specifications
@@ -38,7 +38,7 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
      - The physical setup of the Raspberry Pi, what to plug in, where, etc.
      - What to expect as things turn on
 
-3. **Linux Server Basics**
+**3.** **Linux Server Basics**
 
    - **First Boot Process**
      - Connection and startup
@@ -57,7 +57,7 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
      - chmod and chown usage
      - Understanding advanced permissions
 
-4. **Networking Basics**
+**4.** **Networking Basics**
 
    - **Computer Networking Basics**
      - OSI and TCP/IP models
@@ -78,7 +78,7 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
      - Subnets and routing
      - Security considerations
 
-5. **SSH (Secure Shell)**
+**5.** **SSH (Secure Shell)**
 
    - **SSH Basics**
      - Client vs server setup
@@ -100,7 +100,13 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
      - Using SCP (Secure Copy Protocol)
      - Using rsync for efficient transfers
 
-6. **Partitions**
+**6.** **Remote Development with VS Code**
+
+   - Setting Up VS Code Remote SSH
+   - Managing Remote Projects
+   - Debugging and Terminal Integration
+
+**7.** **Partitions**
 
    - **Partitioning Basics**
      - Understanding partition tables and types
@@ -117,7 +123,7 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
      - Monitoring usage
      - Resizing partitions
 
-7. **Backups and Basic Automation**
+**8.** **Backups and Basic Automation**
    
    - **Backup Basics**
      - Directory structure and permissions
@@ -128,7 +134,7 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
      - Creating restoration scripts
      - Testing recovery procedures
 
-8. **Changing Your Boot Media Device**
+**9.** **Changing Your Boot Media Device**
 
    - **Boot Configuration Transition**
      - Flashing OS to new media
@@ -137,41 +143,35 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
      - Testing the new boot configuration
      - Restoring configurations
 
-9. **Remote Development with VS Code**
+**10.** **Monitoring and Maintenance**
 
-   - Setting Up VS Code Remote SSH
-   - Managing Remote Projects
-   - Debugging and Terminal Integration
-
-10. **Monitoring and Maintenance**
-
-    - **Monitoring Basics** 
+  - **Monitoring Basics** 
       - `smartmon`, `vcgencmd`
       - Resolving SSD health issues
-    - **Security Updates and Patching**
-      - Preventetive Measures
+  - **Security Updates and Patching**
+      - Preventive Measures
       - System patching schedules
-    - **Log Management**
+  - **Log Management**
       - Log basics
       - Management tools and strategy
 
-11. **Containerization with Docker**
+**11.** **Containerization with Docker**
 
-    - **Containerization and Virtualization Basics**
-    - **Docker Installation and Setup**
-    - **Creating Images with Dockerfile**
-    - **Managing Images and Containers**
-    - **Docker Compose for Multi-container Applications**
-    - **CI/CD Integration**
+  - **Containerization and Virtualization Basics**
+  - **Docker Installation and Setup**
+  - **Creating Images with Dockerfile**
+  - **Managing Images and Containers**
+  - **Docker Compose for Multi-container Applications**
+  - **CI/CD Integration**
 
-12. **Container Orchestration with Kubernetes**
+**12.**  **Container Orchestration with Kubernetes**
 
-    - **Orchestration Basics**
-    - **Kubernetes Concepts, Installation, and Setup**
-    - **Setting Up a Kubernetes Cluster**
-    - **Deployment Strategies**
-    - **Managing Resources**
-    - **Scaling Applications**
+  - **Orchestration Basics**
+  - **Kubernetes Concepts, Installation, and Setup**
+  - **Setting Up a Kubernetes Cluster**
+  - **Deployment Strategies**
+  - **Managing Resources**
+  - **Scaling Applications**
 
 
 
@@ -343,7 +343,7 @@ Systemd is the modern initialization and service management system for Linux. It
 
 For example, let's take a look at a generic SSH service file.
 
-``` ini
+```ini
 [Unit]
 Description=OpenSSH server daemon
 Documentation=man:sshd(8) man:sshd_config(5)
@@ -405,7 +405,7 @@ Now that you've logged in and can work on your server, you may wonder where you 
 - `.bashrc`: The primary bash configuration file that's loaded for interactive non-login shells. It defines aliases, functions, and shell behavior. When you open a terminal window, this file is read.
 - `.profile`: Executed for login shells. It typically sets environment variables and executes commands that should run once per login session, not for each new terminal.
 
-``` bash
+```bash
 # Sample .bashrc section
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -500,7 +500,7 @@ Linux inherits its permission system from Unix, providing a robust framework for
 
 It's not only important to know how to set permissions, but also how to view existing ones. When you run ls -l in a directory, you'll see a detailed listing including permission information.
 
-``` plaintext
+```plaintext
 -rw-r--r-- 1 chris chris 1234 May 6 14:32 example.txt
 ```
 
@@ -517,7 +517,7 @@ The `chmod` command modifies file permissions in Linux. You can use it in two wa
 
 Symbolic mode uses letters to represent permission categories (u, g, o, a) and permissions (r, w, x):
 
-``` bash
+```bash
 # Give the owner execute permission
 chmod u+x script.sh
 
@@ -555,7 +555,7 @@ Permissions are calculated by adding these values:
 - `4 (4)` = Read only
 - `0` = No permissions
 
-``` bash
+```bash
 # rwxr-xr-x (755): Owner can read, write, execute; group and others can read and execute
 chmod 755 script.sh
 
@@ -576,7 +576,7 @@ Beyond the basic rwx permissions, Linux has three special permission bits:
 
 The `chown` command changes the owner and/or group of files and directories. Do not change ownership in the root directories because many require specific ownership/permissions to function properly.
 
-``` bash
+```bash
 # Change the owner of a file
 sudo chown chris file.txt
 
@@ -597,7 +597,7 @@ The flags do the following:
 - `-f, --silent`: Suppress most error messages
 - `-v, --verbose`: Output a diagnostic for every file processed
 
-``` bash
+```bash
 # Verbose recursive ownership change
 sudo chown -Rv chris:developers /opt/application
 ```
@@ -616,21 +616,21 @@ Linux manages permissions through users and groups:
 - `/etc/passwd`: Contains basic user account information
     - **Fields:** username, password placeholder, UID, primary GID, full name, home directory, login shell
 
-``` plaintext
+```plaintext
 chris:x:1000:1000:Chris Kornaros:/home/chris:/bin/bash
 ```
 
 - `/etc/shadow`: Contains encrypted passwords and password policy information
     - **Fields:** username, encrypted password, days since epoch of last change, min days between changes, max days password valid, warning days, inactive days, expiration date
 
-``` plaintext
+```plaintext
 chris:$6$xyz...hash:19000:0:99999:7:::
 ```
 
 - `/etc/group`: Contains group definitions
     - **Fields:** group name, password placeholder, GID, comma-separated list of members
 
-``` plaintext
+```plaintext
 developers:x:1001:chris,bob,alice
 ```
 
@@ -657,7 +657,7 @@ The umask (user mask) determines the default permissions for newly created files
     - **Files:** 644 (rw-r--r--)
     - **Directories:** 755 (rwxr-xr-x)
 
-``` bash
+```bash
 # View current umask (in octal)
 umask
 
@@ -667,7 +667,7 @@ umask 027  # More restrictive: owner full access, group read/execute, others no 
 
 Traditional Unix permissions have limitations regarding inheritance: new files don't inherit permissions from parent directories and changing permissions doesn't affect existing files. Modern solutions, however, include: the setgid bit on directories for group inheritance and ACLs (Access Control Lists) with default entries that apply to new files. To setup a collaborative directory with proper permissions:
 
-``` bash
+```bash
 # Create a shared directory for developers
 sudo mkdir /opt/projects
 sudo chown chris:developers /opt/projects
@@ -678,7 +678,7 @@ sudo chmod 2775 /opt/projects  # setgid bit ensures new files get 'developers' g
 
 Like I previously wrote, part of the modern permission solutions include ACLs, or Access Control Lists. ACLs extend the traditional permission model to allow specifying permissions for multiple users and groups. When ACLs are in use, ls -l will show a + after the permission bits. Here's a basic example of how to create and manage an ACL:
 
-``` bash
+```bash
 # Install ACL support (if not already installed)
 sudo apt install acl
 
@@ -695,7 +695,7 @@ setfacl -d -m g:developers:rw directory/
 getfacl file.txt
 ```
 
-``` plaintext
+```plaintext
 -rw-rw-r--+ 1 chris developers 1234 May 6 14:32 file.txt
 ```
 
@@ -883,7 +883,7 @@ Although it seems redundant if you already viewed your IP addresses, you can als
 
 **Test basic connectivity to a host:**
 
-``` bash
+```bash
 ping -c 4 google.com
 ```
 
@@ -891,7 +891,7 @@ ping -c 4 google.com
 
 **Trace the route to a destination:**
 
-``` bash
+```bash
 # First update and install your packages
 sudo apt update && sudo apt upgrade -y
 
@@ -906,7 +906,7 @@ traceroute google.com
 
 **Check the DNS resolution:**
 
-``` bash
+```bash
 nslookup google.com
 # dig google.com
 ```
@@ -917,7 +917,7 @@ nslookup google.com
 
 You can view more specific network information with the `ss` command. This command's name is an acronym for `socket statistics` and is used as a replacement for the older netstat plan because it offers faster performance and a more detailed output. Additionally, you can filter by specific protocol.
 
-``` bash
+```bash
 ss -tuln
 ```
 
@@ -957,7 +957,7 @@ It generally works using three key components:
 
 ***systemd-networkd*** uses configuration files with .network extension. Each file consists of sections with key-value pairs. A basic configuration for a static IP would look like this:
 
-``` ini
+```ini
 # /etc/systemd/network/20-wired.network
 [Match]
 Name=eth0
@@ -1001,7 +1001,7 @@ This configuration example works well for server environments where static, pred
 
 If you want to add DHCP, you can use the following:
 
-``` ini
+```ini
 # /etc/systemd/network/20-wired.network
 [Match]
 Name=eth0
@@ -1042,7 +1042,7 @@ While wired connections are a basic part of networking, wireless connections req
 
 On the `systemd-networkd` side of things, the configuration is simple, broken down in detail below.
 
-``` ini
+```ini
 # /etc/systemd/network/25-wireless.network
 [Match]
 Name=wlan0
@@ -1072,7 +1072,7 @@ DHCP=yes
 
 While the `systemd-networkd` configuration is straightforward, things get more complicated with WPA. In standard wpa_supplicant configuration files, wireless passwords are often stored in plaintext. This creates a security vulnerability - anyone with access to the configuration file can view the password.
 
-``` ini
+```ini
 # /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
 ctrl_interface=/run/wpa_supplicant
 update_config=1
@@ -1085,14 +1085,14 @@ network={
 
 The `wpa_passphrase` tool solves this problem by generating a pre-computed hash of the password. Running this is straightforward as the basic syntax is `wpa_passphrase [SSID] [passphrase]`. Then, WPA outputs a hashed version of your password.
 
-``` bash
+```bash
 # Generate a hashed passphrase
 wpa_passphrase "MyHomeNetwork" "MySecurePassword123"
 ```
 
 To then use the hashed password in your configuration, you can run the following command, just make sure to remove the line with the plaintext password from the config file after runtime:
 
-``` bash
+```bash
 # Generate the hash and save directly to the configuration file
 wpa_passphrase "MyHomeNetwork" "MySecurePassword123" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
 ```
@@ -1101,7 +1101,7 @@ wpa_passphrase "MyHomeNetwork" "MySecurePassword123" | sudo tee -a /etc/wpa_supp
 
 This approach makes it virtually impossible to reverse-engineer the original password from the hash.
 
-``` ini
+```ini
 # /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
 ctrl_interface=/run/wpa_supplicant
 update_config=1
@@ -1148,7 +1148,7 @@ As a heads up, because we already created the wlan0 configuration file manually,
 
 First, start the interactive mode with `sudo wpa_cli`, or specify the interface with `sudo wpa_cli -i wlan0`. Let's go over some essential commands:
 
-``` bash
+```bash
 # Show help
 help
 
@@ -1171,7 +1171,7 @@ add_network
 
 **Step-By-Step: Adding a Network**
 
-``` bash
+```bash
 > add_network
 0
 > set_network 0 ssid "MyNetwork"
@@ -1202,7 +1202,7 @@ OK
 
 It's good to know that higher priority values (like 10), are preferred over lower ones (like 5). Now, you can also use `wpa` by running one off commands or writing scripts with *non-interactive* mode. Additionally, you should know that when you first boot up your Raspberry Pi, the internet will be managed by Netplan (more on that later in this section). So, if you try to use `wpa_cli save_config` after creating the config files, that will return `FAIL`. Instead, once you write the files in the proper directories, run the `reconfigure` command.
 
-``` bash
+```bash
 # Scan for networks
 sudo wpa_cli scan
 sudo wpa_cli scan_results
@@ -1216,7 +1216,7 @@ sudo wpa_cli reconfigure
 
 Finally, you can monitor signal quality and connection status by using the `signal_poll` command. The RSSI (Received Signal Strength Indicator) shows connection quality in dBm. Values closer to 0 indicate stronger signals. Additionally, you can debug connection issues using `status`.
 
-``` bash
+```bash
 > signal_poll
 RSSI=-67
 LINKSPEED=65
@@ -1260,7 +1260,7 @@ By removing the middle layer (Netplan), we're configuring the backend directly. 
 
 1.  Begin by creating backups of your current network configuration
 
-``` bash
+```bash
 # Create a backup directory
 sudo mkdir -p /etc/netplan/backups
 
@@ -1274,7 +1274,7 @@ sudo ip -c route | sudo tee /etc/netplan/backups/current-ip-route.txt
 
 2.  Review your existing Netplan so you know what to recreate
 
-``` bash
+```bash
 # View your current netplan configs
 cat /etc/netplan/*.yaml
 ```
@@ -1283,7 +1283,7 @@ cat /etc/netplan/*.yaml
     1.  For each interface (wired, wireless, etc.) in your Netplan configuration, create a corresponding `.network` file, with the appropriate configurations (i.e. static vs. DHCP).
     2.  **Remember:** For wireless connections, you need *both* a systemd and a wpasupplicant configuration.
 
-``` bash
+```bash
 # Create the directory if it doesn't exist
 sudo mkdir -p /etc/systemd/network/
 
@@ -1297,7 +1297,7 @@ sudo nano /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
 
 4.  Now that your networkd configuration is in place, disable Netplan.
 
-``` bash
+```bash
 # Ensure systemd-networkd is enabled
 sudo systemctl enable systemd-networkd
 sudo systemctl enable systemd-resolved
@@ -1351,7 +1351,7 @@ Let's take a look at the systemctl `enable` and `start` commands, because withou
 
 5.  Apply the systemd-networkd network configuration
 
-``` bash
+```bash
 # Apply Netplan changes (this will do nothing as we now have a minimal config)
 sudo netplan apply
 
@@ -1395,7 +1395,7 @@ These commands are crucial for integrating wpa_supplicant with systemd, let's br
 
 6.  Verify the new configuration by checking the `systemctl status` and running simple network check commands
 
-``` bash
+```bash
 # Check systemd-networkd status
 systemctl status systemd-networkd
 
@@ -1414,7 +1414,7 @@ ping -c 4 google.com
 
 1.  Make the change permanent
 
-``` bash
+```bash
 # Remove the minimal Netplan configuration
 sudo rm /etc/netplan/01-network-manager-all.yaml
 
@@ -1430,7 +1430,7 @@ One final note before moving on, by the time I removed the generic netplan confi
 
 Once you've finished making changes and applying them, verify that everything is up, running, and as you expect.
 
-``` bash
+```bash
 # Check systemd-networkd status
 systemctl status systemd-networkd
 
@@ -1527,7 +1527,7 @@ Creating subnets involves both network design and interface configuration. Here'
     - Enables IP forwarding to allow traffic between this subnet and others
     - When applied, this creates a subnet with 254 usable addresses (10.0.1.1 through 10.0.1.254, excluding the network address 10.0.1.0 and broadcast address 10.0.1.255).
 
-``` ini
+```ini
 # /etc/systemd/network/25-subnet.network
 [Match]
 Name=eth1
@@ -1545,7 +1545,7 @@ IPForward=yes
 
 The system serves as a router/gateway for all three networks simultaneously.
 
-``` ini
+```ini
 # /etc/systemd/network/30-multi-subnet.network
 [Match]
 Name=eth0
@@ -1562,7 +1562,7 @@ Address=172.16.1.1/16
     - Allocates IPs from 10.0.1.11 (base + offset of 10) through 10.0.1.210 (for 200 addresses)
     - Provides DNS server information to DHCP clients
 
-``` ini
+```ini
 # /etc/systemd/network/25-dhcp-server.network
 [Match]
 Name=eth1
@@ -1581,7 +1581,7 @@ DNS=8.8.8.8
 
 Although more complicated than simple networking, subnetting can enhance security when configured properly. It improves isolation by putting separate sensitive services onto different subnets, segmentation by limiting broadcast domains to reduce the potential attack surface, and access control by implementing filters between subnets at the router level. You can see an example of a security-enhanced subnet configuration below, as well as a list of commands to troubleshoot your subnet with.
 
-``` ini
+```ini
 # /etc/systemd/network/25-secure-subnet.network
 [Match]
 Name=eth2
@@ -1604,7 +1604,7 @@ Gateway=_ipv4gateway
 Destination=0.0.0.0/0
 ```
 
-``` bash
+```bash
 # Check interface configuration
 ip addr show
 
@@ -1700,9 +1700,9 @@ This guide uses ECDSA-384 keys, which offer several advantages:
 
 #### Generating Your SSH Keys
 
-You might remember from the beginning of this guide that you can generate an SSH key-pair when flashing the image using RPi Imager. If you didn't do that and want to learn how you can handle this all, the *old fashioned way*, then on your laptop, generate a new SSH key pair:
+You might remember from the beginning of this guide that you can generate an SSH key-pair when flashing the image using RPi Imager. Even if you did that, `PasswordAuthentication` will still be enabled in the server's `/etc/ssh/sshd_config`. That being said, if you didn't do that and want to learn how you can handle this all, the *old fashioned way*, then on your laptop, generate a new SSH key pair:
 
-``` bash
+```bash
 # Generate a new SSH key pair using ECDSA-384
 ssh-keygen -t ecdsa -b 384 -C "ubuntu-pi-server"
 ```
@@ -1720,9 +1720,9 @@ The command generates two files:
 
 #### Installing Your Public Key on the Raspberry Pi
 
-Transferring your public key to your Raspberry Pi is easy, just know the following will not work if you generated a key-pair when flashing the image. This only works if you currently have password authentication enabled.
+Transferring your public key to your Raspberry Pi is easy, just know the following will only work if you currently have password authentication enabled.
 
-``` bash
+```bash
 ssh-copy-id -i ~/.ssh/ubuntu_pi_ecdsa.pub chris@ubuntu-pi-server
 ```
 
@@ -1738,7 +1738,7 @@ This command:
 
 A client-server relationship is a fundamental computing model that underpins most network communications and distributed systems. This architecture divides computing responsibilities between service requestors (clients, your laptop in this case) and service providers (servers, the Raspberry Pi in this case).
 
-A server is a computer program or device that provides functionality, resources, or services to multiple clients.
+A server is a computer program or device that provides functionality, resources, or services to multiple clients. The Raspberry Pi in this case.
 
 - **Service Provider:** Responds to client requests rather than initiating communication
 - **Resource Management:** Manages shared resources (files, databases, computational power)
@@ -1758,50 +1758,12 @@ This communication typically occurs over TCP/IP networks using standardized prot
 
 #### Understanding Server Host Keys
 
-Your Pi's `/etc/ssh` directory contains several important files: - Host key pairs (public and private) for different algorithms - Configuration files and directories - The moduli file for key exchange
+Your Pi's `/etc/ssh` and `/home/chris/.ssh` directories contains several important files:
 
-#### Optimizing Server Security
-
-1.  Back up the original configuration:
-
-``` bash
-sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.backup-$(date +%Y%m%d)
-```
-
-2.  Optimize host key settings in sshd_config:
-
-``` bash
-# Specify host key order (prioritize ECDSA)
-HostKey /etc/ssh/ssh_host_ecdsa_key
-HostKey /etc/ssh/ssh_host_ed25519_key
-HostKey /etc/ssh/ssh_host_rsa_key
-```
-
-3.  Strengthen the moduli file:
-
-``` bash
-# Back up the existing file
-sudo cp /etc/ssh/moduli /etc/ssh/moduli.backup
-
-# Remove moduli less than 3072 bits
-sudo awk '$5 >= 3072' /etc/ssh/moduli > /tmp/moduli
-sudo mv /tmp/moduli /etc/ssh/moduli
-```
-
-4.  Apply changes:
-
-``` bash
-# Test the configuration
-sudo sshd -t
-
-# Restart the SSH service (on Ubuntu Server)
-sudo systemctl restart ssh
-
-# Verify the service status
-sudo systemctl status ssh
-```
-
-Just note, you'll probably need to reboot (`sudo reboot`) your server before all of the changes fully take place. Once you've done that, you may need to run `sudo systemctl start ssh`.
+- Authorized keys (in `/home/chris/.ssh/authorized_keys`)
+- Host key pairs (public and private) for different algorithms (in `/etc/ssh`)
+- Configuration files and directories 
+- The moduli file for key exchange
 
 ### Client-Side Configuration {#sec-ssh_config_client}
 
@@ -1823,7 +1785,7 @@ From a technical perspective, clients:
 
 Create or edit `~/.ssh/config` on your laptop:
 
-``` bash
+```bash
 Host ubuntu-pi-server
     HostName ubuntu-pi-server
     User chris
@@ -1839,26 +1801,26 @@ If your ssh isn't picking up on the \~/.ssh/ssh_config then you might need to sp
 
 1.  Back up your current known_hosts file:
 
-``` bash
+```bash
 cp ~/.ssh/known_hosts ~/.ssh/known_hosts.backup
 ```
 
 2.  View current entries:
 
-``` bash
+```bash
 ssh-keygen -l -f ~/.ssh/known_hosts
 ```
 
 3.  Remove old entries:
 
-``` bash
+```bash
 # Remove specific host
 ssh-keygen -R ubuntu-pi-server
 ```
 
 4.  Hash your known_hosts file for security:
 
-``` bash
+```bash
 ssh-keygen -H -f ~/.ssh/known_hosts
 ```
 
@@ -1870,38 +1832,36 @@ When using SSH key-based authentication, adding a password to your key enhances 
 
 If you already have an SSH key and want to add a password to it, use the following command:
 
-``` sh
+```sh
 ssh-keygen -p -f ~/.ssh/id_rsa
 ```
 
 Explanation:
 
-```         
--p : Prompts for changing the passphrase.
--f ~/.ssh/id_rsa : Specifies the key file to modify (adjust if your key has a different name).
+- `-p`: Prompts for changing the passphrase.
+- `-f ~/.ssh/id_rsa`: Specifies the key file to modify (adjust if your key has a different name).
 You will be asked for the current passphrase (leave blank if none) and then set a new passphrase.
-```
+
 
 **Removing a Password from an SSH Key**
 
 If you want to remove the passphrase from an SSH key, run:
 
-``` bash
+```bash
 ssh-keygen -p -f ~/.ssh/id_rsa -N ""
 ```
 
 Explanation:
+      
+- `-N ""`: Sets an empty passphrase (removes the password).
+- The tool will ask for the current passphrase before removing it.
 
-```         
--N "" : Sets an empty passphrase (removes the password).
-The tool will ask for the current passphrase before removing it.
-```
 
 Verifying the Changes
 
 After modifying the key, test the SSH connection from your CLI, or using an SSH tunnel.
 
-``` bash
+```bash
 ssh -i ~/.ssh/id_rsa user@your-server
 ```
 
@@ -1909,9 +1869,49 @@ If you added a passphrase, you'll be prompted to enter it when connecting.
 
 By using a passphrase, your SSH key is protected against unauthorized use in case it gets compromised. If you frequently use your SSH key, consider using an SSH agent (ssh-agent) to cache your passphrase securely.
 
-### Additional Security Measures {#sec-ssh_security}
+### Implementing SSH Security Measures {#sec-ssh_security}
+Securing SSH is critical because it serves as the primary gateway for remote server management, making it a prime target for attackers. A compromised SSH connection can lead to unauthorized access, data breaches, privilege escalation, and complete system takeover. By implementing robust SSH security measures like key-based authentication, non-standard ports, and intrusion prevention systems, you significantly reduce your attack surface while maintaining convenient remote access. Proper SSH hardening also helps meet compliance requirements for many industries while providing detailed audit logs for security monitoring. For a 24/7 self-hosted server exposed to the internet, optimized SSH security isn't optional—it's essential for protecting your system and the data it contains.
 
-Network security for a Linux server relies on multiple layers of protection. Two essential components are a properly configured firewall and intrusion prevention systems. This section covers UFW (Uncomplicated Firewall) and Fail2Ban, two powerful yet accessible tools for hardening your Ubuntu Pi Server.
+1.  Back up the original configuration:
+
+```bash
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.backup-$(date +%Y%m%d)
+```
+
+2.  Optimize host key settings in sshd_config:
+
+```bash
+# Specify host key order (prioritize ECDSA)
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+HostKey /etc/ssh/ssh_host_rsa_key
+```
+
+3.  Strengthen the moduli file:
+
+```bash
+# Back up the existing file
+sudo cp /etc/ssh/moduli /etc/ssh/moduli.backup
+
+# Remove moduli less than 3072 bits
+sudo awk '$5 >= 3072' /etc/ssh/moduli > /tmp/moduli
+sudo mv /tmp/moduli /etc/ssh/moduli
+```
+
+4.  Apply changes:
+
+```bash
+# Test the configuration
+sudo sshd -t
+
+# Restart the SSH service (on Ubuntu Server)
+sudo systemctl restart ssh
+
+# Verify the service status
+sudo systemctl status ssh
+```
+
+Just note, you'll probably need to reboot (`sudo reboot`) your server before all of the changes fully take place. Once you've done that, you may need to run `sudo systemctl start ssh`.
 
 #### Firewall Configuration with ufw
 
@@ -1922,7 +1922,7 @@ A firewall acts as a barrier between your server and potentially hostile network
 - **Port Control:** Allow or block access based on specific network ports
 - **Source Filtering:** Control traffic based on originating IP addresses or networks
 
-``` bash
+```bash
 # Install UFW (if it isn't already)
 sudo apt install ufw
 
@@ -1935,7 +1935,7 @@ sudo ufw enable
 
 Behind the scenes, UFW translates these simple commands into complex iptables rules, making firewall management accessible without sacrificing security. The underlying iptables system uses a chain-based architecture to process packets through INPUT, OUTPUT, and FORWARD chains. Now, you'll want to add rules for example, allowing traffic on a specific port if you took the step to choose a nonstandard, one that isn't the default **Port 22**, for this guide, I'm choosing 45000.
 
-``` bash
+```bash
 # Add a new rule in the port/protocol format
 sudo ufw add 45000/tcp
 
@@ -1955,7 +1955,7 @@ Fail2Ban is a security tool designed to protect servers from brute force attacks
 
 The best part is the project is entirely open source, you can view the source code and contribute [here](https://https://github.com/fail2ban/fail2ban).
 
-``` bash
+```bash
 # Install Fail2Ban
 sudo apt update
 sudo apt install fail2ban
@@ -1986,13 +1986,13 @@ This layered approach follows the defense-in-depth principle essential to modern
 
 1.  Monitor SSH login attempts:
 
-``` bash
+```bash
 sudo journalctl -u ssh
 ```
 
 2.  Check authentication logs:
 
-``` bash
+```bash
 sudo tail -f /var/log/auth.log
 ```
 
@@ -2015,7 +2015,7 @@ This section outlines the process of securely copying files between your Ubuntu 
 
 Before attempting file transfers, verify your SSH connection is properly configured:
 
-``` bash
+```bash
 ssh -F ~/.ssh/config chris@ubuntu-pi-server
 ```
 
@@ -2025,25 +2025,25 @@ This command explicitly specifies the user configuration file location with the 
 
 1.  Set proper permissions on your config file:
 
-``` bash
+```bash
 chmod 600 ~/.ssh/config
 ```
 
 2.  Update the system-wide SSH config to include your user config:
 
-``` bash
+```bash
 sudo nano /etc/ssh/ssh_config
 ```
 
 Add this line:
 
-``` plaintext
+```plaintext
 Include ~/.ssh/config
 ```
 
 After applying these changes, you should be able to connect using the simplified command:
 
-``` bash
+```bash
 ssh ubuntu-pi-server
 ```
 
@@ -2051,7 +2051,7 @@ ssh ubuntu-pi-server
 
 The basic syntax for copying files from your server to your local machine is shown below. Know that in all code examples in this section, you should run it in a terminal on your client/local machine:
 
-``` bash
+```bash
 scp ubuntu-pi-server:~/configs/wpa_supplicant-wlan0.conf ~/Documents/raspberry_pi_server/configs
 scp ubuntu-pi-server:~/configs/25-wireless.network ~/Documents/raspberry_pi_server/configs
 ```
@@ -2066,7 +2066,7 @@ Each command performs the following actions:
 
 To copy all Bash scripts from a directory in one command:
 
-``` bash
+```bash
 scp chris@ubuntu-pi-server:~/configs/*.sh ~/Documents/raspberry_pi_server/configs
 ```
 
@@ -2076,7 +2076,7 @@ The wildcard pattern `*.sh` tells SCP to match all files with the `.sh` extensio
 
 To copy entire directories with their contents:
 
-``` bash
+```bash
 scp -r chris@ubuntu-pi-server:~/mnt/backups/ ~/Documents/raspberry_pi_server/backups/configs
 ```
 
@@ -2086,7 +2086,7 @@ The `-r` flag (recursive) tells SCP to copy directories and their contents.
 
 To send files in the opposite direction (local to remote):
 
-``` bash
+```bash
 scp -r ~/Documents/pi-scripts chris@ubuntu-pi-server:~/scripts
 ```
 
@@ -2096,7 +2096,7 @@ For larger files or when you need to synchronize directories, rsync offers signi
 
 To copy a single file from server to client:
 
-``` bash
+```bash
 rsync -avz ubuntu-pi-server:~/configs/25-wireless.network ~/Documents/raspberry_pi_server/configs
 ```
 
@@ -2110,7 +2110,7 @@ Let's break down these common flags:
 
 To sync an entire directory from server to client:
 
-``` bash
+```bash
 rsync -avz --progress ubuntu-pi-server:~/configs/ ~/Documents/raspberry_pi_server/configs
 ```
 
@@ -2125,7 +2125,7 @@ The `--progress` flag shows a progress bar for each file transfer, which is part
 
 To sync files from your client to the server:
 
-``` bash
+```bash
 rsync -avz --progress ~/Documents/raspberry_pi_server/configs chris@ubuntu-pi-server:~/configs/
 ```
 
@@ -2133,7 +2133,7 @@ rsync -avz --progress ~/Documents/raspberry_pi_server/configs chris@ubuntu-pi-se
 
 Before performing large transfers, you can see what would happen without actually making changes:
 
-``` bash
+```bash
 rsync -avzn --progress ~/Documents/raspberry_pi_server/configs chris@ubuntu-pi-server:~/configs/
 ```
 
@@ -2143,7 +2143,7 @@ The `-n` flag (or `--dry-run`) simulates the transfer without changing any files
 
 rsync excels at keeping directories in sync over time. After the initial transfer, subsequent runs only transfer what's changed:
 
-``` bash
+```bash
 rsync -avz --delete ~/Documents/raspberry_pi_server/configs chris@ubuntu-pi-server:~/configs/
 ```
 
@@ -2164,7 +2164,7 @@ The `e` flag tells rsync to execute ssh with those specific flags, when it initi
 
 To skip certain files or directories during transfer:
 
-``` bash
+```bash
 rsync -avz --exclude="*.tmp" --exclude="node_modules" ~/Documents/raspberry_pi_server/configs chris@ubuntu-pi-server:~/configs/
 ```
 
@@ -2174,7 +2174,7 @@ This command excludes all `.tmp` files and the `node_modules` directory.
 
 If you need to limit how much network bandwidth rsync uses:
 
-``` bash
+```bash
 rsync -avz --bwlimit=1000 ~/Documents/raspberry_pi_server/configs chris@ubuntu-pi-server:~/configs/
 ```
 
@@ -2184,7 +2184,7 @@ The `--bwlimit=1000` restricts transfer speed to 1000 KB/s (approximately 1 MB/s
 
 When backing up systems that use hard links (like Time Machine or some backup solutions):
 
-``` bash
+```bash
 rsync -avH ~/Documents/raspberry_pi_server/configs chris@ubuntu-pi-server:~/configs/
 ```
 
@@ -2209,6 +2209,111 @@ Use **rsync** when: - You need to synchronize directories - You're transferring 
 - **Automation**: Consider creating scripts for routine backup tasks
 
 Both SCP and rsync are invaluable tools for managing files on your Raspberry Pi server. While SCP is perfect for quick, simple transfers, rsync provides the power and flexibility needed for maintaining backups and keeping systems synchronized.
+
+## Remote Development with VS Code {#sec-remote_vs_code}
+### Key Terms
+
+**Remote Development Concepts:**
+
+- **IDE (Integrated Development Environment):** A software application that provides comprehensive facilities for software development.
+- **Remote Development:** Developing code on a remote machine while using local tools and interfaces.
+- **Headless Development:** Writing code on a system without a graphical interface, often remotely.
+- **Extension:** Add-ons that enhance the functionality of development tools.
+- **Workspace:** A collection of files and folders that make up a development project.
+- **Sync:** The process of keeping files consistent between local and remote systems.
+- **Port Forwarding:** Redirecting communication from one network port to another.
+- **Development Container:** A container configured specifically for development purposes.
+
+**VS Code Specific Terminology:**
+
+- **VS Code:** Visual Studio Code, a code editor developed by Microsoft.
+- **Remote - SSH Extension:** A VS Code extension that allows connecting to and developing on remote machines over SSH.
+- **Remote Explorer:** A VS Code interface for managing remote connections.
+- **SSH Target:** A remote machine configured for SSH access in VS Code.
+- **SSH Config:** Configuration file defining SSH connection properties.
+- **Dev Container:** A containerized development environment defined for a VS Code project.
+- **Workspace Settings:** Project-specific configurations in VS Code.
+- **Settings Sync:** A feature that synchronizes VS Code settings across different instances.
+- **Task:** Configured commands that can be executed within VS Code.
+- **Launch Configuration:** Settings that define how to debug applications in VS Code.
+
+### VS Code and IDE-based Development
+Remote development with Visual Studio Code transforms your Raspberry Pi server from a command-line environment into a fully-featured development platform. While terminal-based SSH access provides basic server management capabilities, VS Code Remote SSH creates a seamless bridge between your local machine's powerful editor interface and your remote server's computing resources. This approach combines the convenience of a graphical editor with syntax highlighting, intelligent code completion, and integrated debugging while executing code directly on your Raspberry Pi server—perfect for resource-intensive tasks or when working with server-specific configurations.
+
+The VS Code Remote SSH extension uses your existing SSH configurations to establish a secure connection to your server. Once connected, the extension installs a lightweight VS Code server component on your Raspberry Pi, enabling real-time file editing, terminal access, and extension functionality—all while maintaining the security of your SSH connection. This method eliminates the need to constantly transfer files between local and remote systems, making development significantly more efficient.
+
+#### Installing VS Code and the Remote - SSH Extension
+First, you'll need to install VS Code on your local machine (MacBook Air for me):
+
+- Download the appropriate version for your operating system from VS Code's official [website](https://code.visualstudio.com/Download)
+- Install VS Code following the standard installation process for your operating system
+- Launch VS Code
+
+Next, install the Remote SSH extension by selecting the VS Code extensions tab and then search for `Remote - SSH`. 
+
+![](images/vs-code_extensions_tab.png)
+
+After that, install the extension.
+
+![](images/vs-code_remote-ssh.png)
+
+Now, it's time to actually connect remotely. We'll do this using VS Code's ***command palette***. The MacBook shortcut is `Cmd+Shift+P`. You'll see that you can also open and edit your `ssh_config` in VS Code, using the command palette to select your configuration. Then, you'll essentially interact with your server the same way you would a client-locally developed application in VS Code. First, select the folder you want to open, for the time being, I'm working out of my home directory `/home/chris`. Then, you can open up one of your backup scripts, notice how much nicer the UI is when dealing with `bash` scripts. Finally, you can also still run commands from the command line (obviously, otherwise it'd be hard to use a headless server), notice here I was copying some of the configuration files we've modified to my home. I do that so I can back those up to my laptop. 
+
+![](images/remote-connect-configure.png)
+
+Select the `Connect to Host...` option.
+
+![](images/remote-select-host.png)
+
+Select the host you want to connect to, in my case `ubuntu-pi-server`.
+
+![](images/remote-connect.png)
+
+You'll see this along the bottom of your window, while VS Code connects to your remote server.
+
+![](images/remote-folder.png)
+
+The first time you connect, VS Code will:
+
+- Install the VS Code server component on your Raspberry Pi
+- Create a `.vscode-server` directory in your home folder
+- Establish a secure connection
+- Load the remote workspace
+
+If you set up SSH key authentication as described earlier in the guide, the connection should establish without requiring a password. If you're using a passphrase-protected SSH key, you'll be prompted to enter it. Then, Select the folder option, same as you would locally with VS Code, and then select what you would like to work out of.
+
+![](images/remote-dev-cli.png)
+
+After connecting successfully, the remote connection is indicated in the bottom-left corner of the VS Code window where you'll see "SSH: ubuntu-pi-server". VS Code will operate as if you were working directly on the Raspberry Pi. Open a file by clicking on it in the file explorer, or type `code filename.sh` into your terminal CLI to open a file. You can open a new terminal by going to the command palette and selecting `Terminal: Create New Terminal` or, on MacOS, use `Ctrl+backtick`. **Note:** I haven't been able to use this to edit files that require root privileges just yet. It seems like my issue is with how/where the `code` command is stored, and how `sudo` tries to interpret it.
+
+The explorer view will now display the file system of your Raspberry Pi, not your local machine. Any file operations (create, edit, delete) will happen directly on the remote server.
+
+![](images/remote-docker-install.png)
+
+To install an extension that should run on the remote server (like language servers, debugging tools, etc.):
+
+- Click on the Extensions icon in the activity bar
+- Find the extension you want to install
+- Click the "Install in SSH: ubuntu-pi-server" button instead of the regular "Install" button
+
+Extensions are categorized into:
+
+- **UI Extensions:** Run on your local machine (themes, UI enhancements)
+- **Workspace Extensions:** Run on the remote server (language servers, debuggers)
+
+This separation ensures optimal performance while providing a complete development experience.
+
+![](images/remote-close-connection.png)
+
+Finally, remember to close your connection, although closing the window does the same.
+
+Using VS Code with Remote SSH fundamentally transforms your development experience with the Raspberry Pi in several ways:
+
+- **Edit with confidence:** No more struggling with terminal-based editors like nano or vim when complex editing is needed
+- **Seamless navigation:** Easily browse the server's filesystem with familiar GUI tools
+- **Integrated tools:** Git integration, debugging, and terminal access all in one environment
+- **Extension ecosystem:** Leverage thousands of VS Code extensions while working on your remote project
+- **Productive workflow:** Maintain your preferred development environment regardless of the target platform
 
 ## Partitions {#sec-partitions}
 ### Key Terms
@@ -2601,7 +2706,7 @@ Before we start, make sure you have:
 
 First, in case you didn't do this earlier, we'll prepare the backup directory structure and set appropriate permissions:
 
-``` bash
+```bash
 # Create backup directories if they don't exist
 sudo mkdir -p /mnt/backups/configs
 sudo mkdir -p /mnt/backups/system
@@ -2620,7 +2725,7 @@ For the purpose of this guide, I'll be showing you how to use `rsync` for a remo
 ### Config Backups {#sec-backups_configs}
 The following script demonstrates how to perform the backup while preserving all file attributes:
 
-``` bash
+```bash
 #!/bin/bash
 # Using the {} around DATEYMD in the file path ensure it's specified as the variable's value, and the subsequent parts are not included
 
@@ -2729,7 +2834,7 @@ mkdir -p "$BACKUP_DIR"
 echo "Logs available at: $LOG_FILE"
 ```
 
-``` bash
+```bash
 # Make the script executable
 chmod +x /scripts/config_backup.sh
 
@@ -2756,7 +2861,7 @@ The package backup commands use specific flags as well:
 
 We covered `rsync` vs. `scp` earlier, so remember that rsync is specifically designed for copying and transferring files, so it offers more sophisticated file synchronization capabilities than basic tools like SCP. If you need a refresher, run the following command from your client machine (laptop), just change the paths to match what your system uses.
 
-``` bash
+```bash
 rsync -avz --partial --progress --update chris@ubuntu-pi-server:/mnt/backups/configs/master/ ~/Documents/raspberry_pi_server/backups/configs/master
 ```
 
@@ -2904,7 +3009,7 @@ You probably have some questions about the script let me explain some of the dec
   - While developing this, some of the services wouldn't necessarily start, so I would run into network or ssh issues post-reboot
 - Finally, the script asks you to `reboot` your system so all of the changes take affect
 
-``` bash
+```bash
 # Make the script executable
 chmod +x /scripts/config_restore.sh
 
@@ -2982,6 +3087,80 @@ sudo systemctl status cron
 # View cron logs
 sudo grep CRON /var/log/syslog
 ```
+
+#### Troubleshooting
+I had no issues while making the above changes; however, after restarting `cron` I got the following message from the `systemctl status` command. 
+
+![](images/cron-fresh-status.png)
+
+After doing some research, I ran `sudo systemctl cat cron.service` to view the `systemd` configuration for `cron`. In the `cron.service` file there is the line `ExecStart=/usr/sbin/cron -f -P $EXTRA_OPTS`. The service is trying to use the $EXTRA_OPTS variable, but it's not defined anywhere. The service is configured to look for environment variables in a file specified by this line `EnvironmentFile=-/etc/default/cron`. The dash before the filepath means this file is optional - if it doesn't exist, systemd continues anyway. This explains why cron still works despite the warning, which is why the `status` command returned a warning, but not any errors. Here's what the `cron` `ini` file looks like.
+
+```ini
+# /usr/lib/systemd/system/cron.service
+[Unit]
+Description=Regular background program processing daemon
+Documentation=man:cron(8)
+After=remote-fs.target nss-user-lookup.target
+
+[Service]
+EnvironmentFile=-/etc/default/cron
+ExecStart=/usr/sbin/cron -f -P $EXTRA_OPTS
+IgnoreSIGPIPE=false
+KillMode=process
+Restart=on-failure
+SyslogFacility=cron
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Let's try resolving this by utilizing `systemd` and creating a system override. We'll add one line to the `etc/systemd/system/cron.service.d/override.conf`. As a note, you've probably run into the `.d/` paths on your server. Whenever you see `.d` added to the end of a file path, like `/etc/systemd/system/cron.service.d`, it just means that's a directory which has config overrides. 
+
+```bash
+# Create a systemd override
+sudo systemctl edit cron.service
+```
+
+```ini
+### Editing /etc/systemd/system/cron.service.d/override.conf
+### Anything between here and the comment below will become the contents of the drop-in file
+
+Environment="EXTRA_OPTS="
+
+### Edits below this comment will be discarded
+
+
+### /usr/lib/systemd/system/cron.service
+# [Unit]
+# Description=Regular background program processing daemon
+# Documentation=man:cron(8)
+# After=remote-fs.target nss-user-lookup.target
+# 
+# [Service]
+# EnvironmentFile=-/etc/default/cron
+# ExecStart=/usr/sbin/cron -f -P $EXTRA_OPTS
+# IgnoreSIGPIPE=false
+# KillMode=process
+# Restart=on-failure
+# SyslogFacility=cron
+# 
+# [Install]
+# WantedBy=multi-user.target
+```
+
+After you implement the solution, restart the `systemctl` daemon and the `cron` service.
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart cron
+sudo systemctl status cron
+```
+
+Now, you should see everything working correctly.
+
+![](images/cron-override-status.png)
+
+This should resolve the warning message. The service is already working correctly with -f (stay in foreground, which systemd needs) and -P (send messages to syslog) flags, so we're just providing an empty value for the EXTRA_OPTS variable to stop systemd from complaining about it being undefined.
 
 With these automated backup jobs in place, your Raspberry Pi server will maintain a regular backup schedule without manual intervention. The weekly backups provide recent restore points, while the monthly master backup ensures you always have a stable configuration to fall back on if needed. The cleanup job prevents your backup drive from running out of space over time.
 
@@ -3200,7 +3379,7 @@ The last thing to do, is give your Raspberry Pi some decency. Now, I'll attach t
    
 ![](images/board_fan_inserted.jpg)
 
-4. Connect the *Red Wire* to Pin 4 (5V), *Black Wire* to Pin 6 (GND), and the *Blue Wire* to Pin 8 (GPIO14)
+4. Connect the *Red Wire* to Pin 4 (5V), *Black Wire* to Pin 6 (GND), and the *Blue Wire* to Pin 8 (GPIO14). Leave the *Blue Wire* unplugged if you want the fan to be always on. 
    
 ![](images/pins_4_6_8.jpg)
 
@@ -3212,38 +3391,7 @@ The last thing to do, is give your Raspberry Pi some decency. Now, I'll attach t
 
 ![](images/decent_server.jpg)
 
-Now, we're ready to move on to some of the fun stuff. If youre fan didn't turn on right away, try these troubleshooting steps:
-
-**FINISH**
-
-## Remote Development with VS Code {#sec-remote_vs_code}
-### Key Terms
-
-**Remote Development Concepts:**
-
-- **IDE (Integrated Development Environment):** A software application that provides comprehensive facilities for software development.
-- **Remote Development:** Developing code on a remote machine while using local tools and interfaces.
-- **Headless Development:** Writing code on a system without a graphical interface, often remotely.
-- **Extension:** Add-ons that enhance the functionality of development tools.
-- **Workspace:** A collection of files and folders that make up a development project.
-- **Sync:** The process of keeping files consistent between local and remote systems.
-- **Port Forwarding:** Redirecting communication from one network port to another.
-- **Development Container:** A container configured specifically for development purposes.
-
-**VS Code Specific Terminology:**
-
-- **VS Code:** Visual Studio Code, a code editor developed by Microsoft.
-- **Remote - SSH Extension:** A VS Code extension that allows connecting to and developing on remote machines over SSH.
-- **Remote Explorer:** A VS Code interface for managing remote connections.
-- **SSH Target:** A remote machine configured for SSH access in VS Code.
-- **SSH Config:** Configuration file defining SSH connection properties.
-- **Dev Container:** A containerized development environment defined for a VS Code project.
-- **Workspace Settings:** Project-specific configurations in VS Code.
-- **Settings Sync:** A feature that synchronizes VS Code settings across different instances.
-- **Task:** Configured commands that can be executed within VS Code.
-- **Launch Configuration:** Settings that define how to debug applications in VS Code.
-
-
+Now, we're ready to move on to some of the fun stuff. If youre fan didn't turn on right away, it's probably because you followed my images and plugged in the blue (control) wire. When this is connected, it turns the fan off. From what I researched online, it sounds like there is a way to keep it plugged in and then configure the fans usage parameters. That being said, I felt like diving into managing a circuit board from your OS would have been too much of a tangent/rabbit hole for this guide, so that's probably something I'll explore in the future, separately.
 
 ## Monitoring and Maintenance {#sec-monitor_maintain}
 ### Key Terms
@@ -3300,7 +3448,390 @@ Now, we're ready to move on to some of the fun stuff. If youre fan didn't turn o
 - **logrotate:** A utility that manages automatic rotation of log files.
 - **Centralized Logging:** Collecting logs from multiple systems in a central location.
 
+### Monitoring and Maintenance Basics {#sec-monitor_basics}
+For a 24/7 server, storage reliability is critical. A self-hosted server relies heavily on its storage device, and I/O errors can disrupt services and potentially lead to data loss. Monitoring your SSD's health and properly configuring your system to handle power interruptions are essential practices for maintaining a reliable self-hosted server. 
 
+Continuous uptime demands proactive management rather than reactive troubleshooting. Without proper monitoring, subtle hardware degradation can progress undetected until catastrophic failure occurs, resulting in extended downtime and potential permanent data loss. Regular maintenance prevents small issues from cascading into system-wide failures and helps maintain consistent performance over time. For Raspberry Pi servers specifically, where hardware operates in potentially suboptimal conditions (varying temperatures, consumer-grade power supplies, and external storage), monitoring becomes even more crucial. Proper maintenance routines extend hardware lifespan, optimize resource usage, and ensure security vulnerabilities are promptly addressed. The slight overhead of implementing monitoring and scheduled maintenance is substantially offset by avoiding the significant costs of emergency recovery, both in terms of lost data and service disruption. Furthermore, systematically collected performance data enables informed decisions about capacity planning and system upgrades, ensuring your server evolves to meet changing demands without overprovisioning or unexpected resource exhaustion.
+
+After chaning my boot media, I ended up with a an I/O error on my SSD, which resulted in data loss. To give a quick summary, this means the processs by which data is written to and read from memory had an issue. This section will walk through how to diagnose and resolve that issue, how and why to configure security updates on a patching schedule, finally how we can manage logs to ensure effective system information and memory usage.
+
+### Diagnosing and Resolving SSD Issues
+
+**1.** Install the primary tool for storage health monitoring
+
+```bash
+# Always update your current system packages before installing a new one
+sudo apt update
+sudo apt install -y smartmontools
+```
+
+The `smartmontools` package provides utilities for monitoring storage devices using SMART (Self-Monitoring, Analysis, and Reporting Technology) - a monitoring system included in most modern storage devices. These tools allow you to check the internal health parameters of your storage device and identify potential issues before they lead to data loss.
+
+**2.** Identify your SSD
+
+```bash
+sudo lsblk -o NAME,SIZE,MODEL,SERIAL,MOUNTPOINT
+```
+
+![](images/lsblk-output-smart.png)
+
+Remember, this command lists all block devices with their names, sizes, model information, serial numbers, and mount points. From the output, we can see:
+
+- The Samsung T7 SSD (PSSD T7) is `/dev/sda` with a capacity of 931.5GB
+- It has two partitions: `sda1` (boot partition) and `sda2` (root filesystem)
+- An SD card is mounted at `/mnt/backups`
+
+The `-o` flag specifies which columns to display, giving us a comprehensive view of all storage devices connected to the Raspberry Pi.
+
+**3.** Check Basic SSD Health 
+
+```bash
+sudo smartctl -H /dev/sda
+```
+
+![](images/smartctl-H.png)
+
+The `-H` flag performs a basic health check, asking the drive to evaluate its own condition. The result "PASSED" indicates the drive believes it's functioning properly at a hardware level. This is the quickest way to assess if the drive has detected any internal failures.
+
+**4.** View Detailed SMART Information
+
+```bash
+sudo smartctl -a /dev/sda
+```
+
+![](images/smartctl-a_1.png)
+![](images/smartctl-a_2.png)
+![](images/smartctl-a_3.png)
+
+Key findings from the output:
+
+- Temperature: 27°C (excellent, well below the 52°C warning threshold)
+- Power On Hours: 2,673 (about 111 days)
+- Unsafe Shutdowns: 61 (significant issue)
+- Media and Data Integrity Errors: 0 (good)
+- Available Spare: 100% (excellent)
+- Percentage Used: 0% (drive health is excellent)
+
+The 62 Unsafe Shutdowns occur when the system loses power or crashes without properly unmounting the filesystems. When this happens:
+
+- **Write operations may be interrupted:** If the system is writing data to the SSD when power is lost, the write operation may be incomplete, leading to partially written files.
+- **Journal transactions remain unfinished:** Modern filesystems like ext4 use journaling to track changes before they're committed. Power loss can leave these journals in an inconsistent state.
+- **Filesystem metadata corruption:** Critical filesystem structures may be left in an inconsistent state, potentially making files or directories inaccessible.
+- **Dirty cache data loss:** Data waiting in the cache to be written to disk is lost during a sudden power cut.
+
+These unsafe shutdowns are particularly problematic for SSDs because they use complex internal mechanisms like wear leveling and garbage collection. Interrupting these processes can lead to:
+
+- Partial page programming
+- Incomplete block erasures
+- Inconsistent mapping tables
+- Lost block allocation information
+
+While modern SSDs have power loss protection mechanisms, consumer-grade external SSDs like the Samsung T7 may have limited protection compared to enterprise-grade drives. The high number (62) indicates a pattern of improper shutdowns, likely due to:
+
+- *Power interruptions to the Raspberry Pi*
+  - This was definitely one of the issues I had
+  - I was using `sudo shutdown now` and then unplugging, rather than adding the `-h` flag to halt power
+  - Sometimes, I just unplugged the power (this is bad too)
+- System crashes requiring hard resets
+- Unplugging the SSD without properly unmounting it
+  - This also happened at least once and was probably a major contributor
+- Power saving features improperly configured
+
+The `-a` flag displays all SMART information available from the drive, providing a comprehensive view of the drive's health and history.
+
+**5.** Attempt a SMART Self-Test
+
+This step doesn't apply, if you're using the Samsung T7, because it doesn't support self-tests, which you can see from the `smartctl` output. That being said, if you're using an SSD that allows this, the step may be helpful. The Samsung T7 portable SSD doesn't support SMART self-tests. This is common for external/portable SSDs, as they often implement a more limited set of SMART commands. The -t short flag attempts to initiate a short self-test, which would typically take a few minutes to complete.
+
+```bash
+sudo smartctl -t short /dev/sda
+```
+
+This is the output I received.
+
+```plaintext
+smartctl 7.4 2023-08-01 r5530 [aarch64-linux-6.8.0-1024-raspi] (local build)
+Copyright (C) 2002-23, Bruce Allen, Christian Franke, www.smartmontools.org
+Self-tests not supported
+```
+
+**6.** Check Filesystem Integrity
+
+```bash
+# Check the boot partition
+sudo fsck -n /dev/sda1
+```
+
+![](images/fsck-boot.png)
+
+Output shows two issues:
+
+- Differences between boot sector and backup
+- Dirty bit set - indicating improper unmounting
+
+```bash
+# Check the root partition
+sudo fsck -n /dev/sda2
+```
+
+![](images/fsck-root.png)
+
+Output indicates the filesystem is clean but warns it's currently mounted.
+
+- The `-n` flag performs a read-only check without making changes, allowing you to safely examine mounted filesystems. 
+- The findings confirm that improper shutdowns have affected the filesystem integrity, particularly on the boot partition.
+
+**7.** Check System Logs for Errors
+
+```bash
+sudo dmesg | grep -i 'error\|ata\|sda\|failed\|i/o'
+```
+
+![](images/sys-logs-io.png)
+
+```bash
+sudo journalctl -p err..emerg -o short-precise | grep -i 'sda\|disk\|i/o\|error'
+```
+
+![](images/sys-logs-disk.png)
+
+```bash
+sudo journalctl -u smartd
+```
+
+![](images/sys-logs-smart.png)
+
+The output shows normal disk detection and mounting events, without indicating any current I/O errors. No errors related to the disk were found in the system journal. No entries found, indicating the SMART monitoring service isn't running. These commands search through different system logs for any reported disk errors. The absence of current errors suggests that despite the history of unsafe shutdowns, the filesystem has remained resilient enough to recover without logging critical errors.
+
+**8.** Check the Power Supply Status
+
+```bash
+vcgencmd get_throttled
+```
+
+![](images/power-supply-status.png)
+
+**Output:** `0x0`
+
+This indicates no power-related issues have been detected since boot. The vcgencmd get_throttled command is specific to Raspberry Pi systems and reports if the system has experienced undervoltage, overheating, or other throttling conditions. A non-zero value would indicate power problems affecting the Raspberry Pi. The result 0x0 is good news, suggesting that your current power supply is adequate for normal operation.
+
+### Implementing Preventive Measures
+
+**1.** Enable SMART Monitoring Service
+
+```bash
+# Configure the SMART monitoring service
+sudo nano /etc/smartd.conf
+```
+
+![](images/smart-enable-configure.png)
+
+The SMART monitoring daemon (`smartd`) continuously checks your drive's health and can alert you to developing issues. Add this line to monitor your SSD (replace sda with your device if different): `/dev/sda -a -o on -S on -s (S/../.././02|L/../../6/03) -m root`. This should go above the line with `DEVICESCAN`, because every configuration after it is ignored.
+
+This configuration:
+
+- `-a`: Monitors all SMART attributes
+- `-o on`: Enables automatic offline testing
+- `-S on`: Saves error logs
+- `-s (S/../.././02|L/../../6/03)`: Schedules short tests at 2 AM daily and long tests on Saturdays at 3 AM
+- `-m root`: Sends email alerts to the root user
+
+Then enable and start the service.
+
+```bash
+sudo systemctl enable smartd
+sudo systemctl start smartd
+```
+
+To receive email alerts, you'll need to configure a mail transfer agent like `postfix`. Personally, I just didn't include that functionality now, but it's something I'll eventually configure; however, I left it in for those curious. The SMART monitoring service provides proactive protection by continuously monitoring your drive's health metrics. It can detect deteriorating conditions before they lead to data loss and send you notifications when potential issues are identified.
+
+**2.** Configure Proper Filesystem Mount Options
+
+```bash
+# Edit /etc/fstab
+sudo nano /etc/fstab
+
+# Add specific options for your root partition
+sudo blkid | grep sda2
+```
+
+Then add this line to your `/etc/fstab` file: `UUID=your-uuid-here / ext4 defaults,noatime,commit=60 0 1`. While your SSD partitions automatically mount at boot, optimizing the mount options can significantly improve resilience against power failures.
+
+Let's look at these options in detail:
+
+- `defaults`: This incorporates standard mount options: `rw` (read-write), `suid` (allow setuid), `dev` (interpret device files), `exec` (permit execution of binaries), `auto` (mountable with -a), `nouser` (only root can mount), and `async` (asynchronous I/O).
+- `noatime`: Disables updating access time attributes on files when they're read. This reduces unnecessary write operations, which is especially beneficial for SSDs that have limited write cycles. Every time you read a file without this option, the system would write an update to the file's metadata recording when it was last accessed.
+- `commit=60`: Changes how often filesystem changes are committed to disk (in seconds). The default is 5 seconds, meaning data may stay in RAM for up to 5 seconds before being written to disk. Increasing this to 60 seconds reduces write operations but increases the potential for data loss during a crash. However, it's a reasonable compromise for most systems.
+- `0`: This refers to the dump flag. A value of 0 indicates the filesystem should not be backed up by the dump utility (which is rarely used these days).
+- `1`: This is the fsck order. A value of 1 means this filesystem should be checked first during boot if a check is needed. The root filesystem always gets 1, while other filesystems get 2 or higher, or 0 to skip checks.
+
+```bash
+# Apply the changes without rebooting
+sudo mount -o remount /
+```
+
+These optimized mount options help mitigate the impact of unexpected shutdowns by reducing unnecessary writes and ensuring more efficient I/O operations. The trade-off between performance and data safety is balanced by the commit interval - 60 seconds provides reasonable protection while reducing write pressure.
+
+By implementing the following measures:
+
+- Verifying adequate power supply: The vcgencmd get_throttled output of 0x0 indicates your current power supply is stable.
+- Enabling SMART monitoring: Setting up the smartd service provides ongoing monitoring and early warning of potential drive issues.
+- Optimizing filesystem mount options: The modified fstab entries with noatime and commit=60 strike a balance between reducing unnecessary writes and maintaining data integrity.
+
+These implementations together create a more resilient system that:
+
+- Continuously monitors drive health
+- Reduces unnecessary write operations that contribute to SSD wear
+- Balances performance with data integrity requirements
+- Provides early warning of developing issues
+
+For a 24/7 self-hosting server, these measures provide essential protection against the most common causes of data loss and system instability. While no solution can completely eliminate the risk from sudden power loss, these configurations significantly reduce the likelihood of filesystem corruption and data loss.
+
+### Log Management
+Effective log management is crucial for maintaining system health, troubleshooting issues, and detecting security incidents on your Raspberry Pi server. Logs provide insights into system behavior, application performance, and potential security threats. This section will cover fundamental log concepts and practical strategies for managing logs efficiently.
+
+#### Log Basics
+Linux logs record events occurring within the system and applications, providing essential information for monitoring and troubleshooting. Understanding where logs are stored and how to interpret them allows you to efficiently diagnose problems and maintain system health.
+
+Let's explore the key log locations on your Ubuntu-based Raspberry Pi server:
+
+```bash
+# View the main system log
+sudo tail -n 50 /var/log/syslog
+
+# View authentication attempts
+sudo tail -n 50 /var/log/auth.log
+
+# View kernel messages
+sudo dmesg | tail -n 50
+
+# View systemd journal logs
+sudo journalctl -n 50
+```
+
+Key log files and their purposes:
+
+- `/var/log/syslog`: General system messages and activities
+- `/var/log/auth.log`: Authentication and authorization events
+- `/var/log/kern.log`: Kernel messages and warnings
+- `/var/log/dpkg.log`: Package installation and removal logs
+- `/var/log/apt/`: APT package management activities
+- `/var/log/fail2ban.log`: Failed login attempt blocks
+- `/var/log/nginx/`: Web server logs (if nginx is installed)
+
+Ubuntu Server uses two primary logging systems:
+
+- **Traditional syslog:** Text files stored in /var/log/
+- **Systemd journal:** Binary logs accessed through journalctl
+
+```bash
+# View only error and higher severity messages
+sudo journalctl -p err..emerg
+```
+
+Log severity levels (from lowest to highest):
+
+- `debug`: Detailed debugging information
+- `info`: Normal operational messages
+- `notice`: Normal but significant events
+- `warning`: Potential issues that aren't errors
+- `err`: Error conditions
+- `crit`: Critical conditions requiring attention
+- `alert`: Actions that must be taken immediately
+- `emerg`: System is unusable
+
+#### Management Tools and Strategy
+Proper log management ensures you can efficiently access the information you need while preventing logs from consuming excessive disk space. A balanced strategy involves log rotation, centralized collection, and automated monitoring.
+
+First, let's configure `logrotate` to manage log file growth. We can also create a custom logrotate config for application logs. While this doesn't apply to anything we've done yet, it will be useful once you start developing and deplying applications on your server. I'll include this below for anyone that wants a starting point.
+
+```bash
+# Examine the main logrotate configuration
+cat /etc/logrotate.conf
+
+# View the service-specific configurations
+ls -l /etc/logrotate.d/
+
+# Customize application log management
+sudo nano /etc/logrotate.d/myapplogs
+```
+
+![](images/logrotate.conf_default.png)
+
+![](images/logrotate-service-configs.png)
+
+```plaintext
+/home/chris/apps/*/logs/*.log {
+    weekly
+    rotate 4
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 chris chris
+}
+```
+
+This configuration:
+
+- `weekly`: Rotates logs once per week
+- `rotate 4`: Keeps 4 rotated log files before deletion
+- `compress`: Compresses rotated logs with gzip
+- `delaycompress`: Delays compression until the next rotation cycle
+- `missingok`: Doesn't generate errors if log files are missing
+- `notifempty`: Doesn't rotate empty log files
+- `create 0640 chris chris`: Creates new log files with specified permissions and ownership
+
+Then, let's setup some persistent storage for our journal logs.
+
+```bash
+# Configure persistent storage for journal logs
+sudo nano /etc/systemd/journald.conf
+```
+
+```ini
+[Journal]
+Storage=persistent
+Compress=yes
+SystemMaxUse=500M
+SystemMaxFileSize=50M
+MaxRetentionSec=1month
+```
+
+```bash
+# Apply changes
+sudo systemctl restart systemd-journald
+```
+
+This configuration:
+
+- `Storage=persistent`: Saves logs across reboots
+- `Compress=yes`: Compresses older journal files
+- `SystemMaxUse=500M`: Limits total journal size to 500MB
+- `SystemMaxFileSize=50M`: Limits individual journal files to 50MB
+- `MaxRetentionSec=1month`: Automatically removes logs older than a month
+
+For more detailed `systemd` journal queries:
+
+```bash
+# View logs from a specific service
+sudo journalctl -u ssh
+
+# View logs from a specific time period
+sudo journalctl --since "2024-05-10" --until "2024-05-12"
+
+# View logs from the current boot
+sudo journalctl -b
+```
+
+Advanced log management strategies include:
+
+- **Centralized logging:** Consider setting up a central log server for multiple devices using rsyslog.
+- **Log analysis tools:** For more sophisticated analysis, tools like Logwatch provide automated log summaries.
+- **Security monitoring:** Configure fail2ban to monitor logs for security threats and respond automatically.
+- **Custom alerting:** Set up alerts for specific critical events using simple grep scripts and cron jobs.
+
+These log management practices ensure your Raspberry Pi server maintains manageable, accessible logs while providing the information needed for effective system monitoring and troubleshooting.
 
 ## Docker {#sec-docker}
 ### Key Terms
