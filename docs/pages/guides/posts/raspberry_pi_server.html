@@ -361,13 +361,17 @@ cookieconsent.run({
   <li><a href="#remote-transfers-of-backups" id="toc-remote-transfers-of-backups" class="nav-link" data-scroll-target="#remote-transfers-of-backups">Remote Transfers of Backups</a></li>
   </ul></li>
   <li><a href="#sec-backups_restore" id="toc-sec-backups_restore" class="nav-link" data-scroll-target="#sec-backups_restore">Restoring from Backup</a></li>
-  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts">Final Thoughts</a></li>
+  <li><a href="#sec-backups_crontab" id="toc-sec-backups_crontab" class="nav-link" data-scroll-target="#sec-backups_crontab">Automating Backups with Crontab</a>
+  <ul class="collapse">
+  <li><a href="#creating-automated-backup-jobs" id="toc-creating-automated-backup-jobs" class="nav-link" data-scroll-target="#creating-automated-backup-jobs">Creating Automated Backup Jobs</a></li>
+  <li><a href="#verifying-jobs" id="toc-verifying-jobs" class="nav-link" data-scroll-target="#verifying-jobs">Verifying Jobs</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#sec-change_boot_media" id="toc-sec-change_boot_media" class="nav-link" data-scroll-target="#sec-change_boot_media">Changing Your Boot Media Device</a>
   <ul>
   <li><a href="#key-terms-6" id="toc-key-terms-6" class="nav-link" data-scroll-target="#key-terms-6">Key Terms</a></li>
   <li><a href="#sec-boot_transition" id="toc-sec-boot_transition" class="nav-link" data-scroll-target="#sec-boot_transition">Boot Configuration Transition Process</a></li>
-  <li><a href="#final-thoughts-1" id="toc-final-thoughts-1" class="nav-link" data-scroll-target="#final-thoughts-1">Final Thoughts</a></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts">Final Thoughts</a></li>
   </ul></li>
   <li><a href="#sec-remote_vs_code" id="toc-sec-remote_vs_code" class="nav-link" data-scroll-target="#sec-remote_vs_code">Remote Development with VS Code</a>
   <ul>
@@ -395,7 +399,7 @@ cookieconsent.run({
 <div class="quarto-title">
 <h1 class="title">Guide to Setting Up Raspberry Pi for Data Engineering and Virtualization Projects</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Research</div>
+    <div class="quarto-category">Guide</div>
     <div class="quarto-category">Ongoing</div>
   </div>
   </div>
@@ -435,175 +439,175 @@ cookieconsent.run({
 <section id="guide-outline" class="level3">
 <h3 class="anchored" data-anchor-id="guide-outline">Guide Outline</h3>
 <ol type="1">
-<li><p><a href="@sec-introduction">Introduction</a></p>
+<li><p><strong>Introduction</strong></p>
 <ul>
 <li>Purpose and scope of the guide</li>
 <li>What you’ll learn and build</li>
 <li>Prerequisites and assumptions</li>
 </ul></li>
-<li><p><a href="@sec-setup">Initial Setup</a></p>
+<li><p><strong>Initial Setup</strong></p>
 <ul>
-<li><a href="@sec-hardware_requirements">Hardware Requirements</a>
+<li><strong>Hardware Requirements</strong>
 <ul>
 <li>Raspberry Pi 4 specifications</li>
 <li>Storage devices (Thumbdrive, SSD, microSD cards)</li>
 <li>Accessories and peripherals (Keyboard, monitor, etc.)</li>
 </ul></li>
-<li><a href="@sec-image_requirements">Image Requirements</a>
+<li><strong>Image Requirements</strong>
 <ul>
 <li>Selecting and downloading Ubuntu Server LTS</li>
 <li>Using Raspberry Pi Imager</li>
 <li>Initial configuration options</li>
 </ul></li>
-<li><a href="@sec-get_started">Get Started</a>
+<li><strong>Get Started</strong>
 <ul>
 <li>The physical setup of the Raspberry Pi, what to plug in, where, etc.</li>
 <li>What to expect as things turn on</li>
 </ul></li>
 </ul></li>
-<li><p><a href="@sec-linux_basics">Linux Server Basics</a></p>
+<li><p><strong>Linux Server Basics</strong></p>
 <ul>
-<li><a href="@sec-first_boot">First Boot Process</a>
+<li><strong>First Boot Process</strong>
 <ul>
 <li>Connection and startup</li>
 <li>Understanding initialization</li>
 </ul></li>
-<li><a href="@sec-systemd">Service Management with systemd</a>
+<li><strong>Service Management with systemd</strong>
 <ul>
 <li>Understanding systemd units and targets</li>
 <li>Basic service commands</li>
 </ul></li>
-<li><a href="@sec-home_directory">Understanding Your Home Directory</a>
+<li><strong>Understanding Your Home Directory</strong>
 <ul>
 <li>Shell configuration files</li>
 <li>Hidden application directories</li>
 </ul></li>
-<li><a href="@sec-root_filesystem">The Root Filesystem</a>
+<li><strong>The Root Filesystem</strong>
 <ul>
 <li>Filesystem Hierarchy Standard (FHS)</li>
 <li>Key directories and their purposes</li>
 </ul></li>
-<li><a href="@sec-permissions">User and Group Permissions</a>
+<li><strong>User and Group Permissions</strong>
 <ul>
 <li>Basic permission concepts</li>
 <li>chmod and chown usage</li>
 <li>Understanding advanced permissions</li>
 </ul></li>
 </ul></li>
-<li><p><a href="@sec-network">Networking Basics</a></p>
+<li><p><strong>Networking Basics</strong></p>
 <ul>
-<li><a href="@sec-network_basics">Computer Networking Basics</a>
+<li><strong>Computer Networking Basics</strong>
 <ul>
 <li>OSI and TCP/IP models</li>
 <li>Key networking protocols</li>
 </ul></li>
-<li><a href="@sec-network_connections">Network Connections</a>
+<li><strong>Network Connections</strong>
 <ul>
 <li>Wired vs wireless configurations</li>
 <li>Understanding IP addressing</li>
 </ul></li>
-<li><a href="@sec-ubuntu_server_network_tools">Ubuntu Server Networking Tools</a>
+<li><strong>Ubuntu Server Networking Tools</strong>
 <ul>
 <li>Testing connectivity</li>
 <li>Viewing network statistics</li>
 </ul></li>
-<li><a href="@sec-systemd_networkd">systemd-networkd</a>
+<li><strong>systemd-networkd</strong>
 <ul>
 <li>Configuration file structure</li>
 <li>Wired and wireless setup</li>
 </ul></li>
-<li><a href="@sec-netplan_to_networkd">Converting Netplan to networkd</a>
+<li><strong>Converting Netplan to networkd</strong>
 <ul>
 <li>Why and how to transition</li>
 <li>Troubleshooting network issues</li>
 </ul></li>
-<li><a href="@sec-advanced_networking">Advanced Networking</a>
+<li><strong>Advanced Networking</strong>
 <ul>
 <li>Subnets and routing</li>
 <li>Security considerations</li>
 </ul></li>
 </ul></li>
-<li><p><a href="@sec-ssh">SSH (Secure Shell)</a></p>
+<li><p><strong>SSH (Secure Shell)</strong></p>
 <ul>
-<li><a href="@sec-ssh_basics">SSH Basics</a>
+<li><strong>SSH Basics</strong>
 <ul>
 <li>Client vs server setup</li>
 <li>Key-based authentication</li>
 </ul></li>
-<li><a href="@sec-ssh_keys">Key-Based Authentication</a>
+<li><strong>Key-Based Authentication</strong>
 <ul>
 <li>Types of SSH key encryption</li>
 <li>Generating keys</li>
 <li>Installing the public key</li>
 </ul></li>
-<li><a href="@sec-ssh_config_server">Server-Side SSH Configuration</a>
+<li><strong>Server-Side SSH Configuration</strong>
 <ul>
 <li>Host keys and security options</li>
 <li>Optimizing for security</li>
 </ul></li>
-<li><a href="@sec-ssh_config_client">Client-Side Configuration</a>
+<li><strong>Client-Side Configuration</strong>
 <ul>
 <li>Setting up SSH config</li>
 <li>Managing known hosts</li>
 </ul></li>
-<li><a href="@sec-ssh_security">Additional Security Measures</a>
+<li><strong>Additional Security Measures</strong>
 <ul>
 <li>Firewall configuration with UFW</li>
 <li>Intrusion prevention with Fail2Ban</li>
 </ul></li>
-<li><a href="@sec-scp_rsync">Secure File Transfers</a>
+<li><strong>Secure File Transfers</strong>
 <ul>
 <li>Using SCP (Secure Copy Protocol)</li>
 <li>Using rsync for efficient transfers</li>
 </ul></li>
 </ul></li>
-<li><p><a href="@sec-partitions">Partitions</a></p>
+<li><p><strong>Partitions</strong></p>
 <ul>
-<li><a href="@sec-partition_basics">Partitioning Basics</a>
+<li><strong>Partitioning Basics</strong>
 <ul>
 <li>Understanding partition tables and types</li>
 <li>Filesystem options and considerations</li>
 </ul></li>
-<li><a href="@sec-partition_tools">Partitioning Tools</a>
+<li><strong>Partitioning Tools</strong>
 <ul>
 <li>Using parted and other utilities</li>
 </ul></li>
-<li><a href="@sec-partition_for_backups">Partitioning for Backups</a>
+<li><strong>Partitioning for Backups</strong>
 <ul>
 <li>Setting up microSD cards</li>
 <li>Mount points and fstab configuration</li>
 </ul></li>
-<li><a href="@sec-partition_ssd">Partitioning your SSD</a>
+<li><strong>Partitioning your SSD</strong>
 <ul>
 <li>Boot and root partitions</li>
 <li>Formatting and preparation</li>
 </ul></li>
-<li><a href="@sec-partition_advanced">Advanced Partitioning</a>
+<li><strong>Advanced Partitioning</strong>
 <ul>
 <li>Monitoring usage</li>
 <li>Resizing partitions</li>
 </ul></li>
 </ul></li>
-<li><p><a href="@sec-backups">Backups and Basic Automation</a></p>
+<li><p><strong>Backups and Basic Automation</strong></p>
 <ul>
-<li><a href="@sec-backups_basics">Backup Basics</a>
+<li><strong>Backup Basics</strong>
 <ul>
 <li>Directory structure and permissions</li>
 </ul></li>
-<li><a href="@sec-backups_configs">Configuration Files Backup</a>
+<li><strong>Configuration Files Backup</strong>
 <ul>
 <li>Using rsync for system configurations</li>
 <li>Remote transfers of backups</li>
 </ul></li>
-<li><a href="@sec-backups_restore">Restoring from Backup</a>
+<li><strong>Restoring from Backup</strong>
 <ul>
 <li>Creating restoration scripts</li>
 <li>Testing recovery procedures</li>
 </ul></li>
 </ul></li>
-<li><p><a href="@sec-change_boot_media">Changing Your Boot Media Device</a></p>
+<li><p><strong>Changing Your Boot Media Device</strong></p>
 <ul>
-<li><a href="@sec-boot_transition">Boot Configuration Transition</a>
+<li><strong>Boot Configuration Transition</strong>
 <ul>
 <li>Flashing OS to new media</li>
 <li>Proper shutdown procedures</li>
@@ -612,47 +616,47 @@ cookieconsent.run({
 <li>Restoring configurations</li>
 </ul></li>
 </ul></li>
-<li><p><a href="@sec-remote_with_vs_code">Remote Development with VS Code</a></p>
+<li><p><strong>Remote Development with VS Code</strong></p>
 <ul>
 <li>Setting Up VS Code Remote SSH</li>
 <li>Managing Remote Projects</li>
 <li>Debugging and Terminal Integration</li>
 </ul></li>
-<li><p><a href="@sec-monitor_maintain">Monitoring and Maintenance</a></p>
+<li><p><strong>Monitoring and Maintenance</strong></p>
 <ul>
-<li><a href="@sec-monitor_basics">Monitoring Basics</a>
+<li><strong>Monitoring Basics</strong>
 <ul>
 <li><code>smartmon</code>, <code>vcgencmd</code></li>
 <li>Resolving SSD health issues</li>
 </ul></li>
-<li><a href="@sec-monitor_patching">Security Updates and Patching</a>
+<li><strong>Security Updates and Patching</strong>
 <ul>
 <li>Preventetive Measures</li>
 <li>System patching schedules</li>
 </ul></li>
-<li><a href="@sec-monitor_logs">Log Management</a>
+<li><strong>Log Management</strong>
 <ul>
 <li>Log basics</li>
 <li>Management tools and strategy</li>
 </ul></li>
 </ul></li>
-<li><p><a href="@sec-docker">Containerization with Docker</a></p>
+<li><p><strong>Containerization with Docker</strong></p>
 <ul>
-<li><a href="@sec-docker_basics">Containerization and Virtualization Basics</a></li>
-<li><a href="@sec-docker_setup">Docker Installation and Setup</a></li>
-<li><a href="@sec-docker_images">Creating Images with Dockerfile</a></li>
-<li><a href="@sec-docker_manage">Managing Images and Containers</a></li>
-<li><a href="@sec-docker_compose">Docker Compose for Multi-container Applications</a></li>
-<li><a href="@sec-docker_ci_cd">CI/CD Integration</a></li>
+<li><strong>Containerization and Virtualization Basics</strong></li>
+<li><strong>Docker Installation and Setup</strong></li>
+<li><strong>Creating Images with Dockerfile</strong></li>
+<li><strong>Managing Images and Containers</strong></li>
+<li><strong>Docker Compose for Multi-container Applications</strong></li>
+<li><strong>CI/CD Integration</strong></li>
 </ul></li>
-<li><p><a href="@sec-kubernetes">Container Orchestration with Kubernetes</a></p>
+<li><p><strong>Container Orchestration with Kubernetes</strong></p>
 <ul>
-<li><a href="@sec-kubernetes_basics">Orchestration Basics</a></li>
-<li><a href="@sec-kubernetes_setup">Kubernetes Concepts, Installation, and Setup</a></li>
-<li><a href="@sec-kubernetes_cluster">Setting Up a Kubernetes Cluster</a></li>
-<li><a href="@sec-kubernetes_deployment">Deployment Strategies</a></li>
-<li><a href="@sec-kubernetes_resources">Managing Resources</a></li>
-<li><a href="@sec-kubernetes_scaling">Scaling Applications</a></li>
+<li><strong>Orchestration Basics</strong></li>
+<li><strong>Kubernetes Concepts, Installation, and Setup</strong></li>
+<li><strong>Setting Up a Kubernetes Cluster</strong></li>
+<li><strong>Deployment Strategies</strong></li>
+<li><strong>Managing Resources</strong></li>
+<li><strong>Scaling Applications</strong></li>
 </ul></li>
 </ol>
 </section>
@@ -2217,13 +2221,11 @@ Important
 <p><strong>SSH Security and Tools:</strong></p>
 <ul>
 <li><strong>Port Forwarding:</strong> The ability to tunnel network connections through an SSH connection.</li>
-<li><strong>X11 Forwarding:</strong> A mechanism for securely running graphical applications over a network.</li>
 <li><strong>SSH Tunnel:</strong> An encrypted network connection established through SSH.</li>
 <li><strong>SCP (Secure Copy Protocol):</strong> A means of securely transferring files between hosts based on SSH.</li>
 <li><strong>SFTP (SSH File Transfer Protocol):</strong> A secure file transfer protocol that operates over SSH.</li>
 <li><strong>UFW (Uncomplicated Firewall):</strong> A simplified firewall management interface for iptables.</li>
 <li><strong>Fail2Ban:</strong> An intrusion prevention software that protects servers from brute-force attacks.</li>
-<li><strong>Bastion Host:</strong> A special-purpose server designed to withstand attacks, situated outside the firewall.</li>
 </ul>
 </section>
 <section id="sec-ssh_basics" class="level3">
@@ -3242,17 +3244,21 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 <span id="cb94-89"><a href="#cb94-89" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 11. Filesystem Table (fstab)</span></span>
 <span id="cb94-90"><a href="#cb94-90" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Backing up filesystem table (fstab)..."</span></span>
 <span id="cb94-91"><a href="#cb94-91" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> rsync <span class="at">-aAXv</span> /etc/fstab <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/fstab.bak"</span></span>
-<span id="cb94-92"><a href="#cb94-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-93"><a href="#cb94-93" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set appropriate permissions</span></span>
-<span id="cb94-94"><a href="#cb94-94" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Configuring backup directory permissions..."</span></span>
-<span id="cb94-95"><a href="#cb94-95" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chown <span class="at">-R</span> chris:chris <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb94-96"><a href="#cb94-96" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chmod <span class="at">-R</span> 600 <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb94-97"><a href="#cb94-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-98"><a href="#cb94-98" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Configuration backup completed at: </span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
-<span id="cb94-99"><a href="#cb94-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-100"><a href="#cb94-100" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$LOG_FILE</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb94-92"><a href="#cb94-92" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb94-93"><a href="#cb94-93" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 12. Backup Package List</span></span>
+<span id="cb94-94"><a href="#cb94-94" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Backing up package list..."</span></span>
+<span id="cb94-95"><a href="#cb94-95" aria-hidden="true" tabindex="-1"></a>    <span class="ex">dpkg</span> <span class="at">--get-selections</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/package_list.txt"</span></span>
+<span id="cb94-96"><a href="#cb94-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-97"><a href="#cb94-97" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set appropriate permissions</span></span>
+<span id="cb94-98"><a href="#cb94-98" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Configuring backup directory permissions..."</span></span>
+<span id="cb94-99"><a href="#cb94-99" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chown <span class="at">-R</span> chris:chris <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb94-100"><a href="#cb94-100" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> chmod <span class="at">-R</span> 600 <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
 <span id="cb94-101"><a href="#cb94-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-102"><a href="#cb94-102" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Logs available at: </span><span class="va">$LOG_FILE</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb94-102"><a href="#cb94-102" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Configuration backup completed at: </span><span class="va">$BACKUP_DIR</span><span class="st">"</span></span>
+<span id="cb94-103"><a href="#cb94-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-104"><a href="#cb94-104" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$LOG_FILE</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb94-105"><a href="#cb94-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-106"><a href="#cb94-106" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Logs available at: </span><span class="va">$LOG_FILE</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb95"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the script executable</span></span>
 <span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x /scripts/config_backup.sh</span>
 <span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -3267,6 +3273,11 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 <li><code>--one-file-system</code>: Don’t cross filesystem boundaries</li>
 <li><code>--hard-links</code>: Preserve hard links</li>
 <li><code>--exclude</code>: Skip specified directories</li>
+</ul>
+<p>The package backup commands use specific flags as well:</p>
+<ul>
+<li><code>dpkg --get-selections</code>: outputs a list of all packages and their status (installed, deinstall, purge)</li>
+<li>This creates a complete snapshot of your system’s package state</li>
 </ul>
 <section id="remote-transfers-of-backups" class="level4">
 <h4 class="anchored" data-anchor-id="remote-transfers-of-backups">Remote Transfers of Backups</h4>
@@ -3371,21 +3382,20 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 <span id="cb97-74"><a href="#cb97-74" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/fstab.bak"</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/fstab.bak"</span> /etc/fstab</span>
 <span id="cb97-75"><a href="#cb97-75" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-76"><a href="#cb97-76" aria-hidden="true" tabindex="-1"></a><span class="co"># 7. Restore Package List</span></span>
-<span id="cb97-77"><a href="#cb97-77" aria-hidden="true" tabindex="-1"></a><span class="co">#echo "Reinstalling packages from backup..."</span></span>
-<span id="cb97-78"><a href="#cb97-78" aria-hidden="true" tabindex="-1"></a><span class="co">#if [ -f "$BACKUP_DIR/package_list.txt" ]; then</span></span>
-<span id="cb97-79"><a href="#cb97-79" aria-hidden="true" tabindex="-1"></a><span class="co">#    apt-get update &amp;&amp; apt-get install -y dselect</span></span>
-<span id="cb97-80"><a href="#cb97-80" aria-hidden="true" tabindex="-1"></a><span class="co">#    dpkg --set-selections &lt; "$BACKUP_DIR/package_list.txt"</span></span>
-<span id="cb97-81"><a href="#cb97-81" aria-hidden="true" tabindex="-1"></a><span class="co">#    apt-get dselect-upgrade -y</span></span>
-<span id="cb97-82"><a href="#cb97-82" aria-hidden="true" tabindex="-1"></a><span class="co">#fi</span></span>
-<span id="cb97-83"><a href="#cb97-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-84"><a href="#cb97-84" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart services</span></span>
-<span id="cb97-85"><a href="#cb97-85" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart systemd-networkd wpa_supplicant@wlan0.service ssh ufw fail2ban </span>
-<span id="cb97-86"><a href="#cb97-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-87"><a href="#cb97-87" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Configuration restoration completed. A system reboot is recommended."</span></span>
-<span id="cb97-88"><a href="#cb97-88" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span> <span class="at">-p</span> <span class="st">"Would you like to reboot now? (y/n): "</span> <span class="va">REBOOT</span></span>
-<span id="cb97-89"><a href="#cb97-89" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span> <span class="st">"</span><span class="va">$REBOOT</span><span class="st">"</span> <span class="ot">==</span> <span class="st">"y"</span> <span class="kw">||</span> <span class="st">"</span><span class="va">$REBOOT</span><span class="st">"</span> <span class="ot">==</span> <span class="st">"Y"</span> <span class="kw">]]</span> <span class="kw">&amp;&amp;</span> <span class="ex">reboot</span></span>
-<span id="cb97-90"><a href="#cb97-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-91"><a href="#cb97-91" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb97-77"><a href="#cb97-77" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Reinstalling packages from backup..."</span></span>
+<span id="cb97-78"><a href="#cb97-78" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/package_list.txt"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb97-79"><a href="#cb97-79" aria-hidden="true" tabindex="-1"></a>    <span class="ex">apt-get</span> update <span class="kw">&amp;&amp;</span> <span class="ex">apt-get</span> install <span class="at">-y</span> dselect</span>
+<span id="cb97-80"><a href="#cb97-80" aria-hidden="true" tabindex="-1"></a>    <span class="ex">dpkg</span> <span class="at">--set-selections</span> <span class="op">&lt;</span> <span class="st">"</span><span class="va">$BACKUP_DIR</span><span class="st">/package_list.txt"</span></span>
+<span id="cb97-81"><a href="#cb97-81" aria-hidden="true" tabindex="-1"></a>    <span class="ex">apt-get</span> dselect-upgrade <span class="at">-y</span></span>
+<span id="cb97-82"><a href="#cb97-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-83"><a href="#cb97-83" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart services</span></span>
+<span id="cb97-84"><a href="#cb97-84" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart systemd-networkd wpa_supplicant@wlan0.service ssh ufw fail2ban </span>
+<span id="cb97-85"><a href="#cb97-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-86"><a href="#cb97-86" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Configuration restoration completed. A system reboot is recommended."</span></span>
+<span id="cb97-87"><a href="#cb97-87" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span> <span class="at">-p</span> <span class="st">"Would you like to reboot now? (y/n): "</span> <span class="va">REBOOT</span></span>
+<span id="cb97-88"><a href="#cb97-88" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span> <span class="st">"</span><span class="va">$REBOOT</span><span class="st">"</span> <span class="ot">==</span> <span class="st">"y"</span> <span class="kw">||</span> <span class="st">"</span><span class="va">$REBOOT</span><span class="st">"</span> <span class="ot">==</span> <span class="st">"Y"</span> <span class="kw">]]</span> <span class="kw">&amp;&amp;</span> <span class="ex">reboot</span></span>
+<span id="cb97-89"><a href="#cb97-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-90"><a href="#cb97-90" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You probably have some questions about the script let me explain some of the decisions I made while doing some trial and error testing.</p>
 <ul>
 <li>Originally, I had the backup directory as a value in the script call itself, now it just defaults to the <code>master/</code> backup
@@ -3411,7 +3421,16 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 <ul>
 <li>This block ensures all of the <code>systemd</code> configurations are included</li>
 </ul></li>
-<li>Sixth <strong>Package List TBD</strong></li>
+<li>Sixth, restoring the Filesystem Table (<code>fstab</code>)
+<ul>
+<li>This is easy, since <code>fstab</code> is already a file, we just overwrite what’s there</li>
+</ul></li>
+<li>Seventh, package restoration
+<ul>
+<li><code>dpkg --set-selections</code>: takes the saved list and marks packages for installation or removal</li>
+<li><code>apt-get dselect-upgrade</code>: then acts on these selections to install missing packages</li>
+<li>The <code>dselect</code> tool is installed first because it’s needed for the upgrade process</li>
+</ul></li>
 <li>Then, the specific services we modified are all explicitly started
 <ul>
 <li>While developing this, some of the services wouldn’t necessarily start, so I would run into network or ssh issues post-reboot</li>
@@ -3424,18 +3443,63 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 <span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the script</span></span>
 <span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./scripts/config_restore.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="final-thoughts" class="level3">
-<h3 class="anchored" data-anchor-id="final-thoughts">Final Thoughts</h3>
-<p>At the time of writing this, I’ve tested and revised everything up until this point. There are a few things I haven’t added yet, that I want to later, once it’s necessary.</p>
-<ol type="1">
-<li>Saving the installed packages and their requirements, similar to a <code>uv</code> lockfile or <code>.venv</code> requirements.txt file.
-<ol type="1">
-<li>Modify the restore script to restore packages to exactly where they should be</li>
-<li>Not necessary now, because only Traceroute, ufw, and fail2ban were installed; however, when other apps are added this will be helpful for tracking dependencies and versioning issues</li>
-</ol></li>
-<li>Creating a private repoistory for storing configuration files, scripts, etc. and then using that, rather than rsync with my laptop</li>
-<li>Do some more granular network configurations, inlcuding subnets and static IPs</li>
-</ol>
+<section id="sec-backups_crontab" class="level3">
+<h3 class="anchored" data-anchor-id="sec-backups_crontab">Automating Backups with Crontab</h3>
+<p>Now that we have both backup and restore scripts in place, the next step is to automate the backup process. Manual backups are valuable but prone to human error, we might forget to run them– or run them inconsistently. Automation ensures your server configurations are backed up regularly without requiring your intervention, providing an essential safety net against data loss and configuration issues.</p>
+<p>Cron is a time-based job scheduler in Unix-like operating systems, including Ubuntu. It enables users to schedule commands or scripts to run automatically at specified intervals. The crontab (cron table) is a configuration file that contains the schedule of cron jobs with their respective commands. Each user on the system can have their own crontab file, and there’s also a system-wide crontab that requires root privileges to modify.</p>
+<section id="creating-automated-backup-jobs" class="level4">
+<h4 class="anchored" data-anchor-id="creating-automated-backup-jobs">Creating Automated Backup Jobs</h4>
+<p>Let’s schedule our configuration backup script to run automatically every week. First, we’ll open the crontab editor for the entire system. If you’re running a more robust system with various users and groups, you’ll probably want to use <code>crontab -e</code> to configure your user specific schedules. That being said, for the time being and because the system is configured, I’ll setup my cron jobs to be system-wide as well:</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Open the crontab file for the system</span></span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nano /etc/crontab</span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run configuration backup every Sunday at 10:00 PM</span></span>
+<span id="cb99-5"><a href="#cb99-5" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span> 22 <span class="pp">*</span> <span class="pp">*</span> 0 root /scripts/config_backup.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here’s a handy way to visualize the <code>crontab</code> syntax, with some explanations for each component down below. Note that we’re using the absolute path <code>/home/chris/scripts/config_backup.sh</code> rather than ./scripts/config_backup.sh. The absolute path starts from the root directory, making it work correctly regardless of the current working directory when cron executes the job as root. When cron runs your commands, it doesn’t necessarily use the same current or home directory you might expect, so absolute paths are more reliable.</p>
+<ul>
+<li><code>0</code>: - At minute 0</li>
+<li><code>22</code>: At 10 PM</li>
+<li><code>*</code>: Every day of the month</li>
+<li><code>*</code>: Every month</li>
+<li><code>0</code>: Only on Sunday (day 0)</li>
+<li><code>root</code>: Run the command as the root user</li>
+<li><code>sudo home/chris/scripts/config_backup.sh</code>: The command to execute</li>
+</ul>
+<pre class="plaintext"><code>┌───────────── minute (0-59)
+│ ┌───────────── hour (0-23)
+│ │  ┌───────────── day of the month (1-31)
+│ │  │ ┌───────────── month (1-12)
+│ │  │ │ ┌───────────── day of the week (0-6) (Sunday=0)
+│ │  │ │ │ ┌───────────── user to run the command as
+│ │  │ │ │ │                                   
+0 22 * * 0 root /scripts/config_backup.sh</code></pre>
+<p>You may also want to create a monthly backup job that you can use for a <code>/master</code> backup more consistent with your most recent development.</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add line to create a master backup on the 1st of every month at 4:00 AM</span></span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span> 4 1 <span class="pp">*</span> <span class="pp">*</span> root /home/chris/scripts/config_backup.sh <span class="kw">&amp;&amp;</span> <span class="fu">rsync</span> <span class="at">-a</span> /mnt/backups/configs/<span class="va">$(</span><span class="fu">date</span> +<span class="dt">\%</span>Y<span class="dt">\%</span>m<span class="dt">\%</span>d<span class="va">)</span>/ /mnt/backups/configs/master/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This job runs at 4:00 AM on the first day of each month, creating a regular backup and then copying it to the /mnt/backups/configs/master/ directory. The date command is escaped with backslashes (%) because crontab interprets percent signs specially. Finally, To prevent our backup drive from filling up, let’s add a job to automatically remove backups older than 90 days, except for the master backup:</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add this line to the system crontab</span></span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span> 23 <span class="pp">*</span> <span class="pp">*</span> 0 root find /mnt/backups/configs/ <span class="at">-maxdepth</span> 1 <span class="at">-type</span> d <span class="at">-name</span> <span class="st">"20*"</span> <span class="at">-mtime</span> +90 <span class="at">-not</span> <span class="at">-path</span> <span class="st">"*/master*"</span> <span class="at">-exec</span> rm <span class="at">-rf</span> {} <span class="dt">\;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>0 5 * * 0</code>: Run at 5:00 AM every Sunday</li>
+<li><code>find /mnt/backups/configs/</code>: Start searching in the configs directory</li>
+<li><code>-maxdepth 1</code>: Only look in the immediate directory, not subdirectories</li>
+<li><code>-type d</code>: Only look for directories</li>
+<li><code>-name "20*"</code>: Only match directories starting with “20” (our date-formatted directories)</li>
+<li><code>-mtime +90</code>: Only match items modified more than 90 days ago</li>
+<li><code>-not -path "*/master*"</code>: Exclude anything with “master” in the path</li>
+<li><code>-exec rm -rf {} \;</code>: Delete each matching directory</li>
+</ul>
+</section>
+<section id="verifying-jobs" class="level4">
+<h4 class="anchored" data-anchor-id="verifying-jobs">Verifying Jobs</h4>
+<p>Now, let’s verify that everything saved and works. First, close out of nano using <code>Ctrl+O</code> (write-out, or save) and <code>Ctrl+X</code> (Exit). Then let’s print the contents with <code>cat /etc/crontab</code>. You can also run the following:</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check cron service status</span></span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status cron</span>
+<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-4"><a href="#cb103-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View cron logs</span></span>
+<span id="cb103-5"><a href="#cb103-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> grep CRON /var/log/syslog</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>With these automated backup jobs in place, your Raspberry Pi server will maintain a regular backup schedule without manual intervention. The weekly backups provide recent restore points, while the monthly master backup ensures you always have a stable configuration to fall back on if needed. The cleanup job prevents your backup drive from running out of space over time.</p>
+</section>
 </section>
 </section>
 <section id="sec-change_boot_media" class="level2">
@@ -3481,11 +3545,9 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 </ul>
 <p>Think of this process like moving into a new house. You’ve already built the structure (partitioning), but now you need to move all your belongings (the operating system) into it, update your mailing address (boot configuration), and ensure everything works in the new location.</p>
 <p>The good news, we’ve already done most of the work required and what we haven’t is going to be something we did for the original boot device. We’ll first run a few commands from the server, do one thing on a different computer, and then we’ll be back to the server.</p>
-<ol type="1">
-<li>First, you’ll need to flash a fresh Ubuntu Server LTS image onto your newly partitioned SSD. This process will write the operating system files to the appropriate partitions you created. This should be done on your Raspberry Pi server.</li>
-</ol>
-<div class="sourceCode" id="cb99"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Before removing the SSD, check its device identifier one more time</span></span>
-<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> lsblk <span class="at">-o</span> NAME,SIZE,FSTYPE,LABEL,TYPE,MOUNTPOINT</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>1.</strong> First, you’ll need to flash a fresh Ubuntu Server LTS image onto your newly partitioned SSD. This process will write the operating system files to the appropriate partitions you created. This should be done on your Raspberry Pi server.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Before removing the SSD, check its device identifier one more time</span></span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> lsblk <span class="at">-o</span> NAME,SIZE,FSTYPE,LABEL,TYPE,MOUNTPOINT</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now you’ll need to use RPi Imager on your MacBook:</p>
 <ul>
 <li>Connect the SSD to your MacBook</li>
@@ -3501,30 +3563,26 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 </ul></li>
 </ul>
 <p>The reason we use identical settings is to reduce the amount of changes needed to replicate the environment we previously configured. Your SSH keys, user permissions, and network configurations will all match what we know works for an initial boot, eliminating the need to reconfigure everything from scratch.</p>
-<ol start="2" type="1">
-<li>Before making any hardware changes, we need to ensure all data is written to disk and all processes are safely terminated. This prevents corruption and data loss during the transition.</li>
-</ol>
-<div class="sourceCode" id="cb100"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save any unsaved work and exit all applications</span></span>
-<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure no important processes are running</span></span>
-<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sync all file system buffers to disk</span></span>
-<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sync</span>
-<span id="cb100-6"><a href="#cb100-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-7"><a href="#cb100-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for any open files on your current boot device (thumb drive)</span></span>
-<span id="cb100-8"><a href="#cb100-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> lsof <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-E</span> <span class="st">'^[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +FIFO'</span></span>
-<span id="cb100-9"><a href="#cb100-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-10"><a href="#cb100-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Display active processes to ensure nothing critical is running</span></span>
-<span id="cb100-11"><a href="#cb100-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> aux <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> <span class="st">'\['</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>2.</strong> Before making any hardware changes, we need to ensure all data is written to disk and all processes are safely terminated. This prevents corruption and data loss during the transition.</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save any unsaved work and exit all applications</span></span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure no important processes are running</span></span>
+<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sync all file system buffers to disk</span></span>
+<span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sync</span>
+<span id="cb105-6"><a href="#cb105-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-7"><a href="#cb105-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for any open files on your current boot device (thumb drive)</span></span>
+<span id="cb105-8"><a href="#cb105-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> lsof <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-E</span> <span class="st">'^[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +FIFO'</span></span>
+<span id="cb105-9"><a href="#cb105-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-10"><a href="#cb105-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Display active processes to ensure nothing critical is running</span></span>
+<span id="cb105-11"><a href="#cb105-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> aux <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> <span class="st">'\['</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>The <code>sync</code> command forces all pending disk writes to complete immediately. This is crucial because Linux uses write caching for performance, meaning data might still be in memory waiting to be written.</li>
 <li>The <code>lsof</code> command lists open files, helping you identify any processes that might be accessing the current boot device.</li>
 <li>The <code>ps aux</code> command shows all active processes, giving you a final check that nothing important is running.</li>
 </ul>
-<ol start="3" type="1">
-<li>A proper shutdown sequence ensures all services stop gracefully and file systems are cleanly unmounted:</li>
-</ol>
-<div class="sourceCode" id="cb101"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform a clean system shutdown</span></span>
-<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> shutdown <span class="at">-h</span> now</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>3.</strong> A proper shutdown sequence ensures all services stop gracefully and file systems are cleanly unmounted:</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform a clean system shutdown</span></span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> shutdown <span class="at">-h</span> now</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The shutdown command initiates a clean shutdown sequence. The <code>-h</code> flag tells the system to halt (power off) after shutdown. This is important because the system may not power off, especially on older systems—it could just bring it to single-user mode or runlevel 1, depending on configuration. While now indicates the shutdown should happen immediately. This command:</p>
 <ul>
 <li>Sends a termination signal to all running processes</li>
@@ -3532,9 +3590,7 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 <li>Unmounts all filesystems in the correct order</li>
 <li>Finally powers down the system</li>
 </ul>
-<ol start="4" type="1">
-<li>Now comes the physical hardware transition. With your Raspberry Pi powered off:</li>
-</ol>
+<p><strong>4.</strong> Now comes the physical hardware transition. With your Raspberry Pi powered off:</p>
 <ul>
 <li>Remove the thumb drive (current boot device)</li>
 <li>Connect the SSD via USB to the Raspberry Pi</li>
@@ -3542,28 +3598,24 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 <li>Ensure all connections are secure</li>
 </ul>
 <p>This step is straightforward but crucial. The Raspberry Pi will attempt to boot from the first bootable device it finds. By removing the thumb drive and connecting the SSD, we’re ensuring the Pi finds and uses the SSD as its boot device. We do not need to remove the SD card used for backups, because it never had an OS flashed onto it. The card’s file system just provides extra memory, instead of being an extra operating system.</p>
-<ol start="5" type="1">
-<li>Power on your Raspberry Pi and observe the boot process.</li>
-</ol>
+<p><strong>5.</strong> Power on your Raspberry Pi and observe the boot process.</p>
 <p>Make sure to connect your monitor and keyboard before the boto begins. The boot process should proceed similarly to your initial setup. The Raspberry Pi firmware reads the configuration from the SSD’s boot partition, loads the kernel, and then mounts the root filesystem. If everything works correctly, you should see the familiar Ubuntu Server boot messages and eventually reach a login prompt.</p>
 <p><strong>Good news,</strong> you won’t need to do this again (for this server). After this, you’ll have your core system, memory, and configurations complete.</p>
-<ol start="6" type="1">
-<li>After booting, you’ll need to log in directly to the Raspberry Pi using a keyboard and monitor. This is because the SSH service may not be running automatically on the fresh installation.</li>
-</ol>
+<p><strong>6.</strong> After booting, you’ll need to log in directly to the Raspberry Pi using a keyboard and monitor. This is because the SSH service may not be running automatically on the fresh installation.</p>
 <ul>
 <li>Connect a keyboard and monitor to your Raspberry Pi</li>
 <li>Log in with your username and password</li>
 <li>Start the SSH service manually:</li>
 </ul>
-<div class="sourceCode" id="cb102"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start the SSH service to enable remote connections</span></span>
-<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl start ssh</span>
-<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the service is running</span></span>
-<span id="cb102-5"><a href="#cb102-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status ssh</span>
-<span id="cb102-6"><a href="#cb102-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb102-7"><a href="#cb102-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Test a remote connection from your client machine</span></span>
-<span id="cb102-8"><a href="#cb102-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Test SSH connection (initially with password authentication)</span></span>
-<span id="cb102-9"><a href="#cb102-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> chris@192.168.1.151</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start the SSH service to enable remote connections</span></span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl start ssh</span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the service is running</span></span>
+<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status ssh</span>
+<span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-7"><a href="#cb107-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Test a remote connection from your client machine</span></span>
+<span id="cb107-8"><a href="#cb107-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Test SSH connection (initially with password authentication)</span></span>
+<span id="cb107-9"><a href="#cb107-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> chris@192.168.1.151</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>You’ll need to specify the local IP because none of the ssh configs are updated yet
 <ul>
@@ -3572,54 +3624,48 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 </ul></li>
 <li>If this is working and you can remotely connect, then we can move on to the next step</li>
 </ul>
-<ol start="7" type="1">
-<li>With SSH access established, transfer your configuration backup and restore scripts from your computer to the Raspberry Pi:</li>
-</ol>
+<p><strong>7.</strong> With SSH access established, transfer your configuration backup and restore scripts from your computer to the Raspberry Pi:</p>
 <p>First, make sure to create the directory, because it won’t exist on a fresh boot. The, from your client computer, a MacBook in my case, you’ll run the <code>rsync</code> commands to move the master backup and scripts. Notice that you can use either the <code>~</code> shortcut to denote your home directory, or write the path explicitly. We’ll also need to move the master backup to the proper backup directory, so the restore script works properly.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On the Raspberry Pi, create the backup directory structure</span></span>
-<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /mnt/backups/configs/</span>
-<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb103-4"><a href="#cb103-4" aria-hidden="true" tabindex="-1"></a><span class="co"># From your MacBook, copy your backup files to the Pi</span></span>
-<span id="cb103-5"><a href="#cb103-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-avz</span> ~/path/to/backups/configs/master chris@ubuntu-pi-server:/home/chris/</span>
-<span id="cb103-6"><a href="#cb103-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb103-7"><a href="#cb103-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy your restore script to the Pi</span></span>
-<span id="cb103-8"><a href="#cb103-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-avz</span> ~/path/to/scripts/config_restore.sh chris@ubuntu-pi-server:~/scripts/</span>
-<span id="cb103-9"><a href="#cb103-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb103-10"><a href="#cb103-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Move the master backup directory to the correct location</span></span>
-<span id="cb103-11"><a href="#cb103-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mv /home/chris/master /mnt/backups/configs/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="8" type="1">
-<li>Run the Configuration Restore Script</li>
-</ol>
-<div class="sourceCode" id="cb104"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure the script is executable</span></span>
-<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x ~/scripts/config_restore.sh</span>
-<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the restore script</span></span>
-<span id="cb104-5"><a href="#cb104-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./scripts/config_restore.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="9" type="1">
-<li>Verify the System</li>
-</ol>
-<div class="sourceCode" id="cb105"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the root filesystem device</span></span>
-<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span> /</span>
-<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the microSD card is mounted properly</span></span>
-<span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span> /mnt/backups</span>
-<span id="cb105-6"><a href="#cb105-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-7"><a href="#cb105-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that your backup files are accessible</span></span>
-<span id="cb105-8"><a href="#cb105-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /mnt/backups/configs/</span>
-<span id="cb105-9"><a href="#cb105-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-10"><a href="#cb105-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify your network settings</span></span>
-<span id="cb105-11"><a href="#cb105-11" aria-hidden="true" tabindex="-1"></a><span class="ex">ip</span> addr show</span>
-<span id="cb105-12"><a href="#cb105-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-13"><a href="#cb105-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Check System configurations</span></span>
-<span id="cb105-14"><a href="#cb105-14" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status ssh</span>
-<span id="cb105-15"><a href="#cb105-15" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status ufw</span>
-<span id="cb105-16"><a href="#cb105-16" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status fail2ban</span>
-<span id="cb105-17"><a href="#cb105-17" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status systemd-networkd</span>
-<span id="cb105-18"><a href="#cb105-18" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status wpa_supplicant@wlan0.service</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On the Raspberry Pi, create the backup directory structure</span></span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /mnt/backups/configs/</span>
+<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a><span class="co"># From your MacBook, copy your backup files to the Pi</span></span>
+<span id="cb108-5"><a href="#cb108-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-avz</span> ~/path/to/backups/configs/master chris@ubuntu-pi-server:/home/chris/</span>
+<span id="cb108-6"><a href="#cb108-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-7"><a href="#cb108-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy your restore script to the Pi</span></span>
+<span id="cb108-8"><a href="#cb108-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-avz</span> ~/path/to/scripts/config_restore.sh chris@ubuntu-pi-server:~/scripts/</span>
+<span id="cb108-9"><a href="#cb108-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-10"><a href="#cb108-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Move the master backup directory to the correct location</span></span>
+<span id="cb108-11"><a href="#cb108-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mv /home/chris/master /mnt/backups/configs/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>8.</strong> Run the Configuration Restore Script</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure the script is executable</span></span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x ~/scripts/config_restore.sh</span>
+<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-4"><a href="#cb109-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the restore script</span></span>
+<span id="cb109-5"><a href="#cb109-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./scripts/config_restore.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>9.</strong> Verify the System</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the root filesystem device</span></span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span> /</span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-4"><a href="#cb110-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the microSD card is mounted properly</span></span>
+<span id="cb110-5"><a href="#cb110-5" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span> /mnt/backups</span>
+<span id="cb110-6"><a href="#cb110-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-7"><a href="#cb110-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that your backup files are accessible</span></span>
+<span id="cb110-8"><a href="#cb110-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /mnt/backups/configs/</span>
+<span id="cb110-9"><a href="#cb110-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-10"><a href="#cb110-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify your network settings</span></span>
+<span id="cb110-11"><a href="#cb110-11" aria-hidden="true" tabindex="-1"></a><span class="ex">ip</span> addr show</span>
+<span id="cb110-12"><a href="#cb110-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-13"><a href="#cb110-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Check System configurations</span></span>
+<span id="cb110-14"><a href="#cb110-14" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status ssh</span>
+<span id="cb110-15"><a href="#cb110-15" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status ufw</span>
+<span id="cb110-16"><a href="#cb110-16" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status fail2ban</span>
+<span id="cb110-17"><a href="#cb110-17" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status systemd-networkd</span>
+<span id="cb110-18"><a href="#cb110-18" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status wpa_supplicant@wlan0.service</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>df -h /</code> command shows disk usage statistics for the root filesystem, including which device it’s mounted from. You should see <code>/dev/sdb2</code> (or similar) listed as the root device, and <code>/dev/sdb1</code> as the boot device, not the thumb drive identifier you used before. You’ll see a similar output, just focused on your <code>/backups</code> directory when running the second command. The <code>ls -la</code> command shows you all of the contents of a directory, as well as the permissions. The other commands you should be familiar with by now.</p>
 </section>
-<section id="final-thoughts-1" class="level3">
-<h3 class="anchored" data-anchor-id="final-thoughts-1">Final Thoughts</h3>
+<section id="final-thoughts" class="level3">
+<h3 class="anchored" data-anchor-id="final-thoughts">Final Thoughts</h3>
 <p>Our Ubuntu Raspberry Pi Server is now booting from the SSD, and all your previous configurations have been restored. You may notice that on reboot, running <code>sudo lsblk</code> will show your SSD under a different This configuration provides a solid foundation for the more advanced server features we’ll implement in the next sections. By moving to SSD boot, we’ve significantly improved our server’s performance profile. SSDs offer several advantages over traditional storage media:</p>
 <ul>
 <li><strong>Faster boot times:</strong> Your Raspberry Pi will start much more quickly</li>
@@ -3628,6 +3674,33 @@ The tool will ask for the current passphrase before removing it.</code></pre>
 <li><strong>Lower power consumption:</strong> SSDs typically use less power than traditional hard drives</li>
 </ul>
 <p>The transition to SSD boot also aligns with modern server practices, where solid-state storage is becoming the standard for production environments. This configuration will serve us well as we expand into containerization with Docker and orchestration with Kubernetes.</p>
+<p>The last thing to do, is give your Raspberry Pi some decency. Now, I’ll attach the fan and case to the Raspberry Pi, so it’ll be ready to run 24/7. This is a straightforward process, but I needed the internet’s help to figure out which cables connected to which pin.</p>
+<ol type="1">
+<li>Safely shutdown your server, and unplug everything.</li>
+</ol>
+<p><img src="images/naked_board.jpg" class="img-fluid"></p>
+<ol start="2" type="1">
+<li>Insert the fan into the case.</li>
+</ol>
+<p><img src="images/fan_inserted.jpg" class="img-fluid"></p>
+<ol start="3" type="1">
+<li>Insert the board, with the SD Card inserted, into the case.</li>
+</ol>
+<p><img src="images/board_fan_inserted.jpg" class="img-fluid"></p>
+<ol start="4" type="1">
+<li>Connect the <em>Red Wire</em> to Pin 4 (5V), <em>Black Wire</em> to Pin 6 (GND), and the <em>Blue Wire</em> to Pin 8 (GPIO14)</li>
+</ol>
+<p><img src="images/pins_4_6_8.jpg" class="img-fluid"></p>
+<ol start="5" type="1">
+<li>Make sure everything is all set, if you are passionate about wire management, you can probably make it prettier than I did.</li>
+</ol>
+<p><img src="images/pins_board_connected.jpg" class="img-fluid"></p>
+<ol start="6" type="1">
+<li>Admire your handsome server</li>
+</ol>
+<p><img src="images/decent_server.jpg" class="img-fluid"></p>
+<p>Now, we’re ready to move on to some of the fun stuff. If youre fan didn’t turn on right away, try these troubleshooting steps:</p>
+<p><strong>FINISH</strong></p>
 </section>
 </section>
 <section id="sec-remote_vs_code" class="level2">

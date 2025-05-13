@@ -2,7 +2,7 @@
 title: "Guide to Setting Up Raspberry Pi for Data Engineering and Virtualization Projects"
 author: "Chris Kornaros"
 date: 2024-12-29
-categories: ["Research", "Ongoing"]
+categories: ["Guide", "Ongoing"]
 tags: ["Architecture", "Systems", "Design", "Open Source", "Raspberry Pi", "Linux", "bash", "ssh", "ufw", "fail2ban", "Cybersecurity", "Networking", "Backup and Recovery", "RPi Imager", "gparted", "MicroSD Card", "SSD", "Partitioning", "Docker", "Kubernetes", "Spark"] 
 ---
 
@@ -18,160 +18,160 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
 
 ### Guide Outline
 
-1. [Introduction](@sec-introduction)
+1. **Introduction**
 
    - Purpose and scope of the guide
    - What you'll learn and build
    - Prerequisites and assumptions
 
-2. [Initial Setup](@sec-setup)
+2. **Initial Setup**
 
-   - [Hardware Requirements](@sec-hardware_requirements)
+   - **Hardware Requirements**
      - Raspberry Pi 4 specifications
      - Storage devices (Thumbdrive, SSD, microSD cards)
      - Accessories and peripherals (Keyboard, monitor, etc.)
-   - [Image Requirements](@sec-image_requirements)
+   - **Image Requirements**
      - Selecting and downloading Ubuntu Server LTS
      - Using Raspberry Pi Imager
      - Initial configuration options
-   - [Get Started](@sec-get_started)
+   - **Get Started**
      - The physical setup of the Raspberry Pi, what to plug in, where, etc.
      - What to expect as things turn on
 
-3. [Linux Server Basics](@sec-linux_basics)
+3. **Linux Server Basics**
 
-   - [First Boot Process](@sec-first_boot)
+   - **First Boot Process**
      - Connection and startup
      - Understanding initialization
-   - [Service Management with systemd](@sec-systemd)
+   - **Service Management with systemd**
      - Understanding systemd units and targets
      - Basic service commands
-   - [Understanding Your Home Directory](@sec-home_directory)
+   - **Understanding Your Home Directory**
      - Shell configuration files
      - Hidden application directories
-   - [The Root Filesystem](@sec-root_filesystem)
+   - **The Root Filesystem**
      - Filesystem Hierarchy Standard (FHS)
      - Key directories and their purposes
-   - [User and Group Permissions](@sec-permissions)
+   - **User and Group Permissions**
      - Basic permission concepts
      - chmod and chown usage
      - Understanding advanced permissions
 
-4. [Networking Basics](@sec-network)
+4. **Networking Basics**
 
-   - [Computer Networking Basics](@sec-network_basics)
+   - **Computer Networking Basics**
      - OSI and TCP/IP models
      - Key networking protocols
-   - [Network Connections](@sec-network_connections)
+   - **Network Connections**
      - Wired vs wireless configurations
      - Understanding IP addressing
-   - [Ubuntu Server Networking Tools](@sec-ubuntu_server_network_tools)
+   - **Ubuntu Server Networking Tools**
      - Testing connectivity
      - Viewing network statistics
-   - [systemd-networkd](@sec-systemd_networkd)
+   - **systemd-networkd**
      - Configuration file structure
      - Wired and wireless setup
-   - [Converting Netplan to networkd](@sec-netplan_to_networkd)
+   - **Converting Netplan to networkd**
      - Why and how to transition
      - Troubleshooting network issues
-   - [Advanced Networking](@sec-advanced_networking)
+   - **Advanced Networking**
      - Subnets and routing
      - Security considerations
 
-5. [SSH (Secure Shell)](@sec-ssh)
+5. **SSH (Secure Shell)**
 
-   - [SSH Basics](@sec-ssh_basics)
+   - **SSH Basics**
      - Client vs server setup
      - Key-based authentication
-   - [Key-Based Authentication](@sec-ssh_keys)
+   - **Key-Based Authentication**
      - Types of SSH key encryption
      - Generating keys
      - Installing the public key
-   - [Server-Side SSH Configuration](@sec-ssh_config_server)
+   - **Server-Side SSH Configuration**
      - Host keys and security options
      - Optimizing for security
-   - [Client-Side Configuration](@sec-ssh_config_client)
+   - **Client-Side Configuration**
      - Setting up SSH config
      - Managing known hosts
-   - [Additional Security Measures](@sec-ssh_security)
+   - **Additional Security Measures**
      - Firewall configuration with UFW
      - Intrusion prevention with Fail2Ban
-   - [Secure File Transfers](@sec-scp_rsync)
+   - **Secure File Transfers**
      - Using SCP (Secure Copy Protocol)
      - Using rsync for efficient transfers
 
-6. [Partitions](@sec-partitions)
+6. **Partitions**
 
-   - [Partitioning Basics](@sec-partition_basics)
+   - **Partitioning Basics**
      - Understanding partition tables and types
      - Filesystem options and considerations
-   - [Partitioning Tools](@sec-partition_tools)
+   - **Partitioning Tools**
      - Using parted and other utilities
-   - [Partitioning for Backups](@sec-partition_for_backups)
+   - **Partitioning for Backups**
      - Setting up microSD cards
      - Mount points and fstab configuration
-   - [Partitioning your SSD](@sec-partition_ssd)
+   - **Partitioning your SSD**
      - Boot and root partitions
      - Formatting and preparation
-   - [Advanced Partitioning](@sec-partition_advanced)
+   - **Advanced Partitioning**
      - Monitoring usage
      - Resizing partitions
 
-7. [Backups and Basic Automation](@sec-backups)
+7. **Backups and Basic Automation**
    
-   - [Backup Basics](@sec-backups_basics)
+   - **Backup Basics**
      - Directory structure and permissions
-   - [Configuration Files Backup](@sec-backups_configs)
+   - **Configuration Files Backup**
      - Using rsync for system configurations
      - Remote transfers of backups
-   - [Restoring from Backup](@sec-backups_restore)
+   - **Restoring from Backup**
      - Creating restoration scripts
      - Testing recovery procedures
 
-8. [Changing Your Boot Media Device](@sec-change_boot_media)
+8. **Changing Your Boot Media Device**
 
-   - [Boot Configuration Transition](@sec-boot_transition)
+   - **Boot Configuration Transition**
      - Flashing OS to new media
      - Proper shutdown procedures
      - Physically changing boot devices
      - Testing the new boot configuration
      - Restoring configurations
 
-9. [Remote Development with VS Code](@sec-remote_with_vs_code)
+9. **Remote Development with VS Code**
 
    - Setting Up VS Code Remote SSH
    - Managing Remote Projects
    - Debugging and Terminal Integration
 
-10. [Monitoring and Maintenance](@sec-monitor_maintain)
+10. **Monitoring and Maintenance**
 
-    - [Monitoring Basics](@sec-monitor_basics) 
+    - **Monitoring Basics** 
       - `smartmon`, `vcgencmd`
       - Resolving SSD health issues
-    - [Security Updates and Patching](@sec-monitor_patching)
+    - **Security Updates and Patching**
       - Preventetive Measures
       - System patching schedules
-    - [Log Management](@sec-monitor_logs)
+    - **Log Management**
       - Log basics
       - Management tools and strategy
 
-11. [Containerization with Docker](@sec-docker)
+11. **Containerization with Docker**
 
-    - [Containerization and Virtualization Basics](@sec-docker_basics)
-    - [Docker Installation and Setup](@sec-docker_setup)
-    - [Creating Images with Dockerfile](@sec-docker_images)
-    - [Managing Images and Containers](@sec-docker_manage)
-    - [Docker Compose for Multi-container Applications](@sec-docker_compose)
-    - [CI/CD Integration](@sec-docker_ci_cd)
+    - **Containerization and Virtualization Basics**
+    - **Docker Installation and Setup**
+    - **Creating Images with Dockerfile**
+    - **Managing Images and Containers**
+    - **Docker Compose for Multi-container Applications**
+    - **CI/CD Integration**
 
-12. [Container Orchestration with Kubernetes](@sec-kubernetes)
+12. **Container Orchestration with Kubernetes**
 
-    - [Orchestration Basics](@sec-kubernetes_basics)
-    - [Kubernetes Concepts, Installation, and Setup](@sec-kubernetes_setup)
-    - [Setting Up a Kubernetes Cluster](@sec-kubernetes_cluster)
-    - [Deployment Strategies](@sec-kubernetes_deployment)
-    - [Managing Resources](@sec-kubernetes_resources)
-    - [Scaling Applications](@sec-kubernetes_scaling)
+    - **Orchestration Basics**
+    - **Kubernetes Concepts, Installation, and Setup**
+    - **Setting Up a Kubernetes Cluster**
+    - **Deployment Strategies**
+    - **Managing Resources**
+    - **Scaling Applications**
 
 
 
@@ -1662,13 +1662,11 @@ Once we have SSH setup, configured, and secured, we'll use a feature in VS Code 
 **SSH Security and Tools:**
 
 - **Port Forwarding:** The ability to tunnel network connections through an SSH connection.
-- **X11 Forwarding:** A mechanism for securely running graphical applications over a network.
 - **SSH Tunnel:** An encrypted network connection established through SSH.
 - **SCP (Secure Copy Protocol):** A means of securely transferring files between hosts based on SSH.
 - **SFTP (SSH File Transfer Protocol):** A secure file transfer protocol that operates over SSH.
 - **UFW (Uncomplicated Firewall):** A simplified firewall management interface for iptables.
 - **Fail2Ban:** An intrusion prevention software that protects servers from brute-force attacks.
-- **Bastion Host:** A special-purpose server designed to withstand attacks, situated outside the firewall.
 
 ### SSH Basics {#sec-ssh_basics}
 #### SSH Client vs Server Configuration
@@ -2714,6 +2712,10 @@ mkdir -p "$BACKUP_DIR"
     # 11. Filesystem Table (fstab)
     echo "Backing up filesystem table (fstab)..."
     sudo rsync -aAXv /etc/fstab "$BACKUP_DIR/fstab.bak"
+    
+    # 12. Backup Package List
+    echo "Backing up package list..."
+    dpkg --get-selections > "$BACKUP_DIR/package_list.txt"
 
     # Set appropriate permissions
     echo "Configuring backup directory permissions..."
@@ -2744,6 +2746,11 @@ The rsync commands use several important options:
 - `--one-file-system`: Don't cross filesystem boundaries
 - `--hard-links`: Preserve hard links
 - `--exclude`: Skip specified directories
+
+The package backup commands use specific flags as well:
+
+- `dpkg --get-selections`: outputs a list of all packages and their status (installed, deinstall, purge)
+- This creates a complete snapshot of your system's package state
 
 #### Remote Transfers of Backups
 
@@ -2854,12 +2861,11 @@ echo "Restoring filesystem table (fstab)..."
 [ -f "$BACKUP_DIR/fstab.bak" ] && rsync -a "$BACKUP_DIR/fstab.bak" /etc/fstab
 
 # 7. Restore Package List
-#echo "Reinstalling packages from backup..."
-#if [ -f "$BACKUP_DIR/package_list.txt" ]; then
-#    apt-get update && apt-get install -y dselect
-#    dpkg --set-selections < "$BACKUP_DIR/package_list.txt"
-#    apt-get dselect-upgrade -y
-#fi
+echo "Reinstalling packages from backup..."
+if [ -f "$BACKUP_DIR/package_list.txt" ]; then
+    apt-get update && apt-get install -y dselect
+    dpkg --set-selections < "$BACKUP_DIR/package_list.txt"
+    apt-get dselect-upgrade -y
 
 # Restart services
 systemctl restart systemd-networkd wpa_supplicant@wlan0.service ssh ufw fail2ban 
@@ -2888,7 +2894,12 @@ You probably have some questions about the script let me explain some of the dec
 - Fourth, `fail2ban` does the same by improving security
 - Fifth, restoring the network configurations, originally, I had issues because `networkd` wasn't included
   - This block ensures all of the `systemd` configurations are included
-- Sixth **Package List TBD**
+- Sixth, restoring the Filesystem Table (`fstab`)
+  - This is easy, since `fstab` is already a file, we just overwrite what's there
+- Seventh, package restoration
+  - `dpkg --set-selections`: takes the saved list and marks packages for installation or removal
+  - `apt-get dselect-upgrade`: then acts on these selections to install missing packages
+  - The `dselect` tool is installed first because it's needed for the upgrade process
 - Then, the specific services we modified are all explicitly started
   - While developing this, some of the services wouldn't necessarily start, so I would run into network or ssh issues post-reboot
 - Finally, the script asks you to `reboot` your system so all of the changes take affect
@@ -2901,14 +2912,78 @@ chmod +x /scripts/config_restore.sh
 sudo ./scripts/config_restore.sh
 ```
 
-### Final Thoughts
-At the time of writing this, I've tested and revised everything up until this point. There are a few things I haven't added yet, that I want to later, once it's necessary. 
+### Automating Backups with Crontab {#sec-backups_crontab}
+Now that we have both backup and restore scripts in place, the next step is to automate the backup process. Manual backups are valuable but prone to human error, we might forget to run them-- or run them inconsistently. Automation ensures your server configurations are backed up regularly without requiring your intervention, providing an essential safety net against data loss and configuration issues.
 
-1. Saving the installed packages and their requirements, similar to a `uv` lockfile or `.venv` requirements.txt file.
-   1. Modify the restore script to restore packages to exactly where they should be
-   2. Not necessary now, because only Traceroute, ufw, and fail2ban were installed; however, when other apps are added this will be helpful for tracking dependencies and versioning issues
-2. Creating a private repoistory for storing configuration files, scripts, etc. and then using that, rather than rsync with my laptop
-3. Do some more granular network configurations, inlcuding subnets and static IPs
+Cron is a time-based job scheduler in Unix-like operating systems, including Ubuntu. It enables users to schedule commands or scripts to run automatically at specified intervals. The crontab (cron table) is a configuration file that contains the schedule of cron jobs with their respective commands. Each user on the system can have their own crontab file, and there's also a system-wide crontab that requires root privileges to modify.
+
+#### Creating Automated Backup Jobs
+Let's schedule our configuration backup script to run automatically every week. First, we'll open the crontab editor for the entire system. If you're running a more robust system with various users and groups, you'll probably want to use `crontab -e` to configure your user specific schedules. That being said, for the time being and because the system is configured, I'll setup my cron jobs to be system-wide as well:
+
+```bash
+# Open the crontab file for the system
+sudo nano /etc/crontab
+
+# Run configuration backup every Sunday at 10:00 PM
+0 22 * * 0 root /scripts/config_backup.sh
+```
+
+Here's a handy way to visualize the `crontab` syntax, with some explanations for each component down below. Note that we're using the absolute path `/home/chris/scripts/config_backup.sh` rather than ./scripts/config_backup.sh. The absolute path starts from the root directory, making it work correctly regardless of the current working directory when cron executes the job as root. When cron runs your commands, it doesn't necessarily use the same current or home directory you might expect, so absolute paths are more reliable.
+
+- `0`: - At minute 0
+- `22`: At 10 PM
+- `*`: Every day of the month
+- `*`: Every month
+- `0`: Only on Sunday (day 0)
+- `root`: Run the command as the root user
+- `sudo home/chris/scripts/config_backup.sh`: The command to execute
+
+```plaintext
+┌───────────── minute (0-59)
+│ ┌───────────── hour (0-23)
+│ │  ┌───────────── day of the month (1-31)
+│ │  │ ┌───────────── month (1-12)
+│ │  │ │ ┌───────────── day of the week (0-6) (Sunday=0)
+│ │  │ │ │ ┌───────────── user to run the command as
+│ │  │ │ │ │                                   
+0 22 * * 0 root /scripts/config_backup.sh
+```
+
+You may also want to create a monthly backup job that you can use for a `/master` backup more consistent with your most recent development. 
+
+```bash
+# Add line to create a master backup on the 1st of every month at 4:00 AM
+0 4 1 * * root /home/chris/scripts/config_backup.sh && rsync -a /mnt/backups/configs/$(date +\%Y\%m\%d)/ /mnt/backups/configs/master/
+```
+
+This job runs at 4:00 AM on the first day of each month, creating a regular backup and then copying it to the /mnt/backups/configs/master/ directory. The date command is escaped with backslashes (\%) because crontab interprets percent signs specially. Finally, To prevent our backup drive from filling up, let's add a job to automatically remove backups older than 90 days, except for the master backup:
+
+```bash
+# Add this line to the system crontab
+0 23 * * 0 root find /mnt/backups/configs/ -maxdepth 1 -type d -name "20*" -mtime +90 -not -path "*/master*" -exec rm -rf {} \;
+```
+
+- `0 5 * * 0`: Run at 5:00 AM every Sunday
+- `find /mnt/backups/configs/`: Start searching in the configs directory
+- `-maxdepth 1`: Only look in the immediate directory, not subdirectories
+- `-type d`: Only look for directories
+- `-name "20*"`: Only match directories starting with "20" (our date-formatted directories)
+- `-mtime +90`: Only match items modified more than 90 days ago
+- `-not -path "*/master*"`: Exclude anything with "master" in the path
+- `-exec rm -rf {} \;`: Delete each matching directory
+
+#### Verifying Jobs
+Now, let's verify that everything saved and works. First, close out of nano using `Ctrl+O` (write-out, or save) and `Ctrl+X` (Exit). Then let's print the contents with `cat /etc/crontab`. You can also run the following:
+
+```bash
+# Check cron service status
+sudo systemctl status cron
+
+# View cron logs
+sudo grep CRON /var/log/syslog
+```
+
+With these automated backup jobs in place, your Raspberry Pi server will maintain a regular backup schedule without manual intervention. The weekly backups provide recent restore points, while the monthly master backup ensures you always have a stable configuration to fall back on if needed. The cleanup job prevents your backup drive from running out of space over time.
 
 ## Changing Your Boot Media Device {#sec-change_boot_media}
 ### Key Terms
@@ -2954,7 +3029,7 @@ Think of this process like moving into a new house. You've already built the str
 
 The good news, we've already done most of the work required and what we haven't is going to be something we did for the original boot device. We'll first run a few commands from the server, do one thing on a different computer, and then we'll be back to the server.
 
-1. First, you'll need to flash a fresh Ubuntu Server LTS image onto your newly partitioned SSD. This process will write the operating system files to the appropriate partitions you created. This should be done on your Raspberry Pi server.
+**1.** First, you'll need to flash a fresh Ubuntu Server LTS image onto your newly partitioned SSD. This process will write the operating system files to the appropriate partitions you created. This should be done on your Raspberry Pi server.
 
 ```bash
 # Before removing the SSD, check its device identifier one more time
@@ -2975,7 +3050,7 @@ Now you'll need to use RPi Imager on your MacBook:
 
 The reason we use identical settings is to reduce the amount of changes needed to replicate the environment we previously configured. Your SSH keys, user permissions, and network configurations will all match what we know works for an initial boot, eliminating the need to reconfigure everything from scratch.
 
-2. Before making any hardware changes, we need to ensure all data is written to disk and all processes are safely terminated. This prevents corruption and data loss during the transition.
+**2.** Before making any hardware changes, we need to ensure all data is written to disk and all processes are safely terminated. This prevents corruption and data loss during the transition.
 
 
 ```bash
@@ -2996,7 +3071,7 @@ ps aux | grep -v '\['
 - The `lsof` command lists open files, helping you identify any processes that might be accessing the current boot device.
 - The `ps aux` command shows all active processes, giving you a final check that nothing important is running.
 
-3. A proper shutdown sequence ensures all services stop gracefully and file systems are cleanly unmounted:
+**3.** A proper shutdown sequence ensures all services stop gracefully and file systems are cleanly unmounted:
 
 ```bash
 # Perform a clean system shutdown
@@ -3010,7 +3085,7 @@ The shutdown command initiates a clean shutdown sequence. The `-h` flag tells th
 - Unmounts all filesystems in the correct order
 - Finally powers down the system
 
-4. Now comes the physical hardware transition. With your Raspberry Pi powered off:
+**4.** Now comes the physical hardware transition. With your Raspberry Pi powered off:
 
 - Remove the thumb drive (current boot device)
 - Connect the SSD via USB to the Raspberry Pi
@@ -3019,13 +3094,13 @@ The shutdown command initiates a clean shutdown sequence. The `-h` flag tells th
 
 This step is straightforward but crucial. The Raspberry Pi will attempt to boot from the first bootable device it finds. By removing the thumb drive and connecting the SSD, we're ensuring the Pi finds and uses the SSD as its boot device. We do not need to remove the SD card used for backups, because it never had an OS flashed onto it. The card's file system just provides extra memory, instead of being an extra operating system.
 
-5. Power on your Raspberry Pi and observe the boot process. 
+**5.** Power on your Raspberry Pi and observe the boot process. 
 
 Make sure to connect your monitor and keyboard before the boto begins. The boot process should proceed similarly to your initial setup. The Raspberry Pi firmware reads the configuration from the SSD's boot partition, loads the kernel, and then mounts the root filesystem. If everything works correctly, you should see the familiar Ubuntu Server boot messages and eventually reach a login prompt.
 
 **Good news,** you won't need to do this again (for this server). After this, you'll have your core system, memory, and configurations complete.
 
-6. After booting, you'll need to log in directly to the Raspberry Pi using a keyboard and monitor. This is because the SSH service may not be running automatically on the fresh installation.
+**6.** After booting, you'll need to log in directly to the Raspberry Pi using a keyboard and monitor. This is because the SSH service may not be running automatically on the fresh installation.
 
 - Connect a keyboard and monitor to your Raspberry Pi
 - Log in with your username and password
@@ -3048,7 +3123,7 @@ ssh chris@192.168.1.151
   - The local IP may be a different one in the 192.168.0.0/16 range (which is reserved for local IPs)
 - If this is working and you can remotely connect, then we can move on to the next step
 
-7. With SSH access established, transfer your configuration backup and restore scripts from your computer to the Raspberry Pi:
+**7.** With SSH access established, transfer your configuration backup and restore scripts from your computer to the Raspberry Pi:
 
 First, make sure to create the directory, because it won't exist on a fresh boot. The, from your client computer, a MacBook in my case, you'll run the `rsync` commands to move the master backup and scripts. Notice that you can use either the `~` shortcut to denote your home directory, or write the path explicitly. We'll also need to move the master backup to the proper backup directory, so the restore script works properly.
 
@@ -3066,7 +3141,7 @@ rsync -avz ~/path/to/scripts/config_restore.sh chris@ubuntu-pi-server:~/scripts/
 sudo mv /home/chris/master /mnt/backups/configs/
 ```
 
-8. Run the Configuration Restore Script
+**8.** Run the Configuration Restore Script
 
 ```bash
 # Make sure the script is executable
@@ -3076,7 +3151,7 @@ chmod +x ~/scripts/config_restore.sh
 sudo ./scripts/config_restore.sh
 ```
 
-9. Verify the System
+**9.** Verify the System
 
 ```bash
 # Verify the root filesystem device
@@ -3110,6 +3185,36 @@ Our Ubuntu Raspberry Pi Server is now booting from the SSD, and all your previou
 - **Lower power consumption:** SSDs typically use less power than traditional hard drives
   
 The transition to SSD boot also aligns with modern server practices, where solid-state storage is becoming the standard for production environments. This configuration will serve us well as we expand into containerization with Docker and orchestration with Kubernetes.
+
+The last thing to do, is give your Raspberry Pi some decency. Now, I'll attach the fan and case to the Raspberry Pi, so it'll be ready to run 24/7. This is a straightforward process, but I needed the internet's help to figure out which cables connected to which pin. 
+
+1. Safely shutdown your server, and unplug everything.
+
+![](images/naked_board.jpg)
+
+2. Insert the fan into the case.
+   
+![](images/fan_inserted.jpg)
+
+3. Insert the board, with the SD Card inserted, into the case.
+   
+![](images/board_fan_inserted.jpg)
+
+4. Connect the *Red Wire* to Pin 4 (5V), *Black Wire* to Pin 6 (GND), and the *Blue Wire* to Pin 8 (GPIO14)
+   
+![](images/pins_4_6_8.jpg)
+
+5. Make sure everything is all set, if you are passionate about wire management, you can probably make it prettier than I did.
+   
+![](images/pins_board_connected.jpg)
+
+6. Admire your handsome server
+
+![](images/decent_server.jpg)
+
+Now, we're ready to move on to some of the fun stuff. If youre fan didn't turn on right away, try these troubleshooting steps:
+
+**FINISH**
 
 ## Remote Development with VS Code {#sec-remote_vs_code}
 ### Key Terms
