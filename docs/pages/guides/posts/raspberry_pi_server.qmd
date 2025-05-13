@@ -2925,7 +2925,7 @@ Let's schedule our configuration backup script to run automatically every week. 
 sudo nano /etc/crontab
 
 # Run configuration backup every Sunday at 10:00 PM
-0 22 * * 0 root /scripts/config_backup.sh
+0 22 * * 0 root /home/chris/scripts/config_backup.sh
 ```
 
 Here's a handy way to visualize the `crontab` syntax, with some explanations for each component down below. Note that we're using the absolute path `/home/chris/scripts/config_backup.sh` rather than ./scripts/config_backup.sh. The absolute path starts from the root directory, making it work correctly regardless of the current working directory when cron executes the job as root. When cron runs your commands, it doesn't necessarily use the same current or home directory you might expect, so absolute paths are more reliable.
