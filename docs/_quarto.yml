@@ -73,22 +73,9 @@ website:
         - pages/projects/projects.qmd
         - section: "Data Engineering and Architecture"
           href: pages/projects/data_engineering/data_engineering.qmd
-          contents:
-            - text: "Bank Marketing ETL"
-              href: pages/projects/data_engineering/posts/bank_etl.qmd
-            - text: "Open Source Data and Analytics Architecture"
-              href: pages/projects/data_engineering/posts/oss_data_arch.qmd
-            - text: "Basic Open Source Architecture"
-              href: pages/projects/data_engineering/posts/basic_oss.qmd 
         - section: "Data Science and Machine Learning"
           href: pages/projects/data_science/data_science.qmd
           contents:
-            - text: "Gym Market Analysis"
-              href: pages/projects/data_science/posts/gym_market.qmd
-            - text: "Login Validation"
-              href: pages/projects/data_science/posts/login_validation.qmd
-            - text: "Netflix Movies"
-              href: pages/projects/data_science/posts/netflix.qmd
             - text: "Titanic Disaster"
               href: pages/projects/data_science/posts/titanic.qmd
             - text: "NFL Big Data Bowl 2025"
@@ -98,8 +85,6 @@ website:
       title: "Blogs"
       contents:
         - pages/blogs/blogs.qmd
-        - text: "1. Experimenting with GitHub Pages and WhiteWind"
-          href: pages/blogs/posts/first_blog.qmd
           
 format:
   html:
