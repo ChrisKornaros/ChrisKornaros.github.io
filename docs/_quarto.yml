@@ -43,7 +43,6 @@ website:
           - pages/guides/guides.qmd
       - text: "Projects"
         menu:
-          - pages/projects/projects.qmd
           - pages/projects/data_engineering/data_engineering.qmd
           - pages/projects/data_science/data_science.qmd
       - text: "Blogs"
