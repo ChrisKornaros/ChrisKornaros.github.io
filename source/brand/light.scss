@@ -109,7 +109,7 @@ code {
 .quarto-about-jolla {
   .about-links {
     .about-link-text {
-      color: $light;
+      color: $warning;
 
       &:hover {
         color: lighten($primary, 10%);
@@ -117,7 +117,7 @@ code {
     }
 
     a {
-     color: $light;
+     color: $warning;
      
      &:hover {
       color: lighten($primary, 10%);

@@ -4,11 +4,11 @@
 .quarto-about-jolla {
   .about-links {
     .about-link-text {
-      color: $link-color;
+      color: $info;
     }
 
     a {
-      color: $link-color;
+      color: $info;
     }
   }
 }
@@ -22,10 +22,10 @@
     color: $body-color;
 
     h3.no-anchor.listing-title {
-      color: $link-color;
+      color: $info;
 
       a {
-        color: $link-color;
+        color: $info;
       }
     }
 
