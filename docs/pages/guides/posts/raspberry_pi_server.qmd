@@ -1,9 +1,9 @@
 ---
 title: "Guide to Setting Up Raspberry Pi for Data Engineering and Virtualization Projects"
 author: "Chris Kornaros"
-date: 2024-12-29
+date: 2025-05-14
 categories: ["Guide", "Ongoing"]
-tags: ["Architecture", "Systems", "Design", "Open Source", "Raspberry Pi", "Linux", "bash", "ssh", "ufw", "fail2ban", "Cybersecurity", "Networking", "Backup and Recovery", "RPi Imager", "gparted", "MicroSD Card", "SSD", "Partitioning", "Docker", "Kubernetes", "Spark"] 
+tags: ["Architecture", "Systems", "Design", "Open Source", "Raspberry Pi", "RPi Imager", "Linux", "systemd", "bash", "Networking", "networkd", "ssh", "ufw", "fail2ban",  "VS Code", "SSH Tunnel", "Remote Development", "Partitioning", "parted", "MicroSD Card", "SSD", "Backup and Recovery",  "cron", "boot", "Changing boot media", "Monitoring", "smartd", "smartmontools", "logs", "logrotate", "Docker", "containers", "orchestration", "Kubernetes", "Cybersecurity"] 
 ---
 
 ## Introduction {#sec-introduction}
@@ -133,6 +133,9 @@ Finally, you'll see an outline below, you can gloss over it to get a general ide
    - **Restoring from Backup**
      - Creating restoration scripts
      - Testing recovery procedures
+   - **Automating Backups with Crontab**
+     - Creating a schedule for scripts
+     - Verifying the schedule
 
 **9.** **Changing Your Boot Media Device**
 
