@@ -13,7 +13,5 @@ wheels/
 *.DS_Store
 
 # Quarto Files
-docs/*ipynb
-docs/*_files/
-docs/.quarto/
 /.quarto/
+/_site/
