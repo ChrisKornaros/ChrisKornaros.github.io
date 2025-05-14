@@ -1,0 +1,62 @@
+// _layout.scss - Contains styles for layout elements, spacing, and containers
+
+// Main container spacing
+.container-fluid {
+  padding: $spacing-md;
+}
+
+// Navbar customization
+.navbar {
+  padding: $spacing-sm $spacing-md;
+  
+  .navbar-brand {
+    font-weight: bold;
+  }
+  
+  .navbar-toggler {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Sidebar adjustments
+.sidebar {
+  padding: $spacing-md;
+  
+  .sidebar-title {
+    font-weight: bold;
+    margin-bottom: $spacing-md;
+  }
+}
+
+// Footer styling
+.page-footer {
+  padding: $spacing-md 0;
+  margin-top: $spacing-xl;
+  
+  .footer-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $spacing-md;
+  }
+}
+
+// TOC container
+#TOC {
+  border-left: 3px solid $primary;
+  padding-left: $spacing-md;
+  
+  .toc-section {
+    margin-bottom: $spacing-sm;
+  }
+}
+
+// Content area
+.content-area {
+  margin-bottom: $spacing-xl;
+}
+
+// Grid system adjustments
+.row {
+  margin-bottom: $spacing-md;
+}

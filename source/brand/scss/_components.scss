@@ -5,12 +5,10 @@
   .about-links {
     .about-link-text {
       color: $link-color;
-      @include hover-lighten($link-color);
     }
 
     a {
       color: $link-color;
-      @include hover-lighten($link-color);
     }
   }
 }
@@ -28,7 +26,6 @@
 
       a {
         color: $link-color;
-        @include hover-lighten($link-color);
       }
     }
 

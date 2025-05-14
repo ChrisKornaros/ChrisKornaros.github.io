@@ -19,7 +19,10 @@ typography:
     color: secondary 
     background-color: success
 
-  
+# Theme colors documentation
+# For implementation details, see:
+# - Light theme: brand/scss/_light-variables.scss
+# - Dark theme: brand/scss/_dark-variables.scss 
 # Light mode
 # Background (#F7F7F7): soft, creamy white base
 # Foreground (#083D77): deep blue for text

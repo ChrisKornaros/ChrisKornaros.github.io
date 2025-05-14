@@ -1,19 +1,52 @@
 /*-- scss:defaults --*/
+// Base colors
 $background: #F7F7F7;
 $foreground: #083D77;
-$primary: #FF9900;
+$primary: #E08800;
 $secondary: #1A4D6E;
 $tertiary: #8B9467;
 $light: #F7F7F7;
 $dark: #083D77;
 $success: #E5F2FF;
 $danger: #052F5F;
-$info: #8B0A1A;
+$info: #4B85C5;
 $warning: #2E6490;
+
+// Syntax highlighting colors
+$code-background: #363B44;     // Current $success value
+$code-text: #A34545;           // Your existing $code-red
+$code-keyword: #7FB4E0;        // Soft blue for keywords
+$code-string: #E4BE7B;         // Warm gold for strings
+$code-comment: #7A8792;        // Muted slate gray for comments
+$code-function: #85C3AB;       // Soft teal for functions
+$code-variable: #B8D0F0;       // Light blue-gray for variables
+$code-number: #D49CDD;         // Muted purple for numbers
+$code-operator: #E0E0E0;       // Light gray for operators
+$code-type: #DD8E6C;           // Soft coral for types/classes
+$code-import: #C586C0;         // Soft purple for import keywords
+$code-error: #E06C75;         // Soft red for error highlighting
+$code-attribute: #D19A66;     // Soft orange for attributes
+
+// Typography
+$font-family-base: 'Open Sans', sans-serif;
+$font-size-base: 1rem;
+$line-height-base: 1.5;
+
+// Spacing
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2.5rem;
+
+// Border radius
+$border-radius-sm: 4px;
+$border-radius: 6px;
+$border-radius-lg: 8px;
 
 /*-- scss:rules --*/
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: $font-family-base;
   background-color: $background;
   color: $dark;
 }
@@ -39,72 +72,55 @@ blockquote {
 
 code {
   background-color: $success;
-  color: $info;
+  color: $code-text;
 }
 
 .sourceCode {
   background-color: $success;
-
 
   pre.code-with-copy {
     padding: 0;
   }
 
   span {
-    &.al { color: lighten($danger, 20%); } // Adjusted for better contrast
-    &.an { color: lighten($secondary, 20%); } // Adjusted for better contrast
-    &.at { color: $primary; } // Adjusted for better contrast
-    &.bn { color: $primary; } // Adjusted for better contrast
-    &.bu { color: $warning; font-weight: bold; } // Adjusted for better contrast
-    &.ch { color: lighten($success, 20%); } // Adjusted for better contrast
-    &.co { color: darken(orange, 10%); font-style: italic; } // Adjusted for better contrast
-    &.cv { color: lighten($primary, 20%); } // Adjusted for better contrast
-    &.cn { color: lighten($primary, 20%); } // Adjusted for better contrast
-    &.cf { color: green; font-weight: bold; } // Adjusted for better contrast
-    &.dt { color: lighten($danger, 20%); } // Adjusted for better contrast
-    &.dv { color: lighten($secondary, 20%); } // Adjusted for better contrast
-    &.do { color: lighten($light, 20%); } // Adjusted for better contrast
-    &.er { color: lighten($danger, 20%); text-decoration: underline; } // Adjusted for better contrast
-    &.ex { color: lighten($primary, 20%); font-weight: bold; } // Adjusted for better contrast
-    &.fl { color: lighten($secondary, 20%); } // Adjusted for better contrast
-    &.fu { color: $info; } // Adjusted for better contrast
-    &.im { color: rgb(227, 97, 227); font-weight: bold; } // Adjusted for better contrast
-    &.in { color: lighten($secondary, 20%); } // Adjusted for better contrast
-    &.kw { color: $foreground; font-weight: bold;} // Adjusted for better contrast
-    &.op { color: lighten($info, 20%); } // Adjusted for better contrast
-    &.ot { color: lighten($primary, 20%); } // Adjusted for better contrast
-    &.pp { color: lighten($green, 10%); font-weight: bold; } // Adjusted for better contrast
-    &.re { color: lighten($primary, 20%); background-color: lighten($light, 20%); } // Adjusted for better contrast
-    &.sc { color: $primary; } // Adjusted for better contrast
-    &.ss { color: $primary;} // Adjusted for better contrast
-    &.st { color: $primary; } // Adjusted for better contrast
-    &.va { color: $info; } // Adjusted for better contrast
-    &.vs { color: lighten($success, 20%); } // Adjusted for better contrast
-    &.wa { color: lighten($tertiary, 20%); } // Adjusted for better contrast
+    &.at { color: darken($code-attribute, 20%); }  // Attributes (HTML/XML)
+    &.bn { color: darken($code-number, 20%); } // Numbers
+    &.bu { color: darken($code-function, 20%); font-weight: bold; } // Built-in functions/methods
+    &.cf { color: darken($code-keyword, 20%); font-weight: bold; } // Control flow (if, else, for, while) 
+    &.cn { color: darken($code-type, 20%); }  // Class/type names
+    &.co { color: darken($code-comment, 20%); font-style: italic; } // Comments
+    &.dv { color: darken($code-number, 20%); } // Numbers
+    &.er { color: darken($code-error, 20%); text-decoration: underline; }  // Error highlighting
+    &.fl { color: darken($code-number, 20%); } // Numbers
+    &.fu { color: darken($code-function, 20%); } // Functions
+    &.im { color: darken($code-import, 20%); font-weight: bold; } // Imports
+    &.kw { color: darken($code-keyword, 20%); font-weight: bold; } // Keywords
+    &.op { color: darken($code-operator, 20%); } // Operators
+    &.sc { color: darken($code-string, 20%); }  // Special characters (escape sequences like \n)
+    &.st { color: darken($code-string, 20%); } // Strings
+    &.va { color: darken($code-variable, 20%); } // Variables
   }
 }
 
 .callout-title-container.flex-fill {
-  color: $danger;
+  color: $light;
 }
 
 .quarto-about-jolla {
-
   .about-links {
-
     .about-link-text {
-      color: $warning;
+      color: $light;
 
       &:hover {
-        color: lighten($warning, 10%);
+        color: lighten($primary, 10%);
       }
     }
 
     a {
-     color: $warning;
+     color: $light;
      
      &:hover {
-      color: lighten($warning, 10%);
+      color: lighten($primary, 10%);
     }
      
     }
@@ -112,31 +128,28 @@ code {
 }
 
 .quarto-post { 
-  // General styles for the post container
-  border: 1px solid $warning; // Subtle border for separation
+  border: 1px solid $dark;
   padding: 2.5px;
 
   .body {
-    color: $warning; // Use the light color for the content text
+    color: $light;
 
-    // Style the title
     h3.no-anchor.listing-title {
-      color: $warning; // Bright blue for title text
+      color: $primary;
 
       a {
-        color: $warning;
+        color: $primary;
 
         &:hover {
-          color: lighten($warning, 10%);
+          color: lighten($primary, 10%);
         }
       }
     }
 
-    // Style the categories
     .listing-categories {
       .listing-category {
-        background-color: $dark; // Dark background for category tags
-        color: $light; // Light text for good contrast
+        background-color: $dark;
+        color: $light;
         padding: 0.25rem 0.5rem;
         border-radius: 4px;
         display: inline-block;
@@ -144,42 +157,40 @@ code {
         cursor: pointer;
 
         &:hover {
-          background-color: lighten($dark, 10%); // Lighter on hover
+          background-color: lighten($dark, 10%);
         }
       }
     }
 
-    // Style the description
     .listing-description {
       font-size: 1rem;
       color: $light;
 
       a {
-        color: $warning; // Orange for links
+        color: $secondary;
         text-decoration: underline;
 
         &:hover {
           text-decoration: none;
-          color: lighten($warning, 10%);
+          color: lighten($primary, 10%);
         }
       }
     }
   }
 
-  // Style the metadata
   .metadata {
     font-size: 0.875rem;
-    color: $danger; // Use secondary blue for metadata text
+    color: $secondary;
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
 
     .listing-date,
     .listing-author {
-      color: $danger;
+      color: $light;
 
       a {
-        color: inherit; // Inherit color from parent
+        color: inherit;
         text-decoration: none;
 
         &:hover {
