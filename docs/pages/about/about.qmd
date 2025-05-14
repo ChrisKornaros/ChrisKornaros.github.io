@@ -17,5 +17,5 @@ In the long run, I want to continue working full time as a Data Engineer (or som
 
 You can take a look at my resume down below. My email is listed.
 
-![](images/Chris%20Kornaros%20Resume.pdf){fig-align="center" width=750 height=975}
+![](images/Chris_Kornaros_Resume.pdf){fig-align="center" width=750 height=975}
 
