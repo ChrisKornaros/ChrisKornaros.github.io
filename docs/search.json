@@ -248,10 +248,7 @@
     "href": "pages/projects/projects.html",
     "title": "Projects",
     "section": "",
-    "text": "Landing page for the project portfolio portion of this website. Contains all of my public repositories and projects (for now, may include future consulting or paid side work, but I don’t do that at the moment), including both the code in repositories and write ups (where applicable).\nCurrently, there are two categories of projects I’m working on:\n\nData Engineering and Architecture\nData Science and Machine Learning",
-    "crumbs": [
-      "Projects"
-    ]
+    "text": "Landing page for the project portfolio portion of this website. Contains all of my public repositories and projects (for now, may include future consulting or paid side work, but I don’t do that at the moment), including both the code in repositories and write ups (where applicable).\nCurrently, there are two categories of projects I’m working on:\n\nData Engineering and Architecture\nData Science and Machine Learning"
   },
   {
     "objectID": "pages/guides/posts/raspberry_pi_server.html",

@@ -69,7 +69,6 @@ website:
     - id: projects
       title: "Projects"
       contents:
-        - pages/projects/projects.qmd
         - section: "Data Engineering and Architecture"
           href: pages/projects/data_engineering/data_engineering.qmd
         - section: "Data Science and Machine Learning"
