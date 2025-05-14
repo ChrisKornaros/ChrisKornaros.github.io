@@ -26,11 +26,6 @@ jobs:
           python-version: '3.13.3'
           cache: 'pip'
       
-      - name: Install Python Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r source/requirements.txt  # Create this file with your dependencies
-      
       - name: Render Quarto Website
         uses: quarto-dev/quarto-actions/render@v2
         with:
