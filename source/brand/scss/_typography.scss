@@ -1,0 +1,33 @@
+// Typography styles
+body {
+  font-family: $font-family-base;
+  background-color: $body-bg;
+  color: $body-color;
+}
+
+h1, h2, h3 {
+  color: $heading-color;
+}
+
+h4, h5, h6 {
+  color: $subheading-color;
+  font-weight: bold;
+}
+
+a:not(.nav-link):not(.sidebar-item-text):not(.sidebar-item-container) {
+  color: $link-color;
+  
+  &:hover {
+    color: $link-hover-color;
+  }
+}
+
+.anchored {
+  border-bottom-color: $subheading-color;
+}
+
+blockquote {
+  background-color: $blockquote-bg;
+  border-color: $heading-color;
+  color: $blockquote-color !important;
+}

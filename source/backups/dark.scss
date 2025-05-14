@@ -1,0 +1,193 @@
+/*-- scss:defaults --*/
+$background: #2E4053;
+$foreground: #4A90E2;
+$primary: #FF9900;
+$secondary: #56B3FA;
+$tertiary: #655D4B;
+$light: #F7F7F7;
+$dark: #1C1F24;
+$success: #33373D;
+$danger: #1A1D23;
+$info: #56B3FA;
+$warning: #2E6490;
+
+
+/*-- scss:rules --*/
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: $background;
+  color: $light;
+}
+
+h1, h2, h3 {
+  color: $dark;
+}
+
+h4, h5, h6 {
+  color: $light;
+  font-weight: bold;
+}
+
+.anchored {
+  border-bottom-color: $primary;
+}
+
+blockquote {
+  background-color: $warning; /* added background color */
+  border-color: $dark;
+  color: $danger !important;
+}
+
+code {
+  background-color: $success;
+  color: $info;
+}
+
+.sourceCode {
+  background-color: $success;
+
+
+  pre.code-with-copy {
+    padding: 0;
+  }
+
+  span {
+    &.al { color: lighten($danger, 20%); } // Adjusted for better contrast
+    &.an { color: lighten($secondary, 20%); } // Adjusted for better contrast
+    &.at { color: $primary; } // YAML name value
+    &.bn { color: $primary; } // Adjusted for better contrast
+    &.bu { color: lighten($info, 10%); font-weight: bold; } // Adjusted for better contrast
+    &.ch { color: lighten($success, 20%); } // Adjusted for better contrast
+    &.co { color: darken(orange, 10%); font-style: italic; } // Adjusted for better contrast
+    &.cv { color: lighten($primary, 20%); } // Adjusted for better contrast
+    &.cn { color: lighten($primary, 20%); } // Adjusted for better contrast
+    &.cf { color: rgb(227, 97, 227); font-weight: bold; } // Adjusted for better contrast
+    &.dt { color: lighten($danger, 20%); } // Adjusted for better contrast
+    &.dv { color: lighten($secondary, 20%); } // Adjusted for better contrast
+    &.do { color: lighten($light, 20%); } // Adjusted for better contrast
+    &.er { color: lighten($danger, 20%); text-decoration: underline; } // Adjusted for better contrast
+    &.ex { color: lighten($primary, 20%); font-weight: bold; } // Adjusted for better contrast
+    &.fl { color: lighten($secondary, 20%); } // Adjusted for better contrast
+    &.fu { color: $info; } // Adjusted for better contrast
+    &.im { color: rgb(227, 97, 227); font-weight: bold; } // Import keyword
+    &.in { color: lighten($secondary, 20%); } // Adjusted for better contrast
+    &.kw { color: $foreground; font-weight: bold;} // Function, def, keyword
+    &.op { color: lighten($info, 20%); } // Adjusted for better contrast
+    &.ot { color: lighten($primary, 20%); } // Adjusted for better contrast
+    &.pp { color: $green; font-weight: bold; } // Adjusted for better contrast
+    &.re { color: lighten($primary, 20%); background-color: lighten($light, 20%); } // Adjusted for better contrast
+    &.sc { color: lighten($primary, 20%); } // Adjusted for better contrast
+    &.ss { color: lighten($primary, 20%); } // Adjusted for better contrast
+    &.st { color: lighten($primary, 20%); } // Strings in quotes
+    &.va { color: $info; } // Adjusted for better contrast
+    &.vs { color: lighten($success, 20%); } // Adjusted for better contrast
+    &.wa { color: lighten($tertiary, 20%); } // Adjusted for better contrast
+  }
+}
+
+.callout-title-container.flex-fill {
+  color: $danger;
+}
+
+
+.quarto-about-jolla {
+
+  .about-links {
+
+    .about-link-text {
+      color: $light;
+
+      &:hover {
+        color: lighten($primary, 10%);
+      }
+    }
+
+    a {
+     color: $light;
+     
+     &:hover {
+      color: lighten($primary, 10%);
+    }
+     
+    }
+  }
+}
+
+.quarto-post { 
+  // General styles for the post container
+  border: 1px solid $dark; // Subtle border for separation
+  padding: 2.5px;
+
+  .body {
+    color: $light; // Use the light color for the content text
+
+    // Style the title
+    h3.no-anchor.listing-title {
+      color: $primary; // Bright blue for title text
+
+      a {
+        color: $primary;
+
+        &:hover {
+          color: lighten($primary, 10%);
+        }
+      }
+    }
+
+    // Style the categories
+    .listing-categories {
+      .listing-category {
+        background-color: $dark; // Dark background for category tags
+        color: $light; // Light text for good contrast
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        display: inline-block;
+        margin-right: 0.5rem;
+        cursor: pointer;
+
+        &:hover {
+          background-color: lighten($dark, 10%); // Lighter on hover
+        }
+      }
+    }
+
+    // Style the description
+    .listing-description {
+      font-size: 1rem;
+      color: $light;
+
+      a {
+        color: $light; // Orange for links
+        text-decoration: underline;
+
+        &:hover {
+          text-decoration: none;
+          color: lighten($primary, 10%);
+        }
+      }
+    }
+  }
+
+  // Style the metadata
+  .metadata {
+    font-size: 0.875rem;
+    color: $secondary; // Use secondary blue for metadata text
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+
+    .listing-date,
+    .listing-author {
+      color: $light;
+
+      a {
+        color: inherit; // Inherit color from parent
+        text-decoration: none;
+
+        &:hover {
+          color: lighten($secondary, 10%);
+        }
+      }
+    }
+  }
+}

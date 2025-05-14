@@ -1,0 +1,24 @@
+// Dark theme variables
+$background: #2E4053;
+$foreground: #4A90E2;
+$primary: #FF9900;
+$secondary: #56B3FA;
+$tertiary: #655D4B;
+$light: #F7F7F7;
+$dark: #1C1F24;
+$success: #33373D;
+$danger: #1A1D23;
+$info: #56B3FA;
+$warning: #2E6490;
+
+// Define semantic color assignments
+$body-bg: $background;
+$body-color: $light;
+$heading-color: $dark;
+$subheading-color: $light;
+$link-color: $primary;
+$link-hover-color: lighten($primary, 10%);
+$code-bg: $success;
+$code-color: $info;
+$blockquote-bg: $warning;
+$blockquote-color: $danger;

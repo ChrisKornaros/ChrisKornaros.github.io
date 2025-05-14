@@ -1,0 +1,50 @@
+// Code block styling
+code {
+  background-color: $code-bg;
+  color: $code-color;
+}
+
+.sourceCode {
+  background-color: $code-bg;
+
+  pre.code-with-copy {
+    padding: 0;
+  }
+
+  span {
+    &.al { color: lighten($danger, 20%); }
+    &.an { color: lighten($secondary, 20%); }
+    &.at { color: $primary; }
+    &.bn { color: $primary; }
+    &.bu { color: $warning; font-weight: bold; }
+    &.ch { color: lighten($success, 20%); }
+    &.co { color: darken(orange, 10%); font-style: italic; }
+    &.cv { color: lighten($primary, 20%); }
+    &.cn { color: lighten($primary, 20%); }
+    &.cf { color: green; font-weight: bold; }
+    &.dt { color: lighten($danger, 20%); }
+    &.dv { color: lighten($secondary, 20%); }
+    &.do { color: lighten($light, 20%); }
+    &.er { color: lighten($danger, 20%); text-decoration: underline; }
+    &.ex { color: lighten($primary, 20%); font-weight: bold; }
+    &.fl { color: lighten($secondary, 20%); }
+    &.fu { color: $info; }
+    &.im { color: rgb(227, 97, 227); font-weight: bold; }
+    &.in { color: lighten($secondary, 20%); }
+    &.kw { color: $foreground; font-weight: bold;}
+    &.op { color: lighten($info, 20%); }
+    &.ot { color: lighten($primary, 20%); }
+    &.pp { color: lighten(green, 10%); font-weight: bold; }
+    &.re { color: lighten($primary, 20%); background-color: lighten($light, 20%); }
+    &.sc { color: $primary; }
+    &.ss { color: $primary;}
+    &.st { color: $primary; }
+    &.va { color: $info; }
+    &.vs { color: lighten($success, 20%); }
+    &.wa { color: lighten($tertiary, 20%); }
+  }
+}
+
+.callout-title-container.flex-fill {
+  color: $subheading-color;
+}

@@ -1,0 +1,88 @@
+// UI Component styles
+
+// About section styling
+.quarto-about-jolla {
+  .about-links {
+    .about-link-text {
+      color: $link-color;
+      @include hover-lighten($link-color);
+    }
+
+    a {
+      color: $link-color;
+      @include hover-lighten($link-color);
+    }
+  }
+}
+
+// Post listing styling
+.quarto-post { 
+  border: 1px solid $link-color;
+  padding: $spacing-xs;
+
+  .body {
+    color: $body-color;
+
+    h3.no-anchor.listing-title {
+      color: $link-color;
+
+      a {
+        color: $link-color;
+        @include hover-lighten($link-color);
+      }
+    }
+
+    .listing-categories {
+      .listing-category {
+        background-color: $dark;
+        color: $light;
+        padding: $spacing-xs $spacing-sm;
+        border-radius: $border-radius-sm;
+        display: inline-block;
+        margin-right: $spacing-sm;
+        cursor: pointer;
+
+        &:hover {
+          background-color: lighten($dark, 10%);
+        }
+      }
+    }
+
+    .listing-description {
+      font-size: $font-size-base;
+      color: $body-color;
+
+      a {
+        color: $link-color;
+        text-decoration: underline;
+
+        &:hover {
+          text-decoration: none;
+          color: $link-hover-color;
+        }
+      }
+    }
+  }
+
+  .metadata {
+    font-size: 0.875rem;
+    color: $subheading-color;
+    display: flex;
+    justify-content: space-between;
+    margin-top: $spacing-md;
+
+    .listing-date,
+    .listing-author {
+      color: $body-color;
+
+      a {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+          color: lighten($secondary, 10%);
+        }
+      }
+    }
+  }
+}
