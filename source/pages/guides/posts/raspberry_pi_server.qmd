@@ -1,9 +1,9 @@
 ---
 title: "Guide to Setting Up Raspberry Pi for Data Engineering and Virtualization Projects"
 author: "Chris Kornaros"
-date: 2025-05-14
-categories: ["Guide", "Ongoing"]
-tags: ["Architecture", "Systems", "Design", "Open Source", "Raspberry Pi", "RPi Imager", "Linux", "systemd", "bash", "Networking", "networkd", "ssh", "ufw", "fail2ban",  "VS Code", "SSH Tunnel", "Remote Development", "Partitioning", "parted", "MicroSD Card", "SSD", "Backup and Recovery",  "cron", "boot", "Changing boot media", "Monitoring", "smartd", "smartmontools", "logs", "logrotate", "Docker", "containers", "orchestration", "Kubernetes", "Cybersecurity"] 
+date: 2025-05-20
+categories: ["Guide", "Completed"]
+tags: ["Architecture", "Systems", "Design", "Open Source", "Raspberry Pi", "RPi Imager", "Linux", "systemd", "bash", "Networking", "networkd", "ssh", "ufw", "fail2ban",  "VS Code", "SSH Tunnel", "Remote Development", "Partitioning", "parted", "MicroSD Card", "SSD", "Backup and Recovery",  "cron", "boot", "Changing boot media", "Monitoring", "smartd", "smartmontools", "logs", "logrotate", "Cybersecurity"] 
 ---
 
 ## Introduction {#sec-introduction}
