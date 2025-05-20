@@ -2,7 +2,7 @@
 title: "Guide to Setting Up Raspberry Pi for Data Engineering and Virtualization Projects"
 author: "Chris Kornaros"
 date: 2025-05-20
-categories: ["Guide", "Completed"]
+categories: ["Architecture", "Completed"]
 tags: ["Architecture", "Systems", "Design", "Open Source", "Raspberry Pi", "RPi Imager", "Linux", "systemd", "bash", "Networking", "networkd", "ssh", "ufw", "fail2ban",  "VS Code", "SSH Tunnel", "Remote Development", "Partitioning", "parted", "MicroSD Card", "SSD", "Backup and Recovery",  "cron", "boot", "Changing boot media", "Monitoring", "smartd", "smartmontools", "logs", "logrotate", "Cybersecurity"] 
 ---
 

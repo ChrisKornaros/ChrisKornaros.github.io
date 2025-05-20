@@ -60,6 +60,8 @@ website:
         - section: "Guides"
           href: pages/guides/guides.qmd
           contents:
+            - text: "Linux Server & Raspberry Pi"
+              href: pages/guides/posts/raspberry_pi_server.qmd
             - text: "Quarto"
               href: pages/guides/posts/quarto.qmd
             - text: "uv"
@@ -72,6 +74,7 @@ website:
         - pages/projects/projects.qmd
         - section: "Data Engineering and Architecture"
           href: pages/projects/data_engineering/data_engineering.qmd
+          contents:
         - section: "Data Science and Machine Learning"
           href: pages/projects/data_science/data_science.qmd
           contents:
