@@ -60,6 +60,8 @@ website:
         - section: "Guides"
           href: pages/guides/guides.qmd
           contents:
+            - text: "Docker: Novice to Journeyman"
+              href: pages/guides/posts/docker.qmd
             - text: "Linux Server & Raspberry Pi"
               href: pages/guides/posts/raspberry_pi_server.qmd
             - text: "Quarto"

@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Chris Kornaros">
+<meta name="dcterms.date" content="2025-05-20">
+
+<title>Docker: Novice to Journeyman – Chris Kornaros</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-75f773647a772d8fa730fc6831eb67ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-a4c6ef5a823a1530680cb31f02b11e7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-75f773647a772d8fa730fc6831eb67ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-e73acfd0c7046d39dfa10654f4a62604.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-df5fb58a0c98eb23e4311b7bc98f59b5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-e73acfd0c7046d39dfa10654f4a62604.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-J1EQMCS7CC"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-J1EQMCS7CC', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"headline",
+  "consent_type":"express",
+  "palette":"dark",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
+<meta name="quarto:status" content="draft">
+
+
+<meta property="og:title" content="Docker: Novice to Journeyman – Chris Kornaros">
+<meta property="og:image" content="images/docker-logo-blue.png">
+<meta property="og:site_name" content="Chris Kornaros">
+<meta name="twitter:title" content="Docker: Novice to Journeyman – Chris Kornaros">
+<meta name="twitter:image" content="images/docker-logo-blue.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Chris Kornaros</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../pages/about/about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-guides" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Guides</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-guides">    
+        <li>
+    <a class="dropdown-item" href="../../../pages/guides/guides.html">
+ <span class="dropdown-text">Guides</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Projects</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
+        <li>
+    <a class="dropdown-item" href="../../../pages/projects/data_engineering/data_engineering.html">
+ <span class="dropdown-text">Data Engineering and Architecture Projects</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/projects/data_science/data_science.html">
+ <span class="dropdown-text">Data Science and Machine Learning Projects</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-blogs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Blogs</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-blogs">    
+        <li>
+    <a class="dropdown-item" href="../../../pages/blogs/blogs.html">
+ <span class="dropdown-text">Blogs</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/guides/guides.html">Guides</a></li><li class="breadcrumb-item"><a href="../../../pages/guides/posts/docker.html">Docker: Novice to Journeyman</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../pages/guides/guides.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guides</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/guides/posts/docker.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Docker: Novice to Journeyman</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/guides/posts/raspberry_pi_server.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Server &amp; Raspberry Pi</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/guides/posts/quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quarto</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../pages/guides/posts/uv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">uv</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#containerization" id="toc-containerization" class="nav-link active" data-scroll-target="#containerization">Containerization</a>
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#basic-concepts" id="toc-basic-concepts" class="nav-link" data-scroll-target="#basic-concepts">Basic Concepts</a>
+  <ul class="collapse">
+  <li><a href="#key-terms" id="toc-key-terms" class="nav-link" data-scroll-target="#key-terms">Key Terms</a></li>
+  <li><a href="#how-containers-work" id="toc-how-containers-work" class="nav-link" data-scroll-target="#how-containers-work">How Containers Work</a></li>
+  <li><a href="#containers-vs.-virtual-machines" id="toc-containers-vs.-virtual-machines" class="nav-link" data-scroll-target="#containers-vs.-virtual-machines">Containers vs.&nbsp;Virtual Machines</a></li>
+  </ul></li>
+  <li><a href="#networking-for-containers" id="toc-networking-for-containers" class="nav-link" data-scroll-target="#networking-for-containers">Networking for Containers</a>
+  <ul class="collapse">
+  <li><a href="#basic-networking" id="toc-basic-networking" class="nav-link" data-scroll-target="#basic-networking">Basic Networking</a></li>
+  <li><a href="#advanced-networking" id="toc-advanced-networking" class="nav-link" data-scroll-target="#advanced-networking">Advanced Networking</a></li>
+  <li><a href="#existing-server-configuration" id="toc-existing-server-configuration" class="nav-link" data-scroll-target="#existing-server-configuration">Existing Server Configuration</a></li>
+  </ul></li>
+  <li><a href="#using-containers" id="toc-using-containers" class="nav-link" data-scroll-target="#using-containers">Using Containers</a>
+  <ul class="collapse">
+  <li><a href="#application-development-and-testing" id="toc-application-development-and-testing" class="nav-link" data-scroll-target="#application-development-and-testing">Application Development and Testing</a></li>
+  <li><a href="#microservices-architecture" id="toc-microservices-architecture" class="nav-link" data-scroll-target="#microservices-architecture">Microservices Architecture</a></li>
+  <li><a href="#edge-computing-and-iot" id="toc-edge-computing-and-iot" class="nav-link" data-scroll-target="#edge-computing-and-iot">Edge Computing and IoT</a></li>
+  <li><a href="#personal-projects-and-self-hosting" id="toc-personal-projects-and-self-hosting" class="nav-link" data-scroll-target="#personal-projects-and-self-hosting">Personal Projects and Self-Hosting</a></li>
+  <li><a href="#specific-raspberry-pi-use-cases" id="toc-specific-raspberry-pi-use-cases" class="nav-link" data-scroll-target="#specific-raspberry-pi-use-cases">Specific Raspberry Pi Use Cases</a></li>
+  </ul></li>
+  <li><a href="#adjacent-and-complementary-topics" id="toc-adjacent-and-complementary-topics" class="nav-link" data-scroll-target="#adjacent-and-complementary-topics">Adjacent and Complementary Topics</a>
+  <ul class="collapse">
+  <li><a href="#container-orchestration" id="toc-container-orchestration" class="nav-link" data-scroll-target="#container-orchestration">Container Orchestration</a></li>
+  <li><a href="#cicd-continuous-integrationcontinuous-deployment" id="toc-cicd-continuous-integrationcontinuous-deployment" class="nav-link" data-scroll-target="#cicd-continuous-integrationcontinuous-deployment">CI/CD (Continuous Integration/Continuous Deployment)</a></li>
+  <li><a href="#infrastructure-as-code" id="toc-infrastructure-as-code" class="nav-link" data-scroll-target="#infrastructure-as-code">Infrastructure as Code</a></li>
+  <li><a href="#monitoring-and-observability" id="toc-monitoring-and-observability" class="nav-link" data-scroll-target="#monitoring-and-observability">Monitoring and Observability</a></li>
+  <li><a href="#security-considerations" id="toc-security-considerations" class="nav-link" data-scroll-target="#security-considerations">Security Considerations</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul></li>
+  <li><a href="#docker" id="toc-docker" class="nav-link" data-scroll-target="#docker">Docker</a>
+  <ul>
+  <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#why-jupyter" id="toc-why-jupyter" class="nav-link" data-scroll-target="#why-jupyter">Why Jupyter?</a></li>
+  </ul></li>
+  <li><a href="#basic-concepts-1" id="toc-basic-concepts-1" class="nav-link" data-scroll-target="#basic-concepts-1">Basic Concepts</a>
+  <ul class="collapse">
+  <li><a href="#key-docker-components" id="toc-key-docker-components" class="nav-link" data-scroll-target="#key-docker-components">Key Docker Components</a></li>
+  <li><a href="#docker-architecture" id="toc-docker-architecture" class="nav-link" data-scroll-target="#docker-architecture">Docker Architecture</a></li>
+  </ul></li>
+  <li><a href="#configuring-vs-code-and-docker" id="toc-configuring-vs-code-and-docker" class="nav-link" data-scroll-target="#configuring-vs-code-and-docker">Configuring VS Code and Docker</a>
+  <ul class="collapse">
+  <li><a href="#essential-vs-code-extensions" id="toc-essential-vs-code-extensions" class="nav-link" data-scroll-target="#essential-vs-code-extensions">Essential VS Code Extensions</a></li>
+  <li><a href="#configuring-docker-integration" id="toc-configuring-docker-integration" class="nav-link" data-scroll-target="#configuring-docker-integration">Configuring Docker Integration</a></li>
+  </ul></li>
+  <li><a href="#configuring-docker-on-the-server" id="toc-configuring-docker-on-the-server" class="nav-link" data-scroll-target="#configuring-docker-on-the-server">Configuring Docker on the Server</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/guides/posts/docker.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/guides/guides.html">Guides</a></li><li class="breadcrumb-item"><a href="../../../pages/guides/posts/docker.html">Docker: Novice to Journeyman</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Docker: Novice to Journeyman</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Architecture</div>
+    <div class="quarto-category">Ongoing</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Chris Kornaros </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 20, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><img src="images/docker-logo-blue.png" class="img-fluid"></p>
+<section id="containerization" class="level2">
+<h2 class="anchored" data-anchor-id="containerization">Containerization</h2>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
+<p>Containerization has revolutionized how we develop, deploy, and run software. At its core, containerization is a method of packaging an application along with all its dependencies—libraries, configuration files, and everything else it needs to run—into a standardized unit called a container. This container can then be reliably transported and run on any computing environment that supports containers.</p>
+<p>Think of containers like standardized shipping containers used in global logistics. Before standardized shipping containers existed, loading and unloading cargo ships was inefficient and unpredictable—different-sized crates and packages made storage challenging and transportation slow. The introduction of uniform shipping containers revolutionized global trade by creating a standard unit that could be easily loaded, stacked, transported, and unloaded regardless of what was inside.</p>
+<p>Software containers work on the same principle. Instead of shipping physical goods, we’re packaging software in a way that eliminates the traditional challenge of “it works on my machine but not in production.” Containers encapsulate the application and its environment, ensuring consistent behavior across different computing infrastructures—from a developer’s laptop to testing environments to production servers.</p>
+<p>What makes containers particularly powerful for developers and system administrators is their combination of isolation and efficiency. Unlike traditional virtual machines that virtualize an entire operating system, containers share the host system’s kernel while maintaining strict isolation between applications. This makes them significantly more lightweight and faster to start than VMs, while still providing the necessary separation between applications.</p>
+<p>For servers, containerization offers several benefits:</p>
+<ul>
+<li><strong>Resource Efficiency:</strong> Containers have minimal overhead, making them perfect for the limited resources of a Raspberry Pi</li>
+<li><strong>Isolation:</strong> Applications in containers won’t interfere with each other or the host system</li>
+<li><strong>Reproducibility:</strong> Container definitions are code, making your server setup reproducible and version-controlled</li>
+<li><strong>Portability:</strong> The same container can run on your Pi, your MacBook, or any other compatible system</li>
+<li><strong>Simplified Deployment:</strong> Containers bundle all dependencies, eliminating complex installation procedures</li>
+<li><strong>Easy Updates:</strong> Containers can be replaced rather than updated in-place, simplifying maintenance</li>
+</ul>
+<p>In this guide, we’ll first explore the foundational concepts of containerization to build a solid understanding of the technology. Then, we’ll dive into Docker—the most popular containerization platform—and create a practical setup for a persistent Jupyter notebook server running on your Raspberry Pi. This container will allow you to use your MacBook as a client for development while leveraging the compute resources and persistent storage of your Pi server.</p>
+<p>By the end of this guide, you’ll have both a theoretical understanding of containerization and practical experience implementing it, setting the stage for more advanced container-based projects like PostgreSQL databases, development environments, and even multi-container applications. It will help to checkout my starter guide on setting up Linux Server LTS on a Raspberry Pi, if you want to know exactly what kind of system I’m using. Otherwise, most of the examples will focus on Docker, not my specific environment.</p>
+</section>
+<section id="basic-concepts" class="level3">
+<h3 class="anchored" data-anchor-id="basic-concepts">Basic Concepts</h3>
+<section id="key-terms" class="level4">
+<h4 class="anchored" data-anchor-id="key-terms">Key Terms</h4>
+<ul>
+<li><strong>Container:</strong> A lightweight, standalone, executable package that includes everything needed to run a piece of software: code, runtime, system tools, libraries, and settings.</li>
+<li><strong>Image:</strong> A read-only template used to create containers. Images contain the application code, libraries, dependencies, tools, and other files needed for an application to run.</li>
+<li><strong>Container Engine:</strong> Software that accepts user requests, including command line options, pulls images, and uses the operating system’s functionality to create and manage containers.</li>
+<li><strong>Namespace:</strong> A Linux kernel feature that partitions system resources so that one set of processes sees one set of resources while another set of processes sees a different set of resources.</li>
+<li><strong>Control Group (cgroup):</strong> A Linux kernel feature that limits, accounts for, and isolates the resource usage (CPU, memory, disk I/O, etc.) of process groups.</li>
+<li><strong>Host:</strong> The physical or virtual machine on which containers run.</li>
+<li><strong>Registry:</strong> A service that stores and distributes container images, similar to a Git repository for code.</li>
+<li><strong>Layer:</strong> Part of an image that represents a set of filesystem changes. Images are built from a series of layers, making them efficient to store and transfer.</li>
+<li><strong>Volume:</strong> A designated directory in the container that exists outside the default Union File System, used for persisting data or sharing data between containers.</li>
+<li><strong>Port Binding:</strong> Mapping a container’s port to a port on the host machine, allowing external access to services running inside the container.</li>
+</ul>
+</section>
+<section id="how-containers-work" class="level4">
+<h4 class="anchored" data-anchor-id="how-containers-work">How Containers Work</h4>
+<p>Containers achieve their isolation and efficiency through several key Linux kernel features, primarily <code>namespaces</code> and <code>control groups (cgroups)</code>. Namespaces create isolation by providing processes with their own view of system resources. Linux implements various namespace types:</p>
+<ul>
+<li><strong>PID Namespace:</strong> Isolates process IDs</li>
+<li><strong>Network Namespace:</strong> Isolates network interfaces</li>
+<li><strong>Mount Namespace:</strong> Isolates filesystem mount points</li>
+<li><strong>UTS Namespace:</strong> Isolates hostname and domain name</li>
+<li><strong>IPC Namespace:</strong> Isolates interprocess communication resources</li>
+<li><strong>User Namespace:</strong> Isolates user and group IDs</li>
+</ul>
+<p>When a container starts, it gets its own set of these namespaces, making it appear to the application inside that it has its own isolated instance of the operating system.</p>
+<ul>
+<li><code>Control Groups (cgroups)</code>: Provide resource limitation and accounting. They ensure containers can only use allocated amounts of system resources like CPU, memory, and I/O. This prevents a single container from consuming all available resources and affecting other containers or the host system.</li>
+<li><code>Union File Systems</code>: Another key technology behind containers. They create layers of file system changes, enabling efficient storage and quick creation of containers. When a container is built from an image, each instruction in the image definition typically creates a new layer. These layers are cached, meaning unchanged layers can be reused between different images, saving both disk space and build time.</li>
+</ul>
+</section>
+<section id="containers-vs.-virtual-machines" class="level4">
+<h4 class="anchored" data-anchor-id="containers-vs.-virtual-machines">Containers vs.&nbsp;Virtual Machines</h4>
+<p>A common point of confusion for newcomers is how containers differ from virtual machines (VMs). Both provide isolation, but they work in fundamentally different ways.</p>
+<p><strong>Virtual Machines:</strong></p>
+<ul>
+<li>Run a complete operating system with its own kernel</li>
+<li>Virtualize hardware resources through a hypervisor</li>
+<li>Require more storage space and memory</li>
+<li>Take minutes to start up</li>
+<li>Provide strong isolation at the hardware level</li>
+</ul>
+<p><img src="images/container-vm-whatcontainer_2.png" class="img-fluid"></p>
+<p><strong>Containers:</strong></p>
+<ul>
+<li>Share the host operating system’s kernel</li>
+<li>Virtualize at the operating system level, not hardware</li>
+<li>Require minimal storage space and memory</li>
+<li>Start in seconds or milliseconds</li>
+<li>Provide process-level isolation</li>
+</ul>
+<p><img src="images/container-what-is-container.png" class="img-fluid"></p>
+<p>This architectural difference explains why containers are so much more lightweight than VMs. While a typical VM might be gigabytes in size and take minutes to start, a container can be megabytes in size and start in seconds.</p>
+</section>
+</section>
+<section id="networking-for-containers" class="level3">
+<h3 class="anchored" data-anchor-id="networking-for-containers">Networking for Containers</h3>
+<section id="basic-networking" class="level4">
+<h4 class="anchored" data-anchor-id="basic-networking">Basic Networking</h4>
+<p>Understanding container networking is essential for building practical container-based applications. Container networking fundamentally relies on Linux network namespaces, which provide each container with its own isolated network stack including:</p>
+<ul>
+<li>Network interfaces</li>
+<li>IP addresses</li>
+<li>Routing tables</li>
+<li>Firewall rules</li>
+<li>Socket port numbers</li>
+</ul>
+<p>Most container engines support several networking modes:</p>
+<ul>
+<li><strong>Bridge Networking:</strong> The default mode where containers connect to a software bridge on the host, giving them their own IP addresses on an isolated network. Port mappings allow external access.</li>
+<li><strong>Host Networking:</strong> Containers share the host’s network namespace with no network isolation, seeing the same network interfaces as the host. This offers the best performance but reduces isolation.</li>
+<li><strong>None Networking:</strong> Containers have no external network connectivity, useful for processing-only workloads that don’t need network access.</li>
+<li><strong>Overlay Networking:</strong> Creates a distributed network among multiple container hosts, allowing containers on different hosts to communicate as if on the same local network.</li>
+<li><strong>Macvlan Networking:</strong> Gives containers their own MAC address, making them appear as physical devices on the network.</li>
+</ul>
+</section>
+<section id="advanced-networking" class="level4">
+<h4 class="anchored" data-anchor-id="advanced-networking">Advanced Networking</h4>
+<p>In bridge networking, containers communicate freely on their isolated network but need <code>port mapping</code> to be accessible from outside. For example, mapping port 8888 on your Raspberry Pi to port 8888 in a container would let you access a Jupyter server by connecting to your Pi’s IP address on port 8888.</p>
+<p>Containers typically use DNS for service discovery:</p>
+<ul>
+<li>Container engines often provide built-in DNS resolution between containers</li>
+<li>Containers can usually resolve external domain names using the host’s DNS configuration</li>
+<li>In multi-container applications, service discovery systems help containers find each other automatically</li>
+</ul>
+</section>
+<section id="existing-server-configuration" class="level4">
+<h4 class="anchored" data-anchor-id="existing-server-configuration">Existing Server Configuration</h4>
+<p>My Raspberry Pi server setup already includes:</p>
+<ul>
+<li>Non-standard SSH port (45000)</li>
+<li>UFW (Uncomplicated Firewall) configuration</li>
+<li>Fail2ban for protection against brute-force attacks</li>
+</ul>
+<p>Any containerized services will need to work with these existing configurations. Later, when we set up our Jupyter container, we’ll need to:</p>
+<ul>
+<li>Choose a port that doesn’t conflict with existing services</li>
+<li>Configure UFW to allow traffic to this port</li>
+<li>Ensure the container’s networking integrates with your existing security measures</li>
+</ul>
+</section>
+</section>
+<section id="using-containers" class="level3">
+<h3 class="anchored" data-anchor-id="using-containers">Using Containers</h3>
+<p>Containerization’s versatility makes it valuable across various computing scenarios. Here are some common use cases that demonstrate why containers have become so foundational in modern computing.</p>
+<section id="application-development-and-testing" class="level4">
+<h4 class="anchored" data-anchor-id="application-development-and-testing">Application Development and Testing</h4>
+<p>For developers, containers solve the “it works on my machine” problem by ensuring consistency across development, testing, and production environments. Benefits include:</p>
+<ul>
+<li><strong>Consistent Development Environments:</strong> Every developer works with identical dependencies and configurations</li>
+<li><strong>Faster Onboarding:</strong> New team members can start with a working environment immediately</li>
+<li><strong>Parallel Version Testing:</strong> Run applications with different dependency versions simultaneously</li>
+<li><strong>Continuous Integration:</strong> Test code in clean, reproducible environments</li>
+</ul>
+<p>For example, a development team working on a web application can define their entire stack—from database to web server—as containers. New developers simply pull the container definitions and start working immediately, rather than spending days configuring their local environment.</p>
+</section>
+<section id="microservices-architecture" class="level4">
+<h4 class="anchored" data-anchor-id="microservices-architecture">Microservices Architecture</h4>
+<p>Containers are ideal for microservices, where applications are composed of many small, independent services:</p>
+<ul>
+<li><strong>Service Isolation:</strong> Each microservice runs in its own container</li>
+<li><strong>Independent Scaling:</strong> Scale containers individually based on demand</li>
+<li><strong>Technology Flexibility:</strong> Use different programming languages and frameworks for different services</li>
+<li><strong>Simplified Updates:</strong> Update individual services without affecting others</li>
+</ul>
+<p>Netflix, for instance, uses containers to manage thousands of microservices that power their streaming platform, allowing them to update and scale individual components without disrupting the entire service.</p>
+</section>
+<section id="edge-computing-and-iot" class="level4">
+<h4 class="anchored" data-anchor-id="edge-computing-and-iot">Edge Computing and IoT</h4>
+<p>Containers are increasingly used in edge computing and Internet of Things (IoT) scenarios:</p>
+<ul>
+<li><strong>Resource Efficiency:</strong> Containers’ low overhead works well on limited-resource devices</li>
+<li><strong>Remote Management:</strong> Deploy and update container workloads remotely</li>
+<li><strong>Standardization:</strong> Same container can run in the cloud and at the edge</li>
+<li><strong>Isolation:</strong> Run multiple applications on a single edge device securely</li>
+</ul>
+<p>My Raspberry Pi is an example of an edge device that can benefit from containerization, allowing you to run multiple services efficiently on limited hardware.</p>
+</section>
+<section id="personal-projects-and-self-hosting" class="level4">
+<h4 class="anchored" data-anchor-id="personal-projects-and-self-hosting">Personal Projects and Self-Hosting</h4>
+<p>For personal projects and self-hosting, containers offer significant advantages:</p>
+<ul>
+<li>Application Isolation: Run multiple applications without conflicts</li>
+<li>Easy Backups: Back up container volumes or entire container states</li>
+<li>Simple Updates: Update applications by pulling new container images</li>
+<li>Resource Management: Limit resource usage for each application</li>
+</ul>
+</section>
+<section id="specific-raspberry-pi-use-cases" class="level4">
+<h4 class="anchored" data-anchor-id="specific-raspberry-pi-use-cases">Specific Raspberry Pi Use Cases</h4>
+<p>For your Raspberry Pi server specifically, containerization enables:</p>
+<ul>
+<li><strong>Jupyter Notebooks:</strong> Run a persistent Jupyter server for data analysis</li>
+<li><strong>Database Servers:</strong> Host PostgreSQL, MySQL, or MongoDB without complex setup</li>
+<li><strong>Web Applications:</strong> Deploy web services with proper isolation</li>
+<li><strong>Development Tools:</strong> Run Git servers, CI/CD pipelines, or code quality tools</li>
+<li><strong>Media Services:</strong> Host Plex, Jellyfin, or other media servers</li>
+<li><strong>Home Automation:</strong> Run Home Assistant, Node-RED, or other automation tools</li>
+</ul>
+</section>
+</section>
+<section id="adjacent-and-complementary-topics" class="level3">
+<h3 class="anchored" data-anchor-id="adjacent-and-complementary-topics">Adjacent and Complementary Topics</h3>
+<p>While containers themselves are powerful, they’re part of a broader ecosystem of technologies and practices. Understanding these adjacent areas will help you get the most from containerization.</p>
+<section id="container-orchestration" class="level4">
+<h4 class="anchored" data-anchor-id="container-orchestration">Container Orchestration</h4>
+<p>For managing multiple containers across multiple hosts:</p>
+<ul>
+<li><strong>Kubernetes:</strong> The industry-standard container orchestration platform</li>
+<li><strong>Docker Swarm:</strong> A simpler orchestration solution integrated with Docker</li>
+<li><strong>K3s/K3d:</strong> Lightweight Kubernetes distributions suitable for Raspberry Pi</li>
+<li><strong>Nomad:</strong> HashiCorp’s workload orchestrator supporting containers and other applications</li>
+</ul>
+<p>Container orchestration becomes important when you need high availability, automated scaling, or management of complex multi-container applications.</p>
+</section>
+<section id="cicd-continuous-integrationcontinuous-deployment" class="level4">
+<h4 class="anchored" data-anchor-id="cicd-continuous-integrationcontinuous-deployment">CI/CD (Continuous Integration/Continuous Deployment)</h4>
+<p>Containers integrate naturally with modern software development practices:</p>
+<ul>
+<li><strong>Automated Testing:</strong> Run tests in clean container environments</li>
+<li><strong>Build Pipelines:</strong> Automatically build container images when code changes</li>
+<li><strong>Deployment Automation:</strong> Automatically deploy new container versions</li>
+<li><strong>Infrastructure as Code:</strong> Define your entire infrastructure declaratively</li>
+</ul>
+<p>Tools like GitHub Actions, GitLab CI, Jenkins, and CircleCI all support container-based workflows.</p>
+</section>
+<section id="infrastructure-as-code" class="level4">
+<h4 class="anchored" data-anchor-id="infrastructure-as-code">Infrastructure as Code</h4>
+<p>Managing container environments declaratively:</p>
+<ul>
+<li><strong>Docker Compose:</strong> Define multi-container applications</li>
+<li><strong>Terraform:</strong> Provision and manage infrastructure including container hosts</li>
+<li><strong>Ansible:</strong> Automate container deployment and configuration</li>
+<li><strong>Helm:</strong> Package and deploy applications to Kubernetes</li>
+</ul>
+<p>Infrastructure as Code makes your container setups reproducible, version-controlled, and easier to maintain.</p>
+</section>
+<section id="monitoring-and-observability" class="level4">
+<h4 class="anchored" data-anchor-id="monitoring-and-observability">Monitoring and Observability</h4>
+<p>With containers, traditional monitoring approaches need adaptation:</p>
+<ul>
+<li><strong>Container Metrics:</strong> CPU, memory, network, and disk usage per container</li>
+<li><strong>Logging Solutions:</strong> Collecting and centralizing logs from ephemeral containers</li>
+<li><strong>Application Performance Monitoring:</strong> Tracing requests across container boundaries</li>
+<li><strong>Service Meshes:</strong> Advanced networking with observability features</li>
+</ul>
+<p>Tools like Prometheus, Grafana, ELK Stack (Elasticsearch, Logstash, Kibana), and Jaeger help monitor containerized environments.</p>
+</section>
+<section id="security-considerations" class="level4">
+<h4 class="anchored" data-anchor-id="security-considerations">Security Considerations</h4>
+<p>Container security requires specific attention:</p>
+<ul>
+<li><strong>Image Scanning:</strong> Detecting vulnerabilities in container images</li>
+<li><strong>Runtime Security:</strong> Monitoring container behavior for anomalies</li>
+<li><strong>Secure Supply Chains:</strong> Ensuring the integrity of images from source to runtime</li>
+<li><strong>Privilege Management:</strong> Running containers with minimum necessary privileges</li>
+</ul>
+<p>Solutions like Trivy, Falco, Notary, and proper security practices help keep containerized environments secure.</p>
+</section>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>Containerization represents one of the most significant shifts in how we develop, deploy, and run software in recent years. By packaging applications with their complete runtime environment, containers solve the long-standing problem of environment inconsistency while providing resource efficiency and isolation.</p>
+<p>In this first section, we’ve explored the fundamental concepts behind containers—how they use Linux kernel features like namespaces and cgroups to provide lightweight isolation, how they differ from virtual machines, and why they’ve become essential in modern computing. We’ve also looked at various use cases and adjacent technologies that complement containerization.</p>
+<p>With this foundational understanding in place, we’re now ready to move from theory to practice. In the next section, we’ll dive into Docker—the most popular containerization platform—and learn how to create, manage, and use containers on your Raspberry Pi server. We’ll build a persistent Jupyter notebook environment that lets you combine the convenience of developing on your laptop with the persistent computing resources of your Raspberry Pi.</p>
+<p>This practical implementation will make these container concepts concrete while giving you a valuable tool for data analysis, coding, and experimentation—all within a properly isolated environment that won’t affect the rest of your server setup.</p>
+</section>
+</section>
+<section id="docker" class="level2">
+<h2 class="anchored" data-anchor-id="docker">Docker</h2>
+<section id="introduction-1" class="level3">
+<h3 class="anchored" data-anchor-id="introduction-1">Introduction</h3>
+<p>Docker has revolutionized application development and deployment by providing a standardized way to package, distribute, and run applications in isolated environments called containers. In this comprehensive guide, we’ll explore Docker from basic concepts to advanced implementations, using a Jupyter notebook server as our primary example.</p>
+<p>Docker enables you to package an application with all its dependencies into a standardized unit called a container. These containers can run consistently across different environments, from development machines to production servers, eliminating the classic “it works on my machine” problem. This consistency is particularly valuable when working with complex data science environments like Jupyter notebooks, which often have numerous interdependent libraries and packages.</p>
+<section id="why-jupyter" class="level4">
+<h4 class="anchored" data-anchor-id="why-jupyter">Why Jupyter?</h4>
+<p>For our Ubuntu Raspberry Pi server, Jupyter provides an ideal example of Docker’s capabilities for several important reasons:</p>
+<ul>
+<li><strong>Computational offloading:</strong> Jupyter allows you to write and execute code on a Raspberry Pi’s resources while using your laptop as a client interface. This distributes the workload efficiently, leveraging each device’s strengths.</li>
+<li><strong>Persistence and accessibility:</strong> A containerized Jupyter server runs 24/7 on your Raspberry Pi, maintaining long-running calculations and persisting data files while being accessible from anywhere.</li>
+<li><strong>Environment isolation:</strong> Data engineering workflows often require specific package versions that might conflict with other applications. Docker containers provide perfect isolation for these environments.</li>
+<li><strong>Security and controlled access:</strong> Jupyter’s token-based authentication integrates well with Docker’s networking capabilities, allowing secure remote access.</li>
+<li><strong>Scalability pathway:</strong> Starting with a single Jupyter container creates a foundation for more complex setups later, such as adding PostgreSQL databases or distributed computing with PySpark.</li>
+<li><strong>Cross-platform compatibility:</strong> Docker abstracts away many of the ARM-specific considerations of running on Raspberry Pi, though we’ll address key compatibility points.</li>
+</ul>
+<p>By focusing on Jupyter, we’ll cover the most important Docker concepts—images, containers, volumes, networking, and orchestration—in a practical context that directly supports data engineering work. As we progress through each section, you’ll build a functional containerized Jupyter environment that serves as both a learning tool and a practical development platform. Let’s start by exploring the fundamental concepts of Docker and setting up the necessary tools on your Ubuntu Pi server.</p>
+</section>
+</section>
+<section id="basic-concepts-1" class="level3">
+<h3 class="anchored" data-anchor-id="basic-concepts-1">Basic Concepts</h3>
+<p>Before diving into implementation, let’s establish a clear understanding of Docker’s core concepts and terminology. These fundamentals will provide the foundation for everything we build throughout this guide.</p>
+<section id="key-docker-components" class="level4">
+<h4 class="anchored" data-anchor-id="key-docker-components">Key Docker Components</h4>
+<ul>
+<li><strong>Docker Engine:</strong> The runtime that builds and runs containers. It consists of:
+<ul>
+<li>A server (daemon) that manages containers</li>
+<li>REST API that programs can use to communicate with the daemon</li>
+<li>Command-line interface (CLI) for user interaction</li>
+</ul></li>
+<li><strong>Docker Image:</strong> A read-only template containing application code, libraries, dependencies, tools, and other files needed to run an application. Think of an image as a snapshot or blueprint of an application and its environment.</li>
+<li><strong>Docker Container:</strong> A runnable instance of an image—what the image becomes in memory when executed. A container runs completely isolated from the host environment, accessing only kernel capabilities and resources explicitly allowed.</li>
+<li><strong>Dockerfile:</strong> A text file containing instructions for building a Docker image. It specifies the base image, additional components, configurations, and commands to be included.</li>
+<li><strong>Docker Registry:</strong> A repository for Docker images. Docker Hub is the default public registry, but private registries can also be used. Images are stored with tags to identify different versions.</li>
+<li><strong>Docker Compose:</strong> A tool for defining and running multi-container Docker applications using a YAML file to configure application services, networks, and volumes.</li>
+</ul>
+</section>
+<section id="docker-architecture" class="level4">
+<h4 class="anchored" data-anchor-id="docker-architecture">Docker Architecture</h4>
+<p>Docker uses a client-server architecture where the Docker client communicates with the Docker daemon. The daemon handles building, running, and distributing Docker containers. The Docker client and daemon can run on the same system, or you can connect a Docker client to a remote Docker daemon—making it especially suitable for our Raspberry Pi server setup.</p>
+<p>The Raspberry Pi uses ARM architecture, which differs from the x86/x64 architecture used in most desktop and server computers. This creates some important considerations when working with Docker:</p>
+<ul>
+<li><strong>Image compatibility:</strong> Docker images are architecture-specific. Many popular images offer ARM variants (often tagged with arm32v7 or arm64v8), but not all do. Always check if images have ARM support before attempting to use them.</li>
+<li><strong>Performance considerations:</strong> Some Docker images may run slower on ARM processors depending on the workload. Computationally intensive operations in containers might experience more significant performance differences compared to x86/x64 architectures.</li>
+<li><strong>Building images locally:</strong> Building Docker images directly on your Raspberry Pi ensures architecture compatibility but may take longer due to limited resources. For complex builds, consider using Docker’s BuildKit with multi-architecture support.</li>
+<li><strong>Image size awareness:</strong> ARM devices like Raspberry Pi often have storage limitations. Be particularly mindful of image sizes and use lightweight base images where possible.</li>
+</ul>
+<p>For our Jupyter implementation, we’ll address these considerations by selecting ARM-compatible base images and optimizing for the Raspberry Pi’s resources.</p>
+</section>
+</section>
+<section id="configuring-vs-code-and-docker" class="level3">
+<h3 class="anchored" data-anchor-id="configuring-vs-code-and-docker">Configuring VS Code and Docker</h3>
+<p>Before we install Docker on the server, let’s set up the development environment on your client machine (MacBook Air for me). VS Code offers excellent Docker and remote development support through extensions, creating a seamless workflow between your local machine and the Raspberry Pi server.</p>
+<p>I recommend installing Docker locally, on your client (laptop), even though the Docker containers will run on your server. You can find client specific installation instructions using a GUI <a href="https://www.docker.com/products/docker-desktop/">here</a>. Once that’s done, and you’ve setup your account, continue with the rest of the guide.</p>
+<section id="essential-vs-code-extensions" class="level4">
+<h4 class="anchored" data-anchor-id="essential-vs-code-extensions">Essential VS Code Extensions</h4>
+<p>Install the following extensions in VS Code to enhance your Docker development experience:</p>
+<ul>
+<li><strong><code>Container Tools</code> extension:</strong> Microsoft’s official extension for building, managing, and deploying containerized applications. This extension replaces the older Docker extension and provides a visual interface for managing containers, images, networks, and volumes. It also offers syntax highlighting and linting for Dockerfiles and docker-compose files.</li>
+<li><strong><code>Docker DX</code> extension:</strong> This extension works alongside Container Tools to deliver a best-in-class authoring experience specifically for Dockerfiles, Compose files, and Bake files. Key features include:
+<ul>
+<li><code>Dockerfile</code> linting with warnings and best-practice suggestions from BuildKit and Buildx</li>
+<li><code>Image</code> vulnerability remediation that flags references to container images with known vulnerabilities</li>
+<li><code>Bake</code> file support with code completion and variable navigation</li>
+<li><code>Compose</code> file outline view for easier navigation of complex Compose files</li>
+</ul></li>
+<li><strong><code>Remote - SSH</code> extension:</strong> Enables you to use VS Code to connect to your Raspberry Pi over SSH and work with files and terminals directly on the remote machine.</li>
+<li><strong><code>Jupyter</code> extension:</strong> Supports working with Jupyter notebooks within VS Code, allowing you to connect to remote Jupyter kernels.</li>
+<li><strong><code>Python</code> extension:</strong> Provides rich support for Python language, including IntelliSense, debugging, and code navigation.</li>
+<li><strong><code>Ruff</code> extension:</strong> A fast Python linter that helps maintain code quality by identifying errors, style issues, and potential bugs in your code.</li>
+</ul>
+<p>To install these extensions:</p>
+<ul>
+<li>Open VS Code</li>
+<li>Press <code>Cmd+Shift+X</code> to open the Extensions view</li>
+<li>Search for each extension by name and click “Install”</li>
+</ul>
+<p>The combination of Container Tools and Docker DX creates a comprehensive Docker development environment, with Container Tools handling the runtime aspects (building, running, managing containers) and Docker DX focusing on improving the authoring experience for Docker-related files.</p>
+</section>
+<section id="configuring-docker-integration" class="level4">
+<h4 class="anchored" data-anchor-id="configuring-docker-integration">Configuring Docker Integration</h4>
+<p>Once connected to your Raspberry Pi through Remote-SSH, the <code>Container Tools</code> extension will automatically detect the Docker daemon running on the remote machine (after we install it in the next section). This integration provides a seamless Docker management experience:</p>
+<ul>
+<li>With the remote connection active, click on the <code>Container Tools</code> icon in the activity bar (resembling a stack of containers)</li>
+<li>The <code>Container Tools</code> view will display remote containers, images, volumes, and networks</li>
+<li>The <code>Docker DX</code> extension will provide enhanced editing capabilities when working with Docker files:
+<ul>
+<li><code>Dockerfile</code> editing with real-time linting from <code>BuildKit</code></li>
+<li><code>Compose</code> file navigation through the outline view</li>
+<li>Contextual suggestions and completions based on your Docker environment</li>
+</ul></li>
+</ul>
+<p>This setup creates a powerful development workflow where you:</p>
+<ul>
+<li>Edit Docker configuration files on your MacBook with syntax highlighting, linting, and intelligent suggestions</li>
+<li>Build and run Docker containers on your Raspberry Pi with visual management</li>
+<li>Access containerized services (like Jupyter) through either VS Code or a web browser</li>
+<li>Maintain high code quality with Python linting through Ruff</li>
+</ul>
+<p>When you first connect to your Raspberry Pi, VS Code might prompt you to install some server components. Allow this installation to ensure all extensions work properly in the remote environment. The <code>Docker DX</code> and <code>Container Tools</code> extensions will work together to provide both authoring and runtime capabilities for your Docker workflow.</p>
+</section>
+</section>
+<section id="configuring-docker-on-the-server" class="level3">
+<h3 class="anchored" data-anchor-id="configuring-docker-on-the-server">Configuring Docker on the Server</h3>
+<p>Now that we’ve prepared our client-side development environment, let’s install and configure Docker on your Ubuntu Raspberry Pi server. We’ll make sure it integrates properly with your existing server setup, including security configurations.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.github.com/ChrisKornaros">
+<p>GitHub</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.linkedin.com/in/chris-kornaros">
+<p>LinkedIn</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://bsky.app/profile/chriskornaros.bsky.social">
+<p>Bluesky</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://forms.gle/gDEjGD9G6VkaxkWX6">
+<p>Email</p>
+</a>
+  </li>  
+</ul>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/guides/posts/docker.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -1,5 +1,5 @@
 ---
-title: "Guide to Setting Up Raspberry Pi for Data Engineering and Virtualization Projects"
+title: "Setting Up A Raspberry Pi for Data Engineering and Virtualization Projects"
 author: "Chris Kornaros"
 date: 2025-05-20
 categories: ["Architecture", "Completed"]

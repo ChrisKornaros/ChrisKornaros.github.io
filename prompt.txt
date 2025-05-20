@@ -1,0 +1,43 @@
+Can you please write me a very detailed guide on Containerization concepts and Docker for containerization? 
+
+This guide will have two primary sections, one of which we completed in another chat:
+1. Containerization (**COMPLETE**)
+   1. Introduction
+   2. Basic Concepts and Background Information (+ Key Terms)
+      1. Networking concepts needed
+   3. Use Cases (General examples)
+   4. Adjacent/complimentary topics to learn
+   5. Conclusion
+
+2. Docker
+   1. Introudction
+      1. Intro to Jupyter as the example and why we'll use this
+   2. Basic Concepts and Background Information (+ Key Terms)
+   3. Configuring VS Code and Docker (what extensions to use)
+   4. Installing and setting up Docker on the server
+   5. Dockerfiles and Images (Where the Jupyter/Docker code examples start)
+   6. Building an Image, Running Containers
+   7. Container Management
+   8. Advanced Docker (Docker Compose, etc.)
+   9. Conclusion
+   10. What's next (The next container based guide will be setting up PostgreSQL)
+
+I would like the Containerization section to be half (or less) the length of the Docker Section. Currently, the Containzerization section of the guide is about 240 lines in a Markdown document. Let's target an initial length of 500 lines for the Docker section.
+
+For Markdown formatting, please have both primary sections (Containerization and Docker) both start with `##`. For the sections where we begin to create the Jupyter image and manage it, use the following information for the reasoning, and to help drive your exaplanations:
+
+Pros:
+* That way I can launch a jupyter notebook on my client and persist files on my server.
+* Directly applicable for data engineering 
+* Interactive coding environment 
+* Perfect transition to PostgreSQL/PySpark later 
+* Shows authentication and persistent storage 
+* Practical tool you'd actually use 
+* Single container to start, can expand 
+Cons: 
+* More resource-intensive 
+* Some extensions may have ARM compatibility issues
+
+Before generating any output, please ask clarifying questions on my goals, the structure I would like to see, and specific examples. If possible, I would like to generate this one section at a time (once we start generating outputs). For example, once you are ready (and have asked me your clarifying questions), we would being with Containerization > Introduction. Once I'm happy with that, we'd move on to Containerization > Basic Concepts and Background Information (+ Key Terms) > Networking concepts needed, etc.
+
+Please confirm you understand what I'm asking and then ask any clariyfing questions, before moving on to output generation. Please reference the conversation we had where we built the Containzerization part of the guide before asking questions. Please and thank you!
