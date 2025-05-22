@@ -258,10 +258,8 @@ For our Ubuntu Raspberry Pi server, Jupyter provides an ideal example of Docker'
 
 By focusing on Jupyter, we'll cover the most important Docker concepts—images, containers, volumes, networking, and orchestration—in a practical context that directly supports data engineering work. As we progress through each section, you'll build a functional containerized Jupyter environment that serves as both a learning tool and a practical development platform. Let's start by exploring the fundamental concepts of Docker and setting up the necessary tools on your Ubuntu Pi server.
 
-### Basic Concepts
+#### Basic Concepts
 Before diving into implementation, let's establish a clear understanding of Docker's core concepts and terminology. These fundamentals will provide the foundation for everything we build throughout this guide.
-
-#### Key Docker Components
 
 - **Docker Engine:** The runtime that builds and runs containers. It consists of:
   - A server (daemon) that manages containers
@@ -273,8 +271,6 @@ Before diving into implementation, let's establish a clear understanding of Dock
 - **Docker Registry:** A repository for Docker images. Docker Hub is the default public registry, but private registries can also be used. Images are stored with tags to identify different versions.
 - **Docker Compose:** A tool for defining and running multi-container Docker applications using a YAML file to configure application services, networks, and volumes.
 
-
-#### Docker Architecture
 Docker uses a client-server architecture where the Docker client communicates with the Docker daemon. The daemon handles building, running, and distributing Docker containers. The Docker client and daemon can run on the same system, or you can connect a Docker client to a remote Docker daemon—making it especially suitable for our Raspberry Pi server setup.
 
 The Raspberry Pi uses ARM architecture, which differs from the x86/x64 architecture used in most desktop and server computers. This creates some important considerations when working with Docker:
@@ -284,7 +280,94 @@ The Raspberry Pi uses ARM architecture, which differs from the x86/x64 architect
 - **Building images locally:** Building Docker images directly on your Raspberry Pi ensures architecture compatibility but may take longer due to limited resources. For complex builds, consider using Docker's BuildKit with multi-architecture support.
 - **Image size awareness:** ARM devices like Raspberry Pi often have storage limitations. Be particularly mindful of image sizes and use lightweight base images where possible.
 
-For our Jupyter implementation, we'll address these considerations by selecting ARM-compatible base images and optimizing for the Raspberry Pi's resources.
+For our Jupyter implementation, we'll address these considerations by selecting ARM-compatible base images and optimizing for the Raspberry Pi's resources. 
+
+That concludes the introduction, next we'll focus on configuring VS Code to work with Docker better, both on your client and server. Then, we'll dive into the actual
+
+### Docker Concepts and Background Information
+Understanding Docker's fundamental concepts is essential before diving into practical implementation. This section will establish the foundational knowledge you need to work effectively with containers, covering the core components that make Docker work, the relationship between images and containers, and how Docker fits into modern development workflows.
+
+#### Docker Components
+Docker consists of several interconnected components that work together to provide containerization capabilities. Understanding these components helps you grasp how Docker operates under the hood and what actually happens when you install Docker on your server.
+
+**Docker Engine** serves as the core runtime that makes containerization possible. Think of Docker Engine as the heart of the entire Docker system - it's the foundational technology that creates and manages containers on your host system. The Engine handles the low-level operations like creating container filesystems, managing network interfaces, and coordinating with the Linux kernel to provide isolation.
+
+**Docker CLI (Command Line Interface)** is the primary way users interact with Docker. The CLI is a client application that translates your commands into API calls that the Docker daemon can understand. When you type commands like docker run or docker build, you're using the CLI to communicate your intentions to the Docker system. The CLI acts as a bridge between human-readable commands and the technical operations Docker needs to perform.
+
+**Docker Daemon** is a background service (a program that runs continuously without direct user interaction) that listens for Docker API requests and manages Docker objects like images, containers, networks, and volumes. The daemon is the component that actually executes the work - when you ask Docker to start a container, the daemon handles creating the container, allocating resources, and monitoring its lifecycle. The daemon runs with elevated privileges because it needs to interact directly with the Linux kernel's containerization features.
+
+**So, what is actually installed on a headless server?** When you install Docker on a headless Ubuntu server like your Raspberry Pi, you're primarily installing the Docker Engine and CLI tools. The installation process sets up several key components: the Docker daemon service that starts automatically with your system, the Docker CLI binary that allows you to issue commands, and the necessary configuration files and directories where Docker stores images, container data, and runtime information.
+
+Unlike desktop installations that might include graphical interfaces, a headless server installation focuses on the core functionality needed to build, run, and manage containers through command-line operations. The installation also configures systemd service definitions so Docker starts automatically when your server boots, ensuring your containerized applications can restart after system reboots.
+
+The relationship between these components follows a client-server architecture pattern. When you execute a Docker command, the CLI parses your command and sends an HTTP request to the Docker daemon's API endpoint. The daemon receives this request, validates it, and performs the requested operation. For example, when you run docker container ls, the CLI sends a request to the daemon asking for a list of running containers, the daemon queries its internal state, and returns the information back through the CLI to your terminal.
+
+This separation of concerns allows for flexible deployment scenarios. You can run the Docker CLI on one machine and connect it to a Docker daemon running on a remote server, enabling remote container management. The daemon handles all the heavy lifting of actually managing containers, while the CLI provides a user-friendly interface for sending commands and receiving feedback.
+
+#### Images and Containers
+One of the most important concepts to understand in Docker is the distinction between images and containers. This relationship forms the foundation of how Docker works, and grasping it clearly will make everything else about Docker much more intuitive.
+
+**A Docker image** is a read-only template that contains instructions for creating a container. Think of an image as a blueprint or recipe - it defines what should be included in a container but doesn't actually run anything. Images contain application code, libraries, dependencies, configuration files, and metadata needed to create a functioning container environment. Images are static and immutable, meaning once they're built, they don't change.
+
+**A Docker container** is a runnable instance of an image. If an image is a blueprint, then a container is the actual house built from that blueprint. When you start a container from an image, Docker creates a writable layer on top of the read-only image layers and starts the defined processes. Multiple containers can be created from the same image, just like multiple houses can be built from the same blueprint, and each container operates independently with its own filesystem changes, network interfaces, and running processes.
+
+The key insight is that images are for distribution and storage, while containers are for execution. You build or download images once, but you can run many containers from those images. When a container is deleted, any changes made inside it are lost unless they were saved to persistent storage, but the original image remains unchanged and can be used to create new containers.
+
+**Base images** form the foundation of the Docker image hierarchy. A base image is typically a minimal operating system image like Ubuntu, Alpine Linux, or CentOS that provides the basic filesystem and tools needed to run applications. Base images are built "from scratch" and don't inherit from other images. They provide the fundamental layer upon which other images are built.
+
+**Parent images** are images that your image extends or builds upon. When you create a Dockerfile that starts with FROM ubuntu:20.04, you're using ubuntu:20.04 as your parent image. Your new image inherits everything from the parent image and then adds your specific modifications on top. Parent images can themselves be built on other images, creating a hierarchy of inheritance.
+
+**Child images** are images built from parent images. These images add specific applications, configurations, or customizations to their parent. For example, you might create a child image that takes a base Ubuntu image and adds Python, then create another child image that adds your specific Python application and its dependencies. This layered approach promotes reusability and efficient storage.
+
+**Docker images use a layered filesystem** architecture that provides significant efficiency benefits. Each instruction in a Dockerfile creates a new layer in the image. These layers are stacked on top of each other to form the complete filesystem that containers see. When you modify a file that exists in a lower layer, Docker uses a copy-on-write mechanism - the file is copied to the current layer and then modified, leaving the original layer unchanged.
+
+This layered approach enables powerful optimizations. If multiple images share common base layers, Docker only stores those layers once on disk, saving significant storage space. When you pull an image from a registry, Docker only downloads the layers you don't already have locally. When you build images, Docker can reuse layers from previous builds if the instructions haven't changed, dramatically speeding up the build process.
+
+The layered system also enables efficient image distribution. Instead of transferring entire filesystem images, Docker can transfer only the layers that have changed. This makes image updates much faster and reduces bandwidth usage, especially important when working with large applications or limited network connections.
+
+#### Registries
+**A Docker registry** is a storage and distribution system for Docker images. Registries serve as centralized repositories where you can upload (push) your images and download (pull) images created by others. Think of a registry as a combination library and distribution center for containerized applications - it stores images in an organized, searchable format and provides reliable access to those images from anywhere on the internet. Another way of looking at it, like `git`, but specific for images.
+
+Registries solve several critical challenges in containerized application development. They provide a central location for storing different versions of your applications, enable sharing images across development teams and deployment environments, and offer a reliable way to distribute your applications to production servers. Without registries, you would need to manually transfer image files between systems, making deployment and collaboration extremely cumbersome.
+
+**Registries provide several important benefits.** 
+
+- **Version control** for your containerized applications. 
+  - You can tag images with version numbers, enabling you to deploy specific versions, roll back to previous versions, and maintain multiple versions simultaneously. 
+  - This versioning capability is essential for production deployments where you need to track exactly which version of an application is running in each environment.
+- **Collaboration** becomes seamless with registries. 
+  - Team members can share images by pushing them to a registry, eliminating the need to share large image files directly.
+  - Developers can pull the latest versions of applications built by their colleagues, ensuring everyone works with consistent environments. 
+  - This collaboration extends to CI/CD systems, which can automatically build images and push them to registries for deployment.
+- **Scalability** benefits emerge as your infrastructure grows. 
+  - Production systems can pull images from registries to deploy applications across multiple servers simultaneously. 
+  - Container orchestration systems like Kubernetes can automatically pull images from registries when scaling applications up or down, enabling dynamic resource allocation based on demand.
+
+**Docker Hub** is the default public registry service provided by Docker Inc. It serves as the primary repository for official images maintained by software vendors and the Docker community. When you run docker pull ubuntu without specifying a registry, Docker automatically pulls from Docker Hub. Docker Hub hosts millions of images ranging from base operating systems to complete application stacks, making it an invaluable resource for developers.
+
+Docker Hub provides both public and private repositories. Public repositories allow anyone to download your images, making them ideal for open-source projects and widely-used tools. Private repositories restrict access to specific users or organizations, enabling secure storage of proprietary applications and sensitive configurations.
+
+Beyond Docker Hub, the registry ecosystem includes private registry solutions for organizations that need complete control over their image distribution. These private registries can be hosted on-premises or in cloud environments, providing security, compliance, and performance benefits for enterprise applications. The registry API is standardized, so tools and workflows that work with Docker Hub also work with private registries.
+
+**Registries integrate seamlessly into modern development workflows**, particularly in CI/CD pipelines. A typical workflow involves developers building images locally during development, pushing those images to a registry when code is ready for testing or deployment, and production systems pulling images from the registry when deploying applications. This workflow ensures that the exact same image tested in development runs in production, eliminating "works on my machine" problems.
+
+Automated build systems can monitor code repositories for changes, automatically build new images when code is updated, and push those images to registries with appropriate tags. This automation ensures that images are always current and reduces manual effort in maintaining deployments. Deployment systems can then pull the latest images or specific versions as needed, enabling both automated and controlled deployments.
+
+#### Docker Compose Overview
+**Docker Compose** is a tool that allows you to define, configure, and run multi-container Docker applications using a simple YAML configuration file. Instead of managing individual containers with separate docker run commands, Compose lets you describe your entire application stack in a single file and manage it with simple commands like `docker-compose up` and `docker-compose down`.
+
+Compose handles the complexity of coordinating multiple containers, including ensuring they start in the correct order, creating networks for inter-container communication, and managing shared volumes for data persistence. This orchestration capability transforms Docker from a tool for running individual containers into a platform for managing complete application architectures.
+
+**Why It Matters for Multi-Container Applications**
+Modern applications typically consist of multiple components that need to work together. A typical web application might include a web server, a database, a cache layer, and background job processors. Each of these components can run in its own container, but they need to communicate with each other and share certain resources.
+
+Without Compose, managing these interconnected containers becomes complex and error-prone. You would need to manually create networks, manage container startup sequences, and coordinate configuration across multiple containers. Compose abstracts this complexity, allowing you to focus on describing what you want your application to look like rather than the detailed steps needed to achieve that configuration.
+
+Docker Compose also enables **development environment consistency**. Team members can spin up identical application stacks with a single command, regardless of their local machine configuration. This consistency eliminates environment-related bugs and makes onboarding new team members much simpler.
+
+**In our advanced section**, we'll explore how Docker Compose enables sophisticated deployment patterns like rolling updates, service scaling, and environment-specific configurations. We'll also cover how Compose integrates with monitoring systems and backup strategies, providing the foundation for production-ready containerized applications.
+
+Compose serves as a stepping stone to more advanced orchestration platforms like Kubernetes, sharing many conceptual approaches while remaining simpler to learn and deploy. Understanding Compose provides excellent preparation for eventually working with container orchestration at scale.
 
 ### Configuring VS Code and Docker
 Before we install Docker on the server, let's set up the development environment on your client machine (MacBook Air for me). VS Code offers excellent Docker and remote development support through extensions, creating a seamless workflow between your local machine and the Raspberry Pi server. 
