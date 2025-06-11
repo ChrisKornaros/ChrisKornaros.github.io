@@ -369,6 +369,31 @@ Docker Compose also enables **development environment consistency**. Team member
 
 Compose serves as a stepping stone to more advanced orchestration platforms like Kubernetes, sharing many conceptual approaches while remaining simpler to learn and deploy. Understanding Compose provides excellent preparation for eventually working with container orchestration at scale.
 
+#### Other considerations
+Docker's capabilities extend beyond basic containerization, involving sophisticated architectural decisions and platform-specific considerations that impact how you design and deploy containerized applications.
+
+Docker follows a client-server architecture where the Docker client communicates with the Docker daemon through a REST API. This architecture enables flexible deployment patterns - the client and daemon can run on the same machine for local development, or the client can connect to remote daemons for managing containers across multiple servers.
+
+The architecture supports pluggable components for different aspects of containerization. Storage drivers handle how container filesystems are implemented, network drivers manage container networking, and runtime engines handle the actual execution of containers. This modularity allows Docker to adapt to different underlying systems and requirements while maintaining a consistent user interface.
+
+Security is built into Docker's architecture through multiple layers of isolation and access control. Containers share the host kernel but are isolated from each other through Linux namespaces and control groups. The Docker daemon typically runs with elevated privileges but can be configured to operate in rootless mode for additional security in certain environments.
+
+**ARM Architecture Considerations for Raspberry Pi**
+While Docker is fully compatible with ARM architecture, there are important considerations when running Docker on Raspberry Pi systems. Image compatibility becomes crucial - not all images available on Docker Hub are built for ARM architecture. You'll need to look for images specifically tagged for ARM or multi-architecture images that support both x86 and ARM platforms.
+
+Performance characteristics differ between ARM and x86 systems. ARM processors typically prioritize power efficiency over raw computational power, which affects how you should design and configure your containerized applications. Resource limits and performance expectations should be adjusted accordingly when moving applications from x86 development environments to ARM production environments.
+
+Build processes may require modification when working with ARM systems. If you're building custom images, you'll need to ensure that all dependencies and compilation processes are compatible with ARM architecture. Cross-compilation tools and multi-architecture build systems can help streamline this process for complex applications.
+
+**Docker's Isolation Mechanisms**
+Docker's isolation capabilities rely on several Linux kernel features that work together to provide secure, lightweight virtualization. Namespaces provide process isolation by giving each container its own view of system resources like process IDs, network interfaces, and filesystem mounts. Each container believes it has exclusive access to these resources, even though they're actually shared and managed by the host kernel.
+
+**Control Groups `(cgroups)`** limit and account for resource usage by containers. Cgroups prevent any single container from consuming all available CPU, memory, or I/O resources, ensuring that multiple containers can coexist without interfering with each other's performance. This resource management is essential for maintaining system stability when running multiple containers simultaneously.
+
+**Union filesystems** enable Docker's layered image system by combining multiple read-only layers into a single filesystem view. When containers make changes to files, the union filesystem uses copy-on-write semantics to maintain the illusion that each container has its own complete filesystem while actually sharing common layers between containers.
+
+These isolation mechanisms provide security and resource management benefits similar to traditional virtual machines but with significantly lower overhead. Understanding these mechanisms helps you make informed decisions about container security, resource allocation, and deployment architecture for your specific use cases.
+
 ### Configuring VS Code and Docker
 Before we install Docker on the server, let's set up the development environment on your client machine (MacBook Air for me). VS Code offers excellent Docker and remote development support through extensions, creating a seamless workflow between your local machine and the Raspberry Pi server. 
 
