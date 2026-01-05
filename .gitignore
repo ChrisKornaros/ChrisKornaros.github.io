@@ -11,6 +11,7 @@ wheels/
 
 # Local environments
 *.DS_Store
+*.vscode/
 
 # Quarto Files
 /.quarto/
