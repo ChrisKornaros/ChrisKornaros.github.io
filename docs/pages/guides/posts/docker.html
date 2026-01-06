@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -36,18 +36,19 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-75f773647a772d8fa730fc6831eb67ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-a4c6ef5a823a1530680cb31f02b11e7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-75f773647a772d8fa730fc6831eb67ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-3fd2bae6f1c5534a0b6658f7bc8b568c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-bfbfeea019f3c18490cc33ec42c0b065.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-3fd2bae6f1c5534a0b6658f7bc8b568c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-e73acfd0c7046d39dfa10654f4a62604.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-df5fb58a0c98eb23e4311b7bc98f59b5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-e73acfd0c7046d39dfa10654f4a62604.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dc9cf204bce4a6a11ae78c3c039d3fc4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-770144baa643cd0c0c8c6ffb5e2d51f5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dc9cf204bce4a6a11ae78c3c039d3fc4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -443,12 +444,17 @@ cookieconsent.run({
   <ul>
   <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1">Introduction</a>
   <ul class="collapse">
-  <li><a href="#why-jupyter" id="toc-why-jupyter" class="nav-link" data-scroll-target="#why-jupyter">Why Jupyter?</a></li>
+  <li><a href="#why-python-containers" id="toc-why-python-containers" class="nav-link" data-scroll-target="#why-python-containers">Why Python Containers?</a></li>
+  <li><a href="#basic-concepts-1" id="toc-basic-concepts-1" class="nav-link" data-scroll-target="#basic-concepts-1">Basic Concepts</a></li>
   </ul></li>
-  <li><a href="#basic-concepts-1" id="toc-basic-concepts-1" class="nav-link" data-scroll-target="#basic-concepts-1">Basic Concepts</a>
+  <li><a href="#docker-concepts-and-background-information" id="toc-docker-concepts-and-background-information" class="nav-link" data-scroll-target="#docker-concepts-and-background-information">Docker Concepts and Background Information</a>
   <ul class="collapse">
-  <li><a href="#key-docker-components" id="toc-key-docker-components" class="nav-link" data-scroll-target="#key-docker-components">Key Docker Components</a></li>
-  <li><a href="#docker-architecture" id="toc-docker-architecture" class="nav-link" data-scroll-target="#docker-architecture">Docker Architecture</a></li>
+  <li><a href="#docker-components" id="toc-docker-components" class="nav-link" data-scroll-target="#docker-components">Docker Components</a></li>
+  <li><a href="#images-and-containers" id="toc-images-and-containers" class="nav-link" data-scroll-target="#images-and-containers">Images and Containers</a></li>
+  <li><a href="#registries" id="toc-registries" class="nav-link" data-scroll-target="#registries">Registries</a></li>
+  <li><a href="#understanding-python-image-variants" id="toc-understanding-python-image-variants" class="nav-link" data-scroll-target="#understanding-python-image-variants">Understanding Python Image Variants</a></li>
+  <li><a href="#docker-compose-overview" id="toc-docker-compose-overview" class="nav-link" data-scroll-target="#docker-compose-overview">Docker Compose Overview</a></li>
+  <li><a href="#other-considerations" id="toc-other-considerations" class="nav-link" data-scroll-target="#other-considerations">Other considerations</a></li>
   </ul></li>
   <li><a href="#configuring-vs-code-and-docker" id="toc-configuring-vs-code-and-docker" class="nav-link" data-scroll-target="#configuring-vs-code-and-docker">Configuring VS Code and Docker</a>
   <ul class="collapse">
@@ -747,7 +753,7 @@ cookieconsent.run({
 <h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
 <p>Containerization represents one of the most significant shifts in how we develop, deploy, and run software in recent years. By packaging applications with their complete runtime environment, containers solve the long-standing problem of environment inconsistency while providing resource efficiency and isolation.</p>
 <p>In this first section, we’ve explored the fundamental concepts behind containers—how they use Linux kernel features like namespaces and cgroups to provide lightweight isolation, how they differ from virtual machines, and why they’ve become essential in modern computing. We’ve also looked at various use cases and adjacent technologies that complement containerization.</p>
-<p>With this foundational understanding in place, we’re now ready to move from theory to practice. In the next section, we’ll dive into Docker—the most popular containerization platform—and learn how to create, manage, and use containers on your Raspberry Pi server. We’ll build a persistent Jupyter notebook environment that lets you combine the convenience of developing on your laptop with the persistent computing resources of your Raspberry Pi.</p>
+<p>With this foundational understanding in place, we’re now ready to move from theory to practice. In the next section, we’ll dive into Docker—the most popular containerization platform—and learn how to create, manage, and use containers on your Raspberry Pi server. We’ll build a Python environment that lets you combine the convenience of developing on your laptop with the persistent computing resources of your Raspberry Pi.</p>
 <p>This practical implementation will make these container concepts concrete while giving you a valuable tool for data analysis, coding, and experimentation—all within a properly isolated environment that won’t affect the rest of your server setup.</p>
 </section>
 </section>
@@ -755,27 +761,16 @@ cookieconsent.run({
 <h2 class="anchored" data-anchor-id="docker">Docker</h2>
 <section id="introduction-1" class="level3">
 <h3 class="anchored" data-anchor-id="introduction-1">Introduction</h3>
-<p>Docker has revolutionized application development and deployment by providing a standardized way to package, distribute, and run applications in isolated environments called containers. In this comprehensive guide, we’ll explore Docker from basic concepts to advanced implementations, using a Jupyter notebook server as our primary example.</p>
-<p>Docker enables you to package an application with all its dependencies into a standardized unit called a container. These containers can run consistently across different environments, from development machines to production servers, eliminating the classic “it works on my machine” problem. This consistency is particularly valuable when working with complex data science environments like Jupyter notebooks, which often have numerous interdependent libraries and packages.</p>
-<section id="why-jupyter" class="level4">
-<h4 class="anchored" data-anchor-id="why-jupyter">Why Jupyter?</h4>
-<p>For our Ubuntu Raspberry Pi server, Jupyter provides an ideal example of Docker’s capabilities for several important reasons:</p>
-<ul>
-<li><strong>Computational offloading:</strong> Jupyter allows you to write and execute code on a Raspberry Pi’s resources while using your laptop as a client interface. This distributes the workload efficiently, leveraging each device’s strengths.</li>
-<li><strong>Persistence and accessibility:</strong> A containerized Jupyter server runs 24/7 on your Raspberry Pi, maintaining long-running calculations and persisting data files while being accessible from anywhere.</li>
-<li><strong>Environment isolation:</strong> Data engineering workflows often require specific package versions that might conflict with other applications. Docker containers provide perfect isolation for these environments.</li>
-<li><strong>Security and controlled access:</strong> Jupyter’s token-based authentication integrates well with Docker’s networking capabilities, allowing secure remote access.</li>
-<li><strong>Scalability pathway:</strong> Starting with a single Jupyter container creates a foundation for more complex setups later, such as adding PostgreSQL databases or distributed computing with PySpark.</li>
-<li><strong>Cross-platform compatibility:</strong> Docker abstracts away many of the ARM-specific considerations of running on Raspberry Pi, though we’ll address key compatibility points.</li>
-</ul>
-<p>By focusing on Jupyter, we’ll cover the most important Docker concepts—images, containers, volumes, networking, and orchestration—in a practical context that directly supports data engineering work. As we progress through each section, you’ll build a functional containerized Jupyter environment that serves as both a learning tool and a practical development platform. Let’s start by exploring the fundamental concepts of Docker and setting up the necessary tools on your Ubuntu Pi server.</p>
+<p>Docker has revolutionized application development and deployment by providing a standardized way to package, distribute, and run applications in isolated environments called containers. In this comprehensive guide, we’ll explore Docker from basic concepts to advanced implementations, using a Python container as our primary example.</p>
+<p>Docker enables you to package an application with all its dependencies into a standardized unit called a container. These containers can run consistently across different environments, from development machines to production servers, eliminating the classic “it works on my machine” problem. This consistency is particularly valuable when working with complex data science or software engineering environments, which often have numerous interdependent libraries and packages.</p>
+<section id="why-python-containers" class="level4">
+<h4 class="anchored" data-anchor-id="why-python-containers">Why Python Containers?</h4>
+<p><strong>First</strong>, Python containers demonstrate the fundamental value proposition of containerization through environment isolation. Python development often suffers from dependency conflicts where different projects require incompatible package versions. A data analysis project might need pandas 1.3.0 while a web scraping project requires pandas 2.0.0, and installing both system-wide creates conflicts. Docker containers provide perfect isolation for these environments, allowing you to maintain multiple Python environments with completely different dependency sets without any interference. <strong>Second</strong>, Python containers enable computational offloading in a way that’s particularly valuable for Raspberry Pi servers. You can write and test Python code on your laptop using your preferred editor, then execute that code on your Raspberry Pi’s resources while your laptop remains responsive for other tasks. <strong>Third</strong>, persistence and accessibility become seamless with containerized Python environments. A Python container running on your Raspberry Pi can execute scripts continuously, maintain long-running processes, and store results in persistent volumes that survive container restarts. <strong>Fourth</strong>, Python containers showcase reproducibility across development stages. The same container that runs on your Raspberry Pi can run on your laptop, on a colleague’s machine, or on a cloud server. <strong>Fifth</strong>, testing in clean environments becomes trivial with containers. Before committing code changes, you can spin up a fresh Python container, run your tests, and then destroy the container. This ensures your tests aren’t passing due to some artifact in your development environment. Each test run starts from a known, clean state.</p>
+<p><strong>Finally</strong>, Python containers provide an excellent foundation for scalability. Starting with a simple Python container gives you a clear path to more complex setups. You might begin with a single container running a script, then expand to add a PostgreSQL database container for data storage, then add a Redis container for caching, and eventually orchestrate multiple Python worker containers processing tasks in parallel. Each step builds naturally on your foundation. By focusing on Python containers, we’ll cover Docker’s most important concepts—images, containers, volumes, networking, and orchestration—in a context that’s immediately practical for development work. Python’s ubiquity in data engineering, automation, web development, and scripting makes it an ideal teaching tool that you’ll actually use beyond this learning exercise. As we progress through each section, you’ll build a functional containerized Python environment that serves as both a learning platform and a practical development tool for any Python-based project you might undertake on your Raspberry Pi server.</p>
 </section>
-</section>
-<section id="basic-concepts-1" class="level3">
-<h3 class="anchored" data-anchor-id="basic-concepts-1">Basic Concepts</h3>
+<section id="basic-concepts-1" class="level4">
+<h4 class="anchored" data-anchor-id="basic-concepts-1">Basic Concepts</h4>
 <p>Before diving into implementation, let’s establish a clear understanding of Docker’s core concepts and terminology. These fundamentals will provide the foundation for everything we build throughout this guide.</p>
-<section id="key-docker-components" class="level4">
-<h4 class="anchored" data-anchor-id="key-docker-components">Key Docker Components</h4>
 <ul>
 <li><strong>Docker Engine:</strong> The runtime that builds and runs containers. It consists of:
 <ul>
@@ -789,9 +784,6 @@ cookieconsent.run({
 <li><strong>Docker Registry:</strong> A repository for Docker images. Docker Hub is the default public registry, but private registries can also be used. Images are stored with tags to identify different versions.</li>
 <li><strong>Docker Compose:</strong> A tool for defining and running multi-container Docker applications using a YAML file to configure application services, networks, and volumes.</li>
 </ul>
-</section>
-<section id="docker-architecture" class="level4">
-<h4 class="anchored" data-anchor-id="docker-architecture">Docker Architecture</h4>
 <p>Docker uses a client-server architecture where the Docker client communicates with the Docker daemon. The daemon handles building, running, and distributing Docker containers. The Docker client and daemon can run on the same system, or you can connect a Docker client to a remote Docker daemon—making it especially suitable for our Raspberry Pi server setup.</p>
 <p>The Raspberry Pi uses ARM architecture, which differs from the x86/x64 architecture used in most desktop and server computers. This creates some important considerations when working with Docker:</p>
 <ul>
@@ -800,7 +792,96 @@ cookieconsent.run({
 <li><strong>Building images locally:</strong> Building Docker images directly on your Raspberry Pi ensures architecture compatibility but may take longer due to limited resources. For complex builds, consider using Docker’s BuildKit with multi-architecture support.</li>
 <li><strong>Image size awareness:</strong> ARM devices like Raspberry Pi often have storage limitations. Be particularly mindful of image sizes and use lightweight base images where possible.</li>
 </ul>
-<p>For our Jupyter implementation, we’ll address these considerations by selecting ARM-compatible base images and optimizing for the Raspberry Pi’s resources.</p>
+<p>For our Python implementation, we’ll address these considerations by selecting ARM-compatible base images and optimizing for the Raspberry Pi’s resources.</p>
+<p>That concludes the introduction, next we’ll focus on configuring VS Code to work with Docker better, both on your client and server. Then, we’ll dive into the actual implementation.</p>
+</section>
+</section>
+<section id="docker-concepts-and-background-information" class="level3">
+<h3 class="anchored" data-anchor-id="docker-concepts-and-background-information">Docker Concepts and Background Information</h3>
+<p>Understanding Docker’s fundamental concepts is essential before diving into practical implementation. This section will establish the foundational knowledge you need to work effectively with containers, covering the core components that make Docker work, the relationship between images and containers, and how Docker fits into modern development workflows.</p>
+<section id="docker-components" class="level4">
+<h4 class="anchored" data-anchor-id="docker-components">Docker Components</h4>
+<p>Docker consists of several interconnected components that work together to provide containerization capabilities. Understanding these components helps you grasp how Docker operates under the hood and what actually happens when you install Docker on your server.</p>
+<p><strong>Docker Engine</strong> serves as the core runtime that makes containerization possible. Think of Docker Engine as the heart of the entire Docker system - it’s the foundational technology that creates and manages containers on your host system. The Engine handles the low-level operations like creating container filesystems, managing network interfaces, and coordinating with the Linux kernel to provide isolation.</p>
+<p><strong>Docker CLI (Command Line Interface)</strong> is the primary way users interact with Docker. The CLI is a client application that translates your commands into API calls that the Docker daemon can understand. When you type commands like docker run or docker build, you’re using the CLI to communicate your intentions to the Docker system. The CLI acts as a bridge between human-readable commands and the technical operations Docker needs to perform.</p>
+<p><strong>Docker Daemon</strong> is a background service (a program that runs continuously without direct user interaction) that listens for Docker API requests and manages Docker objects like images, containers, networks, and volumes. The daemon is the component that actually executes the work - when you ask Docker to start a container, the daemon handles creating the container, allocating resources, and monitoring its lifecycle. The daemon runs with elevated privileges because it needs to interact directly with the Linux kernel’s containerization features.</p>
+<p><strong>So, what is actually installed on a headless server?</strong> When you install Docker on a headless Ubuntu server like your Raspberry Pi, you’re primarily installing the Docker Engine and CLI tools. The installation process sets up several key components: the Docker daemon service that starts automatically with your system, the Docker CLI binary that allows you to issue commands, and the necessary configuration files and directories where Docker stores images, container data, and runtime information.</p>
+<p>Unlike desktop installations that might include graphical interfaces, a headless server installation focuses on the core functionality needed to build, run, and manage containers through command-line operations. The installation also configures systemd service definitions so Docker starts automatically when your server boots, ensuring your containerized applications can restart after system reboots.</p>
+<p>The relationship between these components follows a client-server architecture pattern. When you execute a Docker command, the CLI parses your command and sends an HTTP request to the Docker daemon’s API endpoint. The daemon receives this request, validates it, and performs the requested operation. For example, when you run docker container ls, the CLI sends a request to the daemon asking for a list of running containers, the daemon queries its internal state, and returns the information back through the CLI to your terminal.</p>
+<p>This separation of concerns allows for flexible deployment scenarios. You can run the Docker CLI on one machine and connect it to a Docker daemon running on a remote server, enabling remote container management. The daemon handles all the heavy lifting of actually managing containers, while the CLI provides a user-friendly interface for sending commands and receiving feedback.</p>
+</section>
+<section id="images-and-containers" class="level4">
+<h4 class="anchored" data-anchor-id="images-and-containers">Images and Containers</h4>
+<p>One of the most important concepts to understand in Docker is the distinction between images and containers. This relationship forms the foundation of how Docker works, and grasping it clearly will make everything else about Docker much more intuitive.</p>
+<p><strong>A Docker image</strong> is a read-only template that contains instructions for creating a container. Think of an image as a blueprint or recipe - it defines what should be included in a container but doesn’t actually run anything. Images contain application code, libraries, dependencies, configuration files, and metadata needed to create a functioning container environment. Images are static and immutable, meaning once they’re built, they don’t change.</p>
+<p><strong>A Docker container</strong> is a runnable instance of an image. If an image is a blueprint, then a container is the actual house built from that blueprint. When you start a container from an image, Docker creates a writable layer on top of the read-only image layers and starts the defined processes. Multiple containers can be created from the same image, just like multiple houses can be built from the same blueprint, and each container operates independently with its own filesystem changes, network interfaces, and running processes.</p>
+<p>The key insight is that images are for distribution and storage, while containers are for execution. You build or download images once, but you can run many containers from those images. When a container is deleted, any changes made inside it are lost unless they were saved to persistent storage, but the original image remains unchanged and can be used to create new containers.</p>
+<p><strong>Base images</strong> form the foundation of the Docker image hierarchy. A base image is typically a minimal operating system image like Ubuntu, Alpine Linux, or CentOS that provides the basic filesystem and tools needed to run applications. Base images are built “from scratch” and don’t inherit from other images. They provide the fundamental layer upon which other images are built.</p>
+<p><strong>Parent images</strong> are images that your image extends or builds upon. When you create a Dockerfile that starts with FROM ubuntu:20.04, you’re using ubuntu:20.04 as your parent image. Your new image inherits everything from the parent image and then adds your specific modifications on top. Parent images can themselves be built on other images, creating a hierarchy of inheritance.</p>
+<p><strong>Child images</strong> are images built from parent images. These images add specific applications, configurations, or customizations to their parent. For example, you might create a child image that takes a base Ubuntu image and adds Python, then create another child image that adds your specific Python application and its dependencies. This layered approach promotes reusability and efficient storage.</p>
+<p><strong>Docker images use a layered filesystem</strong> architecture that provides significant efficiency benefits. Each instruction in a Dockerfile creates a new layer in the image. These layers are stacked on top of each other to form the complete filesystem that containers see. When you modify a file that exists in a lower layer, Docker uses a copy-on-write mechanism - the file is copied to the current layer and then modified, leaving the original layer unchanged.</p>
+<p>This layered approach enables powerful optimizations. If multiple images share common base layers, Docker only stores those layers once on disk, saving significant storage space. When you pull an image from a registry, Docker only downloads the layers you don’t already have locally. When you build images, Docker can reuse layers from previous builds if the instructions haven’t changed, dramatically speeding up the build process.</p>
+<p>The layered system also enables efficient image distribution. Instead of transferring entire filesystem images, Docker can transfer only the layers that have changed. This makes image updates much faster and reduces bandwidth usage, especially important when working with large applications or limited network connections.</p>
+</section>
+<section id="registries" class="level4">
+<h4 class="anchored" data-anchor-id="registries">Registries</h4>
+<p><strong>A Docker registry</strong> is a storage and distribution system for Docker images. Registries serve as centralized repositories where you can upload (push) your images and download (pull) images created by others. Think of a registry as a combination library and distribution center for containerized applications - it stores images in an organized, searchable format and provides reliable access to those images from anywhere on the internet. Another way of looking at it, like <code>git</code>, but specific for images.</p>
+<p>Registries solve several critical challenges in containerized application development. They provide a central location for storing different versions of your applications, enable sharing images across development teams and deployment environments, and offer a reliable way to distribute your applications to production servers. Without registries, you would need to manually transfer image files between systems, making deployment and collaboration extremely cumbersome.</p>
+<p><strong>Registries provide several important benefits.</strong></p>
+<ul>
+<li><strong>Version control</strong> for your containerized applications.
+<ul>
+<li>You can tag images with version numbers, enabling you to deploy specific versions, roll back to previous versions, and maintain multiple versions simultaneously.</li>
+<li>This versioning capability is essential for production deployments where you need to track exactly which version of an application is running in each environment.</li>
+</ul></li>
+<li><strong>Collaboration</strong> becomes seamless with registries.
+<ul>
+<li>Team members can share images by pushing them to a registry, eliminating the need to share large image files directly.</li>
+<li>Developers can pull the latest versions of applications built by their colleagues, ensuring everyone works with consistent environments.</li>
+<li>This collaboration extends to CI/CD systems, which can automatically build images and push them to registries for deployment.</li>
+</ul></li>
+<li><strong>Scalability</strong> benefits emerge as your infrastructure grows.
+<ul>
+<li>Production systems can pull images from registries to deploy applications across multiple servers simultaneously.</li>
+<li>Container orchestration systems like Kubernetes can automatically pull images from registries when scaling applications up or down, enabling dynamic resource allocation based on demand.</li>
+</ul></li>
+</ul>
+<p><strong>Docker Hub</strong> is the default public registry service provided by Docker Inc.&nbsp;It serves as the primary repository for official images maintained by software vendors and the Docker community. When you run docker pull ubuntu without specifying a registry, Docker automatically pulls from Docker Hub. Docker Hub hosts millions of images ranging from base operating systems to complete application stacks, making it an invaluable resource for developers.</p>
+<p>Docker Hub provides both public and private repositories. Public repositories allow anyone to download your images, making them ideal for open-source projects and widely-used tools. Private repositories restrict access to specific users or organizations, enabling secure storage of proprietary applications and sensitive configurations.</p>
+<p>Beyond Docker Hub, the registry ecosystem includes private registry solutions for organizations that need complete control over their image distribution. These private registries can be hosted on-premises or in cloud environments, providing security, compliance, and performance benefits for enterprise applications. The registry API is standardized, so tools and workflows that work with Docker Hub also work with private registries.</p>
+<p><strong>Registries integrate seamlessly into modern development workflows</strong>, particularly in CI/CD pipelines. A typical workflow involves developers building images locally during development, pushing those images to a registry when code is ready for testing or deployment, and production systems pulling images from the registry when deploying applications. This workflow ensures that the exact same image tested in development runs in production, eliminating “works on my machine” problems.</p>
+<p>Automated build systems can monitor code repositories for changes, automatically build new images when code is updated, and push those images to registries with appropriate tags. This automation ensures that images are always current and reduces manual effort in maintaining deployments. Deployment systems can then pull the latest images or specific versions as needed, enabling both automated and controlled deployments.</p>
+</section>
+<section id="understanding-python-image-variants" class="level4">
+<h4 class="anchored" data-anchor-id="understanding-python-image-variants">Understanding Python Image Variants</h4>
+<p>When you search for Python on Docker Hub, you’ll discover multiple variants of the official Python image, each optimized for different use cases. Understanding these variants helps you choose the right base image for your specific needs, balancing image size, functionality, and build complexity.</p>
+<p>The <strong><em>standard Python</em></strong> image (tagged simply as <code>python:3.11</code> or similar) provides a full Debian-based environment with Python installed. This image includes the complete Debian system utilities, build tools, and libraries that you might need for compiling Python packages with C extensions. The standard image typically ranges from 900MB to 1GB in size, making it the largest option but also the most compatible. If you’re installing packages with compiled components like numpy, pandas, or pillow, the standard image ensures you have all necessary build dependencies available. This image prioritizes “it just works” compatibility over size optimization, making it ideal for development environments where you want to avoid troubleshooting missing system libraries. The <strong><em>Python Slim</em></strong> image (tagged as <code>python:3.11-slim</code>) strips away many of the Debian system utilities and build tools while retaining the core functionality needed to run Python applications. Slim images typically measure 120-150MB, roughly one-seventh the size of standard images. The slim variant includes Python itself and basic system libraries but excludes compilers, development headers, and less commonly used utilities. This image works well for applications using pure Python packages or pre-compiled wheels. However, you may encounter issues when installing packages that require compilation—you’ll need to manually install build dependencies, compile the package, and then remove those dependencies to keep the image size manageable. The slim image strikes a balance between size and ease of use, making it suitable for many production deployments where you’ve already identified your dependencies. The <strong><em>Python Alpine</em></strong> image (tagged as <code>python:3.11-alpine</code>) takes minimalism further by using Alpine Linux instead of Debian as the base operating system. Alpine images for Python typically measure 40-60MB, making them the smallest option by a significant margin. Alpine Linux uses musl libc instead of glibc and busybox instead of GNU coreutils, creating a fundamentally different environment from standard Linux distributions. While this dramatically reduces size, it introduces compatibility challenges. Many Python packages with C extensions aren’t tested against musl libc, leading to potential runtime issues. Building packages from source on Alpine often requires different development packages than on Debian-based systems, and compilation times can be longer. Additionally, Alpine uses a different package manager (apk instead of apt), requiring you to learn different commands for system package management.</p>
+<p>For our Raspberry Pi server, the choice between these variants involves several considerations. The standard Python image provides the smoothest experience with the fewest surprises, but at 900MB+ it’s quite large for ARM-based storage. The Python Slim image offers a good compromise, reducing size significantly while maintaining broad package compatibility. The Alpine image’s extreme size reduction (40-60MB) seems attractive, but the ARM architecture of the Raspberry Pi combined with Alpine’s musl libc can create challenging debugging situations when packages don’t behave as expected.</p>
+<p>I recommend starting with the Python Slim image for most use cases on Raspberry Pi. It provides sufficient functionality for the majority of Python packages while keeping image size reasonable. If you encounter a package that won’t install due to missing build dependencies, you can either switch to the standard image or learn to install just the specific dependencies needed. This approach gives you practical experience with troubleshooting Docker build issues without the additional complexity that Alpine introduces.</p>
+</section>
+<section id="docker-compose-overview" class="level4">
+<h4 class="anchored" data-anchor-id="docker-compose-overview">Docker Compose Overview</h4>
+<p><strong>Docker Compose</strong> is a tool that allows you to define, configure, and run multi-container Docker applications using a simple YAML configuration file. Instead of managing individual containers with separate docker run commands, Compose lets you describe your entire application stack in a single file and manage it with simple commands like <code>docker-compose up</code> and <code>docker-compose down</code>.</p>
+<p>Compose handles the complexity of coordinating multiple containers, including ensuring they start in the correct order, creating networks for inter-container communication, and managing shared volumes for data persistence. This orchestration capability transforms Docker from a tool for running individual containers into a platform for managing complete application architectures.</p>
+<p><strong>Why It Matters for Multi-Container Applications</strong> Modern applications typically consist of multiple components that need to work together. A typical web application might include a web server, a database, a cache layer, and background job processors. Each of these components can run in its own container, but they need to communicate with each other and share certain resources.</p>
+<p>Without Compose, managing these interconnected containers becomes complex and error-prone. You would need to manually create networks, manage container startup sequences, and coordinate configuration across multiple containers. Compose abstracts this complexity, allowing you to focus on describing what you want your application to look like rather than the detailed steps needed to achieve that configuration.</p>
+<p>Docker Compose also enables <strong>development environment consistency</strong>. Team members can spin up identical application stacks with a single command, regardless of their local machine configuration. This consistency eliminates environment-related bugs and makes onboarding new team members much simpler.</p>
+<p><strong>In our advanced section</strong>, we’ll explore how Docker Compose enables sophisticated deployment patterns like rolling updates, service scaling, and environment-specific configurations. We’ll also cover how Compose integrates with monitoring systems and backup strategies, providing the foundation for production-ready containerized applications.</p>
+<p>Compose serves as a stepping stone to more advanced orchestration platforms like Kubernetes, sharing many conceptual approaches while remaining simpler to learn and deploy. Understanding Compose provides excellent preparation for eventually working with container orchestration at scale.</p>
+</section>
+<section id="other-considerations" class="level4">
+<h4 class="anchored" data-anchor-id="other-considerations">Other considerations</h4>
+<p>Docker’s capabilities extend beyond basic containerization, involving sophisticated architectural decisions and platform-specific considerations that impact how you design and deploy containerized applications.</p>
+<p>Docker follows a client-server architecture where the Docker client communicates with the Docker daemon through a REST API. This architecture enables flexible deployment patterns - the client and daemon can run on the same machine for local development, or the client can connect to remote daemons for managing containers across multiple servers.</p>
+<p>The architecture supports pluggable components for different aspects of containerization. Storage drivers handle how container filesystems are implemented, network drivers manage container networking, and runtime engines handle the actual execution of containers. This modularity allows Docker to adapt to different underlying systems and requirements while maintaining a consistent user interface.</p>
+<p>Security is built into Docker’s architecture through multiple layers of isolation and access control. Containers share the host kernel but are isolated from each other through Linux namespaces and control groups. The Docker daemon typically runs with elevated privileges but can be configured to operate in rootless mode for additional security in certain environments.</p>
+<p><strong>ARM Architecture Considerations for Raspberry Pi</strong> While Docker is fully compatible with ARM architecture, there are important considerations when running Docker on Raspberry Pi systems. Image compatibility becomes crucial - not all images available on Docker Hub are built for ARM architecture. You’ll need to look for images specifically tagged for ARM or multi-architecture images that support both x86 and ARM platforms.</p>
+<p>Performance characteristics differ between ARM and x86 systems. ARM processors typically prioritize power efficiency over raw computational power, which affects how you should design and configure your containerized applications. Resource limits and performance expectations should be adjusted accordingly when moving applications from x86 development environments to ARM production environments.</p>
+<p>Build processes may require modification when working with ARM systems. If you’re building custom images, you’ll need to ensure that all dependencies and compilation processes are compatible with ARM architecture. Cross-compilation tools and multi-architecture build systems can help streamline this process for complex applications.</p>
+<p><strong>Docker’s Isolation Mechanisms</strong> Docker’s isolation capabilities rely on several Linux kernel features that work together to provide secure, lightweight virtualization. Namespaces provide process isolation by giving each container its own view of system resources like process IDs, network interfaces, and filesystem mounts. Each container believes it has exclusive access to these resources, even though they’re actually shared and managed by the host kernel.</p>
+<p><strong>Control Groups <code>(cgroups)</code></strong> limit and account for resource usage by containers. Cgroups prevent any single container from consuming all available CPU, memory, or I/O resources, ensuring that multiple containers can coexist without interfering with each other’s performance. This resource management is essential for maintaining system stability when running multiple containers simultaneously.</p>
+<p><strong>Union filesystems</strong> enable Docker’s layered image system by combining multiple read-only layers into a single filesystem view. When containers make changes to files, the union filesystem uses copy-on-write semantics to maintain the illusion that each container has its own complete filesystem while actually sharing common layers between containers.</p>
+<p>These isolation mechanisms provide security and resource management benefits similar to traditional virtual machines but with significantly lower overhead. Understanding these mechanisms helps you make informed decisions about container security, resource allocation, and deployment architecture for your specific use cases.</p>
 </section>
 </section>
 <section id="configuring-vs-code-and-docker" class="level3">
@@ -849,7 +930,7 @@ cookieconsent.run({
 <ul>
 <li>Edit Docker configuration files on your MacBook with syntax highlighting, linting, and intelligent suggestions</li>
 <li>Build and run Docker containers on your Raspberry Pi with visual management</li>
-<li>Access containerized services (like Jupyter) through either VS Code or a web browser</li>
+<li>Access containerized services (like Python) through either VS Code or a web browser</li>
 <li>Maintain high code quality with Python linting through Ruff</li>
 </ul>
 <p>When you first connect to your Raspberry Pi, VS Code might prompt you to install some server components. Allow this installation to ensure all extensions work properly in the remote environment. The <code>Docker DX</code> and <code>Container Tools</code> extensions will work together to provide both authoring and runtime capabilities for your Docker workflow.</p>
@@ -928,13 +1009,14 @@ cookieconsent.run({
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

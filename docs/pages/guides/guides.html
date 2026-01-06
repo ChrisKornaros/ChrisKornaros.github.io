@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -36,18 +36,19 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-75f773647a772d8fa730fc6831eb67ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-a4c6ef5a823a1530680cb31f02b11e7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-75f773647a772d8fa730fc6831eb67ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-3fd2bae6f1c5534a0b6658f7bc8b568c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-bfbfeea019f3c18490cc33ec42c0b065.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-3fd2bae6f1c5534a0b6658f7bc8b568c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-e73acfd0c7046d39dfa10654f4a62604.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-df5fb58a0c98eb23e4311b7bc98f59b5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-e73acfd0c7046d39dfa10654f4a62604.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dc9cf204bce4a6a11ae78c3c039d3fc4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-770144baa643cd0c0c8c6ffb5e2d51f5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dc9cf204bce4a6a11ae78c3c039d3fc4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -146,7 +147,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -429,12 +430,6 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/guides/posts/docker.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Docker: Novice to Journeyman</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../../pages/guides/posts/raspberry_pi_server.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Linux Server &amp; Raspberry Pi</span></a>
   </div>
@@ -467,7 +462,7 @@ window.Quarto = {
   <li><a href="#current-guides" id="toc-current-guides" class="nav-link" data-scroll-target="#current-guides">Current Guides</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/guides/guides.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="QXJjaGl0ZWN0dXJl">Architecture <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Q29tcGxldGVk">Completed <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGV2T3Bz">DevOps <span class="quarto-category-count">(1)</span></div><div class="category" data-category="T25nb2luZw==">Ongoing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UmVwb3J0aW5n">Reporting <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="QXJjaGl0ZWN0dXJl">Architecture <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29tcGxldGVk">Completed <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGV2T3Bz">DevOps <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UmVwb3J0aW5n">Reporting <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -512,10 +507,10 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="QXJjaGl0ZWN0dXJlJTJDQ29tcGxldGVk" data-listing-date-sort="1747713600000" data-listing-file-modified-sort="1747772690532" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="156" data-listing-word-count-sort="31175">
+<div class="g-col-1" data-index="0" data-categories="QXJjaGl0ZWN0dXJlJTJDQ29tcGxldGVk" data-listing-date-sort="1747713600000" data-listing-file-modified-sort="1767623972305" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="156" data-listing-word-count-sort="31175">
 <a href="../../pages/guides/posts/raspberry_pi_server.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts/images/ubuntu-pi-device.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<p class="card-img-top"><img src="posts\images\ubuntu-pi-device.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 Setting Up A Raspberry Pi for Data Engineering and Virtualization Projects
@@ -541,50 +536,21 @@ May 20, 2025
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="1" data-categories="QXJjaGl0ZWN0dXJlJTJDT25nb2luZw==" data-listing-date-sort="1747713600000" data-listing-file-modified-sort="1747782952935" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="19" data-listing-word-count-sort="3659">
-<a href="../../pages/guides/posts/docker.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="1" data-categories="UmVwb3J0aW5n" data-listing-date-sort="1734066000000" data-listing-file-modified-sort="1767623972304" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17" data-listing-word-count-sort="3329">
+<a href="../../pages/guides/posts/quarto.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts/images/docker-logo-blue.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<p class="card-img-top"><img src="posts\images\quarto.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
-Docker: Novice to Journeyman
+Quarto
 </h5>
 <div class="listing-categories">
 
-<div class="listing-category" onclick="window.quartoListingCategory('QXJjaGl0ZWN0dXJl'); return false;">Architecture</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('T25nb2luZw=='); return false;">Ongoing</div>
+<div class="listing-category" onclick="window.quartoListingCategory('UmVwb3J0aW5n'); return false;">Reporting</div>
 
 </div>
 <div class="card-text listing-description delink">
-Containerization has revolutionized how we develop, deploy, and run software. At its core, containerization is a method of packaging an application along with all its…
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Chris Kornaros
-</div>
-<div class="listing-date">
-May 20, 2025
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="2" data-categories="RGV2T3Bz" data-listing-date-sort="1734066000000" data-listing-file-modified-sort="1743694027241" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2044">
-<a href="../../pages/guides/posts/uv.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts/images/gh_cli_repo_setup.png" alt="GitHub CLI Repo Creation" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-uv, the Python Project and Package Manager
-</h5>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('RGV2T3Bz'); return false;">DevOps</div>
-
-</div>
-<div class="card-text listing-description delink">
-A basic guide on using <code>uv</code> the package and projects manager for Python developers.
+A non-exhaustive guide on using Quarto for project documentation and personal branding.
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -597,21 +563,21 @@ Dec 13, 2024
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="3" data-categories="UmVwb3J0aW5n" data-listing-date-sort="1734066000000" data-listing-file-modified-sort="1743694027239" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17" data-listing-word-count-sort="3329">
-<a href="../../pages/guides/posts/quarto.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="2" data-categories="RGV2T3Bz" data-listing-date-sort="1734066000000" data-listing-file-modified-sort="1767623972306" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2044">
+<a href="../../pages/guides/posts/uv.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts/images/quarto.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<p class="card-img-top"><img src="posts\images\gh_cli_repo_setup.png" alt="GitHub CLI Repo Creation" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
-Quarto
+uv, the Python Project and Package Manager
 </h5>
 <div class="listing-categories">
 
-<div class="listing-category" onclick="window.quartoListingCategory('UmVwb3J0aW5n'); return false;">Reporting</div>
+<div class="listing-category" onclick="window.quartoListingCategory('RGV2T3Bz'); return false;">DevOps</div>
 
 </div>
 <div class="card-text listing-description delink">
-A non-exhaustive guide on using Quarto for project documentation and personal branding.
+A basic guide on using <code>uv</code> the package and projects manager for Python developers.
 </div>
 <div class="card-attribution card-text-small justify">
 <div class="listing-author">
@@ -691,13 +657,14 @@ Dec 13, 2024
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
