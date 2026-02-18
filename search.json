@@ -1,19 +1,5 @@
 [
   {
-    "objectID": "pages/about/about.html",
-    "href": "pages/about/about.html",
-    "title": "About",
-    "section": "",
-    "text": "Thanks for visiting! As you can see, this site is pretty messy. That is because my programming skills lie with data, not web design. I’ve thrown this together with the help of Quarto documentation, SASS documentation, Bootstrap Documentation, _brand.yml documentation, and of course LLMs. Feel free to report issue as you find them, or suggest improvements because there is a link to the source repo on every page."
-  },
-  {
-    "objectID": "pages/about/about.html#about-me",
-    "href": "pages/about/about.html#about-me",
-    "title": "About",
-    "section": "About Me",
-    "text": "About Me\nI’m a 27 year old Data Scientist, Engineer, Analyst, Architect, etc. that has two degrees from Tulane University in New Orleans– BSM, Marketing and Asian Studies; MS, Business Analytics. During COVID, I did an extra year of school and received a Masters in Data Science. As a result of my education, I fell in love with data science and machine learning, but due to common data challenges, I developed a professional passion and skillset for database architecture and data engineering.\nI currently work as a Senior Data Analyst at US Foods in their enterprise data organization, primarily supporting the Safety and Warehousing domains. I previously worked at General Motors in the Global Markets IT organization. Most of the projects I work on outside of US Foods use different tools and skillsets than I do during my day job. The reason being that I want to stay up to date with all of the tools and changes in the industry. As a result, I get to play with all of the cool licensed tools like dbt,Snowflake, Databricks, and Power BI at work, but I get to build and learn with open source tools externally.\nSince really jumping in to open source development and learning in 2024, I’ve come to enjoy the study and field of data even more. I know that long term I want to move into a data strategy and innovation role. I’m also interested in eventually pursuing a PhD, either in a Data Engineering capacity or looking at performance optimization for data applications– think using duckdb instead of pandas. Designing and architecting systems that enable people to get more out of their data is something I’m teaching myself now. That being said, I’m enthralled with both the process and my progress.\nIn the long run, I want to continue working full time as a Data Engineer (or something similar). That being said, for the time being, I am interested in advising or consulting both individuals and companies on data strategy.\nYou can take a look at my resume down below. My email is listed."
-  },
-  {
     "objectID": "pages/guides/guides.html",
     "href": "pages/guides/guides.html",
     "title": "Guides",
@@ -264,83 +250,13 @@
     ]
   },
   {
-    "objectID": "pages/projects/data_engineering/data_engineering.html",
-    "href": "pages/projects/data_engineering/data_engineering.html",
-    "title": "Data Engineering and Architecture Projects",
+    "objectID": "pages/blogs/blogs.html",
+    "href": "pages/blogs/blogs.html",
+    "title": "Blogs",
     "section": "",
-    "text": "Landing page for all my project posts related to Data Engineering and Architecture.",
+    "text": "A landing page for various blogs, journals, or random thoughts. Some of these will be focused on specific tools or technology, others will be random thoughts or research notes.\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
-      "Data Engineering and Architecture"
-    ]
-  },
-  {
-    "objectID": "pages/projects/data_engineering/data_engineering.html#projects",
-    "href": "pages/projects/data_engineering/data_engineering.html#projects",
-    "title": "Data Engineering and Architecture Projects",
-    "section": "Projects",
-    "text": "Projects",
-    "crumbs": [
-      "Data Engineering and Architecture"
-    ]
-  },
-  {
-    "objectID": "pages/projects/data_science/posts/titanic.html#general-overview",
-    "href": "pages/projects/data_science/posts/titanic.html#general-overview",
-    "title": "Titanic Disaster",
-    "section": "General Overview",
-    "text": "General Overview\nThe Kaggle Titanic dataset and ML competition is one that many people are familiar with, and if they’re like me, it was also their first ML project. I redid this after 3 years to get familiar with my current workflow of using git, notebooks, venvs, etc. Below I included some notes to myself. While it was overkill, I used a Dockerized environment for this project, just to increase my familiarity with containers and the docker toolset.",
-    "crumbs": [
-      "Data Science and Machine Learning",
-      "Titanic Disaster"
-    ]
-  },
-  {
-    "objectID": "pages/projects/data_science/posts/titanic.html#notes-on-the-titanic-model-and-the-process-for-using-the-jupyter-kernel-on-the-ec2-server",
-    "href": "pages/projects/data_science/posts/titanic.html#notes-on-the-titanic-model-and-the-process-for-using-the-jupyter-kernel-on-the-ec2-server",
-    "title": "Titanic Disaster",
-    "section": "Notes on the Titanic model and the process for using the Jupyter Kernel on the EC2 Server",
-    "text": "Notes on the Titanic model and the process for using the Jupyter Kernel on the EC2 Server\n\n\nFirst, navigate to Local-Scripts/.AWS/.EC2_Scripts and run the ec2_start.sh script zsh ec2_start.sh\nNext, execute the unix_test_dns.sh script to store the EC2 public DNS in the /etc/hosts file ./unix_test_dns.sh\nUse the ssh -i command to connect to the EC2 server, then run the Jupyter kernel image docker run -p 8888:8888 titanic-env Look into adding a volume mount command here to persist model/file changes in the EC2\nNow that it’s running. Use a different terminal window (or the VS Code IDE) and test the DNS name. ping unix_test.local Need to make this DNS dynamic\nIn VS Code, open the .ipynb file in the model folder and continue work.\n\nIf you need to reconnect to a kernel, use the Titanic preset.\nVS Code connects to the EC2 IPv4 address, even though the Kernel tells you 127.0.0.1\n\nThe format for connecting to the Public IPv4 is http://IPv4:8888/\nTo pull the file out of the container and store it on the EC2 server\n\ndocker cp 786853360d97:/home/files/titanic_submission.csv files/titanic_submission.csv\ndocker copy instance-id:/path/to/file local/path\n\n\n\n\nIf you need to modify the container\n\nDo so locally, or anywhere, and then push the change to the GitHub repoistory\nThen, pull the changes into the EC2 server\nClear the Docker library/cache, and then rebuild the image from scratch, use the following docker build -t titanic-env -f .config/Dockerfile .\nEnsure this is done from the main project folder and uses those flags\n\nFor Titanic, this is in the admin/Kaggle/Titanic folder in the EC2 instance\n--no-cache ensures it’s a fresh build (This will take a while, not worth it in the smaller environment. Rebuild with cache)\n-t sets the name of the image\n-f lets you specify the Dockerfile location\n. lets Docker know that your current working directory is where the build context should take place",
-    "crumbs": [
-      "Data Science and Machine Learning",
-      "Titanic Disaster"
-    ]
-  },
-  {
-    "objectID": "pages/projects/data_science/posts/titanic.html#the-code-portion-of-this-notebook",
-    "href": "pages/projects/data_science/posts/titanic.html#the-code-portion-of-this-notebook",
-    "title": "Titanic Disaster",
-    "section": "The Code Portion of this notebook",
-    "text": "The Code Portion of this notebook\n\n\n\n\n\n\nCaution\n\n\n\nWhen I most recently completed this competition, I didn’t do it with the goal in mind of doing a nice write-up. This is really just an amalgamation of the notes I made to myself on how to use/modify the Docker container I ran my model on and the actual notebook + code + notes.\n\n\nimport numpy as np\nimport pandas as pd\nimport duckdb\nimport sklearn\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.model_selection import train_test_split, KFold, RandomizedSearchCV\nfrom sklearn.metrics import confusion_matrix, classification_report, roc_auc_score\n\n# Initialize a connection and create a persistent database\n# Worth noting that due to the workflow I'm using, the database was/should be created externally, and then built into the Docker container\n# This way, the raw database files are saved locally, but file size won't grow exponentially\ncon = duckdb.connect(\"files/titanic.duckdb\")\n# Using this to DROP and Recreate train_raw, ensuring a fresh process\ncon.sql(\"DROP TABLE train_raw;\")\ncon.sql(\"DROP TABLE test_raw;\")\ncon.sql(\"CREATE TABLE train_raw AS SELECT * FROM 'files/train.csv'\")\ncon.sql(\"CREATE TABLE test_raw AS SELECT * FROM 'files/test.csv'\")\n# Create working tables\n#con.sql(\"DROP TABLE train;\")\n#con.sql(\"DROP TABLE test;\")\ncon.sql(\"CREATE TABLE train AS SELECT * FROM train_raw\")\ncon.sql(\"CREATE TABLE test AS SELECT * FROM test_raw\")\n# Verify the proper tables are loaded\ncon.sql(\"SELECT * FROM duckdb_tables()\")\n# Generate summary statistics\ncon.sql(\"SUMMARIZE train\")\n#con.sql(\"SUMMARIZE test\")\n# Examine Nulls for the Age, Cabin, and Embarked columns (do this for test as well)\ncon.sql(\"SELECT * FROM train WHERE Age IS NULL\") # Seems to make the most sense to use the average age here\ncon.sql(\"SELECT * FROM train WHERE Cabin IS NULL\") # Seems likely Cabins not as strictly recorded for lower class guests, probably unnecessary for model\ncon.sql(\"SELECT * FROM train WHERE Embarked IS NULL\") # This only comprises 2 records and it's unclear if they made it on in the first place, not a high enough percentage of 1st class survivors to consider keeping\n# Update the Age column, replace NULL values with the average Age\ncon.sql(\"\"\"UPDATE train AS train_clean\n        SET Age = (\n            SELECT\n                avg(raw.Age) AS cleanAge\n            FROM train as raw\n            WHERE raw.Age IS NOT NULL\n        )\n        WHERE Age IS NULL\"\"\")\n# Update the Sex column, change the VARCHAR type to BOOLEAN\ncon.sql(\"\"\"ALTER TABLE train ALTER Sex \n        SET DATA TYPE BOOLEAN USING CASE\n            WHEN Sex = 'female' THEN 1 ELSE 0 END\n        \"\"\")\n# Update the Age column in the test dataset\ncon.sql(\"\"\"UPDATE test AS test_clean\n        SET Age = (\n            SELECT\n                avg(raw.Age) AS cleanAge\n            FROM test as raw\n            WHERE raw.Age IS NOT NULL\n        )\n        WHERE Age IS NULL\"\"\")\n# Update the Sex column, change the VARCHAR type to BOOLEAN\ncon.sql(\"\"\"ALTER TABLE test ALTER Sex \n        SET DATA TYPE BOOLEAN USING CASE\n            WHEN Sex = 'female' THEN 1 ELSE 0 END\n        \"\"\")\n# Remove the PassengerId, Name, Cabin, Embarked, Fare, and Ticket columns\ncon.sql(\"ALTER TABLE train DROP PassengerId\") # Has no bearing on the outcome of the model\ncon.sql(\"ALTER TABLE train DROP Name\") # Has to be numeric data\ncon.sql(\"ALTER TABLE train DROP Cabin\")\ncon.sql(\"ALTER TABLE train DROP Embarked\")\ncon.sql(\"ALTER TABLE train DROP Fare\") # Dropping because there are nulls in the test file\ncon.sql(\"ALTER TABLE train DROP Ticket\") # Dropping because of inconsistent values\n\n# Remove the PassengerId, Name, Cabin, Embarked, Fare, and Ticket columns\ncon.sql(\"ALTER TABLE test DROP Name\") # Has to be numeric data\ncon.sql(\"ALTER TABLE test DROP Cabin\")\ncon.sql(\"ALTER TABLE test DROP Embarked\")\ncon.sql(\"ALTER TABLE test DROP Fare\") # Dropping because there are nulls in the test file\ncon.sql(\"ALTER TABLE test DROP Ticket\") # Dropping because of inconsistent values\n\n# Creating dataframes for testing/training, I'll be using sklearn here, which needs both\ntrain = con.sql(\"SELECT * FROM train\").df()\ntest = con.sql(\"SELECT * FROM test\").df()\n# Create features and target\nX = train.drop(\"Survived\", axis = 1).values\ny = train[\"Survived\"].values\n\nX_test = test.drop(\"PassengerId\", axis = 1).values\n# Initialize Regression object and split data\nlogreg = LogisticRegression(penalty = 'l2', tol = np.float64(0.083425), C = np.float64(0.43061224489795924), class_weight = 'balanced')\nX_train, X_val, y_train, y_val = train_test_split(X, y, test_size = 0.7, random_state = 123)\n# Fit and predict\nlogreg.fit(X_train, y_train)\n\n\n\nLogisticRegression(C=np.float64(0.43061224489795924), class_weight='balanced',\n                   tol=np.float64(0.083425))\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n\n\n  LogisticRegression?Documentation for LogisticRegressioniFitted\n\nLogisticRegression(C=np.float64(0.43061224489795924), class_weight='balanced',\n                   tol=np.float64(0.083425))\n\n\n\n\n\n# Predict and measure output\ny_pred = logreg.predict(X_val)\ny_pred_probs = logreg.predict_proba(X_val)[:, 1]\nprint(roc_auc_score(y_val, y_pred_probs))\n0.8149262043998886\n# Create Parameter Dictionary for Model Tuning\nkf = KFold(n_splits = 5, shuffle = True, random_state = 123)\nparams = {\n    \"penalty\": [\"l1\", \"l2\"],\n    \"tol\": np.linspace(0.0001, 1.0, 25),\n    \"C\": np.linspace(0.1, 1.0, 50),\n    \"class_weight\": [\"balanced\", {0:0.8, 1:0.2}]\n}\nlogreg_cv = RandomizedSearchCV(logreg, params, cv=kf)\n# Run the parameter search, fit the object, print the output\nlogreg_cv = RandomizedSearchCV(logreg, params, cv=kf)\nlogreg_cv.fit(X_train, y_train)\nprint(\"Tuned Logistic Regression Parameters: {}\".format(logreg_cv.best_params_))\nprint(\"Tuned Logistic Regression Best Accuracy Score: {}\".format(logreg_cv.best_score_))\n# Apply the model to the test set\npredictions = logreg.predict(X_test)\n\nsubmission = pd.DataFrame({\n    'PassengerId': test['PassengerId'],\n    'Survived': predictions\n})\n\nsubmission.head()\n\n\n\n\n\n\n\n\nPassengerId\n\n\nSurvived\n\n\n\n\n\n\n0\n\n\n892\n\n\n0\n\n\n\n\n1\n\n\n893\n\n\n1\n\n\n\n\n2\n\n\n894\n\n\n0\n\n\n\n\n3\n\n\n895\n\n\n0\n\n\n\n\n4\n\n\n896\n\n\n1\n\n\n\n\n\n# Write the file to .csv and submit\ncon.sql(\"SELECT * FROM submission\").write_csv(\"files/titanic_submission.csv\")",
-    "crumbs": [
-      "Data Science and Machine Learning",
-      "Titanic Disaster"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Chris Kornaros",
-    "section": "",
-    "text": "This site is the personal portfolio and homepage for Chris Kornaros. I’m a Tulane Graduate and professional Data Engineer. On here, you’ll find projects and code samples that I can share publicly, guides for various tools or workflows, journal or blog posts, and any independent research or professional updates (including my resume).\nThis website is a work in progress, so things are going to move around and break. Additionally, there is a lot that I have to still add: past guides, projects, etc. Follow me on social media (links above) to stay up to date with what I’m working on. To learn more about my background visit About, for guides on various open source tools visit Guides, to see my current and past (public) work visit Projects, and to see any blog posts (available on WhiteWind) visit Blogs."
-  },
-  {
-    "objectID": "pages/projects/data_science/data_science.html",
-    "href": "pages/projects/data_science/data_science.html",
-    "title": "Data Science and Machine Learning Projects",
-    "section": "",
-    "text": "Landing page for all my project posts related to Data Science and Machine Learning.",
-    "crumbs": [
-      "Data Science and Machine Learning"
-    ]
-  },
-  {
-    "objectID": "pages/projects/data_science/data_science.html#projects",
-    "href": "pages/projects/data_science/data_science.html#projects",
-    "title": "Data Science and Machine Learning Projects",
-    "section": "Projects",
-    "text": "Projects",
-    "crumbs": [
-      "Data Science and Machine Learning"
+      "Blogs"
     ]
   },
   {
@@ -421,6 +337,33 @@
     ]
   },
   {
+    "objectID": "pages/projects/data_engineering/data_engineering.html",
+    "href": "pages/projects/data_engineering/data_engineering.html",
+    "title": "Data Engineering and Architecture Projects",
+    "section": "",
+    "text": "Landing page for all my project posts related to Data Engineering and Architecture.",
+    "crumbs": [
+      "Data Engineering and Architecture"
+    ]
+  },
+  {
+    "objectID": "pages/projects/data_engineering/data_engineering.html#projects",
+    "href": "pages/projects/data_engineering/data_engineering.html#projects",
+    "title": "Data Engineering and Architecture Projects",
+    "section": "Projects",
+    "text": "Projects",
+    "crumbs": [
+      "Data Engineering and Architecture"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Chris Kornaros",
+    "section": "",
+    "text": "This site is the personal portfolio and homepage for Chris Kornaros. I’m a Tulane Graduate and professional Data Engineer. On here, you’ll find projects and code samples that I can share publicly, guides for various tools or workflows, journal or blog posts, and any independent research or professional updates (including my resume).\nThis website is a work in progress, so things are going to move around and break. Additionally, there is a lot that I have to still add: past guides, projects, etc. Follow me on social media (links above) to stay up to date with what I’m working on. To learn more about my background visit About, for guides on various open source tools visit Guides, to see my current and past (public) work visit Projects, and to see any blog posts (available on WhiteWind) visit Blogs."
+  },
+  {
     "objectID": "pages/projects/projects.html",
     "href": "pages/projects/projects.html",
     "title": "Projects",
@@ -429,6 +372,73 @@
     "crumbs": [
       "Projects"
     ]
+  },
+  {
+    "objectID": "pages/projects/data_science/data_science.html",
+    "href": "pages/projects/data_science/data_science.html",
+    "title": "Data Science and Machine Learning Projects",
+    "section": "",
+    "text": "Landing page for all my project posts related to Data Science and Machine Learning.",
+    "crumbs": [
+      "Data Science and Machine Learning"
+    ]
+  },
+  {
+    "objectID": "pages/projects/data_science/data_science.html#projects",
+    "href": "pages/projects/data_science/data_science.html#projects",
+    "title": "Data Science and Machine Learning Projects",
+    "section": "Projects",
+    "text": "Projects",
+    "crumbs": [
+      "Data Science and Machine Learning"
+    ]
+  },
+  {
+    "objectID": "pages/projects/data_science/posts/titanic.html#general-overview",
+    "href": "pages/projects/data_science/posts/titanic.html#general-overview",
+    "title": "Titanic Disaster",
+    "section": "General Overview",
+    "text": "General Overview\nThe Kaggle Titanic dataset and ML competition is one that many people are familiar with, and if they’re like me, it was also their first ML project. I redid this after 3 years to get familiar with my current workflow of using git, notebooks, venvs, etc. Below I included some notes to myself. While it was overkill, I used a Dockerized environment for this project, just to increase my familiarity with containers and the docker toolset.",
+    "crumbs": [
+      "Data Science and Machine Learning",
+      "Titanic Disaster"
+    ]
+  },
+  {
+    "objectID": "pages/projects/data_science/posts/titanic.html#notes-on-the-titanic-model-and-the-process-for-using-the-jupyter-kernel-on-the-ec2-server",
+    "href": "pages/projects/data_science/posts/titanic.html#notes-on-the-titanic-model-and-the-process-for-using-the-jupyter-kernel-on-the-ec2-server",
+    "title": "Titanic Disaster",
+    "section": "Notes on the Titanic model and the process for using the Jupyter Kernel on the EC2 Server",
+    "text": "Notes on the Titanic model and the process for using the Jupyter Kernel on the EC2 Server\n\n\nFirst, navigate to Local-Scripts/.AWS/.EC2_Scripts and run the ec2_start.sh script zsh ec2_start.sh\nNext, execute the unix_test_dns.sh script to store the EC2 public DNS in the /etc/hosts file ./unix_test_dns.sh\nUse the ssh -i command to connect to the EC2 server, then run the Jupyter kernel image docker run -p 8888:8888 titanic-env Look into adding a volume mount command here to persist model/file changes in the EC2\nNow that it’s running. Use a different terminal window (or the VS Code IDE) and test the DNS name. ping unix_test.local Need to make this DNS dynamic\nIn VS Code, open the .ipynb file in the model folder and continue work.\n\nIf you need to reconnect to a kernel, use the Titanic preset.\nVS Code connects to the EC2 IPv4 address, even though the Kernel tells you 127.0.0.1\n\nThe format for connecting to the Public IPv4 is http://IPv4:8888/\nTo pull the file out of the container and store it on the EC2 server\n\ndocker cp 786853360d97:/home/files/titanic_submission.csv files/titanic_submission.csv\ndocker copy instance-id:/path/to/file local/path\n\n\n\n\nIf you need to modify the container\n\nDo so locally, or anywhere, and then push the change to the GitHub repoistory\nThen, pull the changes into the EC2 server\nClear the Docker library/cache, and then rebuild the image from scratch, use the following docker build -t titanic-env -f .config/Dockerfile .\nEnsure this is done from the main project folder and uses those flags\n\nFor Titanic, this is in the admin/Kaggle/Titanic folder in the EC2 instance\n--no-cache ensures it’s a fresh build (This will take a while, not worth it in the smaller environment. Rebuild with cache)\n-t sets the name of the image\n-f lets you specify the Dockerfile location\n. lets Docker know that your current working directory is where the build context should take place",
+    "crumbs": [
+      "Data Science and Machine Learning",
+      "Titanic Disaster"
+    ]
+  },
+  {
+    "objectID": "pages/projects/data_science/posts/titanic.html#the-code-portion-of-this-notebook",
+    "href": "pages/projects/data_science/posts/titanic.html#the-code-portion-of-this-notebook",
+    "title": "Titanic Disaster",
+    "section": "The Code Portion of this notebook",
+    "text": "The Code Portion of this notebook\n\n\n\n\n\n\nCaution\n\n\n\nWhen I most recently completed this competition, I didn’t do it with the goal in mind of doing a nice write-up. This is really just an amalgamation of the notes I made to myself on how to use/modify the Docker container I ran my model on and the actual notebook + code + notes.\n\n\nimport numpy as np\nimport pandas as pd\nimport duckdb\nimport sklearn\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.model_selection import train_test_split, KFold, RandomizedSearchCV\nfrom sklearn.metrics import confusion_matrix, classification_report, roc_auc_score\n\n# Initialize a connection and create a persistent database\n# Worth noting that due to the workflow I'm using, the database was/should be created externally, and then built into the Docker container\n# This way, the raw database files are saved locally, but file size won't grow exponentially\ncon = duckdb.connect(\"files/titanic.duckdb\")\n# Using this to DROP and Recreate train_raw, ensuring a fresh process\ncon.sql(\"DROP TABLE train_raw;\")\ncon.sql(\"DROP TABLE test_raw;\")\ncon.sql(\"CREATE TABLE train_raw AS SELECT * FROM 'files/train.csv'\")\ncon.sql(\"CREATE TABLE test_raw AS SELECT * FROM 'files/test.csv'\")\n# Create working tables\n#con.sql(\"DROP TABLE train;\")\n#con.sql(\"DROP TABLE test;\")\ncon.sql(\"CREATE TABLE train AS SELECT * FROM train_raw\")\ncon.sql(\"CREATE TABLE test AS SELECT * FROM test_raw\")\n# Verify the proper tables are loaded\ncon.sql(\"SELECT * FROM duckdb_tables()\")\n# Generate summary statistics\ncon.sql(\"SUMMARIZE train\")\n#con.sql(\"SUMMARIZE test\")\n# Examine Nulls for the Age, Cabin, and Embarked columns (do this for test as well)\ncon.sql(\"SELECT * FROM train WHERE Age IS NULL\") # Seems to make the most sense to use the average age here\ncon.sql(\"SELECT * FROM train WHERE Cabin IS NULL\") # Seems likely Cabins not as strictly recorded for lower class guests, probably unnecessary for model\ncon.sql(\"SELECT * FROM train WHERE Embarked IS NULL\") # This only comprises 2 records and it's unclear if they made it on in the first place, not a high enough percentage of 1st class survivors to consider keeping\n# Update the Age column, replace NULL values with the average Age\ncon.sql(\"\"\"UPDATE train AS train_clean\n        SET Age = (\n            SELECT\n                avg(raw.Age) AS cleanAge\n            FROM train as raw\n            WHERE raw.Age IS NOT NULL\n        )\n        WHERE Age IS NULL\"\"\")\n# Update the Sex column, change the VARCHAR type to BOOLEAN\ncon.sql(\"\"\"ALTER TABLE train ALTER Sex \n        SET DATA TYPE BOOLEAN USING CASE\n            WHEN Sex = 'female' THEN 1 ELSE 0 END\n        \"\"\")\n# Update the Age column in the test dataset\ncon.sql(\"\"\"UPDATE test AS test_clean\n        SET Age = (\n            SELECT\n                avg(raw.Age) AS cleanAge\n            FROM test as raw\n            WHERE raw.Age IS NOT NULL\n        )\n        WHERE Age IS NULL\"\"\")\n# Update the Sex column, change the VARCHAR type to BOOLEAN\ncon.sql(\"\"\"ALTER TABLE test ALTER Sex \n        SET DATA TYPE BOOLEAN USING CASE\n            WHEN Sex = 'female' THEN 1 ELSE 0 END\n        \"\"\")\n# Remove the PassengerId, Name, Cabin, Embarked, Fare, and Ticket columns\ncon.sql(\"ALTER TABLE train DROP PassengerId\") # Has no bearing on the outcome of the model\ncon.sql(\"ALTER TABLE train DROP Name\") # Has to be numeric data\ncon.sql(\"ALTER TABLE train DROP Cabin\")\ncon.sql(\"ALTER TABLE train DROP Embarked\")\ncon.sql(\"ALTER TABLE train DROP Fare\") # Dropping because there are nulls in the test file\ncon.sql(\"ALTER TABLE train DROP Ticket\") # Dropping because of inconsistent values\n\n# Remove the PassengerId, Name, Cabin, Embarked, Fare, and Ticket columns\ncon.sql(\"ALTER TABLE test DROP Name\") # Has to be numeric data\ncon.sql(\"ALTER TABLE test DROP Cabin\")\ncon.sql(\"ALTER TABLE test DROP Embarked\")\ncon.sql(\"ALTER TABLE test DROP Fare\") # Dropping because there are nulls in the test file\ncon.sql(\"ALTER TABLE test DROP Ticket\") # Dropping because of inconsistent values\n\n# Creating dataframes for testing/training, I'll be using sklearn here, which needs both\ntrain = con.sql(\"SELECT * FROM train\").df()\ntest = con.sql(\"SELECT * FROM test\").df()\n# Create features and target\nX = train.drop(\"Survived\", axis = 1).values\ny = train[\"Survived\"].values\n\nX_test = test.drop(\"PassengerId\", axis = 1).values\n# Initialize Regression object and split data\nlogreg = LogisticRegression(penalty = 'l2', tol = np.float64(0.083425), C = np.float64(0.43061224489795924), class_weight = 'balanced')\nX_train, X_val, y_train, y_val = train_test_split(X, y, test_size = 0.7, random_state = 123)\n# Fit and predict\nlogreg.fit(X_train, y_train)\n\n\n\nLogisticRegression(C=np.float64(0.43061224489795924), class_weight='balanced',\n                   tol=np.float64(0.083425))\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n\n\n  LogisticRegression?Documentation for LogisticRegressioniFitted\n\nLogisticRegression(C=np.float64(0.43061224489795924), class_weight='balanced',\n                   tol=np.float64(0.083425))\n\n\n\n\n\n# Predict and measure output\ny_pred = logreg.predict(X_val)\ny_pred_probs = logreg.predict_proba(X_val)[:, 1]\nprint(roc_auc_score(y_val, y_pred_probs))\n0.8149262043998886\n# Create Parameter Dictionary for Model Tuning\nkf = KFold(n_splits = 5, shuffle = True, random_state = 123)\nparams = {\n    \"penalty\": [\"l1\", \"l2\"],\n    \"tol\": np.linspace(0.0001, 1.0, 25),\n    \"C\": np.linspace(0.1, 1.0, 50),\n    \"class_weight\": [\"balanced\", {0:0.8, 1:0.2}]\n}\nlogreg_cv = RandomizedSearchCV(logreg, params, cv=kf)\n# Run the parameter search, fit the object, print the output\nlogreg_cv = RandomizedSearchCV(logreg, params, cv=kf)\nlogreg_cv.fit(X_train, y_train)\nprint(\"Tuned Logistic Regression Parameters: {}\".format(logreg_cv.best_params_))\nprint(\"Tuned Logistic Regression Best Accuracy Score: {}\".format(logreg_cv.best_score_))\n# Apply the model to the test set\npredictions = logreg.predict(X_test)\n\nsubmission = pd.DataFrame({\n    'PassengerId': test['PassengerId'],\n    'Survived': predictions\n})\n\nsubmission.head()\n\n\n\n\n\n\n\n\nPassengerId\n\n\nSurvived\n\n\n\n\n\n\n0\n\n\n892\n\n\n0\n\n\n\n\n1\n\n\n893\n\n\n1\n\n\n\n\n2\n\n\n894\n\n\n0\n\n\n\n\n3\n\n\n895\n\n\n0\n\n\n\n\n4\n\n\n896\n\n\n1\n\n\n\n\n\n# Write the file to .csv and submit\ncon.sql(\"SELECT * FROM submission\").write_csv(\"files/titanic_submission.csv\")",
+    "crumbs": [
+      "Data Science and Machine Learning",
+      "Titanic Disaster"
+    ]
+  },
+  {
+    "objectID": "pages/about/about.html",
+    "href": "pages/about/about.html",
+    "title": "About",
+    "section": "",
+    "text": "Thanks for visiting! As you can see, this site is pretty messy. That is because my programming skills lie with data, not web design. I’ve thrown this together with the help of Quarto documentation, SASS documentation, Bootstrap Documentation, _brand.yml documentation, and of course LLMs. Feel free to report issue as you find them, or suggest improvements because there is a link to the source repo on every page."
+  },
+  {
+    "objectID": "pages/about/about.html#about-me",
+    "href": "pages/about/about.html#about-me",
+    "title": "About",
+    "section": "About Me",
+    "text": "About Me\nI’m a 27 year old Data Scientist, Engineer, Analyst, Architect, etc. that has two degrees from Tulane University in New Orleans– BSM, Marketing and Asian Studies; MS, Business Analytics. During COVID, I did an extra year of school and received a Masters in Data Science. As a result of my education, I fell in love with data science and machine learning, but due to common data challenges, I developed a professional passion and skillset for database architecture and data engineering.\nI currently work as a Senior Data Analyst at US Foods in their enterprise data organization, primarily supporting the Safety and Warehousing domains. I previously worked at General Motors in the Global Markets IT organization. Most of the projects I work on outside of US Foods use different tools and skillsets than I do during my day job. The reason being that I want to stay up to date with all of the tools and changes in the industry. As a result, I get to play with all of the cool licensed tools like dbt,Snowflake, Databricks, and Power BI at work, but I get to build and learn with open source tools externally.\nSince really jumping in to open source development and learning in 2024, I’ve come to enjoy the study and field of data even more. I know that long term I want to move into a data strategy and innovation role. I’m also interested in eventually pursuing a PhD, either in a Data Engineering capacity or looking at performance optimization for data applications– think using duckdb instead of pandas. Designing and architecting systems that enable people to get more out of their data is something I’m teaching myself now. That being said, I’m enthralled with both the process and my progress.\nIn the long run, I want to continue working full time as a Data Engineer (or something similar). That being said, for the time being, I am interested in advising or consulting both individuals and companies on data strategy.\nYou can take a look at my resume down below. My email is listed."
   },
   {
     "objectID": "pages/guides/posts/uv.html",
@@ -461,16 +471,6 @@
     "crumbs": [
       "Guides",
       "uv"
-    ]
-  },
-  {
-    "objectID": "pages/blogs/blogs.html",
-    "href": "pages/blogs/blogs.html",
-    "title": "Blogs",
-    "section": "",
-    "text": "A landing page for various blogs, journals, or random thoughts. Some of these will be focused on specific tools or technology, others will be random thoughts or research notes.\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nNo matching items",
-    "crumbs": [
-      "Blogs"
     ]
   }
 ]

@@ -3,9 +3,13 @@
     "listing": "/pages/guides/guides.html",
     "items": [
       "/pages/guides/posts/raspberry_pi_server.html",
-      "/pages/guides/posts/quarto.html",
-      "/pages/guides/posts/uv.html"
+      "/pages/guides/posts/uv.html",
+      "/pages/guides/posts/quarto.html"
     ]
+  },
+  {
+    "listing": "/pages/blogs/blogs.html",
+    "items": []
   },
   {
     "listing": "/pages/projects/data_engineering/data_engineering.html",
@@ -17,9 +21,5 @@
       "/pages/projects/data_science/posts/nfl_bowl_2025.html",
       "/pages/projects/data_science/posts/titanic.html"
     ]
-  },
-  {
-    "listing": "/pages/blogs/blogs.html",
-    "items": []
   }
 ]
