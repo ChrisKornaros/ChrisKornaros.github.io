@@ -16,3 +16,6 @@ wheels/
 # Quarto Files
 /.quarto/
 /_site/
+
+# Claude Files
+.claude/
