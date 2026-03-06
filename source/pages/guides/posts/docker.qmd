@@ -4,7 +4,6 @@ author: "Chris Kornaros"
 date: 2025-05-20
 categories: ["Architecture", "Ongoing"]
 tags: ["Architecture", "Systems", "Design", "Open Source", "Containers", "Docker", "Raspberry Pi", "Linux", "Networking", "VS Code", "SSH Tunnel", "Remote Development", "Jupyter", "CI/CD", "DevOps"]
-draft: true
 ---
 
 ![](images/docker-logo-blue.png)

@@ -10,6 +10,7 @@
   {
     "listing": "/pages/guides/guides.html",
     "items": [
+      "/pages/guides/posts/docker.html",
       "/pages/guides/posts/raspberry_pi_server.html",
       "/pages/guides/posts/quarto.html",
       "/pages/guides/posts/uv.html"
