@@ -177,7 +177,7 @@
     "href": "pages/blogs/blogs.html",
     "title": "Blogs",
     "section": "",
-    "text": "A landing page for various blogs, journals, or random thoughts. Some of these will be focused on specific tools or technology, others will be random thoughts or research notes.\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nNo matching items",
+    "text": "A landing page for various blogs, journals, or random thoughts. Some of these will be focused on specific tools or technology, others will be random thoughts or research notes.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nMar 6, 2026\n\n\nTest\n\n\nChris Kornaros\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Blogs"
     ]
@@ -188,6 +188,17 @@
     "title": "Chris Kornaros",
     "section": "",
     "text": "This site is the personal portfolio and homepage for Chris Kornaros. I’m a Tulane Graduate and professional Data Engineer. On here, you’ll find projects and code samples that I can share publicly, guides for various tools or workflows, journal or blog posts, and any independent research or professional updates (including my resume).\nThis website is a work in progress, so things are going to move around and break. Additionally, there is a lot that I have to still add: past guides, projects, etc. Follow me on social media (links above) to stay up to date with what I’m working on. To learn more about my background visit About, for guides on various open source tools visit Guides, to see my current and past (public) work visit Projects, and to see any blog posts (available on WhiteWind) visit Blogs."
+  },
+  {
+    "objectID": "pages/blogs/posts/test.html",
+    "href": "pages/blogs/posts/test.html",
+    "title": "Test",
+    "section": "",
+    "text": "Test Post by Chris KornarosRead on Substack",
+    "crumbs": [
+      "Blogs",
+      "Test"
+    ]
   },
   {
     "objectID": "pages/about/about.html",

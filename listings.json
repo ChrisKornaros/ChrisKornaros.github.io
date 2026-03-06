@@ -8,14 +8,16 @@
   },
   {
     "listing": "/pages/blogs/blogs.html",
+    "items": [
+      "/pages/blogs/posts/test.html"
+    ]
+  },
+  {
+    "listing": "/pages/projects/data_science/data_science.html",
     "items": []
   },
   {
     "listing": "/pages/projects/data_engineering/data_engineering.html",
-    "items": []
-  },
-  {
-    "listing": "/pages/projects/data_science/data_science.html",
     "items": []
   }
 ]
