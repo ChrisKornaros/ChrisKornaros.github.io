@@ -1,0 +1,10 @@
+---
+title: "05. Preparing and Canning Poultry Red Meats and Seafoods"
+author: "Chris Kornaros"
+date: 2026-03-06
+categories: ["Cooking & Kitchen Tips"]
+---
+
+```{=html}
+<iframe src="05. Preparing and Canning Poultry Red Meats and Seafoods.pdf" width="100%" height="900px" style="border: none;"></iframe>
+```

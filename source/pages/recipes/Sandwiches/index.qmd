@@ -1,0 +1,10 @@
+---
+title: "Sandwiches"
+listing:
+  contents: "*.qmd"
+  sort: "date desc"
+  type: grid
+  categories: false
+---
+
+All **Sandwiches** recipes.

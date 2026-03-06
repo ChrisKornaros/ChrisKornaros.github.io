@@ -1,0 +1,10 @@
+---
+title: "Cookbook"
+listing:
+  contents: "*.qmd"
+  sort: "date desc"
+  type: grid
+  categories: false
+---
+
+Cookbooks and reference guides.

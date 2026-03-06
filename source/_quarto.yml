@@ -50,6 +50,8 @@ website:
         menu:
           - text: "Test"
             href: pages/blogs/posts/test.qmd
+      - text: "Recipes"
+        href: pages/recipes/recipes.qmd
 
   sidebar:
     - id: guides
@@ -79,6 +81,70 @@ website:
           contents:
             - text: "Test"
               href: pages/blogs/posts/test.qmd
+
+    - id: recipes
+      title: "Recipes"
+      style: "docked"
+      background: dark
+      foreground: light
+      collapse-level: 2
+      contents:
+        - text: "All Recipes"
+          href: pages/recipes/recipes.qmd
+        - section: "Categories"
+          contents:
+            - text: "Baked Goods"
+              href: "pages/recipes/Baked Goods/index.qmd"
+            - text: "Beef"
+              href: pages/recipes/Beef/index.qmd
+            - text: "Chicken"
+              href: pages/recipes/Chicken/index.qmd
+            - text: "Cod"
+              href: pages/recipes/Cod/index.qmd
+            - text: "Cookbook"
+              href: pages/recipes/Cookbook/index.qmd
+            - text: "Cooking & Kitchen Tips"
+              href: "pages/recipes/Cooking & Kitchen Tips/index.qmd"
+            - text: "Drinks"
+              href: pages/recipes/Drinks/index.qmd
+            - text: "Japan"
+              href: pages/recipes/Japan/index.qmd
+            - text: "Masterclass Recipes"
+              href: "pages/recipes/Masterclass Recipes/index.qmd"
+            - text: "Mexican"
+              href: pages/recipes/Mexican/index.qmd
+            - text: "New Orleans"
+              href: "pages/recipes/New Orleans/index.qmd"
+            - text: "Noodles"
+              href: pages/recipes/Noodles/index.qmd
+            - text: "Oils and Marinades"
+              href: "pages/recipes/Oils and Marinades/index.qmd"
+            - text: "Party Snacks and Dips"
+              href: "pages/recipes/Party Snacks and Dips/index.qmd"
+            - text: "Pickling and Fermenting"
+              href: "pages/recipes/Pickling and Fermenting/index.qmd"
+            - text: "Pizza"
+              href: pages/recipes/Pizza/index.qmd
+            - text: "Pork"
+              href: pages/recipes/Pork/index.qmd
+            - text: "Potatoes"
+              href: pages/recipes/Potatoes/index.qmd
+            - text: "Salads"
+              href: pages/recipes/Salads/index.qmd
+            - text: "Sandwiches"
+              href: pages/recipes/Sandwiches/index.qmd
+            - text: "Sauces and Condiments"
+              href: "pages/recipes/Sauces and Condiments/index.qmd"
+            - text: "Soups"
+              href: pages/recipes/Soups/index.qmd
+            - text: "Spice Mixes"
+              href: "pages/recipes/Spice Mixes/index.qmd"
+            - text: "Tofu"
+              href: pages/recipes/Tofu/index.qmd
+            - text: "Veal"
+              href: pages/recipes/Veal/index.qmd
+            - text: "Vegetables"
+              href: pages/recipes/Vegetables/index.qmd
           
 format:
   html:

@@ -1,0 +1,4260 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Recipes – Chris Kornaros</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-3fd2bae6f1c5534a0b6658f7bc8b568c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-bfbfeea019f3c18490cc33ec42c0b065.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-3fd2bae6f1c5534a0b6658f7bc8b568c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-dc9cf204bce4a6a11ae78c3c039d3fc4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-770144baa643cd0c0c8c6ffb5e2d51f5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dc9cf204bce4a6a11ae78c3c039d3fc4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      page: 18,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-J1EQMCS7CC"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-J1EQMCS7CC', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"headline",
+  "consent_type":"express",
+  "palette":"dark",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Recipes – Chris Kornaros">
+<meta property="og:description" content="">
+<meta property="og:site_name" content="Chris Kornaros">
+<meta name="twitter:title" content="Recipes – Chris Kornaros">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Chris Kornaros</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../pages/about/about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../pages/guides/guides.html"> 
+<span class="menu-text">Guides</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../pages/blogs/blogs.html"> 
+<span class="menu-text">Blogs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../pages/recipes/recipes.html" aria-current="page"> 
+<span class="menu-text">Recipes</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/recipes/recipes.html">All Recipes</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/recipes/recipes.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">All Recipes</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Categories</span></span>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(123)</span></div><div class="category" data-category="Lg==">. <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QmFrZWQlMjBHb29kcw==">Baked Goods <span class="quarto-category-count">(10)</span></div><div class="category" data-category="QmVlZg==">Beef <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Q2hpY2tlbg==">Chicken <span class="quarto-category-count">(8)</span></div><div class="category" data-category="Q29k">Cod <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz">Cooking &amp; Kitchen Tips <span class="quarto-category-count">(10)</span></div><div class="category" data-category="RHJpbmtz">Drinks <span class="quarto-category-count">(2)</span></div><div class="category" data-category="SmFwYW4=">Japan <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TWFzdGVyY2xhc3MlMjBSZWNpcGVz">Masterclass Recipes <span class="quarto-category-count">(18)</span></div><div class="category" data-category="TWV4aWNhbg==">Mexican <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TmV3JTIwT3JsZWFucw==">New Orleans <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Tm9vZGxlcw==">Noodles <span class="quarto-category-count">(4)</span></div><div class="category" data-category="T2lscyUyMGFuZCUyME1hcmluYWRlcw==">Oils and Marinades <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UGFydHklMjBTbmFja3MlMjBhbmQlMjBEaXBz">Party Snacks and Dips <span class="quarto-category-count">(5)</span></div><div class="category" data-category="UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n">Pickling and Fermenting <span class="quarto-category-count">(11)</span></div><div class="category" data-category="UGl6emE=">Pizza <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UG9yaw==">Pork <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UG90YXRvZXM=">Potatoes <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U2FsYWRz">Salads <span class="quarto-category-count">(4)</span></div><div class="category" data-category="U2FuZHdpY2hlcw==">Sandwiches <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==">Sauces and Condiments <span class="quarto-category-count">(22)</span></div><div class="category" data-category="U291cHM=">Soups <span class="quarto-category-count">(4)</span></div><div class="category" data-category="U3BpY2UlMjBNaXhlcw==">Spice Mixes <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VG9mdQ==">Tofu <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VmVhbA==">Veal <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VmVnZXRhYmxlcw==">Vegetables <span class="quarto-category-count">(6)</span></div></div></div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Recipes</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>A collection of recipes organized by category. Use the category tags to browse by type, or search by name.</p>
+
+
+
+<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-categories="QmFrZWQlMjBHb29kcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835152189" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="835">
+<a href="../../pages/recipes/Baked Goods/Basic Artisan Bread.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Basic Artisan Bread
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmFrZWQlMjBHb29kcw=='); return false;">Baked Goods</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="1" data-categories="QmFrZWQlMjBHb29kcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835152492" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="379">
+<a href="../../pages/recipes/Baked Goods/Basic Ficelle Recipe.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Basic Ficelle Recipe
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmFrZWQlMjBHb29kcw=='); return false;">Baked Goods</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="2" data-categories="QmFrZWQlMjBHb29kcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835152793" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="251">
+<a href="../../pages/recipes/Baked Goods/Best Ever Chewy Brownies.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Best Ever Chewy Brownies
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmFrZWQlMjBHb29kcw=='); return false;">Baked Goods</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="3" data-categories="QmFrZWQlMjBHb29kcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835153097" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="252">
+<a href="../../pages/recipes/Baked Goods/Flour Tortillas.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Flour Tortillas
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmFrZWQlMjBHb29kcw=='); return false;">Baked Goods</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="4" data-categories="QmFrZWQlMjBHb29kcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835153406" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="737">
+<a href="../../pages/recipes/Baked Goods/Focaccia.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Focaccia
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmFrZWQlMjBHb29kcw=='); return false;">Baked Goods</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="5" data-categories="QmFrZWQlMjBHb29kcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835153702" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="134">
+<a href="../../pages/recipes/Baked Goods/Jake Cohen Snacking Cake Recipe.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Jake Cohen Snacking Cake Recipe
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmFrZWQlMjBHb29kcw=='); return false;">Baked Goods</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Source:</strong> <u>https://www.instagram.com/p/Cebw2KGJeCA/</u>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="6" data-categories="QmFrZWQlMjBHb29kcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835154025" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="944">
+<a href="../../pages/recipes/Baked Goods/Pita.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Pita
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmFrZWQlMjBHb29kcw=='); return false;">Baked Goods</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="7" data-categories="QmFrZWQlMjBHb29kcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835154347" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1048">
+<a href="../../pages/recipes/Baked Goods/Richard Bertinet Baguette.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Richard Bertinet Baguette
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmFrZWQlMjBHb29kcw=='); return false;">Baked Goods</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="8" data-categories="QmFrZWQlMjBHb29kcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835154680" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="950">
+<a href="../../pages/recipes/Baked Goods/Sandwich Bread Loaf.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Sandwich Bread Loaf
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmFrZWQlMjBHb29kcw=='); return false;">Baked Goods</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="9" data-categories="QmFrZWQlMjBHb29kcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835155002" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="303">
+<a href="../../pages/recipes/Baked Goods/The Best Chocolate Chip Cookies.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+The Best Chocolate Chip Cookies
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmFrZWQlMjBHb29kcw=='); return false;">Baked Goods</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="10" data-categories="QmVlZg==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835155308" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="244">
+<a href="../../pages/recipes/Beef/Meatballs.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Meatballs
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmVlZg=='); return false;">Beef</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="11" data-categories="QmVlZg==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835155611" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="252">
+<a href="../../pages/recipes/Beef/NYT_ Steak and Salsa Verde.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+NYT_ Steak and Salsa Verde
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmVlZg=='); return false;">Beef</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients: (</strong>Yield: 4 servings)
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="12" data-categories="QmVlZg==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835155928" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="399">
+<a href="../../pages/recipes/Beef/Red Wine Braised Short Ribs.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Red Wine Braised Short Ribs
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmVlZg=='); return false;">Beef</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong> 6 servings
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="13" data-categories="Q2hpY2tlbg==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835156234" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="426">
+<a href="../../pages/recipes/Chicken/Chicken Parm.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Chicken Parm
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q2hpY2tlbg=='); return false;">Chicken</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="14" data-categories="Q2hpY2tlbg==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835156545" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="414">
+<a href="../../pages/recipes/Chicken/Chicken Picatta.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Chicken Picatta
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q2hpY2tlbg=='); return false;">Chicken</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="15" data-categories="Q2hpY2tlbg==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835156963" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="888">
+<a href="../../pages/recipes/Chicken/Chongqing Chicken (La Zi Ji).html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Chongqing Chicken (La Zi Ji)
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q2hpY2tlbg=='); return false;">Chicken</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="16" data-categories="Q2hpY2tlbg==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835157264" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="130">
+<a href="../../pages/recipes/Chicken/Greek Honey Garlic Chicken Paidakia.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Greek Honey Garlic Chicken Paidakia
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q2hpY2tlbg=='); return false;">Chicken</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="17" data-categories="Q2hpY2tlbg==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835157862" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="353">
+<a href="../../pages/recipes/Chicken/NYT Chicken Shawarma.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+NYT Chicken Shawarma
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q2hpY2tlbg=='); return false;">Chicken</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="18" data-categories="Q2hpY2tlbg==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835157559" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="168">
+<a href="../../pages/recipes/Chicken/Nourishing Chicken and Rice.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Nourishing Chicken and Rice
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q2hpY2tlbg=='); return false;">Chicken</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="19" data-categories="Q2hpY2tlbg==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835158166" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="401">
+<a href="../../pages/recipes/Chicken/Sesame Chicken.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Sesame Chicken
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q2hpY2tlbg=='); return false;">Chicken</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="20" data-categories="Q2hpY2tlbg==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835158497" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="695">
+<a href="../../pages/recipes/Chicken/Weissman Fried Chicken (Two Ways).html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Weissman Fried Chicken (Two Ways)
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q2hpY2tlbg=='); return false;">Chicken</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="21" data-categories="Q29k" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835158800" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="133">
+<a href="../../pages/recipes/Cod/Beer Batter (Fish fry optional).html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Beer Batter (Fish fry optional)
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q29k'); return false;">Cod</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="22" data-categories="Q29k" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835159133" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="952">
+<a href="../../pages/recipes/Cod/Miso Glazed Cod.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Miso Glazed Cod
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q29k'); return false;">Cod</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="23" data-categories="Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835159257" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="6">
+<a href="../../pages/recipes/Cooking &amp; Kitchen Tips/Acid_PH_Chart.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Acid_PH_Chart
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz'); return false;">Cooking &amp; Kitchen Tips</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="24" data-categories="Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835159355" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="11">
+<a href="../../pages/recipes/Cooking &amp; Kitchen Tips/Canning, Fermenting, and Pickling/00. Complete Guide to Home Canning.html" class="quarto-grid-link">
+</a><div class="quarto-grid-item card h-100 card-left"><a href="../../pages/recipes/Cooking &amp; Kitchen Tips/Canning, Fermenting, and Pickling/00. Complete Guide to Home Canning.html" class="quarto-grid-link">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+<ol start="0" type="1">
+<li>Complete Guide to Home Canning
+</li></ol></h5>
+
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz'); return false;">Cooking &amp; Kitchen Tips</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+<p>:::</p>
+</div></a>
+<p>:::</p>
+<div class="g-col-1" data-index="25" data-categories="Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835159463" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="10">
+<a href="../../pages/recipes/Cooking &amp; Kitchen Tips/Canning, Fermenting, and Pickling/01. Principles of Home Canning.html" class="quarto-grid-link">
+</a><div class="quarto-grid-item card h-100 card-left"><a href="../../pages/recipes/Cooking &amp; Kitchen Tips/Canning, Fermenting, and Pickling/01. Principles of Home Canning.html" class="quarto-grid-link">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+<ol type="1">
+<li>Principles of Home Canning
+</li></ol></h5>
+
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz'); return false;">Cooking &amp; Kitchen Tips</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+<p>:::</p>
+</div></a>
+<p>:::</p>
+<div class="g-col-1" data-index="26" data-categories="Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835159557" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="14">
+<a href="../../pages/recipes/Cooking &amp; Kitchen Tips/Canning, Fermenting, and Pickling/02. Selecting Preparing and Canning Fruit and Fruit Products.html" class="quarto-grid-link">
+</a><div class="quarto-grid-item card h-100 card-left"><a href="../../pages/recipes/Cooking &amp; Kitchen Tips/Canning, Fermenting, and Pickling/02. Selecting Preparing and Canning Fruit and Fruit Products.html" class="quarto-grid-link">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+<ol start="2" type="1">
+<li>Selecting Preparing and Canning Fruit and Fruit Products
+</li></ol></h5>
+
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz'); return false;">Cooking &amp; Kitchen Tips</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+<p>:::</p>
+</div></a>
+<p>:::</p>
+<div class="g-col-1" data-index="27" data-categories="Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835159650" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="14">
+<a href="../../pages/recipes/Cooking &amp; Kitchen Tips/Canning, Fermenting, and Pickling/03. Selecting Preparing and Canning Tomatoes and Tomato Products.html" class="quarto-grid-link">
+</a><div class="quarto-grid-item card h-100 card-left"><a href="../../pages/recipes/Cooking &amp; Kitchen Tips/Canning, Fermenting, and Pickling/03. Selecting Preparing and Canning Tomatoes and Tomato Products.html" class="quarto-grid-link">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+<ol start="3" type="1">
+<li>Selecting Preparing and Canning Tomatoes and Tomato Products
+</li></ol></h5>
+
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz'); return false;">Cooking &amp; Kitchen Tips</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+<p>:::</p>
+</div></a>
+<p>:::</p>
+<div class="g-col-1" data-index="28" data-categories="Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835159744" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="14">
+<a href="../../pages/recipes/Cooking &amp; Kitchen Tips/Canning, Fermenting, and Pickling/04. Selecting Preparing and Canning Vegetables and Vegetable Products.html" class="quarto-grid-link">
+</a><div class="quarto-grid-item card h-100 card-left"><a href="../../pages/recipes/Cooking &amp; Kitchen Tips/Canning, Fermenting, and Pickling/04. Selecting Preparing and Canning Vegetables and Vegetable Products.html" class="quarto-grid-link">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+<ol start="4" type="1">
+<li>Selecting Preparing and Canning Vegetables and Vegetable Products
+</li></ol></h5>
+
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz'); return false;">Cooking &amp; Kitchen Tips</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+<p>:::</p>
+</div></a>
+<p>:::</p>
+<div class="g-col-1" data-index="29" data-categories="Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835159839" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="14">
+<a href="../../pages/recipes/Cooking &amp; Kitchen Tips/Canning, Fermenting, and Pickling/05. Preparing and Canning Poultry Red Meats and Seafoods.html" class="quarto-grid-link">
+</a><div class="quarto-grid-item card h-100 card-left"><a href="../../pages/recipes/Cooking &amp; Kitchen Tips/Canning, Fermenting, and Pickling/05. Preparing and Canning Poultry Red Meats and Seafoods.html" class="quarto-grid-link">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+<ol start="5" type="1">
+<li>Preparing and Canning Poultry Red Meats and Seafoods
+</li></ol></h5>
+
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz'); return false;">Cooking &amp; Kitchen Tips</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+<p>:::</p>
+</div></a>
+<p>:::</p>
+<div class="g-col-1" data-index="30" data-categories="Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835159933" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="14">
+<a href="../../pages/recipes/Cooking &amp; Kitchen Tips/Canning, Fermenting, and Pickling/06. Preparing and Canning Fermented Foods and Pickled Vegetables.html" class="quarto-grid-link">
+</a><div class="quarto-grid-item card h-100 card-left"><a href="../../pages/recipes/Cooking &amp; Kitchen Tips/Canning, Fermenting, and Pickling/06. Preparing and Canning Fermented Foods and Pickled Vegetables.html" class="quarto-grid-link">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+<ol start="6" type="1">
+<li>Preparing and Canning Fermented Foods and Pickled Vegetables
+</li></ol></h5>
+
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz'); return false;">Cooking &amp; Kitchen Tips</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+<p>:::</p>
+</div></a>
+<p>:::</p>
+<div class="g-col-1" data-index="31" data-categories="Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835160025" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="12">
+<a href="../../pages/recipes/Cooking &amp; Kitchen Tips/Canning, Fermenting, and Pickling/07. Preparing and Canning Jams and Jellies.html" class="quarto-grid-link">
+</a><div class="quarto-grid-item card h-100 card-left"><a href="../../pages/recipes/Cooking &amp; Kitchen Tips/Canning, Fermenting, and Pickling/07. Preparing and Canning Jams and Jellies.html" class="quarto-grid-link">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+<ol start="7" type="1">
+<li>Preparing and Canning Jams and Jellies
+</li></ol></h5>
+
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz'); return false;">Cooking &amp; Kitchen Tips</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+<p>:::</p>
+</div></a>
+<p>:::</p>
+<div class="g-col-1" data-index="32" data-categories="Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835160117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="6">
+<a href="../../pages/recipes/Cooking &amp; Kitchen Tips/Chicken-egg-sizes.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Chicken-egg-sizes
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q29va2luZyUyMCUyNiUyMEtpdGNoZW4lMjBUaXBz'); return false;">Cooking &amp; Kitchen Tips</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="33" data-categories="RHJpbmtz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835160210" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="6">
+<a href="../../pages/recipes/Drinks/Boozy_Backyard_Lemonade.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Boozy_Backyard_Lemonade
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('RHJpbmtz'); return false;">Drinks</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="34" data-categories="RHJpbmtz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835160489" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="177">
+<a href="../../pages/recipes/Drinks/Infused Alcohol.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Infused Alcohol
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('RHJpbmtz'); return false;">Drinks</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="35" data-categories="SmFwYW4=" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835160897" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="175">
+<a href="../../pages/recipes/Japan/Sushi Rice.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Sushi Rice
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('SmFwYW4='); return false;">Japan</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="36" data-categories="TWFzdGVyY2xhc3MlMjBSZWNpcGVz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835161012" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="7">
+<a href="../../pages/recipes/Masterclass Recipes/Gabriela Cámara.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Gabriela Cámara
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWFzdGVyY2xhc3MlMjBSZWNpcGVz'); return false;">Masterclass Recipes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="37" data-categories="TWFzdGVyY2xhc3MlMjBSZWNpcGVz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835161106" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="8">
+<a href="../../pages/recipes/Masterclass Recipes/Gordon Ramsey 1.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Gordon Ramsey 1
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWFzdGVyY2xhc3MlMjBSZWNpcGVz'); return false;">Masterclass Recipes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="38" data-categories="TWFzdGVyY2xhc3MlMjBSZWNpcGVz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835161203" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="8">
+<a href="../../pages/recipes/Masterclass Recipes/Gordon Ramsey 2.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Gordon Ramsey 2
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWFzdGVyY2xhc3MlMjBSZWNpcGVz'); return false;">Masterclass Recipes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="39" data-categories="TWFzdGVyY2xhc3MlMjBSZWNpcGVz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835161301" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="9">
+<a href="../../pages/recipes/Masterclass Recipes/James Suckling Wine Tasting.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+James Suckling Wine Tasting
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWFzdGVyY2xhc3MlMjBSZWNpcGVz'); return false;">Masterclass Recipes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="40" data-categories="TWFzdGVyY2xhc3MlMjBSZWNpcGVz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835161400" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="7">
+<a href="../../pages/recipes/Masterclass Recipes/James Suckling.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+James Suckling
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWFzdGVyY2xhc3MlMjBSZWNpcGVz'); return false;">Masterclass Recipes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="41" data-categories="TWFzdGVyY2xhc3MlMjBSZWNpcGVz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835161514" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="7">
+<a href="../../pages/recipes/Masterclass Recipes/Madhur Jaffrey.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Madhur Jaffrey
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWFzdGVyY2xhc3MlMjBSZWNpcGVz'); return false;">Masterclass Recipes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="42" data-categories="TWFzdGVyY2xhc3MlMjBSZWNpcGVz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835161618" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="7">
+<a href="../../pages/recipes/Masterclass Recipes/Mashama Bailey.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Mashama Bailey
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWFzdGVyY2xhc3MlMjBSZWNpcGVz'); return false;">Masterclass Recipes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="43" data-categories="TWFzdGVyY2xhc3MlMjBSZWNpcGVz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835161715" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="7">
+<a href="../../pages/recipes/Masterclass Recipes/Massimo Bottura.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Massimo Bottura
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWFzdGVyY2xhc3MlMjBSZWNpcGVz'); return false;">Masterclass Recipes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="44" data-categories="TWFzdGVyY2xhc3MlMjBSZWNpcGVz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835161820" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="8">
+<a href="../../pages/recipes/Masterclass Recipes/Michael Twitty Roots.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Michael Twitty Roots
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWFzdGVyY2xhc3MlMjBSZWNpcGVz'); return false;">Masterclass Recipes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="45" data-categories="TWFzdGVyY2xhc3MlMjBSZWNpcGVz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835161913" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="12">
+<a href="../../pages/recipes/Masterclass Recipes/Mixology - Lynnette Marrero &amp; Ryan Chetiyawardana.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Mixology - Lynnette Marrero &amp; Ryan Chetiyawardana
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWFzdGVyY2xhc3MlMjBSZWNpcGVz'); return false;">Masterclass Recipes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="46" data-categories="TWFzdGVyY2xhc3MlMjBSZWNpcGVz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835162011" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="7">
+<a href="../../pages/recipes/Masterclass Recipes/Niki Nakayama.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Niki Nakayama
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWFzdGVyY2xhc3MlMjBSZWNpcGVz'); return false;">Masterclass Recipes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="47" data-categories="TWFzdGVyY2xhc3MlMjBSZWNpcGVz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835162105" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="7">
+<a href="../../pages/recipes/Masterclass Recipes/Ron Finley.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Ron Finley
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWFzdGVyY2xhc3MlMjBSZWNpcGVz'); return false;">Masterclass Recipes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="48" data-categories="TWFzdGVyY2xhc3MlMjBSZWNpcGVz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835162213" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="7">
+<a href="../../pages/recipes/Masterclass Recipes/Roy Choi.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Roy Choi
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWFzdGVyY2xhc3MlMjBSZWNpcGVz'); return false;">Masterclass Recipes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="49" data-categories="TWFzdGVyY2xhc3MlMjBSZWNpcGVz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835162320" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="8">
+<a href="../../pages/recipes/Masterclass Recipes/Thomas Keller 1.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Thomas Keller 1
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWFzdGVyY2xhc3MlMjBSZWNpcGVz'); return false;">Masterclass Recipes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="50" data-categories="TWFzdGVyY2xhc3MlMjBSZWNpcGVz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835162426" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="8">
+<a href="../../pages/recipes/Masterclass Recipes/Thomas Keller 2.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Thomas Keller 2
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWFzdGVyY2xhc3MlMjBSZWNpcGVz'); return false;">Masterclass Recipes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="51" data-categories="TWFzdGVyY2xhc3MlMjBSZWNpcGVz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835162526" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="8">
+<a href="../../pages/recipes/Masterclass Recipes/Thomas Keller 3.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Thomas Keller 3
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWFzdGVyY2xhc3MlMjBSZWNpcGVz'); return false;">Masterclass Recipes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="52" data-categories="TWFzdGVyY2xhc3MlMjBSZWNpcGVz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835162623" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="7">
+<a href="../../pages/recipes/Masterclass Recipes/Wolfgang Puck.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Wolfgang Puck
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWFzdGVyY2xhc3MlMjBSZWNpcGVz'); return false;">Masterclass Recipes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="53" data-categories="TWFzdGVyY2xhc3MlMjBSZWNpcGVz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835162735" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="7">
+<a href="../../pages/recipes/Masterclass Recipes/Yotam Ottolenghi.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Yotam Ottolenghi
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWFzdGVyY2xhc3MlMjBSZWNpcGVz'); return false;">Masterclass Recipes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="54" data-categories="TWV4aWNhbg==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835163044" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="886">
+<a href="../../pages/recipes/Mexican/Burrito Bowls.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Burrito Bowls
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TWV4aWNhbg=='); return false;">Mexican</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="55" data-categories="TmV3JTIwT3JsZWFucw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835163385" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="874">
+<a href="../../pages/recipes/New Orleans/Gumbo - Weissman.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Gumbo - Weissman
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TmV3JTIwT3JsZWFucw=='); return false;">New Orleans</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="56" data-categories="TmV3JTIwT3JsZWFucw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835163712" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="379">
+<a href="../../pages/recipes/New Orleans/Jambalaya.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Jambalaya
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TmV3JTIwT3JsZWFucw=='); return false;">New Orleans</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="57" data-categories="Tm9vZGxlcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835164036" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="428">
+<a href="../../pages/recipes/Noodles/Dan Dan Noodles.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Dan Dan Noodles
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Tm9vZGxlcw=='); return false;">Noodles</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="58" data-categories="Tm9vZGxlcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835164348" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="420">
+<a href="../../pages/recipes/Noodles/Lo Mein.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Lo Mein
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Tm9vZGxlcw=='); return false;">Noodles</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="59" data-categories="Tm9vZGxlcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835164680" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="830">
+<a href="../../pages/recipes/Noodles/Pad Thai.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img data-src="Noodles\media\image1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Pad Thai
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Tm9vZGxlcw=='); return false;">Noodles</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="60" data-categories="Tm9vZGxlcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835165007" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="382">
+<a href="../../pages/recipes/Noodles/Zhajiang Mian.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Zhajiang Mian
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Tm9vZGxlcw=='); return false;">Noodles</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="61" data-categories="T2lscyUyMGFuZCUyME1hcmluYWRlcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835165319" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="491">
+<a href="../../pages/recipes/Oils and Marinades/Marinated Sweet Peppers.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Marinated Sweet Peppers
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('T2lscyUyMGFuZCUyME1hcmluYWRlcw=='); return false;">Oils and Marinades</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong><u>Ingredients:</u></strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="62" data-categories="T2lscyUyMGFuZCUyME1hcmluYWRlcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835165622" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="243">
+<a href="../../pages/recipes/Oils and Marinades/Sun Dried Tomatoes.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Sun Dried Tomatoes
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('T2lscyUyMGFuZCUyME1hcmluYWRlcw=='); return false;">Oils and Marinades</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="63" data-categories="UGFydHklMjBTbmFja3MlMjBhbmQlMjBEaXBz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835165922" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="94">
+<a href="../../pages/recipes/Party Snacks and Dips/Buffalo Chicken Dip.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Buffalo Chicken Dip
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UGFydHklMjBTbmFja3MlMjBhbmQlMjBEaXBz'); return false;">Party Snacks and Dips</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>ChickeIngredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="64" data-categories="UGFydHklMjBTbmFja3MlMjBhbmQlMjBEaXBz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835166242" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="573">
+<a href="../../pages/recipes/Party Snacks and Dips/Hummus with Spiced Chicken and Cauliflower.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Hummus with Spiced Chicken and Cauliflower
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UGFydHklMjBTbmFja3MlMjBhbmQlMjBEaXBz'); return false;">Party Snacks and Dips</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="65" data-categories="UGFydHklMjBTbmFja3MlMjBhbmQlMjBEaXBz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835166547" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="263">
+<a href="../../pages/recipes/Party Snacks and Dips/Olive Tapenade.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Olive Tapenade
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UGFydHklMjBTbmFja3MlMjBhbmQlMjBEaXBz'); return false;">Party Snacks and Dips</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="66" data-categories="UGFydHklMjBTbmFja3MlMjBhbmQlMjBEaXBz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835166876" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="602">
+<a href="../../pages/recipes/Party Snacks and Dips/Queso Two Ways.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Queso Two Ways
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UGFydHklMjBTbmFja3MlMjBhbmQlMjBEaXBz'); return false;">Party Snacks and Dips</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="67" data-categories="UGFydHklMjBTbmFja3MlMjBhbmQlMjBEaXBz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835167200" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="290">
+<a href="../../pages/recipes/Party Snacks and Dips/Spinach and Artichoke Dip - Weissman.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Spinach and Artichoke Dip - Weissman
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UGFydHklMjBTbmFja3MlMjBhbmQlMjBEaXBz'); return false;">Party Snacks and Dips</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="68" data-categories="UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835167504" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="77">
+<a href="../../pages/recipes/Pickling and Fermenting/Asian Cucumber Slices.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Asian Cucumber Slices
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n'); return false;">Pickling and Fermenting</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="69" data-categories="UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835167799" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="110">
+<a href="../../pages/recipes/Pickling and Fermenting/Brad_s Mustard.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Brad_s Mustard
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n'); return false;">Pickling and Fermenting</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="70" data-categories="UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835168107" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="78">
+<a href="../../pages/recipes/Pickling and Fermenting/Caramelized Onions.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Caramelized Onions
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n'); return false;">Pickling and Fermenting</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="71" data-categories="UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835168415" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="96">
+<a href="../../pages/recipes/Pickling and Fermenting/Fermented Peppers for Hot Sauce.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Fermented Peppers for Hot Sauce
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n'); return false;">Pickling and Fermenting</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="72" data-categories="UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835168721" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="273">
+<a href="../../pages/recipes/Pickling and Fermenting/Giardiniera.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Giardiniera
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n'); return false;">Pickling and Fermenting</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong> <em>2 quart yield</em>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="73" data-categories="UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835169020" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="319">
+<a href="../../pages/recipes/Pickling and Fermenting/Pickled Brusselsprouts.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Pickled Brusselsprouts
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n'); return false;">Pickling and Fermenting</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="74" data-categories="UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835169319" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="270">
+<a href="../../pages/recipes/Pickling and Fermenting/Pickled Coleslaw.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Pickled Coleslaw
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n'); return false;">Pickling and Fermenting</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="75" data-categories="UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835169620" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="187">
+<a href="../../pages/recipes/Pickling and Fermenting/Pickled Jalapenos.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Pickled Jalapenos
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n'); return false;">Pickling and Fermenting</div>
+
+</div>
+<div class="card-text listing-description delink">
+1 cup white vinegar
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="76" data-categories="UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835169920" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="112">
+<a href="../../pages/recipes/Pickling and Fermenting/Pickled Onion Recipe.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Pickled Onion Recipe
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n'); return false;">Pickling and Fermenting</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Source:</strong> <u>https://www.youtube.com/watch?v=ifRpwe3wiJU&amp;ab_channel=NOTANOTHERCOOKINGSHOW</u>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="77" data-categories="UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835170235" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="139">
+<a href="../../pages/recipes/Pickling and Fermenting/Spicy Asian Cucumbers.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Spicy Asian Cucumbers
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n'); return false;">Pickling and Fermenting</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="78" data-categories="UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835170533" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="85">
+<a href="../../pages/recipes/Pickling and Fermenting/Weissman Mustard.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Weissman Mustard
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UGlja2xpbmclMjBhbmQlMjBGZXJtZW50aW5n'); return false;">Pickling and Fermenting</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="79" data-categories="UGl6emE=" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835170840" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="800">
+<a href="../../pages/recipes/Pizza/Cast Iron Pizza.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Cast Iron Pizza
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UGl6emE='); return false;">Pizza</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="80" data-categories="UG9yaw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835170960" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="19">
+<a href="../../pages/recipes/Pork/STICKY HOISIN PORK RIBS WITH TANGY SMASHED CUCUMBERS AND GARLIC RICE » Gordon Ramsay.com.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+STICKY HOISIN PORK RIBS WITH TANGY SMASHED CUCUMBERS AND GARLIC RICE » Gordon Ramsay.com
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UG9yaw=='); return false;">Pork</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="81" data-categories="UG90YXRvZXM=" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835171059" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="6">
+<a href="../../pages/recipes/Potatoes/Mom_s_Potato_Salad.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Mom_s_Potato_Salad
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UG90YXRvZXM='); return false;">Potatoes</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="82" data-categories="U2FsYWRz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835171334" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="157">
+<a href="../../pages/recipes/Salads/Greek Horiatiki Salad.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Greek Horiatiki Salad
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2FsYWRz'); return false;">Salads</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="83" data-categories="U2FsYWRz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835171628" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="118">
+<a href="../../pages/recipes/Salads/Israeli Couscous Salad.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Israeli Couscous Salad
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2FsYWRz'); return false;">Salads</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="84" data-categories="U2FsYWRz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835171939" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="375">
+<a href="../../pages/recipes/Salads/Italian Chopped Brussels Sprouts Salad.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Italian Chopped Brussels Sprouts Salad
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2FsYWRz'); return false;">Salads</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="85" data-categories="U2FsYWRz" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835172254" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="396">
+<a href="../../pages/recipes/Salads/Quinoa Mediterranean Salad.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Quinoa Mediterranean Salad
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2FsYWRz'); return false;">Salads</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="86" data-categories="U2FuZHdpY2hlcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835172555" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="371">
+<a href="../../pages/recipes/Sandwiches/Olive Tapenade Slab Sandwich.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Olive Tapenade Slab Sandwich
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2FuZHdpY2hlcw=='); return false;">Sandwiches</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="87" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835172863" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="467">
+<a href="../../pages/recipes/Sauces and Condiments/Adobo Sauce.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Adobo Sauce
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="88" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835173169" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="127">
+<a href="../../pages/recipes/Sauces and Condiments/Balsamic Vinaigrette.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Balsamic Vinaigrette
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="89" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835173466" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="323">
+<a href="../../pages/recipes/Sauces and Condiments/Carolina Reaper Hot Sauce.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Carolina Reaper Hot Sauce
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="90" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835173806" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="827">
+<a href="../../pages/recipes/Sauces and Condiments/Chili Oil_Crisps.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Chili Oil_Crisps
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<mark>Main Ingredients</mark>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="91" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835174112" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="65">
+<a href="../../pages/recipes/Sauces and Condiments/Chipotle Crema.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Chipotle Crema
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="92" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835174408" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="54">
+<a href="../../pages/recipes/Sauces and Condiments/Comeback Sauce.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Comeback Sauce
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="93" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835174710" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="409">
+<a href="../../pages/recipes/Sauces and Condiments/Fermented Hot Sauce (w_ any peppers).html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Fermented Hot Sauce (w_ any peppers)
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="94" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835175005" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="72">
+<a href="../../pages/recipes/Sauces and Condiments/Green Crack.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Green Crack
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="95" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835175309" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="269">
+<a href="../../pages/recipes/Sauces and Condiments/Harissa.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Harissa
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="96" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835175604" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="48">
+<a href="../../pages/recipes/Sauces and Condiments/Homemade Mayo.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Homemade Mayo
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="97" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835175899" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="42">
+<a href="../../pages/recipes/Sauces and Condiments/Honey Mustard.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Honey Mustard
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="98" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835176208" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="124">
+<a href="../../pages/recipes/Sauces and Condiments/Hot Honey.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Hot Honey
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="99" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835176515" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="533">
+<a href="../../pages/recipes/Sauces and Condiments/Hot Sauce (Dried Peppers).html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Hot Sauce (Dried Peppers)
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="100" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835176814" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="89">
+<a href="../../pages/recipes/Sauces and Condiments/Italian Dressing.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Italian Dressing
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="101" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835177118" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="196">
+<a href="../../pages/recipes/Sauces and Condiments/Mango Habanero Hot Sauce.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Mango Habanero Hot Sauce
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="102" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835177418" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="352">
+<a href="../../pages/recipes/Sauces and Condiments/Peach Scotch Bonnet Hot Sauce.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Peach Scotch Bonnet Hot Sauce
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="103" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835177715" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="39">
+<a href="../../pages/recipes/Sauces and Condiments/Ponzu Vinaigrette.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Ponzu Vinaigrette
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="104" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835178014" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="236">
+<a href="../../pages/recipes/Sauces and Condiments/Roasted Ghost Pepper Hot Sauce.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Roasted Ghost Pepper Hot Sauce
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="105" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835178328" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="150">
+<a href="../../pages/recipes/Sauces and Condiments/Salsa Template Recipe.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Salsa Template Recipe
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="106" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835178633" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="421">
+<a href="../../pages/recipes/Sauces and Condiments/Spicy Serrano Hot Sauce.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Spicy Serrano Hot Sauce
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="107" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835178935" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="126">
+<a href="../../pages/recipes/Sauces and Condiments/Teriyaki Sauce.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Teriyaki Sauce
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="108" data-categories="U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835179284" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="478">
+<a href="../../pages/recipes/Sauces and Condiments/Ultimate Pesto.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Ultimate Pesto
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2F1Y2VzJTIwYW5kJTIwQ29uZGltZW50cw=='); return false;">Sauces and Condiments</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="109" data-categories="U291cHM=" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835179597" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="613">
+<a href="../../pages/recipes/Soups/Authentic Hot and Sour Soup.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Authentic Hot and Sour Soup
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U291cHM='); return false;">Soups</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="110" data-categories="U291cHM=" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835179899" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="251">
+<a href="../../pages/recipes/Soups/Blue Zone_s Minestrone.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Blue Zone_s Minestrone
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U291cHM='); return false;">Soups</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="111" data-categories="U291cHM=" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835180250" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="350">
+<a href="../../pages/recipes/Soups/Mediterranean Lentil Soup.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Mediterranean Lentil Soup
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U291cHM='); return false;">Soups</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="112" data-categories="U291cHM=" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835180579" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="772">
+<a href="../../pages/recipes/Soups/Shoyu Ramen.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Shoyu Ramen
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U291cHM='); return false;">Soups</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="113" data-categories="U3BpY2UlMjBNaXhlcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835180886" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="149">
+<a href="../../pages/recipes/Spice Mixes/Garama Masala.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Garama Masala
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U3BpY2UlMjBNaXhlcw=='); return false;">Spice Mixes</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="114" data-categories="VG9mdQ==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835181219" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="542">
+<a href="../../pages/recipes/Tofu/Mapo Tofu.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Mapo Tofu
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('VG9mdQ=='); return false;">Tofu</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="115" data-categories="VmVhbA==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835181555" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="479">
+<a href="../../pages/recipes/Veal/Simple Veal Bolognese.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Simple Veal Bolognese
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('VmVhbA=='); return false;">Veal</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="116" data-categories="VmVnZXRhYmxlcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835181860" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="117">
+<a href="../../pages/recipes/Vegetables/Bang Bang Brussel Sprouts.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Bang Bang Brussel Sprouts
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('VmVnZXRhYmxlcw=='); return false;">Vegetables</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="117" data-categories="VmVnZXRhYmxlcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835182166" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="188">
+<a href="../../pages/recipes/Vegetables/Caramelized Peppers and Onions.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Caramelized Peppers and Onions
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('VmVnZXRhYmxlcw=='); return false;">Vegetables</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="118" data-categories="VmVnZXRhYmxlcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835182468" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="178">
+<a href="../../pages/recipes/Vegetables/Garlic Whipped Cauliflower.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Garlic Whipped Cauliflower
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('VmVnZXRhYmxlcw=='); return false;">Vegetables</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="119" data-categories="VmVnZXRhYmxlcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835182771" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="232">
+<a href="../../pages/recipes/Vegetables/Greek Briam.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Greek Briam
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('VmVnZXRhYmxlcw=='); return false;">Vegetables</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="120" data-categories="VmVnZXRhYmxlcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835183078" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="214">
+<a href="../../pages/recipes/Vegetables/Roasted Red Peppers.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Roasted Red Peppers
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('VmVnZXRhYmxlcw=='); return false;">Vegetables</div>
+
+</div>
+<div class="card-text listing-description delink">
+<strong>Ingredients:</strong>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="121" data-categories="VmVnZXRhYmxlcw==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835183202" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="14">
+<a href="../../pages/recipes/Vegetables/Spicy Chinese Sichuan Green Beans - Dinner, then Dessert.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Spicy Chinese Sichuan Green Beans - Dinner, then Dessert
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('VmVnZXRhYmxlcw=='); return false;">Vegetables</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="122" data-categories="Lg==" data-listing-date-sort="1772773200000" data-listing-file-modified-sort="1772835160618" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="6">
+<a href="../../pages/recipes/ebook.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+ebook
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Lg=='); return false;">.</div>
+
+</div>
+<div class="card-text listing-description delink">
+
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Chris Kornaros
+</div>
+<div class="listing-date">
+Mar 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<p>:::</p>
+<div class="listing-no-matching d-none">No matching items</div>
+<nav id="listing-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
+<p>:::</p>
+<p>:::</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.github.com/ChrisKornaros">
+<p>GitHub</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.linkedin.com/in/chris-kornaros">
+<p>LinkedIn</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://bsky.app/profile/chriskornaros.bsky.social">
+<p>Bluesky</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://forms.gle/gDEjGD9G6VkaxkWX6">
+<p>Email</p>
+</a>
+  </li>  
+</ul>
+    <div class="toc-actions"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/recipes/recipes.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

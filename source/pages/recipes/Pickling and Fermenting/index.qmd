@@ -1,0 +1,10 @@
+---
+title: "Pickling and Fermenting"
+listing:
+  contents: "*.qmd"
+  sort: "date desc"
+  type: grid
+  categories: false
+---
+
+All **Pickling and Fermenting** recipes.

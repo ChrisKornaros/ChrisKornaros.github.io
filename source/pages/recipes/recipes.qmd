@@ -1,0 +1,12 @@
+---
+title: "Recipes"
+listing:
+  contents: "**/*.qmd"
+  exclude:
+    - "**/index.qmd"
+  sort: "date desc"
+  type: grid
+  categories: true
+---
+
+A collection of recipes organized by category. Use the category tags to browse by type, or search by name.

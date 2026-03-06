@@ -1,0 +1,10 @@
+---
+title: "James Suckling Wine Tasting"
+author: "Chris Kornaros"
+date: 2026-03-06
+categories: ["Masterclass Recipes"]
+---
+
+```{=html}
+<iframe src="James Suckling Wine Tasting.pdf" width="100%" height="900px" style="border: none;"></iframe>
+```
