@@ -4,6 +4,7 @@ author: "Chris Kornaros"
 date: 2024-12-13
 categories: ["DevOps"]
 tags: ["uv", "Python", "git", "GitHub", "CLI", "DevOps", "Project Management", "Environments"]
+draft: true
 ---
 
 A basic guide on using `uv` the package and projects manager for Python developers.

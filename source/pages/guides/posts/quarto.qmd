@@ -4,6 +4,7 @@ author: "Chris Kornaros"
 date: 2024-12-13
 categories: ["Reporting"]
 tags: ["Quarto", "Documentation", "Design", "Guides", "Markdown", "HTML", "CSS", "SASS", "CLI", "git", "GitHub"]
+draft: true
 ---
 
 ![](images/quarto.png)

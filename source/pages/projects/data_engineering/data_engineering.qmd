@@ -5,6 +5,7 @@ listing:
     sort: "date desc"
     type: grid
     categories: true
+draft: true
 ---
 
 Landing page for all my project posts related to Data Engineering and Architecture.
