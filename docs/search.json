@@ -165,21 +165,15 @@
     ]
   },
   {
-    "objectID": "pages/blogs/blogs.html",
-    "href": "pages/blogs/blogs.html",
-    "title": "Blogs",
+    "objectID": "pages/blogs/posts/test.html",
+    "href": "pages/blogs/posts/test.html",
+    "title": "Test",
     "section": "",
-    "text": "A landing page for various blogs, journals, or random thoughts. Some of these will be focused on specific tools or technology, others will be random thoughts or research notes.\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\nNo matching items",
+    "text": "Test Post by Chris KornarosRead on Substack",
     "crumbs": [
-      "Blogs"
+      "Blogs",
+      "Test"
     ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Chris Kornaros",
-    "section": "",
-    "text": "This site is the personal portfolio and homepage for Chris Kornaros. I’m a Tulane Graduate and professional Data Engineer. On here, you’ll find projects and code samples that I can share publicly, guides for various tools or workflows, journal or blog posts, and any independent research or professional updates (including my resume).\nThis website is a work in progress, so things are going to move around and break. Additionally, there is a lot that I have to still add: past guides, projects, etc. Follow me on social media (links above) to stay up to date with what I’m working on. To learn more about my background visit About, for guides on various open source tools visit Guides, to see my current and past (public) work visit Projects, and to see any blog posts (available on WhiteWind) visit Blogs."
   },
   {
     "objectID": "pages/about/about.html",
@@ -194,6 +188,23 @@
     "title": "About",
     "section": "About Me",
     "text": "About Me\nI’m a 27 year old Data Scientist, Engineer, Analyst, Architect, etc. that has two degrees from Tulane University in New Orleans– BSM, Marketing and Asian Studies; MS, Business Analytics. During COVID, I did an extra year of school and received a Masters in Data Science. As a result of my education, I fell in love with data science and machine learning, but due to common data challenges, I developed a professional passion and skillset for database architecture and data engineering.\nI currently work as a Senior Data Analyst at US Foods in their enterprise data organization, primarily supporting the Safety and Warehousing domains. I previously worked at General Motors in the Global Markets IT organization. Most of the projects I work on outside of US Foods use different tools and skillsets than I do during my day job. The reason being that I want to stay up to date with all of the tools and changes in the industry. As a result, I get to play with all of the cool licensed tools like dbt,Snowflake, Databricks, and Power BI at work, but I get to build and learn with open source tools externally.\nSince really jumping in to open source development and learning in 2024, I’ve come to enjoy the study and field of data even more. I know that long term I want to move into a data strategy and innovation role. I’m also interested in eventually pursuing a PhD, either in a Data Engineering capacity or looking at performance optimization for data applications– think using duckdb instead of pandas. Designing and architecting systems that enable people to get more out of their data is something I’m teaching myself now. That being said, I’m enthralled with both the process and my progress.\nIn the long run, I want to continue working full time as a Data Engineer (or something similar). That being said, for the time being, I am interested in advising or consulting both individuals and companies on data strategy.\nYou can take a look at my resume down below. My email is listed."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Chris Kornaros",
+    "section": "",
+    "text": "This site is the personal portfolio and homepage for Chris Kornaros. I’m a Tulane Graduate and professional Data Engineer. On here, you’ll find projects and code samples that I can share publicly, guides for various tools or workflows, journal or blog posts, and any independent research or professional updates (including my resume).\nThis website is a work in progress, so things are going to move around and break. Additionally, there is a lot that I have to still add: past guides, projects, etc. Follow me on social media (links above) to stay up to date with what I’m working on. To learn more about my background visit About, for guides on various open source tools visit Guides, to see my current and past (public) work visit Projects, and to see any blog posts (available on WhiteWind) visit Blogs."
+  },
+  {
+    "objectID": "pages/blogs/blogs.html",
+    "href": "pages/blogs/blogs.html",
+    "title": "Blogs",
+    "section": "",
+    "text": "A landing page for various blogs, journals, or random thoughts. Some of these will be focused on specific tools or technology, others will be random thoughts or research notes.\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Title\n      \n      \n        Author\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nDate\n\n\n\nTitle\n\n\n\nAuthor\n\n\n\n\n\n\n\n\nMar 6, 2026\n\n\nTest\n\n\nChris Kornaros\n\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Blogs"
+    ]
   },
   {
     "objectID": "pages/guides/guides.html",

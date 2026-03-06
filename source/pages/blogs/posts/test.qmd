@@ -1,0 +1,10 @@
+---
+title: "Test"
+author: "Chris Kornaros"
+date: 2026-03-06
+categories: ["Test"]
+---
+
+```{=html}
+<div class="substack-post-embed"><p lang="en">Test Post by Chris Kornaros</p><p></p><a data-post-link href="https://chriskornaros.substack.com/p/test-post">Read on Substack</a></div><script async src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>
+```

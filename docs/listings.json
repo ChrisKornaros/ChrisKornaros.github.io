@@ -5,7 +5,9 @@
   },
   {
     "listing": "/pages/blogs/blogs.html",
-    "items": []
+    "items": [
+      "/pages/blogs/posts/test.html"
+    ]
   },
   {
     "listing": "/pages/guides/guides.html",

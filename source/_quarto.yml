@@ -46,8 +46,10 @@ website:
           - text: "Linux Server & Raspberry Pi"
             href: pages/guides/posts/raspberry_pi_server.qmd
       - text: "Blogs"
+        href: pages/blogs/blogs.qmd
         menu:
-          - pages/blogs/blogs.qmd
+          - text: "Test"
+            href: pages/blogs/posts/test.qmd
 
   sidebar:
     - id: guides
@@ -67,8 +69,16 @@ website:
 
     - id: blogs
       title: "Blogs"
+      style: "docked"
+      background: dark
+      foreground: light
+      collapse-level: 2
       contents:
-        - pages/blogs/blogs.qmd
+        - section: "Blogs"
+          href: pages/blogs/blogs.qmd
+          contents:
+            - text: "Test"
+              href: pages/blogs/posts/test.qmd
           
 format:
   html:
