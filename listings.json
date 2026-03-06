@@ -3,9 +3,7 @@
     "listing": "/pages/guides/guides.html",
     "items": [
       "/pages/guides/posts/raspberry_pi_server.html",
-      "/pages/guides/posts/docker.html",
-      "/pages/guides/posts/uv.html",
-      "/pages/guides/posts/quarto.html"
+      "/pages/guides/posts/docker.html"
     ]
   },
   {
@@ -18,9 +16,6 @@
   },
   {
     "listing": "/pages/projects/data_science/data_science.html",
-    "items": [
-      "/pages/projects/data_science/posts/nfl_bowl_2025.html",
-      "/pages/projects/data_science/posts/titanic.html"
-    ]
+    "items": []
   }
 ]
