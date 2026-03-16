@@ -318,7 +318,7 @@ cookieconsent.run({
 <li><strong>Simplified Deployment:</strong> Containers bundle all dependencies, eliminating complex installation procedures</li>
 <li><strong>Easy Updates:</strong> Containers can be replaced rather than updated in-place, simplifying maintenance</li>
 </ul>
-<p>In this guide, we’ll first explore the foundational concepts of containerization to build a solid understanding of the technology. Then, we’ll dive into Docker—the most popular containerization platform—and create a practical setup for a persistent Jupyter notebook server running on your Raspberry Pi. This container will allow you to use your MacBook as a client for development while leveraging the compute resources and persistent storage of your Pi server.</p>
+<p>In this guide, we’ll first explore the foundational concepts of containerization to build a solid understanding of the technology. Then, we’ll dive into Docker—the most popular containerization platform—and create a practical setup for a Python container running on your Raspberry Pi. This container will allow you to use your MacBook as a client for development while leveraging the compute resources and persistent storage of your Pi server.</p>
 <p>By the end of this guide, you’ll have both a theoretical understanding of containerization and practical experience implementing it, setting the stage for more advanced container-based projects like PostgreSQL databases, development environments, and even multi-container applications. It will help to checkout my starter guide on setting up Linux Server LTS on a Raspberry Pi, if you want to know exactly what kind of system I’m using. Otherwise, most of the examples will focus on Docker, not my specific environment.</p>
 </section>
 <section id="basic-concepts" class="level3">
@@ -402,7 +402,7 @@ cookieconsent.run({
 </section>
 <section id="advanced-networking" class="level4">
 <h4 class="anchored" data-anchor-id="advanced-networking">Advanced Networking</h4>
-<p>In bridge networking, containers communicate freely on their isolated network but need <code>port mapping</code> to be accessible from outside. For example, mapping port 8888 on your Raspberry Pi to port 8888 in a container would let you access a Jupyter server by connecting to your Pi’s IP address on port 8888.</p>
+<p>In bridge networking, containers communicate freely on their isolated network but need <code>port mapping</code> to be accessible from outside. For example, mapping port 8888 on your Raspberry Pi to port 8888 in a container would let you access a Python container by connecting to your Pi’s IP address on port 8888.</p>
 <p>Containers typically use DNS for service discovery:</p>
 <ul>
 <li>Container engines often provide built-in DNS resolution between containers</li>
@@ -418,7 +418,7 @@ cookieconsent.run({
 <li>UFW (Uncomplicated Firewall) configuration</li>
 <li>Fail2ban for protection against brute-force attacks</li>
 </ul>
-<p>Any containerized services will need to work with these existing configurations. Later, when we set up our Jupyter container, we’ll need to:</p>
+<p>Any containerized services will need to work with these existing configurations. Later, when we set up our Python container, we’ll need to:</p>
 <ul>
 <li>Choose a port that doesn’t conflict with existing services</li>
 <li>Configure UFW to allow traffic to this port</li>
@@ -476,7 +476,6 @@ cookieconsent.run({
 <h4 class="anchored" data-anchor-id="specific-raspberry-pi-use-cases">Specific Raspberry Pi Use Cases</h4>
 <p>For your Raspberry Pi server specifically, containerization enables:</p>
 <ul>
-<li><strong>Jupyter Notebooks:</strong> Run a persistent Jupyter server for data analysis</li>
 <li><strong>Database Servers:</strong> Host PostgreSQL, MySQL, or MongoDB without complex setup</li>
 <li><strong>Web Applications:</strong> Deploy web services with proper isolation</li>
 <li><strong>Development Tools:</strong> Run Git servers, CI/CD pipelines, or code quality tools</li>
@@ -698,7 +697,6 @@ cookieconsent.run({
 <li><code>Compose</code> file outline view for easier navigation of complex Compose files</li>
 </ul></li>
 <li><strong><code>Remote - SSH</code> extension:</strong> Enables you to use VS Code to connect to your Raspberry Pi over SSH and work with files and terminals directly on the remote machine.</li>
-<li><strong><code>Jupyter</code> extension:</strong> Supports working with Jupyter notebooks within VS Code, allowing you to connect to remote Jupyter kernels.</li>
 <li><strong><code>Python</code> extension:</strong> Provides rich support for Python language, including IntelliSense, debugging, and code navigation.</li>
 <li><strong><code>Ruff</code> extension:</strong> A fast Python linter that helps maintain code quality by identifying errors, style issues, and potential bugs in your code.</li>
 </ul>
