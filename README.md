@@ -158,6 +158,31 @@ newgrp docker                  # Activate in current session (or log out/in)
 docker run hello-world         # Test without sudo
 ```
 
+Since the `docker` group already exists, you can skip `groupadd` and run only the following three commands:
+```bash
+sudo usermod -aG docker $USER
+newgrp docker
+docker run hello-world
+```
+
+---
+
+**`sudo usermod -aG docker $USER`**
+
+`usermod` modifies an existing user account. The `-aG` flag is actually two flags working together: `-a` means *append* (rather than replace existing group memberships), and `-G` specifies the group you're adding the user to. Without the `-a` flag, `-G` would *overwrite* all of your existing supplementary groups with just `docker`, which would be a significant problem. Together, `-aG docker` safely adds `docker` to your user's list of groups without touching anything else. `$USER` is a shell variable that resolves to your current username — in this case, `chris`.
+
+---
+
+**`newgrp docker`**
+
+Group membership changes in Linux don't take effect in your current shell session automatically — the system only re-evaluates your groups at login time. `newgrp docker` forces your current session to recognize the new `docker` group immediately, without requiring a full logout and login. Think of it as refreshing your session's credentials. Alternatively, you can log out and back in, which accomplishes the same thing.
+
+---
+
+**`docker run hello-world`**
+
+This is the verification step. Running this *without* `sudo` is the important part — it confirms that your user can communicate directly with the Docker daemon via the socket (`/var/run/docker.sock`) using group-level permissions, rather than relying on root access. If this succeeds, your permissions are configured correctly.
+
 **This carries a critical security implication.** Any user in the `docker` group has **unrestricted root-equivalent access** to the host. A single command demonstrates why:
 
 ```bash
