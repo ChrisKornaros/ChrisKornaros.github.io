@@ -43,7 +43,36 @@ EOF
 sudo apt update
 ```
 
-The `Suites:` line resolves to the Ubuntu codename (e.g., `noble` for 24.04). The repository source uses the **DEB822 `.sources` format**, which replaced the older one-line `.list` format in Docker's current documentation. Both formats work, but `.sources` is now canonical. No `Architectures:` field is needed — apt fetches packages matching the host architecture automatically.
+Let's break this down step by step.
+
+**`sudo install -m 0755 -d /etc/apt/keyrings`**
+
+The `install` command here isn't installing software — it's creating a directory with specific permissions in one step. The flags are:
+
+- `-m 0755` sets the directory permissions: the owner can read, write, and execute; everyone else can only read and execute. This is standard for a directory that should be publicly readable but only root-writable.
+- `-d` tells `install` that you're creating a directory, not copying a file.
+
+**What is a GPG Key?**
+
+GPG (GNU Privacy Guard) keys are a form of cryptographic verification. When you download software from the internet, you need a way to confirm it actually came from who it claims to — and hasn't been tampered with. Docker publishes a public GPG key, and every package they release is digitally "signed" with the corresponding private key. Your system uses the public key to verify the signature before installing anything. Without this, you could unknowingly install a malicious package from a compromised or fake repository.
+
+The `curl` command downloads Docker's public GPG key and saves it to `/etc/apt/keyrings/docker.asc`.
+
+**`sudo chmod a+r /etc/apt/keyrings/docker.asc`**
+
+You're familiar with `chmod`, so here's the specific flag: `a+r` means "all users, add read permission." The `a` stands for *all* (owner, group, and others), and `+r` adds the read permission. This ensures that `apt` — which may run as a different user — can read the key file when verifying packages.
+
+**The `tee` command and the file it writes**
+
+`tee` reads from standard input and writes to a file, which is useful here because we need `sudo` privileges to write to a system directory. The `<<EOF` syntax is a *heredoc* — everything between `<<EOF` and `EOF` is treated as the input. This writes a source definition file to `/etc/apt/sources.list.d/docker.sources` in the modern DEB822 format. Here's what each field means:
+
+- `Types: deb` — specifies binary (compiled) packages, as opposed to source code.
+- `URIs` — the base URL of Docker's package repository.
+- `Suites` — resolves to the Ubuntu codename (e.g., `noble` for 24.04), dynamically pulled from your system's `/etc/os-release` file so the command works across Ubuntu versions.. The repository source uses the **DEB822 `.sources` format**, which replaced the older one-line `.list` format in Docker's current documentation. Both formats work, but `.sources` is now canonical. No `Architectures:` field is needed — apt fetches packages matching the host architecture automatically.
+- `Components: stable` — pulls only from the stable release channel.
+- `Signed-By` — points to the GPG key we downloaded earlier, so `apt` knows exactly which key to use when verifying Docker packages.
+
+Finally, `sudo apt update` refreshes the package list so your system is aware of the newly added Docker repository.
 
 ### Installing Docker Engine
 
