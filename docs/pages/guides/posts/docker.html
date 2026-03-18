@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -423,7 +458,18 @@ cookieconsent.run({
   <li><a href="#essential-vs-code-extensions" id="toc-essential-vs-code-extensions" class="nav-link" data-scroll-target="#essential-vs-code-extensions">Essential VS Code Extensions</a></li>
   <li><a href="#configuring-docker-integration" id="toc-configuring-docker-integration" class="nav-link" data-scroll-target="#configuring-docker-integration">Configuring Docker Integration</a></li>
   </ul></li>
-  <li><a href="#configuring-docker-on-the-server" id="toc-configuring-docker-on-the-server" class="nav-link" data-scroll-target="#configuring-docker-on-the-server">Configuring Docker on the Server</a></li>
+  <li><a href="#configuring-docker-on-the-server" id="toc-configuring-docker-on-the-server" class="nav-link" data-scroll-target="#configuring-docker-on-the-server">Configuring Docker on the Server</a>
+  <ul class="collapse">
+  <li><a href="#docker-installation-prerequisites" id="toc-docker-installation-prerequisites" class="nav-link" data-scroll-target="#docker-installation-prerequisites">Docker Installation Prerequisites</a></li>
+  <li><a href="#installing-docker-engine" id="toc-installing-docker-engine" class="nav-link" data-scroll-target="#installing-docker-engine">Installing Docker Engine</a></li>
+  <li><a href="#upgrading-docker" id="toc-upgrading-docker" class="nav-link" data-scroll-target="#upgrading-docker">Upgrading Docker</a></li>
+  <li><a href="#complete-uninstallation-and-cleanup" id="toc-complete-uninstallation-and-cleanup" class="nav-link" data-scroll-target="#complete-uninstallation-and-cleanup">Complete uninstallation and cleanup</a></li>
+  <li><a href="#post-installation-systemd-user-permissions-and-daemon-hardening" id="toc-post-installation-systemd-user-permissions-and-daemon-hardening" class="nav-link" data-scroll-target="#post-installation-systemd-user-permissions-and-daemon-hardening">Post-installation: systemd, user permissions, and daemon hardening</a></li>
+  <li><a href="#docker-bypasses-ufw-and-how-to-fix-it" id="toc-docker-bypasses-ufw-and-how-to-fix-it" class="nav-link" data-scroll-target="#docker-bypasses-ufw-and-how-to-fix-it">Docker bypasses UFW — and how to fix it</a></li>
+  <li><a href="#binding-to-localhost-the-simplest-complementary-defense" id="toc-binding-to-localhost-the-simplest-complementary-defense" class="nav-link" data-scroll-target="#binding-to-localhost-the-simplest-complementary-defense">Binding to localhost: the simplest complementary defense</a></li>
+  <li><a href="#fail2ban-coexists-with-docker-but-needs-per-jail-chain-configuration" id="toc-fail2ban-coexists-with-docker-but-needs-per-jail-chain-configuration" class="nav-link" data-scroll-target="#fail2ban-coexists-with-docker-but-needs-per-jail-chain-configuration">Fail2Ban coexists with Docker but needs per-jail chain configuration</a></li>
+  <li><a href="#verifying-the-installation-end-to-end" id="toc-verifying-the-installation-end-to-end" class="nav-link" data-scroll-target="#verifying-the-installation-end-to-end">Verifying the installation end to end</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/guides/posts/docker.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -485,7 +531,7 @@ cookieconsent.run({
 <li><strong>Simplified Deployment:</strong> Containers bundle all dependencies, eliminating complex installation procedures</li>
 <li><strong>Easy Updates:</strong> Containers can be replaced rather than updated in-place, simplifying maintenance</li>
 </ul>
-<p>In this guide, we’ll first explore the foundational concepts of containerization to build a solid understanding of the technology. Then, we’ll dive into Docker—the most popular containerization platform—and create a practical setup for a persistent Jupyter notebook server running on your Raspberry Pi. This container will allow you to use your MacBook as a client for development while leveraging the compute resources and persistent storage of your Pi server.</p>
+<p>In this guide, we’ll first explore the foundational concepts of containerization to build a solid understanding of the technology. Then, we’ll dive into Docker—the most popular containerization platform—and create a practical setup for a Python container running on your Raspberry Pi. This container will allow you to use your MacBook as a client for development while leveraging the compute resources and persistent storage of your Pi server.</p>
 <p>By the end of this guide, you’ll have both a theoretical understanding of containerization and practical experience implementing it, setting the stage for more advanced container-based projects like PostgreSQL databases, development environments, and even multi-container applications. It will help to checkout my starter guide on setting up Linux Server LTS on a Raspberry Pi, if you want to know exactly what kind of system I’m using. Otherwise, most of the examples will focus on Docker, not my specific environment.</p>
 </section>
 <section id="basic-concepts" class="level3">
@@ -569,7 +615,7 @@ cookieconsent.run({
 </section>
 <section id="advanced-networking" class="level4">
 <h4 class="anchored" data-anchor-id="advanced-networking">Advanced Networking</h4>
-<p>In bridge networking, containers communicate freely on their isolated network but need <code>port mapping</code> to be accessible from outside. For example, mapping port 8888 on your Raspberry Pi to port 8888 in a container would let you access a Jupyter server by connecting to your Pi’s IP address on port 8888.</p>
+<p>In bridge networking, containers communicate freely on their isolated network but need <code>port mapping</code> to be accessible from outside. For example, mapping port 8888 on your Raspberry Pi to port 8888 in a container would let you access a Python container by connecting to your Pi’s IP address on port 8888.</p>
 <p>Containers typically use DNS for service discovery:</p>
 <ul>
 <li>Container engines often provide built-in DNS resolution between containers</li>
@@ -585,7 +631,7 @@ cookieconsent.run({
 <li>UFW (Uncomplicated Firewall) configuration</li>
 <li>Fail2ban for protection against brute-force attacks</li>
 </ul>
-<p>Any containerized services will need to work with these existing configurations. Later, when we set up our Jupyter container, we’ll need to:</p>
+<p>Any containerized services will need to work with these existing configurations. Later, when we set up our Python container, we’ll need to:</p>
 <ul>
 <li>Choose a port that doesn’t conflict with existing services</li>
 <li>Configure UFW to allow traffic to this port</li>
@@ -643,7 +689,6 @@ cookieconsent.run({
 <h4 class="anchored" data-anchor-id="specific-raspberry-pi-use-cases">Specific Raspberry Pi Use Cases</h4>
 <p>For your Raspberry Pi server specifically, containerization enables:</p>
 <ul>
-<li><strong>Jupyter Notebooks:</strong> Run a persistent Jupyter server for data analysis</li>
 <li><strong>Database Servers:</strong> Host PostgreSQL, MySQL, or MongoDB without complex setup</li>
 <li><strong>Web Applications:</strong> Deploy web services with proper isolation</li>
 <li><strong>Development Tools:</strong> Run Git servers, CI/CD pipelines, or code quality tools</li>
@@ -865,7 +910,6 @@ cookieconsent.run({
 <li><code>Compose</code> file outline view for easier navigation of complex Compose files</li>
 </ul></li>
 <li><strong><code>Remote - SSH</code> extension:</strong> Enables you to use VS Code to connect to your Raspberry Pi over SSH and work with files and terminals directly on the remote machine.</li>
-<li><strong><code>Jupyter</code> extension:</strong> Supports working with Jupyter notebooks within VS Code, allowing you to connect to remote Jupyter kernels.</li>
 <li><strong><code>Python</code> extension:</strong> Provides rich support for Python language, including IntelliSense, debugging, and code navigation.</li>
 <li><strong><code>Ruff</code> extension:</strong> A fast Python linter that helps maintain code quality by identifying errors, style issues, and potential bugs in your code.</li>
 </ul>
@@ -903,8 +947,313 @@ cookieconsent.run({
 <section id="configuring-docker-on-the-server" class="level3">
 <h3 class="anchored" data-anchor-id="configuring-docker-on-the-server">Configuring Docker on the Server</h3>
 <p>Now that we’ve prepared our client-side development environment, let’s install and configure Docker on your Ubuntu Raspberry Pi server. We’ll make sure it integrates properly with your existing server setup, including security configurations.</p>
+<p>A quick note on security configurations: <strong>Docker Engine installs cleanly on a Raspberry Pi 4 running Ubuntu Server LTS using the standard apt repository method — but its default networking behavior silently bypasses UFW, exposing published container ports to the internet regardless of your firewall rules.</strong></p>
+<p>This is the single most critical fact in this section and what we’re aiming to protect against. Everything below covers the full installation process, post-install hardening, the UFW bypass problem and its solutions, Fail2Ban coexistence, and verification procedures. The target environment is Ubuntu Server 24.04 LTS (Noble) on a Raspberry Pi 4 (ARM64/aarch64) with UFW active and SSH on port 45000.</p>
+<section id="docker-installation-prerequisites" class="level4">
+<h4 class="anchored" data-anchor-id="docker-installation-prerequisites">Docker Installation Prerequisites</h4>
+<p>Docker Engine for Linux ships through Docker’s own apt repository — not through Ubuntu’s default <code>docker.io</code> package. The installation process on ARM64 is <strong>identical to x86_64</strong>; the repository auto-detects the host architecture via the package metadata, and all core Docker features (Compose, Buildx, Swarm, overlay2 storage) are fully supported on <code>arm64</code>. As of 2025–2026, Docker officially supports <strong>Ubuntu 24.04 Noble (LTS)</strong> and <strong>Ubuntu 22.04 Jammy (LTS)</strong> on the <code>arm64</code> architecture. Ubuntu 20.04 Focal is no longer listed.</p>
+<p><strong>Removing conflicting packages</strong></p>
+<p>Ubuntu may ship older or unofficial Docker-related packages that conflict with Docker CE. Remove them first:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt remove <span class="va">$(</span><span class="ex">dpkg</span> <span class="at">--get-selections</span> docker.io docker-compose docker-compose-v2 <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  docker-doc podman-docker containerd runc <span class="dv">2</span><span class="op">&gt;</span>/dev/null <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f1</span><span class="va">)</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This is safe to run even if none of these are installed — apt will simply report nothing to remove. Existing images, containers, and volumes in <code>/var/lib/docker/</code> are preserved.</p>
+<p><strong>Adding the GPG key and repository</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install prerequisites</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install ca-certificates curl</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Add Docker's official GPG key</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> install <span class="at">-m</span> 0755 <span class="at">-d</span> /etc/apt/keyrings</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> curl <span class="at">-fsSL</span> https://download.docker.com/linux/ubuntu/gpg <span class="at">-o</span> /etc/apt/keyrings/docker.asc</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod a+r /etc/apt/keyrings/docker.asc</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the repository (DEB822 format — current official method)</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tee /etc/apt/sources.list.d/docker.sources <span class="op">&lt;&lt;EOF</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">Types: deb</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">URIs: https://download.docker.com/linux/ubuntu</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st">Suites: </span><span class="va">$(</span><span class="bu">.</span> /etc/os-release <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">"</span><span class="va">${UBUNTU_CODENAME</span><span class="op">:-</span><span class="va">$VERSION_CODENAME}</span><span class="st">"</span><span class="va">)</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="st">Components: stable</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="st">Signed-By: /etc/apt/keyrings/docker.asc</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Let’s break this down step by step.</p>
+<p><strong><code>sudo install -m 0755 -d /etc/apt/keyrings</code></strong></p>
+<p>The <code>install</code> command here isn’t installing software — it’s creating a directory with specific permissions in one step. The flags are:</p>
+<ul>
+<li><code>-m 0755</code> sets the directory permissions: the owner can read, write, and execute; everyone else can only read and execute. This is standard for a directory that should be publicly readable but only root-writable.</li>
+<li><code>-d</code> tells <code>install</code> that you’re creating a directory, not copying a file.</li>
+</ul>
+<p><strong>What is a GPG Key?</strong></p>
+<p>GPG (GNU Privacy Guard) keys are a form of cryptographic verification. When you download software from the internet, you need a way to confirm it actually came from who it claims to — and hasn’t been tampered with. Docker publishes a public GPG key, and every package they release is digitally “signed” with the corresponding private key. Your system uses the public key to verify the signature before installing anything. Without this, you could unknowingly install a malicious package from a compromised or fake repository.</p>
+<p>The <code>curl</code> command downloads Docker’s public GPG key and saves it to <code>/etc/apt/keyrings/docker.asc</code>.</p>
+<p><strong><code>sudo chmod a+r /etc/apt/keyrings/docker.asc</code></strong></p>
+<p>You’re familiar with <code>chmod</code>, so here’s the specific flag: <code>a+r</code> means “all users, add read permission.” The <code>a</code> stands for <em>all</em> (owner, group, and others), and <code>+r</code> adds the read permission. This ensures that <code>apt</code> — which may run as a different user — can read the key file when verifying packages.</p>
+<p><strong>The <code>tee</code> command and the file it writes</strong></p>
+<p><code>tee</code> reads from standard input and writes to a file, which is useful here because we need <code>sudo</code> privileges to write to a system directory. The <code>&lt;&lt;EOF</code> syntax is a <em>heredoc</em> — everything between <code>&lt;&lt;EOF</code> and <code>EOF</code> is treated as the input. This writes a source definition file to <code>/etc/apt/sources.list.d/docker.sources</code> in the modern DEB822 format. Here’s what each field means:</p>
+<ul>
+<li><code>Types: deb</code> — specifies binary (compiled) packages, as opposed to source code.</li>
+<li><code>URIs</code> — the base URL of Docker’s package repository.</li>
+<li><code>Suites</code> — resolves to the Ubuntu codename (e.g., <code>noble</code> for 24.04), dynamically pulled from your system’s <code>/etc/os-release</code> file so the command works across Ubuntu versions.. The repository source uses the <strong>DEB822 <code>.sources</code> format</strong>, which replaced the older one-line <code>.list</code> format in Docker’s current documentation. Both formats work, but <code>.sources</code> is now canonical. No <code>Architectures:</code> field is needed — apt fetches packages matching the host architecture automatically.</li>
+<li><code>Components: stable</code> — pulls only from the stable release channel.</li>
+<li><code>Signed-By</code> — points to the GPG key we downloaded earlier, so <code>apt</code> knows exactly which key to use when verifying Docker packages.</li>
+</ul>
+<p>Finally, <code>sudo apt update</code> refreshes the package list so your system is aware of the newly added Docker repository.</p>
+</section>
+<section id="installing-docker-engine" class="level4">
+<h4 class="anchored" data-anchor-id="installing-docker-engine">Installing Docker Engine</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This installs five packages:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Package</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>docker-ce</code></td>
+<td>Docker Engine daemon (<code>dockerd</code>)</td>
+</tr>
+<tr class="even">
+<td><code>docker-ce-cli</code></td>
+<td>Docker CLI client</td>
+</tr>
+<tr class="odd">
+<td><code>containerd.io</code></td>
+<td>Container runtime (bundles containerd + runc)</td>
+</tr>
+<tr class="even">
+<td><code>docker-buildx-plugin</code></td>
+<td>Extended build capabilities</td>
+</tr>
+<tr class="odd">
+<td><code>docker-compose-plugin</code></td>
+<td>Docker Compose v2 (invoked as <code>docker compose</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Verify immediately with <code>sudo docker run hello-world</code>. On ARM64, Docker Hub pulls the <code>linux/arm64</code> variant of multi-arch images automatically. If an image lacks ARM64 support, you’ll see a platform mismatch warning — most official images (Python, Alpine, Node, PostgreSQL, Ubuntu) provide ARM64 builds.</p>
+</section>
+<section id="upgrading-docker" class="level4">
+<h4 class="anchored" data-anchor-id="upgrading-docker">Upgrading Docker</h4>
+<p>Upgrading is simply re-running the install command after refreshing the package index:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To pin a specific version instead:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">apt</span> list <span class="at">--all-versions</span> docker-ce</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="va">VERSION_STRING</span><span class="op">=</span>5:28.0.1-1~ubuntu.24.04~noble</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install docker-ce=<span class="va">$VERSION_STRING</span> docker-ce-cli=<span class="va">$VERSION_STRING</span> containerd.io <span class="dt">\</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  docker-buildx-plugin docker-compose-plugin</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="complete-uninstallation-and-cleanup" class="level4">
+<h4 class="anchored" data-anchor-id="complete-uninstallation-and-cleanup">Complete uninstallation and cleanup</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove all Docker packages</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin <span class="dt">\</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  docker-compose-plugin docker-ce-rootless-extras</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete all Docker data (images, containers, volumes, build cache)</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rm <span class="at">-rf</span> /var/lib/docker</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rm <span class="at">-rf</span> /var/lib/containerd</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the repository and GPG key</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rm /etc/apt/sources.list.d/docker.sources</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rm /etc/apt/keyrings/docker.asc</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove daemon configuration</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rm <span class="at">-rf</span> /etc/docker</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove user-level Docker config</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> ~/.docker</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="post-installation-systemd-user-permissions-and-daemon-hardening" class="level4">
+<h4 class="anchored" data-anchor-id="post-installation-systemd-user-permissions-and-daemon-hardening">Post-installation: systemd, user permissions, and daemon hardening</h4>
+<p><strong>Enabling Docker on boot</strong></p>
+<p>On Ubuntu, Docker enables itself at boot by default after installation. To verify or explicitly set this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable docker.service</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable containerd.service</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To check: <code>systemctl is-enabled docker</code> should return <code>enabled</code>. To disable auto-start: replace <code>enable</code> with <code>disable</code>.</p>
+<p><strong>The docker group grants root-equivalent access</strong></p>
+<p>The Docker daemon runs as root and communicates through a Unix socket at <code>/var/run/docker.sock</code>. By default, only root can access this socket. Adding a user to the <code>docker</code> group lets them run Docker commands without <code>sudo</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd docker          <span class="co"># May already exist</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> usermod <span class="at">-aG</span> docker <span class="va">$USER</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">newgrp</span> docker                  <span class="co"># Activate in current session (or log out/in)</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run hello-world         <span class="co"># Test without sudo</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>That being said, if the <code>docker</code> group already exists, you can skip <code>groupadd</code> and run only the following three commands:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> usermod <span class="at">-aG</span> docker <span class="va">$USER</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">newgrp</span> docker</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run hello-world</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What’s actually happening here?</strong></p>
+<p><code>sudo usermod -aG docker $USER</code></p>
+<p><code>usermod</code> modifies an existing user account. The <code>-aG</code> flag is actually two flags working together: <code>-a</code> means <em>append</em> (rather than replace existing group memberships), and <code>-G</code> specifies the group you’re adding the user to. Without the <code>-a</code> flag, <code>-G</code> would <em>overwrite</em> all of your existing supplementary groups with just <code>docker</code>, which would be a significant problem. Together, <code>-aG docker</code> safely adds <code>docker</code> to your user’s list of groups without touching anything else. <code>$USER</code> is a shell variable that resolves to your current username — in this case, <code>chris</code>.</p>
+<p><code>newgrp docker</code></p>
+<p>Group membership changes in Linux don’t take effect in your current shell session automatically — the system only re-evaluates your groups at login time. <code>newgrp docker</code> forces your current session to recognize the new <code>docker</code> group immediately, without requiring a full logout and login. Think of it as refreshing your session’s credentials. Alternatively, you can log out and back in, which accomplishes the same thing.</p>
+<p><code>docker run hello-world</code></p>
+<p>This is the verification step. Running this <em>without</em> <code>sudo</code> is the important part — it confirms that your user can communicate directly with the Docker daemon via the socket (<code>/var/run/docker.sock</code>) using group-level permissions, rather than relying on root access. If this succeeds, your permissions are configured correctly.</p>
+<p><strong>This carries a critical security implication.</strong> Any user in the <code>docker</code> group has <strong>unrestricted root-equivalent access</strong> to the host. A single command demonstrates why:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-v</span> /:/hostfs <span class="at">-it</span> ubuntu bash</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This mounts the entire host filesystem into a container where the user is root. From there, they can read <code>/etc/shadow</code>, write to <code>/etc/sudoers</code>, modify system binaries, or extract SSH private keys. The <code>--privileged</code> flag grants even broader access, including all kernel capabilities and device access. Docker’s official documentation explicitly states: <em>“only trusted users should be allowed to control your Docker daemon.”</em></p>
+<p>On a <strong>single-user headless server</strong> where the operator already has <code>sudo</code>, this tradeoff is widely accepted — the user already possesses root-equivalent privileges, and the docker group simply removes the friction of typing <code>sudo</code> before every command. On multi-user or shared systems, <strong>rootless mode</strong> is the safer alternative. Rootless mode runs both the daemon and containers under a non-root user namespace, preventing container-escape vulnerabilities from granting host root access. Its limitations include no binding to privileged ports below 1024, reduced network performance (user-space networking via slirp4netns), and limited cgroup resource controls.</p>
+<p><strong>Recommended daemon.json for a headless server</strong></p>
+<p>Create <code>/etc/docker/daemon.json</code> with these settings:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"log-driver"</span><span class="fu">:</span> <span class="st">"json-file"</span><span class="fu">,</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"log-opts"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"max-size"</span><span class="fu">:</span> <span class="st">"10m"</span><span class="fu">,</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"max-file"</span><span class="fu">:</span> <span class="st">"3"</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"live-restore"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"userland-proxy"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"no-new-privileges"</span><span class="fu">:</span> <span class="kw">true</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Apply with <code>sudo systemctl restart docker</code>. Here’s what each setting does:</p>
+<ul>
+<li><strong><code>log-driver</code> and <code>log-opts</code></strong>: The default <code>json-file</code> driver grows unbounded, which will eventually exhaust the SD card or disk on a Pi 4. Capping at <strong>10 MB × 3 files = 30 MB per container</strong> prevents this.</li>
+<li><strong><code>live-restore</code></strong>: Keeps containers running during daemon restarts or upgrades — essential for a headless server where daemon updates shouldn’t cause downtime.</li>
+<li><strong><code>userland-proxy: false</code></strong>: Replaces the <code>docker-proxy</code> userland process with kernel-level iptables/hairpin NAT for port forwarding. Reduces attack surface and improves performance.</li>
+<li><strong><code>no-new-privileges</code></strong>: Prevents container processes from gaining additional privileges via SUID binaries or capabilities.</li>
+</ul>
+<p>Never expose the Docker daemon socket over TCP. If remote management is needed, use SSH tunneling (<code>DOCKER_HOST=ssh://user@host</code>). The Docker documentation is explicit: exposing the daemon API without TLS mutual authentication allows any network-reachable user to gain root on the host.</p>
+</section>
+<section id="docker-bypasses-ufw-and-how-to-fix-it" class="level4">
+<h4 class="anchored" data-anchor-id="docker-bypasses-ufw-and-how-to-fix-it">Docker bypasses UFW — and how to fix it</h4>
+<p>This is the most important security topic in this guide. <strong>Docker directly manipulates iptables to implement container networking, and this bypasses UFW entirely.</strong> The official Docker documentation acknowledges this directly: <em>“When you publish a container’s ports using Docker, traffic to and from that container gets diverted before it goes through the ufw firewall settings.”</em></p>
+<p><strong><em>Why this happens</em></strong></p>
+<p>UFW manages the <strong>INPUT</strong> and <strong>OUTPUT</strong> chains. Docker operates in the <strong>FORWARD</strong> chain and the <strong>nat</strong> table. When you run <code>docker run -p 8080:8000 python-app</code>, Docker adds a DNAT rule in the nat table’s PREROUTING chain that rewrites incoming packets destined for port 8080 to the container’s internal IP on port 8000. These packets then traverse the FORWARD chain — through Docker’s own chains (<code>DOCKER-USER</code> → <code>DOCKER-FORWARD</code> → <code>DOCKER</code>) — and <strong>never touch the INPUT chain that UFW controls</strong>.</p>
+<p>The result: port 8080 is exposed to the entire internet, even if UFW has <code>default deny incoming</code> and you explicitly run <code>ufw deny 8080</code>. UFW will even report port 8080 as blocked, while it remains wide open. This has been documented in GitHub issues (moby/moby#4737, docker/for-linux#690) since 2013 and remains architecturally unchanged.</p>
+<p><strong>Solution: the <code>/etc/ufw/after.rules</code> approach (recommended for UFW-managed servers)</strong></p>
+<p>This is the most elegant solution for servers already using UFW. While there are other solutions, depending on your use case, they are not recommended for every use case. So, I’ve gone with what seemed to be the most straightforward solution. Popularized by the <a href="https://github.com/chaifeng/ufw-docker">chaifeng/ufw-docker</a> project (6.4k GitHub stars, updated November 2025), it redirects Docker traffic into UFW’s forwarding chain so that UFW becomes the control point for container access.</p>
+<p>Append this block to the <strong>end</strong> of <code>/etc/ufw/after.rules</code>:</p>
+<pre><code># BEGIN UFW AND DOCKER
+*filter
+:ufw-user-forward - [0:0]
+:ufw-docker-logging-deny - [0:0]
+:DOCKER-USER - [0:0]
+-A DOCKER-USER -j ufw-user-forward
+
+-A DOCKER-USER -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN
+-A DOCKER-USER -m conntrack --ctstate INVALID -j DROP
+-A DOCKER-USER -i docker0 -o docker0 -j ACCEPT
+
+-A DOCKER-USER -j RETURN -s 10.0.0.0/8
+-A DOCKER-USER -j RETURN -s 172.16.0.0/12
+-A DOCKER-USER -j RETURN -s 192.168.0.0/16
+
+-A DOCKER-USER -j ufw-docker-logging-deny -m conntrack --ctstate NEW -d 10.0.0.0/8
+-A DOCKER-USER -j ufw-docker-logging-deny -m conntrack --ctstate NEW -d 172.16.0.0/12
+-A DOCKER-USER -j ufw-docker-logging-deny -m conntrack --ctstate NEW -d 192.168.0.0/16
+
+-A DOCKER-USER -j RETURN
+
+-A ufw-docker-logging-deny -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW DOCKER BLOCK] "
+-A ufw-docker-logging-deny -j DROP
+
+COMMIT
+# END UFW AND DOCKER</code></pre>
+<p>Restart UFW with <code>sudo systemctl restart ufw</code> or <code>sudo ufw reload</code>. If rules don’t take immediate effect, reboot. After applying these rules, <strong>all published Docker ports are blocked by default</strong> from external access.</p>
+<p>Container-to-container communication and traffic from private subnets (LAN) are allowed. To selectively open a container port to external traffic, use <code>ufw route allow</code> (not <code>ufw allow</code>, which only controls the INPUT chain):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Allow everyone to reach container port 443</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ufw</span> route allow proto tcp from any to any port 443</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Allow only a specific IP to reach container port 8080</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">ufw</span> route allow proto tcp from 203.0.113.50 to any port 8080</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove a rule</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="ex">ufw</span> route delete allow proto tcp from any to any port 443</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This approach preserves Docker’s networking functionality, integrates with UFW’s rule management, logs blocked traffic with a <code>[UFW DOCKER BLOCK]</code> prefix, and requires no changes to Docker’s configuration.</p>
+</section>
+<section id="binding-to-localhost-the-simplest-complementary-defense" class="level4">
+<h4 class="anchored" data-anchor-id="binding-to-localhost-the-simplest-complementary-defense">Binding to localhost: the simplest complementary defense</h4>
+<p>For services accessed only through a host-level reverse proxy, bind published ports exclusively to the loopback interface:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">-p</span> 127.0.0.1:8080:8000 python-app</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Or in Docker Compose:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">python-app</span><span class="kw">:</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> python-app</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"127.0.0.1:8080:8000"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This makes the service physically unreachable from external networks regardless of iptables state. In our Python container example, the container listens internally on port 8000 (a common default for Python web frameworks like Flask and FastAPI), while the host maps it to port 8080 on the loopback interface only. Combined with a host-installed reverse proxy (such as Nginx or Caddy) that UFW controls normally on ports 80/443, this is the <strong>cleanest architecture for production</strong>: containers are invisible to the network, the reverse proxy handles TLS termination and access logging, and UFW manages the proxy ports through the standard INPUT chain with no special Docker configuration required.</p>
+</section>
+<section id="fail2ban-coexists-with-docker-but-needs-per-jail-chain-configuration" class="level4">
+<h4 class="anchored" data-anchor-id="fail2ban-coexists-with-docker-but-needs-per-jail-chain-configuration">Fail2Ban coexists with Docker but needs per-jail chain configuration</h4>
+<p>Fail2Ban adds ban rules to the <strong>INPUT</strong> chain by default. Since Docker container traffic flows through the <strong>FORWARD</strong> chain, a standard Fail2Ban ban has <strong>zero effect on traffic destined for containers</strong>. However, the existing SSH jail (protecting port 45000) is unaffected by Docker installation — SSH traffic hits the INPUT chain regardless, so no changes are needed for host-level services.</p>
+<p>When you run services in Docker containers that need Fail2Ban protection, two adjustments are required: pointing Fail2Ban at the container’s logs, and directing bans to the correct iptables chain.</p>
+<p><strong>Jail configuration with chain = DOCKER-USER</strong></p>
+<p>The Fail2Ban project’s official wiki recommends setting <code>chain = DOCKER-USER</code> on a per-jail basis for containerized services, while keeping <code>chain = INPUT</code> as the global default for host services:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode ini code-with-copy"><code class="sourceCode ini"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># /etc/fail2ban/jail.local</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">[DEFAULT]</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="dt">chain </span><span class="ot">=</span><span class="st"> INPUT              # Default for host-level services (SSH, etc.)</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="kw">[sshd]</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="dt">enabled </span><span class="ot">=</span><span class="st"> </span><span class="kw">true</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="dt">port </span><span class="ot">=</span><span class="st"> </span><span class="dv">45000</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># chain = INPUT (inherited from DEFAULT — correct for host SSH)</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="kw">[python-app]</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="dt">enabled </span><span class="ot">=</span><span class="st"> </span><span class="kw">true</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="dt">port </span><span class="ot">=</span><span class="st"> </span><span class="dv">8080</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="dt">logpath </span><span class="ot">=</span><span class="st"> /opt/python-app-logs/access.log</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="dt">chain </span><span class="ot">=</span><span class="st"> DOCKER-USER        # Bans go to DOCKER-USER chain for container traffic</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="dt">maxretry </span><span class="ot">=</span><span class="st"> </span><span class="dv">5</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="dt">bantime </span><span class="ot">=</span><span class="st"> </span><span class="dv">600</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This configuration defines two jails: one for SSH (a host-level service) and one for a Python application running inside a Docker container. The <code>[sshd]</code> jail inherits <code>chain = INPUT</code> from the <code>[DEFAULT]</code> section, which is correct because SSH traffic enters through the host’s INPUT chain. The <code>[python-app]</code> jail explicitly sets <code>chain = DOCKER-USER</code> because traffic destined for a containerized service traverses the FORWARD chain, and DOCKER-USER is Docker’s designated insertion point for custom firewall rules. Without this override, Fail2Ban would insert bans into the INPUT chain where they would have no effect on container-bound traffic. The <code>port = 8080</code> matches the host-side published port (from <code>-p 8080:8000</code>), and the <code>logpath</code> points to where the Python application writes its access logs on the host filesystem (via a volume mount, shown below). The <code>maxretry = 5</code> and <code>bantime = 600</code> settings are reasonable defaults — five failed attempts triggers a 10-minute ban — but you should tune these based on your application’s expected traffic patterns.</p>
+<p>When <code>chain = DOCKER-USER</code> is set, Fail2Ban creates a sub-chain (e.g., <code>f2b-python-app</code>) and inserts a jump rule at the top of DOCKER-USER. Banned IPs are caught before Docker’s own forwarding rules, so the ban actually takes effect on container-bound traffic.</p>
+<p><strong>Accessing container logs for monitoring</strong></p>
+<p>The recommended approach is <strong>volume-mounting</strong> the application’s log directory to a host path, then pointing Fail2Ban at that path:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">--name</span> python-app <span class="dt">\</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-v</span> /opt/python-app-logs:/app/logs:rw <span class="dt">\</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-p</span> 8080:8000 <span class="dt">\</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  python-app</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>-v /opt/python-app-logs:/app/logs:rw</code> flag mounts a directory from the host filesystem into the container, creating a shared location where the Python application writes its log files and Fail2Ban reads them. The <code>:rw</code> suffix grants the container read-write access to this mount. Your Python application needs to be configured to write its access logs to <code>/app/logs/access.log</code> inside the container (using Python’s built-in <code>logging</code> module or your framework’s logging configuration), which physically maps to <code>/opt/python-app-logs/access.log</code> on the host. This is the path you specified in the <code>logpath</code> directive of the Fail2Ban jail configuration above. The <code>-p 8080:8000</code> publishes the container’s internal port 8000 to port 8080 on the host, consistent with the port mapping we’ve used throughout this section.</p>
+<p>Avoid pointing Fail2Ban at Docker’s internal JSON log files (<code>/var/lib/docker/containers/&lt;id&gt;/&lt;id&gt;-json.log</code>) — these use a JSON wrapper format, container IDs change on recreation, and Docker’s documentation warns against external tool access to these files.</p>
+<p><strong>Ensuring correct startup order</strong></p>
+<p>If Fail2Ban starts before Docker, it cannot find the DOCKER-USER chain and will fail to initialize jails targeting it. Fix with a systemd override:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl edit fail2ban.service</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Add:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode ini code-with-copy"><code class="sourceCode ini"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[Unit]</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="dt">After</span><span class="ot">=</span><span class="st">docker.service</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This ensures Docker creates its chains before Fail2Ban attempts to hook into them.</p>
+</section>
+<section id="verifying-the-installation-end-to-end" class="level4">
+<h4 class="anchored" data-anchor-id="verifying-the-installation-end-to-end">Verifying the installation end to end</h4>
+<p><strong>Docker Engine and CLI</strong></p>
+<p>Run these four commands and confirm the expected output:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> version         <span class="co"># Must show Client AND Server sections, OS/Arch: linux/arm64</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> info            <span class="co"># Check: Storage Driver: overlay2, Architecture: aarch64, </span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                       <span class="co"># Cgroup Driver: systemd, Compose plugin listed</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose version <span class="co"># Confirms Compose v2 plugin (e.g., v2.24.x or later)</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run hello-world <span class="co"># Pulls arm64 image from Docker Hub, prints success message</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>docker run hello-world</code> command without <code>sudo</code> confirms three things simultaneously: the daemon is running, the user has docker group permissions, and Docker Hub connectivity works. If you see <code>Got permission denied while trying to connect to the Docker daemon socket</code>, run <code>groups</code> to verify <code>docker</code> is listed, and if not, re-run <code>sudo usermod -aG docker $USER</code> and log out/in.</p>
+<p><strong>Systemd services</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> is-enabled docker       <span class="co"># Expected: enabled</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> is-enabled containerd   <span class="co"># Expected: enabled</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status docker      <span class="co"># Expected: active (running), loaded (enabled)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Firewall verification from an external machine</strong></p>
+<p>This is the most important verification step. After applying the <code>after.rules</code> configuration, test from a separate machine:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># From an external machine — should timeout or be refused</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-v</span> <span class="at">--connect-timeout</span> 5 http://<span class="op">&lt;</span>server-ip<span class="op">&gt;</span>:8080</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Should show "filtered" (not "open") for blocked Docker ports</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">nmap</span> <span class="at">-p</span> 8080 <span class="op">&lt;</span>server-ip<span class="op">&gt;</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># SSH on port 45000 should still be reachable</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">nmap</span> <span class="at">-p</span> 45000 <span class="op">&lt;</span>server-ip<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>On the server itself, inspect the DOCKER-USER chain to confirm your rules are in place:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-L</span> DOCKER-USER <span class="at">-n</span> <span class="at">-v</span> <span class="at">--line-numbers</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Watch for blocked packets in real time:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tail <span class="at">-f</span> /var/log/syslog <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"UFW DOCKER BLOCK"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If the <code>after.rules</code> approach is configured correctly, externally-initiated connections to published container ports will be dropped and logged, while LAN traffic, container-to-container traffic, and explicitly allowed <code>ufw route allow</code> rules will pass through normally.</p>
+<p><strong>Conclusion</strong></p>
+<p>Docker on a Raspberry Pi 4 with Ubuntu Server ARM64 is a first-class experience — the installation process is identical to x86_64, and all core features work without modification. The critical pitfall is Docker’s iptables manipulation bypassing UFW, which is not a bug but an architectural consequence of Docker’s bridge networking operating in the FORWARD chain while UFW manages INPUT. The <code>/etc/ufw/after.rules</code> approach with the ufw-docker ruleset is the most maintainable solution for UFW-based servers, giving you default-deny behavior for container ports with selective <code>ufw route allow</code> overrides. For maximum simplicity, binding container ports to <code>127.0.0.1</code> and fronting them with a host-level reverse proxy eliminates the firewall problem entirely. Fail2Ban requires per-jail <code>chain = DOCKER-USER</code> configuration only for Docker-hosted services; your existing SSH jail continues working unchanged.</p>
 
 
+</section>
 </section>
 </section>
 
