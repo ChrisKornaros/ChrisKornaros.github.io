@@ -88,7 +88,7 @@ This installs five packages:
 | `docker-buildx-plugin` | Extended build capabilities |
 | `docker-compose-plugin` | Docker Compose v2 (invoked as `docker compose`) |
 
-Verify immediately with `sudo docker run hello-world`. On ARM64, Docker Hub pulls the `linux/arm64` variant of multi-arch images automatically. If an image lacks ARM64 support, you'll see a platform mismatch warning — most official images (Nginx, Alpine, Python, Node, PostgreSQL) provide ARM64 builds.
+Verify immediately with `sudo docker run hello-world`. On ARM64, Docker Hub pulls the `linux/arm64` variant of multi-arch images automatically. If an image lacks ARM64 support, you'll see a platform mismatch warning — most official images (Python, Alpine, Node, PostgreSQL, Ubuntu) provide ARM64 builds.
 
 #### Upgrading Docker
 
@@ -220,7 +220,7 @@ This is the most important security topic in this guide. **Docker directly manip
 
 ***Why this happens***
 
-UFW manages the **INPUT** and **OUTPUT** chains. Docker operates in the **FORWARD** chain and the **nat** table. When you run `docker run -p 8080:80 nginx`, Docker adds a DNAT rule in the nat table's PREROUTING chain that rewrites incoming packets destined for port 8080 to the container's internal IP. These packets then traverse the FORWARD chain — through Docker's own chains (`DOCKER-USER` → `DOCKER-FORWARD` → `DOCKER`) — and **never touch the INPUT chain that UFW controls**.
+UFW manages the **INPUT** and **OUTPUT** chains. Docker operates in the **FORWARD** chain and the **nat** table. When you run `docker run -p 8080:8000 python-app`, Docker adds a DNAT rule in the nat table's PREROUTING chain that rewrites incoming packets destined for port 8080 to the container's internal IP on port 8000. These packets then traverse the FORWARD chain — through Docker's own chains (`DOCKER-USER` → `DOCKER-FORWARD` → `DOCKER`) — and **never touch the INPUT chain that UFW controls**.
 
 The result: port 8080 is exposed to the entire internet, even if UFW has `default deny incoming` and you explicitly run `ufw deny 8080`. UFW will even report port 8080 as blocked, while it remains wide open. This has been documented in GitHub issues (moby/moby#4737, docker/for-linux#690) since 2013 and remains architecturally unchanged.
 
@@ -281,20 +281,20 @@ This approach preserves Docker's networking functionality, integrates with UFW's
 For services accessed only through a host-level reverse proxy, bind published ports exclusively to the loopback interface:
 
 ```bash
-docker run -d -p 127.0.0.1:8080:80 nginx
+docker run -d -p 127.0.0.1:8080:8000 python-app
 ```
 
 Or in Docker Compose:
 
 ```yaml
 services:
-  web:
-    image: nginx
+  python-app:
+    image: python-app
     ports:
-      - "127.0.0.1:8080:80"
+      - "127.0.0.1:8080:8000"
 ```
 
-This makes the service physically unreachable from external networks regardless of iptables state. Combined with a host-installed reverse proxy (Nginx or Caddy) that UFW controls normally on ports 80/443, this is the **cleanest architecture for production**: containers are invisible to the network, the reverse proxy handles TLS termination and access logging, and UFW manages the proxy ports through the standard INPUT chain with no special Docker configuration required.
+This makes the service physically unreachable from external networks regardless of iptables state. In our Python container example, the container listens internally on port 8000 (a common default for Python web frameworks like Flask and FastAPI), while the host maps it to port 8080 on the loopback interface only. Combined with a host-installed reverse proxy (such as Nginx or Caddy) that UFW controls normally on ports 80/443, this is the **cleanest architecture for production**: containers are invisible to the network, the reverse proxy handles TLS termination and access logging, and UFW manages the proxy ports through the standard INPUT chain with no special Docker configuration required.
 
 
 #### Fail2Ban coexists with Docker but needs per-jail chain configuration
@@ -307,8 +307,6 @@ When you run services in Docker containers that need Fail2Ban protection, two ad
 
 The Fail2Ban project's official wiki recommends setting `chain = DOCKER-USER` on a per-jail basis for containerized services, while keeping `chain = INPUT` as the global default for host services:
 
-**UPDATE THIS EXAMPLE TO A PYTHON ONE**
-
 ```ini
 # /etc/fail2ban/jail.local
 
@@ -320,27 +318,31 @@ enabled = true
 port = 45000
 # chain = INPUT (inherited from DEFAULT — correct for host SSH)
 
-[nginx-docker]
+[python-app]
 enabled = true
-port = http,https
-logpath = /opt/nginx-logs/error.log
+port = 8080
+logpath = /opt/python-app-logs/access.log
 chain = DOCKER-USER        # Bans go to DOCKER-USER chain for container traffic
-maxretry = 3
+maxretry = 5
 bantime = 600
 ```
 
-When `chain = DOCKER-USER` is set, Fail2Ban creates a sub-chain (e.g., `f2b-nginx-docker`) and inserts a jump rule at the top of DOCKER-USER. Banned IPs are caught before Docker's own forwarding rules, so the ban actually takes effect on container-bound traffic.
+This configuration defines two jails: one for SSH (a host-level service) and one for a Python application running inside a Docker container. The `[sshd]` jail inherits `chain = INPUT` from the `[DEFAULT]` section, which is correct because SSH traffic enters through the host's INPUT chain. The `[python-app]` jail explicitly sets `chain = DOCKER-USER` because traffic destined for a containerized service traverses the FORWARD chain, and DOCKER-USER is Docker's designated insertion point for custom firewall rules. Without this override, Fail2Ban would insert bans into the INPUT chain where they would have no effect on container-bound traffic. The `port = 8080` matches the host-side published port (from `-p 8080:8000`), and the `logpath` points to where the Python application writes its access logs on the host filesystem (via a volume mount, shown below). The `maxretry = 5` and `bantime = 600` settings are reasonable defaults — five failed attempts triggers a 10-minute ban — but you should tune these based on your application's expected traffic patterns.
+
+When `chain = DOCKER-USER` is set, Fail2Ban creates a sub-chain (e.g., `f2b-python-app`) and inserts a jump rule at the top of DOCKER-USER. Banned IPs are caught before Docker's own forwarding rules, so the ban actually takes effect on container-bound traffic.
 
 **Accessing container logs for monitoring**
 
 The recommended approach is **volume-mounting** the application's log directory to a host path, then pointing Fail2Ban at that path:
 
 ```bash
-docker run -d --name nginx \
-  -v /opt/nginx-logs:/var/log/nginx:rw \
-  -p 80:80 \
-  nginx
+docker run -d --name python-app \
+  -v /opt/python-app-logs:/app/logs:rw \
+  -p 8080:8000 \
+  python-app
 ```
+
+The `-v /opt/python-app-logs:/app/logs:rw` flag mounts a directory from the host filesystem into the container, creating a shared location where the Python application writes its log files and Fail2Ban reads them. The `:rw` suffix grants the container read-write access to this mount. Your Python application needs to be configured to write its access logs to `/app/logs/access.log` inside the container (using Python's built-in `logging` module or your framework's logging configuration), which physically maps to `/opt/python-app-logs/access.log` on the host. This is the path you specified in the `logpath` directive of the Fail2Ban jail configuration above. The `-p 8080:8000` publishes the container's internal port 8000 to port 8080 on the host, consistent with the port mapping we've used throughout this section.
 
 Avoid pointing Fail2Ban at Docker's internal JSON log files (`/var/lib/docker/containers/<id>/<id>-json.log`) — these use a JSON wrapper format, container IDs change on recreation, and Docker's documentation warns against external tool access to these files.
 
