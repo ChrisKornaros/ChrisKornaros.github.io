@@ -961,32 +961,32 @@ cookieconsent.run({
 <p><strong>Solution: the <code>/etc/ufw/after.rules</code> approach (recommended for UFW-managed servers)</strong></p>
 <p>This is the most elegant solution for servers already using UFW. While there are other solutions, depending on your use case, they are not recommended for every use case. So, I’ve gone with what seemed to be the most straightforward solution. Popularized by the <a href="https://github.com/chaifeng/ufw-docker">chaifeng/ufw-docker</a> project (6.4k GitHub stars, updated November 2025), it redirects Docker traffic into UFW’s forwarding chain so that UFW becomes the control point for container access.</p>
 <p>Append this block to the <strong>end</strong> of <code>/etc/ufw/after.rules</code>:</p>
-<pre><code># BEGIN UFW AND DOCKER
-*filter
-:ufw-user-forward - [0:0]
-:ufw-docker-logging-deny - [0:0]
-:DOCKER-USER - [0:0]
--A DOCKER-USER -j ufw-user-forward
-
--A DOCKER-USER -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN
--A DOCKER-USER -m conntrack --ctstate INVALID -j DROP
--A DOCKER-USER -i docker0 -o docker0 -j ACCEPT
-
--A DOCKER-USER -j RETURN -s 10.0.0.0/8
--A DOCKER-USER -j RETURN -s 172.16.0.0/12
--A DOCKER-USER -j RETURN -s 192.168.0.0/16
-
--A DOCKER-USER -j ufw-docker-logging-deny -m conntrack --ctstate NEW -d 10.0.0.0/8
--A DOCKER-USER -j ufw-docker-logging-deny -m conntrack --ctstate NEW -d 172.16.0.0/12
--A DOCKER-USER -j ufw-docker-logging-deny -m conntrack --ctstate NEW -d 192.168.0.0/16
-
--A DOCKER-USER -j RETURN
-
--A ufw-docker-logging-deny -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "[UFW DOCKER BLOCK] "
--A ufw-docker-logging-deny -j DROP
-
-COMMIT
-# END UFW AND DOCKER</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode ini code-with-copy"><code class="sourceCode ini"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="re">BEGIN</span><span class="co"> UFW AND DOCKER</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="dt">*filter</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="dt">:ufw-user-forward - </span><span class="kw">[0:0]</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="dt">:ufw-docker-logging-deny - </span><span class="kw">[0:0]</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="dt">:DOCKER-USER - </span><span class="kw">[0:0]</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -j ufw-user-forward</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -m conntrack --ctstate INVALID -j DROP</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -i docker0 -o docker0 -j ACCEPT</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -j RETURN -s 10.0.0.0/8</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -j RETURN -s 172.16.0.0/12</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -j RETURN -s 192.168.0.0/16</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -j ufw-docker-logging-deny -m conntrack --ctstate NEW -d 10.0.0.0/8</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -j ufw-docker-logging-deny -m conntrack --ctstate NEW -d 172.16.0.0/12</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -j ufw-docker-logging-deny -m conntrack --ctstate NEW -d 192.168.0.0/16</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -j RETURN</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="dt">-A ufw-docker-logging-deny -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "</span><span class="kw">[UFW DOCKER BLOCK]</span><span class="dt"> "</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="dt">-A ufw-docker-logging-deny -j DROP</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="dt">COMMIT</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="re">END</span><span class="co"> UFW AND DOCKER</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Restart UFW with <code>sudo systemctl restart ufw</code> or <code>sudo ufw reload</code>. If rules don’t take immediate effect, reboot. After applying these rules, <strong>all published Docker ports are blocked by default</strong> from external access.</p>
 <p>Container-to-container communication and traffic from private subnets (LAN) are allowed. To selectively open a container port to external traffic, use <code>ufw route allow</code> (not <code>ufw allow</code>, which only controls the INPUT chain):</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Allow everyone to reach container port 443</span></span>
