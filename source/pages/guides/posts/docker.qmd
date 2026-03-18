@@ -683,7 +683,7 @@ This is the most elegant solution for servers already using UFW. While there are
 
 Append this block to the **end** of `/etc/ufw/after.rules`:
 
-```
+```ini
 # BEGIN UFW AND DOCKER
 *filter
 :ufw-user-forward - [0:0]
