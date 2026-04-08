@@ -16,17 +16,17 @@ The most common flags you'll encounter:
 
 ```bash
 # Run a container in detached mode (background) with a custom name
-docker run -d --name my-python python-app
+docker run -d --name my-python yourusername/python-dev:1.0
 
-# Run interactively with a terminal (useful for debugging)
-docker run -it --name my-python python-app bash
+# Run interactively with a bash terminal (useful for debugging)
+docker run -it --name my-python yourusername/python-dev:1.0 bash
 
 # Run with port mapping, volume mount, and auto-removal on exit
 docker run -d --name my-python \
   -p 8080:8000 \
   -v /opt/python-data:/app/data \
   --rm \
-  python-app
+  yourusername/python-dev:1.0
 ```
 
 The `-d` flag runs the container in detached mode, meaning it runs in the background and returns you to your shell prompt immediately — this is what you want for long-running services on a headless server. The `-it` flags are two separate flags combined: `-i` keeps STDIN open and `-t` allocates a pseudo-TTY, together giving you an interactive shell session inside the container. The `--name` flag assigns a human-readable identifier so you can reference the container by name instead of Docker's auto-generated container ID. The `-p` flag publishes a container port to the host (covered in detail below). The `-v` flag mounts a host directory into the container for data persistence. The `--rm` flag automatically removes the container when it exits, which is useful for one-off tasks but not for persistent services.
@@ -40,11 +40,14 @@ docker ps
 # List all containers (including stopped)
 docker ps -a
 
+# List only specific containers
+docker ps -f [FILTER]
+
 # Show only container IDs (useful for scripting)
 docker ps -q
 ```
 
-The default `docker ps` output shows the container ID, image name, command, creation time, status, exposed ports, and container name. The `-a` flag is important because stopped containers still exist on disk until explicitly removed — running `docker ps -a` reveals containers that exited due to errors or were manually stopped, which is essential for debugging. The `-q` flag outputs only the container IDs, one per line, which makes it composable with other commands like `docker stop $(docker ps -q)` to stop all running containers at once.
+The default `docker ps` output shows the container ID, image name, command, creation time, status, exposed ports, and container name. The `-a` flag is important because stopped containers still exist on disk until explicitly removed — running `docker ps -a` reveals containers that exited due to errors or were manually stopped, which is essential for debugging. The `-f` flag allows you to filter for certain conditions, such as the status, helpful when you have multiple containers: `docker ps -f status=exited`, returns all containers that aren't running. The `-q` flag outputs only the container IDs, one per line, which makes it composable with other commands like `docker stop $(docker ps -q)` to stop all running containers at once.
 
 **`docker exec`** runs a command inside an already-running container. This is how you inspect, debug, or interact with a container after it's started.
 
@@ -111,17 +114,17 @@ The `-f` flag combines `docker stop` and `docker rm` into a single operation, wh
 
 #### Publishing and Exposing Ports
 
-When you run a container, its internal network is isolated from the host by default. The `-p` (publish) flag creates a mapping between a port on the host and a port inside the container, allowing external traffic to reach your containerized application.
+When you run a container, its internal network is isolated from the host by default. The `-p` (publish) flag creates a mapping between a port on the host and a port inside the container, allowing external traffic to reach your containerized application. You'll notice that I'm using **200001** as the port example, the reason being this is a non-standard port that is part of an open range on my host server. For Python specific containers, I plan to use the **20001**-**20999** range, so it's easier for me to keep track of.
 
 ```bash
-# Map host port 8080 to container port 8000
-docker run -d -p 8080:8000 --name my-python python-app
+# Map host port 20001 to container port 8000 on any interface
+docker run -d -p 20001:8000 --name my-python yourusername/python-dev:1.0
 
 # Map to localhost only (recommended security practice)
-docker run -d -p 127.0.0.1:8080:8000 --name my-python python-app
+docker run -d -p 127.0.0.1:20001:8000 --name my-python yourusername/python-dev:1.0
 
 # Map multiple ports
-docker run -d -p 8080:8000 -p 8443:8443 --name my-python python-app
+docker run -d -p 127.0.0.1:20001:8000 -p 127.0.0.1:8443:8443 --name my-python yourusername/python-dev:1.0
 ```
 
 The syntax is `-p [host_ip:]host_port:container_port`. When no host IP is specified, Docker binds to `0.0.0.0` (all interfaces), which means the port is accessible from any network the host is connected to. As we covered extensively in the security section, this bypasses UFW — so either use the `after.rules` approach to control access through UFW, or bind to `127.0.0.1` to restrict access to the host machine only.
@@ -134,19 +137,19 @@ The `docker run` command lets you override several defaults defined in the Docke
 
 ```bash
 # Override the default command (CMD)
-docker run -d --name my-python python-app python /app/scripts/analysis.py
+docker run -d --name my-python yourusername/python-dev:1.0 python /app/scripts/analysis.py
 
 # Override environment variables
 docker run -d --name my-python \
   -e PYTHONUNBUFFERED=1 \
   -e APP_ENV=production \
-  python-app
+  yourusername/python-dev:1.0
 
 # Override the working directory
-docker run -d --name my-python -w /app/scripts python-app
+docker run -d --name my-python -w /app/scripts yourusername/python-dev:1.0
 
 # Override the entrypoint entirely
-docker run -it --entrypoint bash python-app
+docker run -it --entrypoint bash yourusername/python-dev:1.0
 ```
 
 The command at the end of `docker run` replaces the `CMD` instruction from the Dockerfile, letting you run different scripts or tools from the same image without rebuilding. The `-e` flag sets environment variables inside the container, which is the standard way to pass configuration like database URLs, API keys, or runtime modes — these override any `ENV` directives in the Dockerfile. The `-w` flag changes the working directory, overriding the `WORKDIR` instruction. The `--entrypoint` flag replaces the `ENTRYPOINT` instruction entirely, which is a powerful debugging tool — setting it to `bash` lets you drop into a shell to inspect the container's filesystem and troubleshoot startup issues.
@@ -160,24 +163,24 @@ With the commands understood, let's put them together to launch your Python cont
 Containers are ephemeral by default — any data written inside the container is lost when the container is removed. For a persistent Python environment, you need volume mounts to store code, data, and logs on the host filesystem.
 
 ```bash
-docker run -d --name python-app \
-  -p 8080:8000 \
-  -v /opt/python-app/code:/app/code:rw \
-  -v /opt/python-app/data:/app/data:rw \
-  -v /opt/python-app/logs:/app/logs:rw \
+docker run -d --name my-python \
+  -p 20001:8000 \
+  -v /opt/python-dev/code:/app/code:rw \
+  -v /opt/python-dev/data:/app/data:rw \
+  -v /opt/python-dev/logs:/app/logs:rw \
   -e PYTHONUNBUFFERED=1 \
-  python-app
+  yourusername/python-dev:1.0
 ```
 
 Each `-v` flag follows the pattern `host_path:container_path:mode`. The host paths (`/opt/python-app/code`, `/opt/python-app/data`, `/opt/python-app/logs`) are directories on your Raspberry Pi's filesystem that persist across container restarts, rebuilds, and removals. The container paths (`/app/code`, `/app/data`, `/app/logs`) are where those directories appear inside the container. The `:rw` suffix grants read-write access (this is the default, but being explicit improves readability). You could use `:ro` for read-only mounts if your container only needs to read certain files.
 
-The `code` volume holds your Python source files — you edit these on your MacBook through the VS Code Remote-SSH connection, and the container executes them. The `data` volume stores datasets, model outputs, or any files your scripts generate that you want to persist. The `logs` volume is where the application writes log files, and it's also the path Fail2Ban monitors (as configured in the security section). The `PYTHONUNBUFFERED=1` environment variable forces Python to write output directly to stdout/stderr without buffering, which ensures `docker logs` displays output in real time rather than in delayed chunks.
+The `code` volume holds your Python source files — you edit these on your client system through the VS Code Remote-SSH connection, and the container executes them. The `data` volume stores datasets, model outputs, or any files your scripts generate that you want to persist. The `logs` volume is where the application writes log files, and it's also the path Fail2Ban monitors (as configured in the security section). The `PYTHONUNBUFFERED=1` environment variable forces Python to write output directly to stdout/stderr without buffering, which ensures `docker logs` displays output in real time rather than in delayed chunks.
 
 Before running the container, create the host directories:
 
 ```bash
-sudo mkdir -p /opt/python-app/{code,data,logs}
-sudo chown -R $USER:$USER /opt/python-app
+sudo mkdir -p /opt/python-dev/{code,data,logs}
+sudo chown -R $USER:$USER /opt/python-dev
 ```
 
 The `mkdir -p` command creates the directory tree in one step, and the brace expansion `{code,data,logs}` creates all three subdirectories. Setting ownership to your user account ensures you can read and write files through VS Code without needing root permissions on the host side.
@@ -188,13 +191,13 @@ If you followed the `after.rules` approach from the installation section, your c
 
 ```bash
 # Allow access from your local network only
-sudo ufw route allow proto tcp from 192.168.1.0/24 to any port 8080
+sudo ufw route allow proto tcp from 192.168.1.0/24 to any port 20001
 
 # Verify the rule was added
 sudo ufw status
 ```
 
-This rule permits TCP traffic from your local network (`192.168.1.0/24` — adjust to match your subnet) to reach port 8080 on the host, which Docker forwards to port 8000 inside the container. Using a network range instead of `from any` ensures that only devices on your LAN can reach the Python service, while the internet at large remains blocked. If you bound the port to `127.0.0.1` instead, no UFW route rule is needed — the service is already restricted to localhost.
+This rule permits TCP traffic from your local network (`192.168.1.0/24` — adjust to match your subnet) to reach port 20001 on the host, which Docker forwards to port 8000 inside the container. Using a network range instead of `from any` ensures that only devices on your LAN can reach the Python service, while the internet at large remains blocked. If you bound the port to `127.0.0.1` instead, no UFW route rule is needed — the service is already restricted to localhost.
 
 For Fail2Ban, the `[python-app]` jail we configured in the installation section is already watching `/opt/python-app/logs/access.log` with `chain = DOCKER-USER`. No additional configuration is needed here — just make sure your Python application writes its access logs to `/app/logs/access.log` inside the container, which maps to the host path Fail2Ban is monitoring.
 
