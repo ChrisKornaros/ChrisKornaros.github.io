@@ -17,5 +17,8 @@ wheels/
 /.quarto/
 /_site/
 
-# Claude Files
-.claude/
+# Claude Files -- ignore local/transient state, but version-control the shared
+# command definitions and project settings (synced Mac <-> Pi).
+.claude/*
+!.claude/commands/
+!.claude/settings.json

@@ -33,6 +33,8 @@ website:
     search: true
     background: danger
     foreground: light
+    # Top-level links only; per-post discovery is handled by the listing pages
+    # and the auto-glob sidebars below, so publishing never edits this file.
     left:
       - text: "Home"
         href: index.qmd
@@ -40,19 +42,15 @@ website:
         href: pages/about/about.qmd
       - text: "Guides"
         href: pages/guides/guides.qmd
-        menu:
-          - text: "Docker: Novice to Journeyman"
-            href: pages/guides/posts/docker.qmd
-          - text: "Linux Server & Raspberry Pi"
-            href: pages/guides/posts/raspberry_pi_server.qmd
+      - text: "Research"
+        href: pages/research/research.qmd
       - text: "Blogs"
         href: pages/blogs/blogs.qmd
-        menu:
-          - text: "Test"
-            href: pages/blogs/posts/test.qmd
       - text: "Recipes"
         href: pages/recipes/recipes.qmd
 
+  # Sidebars use globs (not hand-listed posts) so a freshly published file
+  # appears automatically -- no _quarto.yml edit per publish.
   sidebar:
     - id: guides
       title: "Guides"
@@ -64,10 +62,19 @@ website:
         - section: "Guides"
           href: pages/guides/guides.qmd
           contents:
-            - text: "Docker: Novice to Journeyman"
-              href: pages/guides/posts/docker.qmd
-            - text: "Linux Server & Raspberry Pi"
-              href: pages/guides/posts/raspberry_pi_server.qmd
+            - pages/guides/posts/*.qmd
+
+    - id: research
+      title: "Research"
+      style: "docked"
+      background: dark
+      foreground: light
+      collapse-level: 2
+      contents:
+        - section: "Research"
+          href: pages/research/research.qmd
+          contents:
+            - pages/research/posts/*.qmd
 
     - id: blogs
       title: "Blogs"
@@ -79,8 +86,7 @@ website:
         - section: "Blogs"
           href: pages/blogs/blogs.qmd
           contents:
-            - text: "Test"
-              href: pages/blogs/posts/test.qmd
+            - pages/blogs/posts/*.qmd
 
     - id: recipes
       title: "Recipes"
@@ -93,59 +99,8 @@ website:
           href: pages/recipes/recipes.qmd
         - section: "Categories"
           contents:
-            - text: "Baked Goods"
-              href: "pages/recipes/Baked Goods/index.qmd"
-            - text: "Beef"
-              href: pages/recipes/Beef/index.qmd
-            - text: "Chicken"
-              href: pages/recipes/Chicken/index.qmd
-            - text: "Cod"
-              href: pages/recipes/Cod/index.qmd
-            - text: "Cookbook"
-              href: pages/recipes/Cookbook/index.qmd
-            - text: "Cooking & Kitchen Tips"
-              href: "pages/recipes/Cooking & Kitchen Tips/index.qmd"
-            - text: "Drinks"
-              href: pages/recipes/Drinks/index.qmd
-            - text: "Japan"
-              href: pages/recipes/Japan/index.qmd
-            - text: "Masterclass Recipes"
-              href: "pages/recipes/Masterclass Recipes/index.qmd"
-            - text: "Mexican"
-              href: pages/recipes/Mexican/index.qmd
-            - text: "New Orleans"
-              href: "pages/recipes/New Orleans/index.qmd"
-            - text: "Noodles"
-              href: pages/recipes/Noodles/index.qmd
-            - text: "Oils and Marinades"
-              href: "pages/recipes/Oils and Marinades/index.qmd"
-            - text: "Party Snacks and Dips"
-              href: "pages/recipes/Party Snacks and Dips/index.qmd"
-            - text: "Pickling and Fermenting"
-              href: "pages/recipes/Pickling and Fermenting/index.qmd"
-            - text: "Pizza"
-              href: pages/recipes/Pizza/index.qmd
-            - text: "Pork"
-              href: pages/recipes/Pork/index.qmd
-            - text: "Potatoes"
-              href: pages/recipes/Potatoes/index.qmd
-            - text: "Salads"
-              href: pages/recipes/Salads/index.qmd
-            - text: "Sandwiches"
-              href: pages/recipes/Sandwiches/index.qmd
-            - text: "Sauces and Condiments"
-              href: "pages/recipes/Sauces and Condiments/index.qmd"
-            - text: "Soups"
-              href: pages/recipes/Soups/index.qmd
-            - text: "Spice Mixes"
-              href: "pages/recipes/Spice Mixes/index.qmd"
-            - text: "Tofu"
-              href: pages/recipes/Tofu/index.qmd
-            - text: "Veal"
-              href: pages/recipes/Veal/index.qmd
-            - text: "Vegetables"
-              href: pages/recipes/Vegetables/index.qmd
-          
+            - pages/recipes/*/index.qmd
+
 format:
   html:
     toc: true

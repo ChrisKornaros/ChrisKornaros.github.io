@@ -1,0 +1,10 @@
+---
+title: "Research"
+listing:
+  contents: posts
+  sort: "date desc"
+  type: grid
+  categories: true
+---
+
+A space for independent research, notes, and longer-form explorations. Still early — more to come.

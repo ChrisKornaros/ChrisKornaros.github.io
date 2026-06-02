@@ -72,11 +72,36 @@ cleanup and wait for review notes — the branch is still live work.
   which renders `source/` and deploys `docs/` to GitHub Pages. Chris merges PRs
   in the GitHub UI — that merge *is* the deploy. Don't run `quarto publish`
   without asking.
-- **Branch slugs:** `feat/<slug>`, `docs/<slug>`, `chore/<slug>`. `main` is the
+- **Branch slugs:** `feat/<slug>`, `docs/<slug>`, `chore/<slug>`, and
+  `publish/<section>-<slug>` (content published from the vault). `main` is the
   only long-lived branch.
 - **Verification = a local render.** There's no test suite; confirm a change by
   rendering `source/` cleanly and (when it matters) previewing with
   `quarto preview source`.
+
+## Publishing pipeline (vault → site)
+
+Long-form content is **drafted in Obsidian** under `~/vault/writing/<section>/`
+(sections: `guides`, `research`, `blogs`, `recipes`) and tagged `draft: true`.
+A draft is the canonical source; the site `.qmd` is generated from it.
+
+- **Scaffold a draft:** `uv run new <section> "<Title>" [--category <Cat>]`
+  (recipes require `--category`, mirrored as a subfolder). Pre-fills frontmatter.
+- **Publish one (or all):** the **`/publish`** skill
+  ([.claude/commands/publish.md](.claude/commands/publish.md)) runs the
+  deterministic converter (`uv run publish <draft>` / `--all`), then
+  `quarto render`, then the canonical session-end loop on a
+  `publish/<section>-<slug>` branch. Merge = deploy.
+- **The converter** lives in [site_publish/](site_publish/) and does the
+  transform only — never git. It maps Obsidian → Quarto (wikilinks, `![[embeds]]`
+  → copied `images/`, callouts, strips `#tags`/`draft`), routes by section
+  (recipes → `recipes/<Category>/`, others → `<section>/posts/`), generates the
+  Substack embed for blogs and the `video:` embed for recipes, and is
+  idempotent (re-publish overwrites the `.qmd`).
+- **No `_quarto.yml` edits per publish:** the navbar links to listing pages and
+  the sidebars use globs, so new posts/categories appear automatically.
+- **`docs/` is committed alongside `source/`** in a publish PR (it's tracked and
+  re-rendered on every render). CI re-renders on merge.
 
 ## Verify changes to this contract
 
