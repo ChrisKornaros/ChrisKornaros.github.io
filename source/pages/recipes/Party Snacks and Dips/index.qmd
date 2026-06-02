@@ -1,0 +1,10 @@
+---
+title: "Party Snacks and Dips"
+listing:
+  contents: "*.qmd"
+  sort: "date desc"
+  type: grid
+  categories: false
+---
+
+All **Party Snacks and Dips** recipes.

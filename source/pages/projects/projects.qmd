@@ -1,5 +1,6 @@
 ---
 title: "Projects"
+draft: true
 ---
 
 Landing page for the project portfolio portion of this website. Contains all of my public repositories and projects (for now, may include future consulting or paid side work, but I don't do that at the moment), including both the code in repositories and write ups (where applicable).

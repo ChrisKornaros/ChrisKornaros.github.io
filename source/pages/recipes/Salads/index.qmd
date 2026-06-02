@@ -1,0 +1,10 @@
+---
+title: "Salads"
+listing:
+  contents: "*.qmd"
+  sort: "date desc"
+  type: grid
+  categories: false
+---
+
+All **Salads** recipes.

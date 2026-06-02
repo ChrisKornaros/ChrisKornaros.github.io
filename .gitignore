@@ -11,7 +11,11 @@ wheels/
 
 # Local environments
 *.DS_Store
+*.vscode/
 
 # Quarto Files
 /.quarto/
 /_site/
+
+# Claude Files
+.claude/

@@ -2,8 +2,8 @@
 title: "Blogs"
 listing:
   contents: posts
-  sort: "title desc"
-  type: table
+  sort: "date desc"
+  type: grid
   categories: true
 ---
 

@@ -1,0 +1,10 @@
+---
+title: "Pork"
+listing:
+  contents: "*.qmd"
+  sort: "date desc"
+  type: grid
+  categories: false
+---
+
+All **Pork** recipes.

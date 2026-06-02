@@ -1,0 +1,10 @@
+---
+title: "Sauces and Condiments"
+listing:
+  contents: "*.qmd"
+  sort: "date desc"
+  type: grid
+  categories: false
+---
+
+All **Sauces and Condiments** recipes.

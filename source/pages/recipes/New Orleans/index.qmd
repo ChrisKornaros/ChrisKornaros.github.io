@@ -1,0 +1,10 @@
+---
+title: "New Orleans"
+listing:
+  contents: "*.qmd"
+  sort: "date desc"
+  type: grid
+  categories: false
+---
+
+All **New Orleans** recipes.

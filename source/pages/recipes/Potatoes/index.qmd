@@ -1,0 +1,10 @@
+---
+title: "Potatoes"
+listing:
+  contents: "*.qmd"
+  sort: "date desc"
+  type: grid
+  categories: false
+---
+
+All **Potatoes** recipes.

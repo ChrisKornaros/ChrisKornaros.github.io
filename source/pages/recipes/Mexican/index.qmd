@@ -1,0 +1,10 @@
+---
+title: "Mexican"
+listing:
+  contents: "*.qmd"
+  sort: "date desc"
+  type: grid
+  categories: false
+---
+
+All **Mexican** recipes.

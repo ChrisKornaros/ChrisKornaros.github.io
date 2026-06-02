@@ -1,0 +1,10 @@
+---
+title: "Cooking & Kitchen Tips"
+listing:
+  contents: "**/*.qmd"
+  sort: "date desc"
+  type: grid
+  categories: false
+---
+
+All **Cooking & Kitchen Tips** recipes.

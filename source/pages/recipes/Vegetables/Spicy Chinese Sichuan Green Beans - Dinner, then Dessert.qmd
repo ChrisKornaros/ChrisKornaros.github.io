@@ -1,0 +1,10 @@
+---
+title: "Spicy Chinese Sichuan Green Beans - Dinner, then Dessert"
+author: "Chris Kornaros"
+date: 2026-03-06
+categories: ["Vegetables"]
+---
+
+```{=html}
+<iframe src="Spicy Chinese Sichuan Green Beans - Dinner, then Dessert.pdf" width="100%" height="900px" style="border: none;"></iframe>
+```

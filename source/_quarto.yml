@@ -39,15 +39,19 @@ website:
       - text: "About"
         href: pages/about/about.qmd
       - text: "Guides"
-        menu: 
-          - pages/guides/guides.qmd
-      - text: "Projects"
+        href: pages/guides/guides.qmd
         menu:
-          - pages/projects/data_engineering/data_engineering.qmd
-          - pages/projects/data_science/data_science.qmd
+          - text: "Docker: Novice to Journeyman"
+            href: pages/guides/posts/docker.qmd
+          - text: "Linux Server & Raspberry Pi"
+            href: pages/guides/posts/raspberry_pi_server.qmd
       - text: "Blogs"
+        href: pages/blogs/blogs.qmd
         menu:
-          - pages/blogs/blogs.qmd
+          - text: "Test"
+            href: pages/blogs/posts/test.qmd
+      - text: "Recipes"
+        href: pages/recipes/recipes.qmd
 
   sidebar:
     - id: guides
@@ -64,31 +68,83 @@ website:
               href: pages/guides/posts/docker.qmd
             - text: "Linux Server & Raspberry Pi"
               href: pages/guides/posts/raspberry_pi_server.qmd
-            - text: "Quarto"
-              href: pages/guides/posts/quarto.qmd
-            - text: "uv"
-              href: pages/guides/posts/uv.qmd
 
-      
-    - id: projects
-      title: "Projects"
-      contents:
-        - pages/projects/projects.qmd
-        - section: "Data Engineering and Architecture"
-          href: pages/projects/data_engineering/data_engineering.qmd
-          contents:
-        - section: "Data Science and Machine Learning"
-          href: pages/projects/data_science/data_science.qmd
-          contents:
-            - text: "Titanic Disaster"
-              href: pages/projects/data_science/posts/titanic.qmd
-            - text: "NFL Big Data Bowl 2025"
-              href: pages/projects/data_science/posts/nfl_bowl_2025.qmd
-        
     - id: blogs
       title: "Blogs"
+      style: "docked"
+      background: dark
+      foreground: light
+      collapse-level: 2
       contents:
-        - pages/blogs/blogs.qmd
+        - section: "Blogs"
+          href: pages/blogs/blogs.qmd
+          contents:
+            - text: "Test"
+              href: pages/blogs/posts/test.qmd
+
+    - id: recipes
+      title: "Recipes"
+      style: "docked"
+      background: dark
+      foreground: light
+      collapse-level: 2
+      contents:
+        - text: "All Recipes"
+          href: pages/recipes/recipes.qmd
+        - section: "Categories"
+          contents:
+            - text: "Baked Goods"
+              href: "pages/recipes/Baked Goods/index.qmd"
+            - text: "Beef"
+              href: pages/recipes/Beef/index.qmd
+            - text: "Chicken"
+              href: pages/recipes/Chicken/index.qmd
+            - text: "Cod"
+              href: pages/recipes/Cod/index.qmd
+            - text: "Cookbook"
+              href: pages/recipes/Cookbook/index.qmd
+            - text: "Cooking & Kitchen Tips"
+              href: "pages/recipes/Cooking & Kitchen Tips/index.qmd"
+            - text: "Drinks"
+              href: pages/recipes/Drinks/index.qmd
+            - text: "Japan"
+              href: pages/recipes/Japan/index.qmd
+            - text: "Masterclass Recipes"
+              href: "pages/recipes/Masterclass Recipes/index.qmd"
+            - text: "Mexican"
+              href: pages/recipes/Mexican/index.qmd
+            - text: "New Orleans"
+              href: "pages/recipes/New Orleans/index.qmd"
+            - text: "Noodles"
+              href: pages/recipes/Noodles/index.qmd
+            - text: "Oils and Marinades"
+              href: "pages/recipes/Oils and Marinades/index.qmd"
+            - text: "Party Snacks and Dips"
+              href: "pages/recipes/Party Snacks and Dips/index.qmd"
+            - text: "Pickling and Fermenting"
+              href: "pages/recipes/Pickling and Fermenting/index.qmd"
+            - text: "Pizza"
+              href: pages/recipes/Pizza/index.qmd
+            - text: "Pork"
+              href: pages/recipes/Pork/index.qmd
+            - text: "Potatoes"
+              href: pages/recipes/Potatoes/index.qmd
+            - text: "Salads"
+              href: pages/recipes/Salads/index.qmd
+            - text: "Sandwiches"
+              href: pages/recipes/Sandwiches/index.qmd
+            - text: "Sauces and Condiments"
+              href: "pages/recipes/Sauces and Condiments/index.qmd"
+            - text: "Soups"
+              href: pages/recipes/Soups/index.qmd
+            - text: "Spice Mixes"
+              href: "pages/recipes/Spice Mixes/index.qmd"
+            - text: "Tofu"
+              href: pages/recipes/Tofu/index.qmd
+            - text: "Veal"
+              href: pages/recipes/Veal/index.qmd
+            - text: "Vegetables"
+              href: pages/recipes/Vegetables/index.qmd
           
 format:
   html:

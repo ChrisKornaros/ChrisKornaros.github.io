@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -36,18 +71,19 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-75f773647a772d8fa730fc6831eb67ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-a4c6ef5a823a1530680cb31f02b11e7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-75f773647a772d8fa730fc6831eb67ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-3fd2bae6f1c5534a0b6658f7bc8b568c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-bfbfeea019f3c18490cc33ec42c0b065.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-3fd2bae6f1c5534a0b6658f7bc8b568c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-e73acfd0c7046d39dfa10654f4a62604.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-df5fb58a0c98eb23e4311b7bc98f59b5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-e73acfd0c7046d39dfa10654f4a62604.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dc9cf204bce4a6a11ae78c3c039d3fc4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-770144baa643cd0c0c8c6ffb5e2d51f5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dc9cf204bce4a6a11ae78c3c039d3fc4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,7 +138,6 @@ cookieconsent.run({
 });
 </script> 
   
-<meta name="quarto:status" content="draft">
 
 
 <meta property="og:title" content="Docker: Novice to Journeyman – Chris Kornaros">
@@ -278,7 +313,7 @@ cookieconsent.run({
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -300,43 +335,18 @@ cookieconsent.run({
     <a class="nav-link" href="../../../pages/about/about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-guides" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Guides</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-guides">    
-        <li>
-    <a class="dropdown-item" href="../../../pages/guides/guides.html">
- <span class="dropdown-text">Guides</span></a>
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../pages/guides/guides.html" aria-current="page"> 
+<span class="menu-text">Guides</span></a>
   </li>  
-    </ul>
-  </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Projects</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
-        <li>
-    <a class="dropdown-item" href="../../../pages/projects/data_engineering/data_engineering.html">
- <span class="dropdown-text">Data Engineering and Architecture Projects</span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="../../../pages/blogs/blogs.html"> 
+<span class="menu-text">Blogs</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="../../../pages/projects/data_science/data_science.html">
- <span class="dropdown-text">Data Science and Machine Learning Projects</span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="../../../pages/recipes/recipes.html"> 
+<span class="menu-text">Recipes</span></a>
   </li>  
-    </ul>
-  </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-blogs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Blogs</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-blogs">    
-        <li>
-    <a class="dropdown-item" href="../../../pages/blogs/blogs.html">
- <span class="dropdown-text">Blogs</span></a>
-  </li>  
-    </ul>
-  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -380,18 +390,6 @@ cookieconsent.run({
   <div class="sidebar-item-container"> 
   <a href="../../../pages/guides/posts/raspberry_pi_server.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Linux Server &amp; Raspberry Pi</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/guides/posts/quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Quarto</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/guides/posts/uv.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">uv</span></a>
   </div>
 </li>
       </ul>
@@ -443,7 +441,7 @@ cookieconsent.run({
   <ul>
   <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1">Introduction</a>
   <ul class="collapse">
-  <li><a href="#why-jupyter" id="toc-why-jupyter" class="nav-link" data-scroll-target="#why-jupyter">Why Jupyter?</a></li>
+  <li><a href="#why-python-containers" id="toc-why-python-containers" class="nav-link" data-scroll-target="#why-python-containers">Why Python Containers?</a></li>
   <li><a href="#basic-concepts-1" id="toc-basic-concepts-1" class="nav-link" data-scroll-target="#basic-concepts-1">Basic Concepts</a></li>
   </ul></li>
   <li><a href="#docker-concepts-and-background-information" id="toc-docker-concepts-and-background-information" class="nav-link" data-scroll-target="#docker-concepts-and-background-information">Docker Concepts and Background Information</a>
@@ -451,6 +449,7 @@ cookieconsent.run({
   <li><a href="#docker-components" id="toc-docker-components" class="nav-link" data-scroll-target="#docker-components">Docker Components</a></li>
   <li><a href="#images-and-containers" id="toc-images-and-containers" class="nav-link" data-scroll-target="#images-and-containers">Images and Containers</a></li>
   <li><a href="#registries" id="toc-registries" class="nav-link" data-scroll-target="#registries">Registries</a></li>
+  <li><a href="#understanding-python-image-variants" id="toc-understanding-python-image-variants" class="nav-link" data-scroll-target="#understanding-python-image-variants">Understanding Python Image Variants</a></li>
   <li><a href="#docker-compose-overview" id="toc-docker-compose-overview" class="nav-link" data-scroll-target="#docker-compose-overview">Docker Compose Overview</a></li>
   <li><a href="#other-considerations" id="toc-other-considerations" class="nav-link" data-scroll-target="#other-considerations">Other considerations</a></li>
   </ul></li>
@@ -459,7 +458,26 @@ cookieconsent.run({
   <li><a href="#essential-vs-code-extensions" id="toc-essential-vs-code-extensions" class="nav-link" data-scroll-target="#essential-vs-code-extensions">Essential VS Code Extensions</a></li>
   <li><a href="#configuring-docker-integration" id="toc-configuring-docker-integration" class="nav-link" data-scroll-target="#configuring-docker-integration">Configuring Docker Integration</a></li>
   </ul></li>
-  <li><a href="#configuring-docker-on-the-server" id="toc-configuring-docker-on-the-server" class="nav-link" data-scroll-target="#configuring-docker-on-the-server">Configuring Docker on the Server</a></li>
+  <li><a href="#configuring-docker-on-the-server" id="toc-configuring-docker-on-the-server" class="nav-link" data-scroll-target="#configuring-docker-on-the-server">Configuring Docker on the Server</a>
+  <ul class="collapse">
+  <li><a href="#docker-installation-prerequisites" id="toc-docker-installation-prerequisites" class="nav-link" data-scroll-target="#docker-installation-prerequisites">Docker Installation Prerequisites</a></li>
+  <li><a href="#installing-docker-engine" id="toc-installing-docker-engine" class="nav-link" data-scroll-target="#installing-docker-engine">Installing Docker Engine</a></li>
+  <li><a href="#upgrading-docker" id="toc-upgrading-docker" class="nav-link" data-scroll-target="#upgrading-docker">Upgrading Docker</a></li>
+  <li><a href="#complete-uninstallation-and-cleanup" id="toc-complete-uninstallation-and-cleanup" class="nav-link" data-scroll-target="#complete-uninstallation-and-cleanup">Complete uninstallation and cleanup</a></li>
+  <li><a href="#post-installation-systemd-user-permissions-and-daemon-hardening" id="toc-post-installation-systemd-user-permissions-and-daemon-hardening" class="nav-link" data-scroll-target="#post-installation-systemd-user-permissions-and-daemon-hardening">Post-installation: systemd, user permissions, and daemon hardening</a></li>
+  <li><a href="#docker-bypasses-ufw-and-how-to-fix-it" id="toc-docker-bypasses-ufw-and-how-to-fix-it" class="nav-link" data-scroll-target="#docker-bypasses-ufw-and-how-to-fix-it">Docker bypasses UFW — and how to fix it</a></li>
+  <li><a href="#binding-to-localhost-the-simplest-complementary-defense" id="toc-binding-to-localhost-the-simplest-complementary-defense" class="nav-link" data-scroll-target="#binding-to-localhost-the-simplest-complementary-defense">Binding to localhost: the simplest complementary defense</a></li>
+  <li><a href="#fail2ban-coexists-with-docker-but-needs-per-jail-chain-configuration" id="toc-fail2ban-coexists-with-docker-but-needs-per-jail-chain-configuration" class="nav-link" data-scroll-target="#fail2ban-coexists-with-docker-but-needs-per-jail-chain-configuration">Fail2Ban coexists with Docker but needs per-jail chain configuration</a></li>
+  <li><a href="#verifying-the-installation-end-to-end" id="toc-verifying-the-installation-end-to-end" class="nav-link" data-scroll-target="#verifying-the-installation-end-to-end">Verifying the installation end to end</a></li>
+  </ul></li>
+  <li><a href="#dockerfiles-and-images" id="toc-dockerfiles-and-images" class="nav-link" data-scroll-target="#dockerfiles-and-images">Dockerfiles and Images</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-dockerfiles" id="toc-introduction-to-dockerfiles" class="nav-link" data-scroll-target="#introduction-to-dockerfiles">Introduction to Dockerfiles</a></li>
+  <li><a href="#version-control-with-github" id="toc-version-control-with-github" class="nav-link" data-scroll-target="#version-control-with-github">Version Control with GitHub</a></li>
+  <li><a href="#creating-a-dockerfile-for-python" id="toc-creating-a-dockerfile-for-python" class="nav-link" data-scroll-target="#creating-a-dockerfile-for-python">Creating a Dockerfile for Python</a></li>
+  <li><a href="#dockerfile-best-practices" id="toc-dockerfile-best-practices" class="nav-link" data-scroll-target="#dockerfile-best-practices">Dockerfile Best Practices</a></li>
+  <li><a href="#arm-compatibility-considerations" id="toc-arm-compatibility-considerations" class="nav-link" data-scroll-target="#arm-compatibility-considerations">ARM Compatibility Considerations</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/guides/posts/docker.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -521,7 +539,7 @@ cookieconsent.run({
 <li><strong>Simplified Deployment:</strong> Containers bundle all dependencies, eliminating complex installation procedures</li>
 <li><strong>Easy Updates:</strong> Containers can be replaced rather than updated in-place, simplifying maintenance</li>
 </ul>
-<p>In this guide, we’ll first explore the foundational concepts of containerization to build a solid understanding of the technology. Then, we’ll dive into Docker—the most popular containerization platform—and create a practical setup for a persistent Jupyter notebook server running on your Raspberry Pi. This container will allow you to use your MacBook as a client for development while leveraging the compute resources and persistent storage of your Pi server.</p>
+<p>In this guide, we’ll first explore the foundational concepts of containerization to build a solid understanding of the technology. Then, we’ll dive into Docker—the most popular containerization platform—and create a practical setup for a Python container running on your Raspberry Pi. This container will allow you to use your MacBook as a client for development while leveraging the compute resources and persistent storage of your Pi server.</p>
 <p>By the end of this guide, you’ll have both a theoretical understanding of containerization and practical experience implementing it, setting the stage for more advanced container-based projects like PostgreSQL databases, development environments, and even multi-container applications. It will help to checkout my starter guide on setting up Linux Server LTS on a Raspberry Pi, if you want to know exactly what kind of system I’m using. Otherwise, most of the examples will focus on Docker, not my specific environment.</p>
 </section>
 <section id="basic-concepts" class="level3">
@@ -605,7 +623,7 @@ cookieconsent.run({
 </section>
 <section id="advanced-networking" class="level4">
 <h4 class="anchored" data-anchor-id="advanced-networking">Advanced Networking</h4>
-<p>In bridge networking, containers communicate freely on their isolated network but need <code>port mapping</code> to be accessible from outside. For example, mapping port 8888 on your Raspberry Pi to port 8888 in a container would let you access a Jupyter server by connecting to your Pi’s IP address on port 8888.</p>
+<p>In bridge networking, containers communicate freely on their isolated network but need <code>port mapping</code> to be accessible from outside. For example, mapping port 8888 on your Raspberry Pi to port 8888 in a container would let you access a Python container by connecting to your Pi’s IP address on port 8888.</p>
 <p>Containers typically use DNS for service discovery:</p>
 <ul>
 <li>Container engines often provide built-in DNS resolution between containers</li>
@@ -621,7 +639,7 @@ cookieconsent.run({
 <li>UFW (Uncomplicated Firewall) configuration</li>
 <li>Fail2ban for protection against brute-force attacks</li>
 </ul>
-<p>Any containerized services will need to work with these existing configurations. Later, when we set up our Jupyter container, we’ll need to:</p>
+<p>Any containerized services will need to work with these existing configurations. Later, when we set up our Python container, we’ll need to:</p>
 <ul>
 <li>Choose a port that doesn’t conflict with existing services</li>
 <li>Configure UFW to allow traffic to this port</li>
@@ -679,7 +697,6 @@ cookieconsent.run({
 <h4 class="anchored" data-anchor-id="specific-raspberry-pi-use-cases">Specific Raspberry Pi Use Cases</h4>
 <p>For your Raspberry Pi server specifically, containerization enables:</p>
 <ul>
-<li><strong>Jupyter Notebooks:</strong> Run a persistent Jupyter server for data analysis</li>
 <li><strong>Database Servers:</strong> Host PostgreSQL, MySQL, or MongoDB without complex setup</li>
 <li><strong>Web Applications:</strong> Deploy web services with proper isolation</li>
 <li><strong>Development Tools:</strong> Run Git servers, CI/CD pipelines, or code quality tools</li>
@@ -751,7 +768,7 @@ cookieconsent.run({
 <h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
 <p>Containerization represents one of the most significant shifts in how we develop, deploy, and run software in recent years. By packaging applications with their complete runtime environment, containers solve the long-standing problem of environment inconsistency while providing resource efficiency and isolation.</p>
 <p>In this first section, we’ve explored the fundamental concepts behind containers—how they use Linux kernel features like namespaces and cgroups to provide lightweight isolation, how they differ from virtual machines, and why they’ve become essential in modern computing. We’ve also looked at various use cases and adjacent technologies that complement containerization.</p>
-<p>With this foundational understanding in place, we’re now ready to move from theory to practice. In the next section, we’ll dive into Docker—the most popular containerization platform—and learn how to create, manage, and use containers on your Raspberry Pi server. We’ll build a persistent Jupyter notebook environment that lets you combine the convenience of developing on your laptop with the persistent computing resources of your Raspberry Pi.</p>
+<p>With this foundational understanding in place, we’re now ready to move from theory to practice. In the next section, we’ll dive into Docker—the most popular containerization platform—and learn how to create, manage, and use containers on your Raspberry Pi server. We’ll build a Python environment that lets you combine the convenience of developing on your laptop with the persistent computing resources of your Raspberry Pi.</p>
 <p>This practical implementation will make these container concepts concrete while giving you a valuable tool for data analysis, coding, and experimentation—all within a properly isolated environment that won’t affect the rest of your server setup.</p>
 </section>
 </section>
@@ -759,20 +776,12 @@ cookieconsent.run({
 <h2 class="anchored" data-anchor-id="docker">Docker</h2>
 <section id="introduction-1" class="level3">
 <h3 class="anchored" data-anchor-id="introduction-1">Introduction</h3>
-<p>Docker has revolutionized application development and deployment by providing a standardized way to package, distribute, and run applications in isolated environments called containers. In this comprehensive guide, we’ll explore Docker from basic concepts to advanced implementations, using a Jupyter notebook server as our primary example.</p>
-<p>Docker enables you to package an application with all its dependencies into a standardized unit called a container. These containers can run consistently across different environments, from development machines to production servers, eliminating the classic “it works on my machine” problem. This consistency is particularly valuable when working with complex data science environments like Jupyter notebooks, which often have numerous interdependent libraries and packages.</p>
-<section id="why-jupyter" class="level4">
-<h4 class="anchored" data-anchor-id="why-jupyter">Why Jupyter?</h4>
-<p>For our Ubuntu Raspberry Pi server, Jupyter provides an ideal example of Docker’s capabilities for several important reasons:</p>
-<ul>
-<li><strong>Computational offloading:</strong> Jupyter allows you to write and execute code on a Raspberry Pi’s resources while using your laptop as a client interface. This distributes the workload efficiently, leveraging each device’s strengths.</li>
-<li><strong>Persistence and accessibility:</strong> A containerized Jupyter server runs 24/7 on your Raspberry Pi, maintaining long-running calculations and persisting data files while being accessible from anywhere.</li>
-<li><strong>Environment isolation:</strong> Data engineering workflows often require specific package versions that might conflict with other applications. Docker containers provide perfect isolation for these environments.</li>
-<li><strong>Security and controlled access:</strong> Jupyter’s token-based authentication integrates well with Docker’s networking capabilities, allowing secure remote access.</li>
-<li><strong>Scalability pathway:</strong> Starting with a single Jupyter container creates a foundation for more complex setups later, such as adding PostgreSQL databases or distributed computing with PySpark.</li>
-<li><strong>Cross-platform compatibility:</strong> Docker abstracts away many of the ARM-specific considerations of running on Raspberry Pi, though we’ll address key compatibility points.</li>
-</ul>
-<p>By focusing on Jupyter, we’ll cover the most important Docker concepts—images, containers, volumes, networking, and orchestration—in a practical context that directly supports data engineering work. As we progress through each section, you’ll build a functional containerized Jupyter environment that serves as both a learning tool and a practical development platform. Let’s start by exploring the fundamental concepts of Docker and setting up the necessary tools on your Ubuntu Pi server.</p>
+<p>Docker has revolutionized application development and deployment by providing a standardized way to package, distribute, and run applications in isolated environments called containers. In this comprehensive guide, we’ll explore Docker from basic concepts to advanced implementations, using a Python container as our primary example.</p>
+<p>Docker enables you to package an application with all its dependencies into a standardized unit called a container. These containers can run consistently across different environments, from development machines to production servers, eliminating the classic “it works on my machine” problem. This consistency is particularly valuable when working with complex data science or software engineering environments, which often have numerous interdependent libraries and packages.</p>
+<section id="why-python-containers" class="level4">
+<h4 class="anchored" data-anchor-id="why-python-containers">Why Python Containers?</h4>
+<p><strong>First</strong>, Python containers demonstrate the fundamental value proposition of containerization through environment isolation. Python development often suffers from dependency conflicts where different projects require incompatible package versions. A data analysis project might need pandas 1.3.0 while a web scraping project requires pandas 2.0.0, and installing both system-wide creates conflicts. Docker containers provide perfect isolation for these environments, allowing you to maintain multiple Python environments with completely different dependency sets without any interference. <strong>Second</strong>, Python containers enable computational offloading in a way that’s particularly valuable for Raspberry Pi servers. You can write and test Python code on your laptop using your preferred editor, then execute that code on your Raspberry Pi’s resources while your laptop remains responsive for other tasks. <strong>Third</strong>, persistence and accessibility become seamless with containerized Python environments. A Python container running on your Raspberry Pi can execute scripts continuously, maintain long-running processes, and store results in persistent volumes that survive container restarts. <strong>Fourth</strong>, Python containers showcase reproducibility across development stages. The same container that runs on your Raspberry Pi can run on your laptop, on a colleague’s machine, or on a cloud server. <strong>Fifth</strong>, testing in clean environments becomes trivial with containers. Before committing code changes, you can spin up a fresh Python container, run your tests, and then destroy the container. This ensures your tests aren’t passing due to some artifact in your development environment. Each test run starts from a known, clean state.</p>
+<p><strong>Finally</strong>, Python containers provide an excellent foundation for scalability. Starting with a simple Python container gives you a clear path to more complex setups. You might begin with a single container running a script, then expand to add a PostgreSQL database container for data storage, then add a Redis container for caching, and eventually orchestrate multiple Python worker containers processing tasks in parallel. Each step builds naturally on your foundation. By focusing on Python containers, we’ll cover Docker’s most important concepts—images, containers, volumes, networking, and orchestration—in a context that’s immediately practical for development work. Python’s ubiquity in data engineering, automation, web development, and scripting makes it an ideal teaching tool that you’ll actually use beyond this learning exercise. As we progress through each section, you’ll build a functional containerized Python environment that serves as both a learning platform and a practical development tool for any Python-based project you might undertake on your Raspberry Pi server.</p>
 </section>
 <section id="basic-concepts-1" class="level4">
 <h4 class="anchored" data-anchor-id="basic-concepts-1">Basic Concepts</h4>
@@ -798,8 +807,8 @@ cookieconsent.run({
 <li><strong>Building images locally:</strong> Building Docker images directly on your Raspberry Pi ensures architecture compatibility but may take longer due to limited resources. For complex builds, consider using Docker’s BuildKit with multi-architecture support.</li>
 <li><strong>Image size awareness:</strong> ARM devices like Raspberry Pi often have storage limitations. Be particularly mindful of image sizes and use lightweight base images where possible.</li>
 </ul>
-<p>For our Jupyter implementation, we’ll address these considerations by selecting ARM-compatible base images and optimizing for the Raspberry Pi’s resources.</p>
-<p>That concludes the introduction, next we’ll focus on configuring VS Code to work with Docker better, both on your client and server. Then, we’ll dive into the actual</p>
+<p>For our Python implementation, we’ll address these considerations by selecting ARM-compatible base images and optimizing for the Raspberry Pi’s resources.</p>
+<p>That concludes the introduction, next we’ll focus on configuring VS Code to work with Docker better, both on your client and server. Then, we’ll dive into the actual implementation.</p>
 </section>
 </section>
 <section id="docker-concepts-and-background-information" class="level3">
@@ -858,6 +867,15 @@ cookieconsent.run({
 <p><strong>Registries integrate seamlessly into modern development workflows</strong>, particularly in CI/CD pipelines. A typical workflow involves developers building images locally during development, pushing those images to a registry when code is ready for testing or deployment, and production systems pulling images from the registry when deploying applications. This workflow ensures that the exact same image tested in development runs in production, eliminating “works on my machine” problems.</p>
 <p>Automated build systems can monitor code repositories for changes, automatically build new images when code is updated, and push those images to registries with appropriate tags. This automation ensures that images are always current and reduces manual effort in maintaining deployments. Deployment systems can then pull the latest images or specific versions as needed, enabling both automated and controlled deployments.</p>
 </section>
+<section id="understanding-python-image-variants" class="level4">
+<h4 class="anchored" data-anchor-id="understanding-python-image-variants">Understanding Python Image Variants</h4>
+<p>When you search for Python on Docker Hub, you’ll discover multiple variants of the official Python image, each optimized for different use cases. Understanding these variants helps you choose the right base image for your specific needs, balancing image size, functionality, and build complexity.</p>
+<p>The <strong><em>standard Python</em></strong> image (tagged simply as <code>python:3.11</code> or similar) provides a full Debian-based environment with Python installed. This image includes the complete Debian system utilities, build tools, and libraries that you might need for compiling Python packages with C extensions. The standard image typically ranges from 900MB to 1GB in size, making it the largest option but also the most compatible. If you’re installing packages with compiled components like numpy, pandas, or pillow, the standard image ensures you have all necessary build dependencies available. This image prioritizes “it just works” compatibility over size optimization, making it ideal for development environments where you want to avoid troubleshooting missing system libraries.</p>
+<p>The <strong><em>Python Slim</em></strong> image (tagged as <code>python:3.11-slim</code>) strips away many of the Debian system utilities and build tools while retaining the core functionality needed to run Python applications. Slim images typically measure 120-150MB, roughly one-seventh the size of standard images. The slim variant includes Python itself and basic system libraries but excludes compilers, development headers, and less commonly used utilities. This image works well for applications using pure Python packages or pre-compiled wheels. However, you may encounter issues when installing packages that require compilation—you’ll need to manually install build dependencies, compile the package, and then remove those dependencies to keep the image size manageable. The slim image strikes a balance between size and ease of use, making it suitable for many production deployments where you’ve already identified your dependencies.</p>
+<p>The <strong><em>Python Alpine</em></strong> image (tagged as <code>python:3.11-alpine</code>) takes minimalism further by using Alpine Linux instead of Debian as the base operating system. Alpine images for Python typically measure 40-60MB, making them the smallest option by a significant margin. Alpine Linux uses musl libc instead of glibc and busybox instead of GNU coreutils, creating a fundamentally different environment from standard Linux distributions. While this dramatically reduces size, it introduces compatibility challenges. Many Python packages with C extensions aren’t tested against musl libc, leading to potential runtime issues. Building packages from source on Alpine often requires different development packages than on Debian-based systems, and compilation times can be longer. Additionally, Alpine uses a different package manager (apk instead of apt), requiring you to learn different commands for system package management.</p>
+<p>For our Raspberry Pi server, the choice between these variants involves several considerations. The standard Python image provides the smoothest experience with the fewest surprises, but at 900MB+ it’s quite large for ARM-based storage. The Python Slim image offers a good compromise, reducing size significantly while maintaining broad package compatibility. The Alpine image’s extreme size reduction (40-60MB) seems attractive, but the ARM architecture of the Raspberry Pi combined with Alpine’s musl libc can create challenging debugging situations when packages don’t behave as expected.</p>
+<p>I recommend starting with the Python Slim image for most use cases on Raspberry Pi. It provides sufficient functionality for the majority of Python packages while keeping image size reasonable. If you encounter a package that won’t install due to missing build dependencies, you can either switch to the standard image or learn to install just the specific dependencies needed. This approach gives you practical experience with troubleshooting Docker build issues without the additional complexity that Alpine introduces.</p>
+</section>
 <section id="docker-compose-overview" class="level4">
 <h4 class="anchored" data-anchor-id="docker-compose-overview">Docker Compose Overview</h4>
 <p><strong>Docker Compose</strong> is a tool that allows you to define, configure, and run multi-container Docker applications using a simple YAML configuration file. Instead of managing individual containers with separate docker run commands, Compose lets you describe your entire application stack in a single file and manage it with simple commands like <code>docker-compose up</code> and <code>docker-compose down</code>.</p>
@@ -900,7 +918,6 @@ cookieconsent.run({
 <li><code>Compose</code> file outline view for easier navigation of complex Compose files</li>
 </ul></li>
 <li><strong><code>Remote - SSH</code> extension:</strong> Enables you to use VS Code to connect to your Raspberry Pi over SSH and work with files and terminals directly on the remote machine.</li>
-<li><strong><code>Jupyter</code> extension:</strong> Supports working with Jupyter notebooks within VS Code, allowing you to connect to remote Jupyter kernels.</li>
 <li><strong><code>Python</code> extension:</strong> Provides rich support for Python language, including IntelliSense, debugging, and code navigation.</li>
 <li><strong><code>Ruff</code> extension:</strong> A fast Python linter that helps maintain code quality by identifying errors, style issues, and potential bugs in your code.</li>
 </ul>
@@ -929,7 +946,7 @@ cookieconsent.run({
 <ul>
 <li>Edit Docker configuration files on your MacBook with syntax highlighting, linting, and intelligent suggestions</li>
 <li>Build and run Docker containers on your Raspberry Pi with visual management</li>
-<li>Access containerized services (like Jupyter) through either VS Code or a web browser</li>
+<li>Access containerized services (like Python) through either VS Code or a web browser</li>
 <li>Maintain high code quality with Python linting through Ruff</li>
 </ul>
 <p>When you first connect to your Raspberry Pi, VS Code might prompt you to install some server components. Allow this installation to ensure all extensions work properly in the remote environment. The <code>Docker DX</code> and <code>Container Tools</code> extensions will work together to provide both authoring and runtime capabilities for your Docker workflow.</p>
@@ -938,8 +955,623 @@ cookieconsent.run({
 <section id="configuring-docker-on-the-server" class="level3">
 <h3 class="anchored" data-anchor-id="configuring-docker-on-the-server">Configuring Docker on the Server</h3>
 <p>Now that we’ve prepared our client-side development environment, let’s install and configure Docker on your Ubuntu Raspberry Pi server. We’ll make sure it integrates properly with your existing server setup, including security configurations.</p>
+<p>A quick note on security configurations: <strong>Docker Engine installs cleanly on a Raspberry Pi 4 running Ubuntu Server LTS using the standard apt repository method — but its default networking behavior silently bypasses UFW, exposing published container ports to the internet regardless of your firewall rules.</strong></p>
+<p>This is the single most critical fact in this section and what we’re aiming to protect against. Everything below covers the full installation process, post-install hardening, the UFW bypass problem and its solutions, Fail2Ban coexistence, and verification procedures. The target environment is Ubuntu Server 24.04 LTS (Noble) on a Raspberry Pi 4 (ARM64/aarch64) with UFW active and SSH on port 45000.</p>
+<section id="docker-installation-prerequisites" class="level4">
+<h4 class="anchored" data-anchor-id="docker-installation-prerequisites">Docker Installation Prerequisites</h4>
+<p>Docker Engine for Linux ships through Docker’s own apt repository — not through Ubuntu’s default <code>docker.io</code> package. The installation process on ARM64 is <strong>identical to x86_64</strong>; the repository auto-detects the host architecture via the package metadata, and all core Docker features (Compose, Buildx, Swarm, overlay2 storage) are fully supported on <code>arm64</code>. As of 2025–2026, Docker officially supports <strong>Ubuntu 24.04 Noble (LTS)</strong> and <strong>Ubuntu 22.04 Jammy (LTS)</strong> on the <code>arm64</code> architecture. Ubuntu 20.04 Focal is no longer listed.</p>
+<p><strong>Removing conflicting packages</strong></p>
+<p>Ubuntu may ship older or unofficial Docker-related packages that conflict with Docker CE. Remove them first:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt remove <span class="va">$(</span><span class="ex">dpkg</span> <span class="at">--get-selections</span> docker.io docker-compose docker-compose-v2 <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  docker-doc podman-docker containerd runc <span class="dv">2</span><span class="op">&gt;</span>/dev/null <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f1</span><span class="va">)</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This is safe to run even if none of these are installed — apt will simply report nothing to remove. Existing images, containers, and volumes in <code>/var/lib/docker/</code> are preserved.</p>
+<p><strong>Adding the GPG key and repository</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install prerequisites</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install ca-certificates curl</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Add Docker's official GPG key</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> install <span class="at">-m</span> 0755 <span class="at">-d</span> /etc/apt/keyrings</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> curl <span class="at">-fsSL</span> https://download.docker.com/linux/ubuntu/gpg <span class="at">-o</span> /etc/apt/keyrings/docker.asc</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod a+r /etc/apt/keyrings/docker.asc</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the repository (DEB822 format — current official method)</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tee /etc/apt/sources.list.d/docker.sources <span class="op">&lt;&lt;EOF</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">Types: deb</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">URIs: https://download.docker.com/linux/ubuntu</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st">Suites: </span><span class="va">$(</span><span class="bu">.</span> /etc/os-release <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">"</span><span class="va">${UBUNTU_CODENAME</span><span class="op">:-</span><span class="va">$VERSION_CODENAME}</span><span class="st">"</span><span class="va">)</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="st">Components: stable</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="st">Signed-By: /etc/apt/keyrings/docker.asc</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Let’s break this down step by step.</p>
+<p><strong><code>sudo install -m 0755 -d /etc/apt/keyrings</code></strong></p>
+<p>The <code>install</code> command here isn’t installing software — it’s creating a directory with specific permissions in one step. The flags are:</p>
+<ul>
+<li><code>-m 0755</code> sets the directory permissions: the owner can read, write, and execute; everyone else can only read and execute. This is standard for a directory that should be publicly readable but only root-writable.</li>
+<li><code>-d</code> tells <code>install</code> that you’re creating a directory, not copying a file.</li>
+</ul>
+<p><strong>What is a GPG Key?</strong></p>
+<p>GPG (GNU Privacy Guard) keys are a form of cryptographic verification. When you download software from the internet, you need a way to confirm it actually came from who it claims to — and hasn’t been tampered with. Docker publishes a public GPG key, and every package they release is digitally “signed” with the corresponding private key. Your system uses the public key to verify the signature before installing anything. Without this, you could unknowingly install a malicious package from a compromised or fake repository.</p>
+<p>The <code>curl</code> command downloads Docker’s public GPG key and saves it to <code>/etc/apt/keyrings/docker.asc</code>.</p>
+<p><strong><code>sudo chmod a+r /etc/apt/keyrings/docker.asc</code></strong></p>
+<p>You’re familiar with <code>chmod</code>, so here’s the specific flag: <code>a+r</code> means “all users, add read permission.” The <code>a</code> stands for <em>all</em> (owner, group, and others), and <code>+r</code> adds the read permission. This ensures that <code>apt</code> — which may run as a different user — can read the key file when verifying packages.</p>
+<p><strong>The <code>tee</code> command and the file it writes</strong></p>
+<p><code>tee</code> reads from standard input and writes to a file, which is useful here because we need <code>sudo</code> privileges to write to a system directory. The <code>&lt;&lt;EOF</code> syntax is a <em>heredoc</em> — everything between <code>&lt;&lt;EOF</code> and <code>EOF</code> is treated as the input. This writes a source definition file to <code>/etc/apt/sources.list.d/docker.sources</code> in the modern DEB822 format. Here’s what each field means:</p>
+<ul>
+<li><code>Types: deb</code> — specifies binary (compiled) packages, as opposed to source code.</li>
+<li><code>URIs</code> — the base URL of Docker’s package repository.</li>
+<li><code>Suites</code> — resolves to the Ubuntu codename (e.g., <code>noble</code> for 24.04), dynamically pulled from your system’s <code>/etc/os-release</code> file so the command works across Ubuntu versions.. The repository source uses the <strong>DEB822 <code>.sources</code> format</strong>, which replaced the older one-line <code>.list</code> format in Docker’s current documentation. Both formats work, but <code>.sources</code> is now canonical. No <code>Architectures:</code> field is needed — apt fetches packages matching the host architecture automatically.</li>
+<li><code>Components: stable</code> — pulls only from the stable release channel.</li>
+<li><code>Signed-By</code> — points to the GPG key we downloaded earlier, so <code>apt</code> knows exactly which key to use when verifying Docker packages.</li>
+</ul>
+<p>Finally, <code>sudo apt update</code> refreshes the package list so your system is aware of the newly added Docker repository.</p>
+</section>
+<section id="installing-docker-engine" class="level4">
+<h4 class="anchored" data-anchor-id="installing-docker-engine">Installing Docker Engine</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This installs five packages:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Package</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>docker-ce</code></td>
+<td>Docker Engine daemon (<code>dockerd</code>)</td>
+</tr>
+<tr class="even">
+<td><code>docker-ce-cli</code></td>
+<td>Docker CLI client</td>
+</tr>
+<tr class="odd">
+<td><code>containerd.io</code></td>
+<td>Container runtime (bundles containerd + runc)</td>
+</tr>
+<tr class="even">
+<td><code>docker-buildx-plugin</code></td>
+<td>Extended build capabilities</td>
+</tr>
+<tr class="odd">
+<td><code>docker-compose-plugin</code></td>
+<td>Docker Compose v2 (invoked as <code>docker compose</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Verify immediately with <code>sudo docker run hello-world</code>. On ARM64, Docker Hub pulls the <code>linux/arm64</code> variant of multi-arch images automatically. If an image lacks ARM64 support, you’ll see a platform mismatch warning — most official images (Python, Alpine, Node, PostgreSQL, Ubuntu) provide ARM64 builds.</p>
+</section>
+<section id="upgrading-docker" class="level4">
+<h4 class="anchored" data-anchor-id="upgrading-docker">Upgrading Docker</h4>
+<p>Upgrading is simply re-running the install command after refreshing the package index:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To pin a specific version instead:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">apt</span> list <span class="at">--all-versions</span> docker-ce</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="va">VERSION_STRING</span><span class="op">=</span>5:28.0.1-1~ubuntu.24.04~noble</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install docker-ce=<span class="va">$VERSION_STRING</span> docker-ce-cli=<span class="va">$VERSION_STRING</span> containerd.io <span class="dt">\</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  docker-buildx-plugin docker-compose-plugin</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="complete-uninstallation-and-cleanup" class="level4">
+<h4 class="anchored" data-anchor-id="complete-uninstallation-and-cleanup">Complete uninstallation and cleanup</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove all Docker packages</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin <span class="dt">\</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  docker-compose-plugin docker-ce-rootless-extras</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete all Docker data (images, containers, volumes, build cache)</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rm <span class="at">-rf</span> /var/lib/docker</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rm <span class="at">-rf</span> /var/lib/containerd</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the repository and GPG key</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rm /etc/apt/sources.list.d/docker.sources</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rm /etc/apt/keyrings/docker.asc</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove daemon configuration</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rm <span class="at">-rf</span> /etc/docker</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove user-level Docker config</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> ~/.docker</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="post-installation-systemd-user-permissions-and-daemon-hardening" class="level4">
+<h4 class="anchored" data-anchor-id="post-installation-systemd-user-permissions-and-daemon-hardening">Post-installation: systemd, user permissions, and daemon hardening</h4>
+<p><strong>Enabling Docker on boot</strong></p>
+<p>On Ubuntu, Docker enables itself at boot by default after installation. To verify or explicitly set this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable docker.service</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable containerd.service</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To check: <code>systemctl is-enabled docker</code> should return <code>enabled</code>. To disable auto-start: replace <code>enable</code> with <code>disable</code>.</p>
+<p><strong>The docker group grants root-equivalent access</strong></p>
+<p>The Docker daemon runs as root and communicates through a Unix socket at <code>/var/run/docker.sock</code>. By default, only root can access this socket. Adding a user to the <code>docker</code> group lets them run Docker commands without <code>sudo</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd docker          <span class="co"># May already exist</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> usermod <span class="at">-aG</span> docker <span class="va">$USER</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">newgrp</span> docker                  <span class="co"># Activate in current session (or log out/in)</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run hello-world         <span class="co"># Test without sudo</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>That being said, if the <code>docker</code> group already exists, you can skip <code>groupadd</code> and run only the following three commands:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> usermod <span class="at">-aG</span> docker <span class="va">$USER</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">newgrp</span> docker</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run hello-world</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What’s actually happening here?</strong></p>
+<p><code>sudo usermod -aG docker $USER</code></p>
+<p><code>usermod</code> modifies an existing user account. The <code>-aG</code> flag is actually two flags working together: <code>-a</code> means <em>append</em> (rather than replace existing group memberships), and <code>-G</code> specifies the group you’re adding the user to. Without the <code>-a</code> flag, <code>-G</code> would <em>overwrite</em> all of your existing supplementary groups with just <code>docker</code>, which would be a significant problem. Together, <code>-aG docker</code> safely adds <code>docker</code> to your user’s list of groups without touching anything else. <code>$USER</code> is a shell variable that resolves to your current username — in this case, <code>chris</code>.</p>
+<p><code>newgrp docker</code></p>
+<p>Group membership changes in Linux don’t take effect in your current shell session automatically — the system only re-evaluates your groups at login time. <code>newgrp docker</code> forces your current session to recognize the new <code>docker</code> group immediately, without requiring a full logout and login. Think of it as refreshing your session’s credentials. Alternatively, you can log out and back in, which accomplishes the same thing.</p>
+<p><code>docker run hello-world</code></p>
+<p>This is the verification step. Running this <em>without</em> <code>sudo</code> is the important part — it confirms that your user can communicate directly with the Docker daemon via the socket (<code>/var/run/docker.sock</code>) using group-level permissions, rather than relying on root access. If this succeeds, your permissions are configured correctly.</p>
+<p><strong>This carries a critical security implication.</strong> Any user in the <code>docker</code> group has <strong>unrestricted root-equivalent access</strong> to the host. A single command demonstrates why:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-v</span> /:/hostfs <span class="at">-it</span> ubuntu bash</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This mounts the entire host filesystem into a container where the user is root. From there, they can read <code>/etc/shadow</code>, write to <code>/etc/sudoers</code>, modify system binaries, or extract SSH private keys. The <code>--privileged</code> flag grants even broader access, including all kernel capabilities and device access. Docker’s official documentation explicitly states: <em>“only trusted users should be allowed to control your Docker daemon.”</em></p>
+<p>On a <strong>single-user headless server</strong> where the operator already has <code>sudo</code>, this tradeoff is widely accepted — the user already possesses root-equivalent privileges, and the docker group simply removes the friction of typing <code>sudo</code> before every command. On multi-user or shared systems, <strong>rootless mode</strong> is the safer alternative. Rootless mode runs both the daemon and containers under a non-root user namespace, preventing container-escape vulnerabilities from granting host root access. Its limitations include no binding to privileged ports below 1024, reduced network performance (user-space networking via slirp4netns), and limited cgroup resource controls.</p>
+<p><strong>Recommended daemon.json for a headless server</strong></p>
+<p>Create <code>/etc/docker/daemon.json</code> with these settings:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"log-driver"</span><span class="fu">:</span> <span class="st">"json-file"</span><span class="fu">,</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"log-opts"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"max-size"</span><span class="fu">:</span> <span class="st">"10m"</span><span class="fu">,</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"max-file"</span><span class="fu">:</span> <span class="st">"3"</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"live-restore"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"userland-proxy"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"no-new-privileges"</span><span class="fu">:</span> <span class="kw">true</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Apply with <code>sudo systemctl restart docker</code>. Here’s what each setting does:</p>
+<ul>
+<li><strong><code>log-driver</code> and <code>log-opts</code></strong>: The default <code>json-file</code> driver grows unbounded, which will eventually exhaust the SD card or disk on a Pi 4. Capping at <strong>10 MB × 3 files = 30 MB per container</strong> prevents this.</li>
+<li><strong><code>live-restore</code></strong>: Keeps containers running during daemon restarts or upgrades — essential for a headless server where daemon updates shouldn’t cause downtime.</li>
+<li><strong><code>userland-proxy: false</code></strong>: Replaces the <code>docker-proxy</code> userland process with kernel-level iptables/hairpin NAT for port forwarding. Reduces attack surface and improves performance.</li>
+<li><strong><code>no-new-privileges</code></strong>: Prevents container processes from gaining additional privileges via SUID binaries or capabilities.</li>
+</ul>
+<p>Never expose the Docker daemon socket over TCP. If remote management is needed, use SSH tunneling (<code>DOCKER_HOST=ssh://user@host</code>). The Docker documentation is explicit: exposing the daemon API without TLS mutual authentication allows any network-reachable user to gain root on the host.</p>
+</section>
+<section id="docker-bypasses-ufw-and-how-to-fix-it" class="level4">
+<h4 class="anchored" data-anchor-id="docker-bypasses-ufw-and-how-to-fix-it">Docker bypasses UFW — and how to fix it</h4>
+<p>This is the most important security topic in this guide. <strong>Docker directly manipulates iptables to implement container networking, and this bypasses UFW entirely.</strong> The official Docker documentation acknowledges this directly: <em>“When you publish a container’s ports using Docker, traffic to and from that container gets diverted before it goes through the ufw firewall settings.”</em></p>
+<p><strong><em>Why this happens</em></strong></p>
+<p>UFW manages the <strong>INPUT</strong> and <strong>OUTPUT</strong> chains. Docker operates in the <strong>FORWARD</strong> chain and the <strong>nat</strong> table. When you run <code>docker run -p 8080:8000 python-app</code>, Docker adds a DNAT rule in the nat table’s PREROUTING chain that rewrites incoming packets destined for port 8080 to the container’s internal IP on port 8000. These packets then traverse the FORWARD chain — through Docker’s own chains (<code>DOCKER-USER</code> → <code>DOCKER-FORWARD</code> → <code>DOCKER</code>) — and <strong>never touch the INPUT chain that UFW controls</strong>.</p>
+<p>The result: port 8080 is exposed to the entire internet, even if UFW has <code>default deny incoming</code> and you explicitly run <code>ufw deny 8080</code>. UFW will even report port 8080 as blocked, while it remains wide open. This has been documented in GitHub issues (moby/moby#4737, docker/for-linux#690) since 2013 and remains architecturally unchanged.</p>
+<p><strong>Solution: the <code>/etc/ufw/after.rules</code> approach (recommended for UFW-managed servers)</strong></p>
+<p>This is the most elegant solution for servers already using UFW. While there are other solutions, depending on your use case, they are not recommended for every use case. So, I’ve gone with what seemed to be the most straightforward solution. Popularized by the <a href="https://github.com/chaifeng/ufw-docker">chaifeng/ufw-docker</a> project (6.4k GitHub stars, updated November 2025), it redirects Docker traffic into UFW’s forwarding chain so that UFW becomes the control point for container access.</p>
+<p>Append this block to the <strong>end</strong> of <code>/etc/ufw/after.rules</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode ini code-with-copy"><code class="sourceCode ini"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="re">BEGIN</span><span class="co"> UFW AND DOCKER</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="dt">*filter</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="dt">:ufw-user-forward - </span><span class="kw">[0:0]</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="dt">:ufw-docker-logging-deny - </span><span class="kw">[0:0]</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="dt">:DOCKER-USER - </span><span class="kw">[0:0]</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -j ufw-user-forward</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -m conntrack --ctstate INVALID -j DROP</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -i docker0 -o docker0 -j ACCEPT</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -j RETURN -s 10.0.0.0/8</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -j RETURN -s 172.16.0.0/12</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -j RETURN -s 192.168.0.0/16</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -j ufw-docker-logging-deny -m conntrack --ctstate NEW -d 10.0.0.0/8</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -j ufw-docker-logging-deny -m conntrack --ctstate NEW -d 172.16.0.0/12</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -j ufw-docker-logging-deny -m conntrack --ctstate NEW -d 192.168.0.0/16</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="dt">-A DOCKER-USER -j RETURN</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="dt">-A ufw-docker-logging-deny -m limit --limit 3/min --limit-burst 10 -j LOG --log-prefix "</span><span class="kw">[UFW DOCKER BLOCK]</span><span class="dt"> "</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="dt">-A ufw-docker-logging-deny -j DROP</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="dt">COMMIT</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="re">END</span><span class="co"> UFW AND DOCKER</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Restart UFW with <code>sudo systemctl restart ufw</code> or <code>sudo ufw reload</code>. If rules don’t take immediate effect, reboot. After applying these rules, <strong>all published Docker ports are blocked by default</strong> from external access.</p>
+<p>Container-to-container communication and traffic from private subnets (LAN) are allowed. To selectively open a container port to external traffic, use <code>ufw route allow</code> (not <code>ufw allow</code>, which only controls the INPUT chain):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Allow everyone to reach container port 443</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ufw</span> route allow proto tcp from any to any port 443</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Allow only a specific IP to reach container port 8080</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">ufw</span> route allow proto tcp from 203.0.113.50 to any port 8080</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove a rule</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="ex">ufw</span> route delete allow proto tcp from any to any port 443</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This approach preserves Docker’s networking functionality, integrates with UFW’s rule management, logs blocked traffic with a <code>[UFW DOCKER BLOCK]</code> prefix, and requires no changes to Docker’s configuration.</p>
+</section>
+<section id="binding-to-localhost-the-simplest-complementary-defense" class="level4">
+<h4 class="anchored" data-anchor-id="binding-to-localhost-the-simplest-complementary-defense">Binding to localhost: the simplest complementary defense</h4>
+<p>For services accessed only through a host-level reverse proxy, bind published ports exclusively to the loopback interface:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">-p</span> 127.0.0.1:8080:8000 python-app</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Or in Docker Compose:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">python-app</span><span class="kw">:</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> python-app</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"127.0.0.1:8080:8000"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This makes the service physically unreachable from external networks regardless of iptables state. In our Python container example, the container listens internally on port 8000 (a common default for Python web frameworks like Flask and FastAPI), while the host maps it to port 8080 on the loopback interface only. Combined with a host-installed reverse proxy (such as Nginx or Caddy) that UFW controls normally on ports 80/443, this is the <strong>cleanest architecture for production</strong>: containers are invisible to the network, the reverse proxy handles TLS termination and access logging, and UFW manages the proxy ports through the standard INPUT chain with no special Docker configuration required.</p>
+</section>
+<section id="fail2ban-coexists-with-docker-but-needs-per-jail-chain-configuration" class="level4">
+<h4 class="anchored" data-anchor-id="fail2ban-coexists-with-docker-but-needs-per-jail-chain-configuration">Fail2Ban coexists with Docker but needs per-jail chain configuration</h4>
+<p>Fail2Ban adds ban rules to the <strong>INPUT</strong> chain by default. Since Docker container traffic flows through the <strong>FORWARD</strong> chain, a standard Fail2Ban ban has <strong>zero effect on traffic destined for containers</strong>. However, the existing SSH jail (protecting port 45000) is unaffected by Docker installation — SSH traffic hits the INPUT chain regardless, so no changes are needed for host-level services.</p>
+<p>When you run services in Docker containers that need Fail2Ban protection, two adjustments are required: pointing Fail2Ban at the container’s logs, and directing bans to the correct iptables chain.</p>
+<p><strong>Jail configuration with chain = DOCKER-USER</strong></p>
+<p>The Fail2Ban project’s official wiki recommends setting <code>chain = DOCKER-USER</code> on a per-jail basis for containerized services, while keeping <code>chain = INPUT</code> as the global default for host services:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode ini code-with-copy"><code class="sourceCode ini"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># /etc/fail2ban/jail.local</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">[DEFAULT]</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="dt">chain </span><span class="ot">=</span><span class="st"> INPUT              # Default for host-level services (SSH, etc.)</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="kw">[sshd]</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="dt">enabled </span><span class="ot">=</span><span class="st"> </span><span class="kw">true</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="dt">port </span><span class="ot">=</span><span class="st"> </span><span class="dv">45000</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># chain = INPUT (inherited from DEFAULT — correct for host SSH)</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="kw">[python-app]</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="dt">enabled </span><span class="ot">=</span><span class="st"> </span><span class="kw">true</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="dt">port </span><span class="ot">=</span><span class="st"> </span><span class="dv">8080</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="dt">logpath </span><span class="ot">=</span><span class="st"> /opt/python-app-logs/access.log</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="dt">chain </span><span class="ot">=</span><span class="st"> DOCKER-USER        # Bans go to DOCKER-USER chain for container traffic</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="dt">maxretry </span><span class="ot">=</span><span class="st"> </span><span class="dv">5</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="dt">bantime </span><span class="ot">=</span><span class="st"> </span><span class="dv">600</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This configuration defines two jails: one for SSH (a host-level service) and one for a Python application running inside a Docker container. The <code>[sshd]</code> jail inherits <code>chain = INPUT</code> from the <code>[DEFAULT]</code> section, which is correct because SSH traffic enters through the host’s INPUT chain. The <code>[python-app]</code> jail explicitly sets <code>chain = DOCKER-USER</code> because traffic destined for a containerized service traverses the FORWARD chain, and DOCKER-USER is Docker’s designated insertion point for custom firewall rules. Without this override, Fail2Ban would insert bans into the INPUT chain where they would have no effect on container-bound traffic. The <code>port = 8080</code> matches the host-side published port (from <code>-p 8080:8000</code>), and the <code>logpath</code> points to where the Python application writes its access logs on the host filesystem (via a volume mount, shown below). The <code>maxretry = 5</code> and <code>bantime = 600</code> settings are reasonable defaults — five failed attempts triggers a 10-minute ban — but you should tune these based on your application’s expected traffic patterns.</p>
+<p>When <code>chain = DOCKER-USER</code> is set, Fail2Ban creates a sub-chain (e.g., <code>f2b-python-app</code>) and inserts a jump rule at the top of DOCKER-USER. Banned IPs are caught before Docker’s own forwarding rules, so the ban actually takes effect on container-bound traffic.</p>
+<p><strong>Accessing container logs for monitoring</strong></p>
+<p>The recommended approach is <strong>volume-mounting</strong> the application’s log directory to a host path, then pointing Fail2Ban at that path:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">--name</span> python-app <span class="dt">\</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-v</span> /opt/python-app-logs:/app/logs:rw <span class="dt">\</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-p</span> 8080:8000 <span class="dt">\</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  python-app</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>-v /opt/python-app-logs:/app/logs:rw</code> flag mounts a directory from the host filesystem into the container, creating a shared location where the Python application writes its log files and Fail2Ban reads them. The <code>:rw</code> suffix grants the container read-write access to this mount. Your Python application needs to be configured to write its access logs to <code>/app/logs/access.log</code> inside the container (using Python’s built-in <code>logging</code> module or your framework’s logging configuration), which physically maps to <code>/opt/python-app-logs/access.log</code> on the host. This is the path you specified in the <code>logpath</code> directive of the Fail2Ban jail configuration above. The <code>-p 8080:8000</code> publishes the container’s internal port 8000 to port 8080 on the host, consistent with the port mapping we’ve used throughout this section.</p>
+<p>Avoid pointing Fail2Ban at Docker’s internal JSON log files (<code>/var/lib/docker/containers/&lt;id&gt;/&lt;id&gt;-json.log</code>) — these use a JSON wrapper format, container IDs change on recreation, and Docker’s documentation warns against external tool access to these files.</p>
+<p><strong>Ensuring correct startup order</strong></p>
+<p>If Fail2Ban starts before Docker, it cannot find the DOCKER-USER chain and will fail to initialize jails targeting it. Fix with a systemd override:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl edit fail2ban.service</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Add:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode ini code-with-copy"><code class="sourceCode ini"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[Unit]</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="dt">After</span><span class="ot">=</span><span class="st">docker.service</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This ensures Docker creates its chains before Fail2Ban attempts to hook into them.</p>
+</section>
+<section id="verifying-the-installation-end-to-end" class="level4">
+<h4 class="anchored" data-anchor-id="verifying-the-installation-end-to-end">Verifying the installation end to end</h4>
+<p><strong>Docker Engine and CLI</strong></p>
+<p>Run these four commands and confirm the expected output:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> version         <span class="co"># Must show Client AND Server sections, OS/Arch: linux/arm64</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> info            <span class="co"># Check: Storage Driver: overlay2, Architecture: aarch64, </span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                       <span class="co"># Cgroup Driver: systemd, Compose plugin listed</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose version <span class="co"># Confirms Compose v2 plugin (e.g., v2.24.x or later)</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run hello-world <span class="co"># Pulls arm64 image from Docker Hub, prints success message</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>docker run hello-world</code> command without <code>sudo</code> confirms three things simultaneously: the daemon is running, the user has docker group permissions, and Docker Hub connectivity works. If you see <code>Got permission denied while trying to connect to the Docker daemon socket</code>, run <code>groups</code> to verify <code>docker</code> is listed, and if not, re-run <code>sudo usermod -aG docker $USER</code> and log out/in.</p>
+<p><strong>Systemd services</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> is-enabled docker       <span class="co"># Expected: enabled</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> is-enabled containerd   <span class="co"># Expected: enabled</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status docker      <span class="co"># Expected: active (running), loaded (enabled)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Firewall verification from an external machine</strong></p>
+<p>This is the most important verification step. After applying the <code>after.rules</code> configuration, test from a separate machine:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># From an external machine — should timeout or be refused</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-v</span> <span class="at">--connect-timeout</span> 5 http://<span class="op">&lt;</span>server-ip<span class="op">&gt;</span>:8080</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Should show "filtered" (not "open") for blocked Docker ports</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">nmap</span> <span class="at">-p</span> 8080 <span class="op">&lt;</span>server-ip<span class="op">&gt;</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># SSH on port 45000 should still be reachable</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">nmap</span> <span class="at">-p</span> 45000 <span class="op">&lt;</span>server-ip<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>On the server itself, inspect the DOCKER-USER chain to confirm your rules are in place:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-L</span> DOCKER-USER <span class="at">-n</span> <span class="at">-v</span> <span class="at">--line-numbers</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Watch for blocked packets in real time:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tail <span class="at">-f</span> /var/log/syslog <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"UFW DOCKER BLOCK"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If the <code>after.rules</code> approach is configured correctly, externally-initiated connections to published container ports will be dropped and logged, while LAN traffic, container-to-container traffic, and explicitly allowed <code>ufw route allow</code> rules will pass through normally.</p>
+<p><strong>Conclusion</strong></p>
+<p>Docker on a Raspberry Pi 4 with Ubuntu Server ARM64 is a first-class experience — the installation process is identical to x86_64, and all core features work without modification. The critical pitfall is Docker’s iptables manipulation bypassing UFW, which is not a bug but an architectural consequence of Docker’s bridge networking operating in the FORWARD chain while UFW manages INPUT. The <code>/etc/ufw/after.rules</code> approach with the ufw-docker ruleset is the most maintainable solution for UFW-based servers, giving you default-deny behavior for container ports with selective <code>ufw route allow</code> overrides. For maximum simplicity, binding container ports to <code>127.0.0.1</code> and fronting them with a host-level reverse proxy eliminates the firewall problem entirely. Fail2Ban requires per-jail <code>chain = DOCKER-USER</code> configuration only for Docker-hosted services; your existing SSH jail continues working unchanged.</p>
+</section>
+</section>
+<section id="dockerfiles-and-images" class="level3">
+<h3 class="anchored" data-anchor-id="dockerfiles-and-images">Dockerfiles and Images</h3>
+<p>Now that Docker is installed, configured, and integrated with your server’s security stack, it’s time to learn how to actually build something with it. Up to this point, the only image we’ve pulled is <code>hello-world</code> — a tiny test image that confirms Docker is working. In this section, we’ll move from verifying installations to creating custom images tailored to your specific needs.</p>
+<p>A Dockerfile is where every custom Docker image begins. It’s a plain text file that contains a series of instructions Docker uses to assemble an image, layer by layer. Understanding how Dockerfiles work — and how to write them well — is the single most important skill for working with Docker effectively. Everything else in Docker (running containers, composing services, orchestrating deployments) depends on having well-constructed images, and those images start with Dockerfiles.</p>
+<p>We’ll begin with the general anatomy of a Dockerfile and how the layer system works, then move into writing a real Dockerfile for our Python environment on the Raspberry Pi. Along the way, we’ll cover how to build, tag, and publish images, how to take advantage of Docker’s build cache for faster iterations, and how multi-stage builds can keep your final images lean. We’ll close with best practices and ARM-specific considerations that are particularly relevant for our Raspberry Pi server.</p>
+<section id="introduction-to-dockerfiles" class="level4">
+<h4 class="anchored" data-anchor-id="introduction-to-dockerfiles">Introduction to Dockerfiles</h4>
+<p>A Dockerfile is a text file — literally named <code>Dockerfile</code> with no file extension — that lives in your project directory and tells Docker exactly how to construct an image. Each line in a Dockerfile represents an instruction, and Docker processes these instructions sequentially from top to bottom. The result is a Docker image: a portable, self-contained snapshot of an application and its environment that can be used to spin up containers anywhere Docker runs.</p>
+<p>The important thing to internalize early is that a Dockerfile is <em>declarative infrastructure</em>. Rather than SSHing into a server and manually installing packages, configuring paths, and copying files (the way we set up our Raspberry Pi in the earlier sections of this guide), a Dockerfile captures all of those steps in a reproducible, version-controllable format. If your container breaks or your server fails, you can rebuild the exact same environment from the Dockerfile alone. This is a fundamental shift in how you think about environment setup — instead of a series of manual steps you need to remember, your environment is defined as code.</p>
+<p><strong>The Anatomy of a Dockerfile</strong></p>
+<p>Every Dockerfile follows the same general structure, with instructions that build upon each other to create a complete application environment. Here are the core instructions you’ll encounter most frequently:</p>
+<p><code>FROM</code> declares the base image your image will be built upon. Every Dockerfile must begin with a <code>FROM</code> instruction (or an <code>ARG</code> that precedes it for parameterized base images). The base image provides the foundational filesystem and tools your application will inherit. For example, <code>FROM python:3.11-slim</code> starts with a Debian-based Linux environment that already has Python 3.11 installed. You can think of <code>FROM</code> as choosing the starting point for your environment — rather than installing an operating system and Python from scratch, you inherit a pre-built foundation maintained by the official Python team.</p>
+<p><code>WORKDIR</code> sets the working directory inside the container for all subsequent instructions. If the directory doesn’t exist, Docker creates it. This is analogous to <code>cd</code>-ing into a directory on your Raspberry Pi before running commands, except <code>WORKDIR</code> creates the directory if it’s not already there. Setting a <code>WORKDIR</code> early keeps your Dockerfile organized and avoids scattering files across the container’s filesystem.</p>
+<p><code>COPY</code> transfers files from your local machine (the build context) into the image. This is how your application code, configuration files, and dependency manifests get into the container. <code>COPY requirements.txt .</code> copies the <code>requirements.txt</code> file from your project directory into the current <code>WORKDIR</code> inside the image.</p>
+<p><code>RUN</code> executes a command inside the image during the build process and commits the result as a new layer. This is where you install packages, compile code, create directories, or perform any setup that should be baked into the image. Each <code>RUN</code> instruction creates a new layer, which has implications for image size and build caching that we’ll explore shortly.</p>
+<p><code>EXPOSE</code> documents which port the container will listen on at runtime. This is purely informational — it doesn’t actually publish the port or create any network rules. Think of it as metadata that tells anyone reading the Dockerfile (or tools like Docker Compose) which ports the application expects to use. The actual port publishing happens at runtime with the <code>-p</code> flag.</p>
+<p><code>CMD</code> specifies the default command that runs when a container starts from this image. Unlike <code>RUN</code>, which executes during the build, <code>CMD</code> executes at container startup. A Dockerfile should have exactly one <code>CMD</code> instruction. If you provide multiple, only the last one takes effect. This is the instruction that actually starts your application — for a Python container, this might launch a script, start a Jupyter server, or open an interactive Python shell.</p>
+<p>There are additional instructions like <code>ENV</code> (for setting environment variables), <code>ARG</code> (for build-time variables), <code>ENTRYPOINT</code> (for configuring the container to run as an executable), and <code>VOLUME</code> (for declaring mount points), but the six above form the core vocabulary you’ll use in nearly every Dockerfile.</p>
+<p><strong>Understanding the Layers</strong></p>
+<p>One of Docker’s most powerful and most misunderstood features is its layer-based architecture. Every instruction in a Dockerfile that modifies the filesystem — primarily <code>FROM</code>, <code>COPY</code>, <code>RUN</code>, and <code>ADD</code> — creates a new <em>layer</em> in the image. These layers are stacked on top of each other using a union filesystem, producing the final image you see when you run <code>docker images</code>.</p>
+<p>To understand why this matters, think about how we set up the Raspberry Pi server earlier in this guide. If you installed a package with <code>apt install</code>, your entire filesystem changed. If you later uninstalled that package, the files were removed, but the disk space was essentially reclaimed by the filesystem. Docker layers work differently. Each layer is an immutable snapshot of filesystem changes made by that instruction. If you install a 200MB package in one <code>RUN</code> layer and then remove it in the next <code>RUN</code> layer, your image still contains both layers — the 200MB is baked into the first layer permanently. The removal in the second layer only <em>masks</em> those files; it doesn’t reclaim the space.</p>
+<p>This has two practical consequences. First, you should combine related operations into a single <code>RUN</code> instruction wherever possible. Installing build dependencies, compiling your application, and cleaning up temporary files should all happen in one <code>RUN</code> statement connected with <code>&amp;&amp;</code> operators. Second, the order of your instructions matters significantly for build performance. Docker caches each layer, and when rebuilding an image, it reuses cached layers until it encounters an instruction whose inputs have changed. Everything after that changed instruction must be rebuilt from scratch. We’ll revisit this caching behavior in detail when we discuss the build cache.</p>
+<p>Each layer is identified by a SHA256 hash of its contents. When Docker pulls an image, it only downloads layers it doesn’t already have locally. This means that if you have two images that share the same base (say, both use <code>python:3.11-slim</code>), the base layers are stored only once on disk and shared between both images. This deduplication makes Docker extremely storage-efficient when running multiple containers based on related images — a real advantage on the Raspberry Pi where storage is limited.</p>
+<p><strong>Writing a Dockerfile</strong></p>
+<p>Let’s put these concepts together by examining what a simple Dockerfile looks like. Before we write our actual Python Dockerfile (which we’ll do in the next subsection), here’s a minimal example that illustrates the structure:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode dockerfile code-with-copy"><code class="sourceCode dockerfile"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Every Dockerfile starts with a base image</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> python:3.11-slim</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the working directory inside the container</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /app</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy dependency manifest first (for cache optimization)</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> requirements.txt .</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Install dependencies</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">pip</span> install <span class="at">--no-cache-dir</span> <span class="at">-r</span> requirements.txt</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy the rest of the application code</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> . .</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Document which port the application uses</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="kw">EXPOSE</span> 8000</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the default command to run when the container starts</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="kw">CMD</span> [<span class="st">"python"</span>, <span class="st">"app.py"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>There are several deliberate choices in this structure worth noting. The <code>FROM</code> instruction selects <code>python:3.11-slim</code> rather than the full <code>python:3.11</code> image, which reduces our starting image size from roughly 900MB down to around 120–150MB — a significant difference on a Raspberry Pi with limited storage. The <code>WORKDIR /app</code> creates a clean, dedicated directory for our application rather than dumping files into the container’s root filesystem. The <code>COPY requirements.txt .</code> appears before <code>COPY . .</code> intentionally — this is a cache optimization pattern where the dependency manifest (which changes infrequently) is copied and installed before the application code (which changes frequently). If you only modify your Python code between builds, Docker can reuse the cached layer for <code>pip install</code> and skip re-downloading all your dependencies. The <code>--no-cache-dir</code> flag on <code>pip install</code> prevents pip from storing downloaded package archives inside the image, keeping the layer smaller. The <code>CMD</code> uses the <em>exec form</em> (JSON array syntax) rather than the <em>shell form</em> (<code>CMD python app.py</code>) — the exec form runs the process directly without wrapping it in a shell, which ensures proper signal handling when Docker needs to stop or restart the container.</p>
+<p>This structure — base image, working directory, dependencies, application code, runtime configuration — is the pattern you’ll follow for virtually every Dockerfile you write, regardless of the application language or framework.</p>
+</section>
+<section id="version-control-with-github" class="level4">
+<h4 class="anchored" data-anchor-id="version-control-with-github">Version Control with GitHub</h4>
+<p>Before writing your first Dockerfile, it’s worth setting up version control so that every configuration change is tracked and backed up remotely. This section walks through installing <code>git</code> and the GitHub CLI (<code>gh</code>) on your server, authenticating, creating a repository, and cloning it to your working directory. To keep things short, I will assume you are familiar with git and not go into the basic commands.</p>
+<p><strong>Installing Git</strong></p>
+<p>Ubuntu Server typically ships with <code>git</code> pre-installed. Verify with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If you get <code>git: command not found</code>, install it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install git <span class="at">-y</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then configure your identity. Git attaches this information to every commit, and GitHub uses the email to link commits to your account:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"your-email@example.com"</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> init.defaultBranch main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><code>user.email</code> must match an email on your GitHub account, otherwise commits appear as “unverified” and won’t link to your profile.</li>
+<li><code>init.defaultBranch main</code> ensures new repositories use <code>main</code> instead of the legacy <code>master</code>, matching GitHub’s default.</li>
+<li><code>--global</code> writes to <code>~/.gitconfig</code> and applies to all repositories for your user. You can override these per-repository by running the same commands without <code>--global</code> from inside a specific project.</li>
+</ul>
+<p><strong>Installing the GitHub CLI</strong></p>
+<p>When you’re ready, simply run the following commands to install the program and validate its success.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install gh</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Authenticating with GitHub</strong></p>
+<p>Run <code>gh auth login</code> and follow the interactive prompts:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> auth login</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>? What account do you want to log into? GitHub.com
+? What is your preferred protocol for Git operations on this host? SSH
+? Generate a new SSH key to add to your GitHub account? No
+? How would you like to authenticate GitHub CLI? Login with a web browser</code></pre>
+<ul>
+<li>Select <strong>SSH</strong> as your protocol. You’ll generate a dedicated key for GitHub in the next step, and SSH avoids storing tokens in plaintext for every push and pull.</li>
+<li>Select <strong>No</strong> when asked to generate a new key. The CLI’s auto-generated key won’t have a descriptive name or match your existing key naming conventions. We’ll create one manually with proper naming.</li>
+<li>Select <strong>Login with a web browser</strong>. On a headless server, the CLI will display a one-time code and URL. Open the URL on your client machine (your MacBook), enter the code, and authorize the session. Your GitHub password and 2FA are handled entirely in the browser — nothing sensitive passes through the server’s terminal.</li>
+</ul>
+<p><strong>Generating an SSH Key for GitHub</strong></p>
+<p>Your server needs its own SSH key pair to authenticate outward to GitHub. The SSH keys from your server guide (e.g., <code>ubuntu_pi_ecdsa</code>) live on your MacBook and authenticate <em>into</em> the Pi — the Pi itself doesn’t have a private key for outbound connections. Generate a dedicated key:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ecdsa <span class="at">-b</span> 384 <span class="at">-C</span> <span class="st">"ubuntu-pi-server-github"</span> <span class="at">-f</span> ~/.ssh/github_ecdsa</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><code>-f ~/.ssh/github_ecdsa</code> names the key explicitly so it doesn’t collide with any defaults and its purpose is immediately clear.</li>
+<li><code>-C "ubuntu-pi-server-github"</code> sets a descriptive comment to distinguish it from your MacBook’s keys in any key listing.</li>
+<li>The command will prompt for a passphrase. On a server already secured behind SSH key auth, UFW, and Fail2Ban, leaving it empty is reasonable for convenience. Set one if you prefer an extra layer.</li>
+</ul>
+<p>Upload the public key to your GitHub account using the CLI:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> ssh-key add ~/.ssh/github_ecdsa.pub <span class="at">--title</span> <span class="st">"ubuntu-pi-server"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If this fails with an <code>HTTP 404</code> error about the <code>admin:public_key</code> scope, the default OAuth token doesn’t include permission to manage SSH keys. Refresh the token with the required scope:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> auth refresh <span class="at">-h</span> github.com <span class="at">-s</span> admin:public_key</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This triggers another browser authorization flow. The approval screen will explicitly list <strong>Public keys</strong> as a requested permission. After approving, re-run the upload command. GitHub’s OAuth scopes are granular by design — SSH key management is treated as a higher-privilege operation because adding a key grants push access to all repositories your account can write to.</p>
+<p>Then configure SSH on the server to use this key when connecting to GitHub:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&lt;&lt; 'EOF'</span> <span class="op">&gt;&gt;</span> ~/.ssh/config</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="st">Host github.com</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="st">    HostName github.com</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="st">    User git</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="st">    IdentityFile ~/.ssh/github_ecdsa</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="st">    IdentitiesOnly yes</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 600 ~/.ssh/config</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><code>User git</code> is required because all GitHub SSH connections authenticate as the user <code>git</code>. Your actual identity is determined by which key you present.</li>
+<li><code>IdentitiesOnly yes</code> prevents SSH from offering other keys from your agent or default locations. Without this, SSH might exhaust its authentication attempts on wrong keys before trying <code>github_ecdsa</code>.</li>
+<li><code>chmod 600</code> restricts the config file to owner-only read/write. SSH refuses to use config files readable by other users.</li>
+</ul>
+<p>Test the connection:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-T</span> git@github.com</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You should see <code>Hi YourUsername! You've successfully authenticated, but GitHub does not provide shell access.</code> The “no shell access” message is normal — GitHub’s SSH endpoint only supports git operations.</p>
+<p><strong>Creating and Cloning the Repository</strong></p>
+<p>With authentication working, create your project repository:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> repo create your-repo-name <span class="at">--public</span> <span class="at">--readme</span> <span class="at">--gitignore</span> Python <span class="at">--license</span> <span class="st">"AGPL-3.0"</span> <span class="at">--clone</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><code>--public</code> or <code>--private</code> sets repository visibility. Use <code>--private</code> for projects with environment-specific configurations or sensitive files.</li>
+<li><code>--readme</code> initializes the repository with a <code>README.md</code>, which ensures the <code>main</code> branch exists immediately.</li>
+<li><code>--gitignore Python</code> adds a standard Python <code>.gitignore</code> template. You can customize it further after cloning.</li>
+<li><code>--license "AGPL-3.0"</code> adds a license file. Substitute with your preferred license.</li>
+<li><code>--clone</code> clones the repository to a local directory after creation. This is the step that previously failed before SSH was configured, so make sure <code>ssh -T git@github.com</code> succeeds first.</li>
+</ul>
+<p>After cloning, navigate into the repository and verify:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/your-repo-name</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote <span class="at">-v</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The remote URLs should show <code>git@github.com:YourUsername/your-repo-name.git</code>, confirming SSH protocol is in use. From here, the standard workflow for saving your progress as you build out Dockerfiles and Compose configurations is:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Your descriptive commit message"</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="creating-a-dockerfile-for-python" class="level4">
+<h4 class="anchored" data-anchor-id="creating-a-dockerfile-for-python">Creating a Dockerfile for Python</h4>
+<p>Now let’s build the actual Dockerfile we’ll use for our persistent Python container on the Raspberry Pi. This container needs to serve as a general-purpose Python development environment that runs 24/7 on your server, accessible from your MacBook for development while leveraging the Pi’s compute resources and persistent storage.</p>
+<p><strong>Image Layers for Python</strong></p>
+<p>Before writing the Dockerfile, let’s think through what our image needs to contain, layer by layer. Understanding what each layer contributes helps you make informed decisions about image construction.</p>
+<p>The foundation is the base image layer, provided by <code>FROM python:3.11-slim</code>. This layer contains a minimal Debian Linux filesystem plus a complete Python 3.11 installation — the interpreter, the standard library, <code>pip</code>, and essential C libraries that Python depends on. The slim variant excludes build tools like <code>gcc</code> and <code>make</code>, development headers, and extra system utilities that aren’t needed at runtime. On ARM64 (our Raspberry Pi’s architecture), this base layer is approximately 120–150MB.</p>
+<p>On top of that, we add a system dependency layer. Some Python packages — particularly scientific computing libraries like <code>numpy</code>, <code>pandas</code>, and <code>scipy</code> — include C extensions that require compilation. Since we’re using the slim base image (which lacks build tools), we need to install those tools temporarily. This layer uses <code>apt-get</code> to install compilers and development headers.</p>
+<p>Next comes the Python dependency layer. This is where <code>pip install</code> runs against your <code>requirements.txt</code> file, downloading and installing all the Python packages your projects need. For data engineering work, this might include pandas, numpy, requests, sqlalchemy, and similar libraries. This layer can be substantial in size depending on your dependency list.</p>
+<p>Finally, we add the application layer, which contains your actual project code, configuration files, and any scripts you want available inside the container. This layer changes most frequently during development, which is why it appears last — maximizing cache reuse for the heavier dependency layers above it.</p>
+<p><strong>Build, Tag, and Publish the Image</strong></p>
+<p>Here’s the Dockerfile we’ll use for our Python development environment. Create a project directory on your Raspberry Pi server and save this as <code>Dockerfile</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode dockerfile code-with-copy"><code class="sourceCode dockerfile"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the official Python slim image as our base</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The slim variant balances size (~150MB) with compatibility</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> python:3.11-slim</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set environment variables for Python behavior inside the container</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co"># PYTHONDONTWRITEBYTECODE: Prevents Python from writing .pyc bytecode files to disk,</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   keeping the container filesystem cleaner</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="co"># PYTHONUNBUFFERED: Forces stdout and stderr to be unbuffered, ensuring log output</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   appears immediately in `docker logs` rather than being held in a buffer</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="kw">ENV</span> PYTHONDONTWRITEBYTECODE=1 <span class="op">\</span></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>    PYTHONUNBUFFERED=1</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the working directory for all subsequent instructions</span></span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /app</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Install system-level build dependencies needed for compiling Python packages</span></span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a><span class="co"># with C extensions (numpy, pandas, etc.), then clean up apt caches to reduce</span></span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a><span class="co"># the layer size. Combining install and cleanup in one RUN avoids persisting</span></span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a><span class="co"># the apt cache in a separate layer.</span></span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apt-get</span> update <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>    <span class="ex">apt-get</span> install <span class="at">-y</span> <span class="at">--no-install-recommends</span> <span class="dt">\</span></span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a>        build-essential <span class="dt">\</span></span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>        gcc <span class="dt">\</span></span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>        libffi-dev <span class="dt">\</span></span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-rf</span> /var/lib/apt/lists/<span class="pp">*</span></span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy the dependency manifest first, separately from application code.</span></span>
+<span id="cb41-28"><a href="#cb41-28" aria-hidden="true" tabindex="-1"></a><span class="co"># This ensures Docker can cache the expensive pip install layer and only</span></span>
+<span id="cb41-29"><a href="#cb41-29" aria-hidden="true" tabindex="-1"></a><span class="co"># re-run it when requirements.txt actually changes.</span></span>
+<span id="cb41-30"><a href="#cb41-30" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> requirements.txt .</span>
+<span id="cb41-31"><a href="#cb41-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-32"><a href="#cb41-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Install Python dependencies without caching downloaded archives.</span></span>
+<span id="cb41-33"><a href="#cb41-33" aria-hidden="true" tabindex="-1"></a><span class="co"># The --no-cache-dir flag prevents pip from storing .whl and .tar.gz files</span></span>
+<span id="cb41-34"><a href="#cb41-34" aria-hidden="true" tabindex="-1"></a><span class="co"># inside the image, which would bloat the layer with no runtime benefit.</span></span>
+<span id="cb41-35"><a href="#cb41-35" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">pip</span> install <span class="at">--no-cache-dir</span> <span class="at">--upgrade</span> pip <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb41-36"><a href="#cb41-36" aria-hidden="true" tabindex="-1"></a>    <span class="ex">pip</span> install <span class="at">--no-cache-dir</span> <span class="at">-r</span> requirements.txt</span>
+<span id="cb41-37"><a href="#cb41-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-38"><a href="#cb41-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy the rest of the application code into the container.</span></span>
+<span id="cb41-39"><a href="#cb41-39" aria-hidden="true" tabindex="-1"></a><span class="co"># This layer changes most frequently, so placing it last maximizes</span></span>
+<span id="cb41-40"><a href="#cb41-40" aria-hidden="true" tabindex="-1"></a><span class="co"># cache reuse for all preceding layers.</span></span>
+<span id="cb41-41"><a href="#cb41-41" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> . .</span>
+<span id="cb41-42"><a href="#cb41-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-43"><a href="#cb41-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Document the port our Python application will listen on.</span></span>
+<span id="cb41-44"><a href="#cb41-44" aria-hidden="true" tabindex="-1"></a><span class="co"># This is informational only — actual publishing happens with -p at runtime.</span></span>
+<span id="cb41-45"><a href="#cb41-45" aria-hidden="true" tabindex="-1"></a><span class="kw">EXPOSE</span> 8000</span>
+<span id="cb41-46"><a href="#cb41-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-47"><a href="#cb41-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Default command: start an interactive Python shell.</span></span>
+<span id="cb41-48"><a href="#cb41-48" aria-hidden="true" tabindex="-1"></a><span class="co"># This can be overridden at runtime with docker run ... python my_script.py</span></span>
+<span id="cb41-49"><a href="#cb41-49" aria-hidden="true" tabindex="-1"></a><span class="kw">CMD</span> [<span class="st">"python"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Let’s walk through the build, tag, and publish workflow. From the directory containing your Dockerfile on the Raspberry Pi:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build the image and tag it with a name and version</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> python-dev:1.0 .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>-t</code> flag assigns a tag to the image in the format <code>name:version</code>. The <code>.</code> at the end specifies the <em>build context</em> — the directory Docker will use as the root for <code>COPY</code> instructions. Docker sends this entire directory to the daemon, so keep it clean (we’ll discuss <code>.dockerignore</code> in the best practices section). The build process executes each Dockerfile instruction sequentially, creating a layer for each filesystem-modifying step. You’ll see output for each step, and the final line will confirm the image was successfully built and tagged.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the image was created</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> images python-dev</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This command lists all images matching the <code>python-dev</code> name, showing the tag, image ID, creation time, and size. You should see your <code>python-dev:1.0</code> image listed.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tag the image for Docker Hub (or your private registry)</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> tag python-dev:1.0 yourusername/python-dev:1.0</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Push to Docker Hub</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> login</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> push yourusername/python-dev:1.0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>docker tag</code> command creates an additional reference to the same image with a registry-qualified name. Docker Hub expects the format <code>username/repository:tag</code>. The <code>docker push</code> command uploads your image layers to the registry. Docker is smart about this — it only uploads layers that aren’t already present in the registry, which makes subsequent pushes much faster than the initial one.</p>
+<p>Publishing to a registry is optional for our setup (since we’re building and running on the same Raspberry Pi), but it’s a good practice to understand. If your Pi’s storage fails, having your image on Docker Hub means you can pull and redeploy on a replacement device without rebuilding from scratch.</p>
+<p><strong>Using the Build Cache</strong></p>
+<p>Docker’s build cache is one of its most powerful features for development productivity, and understanding how it works will save you significant time during iterative development. When Docker builds an image, it checks each instruction against its cache of previously built layers. If the instruction and all of its inputs (files being copied, commands being run) are identical to a previous build, Docker reuses the cached layer instead of executing the instruction again.</p>
+<p>The cache follows a strict sequential invalidation rule: once Docker encounters an instruction that can’t be served from cache, <em>every subsequent instruction must also be rebuilt</em>. This is why the order of instructions in your Dockerfile matters so much. Consider the cache behavior of our Python Dockerfile:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First build — everything is built fresh</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> python-dev:1.0 .</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Second build after modifying only app.py — fast!</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Layers 1-5 (FROM through pip install) are cached</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Only the final COPY . . layer is rebuilt</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> python-dev:1.0 .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If we had structured our Dockerfile differently — copying all files first and then running <code>pip install</code> — every code change would trigger a full dependency reinstall. With our current structure, modifying Python source code only triggers a rebuild of the final <code>COPY . .</code> layer, because <code>requirements.txt</code> hasn’t changed and the <code>pip install</code> layer remains cached. On a Raspberry Pi, where <code>pip install</code> for packages like <code>numpy</code> or <code>pandas</code> can take several minutes due to ARM compilation, this optimization is not just a convenience — it’s a practical necessity.</p>
+<p>You can inspect the cache behavior during a build by watching the output. Cached layers will display <code>CACHED</code> next to the step number, while rebuilt layers will show the full execution output. If you need to force a clean build and bypass the cache entirely (useful when debugging dependency issues), use the <code>--no-cache</code> flag:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Force rebuild all layers, ignoring the cache</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">--no-cache</span> <span class="at">-t</span> python-dev:1.0 .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Using Multi-Stage Builds</strong></p>
+<p>Multi-stage builds are an advanced Dockerfile technique that dramatically reduces final image size by separating the build environment from the runtime environment. The core idea is straightforward: some things you need during the build process (compilers, development headers, build tools) are not needed when actually running the application. Multi-stage builds let you use one stage to build and compile, then copy only the results into a clean, minimal final stage.</p>
+<p>Here’s how our Python Dockerfile would look as a multi-stage build:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode dockerfile code-with-copy"><code class="sourceCode dockerfile"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Stage 1: Builder ----</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This stage installs build tools and compiles Python packages.</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co"># It will NOT be part of the final image.</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> python:3.11-slim <span class="kw">AS</span> builder</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /app</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Install build dependencies needed for compiling C extensions</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apt-get</span> update <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">apt-get</span> install <span class="at">-y</span> <span class="at">--no-install-recommends</span> <span class="dt">\</span></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>        build-essential <span class="dt">\</span></span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>        gcc <span class="dt">\</span></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>        libffi-dev <span class="dt">\</span></span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-rf</span> /var/lib/apt/lists/<span class="pp">*</span></span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> requirements.txt .</span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Install packages into a specific target directory so we can</span></span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a><span class="co"># copy just the installed packages (not the build tools) later.</span></span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a><span class="co"># The --prefix flag tells pip where to install everything.</span></span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">pip</span> install <span class="at">--no-cache-dir</span> <span class="at">--prefix</span><span class="op">=</span>/install <span class="at">-r</span> requirements.txt</span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Stage 2: Runtime ----</span></span>
+<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a><span class="co"># This stage starts fresh from the slim base — no build tools.</span></span>
+<span id="cb47-25"><a href="#cb47-25" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> python:3.11-slim</span>
+<span id="cb47-26"><a href="#cb47-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-27"><a href="#cb47-27" aria-hidden="true" tabindex="-1"></a><span class="kw">ENV</span> PYTHONDONTWRITEBYTECODE=1 <span class="op">\</span></span>
+<span id="cb47-28"><a href="#cb47-28" aria-hidden="true" tabindex="-1"></a>    PYTHONUNBUFFERED=1</span>
+<span id="cb47-29"><a href="#cb47-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-30"><a href="#cb47-30" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /app</span>
+<span id="cb47-31"><a href="#cb47-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-32"><a href="#cb47-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy ONLY the installed Python packages from the builder stage.</span></span>
+<span id="cb47-33"><a href="#cb47-33" aria-hidden="true" tabindex="-1"></a><span class="co"># The build tools (gcc, build-essential, etc.) are left behind entirely.</span></span>
+<span id="cb47-34"><a href="#cb47-34" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> <span class="op">--from=builder</span> /install /usr/local</span>
+<span id="cb47-35"><a href="#cb47-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-36"><a href="#cb47-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy application code</span></span>
+<span id="cb47-37"><a href="#cb47-37" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> . .</span>
+<span id="cb47-38"><a href="#cb47-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-39"><a href="#cb47-39" aria-hidden="true" tabindex="-1"></a><span class="kw">EXPOSE</span> 8000</span>
+<span id="cb47-40"><a href="#cb47-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-41"><a href="#cb47-41" aria-hidden="true" tabindex="-1"></a><span class="kw">CMD</span> [<span class="st">"python"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The key mechanism here is the <code>AS builder</code> alias on the first <code>FROM</code> instruction and the <code>COPY --from=builder</code> in the second stage. The first stage does all the heavy lifting — installing <code>gcc</code>, <code>build-essential</code>, and compiling any C extensions your Python packages require. The <code>--prefix=/install</code> flag on <code>pip install</code> directs all installed packages into a dedicated directory rather than the system-wide Python path. The second stage starts from a completely fresh <code>python:3.11-slim</code> base (no build tools whatsoever) and uses <code>COPY --from=builder /install /usr/local</code> to pull in only the compiled Python packages from the first stage. The build tools, development headers, apt caches, and everything else from the first stage are discarded entirely.</p>
+<p>The size savings can be substantial. The build tools and development headers installed in the first stage can add 200-400MB to an image. With a multi-stage build, the final image contains only the Python runtime and your compiled packages — no compilers, no header files, no apt cache. On a Raspberry Pi with limited storage, this reduction from roughly 500-600MB down to 200-300MB (depending on your Python dependencies) is meaningful, especially when you start running multiple containers.</p>
+<p>The tradeoff is that multi-stage builds add complexity to your Dockerfile and can make debugging build issues slightly harder, since you can’t easily inspect the builder stage’s filesystem after the build completes. For our Python development environment, I recommend starting with the single-stage Dockerfile we wrote above and transitioning to a multi-stage build once your <code>requirements.txt</code> stabilizes and you’re optimizing for production use. Both approaches are valid, and understanding when to use each is more valuable than defaulting to one style.</p>
+</section>
+<section id="dockerfile-best-practices" class="level4">
+<h4 class="anchored" data-anchor-id="dockerfile-best-practices">Dockerfile Best Practices</h4>
+<p>Writing a functional Dockerfile is one thing; writing a <em>well-constructed</em> Dockerfile is another. These best practices will help you write Dockerfiles that build faster, produce smaller images, and are easier to maintain — all of which matter on a resource-constrained platform like the Raspberry Pi.</p>
+<p><strong>Use a <code>.dockerignore</code> file.</strong> When you run <code>docker build</code>, Docker sends the entire build context directory to the daemon. Without a <code>.dockerignore</code> file, this includes everything: Git history, editor configuration, local virtual environments, data files, and anything else in the directory. A <code>.dockerignore</code> works exactly like <code>.gitignore</code> — it specifies patterns of files and directories to exclude from the build context. For our Python project, a sensible <code>.dockerignore</code> looks like this:</p>
+<pre><code>.git
+.gitignore
+__pycache__
+*.pyc
+.env
+venv/
+.vscode/
+*.md
+data/
+logs/</code></pre>
+<p>This keeps the build context small and prevents sensitive files (like <code>.env</code> containing credentials) from being accidentally baked into the image. It also ensures that local development artifacts like <code>__pycache__</code> directories and virtual environments don’t end up inside your container.</p>
+<p><strong>Minimize the number of layers.</strong> Each <code>RUN</code> instruction creates a new layer, and layers have overhead. Combine related commands into single <code>RUN</code> instructions using <code>&amp;&amp;</code> to chain them. The most common example is combining <code>apt-get update</code> with <code>apt-get install</code> and the subsequent cleanup, as we did in our Dockerfile above. Running <code>apt-get update</code> in a separate <code>RUN</code> from <code>apt-get install</code> can also cause caching issues — if the <code>apt-get update</code> layer is cached but package repositories have changed, the subsequent <code>install</code> might fail or install outdated packages.</p>
+<p><strong>Use specific image tags, not <code>latest</code>.</strong> Always pin your base image to a specific version tag like <code>python:3.11-slim</code> rather than <code>python:latest</code>. The <code>latest</code> tag is a moving target — it points to whatever the most recent version happens to be, which means your builds could break unexpectedly when a new Python version is released. Pinning to a specific version ensures your builds are reproducible. When you want to upgrade, change the tag deliberately and test the new version.</p>
+<p><strong>Run containers as non-root when possible.</strong> By default, processes inside a Docker container run as root. While container namespaces provide isolation from the host, running as root inside the container is still a security concern — if an attacker escapes the container isolation, they’d have root privileges on the host. Adding a non-root user to your Dockerfile is straightforward:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode dockerfile code-with-copy"><code class="sourceCode dockerfile"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a non-root user for running the application</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">useradd</span> <span class="at">--create-home</span> appuser</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="kw">USER</span> appuser</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Place these instructions after your <code>RUN</code> commands that require root (like <code>apt-get install</code>) but before <code>CMD</code>, so the application runs with reduced privileges. For our development container, running as root is acceptable during the learning phase, but adopting this practice early builds good security habits.</p>
+<p><strong>Keep your images lean.</strong> Beyond the multi-stage build approach discussed above, several smaller practices contribute to leaner images. Always include <code>--no-install-recommends</code> with <code>apt-get install</code> to avoid pulling in suggested packages you don’t need. Clean up apt caches with <code>rm -rf /var/lib/apt/lists/*</code> in the same <code>RUN</code> instruction as your install. Use <code>--no-cache-dir</code> with <code>pip install</code> to prevent pip from caching downloaded package files. These practices compound — individually they might save 20-50MB each, but together they can reduce your image size by several hundred megabytes.</p>
+<p><strong>Order instructions from least to most frequently changing.</strong> This maximizes build cache effectiveness. Base image selection and system package installation rarely change, so they belong at the top. Python dependency installation changes occasionally (when you add or update a package), so it belongs in the middle. Application code changes frequently during development, so it belongs at the bottom. This ordering ensures that a typical code change only rebuilds the final layer rather than triggering a full dependency reinstall.</p>
+</section>
+<section id="arm-compatibility-considerations" class="level4">
+<h4 class="anchored" data-anchor-id="arm-compatibility-considerations">ARM Compatibility Considerations</h4>
+<p>Running Docker on a Raspberry Pi means running on ARM64 (aarch64) architecture, which introduces compatibility considerations that don’t exist on standard x86_64 development machines. Understanding these considerations will save you from confusing build failures and runtime errors.</p>
+<p>The most fundamental consideration is that Docker images are architecture-specific. An image built on your MacBook (which uses Apple Silicon, also ARM64, or Intel x86_64 depending on your model) may or may not run on your Raspberry Pi, and vice versa. The official Python images we’re using are <em>multi-architecture</em> images — Docker Hub hosts variants for both x86_64 and ARM64 under the same tag, and Docker automatically pulls the correct variant for your platform. When you run <code>docker pull python:3.11-slim</code> on your Raspberry Pi, Docker detects the ARM64 architecture and downloads the ARM64 variant. This happens transparently, which is why we haven’t had to specify architecture explicitly in our Dockerfile.</p>
+<p>However, not all images on Docker Hub offer ARM64 support. When evaluating third-party or community-maintained images, always check the “OS/ARCH” column on the image’s Docker Hub page to confirm ARM64 compatibility. If an image only provides x86_64 builds, you have two options: find an alternative image that supports ARM64, or build a custom image from an ARM-compatible base. Attempting to run an x86_64 image on ARM64 will result in an <code>exec format error</code> — the container will fail to start because the binaries inside are compiled for the wrong architecture.</p>
+<p>Compilation times on ARM processors are generally longer than on x86_64 for CPU-intensive tasks like compiling C extensions. Python packages such as <code>numpy</code>, <code>pandas</code>, <code>scipy</code>, and <code>cryptography</code> include C code that must be compiled during installation. On a Raspberry Pi 4 with 8GB RAM, installing <code>numpy</code> from source can take 5-10 minutes compared to under a minute on a modern x86_64 machine. This makes the build cache optimization we discussed earlier even more critical — you really don’t want to recompile <code>numpy</code> every time you change a line of application code. Additionally, using pre-compiled wheels (binary packages) where available can dramatically reduce build times. The <code>pip install</code> command will automatically prefer wheels over source distributions when a compatible wheel exists for your platform.</p>
+<p>If you’re developing on an Apple Silicon MacBook (M1, M2, M3, or M4), your local machine also runs ARM64, which means images built locally will generally work on your Raspberry Pi without architecture issues. However, if your MacBook is an older Intel model (x86_64), any images you build locally will not run on the Pi. In that case, you can use Docker’s <code>buildx</code> tool to cross-compile images for ARM64 from your x86_64 machine:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a multi-architecture builder instance</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> buildx create <span class="at">--name</span> pibuilder <span class="at">--use</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Build for ARM64 specifically, even from an x86_64 host</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> buildx build <span class="at">--platform</span> linux/arm64 <span class="at">-t</span> python-dev:1.0 <span class="at">--load</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>docker buildx create</code> command sets up a builder instance that supports multi-platform builds through QEMU emulation. The <code>--platform linux/arm64</code> flag tells Docker to build the image targeting the ARM64 architecture regardless of the host machine’s architecture. The <code>--load</code> flag imports the resulting image into your local Docker image store. Note that cross-compilation through QEMU is significantly slower than native builds — a build that takes 5 minutes natively on the Pi might take 15-20 minutes through emulation. For this reason, building directly on the Raspberry Pi is usually the more practical approach for our setup, and it guarantees the resulting image is natively compatible.</p>
+<p>When writing Dockerfiles intended for ARM deployment, stick to well-maintained official images as your base (like <code>python:3.11-slim</code>, <code>ubuntu</code>, or <code>alpine</code>) — these consistently provide ARM64 variants. Be cautious with smaller community images and always verify architecture support before committing to a base image in your Dockerfile.</p>
 
 
+</section>
 </section>
 </section>
 
@@ -1008,13 +1640,14 @@ cookieconsent.run({
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

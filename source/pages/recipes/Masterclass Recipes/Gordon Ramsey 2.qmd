@@ -1,0 +1,10 @@
+---
+title: "Gordon Ramsey 2"
+author: "Chris Kornaros"
+date: 2026-03-06
+categories: ["Masterclass Recipes"]
+---
+
+```{=html}
+<iframe src="Gordon Ramsey 2.pdf" width="100%" height="900px" style="border: none;"></iframe>
+```
