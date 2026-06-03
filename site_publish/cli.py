@@ -7,7 +7,7 @@ import datetime as _dt
 import sys
 from pathlib import Path
 
-from . import config, convert
+from . import config, convert, frontmatter_map
 from .convert import ConvertError
 from .frontmatter_map import FrontmatterError
 
@@ -38,7 +38,7 @@ def _iter_non_draft_drafts():
             meta = frontmatter.load(str(md)).metadata
         except Exception:
             continue
-        if not meta.get("draft"):
+        if not frontmatter_map.is_draft(meta):
             yield md
 
 
@@ -53,10 +53,6 @@ def publish(argv: list[str] | None = None) -> int:
         "--all", action="store_true",
         help="Convert every non-draft file under the vault writing root.",
     )
-    parser.add_argument(
-        "--force", action="store_true",
-        help="Publish even if the draft is still marked draft: true.",
-    )
     args = parser.parse_args(argv)
 
     if bool(args.file) == bool(args.all):
@@ -70,7 +66,7 @@ def publish(argv: list[str] | None = None) -> int:
     failures = 0
     for draft in drafts:
         try:
-            result = convert.convert(draft, force=args.force)
+            result = convert.convert(draft)
         except (ConvertError, FrontmatterError, ValueError) as exc:
             print(f"  ✗ {draft}: {exc}", file=sys.stderr)
             failures += 1
@@ -79,6 +75,8 @@ def publish(argv: list[str] | None = None) -> int:
         for extra in result.written:
             if extra != result.qmd_path:
                 print(f"      + {_rel(extra)}")
+        if convert.clear_source_draft(draft):
+            print("      (un-drafted vault source)")
 
     if failures:
         print(f"\n{failures} file(s) failed.", file=sys.stderr)

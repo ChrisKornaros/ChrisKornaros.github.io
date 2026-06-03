@@ -1,6 +1,6 @@
 ---
 description: Convert a vault draft to a site .qmd and ship it through the branch→PR→merge→deploy flow.
-argument-hint: <vault-draft-path> | --all [--force]
+argument-hint: <vault-draft-path> | --all
 allowed-tools: Bash, Read, AskUserQuestion
 ---
 
@@ -16,11 +16,15 @@ Do all of this from the repo root (`~/vault/projects/ChrisKornaros.github.io`).
 
 Run: `uv run publish $ARGUMENTS`
 
-- If it reports a file is still `draft: true`, stop and tell Chris to clear the
-  flag in the vault (or re-run with `--force`). Do **not** force on his behalf.
+- Publishing **is** the act of un-drafting: a single-file publish converts the
+  file regardless of its draft flag and clears `draft: true` from the vault
+  source (prints "un-drafted vault source"). `--all` still skips anything still
+  tagged `draft: true`.
 - On success it prints the `.qmd` (and any copied images / new category
   `index.qmd`) it wrote under `source/pages/`. Note the section + slug from the
   output — you need them for the branch name.
+- The vault `.md` edit is just the one-line draft removal; mention it but you do
+  not commit the vault (separate repo) — it stays as Chris's canonical source.
 
 ## 2. Render (verification + regenerates the tracked `docs/`)
 

@@ -91,7 +91,9 @@ A draft is the canonical source; the site `.qmd` is generated from it.
   ([.claude/commands/publish.md](.claude/commands/publish.md)) runs the
   deterministic converter (`uv run publish <draft>` / `--all`), then
   `quarto render`, then the canonical session-end loop on a
-  `publish/<section>-<slug>` branch. Merge = deploy.
+  `publish/<section>-<slug>` branch. Merge = deploy. A single-file publish
+  **un-drafts the vault source** (clears `draft: true`); `--all` skips anything
+  still tagged draft.
 - **The converter** lives in [site_publish/](site_publish/) and does the
   transform only — never git. It maps Obsidian → Quarto (wikilinks, `![[embeds]]`
   → copied `images/`, callouts, strips `#tags`/`draft`), routes by section
