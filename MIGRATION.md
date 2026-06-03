@@ -1,5 +1,13 @@
 # Migrating the existing guides into the vault
 
+> **Status (2026-06-02):** Steps 1–3 executed. The four guides now live in
+> `~/vault/writing/guides/` as the canonical `.md` source (`quarto.md`/`uv.md`
+> carry `draft: true`; `raspberry-pi-server.md` has the `aliases` redirect), and
+> `quarto.qmd`/`uv.qmd` are removed from the live site in this PR. **Step 4
+> (re-homing the live `docker` and Pi guides through `/publish`) is deferred** —
+> the existing `raspberry_pi_server.qmd`/`docker.qmd` keep serving the site until
+> republished.
+
 One-time runbook to move the four guide `.qmd` files that currently live in
 [source/pages/guides/posts/](source/pages/guides/posts/) into the vault
 (`~/vault/writing/guides/`), so the vault `.md` becomes the **canonical source**
