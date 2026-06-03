@@ -96,12 +96,44 @@ website:
       background: dark
       foreground: light
       collapse-level: 2
-      # Directory auto-listing: the landing page plus every category folder (each a
-      # collapsible sub-section with its recipes). A bare glob like
-      # `pages/recipes/*/index.qmd` renders as literal text in Quarto 1.9; a directory
-      # path expands correctly. Listed at top level (no wrapper section) to avoid a
-      # redundant "Recipes" nesting.
-      contents: "pages/recipes"
+      # Categories-only sidebar: "All Recipes" + one link per category index page.
+      # Deliberately slim -- ~27 nav items, NOT every recipe. A directory listing
+      # ("pages/recipes") recurses the whole tree and embeds all ~120 recipes into
+      # every page (~1k lines/page); globs render as literal text and the `auto:`
+      # glob form crashes in Quarto 1.9, so categories are listed explicitly.
+      # Publishing a recipe needs NO edit here (it lands on its category's listing
+      # page); only adding a brand-new category folder adds one line below.
+      contents:
+        - text: "All Recipes"
+          href: pages/recipes/recipes.qmd
+        - section: "Categories"
+          contents:
+            - "pages/recipes/Baked Goods/index.qmd"
+            - "pages/recipes/Beef/index.qmd"
+            - "pages/recipes/Chicken/index.qmd"
+            - "pages/recipes/Cod/index.qmd"
+            - "pages/recipes/Cookbook/index.qmd"
+            - "pages/recipes/Cooking & Kitchen Tips/index.qmd"
+            - "pages/recipes/Drinks/index.qmd"
+            - "pages/recipes/Japan/index.qmd"
+            - "pages/recipes/Masterclass Recipes/index.qmd"
+            - "pages/recipes/Mexican/index.qmd"
+            - "pages/recipes/New Orleans/index.qmd"
+            - "pages/recipes/Noodles/index.qmd"
+            - "pages/recipes/Oils and Marinades/index.qmd"
+            - "pages/recipes/Party Snacks and Dips/index.qmd"
+            - "pages/recipes/Pickling and Fermenting/index.qmd"
+            - "pages/recipes/Pizza/index.qmd"
+            - "pages/recipes/Pork/index.qmd"
+            - "pages/recipes/Potatoes/index.qmd"
+            - "pages/recipes/Salads/index.qmd"
+            - "pages/recipes/Sandwiches/index.qmd"
+            - "pages/recipes/Sauces and Condiments/index.qmd"
+            - "pages/recipes/Soups/index.qmd"
+            - "pages/recipes/Spice Mixes/index.qmd"
+            - "pages/recipes/Tofu/index.qmd"
+            - "pages/recipes/Veal/index.qmd"
+            - "pages/recipes/Vegetables/index.qmd"
 
 format:
   html:

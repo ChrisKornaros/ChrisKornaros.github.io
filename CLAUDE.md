@@ -100,8 +100,14 @@ A draft is the canonical source; the site `.qmd` is generated from it.
   (recipes → `recipes/<Category>/`, others → `<section>/posts/`), generates the
   Substack embed for blogs and the `video:` embed for recipes, and is
   idempotent (re-publish overwrites the `.qmd`).
-- **No `_quarto.yml` edits per publish:** the navbar links to listing pages and
-  the sidebars use globs, so new posts/categories appear automatically.
+- **No `_quarto.yml` edits per publish:** the navbar links to listing pages, the
+  guides/blogs sidebars auto-list their `posts/` directory, and the recipes
+  sidebar lists category index pages, so a newly published post appears
+  automatically. The one exception is adding a brand-new recipe *category*
+  folder — that needs a one-line entry under the recipes sidebar `contents`
+  (Quarto 1.9 renders bare globs as literal text and crashes on the `auto:` glob
+  form, so categories are listed explicitly to keep each page's sidebar slim
+  rather than embedding the whole recipe tree).
 - **`docs/` is committed alongside `source/`** in a publish PR (it's tracked and
   re-rendered on every render). CI re-renders on merge.
 
