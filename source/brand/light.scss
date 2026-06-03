@@ -12,6 +12,10 @@ $danger: #052F5F;
 $info: #4B85C5;
 $warning: #2E6490;
 
+// Helper tones (light-mode navigation accents)
+$surface-2: lighten($dark, 8%);   // sidebar hover surface
+$border: #D7DEE6;                 // subtle hairline borders
+
 // Syntax highlighting colors
 $code-background: #363B44;     // Current $success value
 $code-text: #A34545;           // Your existing $code-red
@@ -86,7 +90,7 @@ code {
     &.at { color: darken($code-attribute, 20%); }  // Attributes (HTML/XML)
     &.bn { color: darken($code-number, 20%); } // Numbers
     &.bu { color: darken($code-function, 20%); font-weight: bold; } // Built-in functions/methods
-    &.cf { color: darken($code-keyword, 20%); font-weight: bold; } // Control flow (if, else, for, while) 
+    &.cf { color: darken($code-keyword, 20%); font-weight: bold; } // Control flow (if, else, for, while)
     &.cn { color: darken($code-type, 20%); }  // Class/type names
     &.co { color: darken($code-comment, 20%); font-style: italic; } // Comments
     &.dv { color: darken($code-number, 20%); } // Numbers
@@ -106,6 +110,76 @@ code {
   color: $light;
 }
 
+// ============================================================================
+// Dark/light toggle — subtle hover affordance (icon already visible in light)
+// ============================================================================
+.quarto-color-scheme-toggle {
+  opacity: 0.85;
+  transition: opacity 0.15s ease-in-out;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+// ============================================================================
+// Sidebar navigation — clearer hierarchy, active state, hover affordance
+// Sidebar ground is $dark (navy) with light text, per _quarto.yml.
+// ============================================================================
+.sidebar.sidebar-navigation {
+  .sidebar-title {
+    color: $light;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  // Section headers within the sidebar
+  .sidebar-item-section > .sidebar-item-container .sidebar-item-text {
+    color: rgba($light, 0.7);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+  }
+
+  .sidebar-item {
+    .sidebar-item-container {
+      border-radius: $border-radius-sm;
+      transition: background-color 0.12s ease-in-out, color 0.12s ease-in-out;
+    }
+
+    .sidebar-item-text {
+      color: rgba($light, 0.88);
+    }
+
+    // Hover affordance on any row
+    .sidebar-item-container:hover {
+      background-color: $surface-2;
+
+      .sidebar-item-text {
+        color: $light;
+      }
+    }
+  }
+
+  // The currently-open page gets a clear orange marker
+  .sidebar-link.active,
+  a.sidebar-item-text.active {
+    color: $primary !important;
+    font-weight: 600;
+    border-left: 3px solid $primary;
+    padding-left: calc(#{$spacing-sm} - 3px);
+    background-color: rgba($primary, 0.14);
+    border-radius: 0 $border-radius-sm $border-radius-sm 0;
+  }
+}
+
+// On-this-page TOC — orange active marker
+#TOC, .toc-active {
+  .nav-link {
+    &.active { color: $primary; border-left-color: $primary; }
+  }
+}
+
 .quarto-about-jolla {
   .about-links {
     .about-link-text {
@@ -118,18 +192,25 @@ code {
 
     a {
      color: $warning;
-     
+
      &:hover {
       color: lighten($primary, 10%);
     }
-     
+
     }
   }
 }
 
-.quarto-post { 
+.quarto-post {
   border: 1px solid $dark;
-  padding: 2.5px;
+  border-radius: $border-radius;
+  padding: $spacing-sm $spacing-md;
+  transition: border-color 0.15s ease-in-out, transform 0.15s ease-in-out;
+
+  &:hover {
+    border-color: $primary;
+    transform: translateY(-1px);
+  }
 
   .body {
     color: $light;
@@ -151,13 +232,15 @@ code {
         background-color: $dark;
         color: $light;
         padding: 0.25rem 0.5rem;
-        border-radius: 4px;
+        border-radius: 999px;
         display: inline-block;
         margin-right: 0.5rem;
+        font-size: 0.8rem;
         cursor: pointer;
 
         &:hover {
-          background-color: lighten($dark, 10%);
+          background-color: $primary;
+          color: $dark;
         }
       }
     }

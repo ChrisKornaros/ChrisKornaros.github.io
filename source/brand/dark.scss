@@ -1,45 +1,59 @@
 /*-- scss:defaults --*/
-// Base colors
-$background: #171C21;
-$foreground: #7BA7DB ;
-$primary: #FF9900;
-$secondary: #5C90D1;
-$tertiary: #655D4B;
-$light: #4B7FD1;
-$dark: #1A1D23;
-$success: #363B44;
-$danger: #0A1929;
-$info: #5C90D1;
-$warning: #2E6490;
+// ============================================================================
+// Dark theme — "Refined cool slate"
+// Near-white text on a deep blue-slate ground; blue links, orange accent.
+// Keeps the blue + orange brand identity but fixes contrast: body text is no
+// longer a saturated mid-blue, and surfaces step up in lightness for hierarchy.
+// ============================================================================
 
-// Syntax highlighting colors
-$code-background: #363B44;     // Current $success value
-$code-text: #A34545;           // Your existing $code-red
-$code-keyword: #7FB4E0;        // Soft blue for keywords
-$code-string: #E4BE7B;         // Warm gold for strings
-$code-comment: #7A8792;        // Muted slate gray for comments
-$code-function: #85C3AB;       // Soft teal for functions
-$code-variable: #B8D0F0;       // Light blue-gray for variables
-$code-number: #D49CDD;         // Muted purple for numbers
-$code-operator: #E0E0E0;       // Light gray for operators
-$code-type: #DD8E6C;           // Soft coral for types/classes
-$code-import: #C586C0;         // Soft purple for import keywords
-$code-error: #E06C75;         // Soft red for error highlighting
-$code-attribute: #D19A66;     // Soft orange for attributes
+// --- Brand roles -----------------------------------------------------------
+$background: #0F1419;   // page ground (deep slate)
+$foreground: #E6EDF3;   // primary text (near-white)
+$primary:    #FF9F1C;   // accent — orange (links-on-cards, highlights)
+$secondary:  #6CB0F5;   // sky blue — inline links, descriptions
+$tertiary:   #8B98A5;   // muted slate — metadata, captions
+$light:      #E6EDF3;   // body/heading text (rules reference $light widely)
+$dark:       #1C2530;   // raised surface / borders (sidebar, cards, chips)
+$success:    #1A2330;   // code-block surface
+$danger:     #11161C;   // navbar + footer ground (a touch darker than body)
+$info:       #6CB0F5;   // info accent (matches link blue)
+$warning:    #233040;   // blockquote surface
 
-// Typography
+// Bootstrap body bindings so framework components inherit the right colors
+$body-bg:    $background;
+$body-color: $foreground;
+
+// Helper tones (computed once, reused in rules)
+$heading:    #F0F6FC;   // brightest — headings
+$surface-2:  #232E3B;   // hover surface, one step above $dark
+$border:     #2A3441;   // subtle hairline borders
+
+// --- Syntax highlighting ---------------------------------------------------
+$code-background: #1A2330;     // matches $success surface
+$code-text:       #E06C75;     // soft red for inline code
+$code-keyword:    #7FB4E0;     // soft blue for keywords
+$code-string:     #E4BE7B;     // warm gold for strings
+$code-comment:    #7A8792;     // muted slate gray for comments
+$code-function:   #85C3AB;     // soft teal for functions
+$code-variable:   #B8D0F0;     // light blue-gray for variables
+$code-number:     #D49CDD;     // muted purple for numbers
+$code-operator:   #C9D4E0;     // light gray for operators
+$code-type:       #DD8E6C;     // soft coral for types/classes
+$code-import:     #C586C0;     // soft purple for import keywords
+$code-error:      #E06C75;     // soft red for error highlighting
+$code-attribute:  #D19A66;     // soft orange for attributes
+
+// --- Typography / spacing / radius ----------------------------------------
 $font-family-base: 'Open Sans', sans-serif;
 $font-size-base: 1rem;
-$line-height-base: 1.5;
+$line-height-base: 1.6;
 
-// Spacing
 $spacing-xs: 0.25rem;
 $spacing-sm: 0.5rem;
 $spacing-md: 1rem;
 $spacing-lg: 1.5rem;
 $spacing-xl: 2.5rem;
 
-// Border radius
 $border-radius-sm: 4px;
 $border-radius: 6px;
 $border-radius-lg: 8px;
@@ -48,16 +62,25 @@ $border-radius-lg: 8px;
 body {
   font-family: $font-family-base;
   background-color: $background;
-  color: $light;
+  color: $foreground;
 }
 
 h1, h2, h3 {
-  color: $light;
+  color: $heading;
 }
 
 h4, h5, h6 {
-  color: $light;
+  color: $heading;
   font-weight: bold;
+}
+
+// Inline content links — readable blue, orange on hover
+a:not(.nav-link):not(.sidebar-item-text):not(.navbar-brand):not(.quarto-navigation-tool):not(.about-link) {
+  color: $secondary;
+
+  &:hover {
+    color: lighten($primary, 8%);
+  }
 }
 
 .anchored {
@@ -66,17 +89,19 @@ h4, h5, h6 {
 
 blockquote {
   background-color: $warning;
-  border-color: $dark;
-  color: $light !important;
+  border-color: $primary;
+  color: $foreground !important;
 }
 
 code {
-  background-color: $success;
+  background-color: $code-background;
   color: $code-text;
 }
 
 .sourceCode {
-  background-color: $success;
+  background-color: $code-background;
+  border: 1px solid $border;
+  border-radius: $border-radius;
 
   pre.code-with-copy {
     padding: 0;
@@ -86,7 +111,7 @@ code {
     &.at { color: $code-attribute; }  // Attributes (HTML/XML)
     &.bn { color: $code-number; } // Numbers
     &.bu { color: $code-function; font-weight: bold; } // Built-in functions/methods
-    &.cf { color: $code-keyword; font-weight: bold; } // Control flow (if, else, for, while) 
+    &.cf { color: $code-keyword; font-weight: bold; } // Control flow (if, else, for, while)
     &.cn { color: $code-type; }  // Class/type names
     &.co { color: $code-comment; font-style: italic; } // Comments
     &.dv { color: $code-number; } // Numbers
@@ -103,36 +128,110 @@ code {
 }
 
 .callout-title-container.flex-fill {
-  color: $light;
+  color: $foreground;
 }
 
-.quarto-about-jolla {
-  .about-links {
-    .about-link-text {
-      color: $light;
+// ============================================================================
+// Dark/light toggle — fix the invisible icon
+// Quarto's dark Bootstrap fills the toggle glyph with a near-black gray
+// (~#383F45) that disappears on the dark navbar. Re-paint it near-white so the
+// switch is clearly visible, and brighten on hover.
+// ============================================================================
+.quarto-color-scheme-toggle:not(.alternate) .bi::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgba(230, 237, 243, 1)" class="bi bi-toggle-off" viewBox="0 0 16 16"><path d="M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z"/></svg>');
+}
 
-      &:hover {
-        color: lighten($primary, 10%);
-      }
-    }
+.quarto-color-scheme-toggle.alternate .bi::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgba(230, 237, 243, 1)" class="bi bi-toggle-on" viewBox="0 0 16 16"><path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/></svg>');
+}
 
-    a {
-     color: $light;
-     
-     &:hover {
-      color: lighten($primary, 10%);
-    }
-     
-    }
+.quarto-color-scheme-toggle {
+  opacity: 0.85;
+  transition: opacity 0.15s ease-in-out;
+
+  &:hover {
+    opacity: 1;
   }
 }
 
-.quarto-post { 
-  border: 1px solid $dark;
-  padding: 2.5px;
+// ============================================================================
+// Sidebar navigation — clearer hierarchy, active state, hover affordance
+// ============================================================================
+.sidebar.sidebar-navigation {
+  border-right: 1px solid $border;
+
+  .sidebar-title {
+    color: $heading;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  // Section headers within the sidebar
+  .sidebar-item-section > .sidebar-item-container .sidebar-item-text {
+    color: $tertiary;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+  }
+
+  .sidebar-item {
+    .sidebar-item-container {
+      border-radius: $border-radius-sm;
+      transition: background-color 0.12s ease-in-out, color 0.12s ease-in-out;
+    }
+
+    .sidebar-item-text {
+      color: #C7D2DD;
+    }
+
+    // Hover affordance on any row
+    .sidebar-item-container:hover {
+      background-color: $surface-2;
+
+      .sidebar-item-text {
+        color: $heading;
+      }
+    }
+  }
+
+  // The currently-open page gets a clear orange marker
+  .sidebar-link.active,
+  a.sidebar-item-text.active {
+    color: $primary !important;
+    font-weight: 600;
+    border-left: 3px solid $primary;
+    padding-left: calc(#{$spacing-sm} - 3px);
+    background-color: rgba($primary, 0.08);
+    border-radius: 0 $border-radius-sm $border-radius-sm 0;
+  }
+}
+
+// On-this-page TOC — match the slate ground, orange rule
+#TOC, .toc-active {
+  .nav-link {
+    color: $tertiary;
+
+    &:hover { color: $foreground; }
+    &.active { color: $primary; border-left-color: $primary; }
+  }
+}
+
+// ============================================================================
+// Post / listing cards
+// ============================================================================
+.quarto-post {
+  border: 1px solid $border;
+  border-radius: $border-radius;
+  padding: $spacing-sm $spacing-md;
+  transition: border-color 0.15s ease-in-out, transform 0.15s ease-in-out;
+
+  &:hover {
+    border-color: $primary;
+    transform: translateY(-1px);
+  }
 
   .body {
-    color: $light;
+    color: $foreground;
 
     h3.no-anchor.listing-title {
       color: $primary;
@@ -148,23 +247,25 @@ code {
 
     .listing-categories {
       .listing-category {
-        background-color: $dark;
-        color: $light;
+        background-color: $surface-2;
+        color: #C7D2DD;
         padding: 0.25rem 0.5rem;
-        border-radius: 4px;
+        border-radius: 999px;
         display: inline-block;
         margin-right: 0.5rem;
+        font-size: 0.8rem;
         cursor: pointer;
 
         &:hover {
-          background-color: lighten($dark, 10%);
+          background-color: $primary;
+          color: $danger;
         }
       }
     }
 
     .listing-description {
       font-size: 1rem;
-      color: $light;
+      color: #C7D2DD;
 
       a {
         color: $secondary;
@@ -180,22 +281,45 @@ code {
 
   .metadata {
     font-size: 0.875rem;
-    color: $secondary;
+    color: $tertiary;
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
 
     .listing-date,
     .listing-author {
-      color: $light;
+      color: $tertiary;
 
       a {
         color: inherit;
         text-decoration: none;
 
         &:hover {
-          color: lighten($secondary, 10%);
+          color: $secondary;
         }
+      }
+    }
+  }
+}
+
+// ============================================================================
+// About page links
+// ============================================================================
+.quarto-about-jolla {
+  .about-links {
+    .about-link-text {
+      color: $foreground;
+
+      &:hover {
+        color: lighten($primary, 10%);
+      }
+    }
+
+    a {
+      color: $foreground;
+
+      &:hover {
+        color: lighten($primary, 10%);
       }
     }
   }
