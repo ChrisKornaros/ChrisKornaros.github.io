@@ -1,0 +1,4 @@
+# Attach the "guides" sidebar to every page in this folder (listing + posts),
+# so the section navigation persists when a reader opens an individual guide.
+# Mirrors pages/recipes/_metadata.yml.
+sidebar: guides

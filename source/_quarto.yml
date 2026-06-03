@@ -34,7 +34,7 @@ website:
     background: danger
     foreground: light
     # Top-level links only; per-post discovery is handled by the listing pages
-    # and the auto-glob sidebars below, so publishing never edits this file.
+    # and the directory-auto sidebars below, so publishing never edits this file.
     left:
       - text: "Home"
         href: index.qmd
@@ -49,8 +49,12 @@ website:
       - text: "Recipes"
         href: pages/recipes/recipes.qmd
 
-  # Sidebars use globs (not hand-listed posts) so a freshly published file
-  # appears automatically -- no _quarto.yml edit per publish.
+  # Sidebars auto-list a directory (not hand-listed posts) so a freshly published
+  # file appears automatically -- no _quarto.yml edit per publish. NOTE: use a
+  # directory path (e.g. "pages/guides/posts"); bare globs like ".../*.qmd" render
+  # as literal text in Quarto 1.9, and `auto:` on an empty/missing dir aborts render.
+  # Each section's sidebar is attached to its posts by a pages/<section>/_metadata.yml
+  # (`sidebar: <id>`), so the nav persists when a reader opens an individual post.
   sidebar:
     - id: guides
       title: "Guides"
@@ -61,8 +65,7 @@ website:
       contents:
         - section: "Guides"
           href: pages/guides/guides.qmd
-          contents:
-            - pages/guides/posts/*.qmd
+          contents: "pages/guides/posts"
 
     - id: research
       title: "Research"
@@ -73,8 +76,8 @@ website:
       contents:
         - section: "Research"
           href: pages/research/research.qmd
-          contents:
-            - pages/research/posts/*.qmd
+          # No posts yet; add `- auto: "/pages/research/posts/*.qmd"` once
+          # pages/research/posts/ has content (an empty auto: glob crashes render).
 
     - id: blogs
       title: "Blogs"
@@ -85,8 +88,7 @@ website:
       contents:
         - section: "Blogs"
           href: pages/blogs/blogs.qmd
-          contents:
-            - pages/blogs/posts/*.qmd
+          contents: "pages/blogs/posts"
 
     - id: recipes
       title: "Recipes"
@@ -94,12 +96,12 @@ website:
       background: dark
       foreground: light
       collapse-level: 2
-      contents:
-        - text: "All Recipes"
-          href: pages/recipes/recipes.qmd
-        - section: "Categories"
-          contents:
-            - pages/recipes/*/index.qmd
+      # Directory auto-listing: the landing page plus every category folder (each a
+      # collapsible sub-section with its recipes). A bare glob like
+      # `pages/recipes/*/index.qmd` renders as literal text in Quarto 1.9; a directory
+      # path expands correctly. Listed at top level (no wrapper section) to avoid a
+      # redundant "Recipes" nesting.
+      contents: "pages/recipes"
 
 format:
   html:

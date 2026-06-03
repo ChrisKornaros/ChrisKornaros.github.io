@@ -1,0 +1,4 @@
+# Attach the "research" sidebar to every page in this folder (listing + posts),
+# so the section navigation persists when a reader opens an individual entry.
+# Mirrors pages/recipes/_metadata.yml.
+sidebar: research
