@@ -10,7 +10,7 @@ a code change — it creates **no git branch, commit, or PR**. (The `announce`
 command itself was added to the repo in its own PR; running it just posts.)
 
 Arguments: `$ARGUMENTS` — a published vault draft path (supplies title + link),
-and/or `--url`, `--title`, `--tag`, `--text`, `--item`, `--dry-run`.
+and/or `--url`, `--tag`, `--text`, `--item`, `--dry-run`.
 
 Run everything from the repo root (`~/vault/projects/ChrisKornaros.github.io`).
 
@@ -21,8 +21,8 @@ Run: `uv run announce $ARGUMENTS --dry-run`
 - This composes the post and prints it plus the detected facets (clickable link
   + any `#tags`). It does **not** touch Bitwarden or the network.
 - For a blog draft the link comes from the draft's `substack:` frontmatter; for
-  anything else pass `--url`. Override the headline with `--title`, the whole
-  text with `--text`, and add hashtags with `--tag` (lowercase, few).
+  anything else pass `--url`. Override the whole text with `--text`, and add
+  hashtags with `--tag` (lowercase, few).
 - Show Chris the composed post and confirm it reads right before sending.
 
 ## 2. Make sure the Bitwarden vault is unlocked

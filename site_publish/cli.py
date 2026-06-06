@@ -135,7 +135,6 @@ def announce(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "file", nargs="?", help="A published vault draft (.md); supplies title + link."
     )
-    parser.add_argument("--title", help="Override the post title.")
     parser.add_argument(
         "--url", help="Link to announce (required if no draft / non-blog draft)."
     )
@@ -161,7 +160,6 @@ def announce(argv: list[str] | None = None) -> int:
         try:
             ann = _announce.compose(
                 draft=Path(args.file) if args.file else None,
-                title=args.title,
                 url=args.url,
                 tags=args.tag,
             )
