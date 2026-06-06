@@ -10,10 +10,34 @@ import re
 from urllib.parse import parse_qs, urlparse
 
 _YT_ID = re.compile(r"^[A-Za-z0-9_-]{11}$")
+_SHARE_PATH = re.compile(r"^/pub/([^/]+)/p/(.+)$")
+
+
+def _canonical_substack_url(url: str) -> str:
+    """Normalize a Substack URL to the canonical post form for embedding.
+
+    Substack's "Share" button hands out a tracking link
+    (``open.substack.com/pub/<pub>/p/<slug>?r=...&utm_...``); ``embed.js`` wants
+    the canonical ``<pub>.substack.com/p/<slug>`` shape used in test.qmd. Rewrite
+    the share form and drop the query/fragment in every case. A URL already in
+    canonical form just loses its tracking params; an unrecognized URL is
+    returned untouched.
+    """
+    parsed = urlparse(url)
+    host = parsed.netloc.lower()
+    path = parsed.path.rstrip("/")
+    if host == "open.substack.com":
+        m = _SHARE_PATH.match(path)
+        if m:
+            return f"https://{m.group(1)}.substack.com/p/{m.group(2)}"
+    if host:
+        return f"{parsed.scheme or 'https'}://{host}{path}"
+    return url
 
 
 def substack_embed(title: str, url: str) -> str:
     """Substack post embed stub (verbatim shape of the existing test.qmd)."""
+    url = _canonical_substack_url(url)
     return (
         "```{=html}\n"
         f'<div class="substack-post-embed"><p lang="en">{title} by '
