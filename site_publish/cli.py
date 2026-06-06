@@ -7,6 +7,7 @@ import datetime as _dt
 import sys
 from pathlib import Path
 
+from . import announce as _announce
 from . import config, convert, frontmatter_map
 from .convert import ConvertError
 from .frontmatter_map import FrontmatterError
@@ -119,6 +120,80 @@ def new_draft(argv: list[str] | None = None) -> int:
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(content, encoding="utf-8")
     print(f"Created {dest}")
+    return 0
+
+
+# --------------------------------------------------------------------------- #
+# announce (Bluesky)
+# --------------------------------------------------------------------------- #
+def announce(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        prog="announce",
+        description="Post a Bluesky announcement for a published post. Reads "
+        "the app password from Bitwarden (bw) -- never from a file.",
+    )
+    parser.add_argument(
+        "file", nargs="?", help="A published vault draft (.md); supplies title + link."
+    )
+    parser.add_argument("--title", help="Override the post title.")
+    parser.add_argument(
+        "--url", help="Link to announce (required if no draft / non-blog draft)."
+    )
+    parser.add_argument(
+        "--tag", action="append", default=[], metavar="TAG",
+        help="Hashtag to append (repeatable; '#' optional). Lowercase, few.",
+    )
+    parser.add_argument(
+        "--text", help="Use this exact post text verbatim (skips composition)."
+    )
+    parser.add_argument("--item", help="Bitwarden item name/id (default $BLUESKY_BW_ITEM or 'Bluesky').")
+    parser.add_argument(
+        "--dry-run", action="store_true",
+        help="Compose and print the post (with detected facets); do not auth or send.",
+    )
+    args = parser.parse_args(argv)
+
+    from . import bluesky
+
+    if args.text:
+        text = args.text
+    else:
+        try:
+            ann = _announce.compose(
+                draft=Path(args.file) if args.file else None,
+                title=args.title,
+                url=args.url,
+                tags=args.tag,
+            )
+        except ValueError as exc:
+            parser.error(str(exc))
+        text = ann.text
+
+    if args.dry_run:
+        import json
+        print("--- post text ---")
+        print(text)
+        print("--- facets ---")
+        print(json.dumps(bluesky.detect_facets(text), indent=2))
+        print("\n(dry run: nothing sent, Bitwarden not touched)")
+        return 0
+
+    from . import secrets
+    from .bluesky import BlueskyError
+    from .secrets import SecretError
+
+    try:
+        identifier, password = secrets.bluesky_credentials(args.item)
+        session = bluesky.create_session(identifier, password)
+        resp = bluesky.create_post(session, text)
+    except (SecretError, BlueskyError) as exc:
+        print(f"  ✗ {exc}", file=sys.stderr)
+        return 1
+
+    web = bluesky.post_web_url(identifier, resp.get("uri", ""))
+    print(f"  ✓ Posted to Bluesky as {identifier}")
+    if web:
+        print(f"      {web}")
     return 0
 
 
