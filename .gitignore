@@ -9,6 +9,11 @@ wheels/
 # Virtual environments
 .venv
 
+# Secrets -- read at run time from Bitwarden (bw), never committed.
+.env
+*.key
+*.pem
+
 # Local environments
 *.DS_Store
 *.vscode/

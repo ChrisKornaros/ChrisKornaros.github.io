@@ -13,6 +13,7 @@ dependencies = [
 [project.scripts]
 publish = "site_publish.cli:publish"
 new = "site_publish.cli:new_draft"
+announce = "site_publish.cli:announce"
 
 [build-system]
 requires = ["hatchling"]

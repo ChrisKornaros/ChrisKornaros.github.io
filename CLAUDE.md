@@ -102,6 +102,18 @@ A draft is the canonical source; the site `.qmd` is generated from it.
   URL with tracking params to the canonical `<pub>.substack.com/p/<slug>` form)
   and the `video:` embed for recipes, and is idempotent (re-publish overwrites
   the `.qmd`).
+- **Announce on Bluesky (optional, after publish):** the **`/announce`** skill
+  ([.claude/commands/announce.md](.claude/commands/announce.md)) posts a short
+  Bluesky update linking to a just-published post. `uv run announce <draft>
+  [--url …] [--tag …] --dry-run` composes + previews (clickable link/hashtag
+  facets, no network); dropping `--dry-run` sends it. It's a **runtime action,
+  not a code change** — no branch/PR. The Bluesky **app password** is read at
+  run time from a Bitwarden item via the `bw` CLI through the single
+  [site_publish/secrets.py](site_publish/secrets.py) boundary (unlock first:
+  `export BW_SESSION="$(bw unlock --raw)"`); it's never written to a file or
+  printed. Config is env-driven (`BLUESKY_BW_ITEM`, default `Bluesky`;
+  `BLUESKY_HANDLE` to override the identifier). Folds into `content_manager`'s
+  multi-platform poster later — the `bw`-CLI shape is the documented bridge.
 - **No `_quarto.yml` edits per publish:** the navbar links to listing pages, the
   guides/blogs sidebars auto-list their `posts/` directory, and the recipes
   sidebar lists category index pages, so a newly published post appears
