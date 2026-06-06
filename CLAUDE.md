@@ -109,8 +109,10 @@ A draft is the canonical source; the site `.qmd` is generated from it.
   facets, no network); dropping `--dry-run` sends it. It's a **runtime action,
   not a code change** — no branch/PR. The Bluesky **app password** is read at
   run time from a Bitwarden item via the `bw` CLI through the single
-  [site_publish/secrets.py](site_publish/secrets.py) boundary (unlock first:
-  `export BW_SESSION="$(bw unlock --raw)"`); it's never written to a file or
+  [site_publish/secrets.py](site_publish/secrets.py) boundary via two narrow
+  reads (`bw get username` / `bw get password`); a locked vault is unlocked
+  interactively when run at a terminal (else pre-export
+  `BW_SESSION="$(bw unlock --raw)"`). The password is never written to a file or
   printed. Config is env-driven (`BLUESKY_BW_ITEM`, default `Bluesky`;
   `BLUESKY_HANDLE` to override the identifier). Folds into `content_manager`'s
   multi-platform poster later — the `bw`-CLI shape is the documented bridge.
