@@ -13,7 +13,7 @@ _YT_ID = re.compile(r"^[A-Za-z0-9_-]{11}$")
 _SHARE_PATH = re.compile(r"^/pub/([^/]+)/p/(.+)$")
 
 
-def _canonical_substack_url(url: str) -> str:
+def canonical_substack_url(url: str) -> str:
     """Normalize a Substack URL to the canonical post form for embedding.
 
     Substack's "Share" button hands out a tracking link
@@ -37,7 +37,7 @@ def _canonical_substack_url(url: str) -> str:
 
 def substack_embed(title: str, url: str) -> str:
     """Substack post embed stub (verbatim shape of the existing test.qmd)."""
-    url = _canonical_substack_url(url)
+    url = canonical_substack_url(url)
     return (
         "```{=html}\n"
         f'<div class="substack-post-embed"><p lang="en">{title} by '
