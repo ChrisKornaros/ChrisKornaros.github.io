@@ -98,8 +98,10 @@ A draft is the canonical source; the site `.qmd` is generated from it.
   transform only — never git. It maps Obsidian → Quarto (wikilinks, `![[embeds]]`
   → copied `images/`, callouts, strips `#tags`/`draft`), routes by section
   (recipes → `recipes/<Category>/`, others → `<section>/posts/`), generates the
-  Substack embed for blogs and the `video:` embed for recipes, and is
-  idempotent (re-publish overwrites the `.qmd`).
+  Substack embed for blogs (normalizing a "Share"-link `open.substack.com/pub/…`
+  URL with tracking params to the canonical `<pub>.substack.com/p/<slug>` form)
+  and the `video:` embed for recipes, and is idempotent (re-publish overwrites
+  the `.qmd`).
 - **No `_quarto.yml` edits per publish:** the navbar links to listing pages, the
   guides/blogs sidebars auto-list their `posts/` directory, and the recipes
   sidebar lists category index pages, so a newly published post appears
