@@ -182,6 +182,7 @@
   {
     "listing": "/pages/blogs/blogs.html",
     "items": [
+      "/pages/blogs/posts/figuring-things-out.html",
       "/pages/blogs/posts/test.html"
     ]
   },
