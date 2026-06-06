@@ -25,20 +25,27 @@ Run: `uv run announce $ARGUMENTS --dry-run`
   hashtags with `--tag` (lowercase, few).
 - Show Chris the composed post and confirm it reads right before sending.
 
-## 2. Make sure the Bitwarden vault is unlocked
+## 2. Bitwarden vault — unlock is handled for you (on a terminal)
 
 The send step reads the Bluesky **app password** (not the account password)
-from a Bitwarden item via the `bw` CLI. It needs an unlocked vault in the shell:
+from a Bitwarden item via the `bw` CLI. If the vault is locked **and you're at a
+terminal**, `announce` runs `bw unlock` itself — the master-password prompt
+shows inline, you type it, and it proceeds. The session key is captured, never
+printed. So no pre-export is required for interactive use; you *can* still
+pre-unlock if you prefer:
 
 ```sh
 export BW_SESSION="$(bw unlock --raw)"
 ```
 
+- With **no tty** (CI, or a captured subprocess — e.g. an agent's Bash tool),
+  there's no way to prompt, so it fails with the manual-unlock hint instead of
+  hanging. In that case run the pre-export above first.
 - Config (non-secret) is env-driven: `BLUESKY_BW_ITEM` (default `Bluesky`) names
   the vault item; its username is the handle and its password is the app
   password. `BLUESKY_HANDLE` overrides the identifier if needed.
-- Never print, echo, or log the password. If `bw` reports the vault is locked or
-  you're not logged in, surface that and stop — don't work around it.
+- Never print, echo, or log the password. If `bw` reports it's not logged in,
+  surface that and stop — don't work around it.
 
 ## 3. Send
 
