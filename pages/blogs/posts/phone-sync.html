@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Chris Kornaros">
+<meta name="dcterms.date" content="2026-06-05">
 
-<title>Spice Mixes – Chris Kornaros</title>
+<title>Syncing an Obsidian Vault to iPhone over Git with Working Copy – Chris Kornaros</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +32,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<script src="../../../site_libs/quarto-listing/list.min.js"></script>
-<script src="../../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../../../site_libs/quarto-html/quarto.js"></script>
@@ -72,35 +72,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-J1EQMCS7CC"></script>
 
 <script type="text/plain" cookie-consent="tracking">
@@ -129,41 +100,10 @@ cookieconsent.run({
 </script> 
   
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<meta property="og:title" content="Spice Mixes – Chris Kornaros">
-<meta property="og:description" content="">
+<meta property="og:title" content="Syncing an Obsidian Vault to iPhone over Git with Working Copy – Chris Kornaros">
 <meta property="og:site_name" content="Chris Kornaros">
-<meta name="twitter:title" content="Spice Mixes – Chris Kornaros">
-<meta name="twitter:description" content="">
+<meta name="twitter:title" content="Syncing an Obsidian Vault to iPhone over Git with Working Copy – Chris Kornaros">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -201,11 +141,11 @@ window.Quarto = {
 <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../pages/blogs/blogs.html"> 
+    <a class="nav-link active" href="../../../pages/blogs/blogs.html" aria-current="page"> 
 <span class="menu-text">Blogs</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../../pages/recipes/recipes.html" aria-current="page"> 
+    <a class="nav-link" href="../../../pages/recipes/recipes.html"> 
 <span class="menu-text">Recipes</span></a>
   </li>  
 </ul>
@@ -220,7 +160,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/recipes/Baked Goods/index.html">Categories</a></li><li class="breadcrumb-item"><a href="../../../pages/recipes/Spice Mixes/index.html">Spice Mixes</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/blogs/blogs.html">Blogs</a></li><li class="breadcrumb-item"><a href="../../../pages/blogs/posts/figuring-things-out.html">Posts</a></li><li class="breadcrumb-item"><a href="../../../pages/blogs/posts/phone-sync.html">Syncing an Obsidian Vault to iPhone over Git with Working Copy</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -232,177 +172,44 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/recipes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">All Recipes</span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Categories</span></a>
+            <a href="../../../pages/blogs/blogs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Blogs</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Posts</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Baked Goods/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Baked Goods</span></a>
+  <a href="../../../pages/blogs/posts/figuring-things-out.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Figuring things out…</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Beef/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Beef</span></a>
+  <a href="../../../pages/blogs/posts/phone-sync.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Syncing an Obsidian Vault to iPhone over Git with Working Copy</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Chicken/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Chicken</span></a>
+  <a href="../../../pages/blogs/posts/test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Test</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Cod/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Cod</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Cookbook/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Cookbook</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Cooking &amp; Kitchen Tips/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Cooking &amp; Kitchen Tips</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Drinks/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Drinks</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Japan/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Japan</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Masterclass Recipes/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Masterclass Recipes</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Mexican/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Mexican</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/New Orleans/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Orleans</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Noodles/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Noodles</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Oils and Marinades/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Oils and Marinades</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Party Snacks and Dips/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Party Snacks and Dips</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Pickling and Fermenting/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pickling and Fermenting</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Pizza/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pizza</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Pork/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pork</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Potatoes/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Potatoes</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Salads/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Salads</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Sandwiches/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sandwiches</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Sauces and Condiments/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sauces and Condiments</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Soups/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Soups</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Spice Mixes/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Spice Mixes</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Tofu/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Tofu</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Veal/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Veal</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../pages/recipes/Vegetables/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Vegetables</span></a>
-  </div>
-</li>
+      </ul>
+  </li>
       </ul>
   </li>
     </ul>
@@ -416,16 +223,32 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/recipes/Baked Goods/index.html">Categories</a></li><li class="breadcrumb-item"><a href="../../../pages/recipes/Spice Mixes/index.html">Spice Mixes</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/blogs/blogs.html">Blogs</a></li><li class="breadcrumb-item"><a href="../../../pages/blogs/posts/figuring-things-out.html">Posts</a></li><li class="breadcrumb-item"><a href="../../../pages/blogs/posts/phone-sync.html">Syncing an Obsidian Vault to iPhone over Git with Working Copy</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Spice Mixes</h1>
-</div>
+<h1 class="title">Syncing an Obsidian Vault to iPhone over Git with Working Copy</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">blog</div>
+    <div class="quarto-category">guide</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Chris Kornaros </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 5, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -435,41 +258,11 @@ window.Quarto = {
 </header>
 
 
-<p>All <strong>Spice Mixes</strong> recipes.</p>
+<div class="substack-post-embed"><p lang="en">Syncing an Obsidian Vault to iPhone over Git with Working Copy by Chris Kornaros</p><p></p><a data-post-link="" href="https://chriskornaros.substack.com/p/syncing-my-notes-across-devices">Read on Substack</a></div><script async="" src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>
 
 
 
-
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="U3BpY2UlMjBNaXhlcw==" data-listing-date-sort="1772755200000" data-listing-file-modified-sort="1780784343396" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="149">
-<a href="../../../pages/recipes/Spice Mixes/Garama Masala.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Garama Masala
-</h5>
-<div class="card-text listing-description">
-<strong>Ingredients:</strong>
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Chris Kornaros
-</div>
-<div class="listing-date">
-Mar 6, 2026
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1060,7 +853,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </a>
   </li>  
 </ul>
-    <div class="toc-actions"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/recipes/Spice Mixes/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/blogs/posts/phone-sync.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
