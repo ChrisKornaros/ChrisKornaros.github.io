@@ -703,17 +703,35 @@
     ]
   },
   {
-    "objectID": "pages/blogs/posts/phone-sync.html",
-    "href": "pages/blogs/posts/phone-sync.html",
-    "title": "Syncing an Obsidian Vault to iPhone over Git with Working Copy",
+    "objectID": "pages/blogs/posts/agent-context.html",
+    "href": "pages/blogs/posts/agent-context.html",
+    "title": "Persistent Agent Memory — Giving Claude Cross-Machine Context with Symlinks and Git",
     "section": "",
-    "text": "Syncing an Obsidian Vault to iPhone over Git with Working Copy by Chris KornarosRead on Substack",
+    "text": "Persistent Agent Memory — Giving Claude Cross-Machine Context with Symlinks and Git by Chris KornarosRead on Substack",
     "crumbs": [
       "Home",
       "Blogs",
       "Posts",
-      "Syncing an Obsidian Vault to iPhone over Git with Working Copy"
+      "Persistent Agent Memory — Giving Claude Cross-Machine Context with Symlinks and Git"
     ]
+  },
+  {
+    "objectID": "pages/research/research.html",
+    "href": "pages/research/research.html",
+    "title": "Research",
+    "section": "",
+    "text": "A space for independent research, notes, and longer-form explorations. Still early — more to come.\n\n\n\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Home",
+      "Research"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Chris Kornaros",
+    "section": "",
+    "text": "This site is the personal portfolio and homepage for Chris Kornaros. I’m a Tulane Graduate and professional Data Engineer. On here, you’ll find projects and code samples that I can share publicly, guides for various tools or workflows, journal or blog posts, and any independent research or professional updates (including my resume).\nThis website is a work in progress, so things are going to move around and break. Additionally, there is a lot that I have to still add: past guides, projects, etc. Follow me on social media (links above) to stay up to date with what I’m working on. To learn more about my background visit About, for guides on various open source tools visit Guides, to see my current and past (public) work visit Projects, and to see any blog posts (available on WhiteWind) visit Blogs."
   },
   {
     "objectID": "pages/blogs/posts/figuring-things-out.html",
@@ -729,47 +747,16 @@
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Chris Kornaros",
+    "objectID": "pages/blogs/posts/phone-sync.html",
+    "href": "pages/blogs/posts/phone-sync.html",
+    "title": "Syncing an Obsidian Vault to iPhone over Git with Working Copy",
     "section": "",
-    "text": "This site is the personal portfolio and homepage for Chris Kornaros. I’m a Tulane Graduate and professional Data Engineer. On here, you’ll find projects and code samples that I can share publicly, guides for various tools or workflows, journal or blog posts, and any independent research or professional updates (including my resume).\nThis website is a work in progress, so things are going to move around and break. Additionally, there is a lot that I have to still add: past guides, projects, etc. Follow me on social media (links above) to stay up to date with what I’m working on. To learn more about my background visit About, for guides on various open source tools visit Guides, to see my current and past (public) work visit Projects, and to see any blog posts (available on WhiteWind) visit Blogs."
-  },
-  {
-    "objectID": "pages/research/research.html",
-    "href": "pages/research/research.html",
-    "title": "Research",
-    "section": "",
-    "text": "A space for independent research, notes, and longer-form explorations. Still early — more to come.\n\n\n\n\n\n\n\n\nNo matching items",
-    "crumbs": [
-      "Home",
-      "Research"
-    ]
-  },
-  {
-    "objectID": "pages/blogs/posts/agent-context.html",
-    "href": "pages/blogs/posts/agent-context.html",
-    "title": "Persistent Agent Memory — Giving Claude Cross-Machine Context with Symlinks and Git",
-    "section": "",
-    "text": "Persistent Agent Memory — Giving Claude Cross-Machine Context with Symlinks and Git by Chris KornarosRead on Substack",
+    "text": "Syncing an Obsidian Vault to iPhone over Git with Working Copy by Chris KornarosRead on Substack",
     "crumbs": [
       "Home",
       "Blogs",
       "Posts",
-      "Persistent Agent Memory — Giving Claude Cross-Machine Context with Symlinks and Git"
-    ]
-  },
-  {
-    "objectID": "pages/blogs/posts/test.html",
-    "href": "pages/blogs/posts/test.html",
-    "title": "Test",
-    "section": "",
-    "text": "Test Post by Chris KornarosRead on Substack",
-    "crumbs": [
-      "Home",
-      "Blogs",
-      "Posts",
-      "Test"
+      "Syncing an Obsidian Vault to iPhone over Git with Working Copy"
     ]
   },
   {
@@ -777,7 +764,7 @@
     "href": "pages/blogs/blogs.html",
     "title": "Blogs",
     "section": "",
-    "text": "A landing page for various blogs, journals, or random thoughts. Some of these will be focused on specific tools or technology, others will be random thoughts or research notes.\n\n\n\n\n\n\n\n\n\n\n\n\nPersistent Agent Memory — Giving Claude Cross-Machine Context with Symlinks and Git\n\n\n\nblog\n\nguide\n\nai\n\n\n\n\n\n\n\nChris Kornaros\n\n\nJun 7, 2026\n\n\n\n\n\n\n\n\n\n\n\nOne Vault Across Devices — Syncing Notes, Projects, and Agent Memory over Git\n\n\n\nblog\n\nguide\n\n\n\n\n\n\n\nChris Kornaros\n\n\nJun 7, 2026\n\n\n\n\n\n\n\n\n\n\n\nFiguring things out…\n\n\n\nblog\n\nai\n\nresearch\n\n\n\n\n\n\n\nChris Kornaros\n\n\nJun 6, 2026\n\n\n\n\n\n\n\n\n\n\n\nSyncing an Obsidian Vault to iPhone over Git with Working Copy\n\n\n\nblog\n\nguide\n\n\n\n\n\n\n\nChris Kornaros\n\n\nJun 5, 2026\n\n\n\n\n\n\n\n\n\n\n\nTest\n\n\n\nTest\n\n\n\n\n\n\n\nChris Kornaros\n\n\nMar 6, 2026\n\n\n\n\n\n\nNo matching items",
+    "text": "A landing page for various blogs, journals, or random thoughts. Some of these will be focused on specific tools or technology, others will be random thoughts or research notes.\n\n\n\n\n\n\n\n\n\n\n\n\nPersistent Agent Memory — Giving Claude Cross-Machine Context with Symlinks and Git\n\n\n\nblog\n\nguide\n\nai\n\n\n\n\n\n\n\nChris Kornaros\n\n\nJun 7, 2026\n\n\n\n\n\n\n\n\n\n\n\nOne Vault Across Devices — Syncing Notes, Projects, and Agent Memory over Git\n\n\n\nblog\n\nguide\n\n\n\n\n\n\n\nChris Kornaros\n\n\nJun 7, 2026\n\n\n\n\n\n\n\n\n\n\n\nFiguring things out…\n\n\n\nblog\n\nai\n\nresearch\n\n\n\n\n\n\n\nChris Kornaros\n\n\nJun 6, 2026\n\n\n\n\n\n\n\n\n\n\n\nSyncing an Obsidian Vault to iPhone over Git with Working Copy\n\n\n\nblog\n\nguide\n\n\n\n\n\n\n\nChris Kornaros\n\n\nJun 5, 2026\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Home",
       "Blogs"
