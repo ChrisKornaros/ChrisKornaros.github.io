@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Chris Kornaros">
-<meta name="dcterms.date" content="2026-06-06">
+<meta name="dcterms.date" content="2026-06-07">
 
-<title>Figuring things out… – Chris Kornaros</title>
+<title>Persistent Agent Memory — Giving Claude Cross-Machine Context with Symlinks and Git – Chris Kornaros</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -107,9 +107,9 @@ cookieconsent.run({
   
 
 
-<meta property="og:title" content="Figuring things out… – Chris Kornaros">
+<meta property="og:title" content="Persistent Agent Memory — Giving Claude Cross-Machine Context with Symlinks and Git – Chris Kornaros">
 <meta property="og:site_name" content="Chris Kornaros">
-<meta name="twitter:title" content="Figuring things out… – Chris Kornaros">
+<meta name="twitter:title" content="Persistent Agent Memory — Giving Claude Cross-Machine Context with Symlinks and Git – Chris Kornaros">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -328,7 +328,7 @@ cookieconsent.run({
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/blogs/blogs.html">Blogs</a></li><li class="breadcrumb-item"><a href="../../../pages/blogs/posts/agent-context.html">Posts</a></li><li class="breadcrumb-item"><a href="../../../pages/blogs/posts/figuring-things-out.html">Figuring things out…</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/blogs/blogs.html">Blogs</a></li><li class="breadcrumb-item"><a href="../../../pages/blogs/posts/agent-context.html">Posts</a></li><li class="breadcrumb-item"><a href="../../../pages/blogs/posts/agent-context.html">Persistent Agent Memory — Giving Claude Cross-Machine Context with Symlinks and Git</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -360,7 +360,7 @@ cookieconsent.run({
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../pages/blogs/posts/agent-context.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../pages/blogs/posts/agent-context.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Persistent Agent Memory — Giving Claude Cross-Machine Context with Symlinks and Git</span></a>
   </div>
 </li>
@@ -372,7 +372,7 @@ cookieconsent.run({
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../pages/blogs/posts/figuring-things-out.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../pages/blogs/posts/figuring-things-out.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Figuring things out…</span></a>
   </div>
 </li>
@@ -404,13 +404,13 @@ cookieconsent.run({
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/blogs/blogs.html">Blogs</a></li><li class="breadcrumb-item"><a href="../../../pages/blogs/posts/agent-context.html">Posts</a></li><li class="breadcrumb-item"><a href="../../../pages/blogs/posts/figuring-things-out.html">Figuring things out…</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../pages/blogs/blogs.html">Blogs</a></li><li class="breadcrumb-item"><a href="../../../pages/blogs/posts/agent-context.html">Posts</a></li><li class="breadcrumb-item"><a href="../../../pages/blogs/posts/agent-context.html">Persistent Agent Memory — Giving Claude Cross-Machine Context with Symlinks and Git</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Figuring things out…</h1>
+<h1 class="title">Persistent Agent Memory — Giving Claude Cross-Machine Context with Symlinks and Git</h1>
   <div class="quarto-categories">
     <div class="quarto-category">blog</div>
+    <div class="quarto-category">guide</div>
     <div class="quarto-category">ai</div>
-    <div class="quarto-category">research</div>
   </div>
   </div>
 
@@ -428,7 +428,7 @@ cookieconsent.run({
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 6, 2026</p>
+      <p class="date">June 7, 2026</p>
     </div>
   </div>
   
@@ -440,7 +440,7 @@ cookieconsent.run({
 </header>
 
 
-<div class="substack-post-embed"><p lang="en">Figuring things out... by Chris Kornaros</p><p></p><a data-post-link="" href="https://chriskornaros.substack.com/p/figuring-things-out">Read on Substack</a></div><script async="" src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>
+<div class="substack-post-embed"><p lang="en">Persistent Agent Memory — Giving Claude Cross-Machine Context with Symlinks and Git by Chris Kornaros</p><p></p><a data-post-link="" href="https://chriskornaros.substack.com/p/persistent-agent-memory">Read on Substack</a></div><script async="" src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>
 
 
 
@@ -887,7 +887,7 @@ cookieconsent.run({
 </a>
   </li>  
 </ul>
-    <div class="toc-actions"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/blogs/posts/figuring-things-out.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/blob/main/pages/blogs/posts/agent-context.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/ChrisKornaros/ChrisKornaros.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
