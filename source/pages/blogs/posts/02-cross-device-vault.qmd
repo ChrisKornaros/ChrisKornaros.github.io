@@ -1,7 +1,7 @@
 ---
 title: One Vault Across Devices — Syncing Notes, Projects, and Agent Memory over Git
 author: Chris Kornaros
-date: 2026-06-07
+date: 2026-06-05
 categories:
 - blog
 - guide

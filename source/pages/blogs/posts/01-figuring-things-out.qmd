@@ -1,12 +1,12 @@
 ---
 title: Figuring things out...
 author: Chris Kornaros
-date: 2026-06-06
+date: 2026-06-04
 categories:
 - blog
 - ai
 - research
-published: '2026-06-06'
+published: '2026-06-07'
 ---
 
 ```{=html}
