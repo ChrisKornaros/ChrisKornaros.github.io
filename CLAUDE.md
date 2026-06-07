@@ -106,8 +106,12 @@ A draft is the canonical source; the site `.qmd` is generated from it.
   ([.claude/commands/announce.md](.claude/commands/announce.md)) posts a short
   Bluesky update linking to a just-published post. `uv run announce <draft>
   [--url …] [--tag …] --dry-run` composes + previews (clickable link/hashtag
-  facets, no network); dropping `--dry-run` sends it. It's a **runtime action,
-  not a code change** — no branch/PR. The Bluesky **app password** is read at
+  facets, no network); dropping `--dry-run` sends it. On send it also attaches
+  an `app.bsky.embed.external` **link card** (the page's OG title/description +
+  the image uploaded as a thumb blob), degrading to no card if the OG data
+  isn't fetchable; the printed `bsky.app` URL uses the account's real handle
+  from the session, not the login identifier. It's a **runtime action, not a
+  code change** — no branch/PR. The Bluesky **app password** is read at
   run time from a Bitwarden item via the `bw` CLI through the single
   [site_publish/secrets.py](site_publish/secrets.py) boundary via two narrow
   reads (`bw get username` / `bw get password`); a locked vault is unlocked
