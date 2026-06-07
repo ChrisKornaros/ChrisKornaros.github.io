@@ -1,11 +1,11 @@
 ---
 title: Syncing an Obsidian Vault to iPhone over Git with Working Copy
 author: Chris Kornaros
-date: 2026-06-05
+date: 2026-06-06
 categories:
 - blog
 - guide
-published: '2026-06-06'
+published: '2026-06-07'
 ---
 
 ```{=html}
