@@ -154,8 +154,12 @@ def announce(argv: list[str] | None = None) -> int:
 
     from . import bluesky
 
+    # The link to card, when there is one: explicit --url wins, else the
+    # composed announcement's link. --text posts verbatim with no card.
+    link: str | None = None
     if args.text:
         text = args.text
+        link = args.url
     else:
         try:
             ann = _announce.compose(
@@ -166,6 +170,7 @@ def announce(argv: list[str] | None = None) -> int:
         except ValueError as exc:
             parser.error(str(exc))
         text = ann.text
+        link = ann.url
 
     if args.dry_run:
         import json
@@ -173,6 +178,9 @@ def announce(argv: list[str] | None = None) -> int:
         print(text)
         print("--- facets ---")
         print(json.dumps(bluesky.detect_facets(text), indent=2))
+        if link:
+            print(f"\n(link card: an external embed for {link} will be fetched "
+                  "at send time)")
         print("\n(dry run: nothing sent, Bitwarden not touched)")
         return 0
 
@@ -183,15 +191,23 @@ def announce(argv: list[str] | None = None) -> int:
     try:
         identifier, password = secrets.bluesky_credentials(args.item)
         session = bluesky.create_session(identifier, password)
-        resp = bluesky.create_post(session, text)
+        # The link card degrades to None on any fetch/upload trouble, so a
+        # flaky OG fetch never blocks the post itself.
+        embed = bluesky.build_external_embed(session, link) if link else None
+        resp = bluesky.create_post(session, text, embed=embed)
     except (SecretError, BlueskyError) as exc:
         print(f"  ✗ {exc}", file=sys.stderr)
         return 1
 
-    web = bluesky.post_web_url(identifier, resp.get("uri", ""))
-    print(f"  ✓ Posted to Bluesky as {identifier}")
+    # Use the account's real handle from the session for the bsky.app URL --
+    # the login identifier may be an email, which isn't a valid profile slug.
+    handle = session.get("handle") or identifier
+    web = bluesky.post_web_url(handle, resp.get("uri", ""))
+    print(f"  ✓ Posted to Bluesky as {handle}")
     if web:
         print(f"      {web}")
+    if link and embed is None:
+        print("      (note: no link card — the page's OG data wasn't fetchable)")
     return 0
 
 

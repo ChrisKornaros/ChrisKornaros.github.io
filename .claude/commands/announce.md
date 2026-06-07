@@ -19,7 +19,11 @@ Run everything from the repo root (`~/vault/projects/ChrisKornaros.github.io`).
 Run: `uv run announce $ARGUMENTS --dry-run`
 
 - This composes the post and prints it plus the detected facets (clickable link
-  + any `#tags`). It does **not** touch Bitwarden or the network.
+  + any `#tags`). It does **not** touch Bitwarden or the network. On the real
+  send (not dry-run) it also attaches a **link card** — the page's OG
+  title/description and image (uploaded as a thumb blob) — so the post shows a
+  Substack preview, not just a bare link. The card degrades to nothing if the
+  OG data can't be fetched; the post still goes out.
 - For a blog draft the link comes from the draft's `substack:` frontmatter; for
   anything else pass `--url`. Override the whole text with `--text`, and add
   hashtags with `--tag` (lowercase, few).
