@@ -1141,7 +1141,7 @@ update_config=1
 network={
     ssid="MyHomeNetwork"
     #psk="MySecurePassword123"
-    psk=a8e665b82929d810746c5a1208c472f9d2a25db67a6bc32a99fa4158aea02175
+    psk=<64-hex output of wpa_passphrase — never commit the real value>
 }
 ```
 
