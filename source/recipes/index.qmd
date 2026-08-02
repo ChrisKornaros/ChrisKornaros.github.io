@@ -1,0 +1,38 @@
+---
+title: "Recipes"
+listing:
+  contents: "*.qmd"
+  sort: "title asc"
+  type: grid
+  categories: true
+aliases:
+  - "/pages/recipes/Baked Goods/index.html"
+  - "/pages/recipes/Beef/index.html"
+  - "/pages/recipes/Chicken/index.html"
+  - "/pages/recipes/Cod/index.html"
+  - "/pages/recipes/Cookbook/index.html"
+  - "/pages/recipes/Cooking & Kitchen Tips/index.html"
+  - "/pages/recipes/Drinks/index.html"
+  - "/pages/recipes/Japan/index.html"
+  - "/pages/recipes/Masterclass Recipes/index.html"
+  - "/pages/recipes/Mexican/index.html"
+  - "/pages/recipes/New Orleans/index.html"
+  - "/pages/recipes/Noodles/index.html"
+  - "/pages/recipes/Oils and Marinades/index.html"
+  - "/pages/recipes/Party Snacks and Dips/index.html"
+  - "/pages/recipes/Pickling and Fermenting/index.html"
+  - "/pages/recipes/Pizza/index.html"
+  - "/pages/recipes/Pork/index.html"
+  - "/pages/recipes/Potatoes/index.html"
+  - "/pages/recipes/Salads/index.html"
+  - "/pages/recipes/Sandwiches/index.html"
+  - "/pages/recipes/Sauces and Condiments/index.html"
+  - "/pages/recipes/Soups/index.html"
+  - "/pages/recipes/Spice Mixes/index.html"
+  - "/pages/recipes/Tofu/index.html"
+  - "/pages/recipes/Veal/index.html"
+  - "/pages/recipes/Vegetables/index.html"
+  - "/pages/recipes/recipes.html"
+---
+
+A collection of recipes. Use the category filter on the right to browse by type, or search by name.

@@ -1,0 +1,12 @@
+---
+title: "Acid_PH_Chart"
+author: "Chris Kornaros"
+date: 2026-03-06
+categories: ["Cooking & Kitchen Tips"]
+aliases:
+  - "/pages/recipes/Cooking & Kitchen Tips/Acid_PH_Chart.html"
+---
+
+```{=html}
+<iframe src="acid-ph-chart.pdf" width="100%" height="900px" style="border: none;"></iframe>
+```

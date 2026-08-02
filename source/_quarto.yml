@@ -47,7 +47,7 @@ website:
       - text: "Blogs"
         href: pages/blogs/blogs.qmd
       - text: "Recipes"
-        href: pages/recipes/recipes.qmd
+        href: recipes/index.qmd
 
   # Sidebars auto-list a directory (not hand-listed posts) so a freshly published
   # file appears automatically -- no _quarto.yml edit per publish. NOTE: use a
@@ -96,44 +96,17 @@ website:
       background: dark
       foreground: light
       collapse-level: 2
-      # Categories-only sidebar: "All Recipes" + one link per category index page.
-      # Deliberately slim -- ~27 nav items, NOT every recipe. A directory listing
-      # ("pages/recipes") recurses the whole tree and embeds all ~120 recipes into
-      # every page (~1k lines/page); globs render as literal text and the `auto:`
-      # glob form crashes in Quarto 1.9, so categories are listed explicitly.
-      # Publishing a recipe needs NO edit here (it lands on its category's listing
-      # page); only adding a brand-new category folder adds one line below.
+      # Recipes are FLAT: recipes/<slug>.qmd, slug = content_manager's
+      # slugify(title), so CM's <recipes_dir>/<slug>.qmd lookup resolves every
+      # page with no per-recipe override. Category browsing moved to the
+      # listing page's category filter (recipes/index.qmd, `categories: true`);
+      # the old per-category index pages are gone. Keep this sidebar to the
+      # single listing link -- a directory listing ("recipes") would embed all
+      # ~120 recipes into every page's sidebar (~1k lines/page).
+      # Publishing a recipe needs NO edit here.
       contents:
         - text: "All Recipes"
-          href: pages/recipes/recipes.qmd
-        - section: "Categories"
-          contents:
-            - "pages/recipes/Baked Goods/index.qmd"
-            - "pages/recipes/Beef/index.qmd"
-            - "pages/recipes/Chicken/index.qmd"
-            - "pages/recipes/Cod/index.qmd"
-            - "pages/recipes/Cookbook/index.qmd"
-            - "pages/recipes/Cooking & Kitchen Tips/index.qmd"
-            - "pages/recipes/Drinks/index.qmd"
-            - "pages/recipes/Japan/index.qmd"
-            - "pages/recipes/Masterclass Recipes/index.qmd"
-            - "pages/recipes/Mexican/index.qmd"
-            - "pages/recipes/New Orleans/index.qmd"
-            - "pages/recipes/Noodles/index.qmd"
-            - "pages/recipes/Oils and Marinades/index.qmd"
-            - "pages/recipes/Party Snacks and Dips/index.qmd"
-            - "pages/recipes/Pickling and Fermenting/index.qmd"
-            - "pages/recipes/Pizza/index.qmd"
-            - "pages/recipes/Pork/index.qmd"
-            - "pages/recipes/Potatoes/index.qmd"
-            - "pages/recipes/Salads/index.qmd"
-            - "pages/recipes/Sandwiches/index.qmd"
-            - "pages/recipes/Sauces and Condiments/index.qmd"
-            - "pages/recipes/Soups/index.qmd"
-            - "pages/recipes/Spice Mixes/index.qmd"
-            - "pages/recipes/Tofu/index.qmd"
-            - "pages/recipes/Veal/index.qmd"
-            - "pages/recipes/Vegetables/index.qmd"
+          href: recipes/index.qmd
 
 format:
   html:

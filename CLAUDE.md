@@ -97,11 +97,19 @@ A draft is the canonical source; the site `.qmd` is generated from it.
 - **The converter** lives in [site_publish/](site_publish/) and does the
   transform only — never git. It maps Obsidian → Quarto (wikilinks, `![[embeds]]`
   → copied `images/`, callouts, strips `#tags`/`draft`), routes by section
-  (recipes → `recipes/<Category>/`, others → `<section>/posts/`), generates the
+  (recipes → flat `source/recipes/<slug>.qmd`, others → `<section>/posts/`),
+  generates the
   Substack embed for blogs (normalizing a "Share"-link `open.substack.com/pub/…`
   URL with tracking params to the canonical `<pub>.substack.com/p/<slug>` form)
   and the `video:` embed for recipes, and is idempotent (re-publish overwrites
-  the `.qmd`).
+  the `.qmd`). **Recipe site files are flat:** `source/recipes/<slug>.qmd`,
+  where `<slug>` = content_manager's `slugify(title)` (mirrored as
+  `site_publish/config.py:slugify_recipe` — Unicode alnums kept, everything
+  else collapses to single hyphens), so CM's `<recipes_dir>/<slug>.qmd` lookup
+  resolves every recipe with no per-recipe `website_slug` override. The vault
+  keeps its `writing/recipes/<Category>/` subfolders — the category becomes
+  `categories:` front matter, and browsing is the listing page's category
+  filter (`source/recipes/index.qmd`), not per-category index pages.
 - **Announce on Bluesky (optional, after publish):** the **`/announce`** skill
   ([.claude/commands/announce.md](.claude/commands/announce.md)) posts a short
   Bluesky update linking to a just-published post. `uv run announce <draft>
@@ -122,12 +130,12 @@ A draft is the canonical source; the site `.qmd` is generated from it.
   multi-platform poster later — the `bw`-CLI shape is the documented bridge.
 - **No `_quarto.yml` edits per publish:** the navbar links to listing pages, the
   guides/blogs sidebars auto-list their `posts/` directory, and the recipes
-  sidebar lists category index pages, so a newly published post appears
-  automatically. The one exception is adding a brand-new recipe *category*
-  folder — that needs a one-line entry under the recipes sidebar `contents`
-  (Quarto 1.9 renders bare globs as literal text and crashes on the `auto:` glob
-  form, so categories are listed explicitly to keep each page's sidebar slim
-  rather than embedding the whole recipe tree).
+  sidebar is a single "All Recipes" link to the flat listing
+  (`source/recipes/index.qmd`, whose category filter replaces the old
+  per-category index pages), so a newly published post — including a recipe in
+  a brand-new category — appears automatically with no config edit. (Keep the
+  recipes sidebar to that one link: a directory listing would embed all ~120
+  recipes into every page's sidebar.)
 - **`docs/` is committed alongside `source/`** in a publish PR (it's tracked and
   re-rendered on every render). CI re-renders on merge.
 

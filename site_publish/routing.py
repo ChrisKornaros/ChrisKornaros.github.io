@@ -5,7 +5,7 @@ Layout mirrored between vault and site:
     writing/guides/foo.md        -> source/pages/guides/posts/foo.qmd
     writing/research/foo.md      -> source/pages/research/posts/foo.qmd
     writing/blogs/foo.md         -> source/pages/blogs/posts/foo.qmd
-    writing/recipes/Beef/foo.md  -> source/pages/recipes/Beef/foo.qmd
+    writing/recipes/Beef/foo.md  -> source/recipes/<cm-slug-of-title>.qmd
 """
 
 from __future__ import annotations
@@ -51,18 +51,21 @@ def resolve(draft: Path, *, title: str) -> Target:
     pages = config.site_pages()
 
     if section == "recipes":
-        # writing/recipes/<Category>/<file>.md -- category is required.
+        # writing/recipes/<Category>/<file>.md -- the category subfolder still
+        # names the `categories:` front matter, but the site file is FLAT:
+        # source/recipes/<slug>.qmd with slug = content_manager's
+        # slugify(title), so CM's slug->file lookup resolves it directly.
         if len(rel.parts) < 3:
             raise ValueError(
                 f"Recipe draft {draft} must live in a category subfolder, e.g. "
                 f"writing/recipes/Beef/{draft.name}."
             )
         category = rel.parts[1]
-        dest_dir = pages / "recipes" / category
+        dest_dir = config.site_source() / "recipes"
         return Target(
             section=section,
             category=category,
-            qmd_path=dest_dir / f"{slug}.qmd",
+            qmd_path=dest_dir / f"{config.slugify_recipe(title)}.qmd",
             assets_dir=dest_dir / "images",
         )
 

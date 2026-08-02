@@ -49,3 +49,23 @@ def slugify(value: str) -> str:
     value = value.strip().lower()
     value = re.sub(r"[^a-z0-9]+", "-", value)
     return value.strip("-") or "untitled"
+
+
+def slugify_recipe(title: str) -> str:
+    """content_manager's slug rule, mirrored exactly (website_embed.slugify).
+
+    Recipe filenames must equal CM's slugify(title) so its
+    ``<recipes_dir>/<slug>.qmd`` lookup resolves without a per-recipe
+    ``website_slug`` override. Differs from :func:`slugify` in keeping any
+    Unicode alphanumeric (``str.isalnum``), not just ``[a-z0-9]``.
+    """
+    out: list[str] = []
+    prev_hyphen = False
+    for ch in title.strip().lower():
+        if ch.isalnum():
+            out.append(ch)
+            prev_hyphen = False
+        elif not prev_hyphen:
+            out.append("-")
+            prev_hyphen = True
+    return "".join(out).strip("-") or "untitled"

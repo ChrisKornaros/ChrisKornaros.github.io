@@ -1,0 +1,12 @@
+---
+title: "Mom_s_Potato_Salad"
+author: "Chris Kornaros"
+date: 2026-03-06
+categories: ["Potatoes"]
+aliases:
+  - "/pages/recipes/Potatoes/Mom_s_Potato_Salad.html"
+---
+
+```{=html}
+<iframe src="mom-s-potato-salad.pdf" width="100%" height="900px" style="border: none;"></iframe>
+```
