@@ -27,3 +27,4 @@ wheels/
 .claude/*
 !.claude/commands/
 !.claude/settings.json
+!.claude/next-session.md
