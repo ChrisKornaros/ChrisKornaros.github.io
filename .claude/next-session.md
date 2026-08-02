@@ -1,5 +1,11 @@
 # Next session kickoff
 
+**⚠️ Sequencing gate:** PR #20 stays UNMERGED until after Monday's live
+content_manager pass — the pass expects the current (old) site shape for
+its first live synced row. Chris merges it in the GitHub UI after the
+full test. Do not clean up the branch before `gh pr view 20` shows
+`MERGED`.
+
 **Context:** PR #20 (`chore/recipes-flat-slugs`) flattened all 123 recipe
 pages to `source/recipes/<slug>.qmd` with slug = content_manager's
 `slugify(title)`, added redirect aliases for every old
