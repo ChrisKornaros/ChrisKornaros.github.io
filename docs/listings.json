@@ -7,177 +7,140 @@
     ]
   },
   {
-    "listing": "/pages/recipes/Mexican/index.html",
-    "items": [
-      "/pages/recipes/Mexican/Burrito Bowls.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Oils and Marinades/index.html",
-    "items": [
-      "/pages/recipes/Oils and Marinades/Marinated Sweet Peppers.html",
-      "/pages/recipes/Oils and Marinades/Sun Dried Tomatoes.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Cod/index.html",
-    "items": [
-      "/pages/recipes/Cod/Beer Batter (Fish fry optional).html",
-      "/pages/recipes/Cod/Miso Glazed Cod.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Masterclass Recipes/index.html",
-    "items": [
-      "/pages/recipes/Masterclass Recipes/Gabriela Cámara.html",
-      "/pages/recipes/Masterclass Recipes/Gordon Ramsey 1.html",
-      "/pages/recipes/Masterclass Recipes/Gordon Ramsey 2.html",
-      "/pages/recipes/Masterclass Recipes/James Suckling Wine Tasting.html",
-      "/pages/recipes/Masterclass Recipes/James Suckling.html",
-      "/pages/recipes/Masterclass Recipes/Madhur Jaffrey.html",
-      "/pages/recipes/Masterclass Recipes/Mashama Bailey.html",
-      "/pages/recipes/Masterclass Recipes/Massimo Bottura.html",
-      "/pages/recipes/Masterclass Recipes/Michael Twitty Roots.html",
-      "/pages/recipes/Masterclass Recipes/Mixology - Lynnette Marrero & Ryan Chetiyawardana.html",
-      "/pages/recipes/Masterclass Recipes/Niki Nakayama.html",
-      "/pages/recipes/Masterclass Recipes/Ron Finley.html",
-      "/pages/recipes/Masterclass Recipes/Roy Choi.html",
-      "/pages/recipes/Masterclass Recipes/Thomas Keller 1.html",
-      "/pages/recipes/Masterclass Recipes/Thomas Keller 2.html",
-      "/pages/recipes/Masterclass Recipes/Thomas Keller 3.html",
-      "/pages/recipes/Masterclass Recipes/Wolfgang Puck.html",
-      "/pages/recipes/Masterclass Recipes/Yotam Ottolenghi.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Pizza/index.html",
-    "items": [
-      "/pages/recipes/Pizza/Cast Iron Pizza.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Pickling and Fermenting/index.html",
-    "items": [
-      "/pages/recipes/Pickling and Fermenting/Asian Cucumber Slices.html",
-      "/pages/recipes/Pickling and Fermenting/Brad_s Mustard.html",
-      "/pages/recipes/Pickling and Fermenting/Caramelized Onions.html",
-      "/pages/recipes/Pickling and Fermenting/Fermented Peppers for Hot Sauce.html",
-      "/pages/recipes/Pickling and Fermenting/Giardiniera.html",
-      "/pages/recipes/Pickling and Fermenting/Pickled Brusselsprouts.html",
-      "/pages/recipes/Pickling and Fermenting/Pickled Coleslaw.html",
-      "/pages/recipes/Pickling and Fermenting/Pickled Jalapenos.html",
-      "/pages/recipes/Pickling and Fermenting/Pickled Onion Recipe.html",
-      "/pages/recipes/Pickling and Fermenting/Spicy Asian Cucumbers.html",
-      "/pages/recipes/Pickling and Fermenting/Weissman Mustard.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Baked Goods/index.html",
-    "items": [
-      "/pages/recipes/Baked Goods/Basic Artisan Bread.html",
-      "/pages/recipes/Baked Goods/Basic Ficelle Recipe.html",
-      "/pages/recipes/Baked Goods/Best Ever Chewy Brownies.html",
-      "/pages/recipes/Baked Goods/Flour Tortillas.html",
-      "/pages/recipes/Baked Goods/Focaccia.html",
-      "/pages/recipes/Baked Goods/Jake Cohen Snacking Cake Recipe.html",
-      "/pages/recipes/Baked Goods/Pita.html",
-      "/pages/recipes/Baked Goods/Richard Bertinet Baguette.html",
-      "/pages/recipes/Baked Goods/Sandwich Bread Loaf.html",
-      "/pages/recipes/Baked Goods/The Best Chocolate Chip Cookies.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Spice Mixes/index.html",
-    "items": [
-      "/pages/recipes/Spice Mixes/Garama Masala.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Salads/index.html",
-    "items": [
-      "/pages/recipes/Salads/Greek Horiatiki Salad.html",
-      "/pages/recipes/Salads/Israeli Couscous Salad.html",
-      "/pages/recipes/Salads/Italian Chopped Brussels Sprouts Salad.html",
-      "/pages/recipes/Salads/Quinoa Mediterranean Salad.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Potatoes/index.html",
-    "items": [
-      "/pages/recipes/Potatoes/Mom_s_Potato_Salad.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Cooking & Kitchen Tips/index.html",
-    "items": [
-      "/pages/recipes/Cooking & Kitchen Tips/Acid_PH_Chart.html",
-      "/pages/recipes/Cooking & Kitchen Tips/Canning, Fermenting, and Pickling/00. Complete Guide to Home Canning.html",
-      "/pages/recipes/Cooking & Kitchen Tips/Canning, Fermenting, and Pickling/01. Principles of Home Canning.html",
-      "/pages/recipes/Cooking & Kitchen Tips/Canning, Fermenting, and Pickling/02. Selecting Preparing and Canning Fruit and Fruit Products.html",
-      "/pages/recipes/Cooking & Kitchen Tips/Canning, Fermenting, and Pickling/03. Selecting Preparing and Canning Tomatoes and Tomato Products.html",
-      "/pages/recipes/Cooking & Kitchen Tips/Canning, Fermenting, and Pickling/04. Selecting Preparing and Canning Vegetables and Vegetable Products.html",
-      "/pages/recipes/Cooking & Kitchen Tips/Canning, Fermenting, and Pickling/05. Preparing and Canning Poultry Red Meats and Seafoods.html",
-      "/pages/recipes/Cooking & Kitchen Tips/Canning, Fermenting, and Pickling/06. Preparing and Canning Fermented Foods and Pickled Vegetables.html",
-      "/pages/recipes/Cooking & Kitchen Tips/Canning, Fermenting, and Pickling/07. Preparing and Canning Jams and Jellies.html",
-      "/pages/recipes/Cooking & Kitchen Tips/Chicken-egg-sizes.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Sauces and Condiments/index.html",
-    "items": [
-      "/pages/recipes/Sauces and Condiments/Adobo Sauce.html",
-      "/pages/recipes/Sauces and Condiments/Balsamic Vinaigrette.html",
-      "/pages/recipes/Sauces and Condiments/Carolina Reaper Hot Sauce.html",
-      "/pages/recipes/Sauces and Condiments/Chili Oil_Crisps.html",
-      "/pages/recipes/Sauces and Condiments/Chipotle Crema.html",
-      "/pages/recipes/Sauces and Condiments/Comeback Sauce.html",
-      "/pages/recipes/Sauces and Condiments/Fermented Hot Sauce (w_ any peppers).html",
-      "/pages/recipes/Sauces and Condiments/Green Crack.html",
-      "/pages/recipes/Sauces and Condiments/Harissa.html",
-      "/pages/recipes/Sauces and Condiments/Homemade Mayo.html",
-      "/pages/recipes/Sauces and Condiments/Honey Mustard.html",
-      "/pages/recipes/Sauces and Condiments/Hot Honey.html",
-      "/pages/recipes/Sauces and Condiments/Hot Sauce (Dried Peppers).html",
-      "/pages/recipes/Sauces and Condiments/Italian Dressing.html",
-      "/pages/recipes/Sauces and Condiments/Mango Habanero Hot Sauce.html",
-      "/pages/recipes/Sauces and Condiments/Peach Scotch Bonnet Hot Sauce.html",
-      "/pages/recipes/Sauces and Condiments/Ponzu Vinaigrette.html",
-      "/pages/recipes/Sauces and Condiments/Roasted Ghost Pepper Hot Sauce.html",
-      "/pages/recipes/Sauces and Condiments/Salsa Template Recipe.html",
-      "/pages/recipes/Sauces and Condiments/Spicy Serrano Hot Sauce.html",
-      "/pages/recipes/Sauces and Condiments/Teriyaki Sauce.html",
-      "/pages/recipes/Sauces and Condiments/Ultimate Pesto.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/New Orleans/index.html",
-    "items": [
-      "/pages/recipes/New Orleans/Gumbo - Weissman.html",
-      "/pages/recipes/New Orleans/Jambalaya.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Beef/index.html",
-    "items": [
-      "/pages/recipes/Beef/Meatballs.html",
-      "/pages/recipes/Beef/NYT_ Steak and Salsa Verde.html",
-      "/pages/recipes/Beef/Red Wine Braised Short Ribs.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Drinks/index.html",
-    "items": [
-      "/pages/recipes/Drinks/Boozy_Backyard_Lemonade.html",
-      "/pages/recipes/Drinks/Infused Alcohol.html"
-    ]
-  },
-  {
     "listing": "/pages/projects/data_science/data_science.html",
     "items": []
   },
   {
     "listing": "/pages/research/research.html",
     "items": []
+  },
+  {
+    "listing": "/recipes/index.html",
+    "items": [
+      "/recipes/00-complete-guide-to-home-canning.html",
+      "/recipes/01-principles-of-home-canning.html",
+      "/recipes/02-selecting-preparing-and-canning-fruit-and-fruit-products.html",
+      "/recipes/03-selecting-preparing-and-canning-tomatoes-and-tomato-products.html",
+      "/recipes/04-selecting-preparing-and-canning-vegetables-and-vegetable-products.html",
+      "/recipes/05-preparing-and-canning-poultry-red-meats-and-seafoods.html",
+      "/recipes/06-preparing-and-canning-fermented-foods-and-pickled-vegetables.html",
+      "/recipes/07-preparing-and-canning-jams-and-jellies.html",
+      "/recipes/acid-ph-chart.html",
+      "/recipes/adobo-sauce.html",
+      "/recipes/asian-cucumber-slices.html",
+      "/recipes/authentic-hot-and-sour-soup.html",
+      "/recipes/balsamic-vinaigrette.html",
+      "/recipes/bang-bang-brussel-sprouts.html",
+      "/recipes/basic-artisan-bread.html",
+      "/recipes/basic-ficelle-recipe.html",
+      "/recipes/beer-batter-fish-fry-optional.html",
+      "/recipes/best-ever-chewy-brownies.html",
+      "/recipes/blue-zone-s-minestrone.html",
+      "/recipes/boozy-backyard-lemonade.html",
+      "/recipes/brad-s-mustard.html",
+      "/recipes/buffalo-chicken-dip.html",
+      "/recipes/burrito-bowls.html",
+      "/recipes/caramelized-onions.html",
+      "/recipes/caramelized-peppers-and-onions.html",
+      "/recipes/carolina-reaper-hot-sauce.html",
+      "/recipes/cast-iron-pizza.html",
+      "/recipes/chicken-parm.html",
+      "/recipes/chicken-picatta.html",
+      "/recipes/chicken-egg-sizes.html",
+      "/recipes/chili-oil-crisps.html",
+      "/recipes/chipotle-crema.html",
+      "/recipes/chongqing-chicken-la-zi-ji.html",
+      "/recipes/comeback-sauce.html",
+      "/recipes/dan-dan-noodles.html",
+      "/recipes/fermented-hot-sauce-w-any-peppers.html",
+      "/recipes/fermented-peppers-for-hot-sauce.html",
+      "/recipes/flour-tortillas.html",
+      "/recipes/focaccia.html",
+      "/recipes/gabriela-cámara.html",
+      "/recipes/garama-masala.html",
+      "/recipes/garlic-whipped-cauliflower.html",
+      "/recipes/giardiniera.html",
+      "/recipes/gordon-ramsey-1.html",
+      "/recipes/gordon-ramsey-2.html",
+      "/recipes/greek-briam.html",
+      "/recipes/greek-honey-garlic-chicken-paidakia.html",
+      "/recipes/greek-horiatiki-salad.html",
+      "/recipes/green-crack.html",
+      "/recipes/gumbo-weissman.html",
+      "/recipes/harissa.html",
+      "/recipes/homemade-mayo.html",
+      "/recipes/honey-mustard.html",
+      "/recipes/hot-honey.html",
+      "/recipes/hot-sauce-dried-peppers.html",
+      "/recipes/hummus-with-spiced-chicken-and-cauliflower.html",
+      "/recipes/infused-alcohol.html",
+      "/recipes/israeli-couscous-salad.html",
+      "/recipes/italian-chopped-brussels-sprouts-salad.html",
+      "/recipes/italian-dressing.html",
+      "/recipes/jake-cohen-snacking-cake-recipe.html",
+      "/recipes/jambalaya.html",
+      "/recipes/james-suckling.html",
+      "/recipes/james-suckling-wine-tasting.html",
+      "/recipes/lo-mein.html",
+      "/recipes/madhur-jaffrey.html",
+      "/recipes/mango-habanero-hot-sauce.html",
+      "/recipes/mapo-tofu.html",
+      "/recipes/marinated-sweet-peppers.html",
+      "/recipes/mashama-bailey.html",
+      "/recipes/massimo-bottura.html",
+      "/recipes/meatballs.html",
+      "/recipes/mediterranean-lentil-soup.html",
+      "/recipes/michael-twitty-roots.html",
+      "/recipes/miso-glazed-cod.html",
+      "/recipes/mixology-lynnette-marrero-ryan-chetiyawardana.html",
+      "/recipes/mom-s-potato-salad.html",
+      "/recipes/nyt-chicken-shawarma.html",
+      "/recipes/nyt-steak-and-salsa-verde.html",
+      "/recipes/niki-nakayama.html",
+      "/recipes/nourishing-chicken-and-rice.html",
+      "/recipes/olive-tapenade.html",
+      "/recipes/olive-tapenade-slab-sandwich.html",
+      "/recipes/pad-thai.html",
+      "/recipes/peach-scotch-bonnet-hot-sauce.html",
+      "/recipes/pickled-brusselsprouts.html",
+      "/recipes/pickled-coleslaw.html",
+      "/recipes/pickled-jalapenos.html",
+      "/recipes/pickled-onion-recipe.html",
+      "/recipes/pita.html",
+      "/recipes/ponzu-vinaigrette.html",
+      "/recipes/queso-two-ways.html",
+      "/recipes/quinoa-mediterranean-salad.html",
+      "/recipes/red-wine-braised-short-ribs.html",
+      "/recipes/richard-bertinet-baguette.html",
+      "/recipes/roasted-ghost-pepper-hot-sauce.html",
+      "/recipes/roasted-red-peppers.html",
+      "/recipes/ron-finley.html",
+      "/recipes/roy-choi.html",
+      "/recipes/sticky-hoisin-pork-ribs-with-tangy-smashed-cucumbers-and-garlic-rice-gordon-ramsay-com.html",
+      "/recipes/salsa-template-recipe.html",
+      "/recipes/sandwich-bread-loaf.html",
+      "/recipes/sesame-chicken.html",
+      "/recipes/shoyu-ramen.html",
+      "/recipes/simple-veal-bolognese.html",
+      "/recipes/spicy-asian-cucumbers.html",
+      "/recipes/spicy-chinese-sichuan-green-beans-dinner-then-dessert.html",
+      "/recipes/spicy-serrano-hot-sauce.html",
+      "/recipes/spinach-and-artichoke-dip-weissman.html",
+      "/recipes/sun-dried-tomatoes.html",
+      "/recipes/sushi-rice.html",
+      "/recipes/teriyaki-sauce.html",
+      "/recipes/the-best-chocolate-chip-cookies.html",
+      "/recipes/thomas-keller-1.html",
+      "/recipes/thomas-keller-2.html",
+      "/recipes/thomas-keller-3.html",
+      "/recipes/ultimate-pesto.html",
+      "/recipes/weissman-fried-chicken-two-ways.html",
+      "/recipes/weissman-mustard.html",
+      "/recipes/wolfgang-puck.html",
+      "/recipes/yotam-ottolenghi.html",
+      "/recipes/zhajiang-mian.html",
+      "/recipes/ebook.html"
+    ]
   },
   {
     "listing": "/pages/blogs/blogs.html",
@@ -191,124 +154,5 @@
   {
     "listing": "/pages/projects/data_engineering/data_engineering.html",
     "items": []
-  },
-  {
-    "listing": "/pages/recipes/recipes.html",
-    "items": [
-      "/pages/recipes/Baked Goods/index.html",
-      "/pages/recipes/Beef/index.html",
-      "/pages/recipes/Chicken/index.html",
-      "/pages/recipes/Cod/index.html",
-      "/pages/recipes/Cookbook/index.html",
-      "/pages/recipes/Cooking & Kitchen Tips/index.html",
-      "/pages/recipes/Drinks/index.html",
-      "/pages/recipes/Japan/index.html",
-      "/pages/recipes/Masterclass Recipes/index.html",
-      "/pages/recipes/Mexican/index.html",
-      "/pages/recipes/New Orleans/index.html",
-      "/pages/recipes/Noodles/index.html",
-      "/pages/recipes/Oils and Marinades/index.html",
-      "/pages/recipes/Party Snacks and Dips/index.html",
-      "/pages/recipes/Pickling and Fermenting/index.html",
-      "/pages/recipes/Pizza/index.html",
-      "/pages/recipes/Pork/index.html",
-      "/pages/recipes/Potatoes/index.html",
-      "/pages/recipes/Salads/index.html",
-      "/pages/recipes/Sandwiches/index.html",
-      "/pages/recipes/Sauces and Condiments/index.html",
-      "/pages/recipes/Soups/index.html",
-      "/pages/recipes/Spice Mixes/index.html",
-      "/pages/recipes/Tofu/index.html",
-      "/pages/recipes/Veal/index.html",
-      "/pages/recipes/Vegetables/index.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Vegetables/index.html",
-    "items": [
-      "/pages/recipes/Vegetables/Bang Bang Brussel Sprouts.html",
-      "/pages/recipes/Vegetables/Caramelized Peppers and Onions.html",
-      "/pages/recipes/Vegetables/Garlic Whipped Cauliflower.html",
-      "/pages/recipes/Vegetables/Greek Briam.html",
-      "/pages/recipes/Vegetables/Roasted Red Peppers.html",
-      "/pages/recipes/Vegetables/Spicy Chinese Sichuan Green Beans - Dinner, then Dessert.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Pork/index.html",
-    "items": [
-      "/pages/recipes/Pork/STICKY HOISIN PORK RIBS WITH TANGY SMASHED CUCUMBERS AND GARLIC RICE » Gordon Ramsay.com.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Veal/index.html",
-    "items": [
-      "/pages/recipes/Veal/Simple Veal Bolognese.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Cookbook/index.html",
-    "items": [
-      "/pages/recipes/Cookbook/ebook.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Tofu/index.html",
-    "items": [
-      "/pages/recipes/Tofu/Mapo Tofu.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Japan/index.html",
-    "items": [
-      "/pages/recipes/Japan/Sushi Rice.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Sandwiches/index.html",
-    "items": [
-      "/pages/recipes/Sandwiches/Olive Tapenade Slab Sandwich.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Chicken/index.html",
-    "items": [
-      "/pages/recipes/Chicken/Chicken Parm.html",
-      "/pages/recipes/Chicken/Chicken Picatta.html",
-      "/pages/recipes/Chicken/Chongqing Chicken (La Zi Ji).html",
-      "/pages/recipes/Chicken/Greek Honey Garlic Chicken Paidakia.html",
-      "/pages/recipes/Chicken/NYT Chicken Shawarma.html",
-      "/pages/recipes/Chicken/Nourishing Chicken and Rice.html",
-      "/pages/recipes/Chicken/Sesame Chicken.html",
-      "/pages/recipes/Chicken/Weissman Fried Chicken (Two Ways).html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Party Snacks and Dips/index.html",
-    "items": [
-      "/pages/recipes/Party Snacks and Dips/Buffalo Chicken Dip.html",
-      "/pages/recipes/Party Snacks and Dips/Hummus with Spiced Chicken and Cauliflower.html",
-      "/pages/recipes/Party Snacks and Dips/Olive Tapenade.html",
-      "/pages/recipes/Party Snacks and Dips/Queso Two Ways.html",
-      "/pages/recipes/Party Snacks and Dips/Spinach and Artichoke Dip - Weissman.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Soups/index.html",
-    "items": [
-      "/pages/recipes/Soups/Authentic Hot and Sour Soup.html",
-      "/pages/recipes/Soups/Blue Zone_s Minestrone.html",
-      "/pages/recipes/Soups/Mediterranean Lentil Soup.html",
-      "/pages/recipes/Soups/Shoyu Ramen.html"
-    ]
-  },
-  {
-    "listing": "/pages/recipes/Noodles/index.html",
-    "items": [
-      "/pages/recipes/Noodles/Dan Dan Noodles.html",
-      "/pages/recipes/Noodles/Lo Mein.html",
-      "/pages/recipes/Noodles/Pad Thai.html",
-      "/pages/recipes/Noodles/Zhajiang Mian.html"
-    ]
   }
 ]

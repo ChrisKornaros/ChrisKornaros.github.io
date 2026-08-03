@@ -1,0 +1,12 @@
+---
+title: "Madhur Jaffrey"
+author: "Chris Kornaros"
+date: 2026-03-06
+categories: ["Masterclass Recipes"]
+aliases:
+  - "/pages/recipes/Masterclass Recipes/Madhur Jaffrey.html"
+---
+
+```{=html}
+<iframe src="madhur-jaffrey.pdf" width="100%" height="900px" style="border: none;"></iframe>
+```

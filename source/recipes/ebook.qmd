@@ -1,0 +1,12 @@
+---
+title: "ebook"
+author: "Chris Kornaros"
+date: 2026-03-06
+categories: ["Cookbook"]
+aliases:
+  - "/pages/recipes/Cookbook/ebook.html"
+---
+
+```{=html}
+<iframe src="ebook.pdf" width="100%" height="900px" style="border: none;"></iframe>
+```

@@ -1,8 +1,7 @@
 """Convert a single vault draft into a site ``.qmd``.
 
 Pure-ish: reads the draft + (for embeds) copies image assets, writes the target
-``.qmd`` and, for recipes, a category ``index.qmd`` if one is missing. Never
-touches git.
+``.qmd``. Never touches git.
 """
 
 from __future__ import annotations
@@ -19,7 +18,6 @@ from . import config, embeds, frontmatter_map, obsidian, routing
 
 # Image extensions we resolve for ![[embeds]].
 _IMG_EXTS = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg", ".avif"}
-_TEMPLATES = Path(__file__).resolve().parent / "templates"
 
 
 @dataclass
@@ -47,18 +45,6 @@ def _find_asset(name: str, draft: Path) -> Path | None:
     # Fall back to a recursive search under writing/ (handles nested attachments).
     matches = list(config.vault_writing().rglob(name))
     return matches[0] if matches else None
-
-
-def _ensure_category_index(target: routing.Target, result: Result) -> None:
-    if target.section != "recipes" or target.category is None:
-        return
-    index = target.qmd_path.parent / "index.qmd"
-    if index.exists():
-        return
-    text = (_TEMPLATES / "category_index.qmd").read_text(encoding="utf-8")
-    index.parent.mkdir(parents=True, exist_ok=True)
-    index.write_text(text.format(category=target.category), encoding="utf-8")
-    result.written.append(index)
 
 
 _FM_BLOCK = re.compile(r"\A---\r?\n.*?\r?\n---", re.DOTALL)
@@ -134,7 +120,6 @@ def convert(draft: Path) -> Result:
             body = embeds.video_embed(str(mapped["video"])) + "\n" + body
             mapped.pop("video")  # rendered into the body, not shown as metadata
 
-    _ensure_category_index(target, result)
     target.qmd_path.parent.mkdir(parents=True, exist_ok=True)
     target.qmd_path.write_text(_dump_qmd(mapped, body), encoding="utf-8")
     result.written.append(target.qmd_path)

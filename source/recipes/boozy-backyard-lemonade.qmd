@@ -1,0 +1,12 @@
+---
+title: "Boozy_Backyard_Lemonade"
+author: "Chris Kornaros"
+date: 2026-03-06
+categories: ["Drinks"]
+aliases:
+  - "/pages/recipes/Drinks/Boozy_Backyard_Lemonade.html"
+---
+
+```{=html}
+<iframe src="boozy-backyard-lemonade.pdf" width="100%" height="900px" style="border: none;"></iframe>
+```
