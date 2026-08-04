@@ -1,5 +1,5 @@
 ---
-title: "00. Complete Guide to Home Canning"
+title: "00 — Complete Guide to Home Canning"
 author: "Chris Kornaros"
 date: 2026-03-06
 categories: ["Cooking & Kitchen Tips"]
