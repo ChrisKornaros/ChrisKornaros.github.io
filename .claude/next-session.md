@@ -1,35 +1,31 @@
 # Next session kickoff
 
-**Context:** PR #20 (flat recipe slugs) merged 2026-08-03. PR #21
-(`chore/fix-recipes-listing-titles`) then repaired its fallout: recipe
-titles starting `NN. ` parsed as markdown ordered lists in the grid
-listing, corrupting the card anchors so List.js rendered an **empty**
-/recipes listing. Fix: retitle the 8 canning chapters to `NN — Title`
-(same slug via `slugify_recipe`), restore category browsing to the left
-recipes sidebar as `#category=` hash links, document the `NN.`-title
-rule in CLAUDE.md. The re-render also shipped CM's paidakia video embed
-(commit 3a09cdb had touched only the `.qmd`).
+**Context:** The Pages source gap is closed (2026-08-04, session after PR
+#22): GitHub Pages now serves the **`gh-pages` branch** (CI render from
+publish.yml) instead of `main:/docs`. Settings-only change via the Pages
+API — verified live (all pages 200, paidakia video embed intact). CM
+pushes that touch only a `.qmd` now deploy automatically via the CI
+render; no local re-render needed.
 
 **Queued follow-ups:**
 
-1. **CM emission config (content_manager repo, not here):** point CM's
-   emission at the new layout — `website_repo_path` → the clone's
-   `source/` dir, `website_recipes_dir: recipes` (default). File lookup
-   becomes `source/recipes/<slug>.qmd`, emitted URLs
-   `https://chriskornaros.dev/recipes/<slug>.html`. Recognition regex
-   already matches. Drop any `website_slug` overrides that only bridged
-   the old capitalized paths. Own branch/PR in that repo.
-   **New constraint from PR #21:** CM must never emit a recipe title
-   matching `^\d+\. ` — it blanks the whole listing (see CLAUDE.md
-   publishing section).
-2. **Pages source gap (this repo):** Pages serves `main:/docs` while
-   publish.yml deploys to `gh-pages` (JamesIves action) — the CI render
-   is dead weight, so a CM push that touches only a `.qmd` never goes
-   live until someone re-renders locally. Either switch Pages to
-   `gh-pages` or make the workflow commit `docs/` back to `main`.
-   Suggested branch: `chore/pages-deploy-alignment`.
+1. **CM emission config (content_manager repo, not here):** CM PR #137
+   finalized `CM_WEBSITE_REPO_PATH: /data/website/source` +
+   `CM_WEBSITE_RECIPES_DIR: recipes`; Chris may still need to
+   `git pull && docker compose up -d --build` on ms01. Remaining CM work:
+   `site/git_repo.py` should `git pull --ff-only` the clone before
+   resolving (stale clone → terminal `skipped_no_match`).
+   **Constraint from PR #21:** CM must never emit a recipe title matching
+   `^\d+\. ` — it blanks the whole listing (see CLAUDE.md publishing
+   section).
+2. **Untrack `docs/` (this repo, optional):** with Pages serving
+   `gh-pages`, the committed `docs/` no longer drives the live site —
+   it's kept for local preview parity. Deciding to untrack it would
+   shrink publish PRs to just the `.qmd` diff; it's a contract change
+   (CLAUDE.md documents `docs/` as committed), so it's its own
+   decision/PR, not a drive-by.
 3. **Guides migration step 4** (republish live guides) — still open per
-   memory.
+   MIGRATION.md / memory.
 
 **Open question:** old recipe URLs inside Plane work-item descriptions
 still point at `/pages/recipes/...`; redirects cover humans, and CM

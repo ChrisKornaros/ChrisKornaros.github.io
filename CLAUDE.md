@@ -2,7 +2,8 @@
 
 Chris Kornaros's personal website: a [Quarto](https://quarto.org) website
 (guides, projects, blogs) whose source `.qmd` lives in [source/](source/),
-renders to [docs/](docs/), and is deployed to GitHub Pages by
+renders to [docs/](docs/) locally, and is deployed to GitHub Pages (serving
+the CI-rendered `gh-pages` branch) by
 [.github/workflows/publish.yml](.github/workflows/publish.yml) on every push to
 `main`. Python tooling is managed with [uv](https://docs.astral.sh/uv/)
 (`pyproject.toml` + `uv.lock`, Python 3.13).
@@ -69,9 +70,12 @@ cleanup and wait for review notes — the branch is still live work.
   the next render. Regenerate with `quarto render` from `source/` (or
   `uv run quarto render source` from the repo root).
 - **Publishing is automatic.** Pushing to `main` triggers the publish workflow,
-  which renders `source/` and deploys `docs/` to GitHub Pages. Chris merges PRs
-  in the GitHub UI — that merge *is* the deploy. Don't run `quarto publish`
-  without asking.
+  which renders `source/` in CI and deploys the output to the `gh-pages`
+  branch; **GitHub Pages serves `gh-pages`** (switched from `main:/docs`
+  2026-08-04), so the CI render *is* the deploy — including pushes that touch
+  only a `.qmd` (e.g. content_manager's embed commits). Chris merges PRs in
+  the GitHub UI — that merge triggers the deploy (~2–3 min of CI). Don't run
+  `quarto publish` without asking.
 - **Branch slugs:** `feat/<slug>`, `docs/<slug>`, `chore/<slug>`, and
   `publish/<section>-<slug>` (content published from the vault). `main` is the
   only long-lived branch.
@@ -143,7 +147,9 @@ A draft is the canonical source; the site `.qmd` is generated from it.
   fences, which corrupts the DOM badly enough that List.js renders an empty
   listing. Use `NN — Title` instead (slugify collapses both to the same slug).
 - **`docs/` is committed alongside `source/`** in a publish PR (it's tracked and
-  re-rendered on every render). CI re-renders on merge.
+  re-rendered on every render). Since Pages serves `gh-pages`, the committed
+  `docs/` no longer drives the live site — it's kept for local preview parity;
+  untracking it is a queued follow-up decision, not something to do in passing.
 
 ## Verify changes to this contract
 
