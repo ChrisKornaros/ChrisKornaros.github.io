@@ -130,12 +130,18 @@ A draft is the canonical source; the site `.qmd` is generated from it.
   multi-platform poster later — the `bw`-CLI shape is the documented bridge.
 - **No `_quarto.yml` edits per publish:** the navbar links to listing pages, the
   guides/blogs sidebars auto-list their `posts/` directory, and the recipes
-  sidebar is a single "All Recipes" link to the flat listing
-  (`source/recipes/index.qmd`, whose category filter replaces the old
-  per-category index pages), so a newly published post — including a recipe in
-  a brand-new category — appears automatically with no config edit. (Keep the
-  recipes sidebar to that one link: a directory listing would embed all ~120
-  recipes into every page's sidebar.)
+  sidebar is an "All Recipes" link plus one link per category targeting the
+  flat listing's category filter via `#category=` hashes
+  (`source/recipes/index.qmd`; the filter replaces the old per-category index
+  pages), so a newly published post appears automatically with no config edit —
+  only a recipe in a brand-new category adds one sidebar link. (Never switch
+  the recipes sidebar to a directory listing: it would embed all ~120 recipes
+  into every page's sidebar.)
+- **Recipe titles must not start with `NN.`** (digits + period + space): in the
+  grid listing template the title is parsed as markdown, and `00. …` becomes an
+  ordered list — a block element that splits the card's anchor and leaks `:::`
+  fences, which corrupts the DOM badly enough that List.js renders an empty
+  listing. Use `NN — Title` instead (slugify collapses both to the same slug).
 - **`docs/` is committed alongside `source/`** in a publish PR (it's tracked and
   re-rendered on every render). CI re-renders on merge.
 

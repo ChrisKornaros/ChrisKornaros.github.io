@@ -98,15 +98,70 @@ website:
       collapse-level: 2
       # Recipes are FLAT: recipes/<slug>.qmd, slug = content_manager's
       # slugify(title), so CM's <recipes_dir>/<slug>.qmd lookup resolves every
-      # page with no per-recipe override. Category browsing moved to the
-      # listing page's category filter (recipes/index.qmd, `categories: true`);
-      # the old per-category index pages are gone. Keep this sidebar to the
-      # single listing link -- a directory listing ("recipes") would embed all
-      # ~120 recipes into every page's sidebar (~1k lines/page).
-      # Publishing a recipe needs NO edit here.
+      # page with no per-recipe override. The old per-category index pages are
+      # gone; each category link below targets the single listing page's
+      # category filter via its `#category=` hash (quarto-listing.js applies it
+      # on load and on hashchange), URI-encoded (space -> %20, & -> %26). Do NOT
+      # switch to a directory listing ("recipes") -- it would embed all ~120
+      # recipes into every page's sidebar (~1k lines/page). Publishing a recipe
+      # needs NO edit here; only a brand-new category adds one link below.
       contents:
         - text: "All Recipes"
           href: recipes/index.qmd
+        - section: "Categories"
+          contents:
+            - text: "Baked Goods"
+              href: "/recipes/index.html#category=Baked%20Goods"
+            - text: "Beef"
+              href: "/recipes/index.html#category=Beef"
+            - text: "Chicken"
+              href: "/recipes/index.html#category=Chicken"
+            - text: "Cod"
+              href: "/recipes/index.html#category=Cod"
+            - text: "Cookbook"
+              href: "/recipes/index.html#category=Cookbook"
+            - text: "Cooking & Kitchen Tips"
+              href: "/recipes/index.html#category=Cooking%20%26%20Kitchen%20Tips"
+            - text: "Drinks"
+              href: "/recipes/index.html#category=Drinks"
+            - text: "Japan"
+              href: "/recipes/index.html#category=Japan"
+            - text: "Masterclass Recipes"
+              href: "/recipes/index.html#category=Masterclass%20Recipes"
+            - text: "Mexican"
+              href: "/recipes/index.html#category=Mexican"
+            - text: "New Orleans"
+              href: "/recipes/index.html#category=New%20Orleans"
+            - text: "Noodles"
+              href: "/recipes/index.html#category=Noodles"
+            - text: "Oils and Marinades"
+              href: "/recipes/index.html#category=Oils%20and%20Marinades"
+            - text: "Party Snacks and Dips"
+              href: "/recipes/index.html#category=Party%20Snacks%20and%20Dips"
+            - text: "Pickling and Fermenting"
+              href: "/recipes/index.html#category=Pickling%20and%20Fermenting"
+            - text: "Pizza"
+              href: "/recipes/index.html#category=Pizza"
+            - text: "Pork"
+              href: "/recipes/index.html#category=Pork"
+            - text: "Potatoes"
+              href: "/recipes/index.html#category=Potatoes"
+            - text: "Salads"
+              href: "/recipes/index.html#category=Salads"
+            - text: "Sandwiches"
+              href: "/recipes/index.html#category=Sandwiches"
+            - text: "Sauces and Condiments"
+              href: "/recipes/index.html#category=Sauces%20and%20Condiments"
+            - text: "Soups"
+              href: "/recipes/index.html#category=Soups"
+            - text: "Spice Mixes"
+              href: "/recipes/index.html#category=Spice%20Mixes"
+            - text: "Tofu"
+              href: "/recipes/index.html#category=Tofu"
+            - text: "Veal"
+              href: "/recipes/index.html#category=Veal"
+            - text: "Vegetables"
+              href: "/recipes/index.html#category=Vegetables"
 
 format:
   html:
