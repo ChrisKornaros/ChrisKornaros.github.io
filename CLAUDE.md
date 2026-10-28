@@ -82,6 +82,15 @@ cleanup and wait for review notes — the branch is still live work.
 - **Verification = a local render.** There's no test suite; confirm a change by
   rendering `source/` cleanly and (when it matters) previewing with
   `quarto preview source`.
+- **The session hand-off is private.** This repo is public, so
+  `.claude/next-session.md` is gitignored and never rides a PR. It's a
+  symlink to `~/vault/claude/memory/ChrisKornaros.github.io/next-session.md`,
+  which the vault's hooks sync. Link it once per machine:
+  `ln -s ../../../claude/memory/ChrisKornaros.github.io/next-session.md .claude/next-session.md`.
+  Checking out a branch from before 2026-10-28 still tracks the file and
+  replaces the link, so re-link after the post-merge sync (`ls -l` should
+  show `-> …`). The rule is session-handoff's
+  [public-host section](https://github.com/ChrisKornaros/agentic_optimization_research/blob/main/modules/session-handoff/index.md#public-hosts-keep-the-kickoff-private).
 
 ## Publishing pipeline (vault → site)
 
