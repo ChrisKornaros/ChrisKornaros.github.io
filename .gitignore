@@ -27,4 +27,6 @@ wheels/
 .claude/*
 !.claude/commands/
 !.claude/settings.json
-!.claude/next-session.md
+# The session hand-off stays private: .claude/next-session.md is a symlink into
+# the vault's memory store (see CLAUDE.md), so it's ignored, not tracked.
+/.claude/next-session.md
