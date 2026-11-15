@@ -156,6 +156,8 @@ website:
               href: "/recipes/index.html#category=Soups"
             - text: "Spice Mixes"
               href: "/recipes/index.html#category=Spice%20Mixes"
+            - text: "Thanksgiving"
+              href: "/recipes/index.html#category=Thanksgiving"
             - text: "Tofu"
               href: "/recipes/index.html#category=Tofu"
             - text: "Veal"

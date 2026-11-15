@@ -41,6 +41,23 @@ def _iter_non_draft_drafts():
             continue
         if not frontmatter_map.is_draft(meta):
             yield md
+    yield from _iter_library_recipes()
+
+
+def _iter_library_recipes():
+    """Non-draft ``type: recipe`` pages under the vault library."""
+    import frontmatter
+
+    for md in sorted(config.vault_library().rglob("*.md")):
+        # Index pages and ``_`` templates are never recipes to publish.
+        if md.name == "index.md" or md.name.startswith("_"):
+            continue
+        try:
+            meta = frontmatter.load(str(md)).metadata
+        except Exception:
+            continue
+        if meta.get("type") == "recipe" and not frontmatter_map.is_draft(meta):
+            yield md
 
 
 def publish(argv: list[str] | None = None) -> int:
@@ -52,7 +69,8 @@ def publish(argv: list[str] | None = None) -> int:
     parser.add_argument("file", nargs="?", help="Path to a vault draft (.md).")
     parser.add_argument(
         "--all", action="store_true",
-        help="Convert every non-draft file under the vault writing root.",
+        help="Convert every non-draft file under the vault writing root and "
+        "every non-draft recipe page under the vault library.",
     )
     args = parser.parse_args(argv)
 
