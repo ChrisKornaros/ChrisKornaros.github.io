@@ -1,13 +1,18 @@
 ---
-title: "Pita"
-author: "Chris Kornaros"
+title: Pita
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Baked Goods"]
+categories:
+- Baked Goods
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Baked Goods/Pita.html"
+- /pages/recipes/Baked Goods/Pita.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   1 cup lukewarm water
 
@@ -24,7 +29,7 @@ aliases:
     Reserve]{.underline}](https://shop.themediterraneandish.com/product/private-reserve-extra-virgin-olive-oil/)
     Greek extra virgin olive oil), more for the bowl
 
-**Directions:**
+## Method
 
 1.  **Make sponge:** In a large mixing bowl add the lukewarm water and
     stir in yeast and sugar until dissolved. Add 1/2 cup flour and whisk

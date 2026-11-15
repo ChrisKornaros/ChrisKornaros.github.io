@@ -1,13 +1,18 @@
 ---
-title: "Sesame Chicken"
-author: "Chris Kornaros"
+title: Sesame Chicken
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Chicken"]
+categories:
+- Chicken
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Chicken/Sesame Chicken.html"
+- /pages/recipes/Chicken/Sesame Chicken.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   1 lbs (450 g) chicken thighs , cut to bite-size chunks
 
@@ -45,7 +50,7 @@ Cook
 
 -   2 green onions , sliced
 
-**Directions:**
+## Method
 
 1.  Combine chicken pieces, vegetable oil, and salt in a big bowl. Mix
     well and let marinate for 10 to 15 minutes.

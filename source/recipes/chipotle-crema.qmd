@@ -1,13 +1,18 @@
 ---
-title: "Chipotle Crema"
-author: "Chris Kornaros"
+title: Chipotle Crema
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sauces and Condiments"]
+categories:
+- Sauces and Condiments
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sauces and Condiments/Chipotle Crema.html"
+- /pages/recipes/Sauces and Condiments/Chipotle Crema.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   2/3 cup mayonnaise
 
@@ -17,7 +22,7 @@ aliases:
 
 -   2 tablespoons hot sauce Texas Pete or Frank\'s RedHot
 
-**Directions:**
+## Method
 
 1.  Mix all of the ingredients together in a small bowl. Store in a
     squeeze bottle. For best results, chill for an hour so the flavors

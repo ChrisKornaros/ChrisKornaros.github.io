@@ -1,13 +1,18 @@
 ---
-title: "Simple Veal Bolognese"
-author: "Chris Kornaros"
+title: Simple Veal Bolognese
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Veal"]
+categories:
+- Veal
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Veal/Simple Veal Bolognese.html"
+- /pages/recipes/Veal/Simple Veal Bolognese.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   1 1/2 tbsp olive oil
 
@@ -39,7 +44,7 @@ aliases:
 
 -   Parmesan cheese and finely chopped parsley (optional)
 
-**Directions:**
+## Method
 
 1.  **Sauté --** Heat oil in a large pot or deep skillet over medium
     high heat. Add onion and garlic, cook for 3 minutes or until light
@@ -67,7 +72,7 @@ aliases:
     though if you have the time, I recommend tossing the sauce and pasta
     per steps below.
 
-#### **Tossing Sauce and Spaghetti (optional)**
+### Tossing Sauce and Spaghetti (optional)
 
 1.  Bring a large pot of salted water to boil. Add pasta and cook per
     packet directions MINUS 1 minute.

@@ -1,13 +1,18 @@
 ---
-title: "Italian Dressing"
-author: "Chris Kornaros"
+title: Italian Dressing
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sauces and Condiments"]
+categories:
+- Sauces and Condiments
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sauces and Condiments/Italian Dressing.html"
+- /pages/recipes/Sauces and Condiments/Italian Dressing.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   6 tablespoons extra-virgin olive oil
 
@@ -33,6 +38,6 @@ aliases:
 
 -   3 tablespoons Parmesan cheese, optional
 
-**Directions:**
+## Method
 
 1.  Put everything in a container, mix well and refrigerate

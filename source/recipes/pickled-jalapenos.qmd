@@ -1,13 +1,18 @@
 ---
-title: "Pickled Jalapenos"
-author: "Chris Kornaros"
+title: Pickled Jalapenos
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Pickling and Fermenting"]
+categories:
+- Pickling and Fermenting
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Pickling and Fermenting/Pickled Jalapenos.html"
+- /pages/recipes/Pickling and Fermenting/Pickled Jalapenos.html
 ---
 
-### **Ingredients**
+## Ingredients
 
 -   1 cup white vinegar
 
@@ -21,7 +26,7 @@ aliases:
 
 -   7-8 jalapeno peppers thinly sliced
 
-### **Instructions**
+## Method
 
 1.  Combine the vinegar, water, garlic, sugar, and salt in a medium pot
     and bring to a boil. Add jalapeno slices, stir, and remove from
@@ -33,7 +38,7 @@ aliases:
 
 3.  Store in the fridge for up to two months.
 
-**Notes:**
+## Notes
 
 -   Can probably fit about 2-3 jalapenos per jar
 

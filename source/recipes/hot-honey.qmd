@@ -1,13 +1,18 @@
 ---
-title: "Hot Honey"
-author: "Chris Kornaros"
+title: Hot Honey
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sauces and Condiments"]
+categories:
+- Sauces and Condiments
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sauces and Condiments/Hot Honey.html"
+- /pages/recipes/Sauces and Condiments/Hot Honey.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   1 cup honey
 
@@ -17,7 +22,7 @@ aliases:
 
     -   Haven't tested, allegedly cuts sweetness
 
-**Directions:**
+## Method
 
 1.  Put honey in a pot on the stove and head that over medium until its
     consistency is more like water than honey.

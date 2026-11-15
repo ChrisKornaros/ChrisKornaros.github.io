@@ -1,13 +1,18 @@
 ---
-title: "Chili Oil_Crisps"
-author: "Chris Kornaros"
+title: Chili Oil_Crisps
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sauces and Condiments"]
+categories:
+- Sauces and Condiments
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sauces and Condiments/Chili Oil_Crisps.html"
+- /pages/recipes/Sauces and Condiments/Chili Oil_Crisps.html
 ---
 
-[Main Ingredients]{.mark}
+## Ingredients
 
 -   [1.5 oz **Sichuan dried chili flakes**
     ([[Amazon]{.underline}](https://amzn.to/3RUaYGk))]{.mark}
@@ -30,7 +35,7 @@ aliases:
 
 -   [1 tsp **sesame oil**]{.mark}
 
-[Chili Mix]{.mark}
+### Chili Mix
 
 -   [0.50 tsp **salt**]{.mark}
 
@@ -42,7 +47,7 @@ aliases:
 
 -   [1 tbsp **neutral oil**]{.mark}
 
-[Steps:]{.mark}
+## Method
 
 [First, we\'ll create a flavorful chili mix as the seasoning base for
 the chili oil. In a medium, heat-safe bowl, mix together **chili
@@ -128,6 +133,8 @@ aromas of all the ingredients.]{.mark}
 
 [Store this amazing chili oil in the fridge, and enjoy for several
 months!]{.mark}
+
+## Notes
 
 **Source:**
 [[https://www.madewithlau.com/recipes/homemade-chili-oil]{.underline}](https://www.madewithlau.com/recipes/homemade-chili-oil)

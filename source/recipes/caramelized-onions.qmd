@@ -1,13 +1,18 @@
 ---
-title: "Caramelized Onions"
-author: "Chris Kornaros"
+title: Caramelized Onions
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Pickling and Fermenting"]
+categories:
+- Pickling and Fermenting
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Pickling and Fermenting/Caramelized Onions.html"
+- /pages/recipes/Pickling and Fermenting/Caramelized Onions.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   3 tablespoons (42g) unsalted butter
 
@@ -16,7 +21,7 @@ aliases:
 -   3.5 lb (1.5kg) sweet onions/Vidalia onions (about 5-6 large) salt to
     taste
 
-**Directions:**
+## Method
 
 1.  Slice onions thinly.
 

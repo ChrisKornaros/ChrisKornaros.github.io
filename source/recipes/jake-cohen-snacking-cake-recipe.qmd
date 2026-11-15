@@ -1,16 +1,21 @@
 ---
-title: "Jake Cohen Snacking Cake Recipe"
-author: "Chris Kornaros"
+title: Jake Cohen Snacking Cake Recipe
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Baked Goods"]
+categories:
+- Baked Goods
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Baked Goods/Jake Cohen Snacking Cake Recipe.html"
+- /pages/recipes/Baked Goods/Jake Cohen Snacking Cake Recipe.html
 ---
 
 **Source:**
 [[https://www.instagram.com/p/Cebw2KGJeCA/]{.underline}](https://www.instagram.com/p/Cebw2KGJeCA/)
 
-**Ingredients:**
+## Ingredients
 
 [Jam-Swirled Olive Oil Snacking Cake]{.mark}
 
@@ -38,7 +43,7 @@ aliases:
 
 [1/2 cup jam]{.mark}
 
-**Directions:**
+## Method
 
 [1. Preheat the oven to 350°F. Line a 9-inch square baking pan with
 parchment paper.]{.mark}

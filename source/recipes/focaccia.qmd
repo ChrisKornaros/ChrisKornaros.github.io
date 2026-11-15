@@ -1,13 +1,18 @@
 ---
-title: "Focaccia"
-author: "Chris Kornaros"
+title: Focaccia
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Baked Goods"]
+categories:
+- Baked Goods
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Baked Goods/Focaccia.html"
+- /pages/recipes/Baked Goods/Focaccia.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   4 cups (512 g) all-purpose flour or bread flour, see notes above
 
@@ -26,7 +31,7 @@ aliases:
 
 -   1 to 2 teaspoons whole rosemary leaves, optional
 
-**Directions:**
+## Method
 
 1.  Make the dough: In a large bowl, whisk together the flour, salt, and
     instant yeast. Add the water. Using a rubber spatula, mix until the

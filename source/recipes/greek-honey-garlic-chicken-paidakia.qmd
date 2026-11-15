@@ -1,11 +1,17 @@
 ---
-title: "Greek Honey Garlic Chicken Paidakia"
-author: "Chris Kornaros"
+title: Greek Honey Garlic Chicken Paidakia
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Chicken"]
+categories:
+- Chicken
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Chicken/Greek Honey Garlic Chicken Paidakia.html"
+- /pages/recipes/Chicken/Greek Honey Garlic Chicken Paidakia.html
 ---
+
 <!-- cm:video:start -->
 {{< video https://www.youtube.com/watch?v=mbBz9xrda3c >}}
 
@@ -44,7 +50,7 @@ aliases:
 </script>
 <!-- cm:video:end -->
 
-**Ingredients:**
+## Ingredients
 
 -   3lbs chicken thighs (or you can use an entire chicken broken down)
 
@@ -74,7 +80,7 @@ aliases:
 
 -   Olive oil
 
-**Directions:**
+## Method
 
 1.  Preheat the oven to 400°F. Add everything into a dutch oven or
     roasting pot. Mix the ingredients well and then coat all sides of

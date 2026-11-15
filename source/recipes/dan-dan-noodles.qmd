@@ -1,13 +1,18 @@
 ---
-title: "Dan Dan Noodles"
-author: "Chris Kornaros"
+title: Dan Dan Noodles
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Noodles"]
+categories:
+- Noodles
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Noodles/Dan Dan Noodles.html"
+- /pages/recipes/Noodles/Dan Dan Noodles.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 *Sauce:*
 
@@ -54,7 +59,7 @@ aliases:
 
 -   Homemade chili oil , to taste
 
-**Directions:**
+## Method
 
 1.  Prepare sauce
 
@@ -90,4 +95,4 @@ aliases:
 
 11. Serve hot or cold.
 
-12. 
+12.

@@ -1,13 +1,20 @@
 ---
-title: "Giardiniera"
-author: "Chris Kornaros"
+title: Giardiniera
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Pickling and Fermenting"]
+categories:
+- Pickling and Fermenting
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Pickling and Fermenting/Giardiniera.html"
+- /pages/recipes/Pickling and Fermenting/Giardiniera.html
 ---
 
-**Ingredients:** *2 quart yield*
+**Yield:** 2 quarts
+
+## Ingredients
 
 -   4 serrano chiles, thinly sliced, with seeds removed
 
@@ -37,7 +44,7 @@ aliases:
 
 -   ½ cup grapeseed or safflower oil
 
-**Directions:**
+## Method
 
 1.  In a large bowl, using your hands, mix the vegetables and salt until
     well combined. Cover the vegetables with water. Cover the bowl and

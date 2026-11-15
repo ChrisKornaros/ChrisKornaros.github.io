@@ -1,13 +1,18 @@
 ---
-title: "Blue Zone_s Minestrone"
-author: "Chris Kornaros"
+title: Blue Zone_s Minestrone
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Soups"]
+categories:
+- Soups
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Soups/Blue Zone_s Minestrone.html"
+- /pages/recipes/Soups/Blue Zone_s Minestrone.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   1/3 lbs dry garbanzo beans
 
@@ -41,7 +46,7 @@ aliases:
 
 -   Salt to taste
 
-**Directions:**
+## Method
 
 1.  I like to soak beans overnight or if you forget, Microwave dry beans
     in a bowl of water as you chop the other ingredients.
@@ -62,6 +67,6 @@ aliases:
 
 7.  Freeze leftovers in single-serving glass Tupperware.
 
-**Notes:**
+## Notes
 
 -   More healthy recipes here: https://danbuettner.com/recipes/

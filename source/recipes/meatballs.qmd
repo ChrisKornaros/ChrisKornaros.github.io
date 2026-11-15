@@ -1,13 +1,18 @@
 ---
-title: "Meatballs"
-author: "Chris Kornaros"
+title: Meatballs
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Beef"]
+categories:
+- Beef
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Beef/Meatballs.html"
+- /pages/recipes/Beef/Meatballs.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   1/2 cup Italian bread crumbs
 
@@ -29,7 +34,7 @@ aliases:
 
 -   1 tbsp fresh parsley or 1 tsp dried parsley
 
-**Directions:**
+## Method
 
 1.  Preheat the oven to 400°F (200°C) and line a baking sheet with
     parchment paper or a baking mat.

@@ -1,13 +1,18 @@
 ---
-title: "Fermented Hot Sauce (w_ any peppers)"
-author: "Chris Kornaros"
+title: Fermented Hot Sauce (w_ any peppers)
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sauces and Condiments"]
+categories:
+- Sauces and Condiments
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sauces and Condiments/Fermented Hot Sauce (w_ any peppers).html"
+- /pages/recipes/Sauces and Condiments/Fermented Hot Sauce (w_ any peppers).html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   1 pound red serrano peppers or use any chili peppers, stems removed
 
@@ -18,7 +23,7 @@ aliases:
 -   ½-1 cup white wine vinegar to your preference use a good quality
     vinegar for better quality hot sauce
 
-**Directions:**
+## Method
 
 1.  First, ferment the serrano peppers. Roughly chop the peppers, then
     pack them into a ball jar, leaving at least 1 inch of head space.

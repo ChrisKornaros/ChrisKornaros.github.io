@@ -1,13 +1,18 @@
 ---
-title: "Peach Scotch Bonnet Hot Sauce"
-author: "Chris Kornaros"
+title: Peach Scotch Bonnet Hot Sauce
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sauces and Condiments"]
+categories:
+- Sauces and Condiments
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sauces and Condiments/Peach Scotch Bonnet Hot Sauce.html"
+- /pages/recipes/Sauces and Condiments/Peach Scotch Bonnet Hot Sauce.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   6 ounces Scotch Bonnet peppers chopped
 
@@ -29,7 +34,7 @@ aliases:
 
 -   ½ teaspoon black pepper
 
-**Directions:**
+## Method
 
 1.  First, roughly chop the peppers, tomato, peach and garlic. Pack them
     into a large jar, leaving at least 1 inch of head space. The mixture

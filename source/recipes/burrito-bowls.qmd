@@ -1,13 +1,20 @@
 ---
-title: "Burrito Bowls"
-author: "Chris Kornaros"
+title: Burrito Bowls
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Mexican"]
+categories:
+- Mexican
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Mexican/Burrito Bowls.html"
+- /pages/recipes/Mexican/Burrito Bowls.html
 ---
 
-**Ingredients:**
+**Yield:** 5 servings
+
+## Ingredients
 
 [FOR THE CHICKEN THIGHS]{.underline}
 
@@ -63,7 +70,7 @@ aliases:
 
 -   10 tbsp (150 g) sour cream
 
-**Directions:**
+## Method
 
 [FOR THE RICE]{.underline}
 

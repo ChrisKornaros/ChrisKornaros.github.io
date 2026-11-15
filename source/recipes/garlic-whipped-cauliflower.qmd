@@ -1,13 +1,18 @@
 ---
-title: "Garlic Whipped Cauliflower"
-author: "Chris Kornaros"
+title: Garlic Whipped Cauliflower
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Vegetables"]
+categories:
+- Vegetables
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Vegetables/Garlic Whipped Cauliflower.html"
+- /pages/recipes/Vegetables/Garlic Whipped Cauliflower.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   1 head cauliflower, cut into florets
 
@@ -25,7 +30,7 @@ aliases:
 
 <!-- -->
 
--   **Directions:**
+## Method
 
 -   Preheat the oven to 350F.
 
@@ -37,7 +42,7 @@ aliases:
     vegetables are creamy. Blend in cooked garlic, Parmesan cheese,
     cream cheese, salt, and black pepper.
 
--   **Notes:**
+## Notes
 
 -   Greek Yogurt works very well as a substitute for cream cheese
 

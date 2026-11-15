@@ -1,13 +1,18 @@
 ---
-title: "Mapo Tofu"
-author: "Chris Kornaros"
+title: Mapo Tofu
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Tofu"]
+categories:
+- Tofu
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Tofu/Mapo Tofu.html"
+- /pages/recipes/Tofu/Mapo Tofu.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 *Marinade*
 
@@ -45,7 +50,7 @@ aliases:
 
 -   1 teaspoon sugar (or to taste)
 
-**Directions:**
+## Method
 
 1.  Combine ground meat, cooking wine, soy sauce, and ginger in a small
     bowl. Mix well.

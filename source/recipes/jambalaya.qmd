@@ -1,13 +1,18 @@
 ---
-title: "Jambalaya"
-author: "Chris Kornaros"
+title: Jambalaya
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["New Orleans"]
+categories:
+- New Orleans
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/New Orleans/Jambalaya.html"
+- /pages/recipes/New Orleans/Jambalaya.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   1 tablespoon olive oil or butter
 
@@ -56,7 +61,7 @@ aliases:
 
 -   2 green onions, thinly sliced on the diagonal
 
-**Directions:**
+## Method
 
 1.  Heat oil in a Dutch oven, large pot, or very large skillet
     (preferably cast iron) over medium heat. Add pork, sausage, and
@@ -75,6 +80,8 @@ aliases:
 
 4.  Fluff with a fork, garnish with green onions, and serve warm with
     hot sauce.
+
+## Notes
 
 **Source:**
 [[https://www.masterclass.com/articles/how-to-make-jambalaya]{.underline}](https://www.masterclass.com/articles/how-to-make-jambalaya)

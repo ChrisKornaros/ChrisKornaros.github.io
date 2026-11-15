@@ -1,13 +1,18 @@
 ---
-title: "Homemade Mayo"
-author: "Chris Kornaros"
+title: Homemade Mayo
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sauces and Condiments"]
+categories:
+- Sauces and Condiments
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sauces and Condiments/Homemade Mayo.html"
+- /pages/recipes/Sauces and Condiments/Homemade Mayo.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   Neutral Oil
 
@@ -27,6 +32,6 @@ aliases:
 
 -   **Optional:** Vinegar
 
-**Directions:**
+## Method
 
-1.  
+1.

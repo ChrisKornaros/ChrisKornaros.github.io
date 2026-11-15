@@ -1,13 +1,18 @@
 ---
-title: "Asian Cucumber Slices"
-author: "Chris Kornaros"
+title: Asian Cucumber Slices
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Pickling and Fermenting"]
+categories:
+- Pickling and Fermenting
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Pickling and Fermenting/Asian Cucumber Slices.html"
+- /pages/recipes/Pickling and Fermenting/Asian Cucumber Slices.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 2 long English cucumbers
 
@@ -19,7 +24,7 @@ pinch crushed red pepper
 
 salt to taste
 
-**Instructions:**
+## Method
 
 1\. Thinly slice cucumbers and place in a small bowl. Lightly salt to
 taste and stir.
@@ -29,7 +34,7 @@ Stir well.
 
 3\. Let marinate, stirring occasionally for at least 3-4 hours.
 
-**Notes:**
+## Notes
 
 -   One of the 8oz jars can hold about a third of an english cucumber
     with about ⅓ of the brine

@@ -1,13 +1,18 @@
 ---
-title: "Beer Batter (Fish fry optional)"
-author: "Chris Kornaros"
+title: Beer Batter (Fish fry optional)
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Cod"]
+categories:
+- Cod
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Cod/Beer Batter (Fish fry optional).html"
+- /pages/recipes/Cod/Beer Batter (Fish fry optional).html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   1 cup all purpose flour
 
@@ -23,7 +28,7 @@ aliases:
 
     -   Lager (I have Spaten on hand)
 
-**Directions:**
+## Method
 
 1.  To make the beer batter, whisk together the flour, garlic powder,
     paprika and seasoned salt. Stir in the lightly beaten egg, then

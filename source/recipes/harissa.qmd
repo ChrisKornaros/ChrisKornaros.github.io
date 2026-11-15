@@ -1,13 +1,20 @@
 ---
-title: "Harissa"
-author: "Chris Kornaros"
+title: Harissa
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sauces and Condiments"]
+categories:
+- Sauces and Condiments
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sauces and Condiments/Harissa.html"
+- /pages/recipes/Sauces and Condiments/Harissa.html
 ---
 
-**Ingredients:**
+**Yield:** about 1 cup
+
+## Ingredients
 
 -   16 dried red chilies (New Mexico and guajillo chilies work well,
     remove seeds, membranes and stems. If you want a really hot paste,
@@ -27,7 +34,7 @@ aliases:
 
 -   2 tablespoons freshly squeezed lemon juice
 
-**Directions:**
+## Method
 
 1.  Put the dried chiles in a bowl and cover with boiling water. Let
     them sit for 20 minutes. Heat a small skillet over medium heat and

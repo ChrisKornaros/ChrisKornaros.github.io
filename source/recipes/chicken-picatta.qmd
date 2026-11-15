@@ -1,13 +1,18 @@
 ---
-title: "Chicken Picatta"
-author: "Chris Kornaros"
+title: Chicken Picatta
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Chicken"]
+categories:
+- Chicken
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Chicken/Chicken Picatta.html"
+- /pages/recipes/Chicken/Chicken Picatta.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   2 large lemons
 
@@ -34,7 +39,7 @@ aliases:
 
 -   6 servings couscous or angel hair pasta
 
-**Directions:**
+## Method
 
 1.  Cut one lemon in half lengthwise. Trim the ends from one half and
     cut across into thin slices about 1/8 inch thick; set aside. Juice
@@ -64,6 +69,8 @@ aliases:
     flavors. Remove pan from heat and swirl in the butter until it melts
     and thickens the sauce. Swirl in the parsley. Spoon over chicken and
     serve immediately over a bed of couscous or angel hair pasta.
+
+## Notes
 
 **Source:**
 [[https://food52.com/recipes/26564-classic-chicken-piccata]{.underline}](https://food52.com/recipes/26564-classic-chicken-piccata)

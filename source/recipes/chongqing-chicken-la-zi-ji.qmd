@@ -1,13 +1,18 @@
 ---
-title: "Chongqing Chicken (La Zi Ji)"
-author: "Chris Kornaros"
+title: Chongqing Chicken (La Zi Ji)
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Chicken"]
+categories:
+- Chicken
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Chicken/Chongqing Chicken (La Zi Ji).html"
+- /pages/recipes/Chicken/Chongqing Chicken (La Zi Ji).html
 ---
 
-**Ingredients:**
+## Ingredients
 
 *Marinade:*
 
@@ -52,7 +57,7 @@ aliases:
 
 -   1 cup chopped cilantro , and more for garnish
 
-**Directions:**
+## Method
 
 1.  To marinate the chicken: Combine chicken pieces, Shaoxing wine, and
     soy sauce in a medium-sized bowl. Mix well and marinate for 10 to 15
@@ -100,7 +105,7 @@ aliases:
     everything to a plate with chili peppers prominently displayed. Top
     with more cilantro for garnish, if needed.
 
-**Notes:**
+## Notes
 
 -   Choose fat and large chili peppers that have a milder taste. If you
     cannot find Sichuan chili peppers, you can alternatively use Korean

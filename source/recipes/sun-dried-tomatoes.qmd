@@ -1,13 +1,18 @@
 ---
-title: "Sun Dried Tomatoes"
-author: "Chris Kornaros"
+title: Sun Dried Tomatoes
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Oils and Marinades"]
+categories:
+- Oils and Marinades
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Oils and Marinades/Sun Dried Tomatoes.html"
+- /pages/recipes/Oils and Marinades/Sun Dried Tomatoes.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   12oz cherry or grape tomatoes
 
@@ -21,7 +26,7 @@ aliases:
 
 -   *Optional*: Red Pepper/Chili Flakes
 
-**Directions:**
+## Method
 
 1.  Preheat the oven to 215 degrees fahrenheit (this is a bit variable
     depending on the size and quantity of tomatoes) and line a large
@@ -40,7 +45,7 @@ aliases:
     spices. They should last for up to 3 weeks in the fridge, covered in
     oil.
 
-**Notes:**
+## Notes
 
 -   Just tomatoes in oil is better for sandwiches
 

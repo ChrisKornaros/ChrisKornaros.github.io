@@ -1,13 +1,18 @@
 ---
-title: "Brad_s Mustard"
-author: "Chris Kornaros"
+title: Brad_s Mustard
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Pickling and Fermenting"]
+categories:
+- Pickling and Fermenting
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Pickling and Fermenting/Brad_s Mustard.html"
+- /pages/recipes/Pickling and Fermenting/Brad_s Mustard.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   6 tbsp brown mustard seeds
 
@@ -23,7 +28,7 @@ aliases:
 
 -   5 tbsp sauerkraut juice
 
-**Directions:**
+## Method
 
 1.  Using a spice blender, or mortar and pestle, grind up the whole
     seeds into a coarse blend. Then add to a bowl with the mustard

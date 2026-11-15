@@ -1,13 +1,18 @@
 ---
-title: "Greek Briam"
-author: "Chris Kornaros"
+title: Greek Briam
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Vegetables"]
+categories:
+- Vegetables
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Vegetables/Greek Briam.html"
+- /pages/recipes/Vegetables/Greek Briam.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   2 pounds potatoes, peeled and thinly sliced
 
@@ -23,7 +28,7 @@ aliases:
 
 -   sea salt and freshly ground black pepper to taste
 
-**Directions:**
+## Method
 
 1.  Gather all ingredients. Preheat the oven to 400 degrees F (200
     degrees C).
@@ -43,7 +48,7 @@ aliases:
     baking until vegetables are tender and moisture has evaporated,
     about 30 minutes more.
 
-**Notes:**
+## Notes
 
 -   Add up to 1/4 cup of water if the vegetables are too dry after the
     first hour of baking. Don\'t add too much liquid, however, as there

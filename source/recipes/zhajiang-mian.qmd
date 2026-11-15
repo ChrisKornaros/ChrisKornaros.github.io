@@ -1,13 +1,18 @@
 ---
-title: "Zhajiang Mian"
-author: "Chris Kornaros"
+title: Zhajiang Mian
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Noodles"]
+categories:
+- Noodles
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Noodles/Zhajiang Mian.html"
+- /pages/recipes/Noodles/Zhajiang Mian.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   6 oz. ground pork
 
@@ -45,7 +50,7 @@ aliases:
 
 -   1/2 cup scallions (julienned)
 
-**Directions:**
+## Method
 
 1.  Marinate the pork with the following for 15 minutes: ¼ teaspoon
     salt, 1 teaspoon cornstarch, ½ teaspoon oil, 1/8 teaspoon white
@@ -67,7 +72,7 @@ aliases:
     cucumbers, and scallions. This amount of sauce should be good for 4
     servings.
 
-**Notes**:
+## Notes
 
 -   Used Doubanjiang instead of the Sweet Bean and Ground Bean Paste
 

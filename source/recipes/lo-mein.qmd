@@ -1,13 +1,18 @@
 ---
-title: "Lo Mein"
-author: "Chris Kornaros"
+title: Lo Mein
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Noodles"]
+categories:
+- Noodles
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Noodles/Lo Mein.html"
+- /pages/recipes/Noodles/Lo Mein.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 *Noodles*:
 
@@ -51,7 +56,7 @@ aliases:
 
 -   1/4 tsp white pepper (sub black)
 
-**Directions:**
+## Method
 
 1.  Sauce: Mix cornflour and dark soy until lump free, then add
     remaining Sauce ingredients.

@@ -1,13 +1,18 @@
 ---
-title: "Pickled Coleslaw"
-author: "Chris Kornaros"
+title: Pickled Coleslaw
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Pickling and Fermenting"]
+categories:
+- Pickling and Fermenting
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Pickling and Fermenting/Pickled Coleslaw.html"
+- /pages/recipes/Pickling and Fermenting/Pickled Coleslaw.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   1 head cabbage, green or purple -- shredded
 
@@ -26,7 +31,7 @@ aliases:
 
 -   ½ teaspoon pickle crisp
 
-**Directions:**
+## Method
 
 1.  Combine the shredded/thinly sliced cabbage in a large bowl with the
     canning salt. Toss the cabbage to mix the salt all through it. Cover
@@ -52,6 +57,8 @@ aliases:
 7.  Ladle in the brine.
 
 8.  Close the jars and ferment.
+
+## Notes
 
 **Source:**
 [[https://cosmopolitancornbread.com/pickled-coleslaw/]{.underline}](https://cosmopolitancornbread.com/pickled-coleslaw/)

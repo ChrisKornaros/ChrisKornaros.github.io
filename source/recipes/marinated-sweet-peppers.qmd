@@ -1,13 +1,18 @@
 ---
-title: "Marinated Sweet Peppers"
-author: "Chris Kornaros"
+title: Marinated Sweet Peppers
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Oils and Marinades"]
+categories:
+- Oils and Marinades
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Oils and Marinades/Marinated Sweet Peppers.html"
+- /pages/recipes/Oils and Marinades/Marinated Sweet Peppers.html
 ---
 
-**[Ingredients:]{.underline}**
+## Ingredients
 
 -   4 red, yellow, or orange bell peppers, all one color or a mix
 
@@ -39,7 +44,7 @@ aliases:
 
     -   1/2 cup of chopped fresh parsley
 
-**[Directions:]{.underline}**
+## Method
 
 1.  To roast the peppers in the oven: Set a rack in the top third of
     your oven and preheat the broiler. Line a rimmed baking sheet with
@@ -69,7 +74,7 @@ aliases:
     Store in a jar or other airtight container for up to 3 weeks.
     (They\'ll probably last longer, I\'m just being safe here.)
 
-**[Notes:]{.underline}**
+## Notes
 
 -   Recipe is good, go lighter on the vinegar next time and try to
     infuse the olive oil before adding the vinegar

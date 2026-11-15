@@ -1,13 +1,18 @@
 ---
-title: "Caramelized Peppers and Onions"
-author: "Chris Kornaros"
+title: Caramelized Peppers and Onions
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Vegetables"]
+categories:
+- Vegetables
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Vegetables/Caramelized Peppers and Onions.html"
+- /pages/recipes/Vegetables/Caramelized Peppers and Onions.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   2 tablespoons extra virgin olive oil
 
@@ -23,7 +28,7 @@ aliases:
 
 -   1 teaspoon fresh thyme, finely chopped (or ½ teaspoon dried thyme)
 
-**Directions:**
+## Method
 
 1.  Heat the oil in a large skillet over medium-high heat. Add the
     onions, peppers, salt and pepper.

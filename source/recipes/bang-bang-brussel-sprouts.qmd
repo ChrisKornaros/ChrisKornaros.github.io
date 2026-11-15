@@ -1,13 +1,18 @@
 ---
-title: "Bang Bang Brussel Sprouts"
-author: "Chris Kornaros"
+title: Bang Bang Brussel Sprouts
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Vegetables"]
+categories:
+- Vegetables
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Vegetables/Bang Bang Brussel Sprouts.html"
+- /pages/recipes/Vegetables/Bang Bang Brussel Sprouts.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   3 tbsp. extra-virgin olive oil
 
@@ -25,7 +30,7 @@ aliases:
 
 -   Freshly ground black pepper
 
-**Directions:**
+## Method
 
 1.  Preheat oven to 425°. In a small bowl, whisk together oil, sweet
     chili sauce, Sriracha, lime juice, and garlic.
@@ -35,6 +40,8 @@ aliases:
 
 3.  Roast until Brussels are slightly charred and tender, 30 to 35
     minutes.
+
+## Notes
 
 **Source:**
 [[https://www.delish.com/cooking/recipe-ideas/recipes/a51615/bang-bang-brussels-sprouts-recipe/]{.underline}](https://www.delish.com/cooking/recipe-ideas/recipes/a51615/bang-bang-brussels-sprouts-recipe/)

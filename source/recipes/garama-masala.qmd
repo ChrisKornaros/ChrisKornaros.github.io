@@ -1,13 +1,20 @@
 ---
-title: "Garama Masala"
-author: "Chris Kornaros"
+title: Garama Masala
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Spice Mixes"]
+categories:
+- Spice Mixes
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Spice Mixes/Garama Masala.html"
+- /pages/recipes/Spice Mixes/Garama Masala.html
 ---
 
-**Ingredients:**
+**Yield:** about 1/4 cup
+
+## Ingredients
 
 -   10 green cardamom pods seeded and husks removed
 
@@ -27,7 +34,7 @@ aliases:
 
 -   2 bay leaves
 
-**Directions:**
+## Method
 
 1.  Heat a large skillet to medium heat and add all of the spices.
 
@@ -40,4 +47,6 @@ aliases:
 4.  Use immediately. Store in an airtight container and keep in a cool,
     dark place.
 
-**Notes:** Makes about 1/4 cup of garam masala.
+## Notes
+
+Makes about 1/4 cup of garam masala.

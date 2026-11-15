@@ -1,13 +1,18 @@
 ---
-title: "Hummus with Spiced Chicken and Cauliflower"
-author: "Chris Kornaros"
+title: Hummus with Spiced Chicken and Cauliflower
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Party Snacks and Dips"]
+categories:
+- Party Snacks and Dips
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Party Snacks and Dips/Hummus with Spiced Chicken and Cauliflower.html"
+- /pages/recipes/Party Snacks and Dips/Hummus with Spiced Chicken and Cauliflower.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 [Hummus]{.underline}
 
@@ -58,7 +63,7 @@ aliases:
 -   Chopped fresh flat-leaf parsley, za'atar, and toasted pine nuts, for
     serving
 
-**Directions:**
+## Method
 
 [Hummus]{.underline}
 

@@ -1,13 +1,18 @@
 ---
-title: "Best Ever Chewy Brownies"
-author: "Chris Kornaros"
+title: Best Ever Chewy Brownies
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Baked Goods"]
+categories:
+- Baked Goods
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Baked Goods/Best Ever Chewy Brownies.html"
+- /pages/recipes/Baked Goods/Best Ever Chewy Brownies.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   5 tablespoons (71 grams) unsalted butter
 
@@ -31,7 +36,7 @@ aliases:
 
 -   3/4 cup (128 grams) semisweet chocolate chips
 
-**Directions:**
+## Method
 
 1.  Preheat the oven to 325°F. Line a 8 by 8-inch pan with foil or
     parchment paper and spray with nonstick cooking spray.

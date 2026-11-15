@@ -1,13 +1,20 @@
 ---
-title: "Red Wine Braised Short Ribs"
-author: "Chris Kornaros"
+title: Red Wine Braised Short Ribs
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Beef"]
+categories:
+- Beef
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Beef/Red Wine Braised Short Ribs.html"
+- /pages/recipes/Beef/Red Wine Braised Short Ribs.html
 ---
 
-**Ingredients:** 6 servings
+**Yield:** 6 servings
+
+## Ingredients
 
 -   5lb. bone-in beef short ribs, cut crosswise into 2\" pieces
 
@@ -41,7 +48,7 @@ aliases:
 
 -   4 cups low-sodium beef stock
 
-**Directions:**
+## Method
 
 1.  Preheat the oven to 350°. Season short ribs with salt and pepper.
     Heat oil in a large Dutch oven over medium-high. Working in 2
@@ -64,7 +71,7 @@ aliases:
     salt and pepper. Serve in shallow bowls over mashed potatoes with
     sauce spooned over.
 
-**Notes:**
+## Notes
 
 -   Bon Appetit Recipe
 
