@@ -6,6 +6,10 @@ Layout mirrored between vault and site:
     writing/research/foo.md      -> source/pages/research/posts/foo.qmd
     writing/blogs/foo.md         -> source/pages/blogs/posts/foo.qmd
     writing/recipes/Beef/foo.md  -> source/recipes/<cm-slug-of-title>.qmd
+    library/food/recipes/beef/foo.md -> source/recipes/<cm-slug-of-title>.qmd
+
+Recipes are read from both vault places until the ``writing/recipes/`` ones
+move into the library; both land in the same flat ``source/recipes/``.
 """
 
 from __future__ import annotations
@@ -24,14 +28,42 @@ class Target:
     assets_dir: Path  # where embedded images are copied
 
 
+def _library_rel(draft: Path) -> Path | None:
+    """The draft's path under the library recipes root, or None if not there."""
+    try:
+        return draft.resolve().relative_to(config.library_recipes())
+    except ValueError:
+        return None
+
+
+def is_library_recipe(draft: Path) -> bool:
+    """True when the draft is under ``library/food/recipes/``."""
+    return _library_rel(draft) is not None
+
+
+def library_category(draft: Path) -> str:
+    """A library recipe's category: its folder under ``food/recipes/``."""
+    rel = _library_rel(draft)
+    if rel is None or len(rel.parts) < 2:
+        raise ValueError(
+            f"Library recipe {draft} must live in a category folder, e.g. "
+            f"library/food/recipes/vegetables/{draft.name}."
+        )
+    return rel.parts[0]
+
+
 def section_for(draft: Path) -> str:
-    """The section a draft belongs to, from its first path part under writing/."""
+    """The section a draft belongs to: ``recipes`` for a library recipe page,
+    else its first path part under writing/."""
+    if is_library_recipe(draft):
+        return "recipes"
     writing = config.vault_writing()
     try:
         rel = draft.resolve().relative_to(writing)
     except ValueError as exc:  # pragma: no cover - guarded by caller
         raise ValueError(
-            f"{draft} is not under the vault writing root ({writing})."
+            f"{draft} is not under the vault writing root ({writing}) or the "
+            f"library recipes root ({config.library_recipes()})."
         ) from exc
     section = rel.parts[0] if rel.parts else ""
     if section not in config.SECTIONS:
@@ -42,8 +74,22 @@ def section_for(draft: Path) -> str:
     return section
 
 
+def _recipe_target(category: str, title: str) -> Target:
+    dest_dir = config.site_source() / "recipes"
+    return Target(
+        section="recipes",
+        category=category,
+        qmd_path=dest_dir / f"{config.slugify_recipe(title)}.qmd",
+        assets_dir=dest_dir / "images",
+    )
+
+
 def resolve(draft: Path, *, title: str) -> Target:
     """Compute the target paths for a draft given its (mapped) title."""
+    if is_library_recipe(draft):
+        # library/food/recipes/<category>/<slug>.md -> the same flat site file.
+        return _recipe_target(library_category(draft), title)
+
     section = section_for(draft)
     writing = config.vault_writing()
     rel = draft.resolve().relative_to(writing)
@@ -60,14 +106,7 @@ def resolve(draft: Path, *, title: str) -> Target:
                 f"Recipe draft {draft} must live in a category subfolder, e.g. "
                 f"writing/recipes/Beef/{draft.name}."
             )
-        category = rel.parts[1]
-        dest_dir = config.site_source() / "recipes"
-        return Target(
-            section=section,
-            category=category,
-            qmd_path=dest_dir / f"{config.slugify_recipe(title)}.qmd",
-            assets_dir=dest_dir / "images",
-        )
+        return _recipe_target(rel.parts[1], title)
 
     dest_dir = pages / section / "posts"
     return Target(

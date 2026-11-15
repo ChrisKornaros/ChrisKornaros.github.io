@@ -97,9 +97,15 @@ cleanup and wait for review notes — the branch is still live work.
 Long-form content is **drafted in Obsidian** under `~/vault/writing/<section>/`
 (sections: `guides`, `research`, `blogs`, `recipes`) and tagged `draft: true`.
 A draft is the canonical source; the site `.qmd` is generated from it.
+**Recipes are read from two places:** `writing/recipes/<Category>/` and the
+vault library's `library/food/recipes/<category>/<slug>.md`, where new recipes
+are written from 2026-11-15 to the library's recipe-page contract (decision D12
+of the vault's private library requirements). The `writing/` ones move there
+in a later change.
 
 - **Scaffold a draft:** `uv run new <section> "<Title>" [--category <Cat>]`
   (recipes require `--category`, mirrored as a subfolder). Pre-fills frontmatter.
+  Still scaffolds under `writing/` only, recipes included.
 - **Publish one (or all):** the **`/publish`** skill
   ([.claude/commands/publish.md](.claude/commands/publish.md)) runs the
   deterministic converter (`uv run publish <draft>` / `--all`), then
@@ -123,6 +129,16 @@ A draft is the canonical source; the site `.qmd` is generated from it.
   keeps its `writing/recipes/<Category>/` subfolders — the category becomes
   `categories:` front matter, and browsing is the listing page's category
   filter (`source/recipes/index.qmd`), not per-category index pages.
+  A **library recipe** lands in the same flat file after a reshape: its
+  vault-only keys (`type`, `category`, `yield`, `prep_minutes`,
+  `cook_minutes`, `source`, `updated`, `draft`, and its `author: agent|chris`)
+  never reach the site, the author is always Chris Kornaros, `categories:`
+  comes from the folder in the site's form (`sauces-and-condiments` →
+  `Sauces and Condiments`), the `Up:` line and any HTML comment with text in
+  it are dropped (an empty `<!-- -->` list separator stays), and
+  a `**Yield:** … · **Prep:** … · **Cook:** …` line goes after the
+  `Adapted from` line. `--all` takes from the library only non-draft
+  `type: recipe` pages, skipping `index.md` and `_` templates.
 - **Announce on Bluesky (optional, after publish):** the **`/announce`** skill
   ([.claude/commands/announce.md](.claude/commands/announce.md)) posts a short
   Bluesky update linking to a just-published post. `uv run announce <draft>

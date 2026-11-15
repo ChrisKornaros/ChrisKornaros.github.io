@@ -1,10 +1,12 @@
 """Path + section configuration for the publishing pipeline.
 
 Roots are resolved relative to this repo so the tooling works on any machine
-(Mac/Pi) without hardcoded home paths, but both are env-overridable:
+(Mac/Pi) without hardcoded home paths, but all are env-overridable:
 
 - ``VAULT_WRITING``  -- where Obsidian drafts live (default ``<repo>/../../writing``
   which resolves to ``~/vault/writing`` in the normal vault layout).
+- ``VAULT_LIBRARY``  -- the vault's library (default ``<repo>/../../library``,
+  i.e. ``~/vault/library``); recipe pages also live under its ``food/recipes/``.
 - ``SITE_SOURCE``    -- this site's Quarto source dir (default ``<repo>/source``).
 """
 
@@ -24,6 +26,19 @@ def vault_writing() -> Path:
     if env:
         return Path(env).expanduser().resolve()
     return (REPO_ROOT / ".." / ".." / "writing").resolve()
+
+
+def vault_library() -> Path:
+    """Root of the vault library (``library/``)."""
+    env = os.environ.get("VAULT_LIBRARY")
+    if env:
+        return Path(env).expanduser().resolve()
+    return (REPO_ROOT / ".." / ".." / "library").resolve()
+
+
+def library_recipes() -> Path:
+    """Root of the library's recipe pages (``library/food/recipes/``)."""
+    return vault_library() / "food" / "recipes"
 
 
 def site_source() -> Path:
