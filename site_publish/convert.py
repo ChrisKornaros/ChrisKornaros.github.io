@@ -7,7 +7,13 @@ A library recipe page (``library/food/recipes/<category>/<slug>.md``) is
 reshaped into a ``writing/`` recipe draft first: its frontmatter by
 ``frontmatter_map.library_recipe_meta``, its body by :func:`_library_body`
 (``Up:`` line and HTML comments with text dropped, a yield/prep/cook line
-added). From there it converts exactly like a ``writing/`` recipe.
+added). From there it converts like any other draft.
+
+A re-publish keeps what only the site file holds (:func:`_existing_page`): its
+``aliases`` (the redirects from a page's old address), its ``published`` date
+(or the lack of one, on a page from before the stamp), and the video block
+content_manager writes between ``cm:video`` markers. None of these is in the
+vault, so regenerating the file from the vault alone would drop them.
 """
 
 from __future__ import annotations
@@ -116,6 +122,43 @@ def _library_body(body: str, meta: dict) -> str:
     return f"{body[:adapted.end()]}\n\n{line}{body[adapted.end():]}"
 
 
+# content_manager writes a recipe's video embed (and its JSON-LD) into the site
+# file itself, between these markers.
+_CM_BLOCK = re.compile(r"<!-- cm:video:start -->.*?<!-- cm:video:end -->", re.DOTALL)
+
+
+@dataclass(frozen=True)
+class _Existing:
+    """What the site file at a target path already holds."""
+
+    meta: dict
+    cm_block: str | None
+
+
+def _existing_page(qmd_path: Path) -> _Existing | None:
+    """The page already on the site at ``qmd_path``, or None on a first publish."""
+    if not qmd_path.is_file():
+        return None
+    post = frontmatter.load(str(qmd_path))
+    block = _CM_BLOCK.search(post.content)
+    return _Existing(dict(post.metadata), block.group(0) if block else None)
+
+
+def _keep_site_frontmatter(mapped: dict, existing: _Existing) -> None:
+    """Carry the site-only frontmatter of an existing page into ``mapped``.
+
+    ``aliases`` are the redirects from the page's old address. ``published`` is
+    the day the page first went out: a re-publish keeps it, and a page that was
+    on the site before the stamp existed gets none rather than today's date.
+    """
+    if existing.meta.get("aliases"):
+        mapped["aliases"] = existing.meta["aliases"]
+    if "published" in existing.meta:
+        mapped["published"] = existing.meta["published"]
+    else:
+        mapped.pop("published", None)
+
+
 def _dump_qmd(meta: dict, body: str) -> str:
     fm = yaml.safe_dump(meta, sort_keys=False, allow_unicode=True).rstrip("\n")
     return f"---\n{fm}\n---\n\n{body.strip()}\n"
@@ -152,6 +195,9 @@ def convert(draft: Path) -> Result:
         draft=draft, qmd_path=target.qmd_path, section=section,
         category=target.category,
     )
+    existing = _existing_page(target.qmd_path)
+    if existing is not None:
+        _keep_site_frontmatter(mapped, existing)
 
     if section == "blogs":
         body = embeds.substack_embed(str(mapped["title"]), str(meta["substack"]))
@@ -174,7 +220,12 @@ def convert(draft: Path) -> Result:
         body = obsidian.transform_body(content, _resolver)
         result.written.extend(copied)
 
-        if section == "recipes" and mapped.get("video"):
+        if section == "recipes" and existing is not None and existing.cm_block:
+            # content_manager's block already carries the video; it stays where
+            # it was, at the top of the body, and no second embed is added.
+            body = f"{existing.cm_block}\n\n{body.lstrip()}"
+            mapped.pop("video", None)
+        elif section == "recipes" and mapped.get("video"):
             body = embeds.video_embed(str(mapped["video"])) + "\n" + body
             mapped.pop("video")  # rendered into the body, not shown as metadata
 

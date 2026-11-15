@@ -5,8 +5,11 @@ allowed-tools: Bash, Read, AskUserQuestion
 ---
 
 You are running the **publish** workflow for ChrisKornaros.github.io: take a
-ready Obsidian draft from `~/vault/writing/`, convert it to Quarto, render, and
-deploy it through the canonical git-flow (branch → PR → merge = deploy).
+ready Obsidian draft from the vault, convert it to Quarto, render, and deploy
+it through the canonical git-flow (branch → PR → merge = deploy). A guide, a
+research post or a blog is a draft under `~/vault/writing/<section>/`; a
+recipe is a page under `~/vault/library/food/recipes/<category>/` (recipes
+are no longer under `writing/`, and a draft found there is refused).
 
 Arguments: `$ARGUMENTS` (a vault draft path, or `--all`; may include `--force`).
 
@@ -20,11 +23,16 @@ Run: `uv run publish $ARGUMENTS`
   file regardless of its draft flag and clears `draft: true` from the vault
   source (prints "un-drafted vault source"). `--all` still skips anything still
   tagged `draft: true`.
-- On success it prints the `.qmd` (and any copied images / new category
-  `index.qmd`) it wrote under `source/pages/`. Note the section + slug from the
-  output — you need them for the branch name.
+- On success it prints the `.qmd` (and any copied images) it wrote: under
+  `source/pages/<section>/posts/` for a post, flat under `source/recipes/` for
+  a recipe. Note the section + slug from the output — you need them for the
+  branch name.
 - The vault `.md` edit is just the one-line draft removal; mention it but you do
-  not commit the vault (separate repo) — it stays as Chris's canonical source.
+  not commit it here (the vault is a separate repo with its own PR) — it stays
+  as Chris's canonical source.
+- A re-publish of a page that is already on the site keeps what only the site
+  file holds: its `aliases`, its `published` date, and content_manager's
+  `cm:video` block. Check `git diff` shows none of them removed.
 
 ## 2. Render (verification + regenerates the tracked `docs/`)
 
@@ -57,7 +65,9 @@ Follow [modules/git-flow-session-end/index.md](../../modules/git-flow-session-en
 
 ## Notes
 
-- The vault `.md` stays canonical and is **not** modified here; re-running
-  `/publish` on an edited draft overwrites the `.qmd` (idempotent).
-- The CLI reads from `~/vault/writing` and writes only into this repo's
-  `source/`. It never runs git — that's this skill's job.
+- The vault `.md` stays canonical and only its `draft: true` line is ever
+  changed here; re-running `/publish` on an edited draft regenerates the
+  `.qmd` from it, keeping the site-only parts named in step 1.
+- The CLI reads from `~/vault/writing` and `~/vault/library/food/recipes`
+  and writes only into this repo's `source/`. It never runs git — that's this
+  skill's job.

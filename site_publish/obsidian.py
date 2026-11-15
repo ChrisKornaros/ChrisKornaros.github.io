@@ -8,7 +8,8 @@ Transforms (applied outside of fenced/inline code, which is preserved verbatim):
 - callouts:  ``> [!note] Title`` blocks -> ``::: {.callout-note title="Title"}``
 - wikilinks: ``[[Note|alias]]`` -> ``alias`` (plain text; v1 doesn't cross-link)
 - embeds:    ``![[img.png]]``   -> ``![](images/img.png)`` (via resolver)
-- inline tags: ``#tag`` -> removed
+- inline tags: ``#tag`` -> removed (only at a line's start or after
+  whitespace, so a ``#fragment`` inside a link is left alone)
 """
 
 from __future__ import annotations
@@ -43,8 +44,10 @@ _CALLOUT_MAP = {
 _CALLOUT_HEAD = re.compile(r"^>\s*\[!(?P<type>\w+)\][+-]?\s*(?P<title>.*?)\s*$")
 _WIKILINK = re.compile(r"!?\[\[([^\]]+)\]\]")
 _IMAGE_EMBED = re.compile(r"!\[\[([^\]]+)\]\]")
-# A hashtag tag: # immediately followed by a word char (so "# Heading" is safe).
-_INLINE_TAG = re.compile(r"(?<!\w)#(?=[A-Za-z])[A-Za-z0-9_/-]+")
+# A hashtag tag: # immediately followed by a word char (so "# Heading" is safe),
+# and preceded by whitespace or the line's start, as Obsidian requires. Without
+# that, ".../page/#section" in a link lost its fragment.
+_INLINE_TAG = re.compile(r"(?<!\S)#(?=[A-Za-z])[A-Za-z0-9_/-]+")
 
 
 # --------------------------------------------------------------------------- #
