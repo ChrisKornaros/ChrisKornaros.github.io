@@ -1,13 +1,18 @@
 ---
-title: "Infused Alcohol"
-author: "Chris Kornaros"
+title: Infused Alcohol
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Drinks"]
+categories:
+- Drinks
+tags:
+- recipe
+- food
+- drinks
 aliases:
-  - "/pages/recipes/Drinks/Infused Alcohol.html"
+- /pages/recipes/Drinks/Infused Alcohol.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   16 ounces alcohol Use vodka, tequila, bourbon or whisky, gin,
     moonshine, or your own favorite type.
@@ -16,7 +21,7 @@ aliases:
     serrano pepeprs for mid-level heat, habanero peppers for hot, or
     ghost peppers or hotter for a truly hot and spicy alcohol.
 
-**Directions:**
+## Method
 
 1.  Slice the chili peppers in half and add them to the bottle of
     alcohol. Be sure they float down beneath the alcohol and are not
@@ -32,6 +37,8 @@ aliases:
     and infusion you would like.
 
 5.  Strain out the peppers and enjoy.
+
+## Notes
 
 **Sources:**
 [[https://www.chilipeppermadness.com/cooking-with-chili-peppers/how-to-infuse-alcohol-with-chili-peppers/#wprm-recipe-container-16905]{.underline}](https://www.chilipeppermadness.com/cooking-with-chili-peppers/how-to-infuse-alcohol-with-chili-peppers/#wprm-recipe-container-16905)

@@ -1,13 +1,18 @@
 ---
-title: "Salsa Template Recipe"
-author: "Chris Kornaros"
+title: Salsa Template Recipe
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sauces and Condiments"]
+categories:
+- Sauces and Condiments
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sauces and Condiments/Salsa Template Recipe.html"
+- /pages/recipes/Sauces and Condiments/Salsa Template Recipe.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   4 ghost peppers chopped, or more, as desired
 
@@ -21,7 +26,7 @@ aliases:
 
 -   Salt to taste
 
-**Directions:**
+## Method
 
 1.  Combine all ingredients in a mixing bowl. Mix well. Taste and adjust
     for salt.
@@ -29,7 +34,7 @@ aliases:
 2.  Cover and refrigerate overnight for the flavors to mingle and
     develop. Serve!
 
-**Notes:**
+## Notes
 
 -   That's a basic template and recipe, but you can easily modify in
     different ways

@@ -1,13 +1,18 @@
 ---
-title: "Olive Tapenade Slab Sandwich"
-author: "Chris Kornaros"
+title: Olive Tapenade Slab Sandwich
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sandwiches"]
+categories:
+- Sandwiches
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sandwiches/Olive Tapenade Slab Sandwich.html"
+- /pages/recipes/Sandwiches/Olive Tapenade Slab Sandwich.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 [For the roasted red peppers:]{.underline}
 
@@ -33,7 +38,7 @@ aliases:
 
 -   2 to 4 ounces mixed greens or arugula
 
-**Directions:**
+## Method
 
 1.  Preheat the oven to 425ºF. Line a rimmed sheet pan with parchment
     paper (for easy clean up --- make sure it extends over the edges).

@@ -1,13 +1,18 @@
 ---
-title: "Basic Ficelle Recipe"
-author: "Chris Kornaros"
+title: Basic Ficelle Recipe
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Baked Goods"]
+categories:
+- Baked Goods
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Baked Goods/Basic Ficelle Recipe.html"
+- /pages/recipes/Baked Goods/Basic Ficelle Recipe.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   3 cups (410 grams) all-purpose flour (or bread flour)
 
@@ -19,7 +24,7 @@ aliases:
 
 -   1 tsp (5 grams) sugar
 
-**Directions:**
+## Method
 
 1.  **Knead the dough:** In the bowl of stand mixer, add water, flour,
     salt, sugar and yeast. Attach the dough hook, turn on the mixer and

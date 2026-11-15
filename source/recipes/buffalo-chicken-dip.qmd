@@ -1,13 +1,18 @@
 ---
-title: "Buffalo Chicken Dip"
-author: "Chris Kornaros"
+title: Buffalo Chicken Dip
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Party Snacks and Dips"]
+categories:
+- Party Snacks and Dips
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Party Snacks and Dips/Buffalo Chicken Dip.html"
+- /pages/recipes/Party Snacks and Dips/Buffalo Chicken Dip.html
 ---
 
-**ChickeIngredients:**
+## Ingredients
 
 -   2 cups shredded cooked chicken
 
@@ -19,7 +24,7 @@ aliases:
 
 -   1/2 cup blue cheese crumbles
 
-**Directions:**
+## Method
 
 1.  PREHEAT oven to 350°F. Mix all ingredients in a large bowl. Spoon
     into shallow 1-quart baking dish.

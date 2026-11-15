@@ -1,15 +1,20 @@
 ---
-title: "Weissman Fried Chicken (Two Ways)"
-author: "Chris Kornaros"
+title: Weissman Fried Chicken (Two Ways)
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Chicken"]
+categories:
+- Chicken
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Chicken/Weissman Fried Chicken (Two Ways).html"
+- /pages/recipes/Chicken/Weissman Fried Chicken (Two Ways).html
 ---
 
-**Ingredients:**
+## Ingredients
 
-**[Marinade]{.underline}:**
+### Marinade
 
 -   2 cups (473ml) buttermilk
 
@@ -25,7 +30,7 @@ aliases:
 
 -   2 lbs (907g) chicken thighs or drumsticks
 
-**[Flour Dredge]{.underline}**:
+### Flour Dredge
 
 -   2.5 cups (375g) all-purpose flour
 
@@ -43,7 +48,7 @@ aliases:
 
 -   2 tablespoons (23g) kosher salt
 
-**[Sauce]{.underline}**:
+### Sauce
 
 -   1/2 cup (160g) gochujang
 
@@ -63,7 +68,7 @@ aliases:
 
 -   Thinly sliced green onions for garnish
 
-**[Korean Fried Chicken]{.underline}** (Yangnyeom Chicken):
+### Korean Fried Chicken (Yangnyeom Chicken)
 
 -   2 lbs (907g) chicken thighs or drumsticks
 
@@ -77,9 +82,9 @@ aliases:
 
 -   1/4 teaspoon (under 1g) baking soda
 
-**Directions:**
+## Method
 
-**[Marinade/Flour Dredge]{.underline}**:
+### Marinade/Flour Dredge
 
 -   In a medium bowl, add all ingredients for the marinade minus the
     chicken. Whisk together until homogenous. In a separate large bowl,
@@ -101,7 +106,7 @@ aliases:
 -   Remove, drain on a wire rack and repeat with the rest of your
     chicken. Eat while hot and fresh.
 
-**[Sauce]{.underline}**:
+### Sauce
 
 -   In a medium saucepan, add gochujang paste, ketchup, soy sauce, rice
     vinegar, mirin, palm sugar, and whisk until homogenous. Heat that
@@ -110,7 +115,7 @@ aliases:
 
 -   Immediately remove from the heat and stir in garlic.
 
-**[Korean Fried Chicken]{.underline}** (Yangnyeom Chicken):
+### Korean Fried Chicken (Yangnyeom Chicken)
 
 -   In a medium-sized bowl, add chicken ginger, black pepper, generous
     salt to taste, and toss it together: let it sit for at least 5 min

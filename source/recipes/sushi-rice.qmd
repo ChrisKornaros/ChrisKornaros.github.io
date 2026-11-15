@@ -1,13 +1,18 @@
 ---
-title: "Sushi Rice"
-author: "Chris Kornaros"
+title: Sushi Rice
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Japan"]
+categories:
+- Japan
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Japan/Sushi Rice.html"
+- /pages/recipes/Japan/Sushi Rice.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   2 cups uncooked sushi rice
 
@@ -21,7 +26,7 @@ aliases:
 
 -   1 teaspoon salt or to taste
 
-**Directions:**
+## Method
 
 1.  Gather ingredients.
 
@@ -40,6 +45,8 @@ aliases:
     stirring; rice will dry as it cools.
 
 6.  Enjoy!
+
+## Notes
 
 **Source:**
 [[https://www.allrecipes.com/recipe/99211/perfect-sushi-rice/]{.underline}](https://www.allrecipes.com/recipe/99211/perfect-sushi-rice/)

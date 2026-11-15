@@ -1,13 +1,18 @@
 ---
-title: "Greek Horiatiki Salad"
-author: "Chris Kornaros"
+title: Greek Horiatiki Salad
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Salads"]
+categories:
+- Salads
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Salads/Greek Horiatiki Salad.html"
+- /pages/recipes/Salads/Greek Horiatiki Salad.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   5 large tomatoes
 
@@ -27,7 +32,7 @@ aliases:
 
 -   1 (8 ounce) package feta cheese
 
-**Directions:**
+## Method
 
 1.  Cut tomatoes into wedges over a large serving bowl so that any extra
     juices land in the bowl with tomato wedges. Add onion slices and

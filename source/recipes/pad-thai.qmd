@@ -1,13 +1,18 @@
 ---
-title: "Pad Thai"
-author: "Chris Kornaros"
+title: Pad Thai
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Noodles"]
+categories:
+- Noodles
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Noodles/Pad Thai.html"
+- /pages/recipes/Noodles/Pad Thai.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   125 g / 4oz Chang's Pad Thai dried rice sticks (Note 1)
 
@@ -49,7 +54,7 @@ aliases:
 
 -   More beansprouts
 
-**Directions:**
+## Method
 
 1.  Place noodles in a large bowl, pour over plenty of boiling water.
     Soak for 5 minutes, then drain in a colander and quickly rinse under
@@ -80,7 +85,7 @@ aliases:
     beansprouts on the side if desired (this is the Thai way!). Squeeze
     over lime juice to taste before eating
 
-**Notes:**
+## Notes
 
 1.  Rice noodles -- I've tried every rice stick sold at supermarkets in
     Australia. Chang's is the best -- it's less prone to breaking when
@@ -137,5 +142,3 @@ aliases:
     into account the water absorbed by the noodles. I think it's closer
     to 350g / 12oz per serving. It's a generous serving! (**Image
     Below**)
-
-![](media/image1.png){width="3.125in" height="4.322916666666667in"}

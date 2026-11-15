@@ -1,13 +1,18 @@
 ---
-title: "Richard Bertinet Baguette"
-author: "Chris Kornaros"
+title: Richard Bertinet Baguette
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Baked Goods"]
+categories:
+- Baked Goods
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Baked Goods/Richard Bertinet Baguette.html"
+- /pages/recipes/Baked Goods/Richard Bertinet Baguette.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   35 oz / 1000g bread flour (strong)
 
@@ -19,7 +24,7 @@ aliases:
 
 -   0.7 oz / 20g Salt
 
-**Directions:**
+## Method
 
 1.  Pour water into a stand mixer bowl, then add flour. Rub yeast in
     hands with a bit of flour into the bowl. Keep the salt to the side
@@ -97,7 +102,7 @@ aliases:
     bottom already. Simply take them out and freeze them. Later, defrost
     the baguette and then finish baking it before enjoying.
 
-**Notes:**
+## Notes
 
 -   It seems 20-23 minutes at 425\~ works for par baking as well
 

@@ -1,13 +1,18 @@
 ---
-title: "Miso Glazed Cod"
-author: "Chris Kornaros"
+title: Miso Glazed Cod
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Cod"]
+categories:
+- Cod
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Cod/Miso Glazed Cod.html"
+- /pages/recipes/Cod/Miso Glazed Cod.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   4 fillets sablefish (gindara) (4-6 oz or 113-170 g per fillet;
     skin-on; about 1 inch or 2.5 cm thick)
@@ -36,7 +41,7 @@ For the Miso Marinade with Regular White Miso (Optional)
 
 -   1 Tbsp sugar
 
-**Directions:**
+## Method
 
 [Before You Start:]{.underline}
 

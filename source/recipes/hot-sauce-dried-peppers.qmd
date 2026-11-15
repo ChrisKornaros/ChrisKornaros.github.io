@@ -1,13 +1,18 @@
 ---
-title: "Hot Sauce (Dried Peppers)"
-author: "Chris Kornaros"
+title: Hot Sauce (Dried Peppers)
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sauces and Condiments"]
+categories:
+- Sauces and Condiments
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sauces and Condiments/Hot Sauce (Dried Peppers).html"
+- /pages/recipes/Sauces and Condiments/Hot Sauce (Dried Peppers).html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   2 cups lightly crushed and seeded dried chili peppers
 
@@ -21,7 +26,7 @@ aliases:
 
 -   \*Other ingredients as desired. See notes.
 
-**Directions:**
+## Method
 
 [FOR METHOD ONE]{.underline}
 
@@ -65,7 +70,7 @@ aliases:
     minutes to develop the flavors even more, then cool and bottle.
     Store in the refrigerator.
 
-**Notes:**
+## Notes
 
 [Water & Vinegar.]{.underline} I use 1 cup of each along with 2 cups
 lightly crushed dried pepper pods. This results in a thin sauce, like

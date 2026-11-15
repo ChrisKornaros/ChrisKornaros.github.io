@@ -1,13 +1,18 @@
 ---
-title: "Roasted Ghost Pepper Hot Sauce"
-author: "Chris Kornaros"
+title: Roasted Ghost Pepper Hot Sauce
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sauces and Condiments"]
+categories:
+- Sauces and Condiments
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sauces and Condiments/Roasted Ghost Pepper Hot Sauce.html"
+- /pages/recipes/Sauces and Condiments/Roasted Ghost Pepper Hot Sauce.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   2 ounces ghost peppers about 5-6 average sized ghost peppers
 
@@ -23,7 +28,7 @@ aliases:
 
 -   ½ cup water for thinning, or use more as desired
 
-**Directions:**
+## Method
 
 1.  Preheat your oven to 350 degrees F.
 

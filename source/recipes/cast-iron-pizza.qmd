@@ -1,13 +1,18 @@
 ---
-title: "Cast Iron Pizza"
-author: "Chris Kornaros"
+title: Cast Iron Pizza
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Pizza"]
+categories:
+- Pizza
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Pizza/Cast Iron Pizza.html"
+- /pages/recipes/Pizza/Cast Iron Pizza.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   400g bread flour (14 ounces; about 2 1/2 cups), plus more for
     dusting
@@ -34,7 +39,7 @@ aliases:
 
 -   2 ounces grated Parmesan or Pecorino Romano cheese (optional)
 
-**Directions:**
+## Method
 
 1.  Combine flour, salt, yeast, water, and oil in a large bowl. Mix with
     hands or a wooden spoon until no dry flour remains. (The bowl should
@@ -86,7 +91,7 @@ aliases:
     pizzas and transfer to a cutting board. Cut each pizza into 6 slices
     and serve immediately.
 
-**Notes:**
+## Notes
 
 -   Preheat oven to 450 with cast iron in there, then put dough in and
     bake for 8-12 minutes

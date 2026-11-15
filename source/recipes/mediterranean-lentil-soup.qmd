@@ -1,13 +1,18 @@
 ---
-title: "Mediterranean Lentil Soup"
-author: "Chris Kornaros"
+title: Mediterranean Lentil Soup
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Soups"]
+categories:
+- Soups
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Soups/Mediterranean Lentil Soup.html"
+- /pages/recipes/Soups/Mediterranean Lentil Soup.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   2 tablespoons **extra virgin olive oil**
 
@@ -37,7 +42,7 @@ aliases:
 
 -   1 teaspoon **salt** *or to taste + black pepper*
 
-**Directions:**
+## Method
 
 1.  **Build the Flavor Base:** Heat the 2 tablespoons **extra virgin
     olive oil** in a large pot. Add 1 large **onion**, 1 rib **celery**,

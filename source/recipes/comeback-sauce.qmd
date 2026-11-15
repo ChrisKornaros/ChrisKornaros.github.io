@@ -1,13 +1,18 @@
 ---
-title: "Comeback Sauce"
-author: "Chris Kornaros"
+title: Comeback Sauce
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sauces and Condiments"]
+categories:
+- Sauces and Condiments
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sauces and Condiments/Comeback Sauce.html"
+- /pages/recipes/Sauces and Condiments/Comeback Sauce.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   1/2 cup mayonnaise
 
@@ -21,7 +26,7 @@ aliases:
 
 -   1/4 teaspoon black pepper
 
-**Directions:**
+## Method
 
 1.  Mix all ingredients together until smooth.
 

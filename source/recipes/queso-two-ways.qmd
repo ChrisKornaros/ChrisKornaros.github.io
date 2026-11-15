@@ -1,13 +1,18 @@
 ---
-title: "Queso Two Ways"
-author: "Chris Kornaros"
+title: Queso Two Ways
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Party Snacks and Dips"]
+categories:
+- Party Snacks and Dips
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Party Snacks and Dips/Queso Two Ways.html"
+- /pages/recipes/Party Snacks and Dips/Queso Two Ways.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 [Traditional:]{.underline}
 
@@ -71,7 +76,7 @@ aliases:
 
 -   Hot Sauce
 
-**Directions:**
+## Method
 
 [Traditional Method:]{.underline}
 

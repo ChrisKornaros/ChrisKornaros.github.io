@@ -1,13 +1,18 @@
 ---
-title: "NYT Chicken Shawarma"
-author: "Chris Kornaros"
+title: NYT Chicken Shawarma
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Chicken"]
+categories:
+- Chicken
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Chicken/NYT Chicken Shawarma.html"
+- /pages/recipes/Chicken/NYT Chicken Shawarma.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   2 lemons, juiced
 
@@ -35,7 +40,7 @@ aliases:
 
 -   2 tablespoon chopped fresh parsley
 
-**Directions:**
+## Method
 
 1.  Prepare a marinade for the chicken. Combine the lemon juice, ½ cup
     olive oil, garlic, salt, pepper, cumin, paprika, turmeric, cinnamon,

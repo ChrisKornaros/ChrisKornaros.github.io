@@ -1,13 +1,18 @@
 ---
-title: "Basic Artisan Bread"
-author: "Chris Kornaros"
+title: Basic Artisan Bread
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Baked Goods"]
+categories:
+- Baked Goods
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Baked Goods/Basic Artisan Bread.html"
+- /pages/recipes/Baked Goods/Basic Artisan Bread.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   3 and 1/4 cups (about 430g) bread flour ([[spooned &
     leveled]{.underline}](https://sallysbakingaddiction.com/how-to-measure-baking-ingredients/))
@@ -32,7 +37,7 @@ aliases:
     stream, and more frequently) and then letting it mix/knead for the
     full time
 
-**Directions:**
+## Method
 
 1.  In a large un-greased mixing bowl, whisk the flour, yeast, and salt
     together. Pour in the water and gently mix together with a silicone

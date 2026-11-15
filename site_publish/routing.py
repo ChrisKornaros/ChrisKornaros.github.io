@@ -5,11 +5,11 @@ Layout mirrored between vault and site:
     writing/guides/foo.md        -> source/pages/guides/posts/foo.qmd
     writing/research/foo.md      -> source/pages/research/posts/foo.qmd
     writing/blogs/foo.md         -> source/pages/blogs/posts/foo.qmd
-    writing/recipes/Beef/foo.md  -> source/recipes/<cm-slug-of-title>.qmd
     library/food/recipes/beef/foo.md -> source/recipes/<cm-slug-of-title>.qmd
 
-Recipes are read from both vault places until the ``writing/recipes/`` ones
-move into the library; both land in the same flat ``source/recipes/``.
+Recipes live in the vault library only (the ``writing/recipes/`` ones moved
+there on 2026-11-15) and land in the flat ``source/recipes/``; a draft found
+under ``writing/recipes/`` is refused.
 """
 
 from __future__ import annotations
@@ -66,15 +66,23 @@ def section_for(draft: Path) -> str:
             f"library recipes root ({config.library_recipes()})."
         ) from exc
     section = rel.parts[0] if rel.parts else ""
-    if section not in config.SECTIONS:
+    if section == "recipes":
+        raise ValueError(
+            f"{draft} is under writing/recipes/, but recipes live in the vault "
+            f"library: move it to library/food/recipes/<category>/<slug>.md."
+        )
+    if section not in config.POST_SECTIONS:
         raise ValueError(
             f"{draft} is in '{section or '<root>'}', not a known section "
-            f"({', '.join(config.SECTIONS)})."
+            f"({', '.join(config.POST_SECTIONS)})."
         )
     return section
 
 
 def _recipe_target(category: str, title: str) -> Target:
+    # The site file is flat: source/recipes/<slug>.qmd with slug =
+    # content_manager's slugify(title), so CM's slug->file lookup resolves it
+    # directly. The category folder only names the `categories:` front matter.
     dest_dir = config.site_source() / "recipes"
     return Target(
         section="recipes",
@@ -95,18 +103,6 @@ def resolve(draft: Path, *, title: str) -> Target:
     rel = draft.resolve().relative_to(writing)
     slug = config.slugify(draft.stem)
     pages = config.site_pages()
-
-    if section == "recipes":
-        # writing/recipes/<Category>/<file>.md -- the category subfolder still
-        # names the `categories:` front matter, but the site file is FLAT:
-        # source/recipes/<slug>.qmd with slug = content_manager's
-        # slugify(title), so CM's slug->file lookup resolves it directly.
-        if len(rel.parts) < 3:
-            raise ValueError(
-                f"Recipe draft {draft} must live in a category subfolder, e.g. "
-                f"writing/recipes/Beef/{draft.name}."
-            )
-        return _recipe_target(rel.parts[1], title)
 
     dest_dir = pages / section / "posts"
     return Target(

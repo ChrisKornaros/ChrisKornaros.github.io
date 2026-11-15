@@ -1,13 +1,18 @@
 ---
-title: "Spicy Asian Cucumbers"
-author: "Chris Kornaros"
+title: Spicy Asian Cucumbers
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Pickling and Fermenting"]
+categories:
+- Pickling and Fermenting
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Pickling and Fermenting/Spicy Asian Cucumbers.html"
+- /pages/recipes/Pickling and Fermenting/Spicy Asian Cucumbers.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   1 or 2 Persian cucumber
 
@@ -25,7 +30,7 @@ aliases:
 
 -   ¼ cup water
 
-**Directions:**
+## Method
 
 1.  Thinly slice the cucumber (I used a different technique, watch the
     video to understand better)
@@ -38,6 +43,8 @@ aliases:
 
 4.  The flavor gets better the next day after resting in the fridge for
     overnight.
+
+## Notes
 
 **Source:**
 [[https://www.playfulcooking.com/pickled-cucumber/#recipe]{.underline}](https://www.playfulcooking.com/pickled-cucumber/#recipe)

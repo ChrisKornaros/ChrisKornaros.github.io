@@ -1,13 +1,18 @@
 ---
-title: "Spicy Serrano Hot Sauce"
-author: "Chris Kornaros"
+title: Spicy Serrano Hot Sauce
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sauces and Condiments"]
+categories:
+- Sauces and Condiments
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sauces and Condiments/Spicy Serrano Hot Sauce.html"
+- /pages/recipes/Sauces and Condiments/Spicy Serrano Hot Sauce.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   1 pound serrano peppers
 
@@ -23,7 +28,7 @@ aliases:
 
 -   Juice from 1 lime
 
-**Directions:**
+## Method
 
 1.  First, ferment the serrano peppers. Process your fresh peppers in a
     food processor. If you don't have a processor, use a mortar and

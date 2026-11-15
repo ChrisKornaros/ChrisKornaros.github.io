@@ -1,13 +1,18 @@
 ---
-title: "Sandwich Bread Loaf"
-author: "Chris Kornaros"
+title: Sandwich Bread Loaf
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Baked Goods"]
+categories:
+- Baked Goods
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Baked Goods/Sandwich Bread Loaf.html"
+- /pages/recipes/Baked Goods/Sandwich Bread Loaf.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   1 cup (240ml) **water**, warmed to about 110°F (43°C)
 
@@ -28,7 +33,7 @@ aliases:
     leveled]{.underline}](https://sallysbakingaddiction.com/how-to-measure-baking-ingredients/)),
     plus more as needed
 
-**Directions:**
+## Method
 
 1.  **Prepare the dough:** Whisk the warm water, warm milk, yeast, and
     sugar together in the bowl of your stand mixer fitted with a dough
@@ -102,6 +107,8 @@ aliases:
 10. Remove from the oven and allow bread to cool for a few minutes in
     the pan on a cooling rack before removing the bread from the pan and
     slicing. Feel free to let it cool completely before slicing, too.
+
+## Notes
 
 **Source:**
 [[https://sallysbakingaddiction.com/sandwich-bread/#tasty-recipes-78612]{.underline}](https://sallysbakingaddiction.com/sandwich-bread/#tasty-recipes-78612)

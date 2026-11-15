@@ -1,13 +1,18 @@
 ---
-title: "Authentic Hot and Sour Soup"
-author: "Chris Kornaros"
+title: Authentic Hot and Sour Soup
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Soups"]
+categories:
+- Soups
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Soups/Authentic Hot and Sour Soup.html"
+- /pages/recipes/Soups/Authentic Hot and Sour Soup.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 [Rehydrate (Optional):]{.underline}
 
@@ -52,7 +57,7 @@ aliases:
 
 -   1 teaspoon sesame oil
 
-**Directions:**
+## Method
 
 1.  Gently rinse dried shiitake mushrooms, dried wood ear mushrooms, and
     lily flowers with tap water. Soak each of them with 1.5 to 2 cups
@@ -91,7 +96,7 @@ aliases:
 9.  Garnish with cilantro and drizzle with sesame oil. Give it a final
     stir. Taste the soup and add more salt if needed.
 
-**Notes:**
+## Notes
 
 -   If you do not have these dry ingredients, you can use half a pound
     of fresh mushrooms instead. Then use chicken stock instead of water

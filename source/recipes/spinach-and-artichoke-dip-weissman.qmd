@@ -1,13 +1,18 @@
 ---
-title: "Spinach and Artichoke Dip - Weissman"
-author: "Chris Kornaros"
+title: Spinach and Artichoke Dip - Weissman
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Party Snacks and Dips"]
+categories:
+- Party Snacks and Dips
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Party Snacks and Dips/Spinach and Artichoke Dip - Weissman.html"
+- /pages/recipes/Party Snacks and Dips/Spinach and Artichoke Dip - Weissman.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   2 Tbsp (14g) unsalted butter
 
@@ -33,7 +38,7 @@ aliases:
 
 -   Chips, to serve (optional)
 
-**Directions:**
+## Method
 
 1.  Preheat oven to 375℉ / 190℃.
 
@@ -56,6 +61,8 @@ aliases:
     cheese. Sprinkle the cheese on top of the dip. Bake for 20 minutes
     or until the dip is bubbling, the cheese is melted and the top is
     golden brown. Serve as a side dish or with chips.
+
+## Notes
 
 **Source:**
 [[https://www.joshuaweissman.com/recipes/ultimate-spinach-artichoke-dip-recipe#recipe]{.underline}](https://www.joshuaweissman.com/recipes/ultimate-spinach-artichoke-dip-recipe#recipe)

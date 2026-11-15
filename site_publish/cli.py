@@ -32,8 +32,9 @@ def _iter_non_draft_drafts():
     writing = config.vault_writing()
     for md in sorted(writing.rglob("*.md")):
         parts = md.relative_to(writing).parts
-        # Only files that live under a known section (skip index.md, attachments, etc.)
-        if not parts or parts[0] not in config.SECTIONS:
+        # Only files that live under a known section (skip index.md, attachments,
+        # etc.). Recipes are not under writing/: they come from the library, below.
+        if not parts or parts[0] not in config.POST_SECTIONS:
             continue
         try:
             meta = frontmatter.load(str(md)).metadata
@@ -114,16 +115,28 @@ def new_draft(argv: list[str] | None = None) -> int:
     parser.add_argument("section", choices=config.SECTIONS)
     parser.add_argument("title", help='Draft title, e.g. "Braised Short Ribs".')
     parser.add_argument(
-        "--category", help="Recipe category subfolder (required for recipes).",
+        "--category",
+        help="Recipe category folder in the vault library, kebab-case "
+        "(required for recipes), e.g. sauces-and-condiments.",
     )
     args = parser.parse_args(argv)
 
     if args.section == "recipes" and not args.category:
-        parser.error("recipes require --category, e.g. --category Beef.")
+        parser.error("recipes require --category, e.g. --category beef.")
+    if args.section != "recipes" and args.category:
+        parser.error("--category is for recipes only.")
 
-    slug = config.slugify(args.title)
-    base = config.vault_writing() / args.section
-    dest = base / args.category / f"{slug}.md" if args.category else base / f"{slug}.md"
+    if args.section == "recipes":
+        # A recipe page goes to the vault library, in its contract's shape:
+        # library/food/recipes/<category>/<slug>.md, slug = the site's slug.
+        category = config.slugify(args.category)
+        dest = (
+            config.library_recipes() / category
+            / f"{config.slugify_recipe(args.title)}.md"
+        )
+    else:
+        category = ""
+        dest = config.vault_writing() / args.section / f"{config.slugify(args.title)}.md"
 
     if dest.exists():
         print(f"Refusing to overwrite existing draft: {dest}", file=sys.stderr)
@@ -133,11 +146,17 @@ def new_draft(argv: list[str] | None = None) -> int:
     content = template.format(
         title=args.title,
         date=_dt.date.today().isoformat(),
-        category=args.category or "",
+        category=category,
     )
+    new_category = args.section == "recipes" and not dest.parent.is_dir()
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(content, encoding="utf-8")
     print(f"Created {dest}")
+    if new_category:
+        print(
+            f"      '{category}' is a new category: the vault wants an index.md "
+            "in that folder and a line for it in library/food/recipes/index.md."
+        )
     return 0
 
 

@@ -1,13 +1,18 @@
 ---
-title: "Chicken Parm"
-author: "Chris Kornaros"
+title: Chicken Parm
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Chicken"]
+categories:
+- Chicken
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Chicken/Chicken Parm.html"
+- /pages/recipes/Chicken/Chicken Parm.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   4 skinless, boneless chicken breast halves
 
@@ -33,7 +38,7 @@ aliases:
 
 -   2 teaspoons olive oil
 
-**Directions:**
+## Method
 
 1.  Preheat an oven to 450 degrees F (230 degrees C).
 

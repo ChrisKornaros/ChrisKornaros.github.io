@@ -1,13 +1,18 @@
 ---
-title: "Mango Habanero Hot Sauce"
-author: "Chris Kornaros"
+title: Mango Habanero Hot Sauce
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sauces and Condiments"]
+categories:
+- Sauces and Condiments
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sauces and Condiments/Mango Habanero Hot Sauce.html"
+- /pages/recipes/Sauces and Condiments/Mango Habanero Hot Sauce.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   2 small mangos peeled and chopped
 
@@ -31,7 +36,7 @@ aliases:
 
 -   Salt and pepper to taste
 
-**Directions:**
+## Method
 
 1.  Add all of the ingredients to a food processor. Pulse the mixture
     several times until you achieve your desired consistency.

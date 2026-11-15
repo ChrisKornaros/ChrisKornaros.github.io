@@ -1,13 +1,18 @@
 ---
-title: "Ultimate Pesto"
-author: "Chris Kornaros"
+title: Ultimate Pesto
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sauces and Condiments"]
+categories:
+- Sauces and Condiments
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sauces and Condiments/Ultimate Pesto.html"
+- /pages/recipes/Sauces and Condiments/Ultimate Pesto.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   Two cups greens
 
@@ -55,7 +60,7 @@ aliases:
 
         -   Seeds also work
 
-**Directions:**
+## Method
 
 1.  First put your garlic, nuts, and any personal flavor upgrades (i.e.
     serrano, red chili, etc.) in the food processor for 15 seconds, a
@@ -78,7 +83,7 @@ aliases:
     mixture. Then, put some plastic wrap over the top of the jar mouth,
     pressing down a bit, before sealing.
 
-**Notes:**
+## Notes
 
 -   The oil acts as a water and airproofing for the mixture, the plastic
     wrap serves as another layer as well.

@@ -1,16 +1,20 @@
 ---
+type: recipe
 title: "{title}"
-author: "Chris Kornaros"
 date: {date}
-categories: ["{category}"]
+tags: [recipe, food, cooking]
+author: chris
+category: {category}
 video: ""
 draft: true
 ---
 
-**Ingredients:**
+Up: [{category}](index.md)
+
+## Ingredients
 
 -
 
-**Directions:**
+## Method
 
 1.

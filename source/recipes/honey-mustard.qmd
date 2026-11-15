@@ -1,13 +1,18 @@
 ---
-title: "Honey Mustard"
-author: "Chris Kornaros"
+title: Honey Mustard
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sauces and Condiments"]
+categories:
+- Sauces and Condiments
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sauces and Condiments/Honey Mustard.html"
+- /pages/recipes/Sauces and Condiments/Honey Mustard.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   3 tbsp mayo
 
@@ -23,6 +28,6 @@ aliases:
 
 -   ¼ teaspoon black pepper
 
-**Directions:**
+## Method
 
 1.  Whisk to combine

@@ -1,13 +1,18 @@
 ---
-title: "Flour Tortillas"
-author: "Chris Kornaros"
+title: Flour Tortillas
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Baked Goods"]
+categories:
+- Baked Goods
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Baked Goods/Flour Tortillas.html"
+- /pages/recipes/Baked Goods/Flour Tortillas.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   3 cups all purpose flour
 
@@ -19,7 +24,7 @@ aliases:
 
 -   1 cup hot water
 
-**Directions:**
+## Method
 
 1.  In a bowl, combine the flour, baking powder, and salt. Add the
     butter, then pour over the hot water. Stir until a shaggy dough

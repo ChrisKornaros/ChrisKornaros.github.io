@@ -1,14 +1,21 @@
 ---
-title: "Pickled Onion Recipe"
-author: "Chris Kornaros"
+title: Pickled Onion Recipe
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Pickling and Fermenting"]
+categories:
+- Pickling and Fermenting
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Pickling and Fermenting/Pickled Onion Recipe.html"
+- /pages/recipes/Pickling and Fermenting/Pickled Onion Recipe.html
 ---
 
 **Source:**
 [[https://www.youtube.com/watch?v=ifRpwe3wiJU&ab_channel=NOTANOTHERCOOKINGSHOW]{.underline}](https://www.youtube.com/watch?v=ifRpwe3wiJU&ab_channel=NOTANOTHERCOOKINGSHOW)
+
+## Method
 
 1.  Slice red onion
 
@@ -25,7 +32,7 @@ aliases:
 
 7.  Then mix the above until everything dissolves
 
-**Notes:**
+## Notes
 
 -   Most important thing: sugar, the sweetness is the difference
 

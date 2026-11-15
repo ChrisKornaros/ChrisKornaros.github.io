@@ -1,13 +1,18 @@
 ---
-title: "Gumbo - Weissman"
-author: "Chris Kornaros"
+title: Gumbo - Weissman
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["New Orleans"]
+categories:
+- New Orleans
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/New Orleans/Gumbo - Weissman.html"
+- /pages/recipes/New Orleans/Gumbo - Weissman.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 *Stock:*
 
@@ -113,7 +118,7 @@ aliases:
 
 -   2 Tbsp thinly sliced chives
 
-**Directions:**
+## Method
 
 *Stock:*
 
@@ -182,6 +187,8 @@ aliases:
     and place it in the fridge until solid.
 
 3.  Slice a medallion and place it in your bowl of gumbo.
+
+## Notes
 
 **Source:**
 [[https://www.joshuaweissman.com/recipes/homemade-gumbo-recipe-with-creole-butter]{.underline}](https://www.joshuaweissman.com/recipes/homemade-gumbo-recipe-with-creole-butter)

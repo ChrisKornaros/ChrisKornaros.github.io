@@ -1,13 +1,18 @@
 ---
-title: "Ponzu Vinaigrette"
-author: "Chris Kornaros"
+title: Ponzu Vinaigrette
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sauces and Condiments"]
+categories:
+- Sauces and Condiments
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sauces and Condiments/Ponzu Vinaigrette.html"
+- /pages/recipes/Sauces and Condiments/Ponzu Vinaigrette.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   ¼ Cup Olive Oil
 

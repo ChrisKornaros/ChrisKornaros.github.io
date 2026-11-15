@@ -1,13 +1,20 @@
 ---
-title: "NYT_ Steak and Salsa Verde"
-author: "Chris Kornaros"
+title: NYT_ Steak and Salsa Verde
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Beef"]
+categories:
+- Beef
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Beef/NYT_ Steak and Salsa Verde.html"
+- /pages/recipes/Beef/NYT_ Steak and Salsa Verde.html
 ---
 
-**Ingredients: (**Yield: 4 servings)
+**Yield:** 4 servings
+
+## Ingredients
 
 -   1½pounds skirt steak
 
@@ -30,6 +37,8 @@ aliases:
 -   2tablespoons chopped fresh mint
 
 -   ¼cup toasted pine nuts
+
+## Method
 
 **Step 1**\
 If necessary, cut the steak crosswise into large pieces that will fit
@@ -54,6 +63,8 @@ Set the grill to medium-high heat, or heat a grill pan on the stovetop
 over medium-high. Pat the steaks dry with a paper towel and grill for 3
 to 5 minutes on each side for medium-rare. Transfer to a plate, sprinkle
 with salt, and allow to rest for 10 minutes.
+
+## Notes
 
 **Source:**
 [[https://cooking.nytimes.com/recipes/1020355-skirt-steak-with-salsa-verde-salad]{.underline}](https://cooking.nytimes.com/recipes/1020355-skirt-steak-with-salsa-verde-salad)

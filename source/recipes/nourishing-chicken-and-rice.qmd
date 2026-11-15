@@ -1,13 +1,18 @@
 ---
-title: "Nourishing Chicken and Rice"
-author: "Chris Kornaros"
+title: Nourishing Chicken and Rice
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Chicken"]
+categories:
+- Chicken
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Chicken/Nourishing Chicken and Rice.html"
+- /pages/recipes/Chicken/Nourishing Chicken and Rice.html
 ---
 
-**Ingredients:**
+## Ingredients
 
 -   2 lbs chicken breast
 
@@ -29,7 +34,7 @@ aliases:
 
 -   Olive oil to cover bottom of pot
 
-**Directions:**
+## Method
 
 1.  Dice the chicken breast, this is just for ease of cooking and making
     it a one pot recipe; however, you can cook it in any way you want.

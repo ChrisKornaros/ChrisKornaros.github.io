@@ -1,13 +1,20 @@
 ---
-title: "Adobo Sauce"
-author: "Chris Kornaros"
+title: Adobo Sauce
+author: Chris Kornaros
 date: 2026-03-06
-categories: ["Sauces and Condiments"]
+categories:
+- Sauces and Condiments
+tags:
+- recipe
+- food
+- cooking
 aliases:
-  - "/pages/recipes/Sauces and Condiments/Adobo Sauce.html"
+- /pages/recipes/Sauces and Condiments/Adobo Sauce.html
 ---
 
-**Ingredients:**
+**Yield:** about 2 cups
+
+## Ingredients
 
 -   Adobo Sauce Ingredients
 
@@ -36,7 +43,7 @@ aliases:
 
 -   Salt to taste
 
-**Directions:**
+## Method
 
 1.  First, remove the stems from the guajillo and ancho peppers and
     remove the seeds. You may need to cut into the peppers for this,
@@ -75,6 +82,8 @@ aliases:
 >
 > Store in the refrigerator in an airtight container. **It should last
 > about a month this way.**
+
+## Notes
 
 **Source:**
 [[https://www.chilipeppermadness.com/recipes/adobo-sauce/#wprm-recipe-container-18568]{.underline}](https://www.chilipeppermadness.com/recipes/adobo-sauce/#wprm-recipe-container-18568)
