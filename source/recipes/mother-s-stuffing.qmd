@@ -15,11 +15,13 @@ published: '2026-11-16'
 
 ## Ingredients
 
-- 4 tablespoons butter
-- 1 large onion, chopped
-- 2 stalks celery, chopped
+- 4 tablespoons butter, plus more for the mushrooms
+- 1 medium yellow onion, finely diced
+- 3 to 4 stalks celery, finely diced
 - 2 cloves garlic, chopped
-- 1 pound sausage
+- 1 container mushrooms
+- salt and pepper
+- 1 pound sausage, at the most
 - 1 package peeled, partially cooked chestnuts
 - 1 bag (12 ounces) Pepperidge Farm seasoned stuffing
 - about 2 ½ cups turkey stock, plus extra
@@ -27,15 +29,17 @@ published: '2026-11-16'
 ## Method
 
 1. Sauté the onion, garlic and celery in the butter.
-2. In a second pan, sauté the sausage, breaking it up as it cooks. Drain off the fat.
-3. Break the chestnuts into pieces.
-4. Stir the sausage and the chestnuts into the vegetables, then stir in the stuffing.
-5. Add stock a little at a time until it is as moist as you want. A little on the dry side is good.
-6. Bake it in a greased 9 x 13-inch pan, covered, at 350°F for 30 minutes, until hot. Or stuff a bird with it.
+2. Sauté the mushrooms lightly in more butter. They take up butter quickly. Salt and pepper them well.
+3. In another pan, sauté the sausage, breaking it up as it cooks. Drain off the fat.
+4. Break the chestnuts into pieces.
+5. Stir the mushrooms, the sausage and the chestnuts into the vegetables, then stir in the stuffing.
+6. Add stock a little at a time until it is as moist as you want. A little on the dry side is good.
+7. Bake it in a greased 9 x 13-inch pan, covered, at 350°F for 30 minutes, until hot. Or stuff a bird with it.
 
 ## Notes
 
-- My mom's recipe. She gives no amounts; these are sized for one bag of stuffing.
+- My mom's recipe. The onion, celery, sausage and mushrooms are her amounts for a small batch; the rest are sized for one bag of stuffing.
+- The mushrooms give the stuffing a nice earthiness, but they do not taste of much unless they are well seasoned.
 - Peeled, partially cooked chestnuts are sold at good food stores, which saves roasting and shelling them.
 - The pan, oven temperature, time and the amount of stock for one bag are from Pepperidge Farm's [Moist & Savory Stuffing](https://www.pepperidgefarm.com/recipe/moist-savory-stuffing/) (read 2026-11-16), which also says to bake it uncovered for a crunchier top.
 - It is my mom's take on my [grandmother's stuffing](grandmother-s-stuffing.md).
