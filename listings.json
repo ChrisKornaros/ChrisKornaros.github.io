@@ -1,14 +1,6 @@
 [
   {
-    "listing": "/pages/research/research.html",
-    "items": []
-  },
-  {
     "listing": "/pages/projects/data_engineering/data_engineering.html",
-    "items": []
-  },
-  {
-    "listing": "/pages/projects/data_science/data_science.html",
     "items": []
   },
   {
@@ -147,10 +139,18 @@
     ]
   },
   {
+    "listing": "/pages/research/research.html",
+    "items": []
+  },
+  {
+    "listing": "/pages/projects/data_science/data_science.html",
+    "items": []
+  },
+  {
     "listing": "/pages/guides/guides.html",
     "items": [
-      "/pages/guides/posts/raspberry_pi_server.html",
-      "/pages/guides/posts/docker.html"
+      "/pages/guides/posts/docker.html",
+      "/pages/guides/posts/raspberry_pi_server.html"
     ]
   },
   {
